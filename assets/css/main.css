@@ -1,0 +1,56 @@
+/* ===== Reset & Base ===== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: 1.6;
+  color: #222;
+  background-color: #f8f9fa;
+}
+
+/* ===== Layout ===== */
+.site-header,
+.site-footer {
+  background-color: #ffffff;
+  padding: 1rem 2rem;
+  border-bottom: 1px solid #ddd;
+}
+
+.site-footer {
+  border-top: 1px solid #ddd;
+  border-bottom: none;
+  text-align: center;
+}
+
+.content {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+/* ===== Navigation ===== */
+.nav-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  gap: 1rem;
+}
+
+.nav-list a {
+  text-decoration: none;
+  color: #0077cc;
+}
+
+.nav-list a:hover {
+  text-decoration: underline;
+}
+
+/* ===== Headings ===== */
+h1, h2 {
+  margin-top: 0;
+}
