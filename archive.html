@@ -1,0 +1,692 @@
+<html lang="de">
+<meta charset="UTF-16">
+	<head> 
+		<title>Testsite for JK's purposes</title>
+		<!--<link rel="stylesheet" href="./styles.css">-->
+			<link rel="stylesheet" href="./styles_new.css">
+			<!--<style>
+				body {background-color:lightyellow;}
+				h1 {font-family:Impact;}
+				h2 {text-align: center;}
+				h3 {color:red;}
+				ol {color:blue;}
+				ul {color:green;}
+				p {text-align:left;}
+			</style> -->
+	</head>
+
+	<body>
+		<h1 font-family="helvetica" align="center">Welcome to JK's site</h1>
+		<hr>
+		<a style="font-family:consolas" href="dragongame.html">Dragon Game?</a>
+
+		<hr>
+
+		<p><abbr title="HyperText Markup Language">HTML</abbr> is the foundation of the web.</p>
+		
+		<hr>
+		<h
+
+
+		<hr>
+
+		<h2>Contents</h2>
+		<ol>
+			<li><a href="#C1">HTML Headings</a></li>
+			<li><a href="#C2">horizontal rule</a></li>
+			<li><a href="#C3">Doctype tag</a></li>
+			<li><a href="#C4">Links and Images</a></li>
+			<li><a href="#C5">Style Attributes</a></li>
+			<li><a href="#C9">Images</a></li>
+			<li><a href="#C10">Forms</a></li>
+			<li><a href="#C6" style="color:green">HTML <b>Cheatsheet</b></a></li>
+			<li><a href="#C11" style="color:green">CSS <b>Cheatsheet</b></a></li>
+			<li><a href="#C7" style="color:green">Linux <b>Cheatsheet</b></a></li></br>
+
+			<li><a href="#C8">the original HTML Document</a></li>
+		</ol>
+
+<hr>			
+		
+			<h1 id="C1">This is the heading "h1"</h1>
+			<p>h1 headings are the highest order. Here's the comparison:</p>
+
+			<h2>This is h2 (you guessed it: centered)</h2>
+			<h3>This is h3 (in red)</h3>
+			<h4 style="font-size:60;">This is h4 (but font-size was changed to 60)</h4>
+			<h5 style="text-align:right">------------------------------------> This is h5</h5>
+			<h6 title="check this tooltip">This is h6 (tiny, innit?)</h6>	
+
+			<hr>
+			<p id="C2">^ that (< hr>) is actually a horizontal rule</br></br></br></p>
+			<hr>
+			<p id="C3">but the HTML-Document beginns with something different: the < !DOCTYPE html> tag </p>
+			<hr>
+			<p id="C4">HTML Links are defined with the < a> tag </br>
+			for example: < a href="www.bulme.at">here comes the text< /a></br></br>
+			however, images are defined via the < img> tag.</br>
+			an example: < img scr="https://images.pexels.com/photos/1266884/pexels-photo-1266884.jpeg" alt= "oh what a picture" width ="12" heigth="34"></br>
+			<strong>note: </br>absolute URLs</strong> link to an external site or image</br>
+			like: src="www.bulme.at/picture.jpg"</br>
+			whereas <strong>relative URLs</strong> link to an image, which is hosted within the website</br>
+			like: src="picture_of_penguins.jpg" (if the URL beginns with a slash, it will be relative to the domain: src:"/images/penguins_with_hats.jpg")</br>
+			<strong>preferably relatives URLs are used, so they won't break, if e.g. the domain is changed.</strong></br></br>
+			</p>
+			<hr>
+			<h3 id="C5" title="that's a tooltip by the way">Style Attributes</h3>
+
+			<p>
+			there are different style attributes, like: 
+			<ul><li>width,</li><li>height,</li><li>color,</li><li>text-align</li><li>background-color</li><li>...</li></ul></br>
+			have an example: < p style="color:red;"><em>This is an examle</em>< / p></br></br>
+			</p>
+
+
+<pre style="font-family:calibri;">Using
+< pre> 
+you 			can
+		paste pre-
+formatted
+	T
+		E
+X
+	T
+</pre>
+
+		<figure id="C9">
+		<img src="https://images.pexels.com/photos/273886/pexels-photo-273886.jpeg" alt="what are you looking at?" style="width:50%;height:50%;">
+		<figcaption>that is a sailing boat</figcaption>
+		</figure>
+
+		<p style="font-family:Consolas">
+		< img src="https://images.pexels.com/photos/273886/pexels-photo-273886.jpeg" alt="what are you looking at?" style="width:50%;height:50%;" >
+		</p>
+
+
+		<h1 id="C10" style="text-align:left"><b>Forms</b></h1>
+
+
+		<form>
+			<fieldset>
+			<legend>please give us your data :)</legend> 
+			<!--the legend defines a caption für the fieldset element-->
+				<label for="fname">First name:</label></br>
+				<input type="text" id="fname" name="fname" placeholder="your first name" required></br>
+				<label for="lname">Last name:</label></br>
+				<input type="text" id="lname" name="lname" placeholder="your last name" required></br>
+				<label for="genderM">Male</label>
+				<label for="genderF">Female</label><br>
+				<input name="gender" type="radio" id="genderM" checked>
+				<input name="gender" type="radio" id="genderF"><br>
+				<input id="ads" type="checkbox" _checked><label for="ads">Subscribe to our Newsletter</label><br> 
+				<input type="number" placeholder="your age"><br>
+				<input type="password" name="password" placeholder="password"><br>
+				<input type="submit" value="submit">
+			<!--Name defines the common value-->
+			</fieldset>
+			<!-- fieldset groups related data in a form-->
+		</form>
+		
+		<pre style="font-family:Consolas;">
+
+< form>
+  < label for="fname">First name:< /label>
+  < input type="text" id="fname" name="fname">
+  < label for="lname">Last name:< /label>
+  < input type="text" id="lname" name="lname">
+< /form>
+</pre>
+
+	<h2 style="text-align:left; margin-left:20px;font-size:38px">Input Types</h2>
+	<ol>
+		<li>input type="text"</li>
+		<li>input tpye="radio"</li>
+		<li>.. type="checkbox"</li>
+		<li>.. type="submit"</li>
+		<li>.. type="button"</li>
+	</ol>
+
+
+	<p>
+	each input field must hafe a name attribute to be submitted
+	</p>
+
+		
+
+<hr>
+
+	<h1 id="C6">HTML Cheatsheet</h1>
+		<table style="width:90%;margin-left:5%;margin-right:5%">
+			<tr>
+				<td>Comment tag < !-- --></td>
+				<td>headings < h1> to < h6></td>
+			</tr>
+			</tr>	
+			<tr style="background-color:lightgrey">
+				<td>< p> paragraph</td>
+				<td style="font-family:consolas;">< html> < head> < /head> < body> < /body> < footer> < /footer> < /html></td>
+			</tr>	
+			<tr>
+				<td style="font-family:consolas;">< img src="<i>URL</i>" alt="alt text" style="width:20px; height:50%;"</td>
+				<td style="font-family:consolas;">< a href="<i>URL</i> target="_blank">Put your Link-Text here< /a></td>
+			</tr>
+			<tr style="background-color:lightgrey">
+				<td style="font-family:consolas;">< a href="<i>URL</i>">< img src="<i>URL</i>" alt="<i>alt</i>">< /a></td>
+				<td>< section> < /section></td>
+			</tr>	
+			<tr>
+				<td><b>unordered list:</b><br>< ul><br>< li>< /li><br>< li>< /li><br>< /ul></td>
+				<td><b>ordered list:</b><br>< ol><br>< li>< /li><br>< li>< /li><br>< /ol></td>
+			</tr>
+			</tr>	
+			<tr style="background-color:lightgrey;font-family:consolas;">
+				<td>< firgure> < img> < figcaption> ...</td>
+				<td>< em> emphasised/italic</td>
+			</tr>	
+			<tr style="font-family:consolas">
+				<td>< form><br><br>< /br></td>
+				<td>< input type="text"><br><ul><li>radio (same <i>name</i> attribute!! for single choice)</li><li>number</li><li>checkbox (checked)</li></td>
+			<tr style="background-color:lightgrey">
+				<td>< button type="submit">Submit here!< /button></td>
+				<td style="font-family:consolas">< fieldset><br>< legend></td>
+			</tr>	
+			<tr>
+				<td style="font-family:consolas;">< head><br>< title><i>Title</i>< /title><br>< meta charset="UTF-8" lang="en"><br>< /head></td>
+				<td></td>
+			</tr>
+			<tr style="background-color:lightgrey">
+				<td></td>
+				<td></td>
+			</tr>	
+			<tr>
+				<td></td>
+				<td></td>
+			</tr>
+			</tr>	
+			<tr style="background-color:lightgrey">
+				<td></td>
+				<td></td>
+			</tr>	
+			<tr>
+				<td></td>
+				<td></td>
+			<tr style="background-color:lightgrey">
+				<td></td>
+				<td></td>
+			</tr>	
+			<tr>
+				<td></td>
+				<td></td>
+			</tr>
+			</tr>	
+			<tr style="background-color:lightgrey">
+				<td></td>
+				<td></td>
+			</tr>	
+			<tr>
+				<td></td>
+				<td></td>
+			<tr style="background-color:lightgrey">
+				<td></td>
+				<td></td>
+			</tr>	
+			<tr>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr style="background-color:lightgrey">
+				<td></td>
+				<td></td>
+			</tr>	
+			<tr>
+				<td></td>
+				<td></td>
+			</tr>
+			</tr>	
+			<tr style="background-color:lightgrey">
+				<td></td>
+				<td></td>
+			</tr>	
+			<tr>
+				<td></td>
+				<td></td>
+			</tr>
+		</table>
+
+<hr>
+
+	<h1 id="C11">CSS Cheatsheet</h1>
+
+	<pre style="font-family:consolas;">
+<head>
+	<style>
+		h1 {color:red;background-color:yellow}
+		p {text-align:center;font-family:verdana}
+	</style>
+</head></pre>
+<br><hr>
+	<pre style="font-family:consolas;">
+<head>
+	<link rel="stylesheet" href="styles.css">
+</head>
+<br><hr>
+	</pre>
+	
+		<table style="width:90%;margin-left:5%;margin-right:5%;font-family:consolas;">
+			<tr>
+				<td style="width:50%">
+				</td>
+				<td style="width:50%"></td>
+			</tr>
+	
+			<tr style="background-color:lightgrey">
+				<td>color</td>
+				<td>text-align:center</td>
+			</tr>	
+			<tr>
+				<td><b>Class selector:</b> ".center" edits all elements with class="center"</td>
+				<td><b>id selector:</b> "#para1" edits all elements with id="para1"</td>
+			</tr>
+			<tr style="background-color:lightgrey">
+				<td><b>universal selector</b> "*" will affect every HTLM element on the page</td>
+				<td>background-color</td>
+			</tr>	
+			<tr>
+				<td>margin-left:20px</td>
+				<td>width</td>
+			</tr>
+			</tr>	
+			<tr style="background-color:lightgrey">
+				<td>font-size:20px</td>
+				<td>comment /* */</td>
+			</tr>	
+			<tr>
+				<td>background-image: url("foto.jpg")</td>
+				<td>mgarin-top -bottom -left -right</td>
+			<tr style="background-color:lightgrey">
+				<td>margin:auto</td>
+				<td>padding-top -bottom -left -right: 50px</td>
+			</tr>	
+			<tr>
+				<td>padding: 25px</td>
+				<td>background-image: url(<i>URL</i>)</td>
+			</tr>
+			<tr style="background-color:lightgrey">
+				<td>font-style: italic</td>
+				<td>max-width:500px</td>
+			</tr>	
+			<tr>
+				<td>img {display:block}</td>
+				<td></td>
+			</tr>
+			</tr>	
+			<tr style="background-color:lightgrey">
+				<td>a:visited {}<br>a:hover {}<br>a:active {}</td>
+				<td></td>
+			</tr>	
+			<tr>
+				<td></td>
+				<td></td>
+			<tr style="background-color:lightgrey">
+				<td></td>
+				<td></td>
+			</tr>	
+			<tr>
+				<td></td>
+				<td></td>
+			</tr>
+			</tr>	
+			<tr style="background-color:lightgrey">
+				<td></td>
+				<td></td>
+			</tr>	
+			<tr>
+				<td></td>
+				<td></td>
+			<tr style="background-color:lightgrey">
+				<td></td>
+				<td></td>
+			</tr>	
+			<tr>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr style="background-color:lightgrey">
+				<td></td>
+				<td></td>
+			</tr>	
+			<tr>
+				<td></td>
+				<td></td>
+			</tr>
+			</tr>	
+			<tr style="background-color:lightgrey">
+				<td></td>
+				<td></td>
+			</tr>	
+			<tr>
+				<td></td>
+				<td></td>
+			</tr>
+		</table>
+
+<hr>
+
+	<h1 id="C7">Linux Cheatsheet</h1>
+
+		<table style="width:90%;margin-left:5%;margin-right:5%">
+			<tr>
+				<th style="text-align:left; width: 30%;">Command</th>
+				<th style="text-align:left; width: 70%;">Explaination</th>
+			</tr>	
+			<tr style="background-color:lightgrey">
+				<td>ls [-l] [-a]</td>
+				<td>lists content of directory</td>
+			</tr>	
+			<tr>
+				<td>pwd</td>
+				<td>prints working directory</td>
+			</tr>	
+			<tr style="background-color:lightgrey">
+				<td>cd [path]</td>
+				<td>changes directory (cd alone: switch to home directory)</td>
+			</tr>
+			<tr>
+				<td>cd ..</td>
+				<td>move a level up (directory)</td>
+			</tr>	
+			<tr style="background-color:lightgrey">
+				<td>cd ~</td>
+				<td>change to home directory</td>
+			</tr>	
+			<tr>
+				<td>cd -</td>
+				<td>change to previous directory</td>
+			</tr>
+			<tr style="background-color:lightgrey">
+				<td>cd /</td>
+				<td>change to root directory</td>
+			</tr>	
+			<tr>
+				<td>cp [-r] [source] [target]</td>
+				<td>copies files (for directories use -r; folders in Linux end with a slash /)</td>
+			</tr>
+			<tr style="background-color:lightgrey">
+				<td>rm [-r] [-f]</td>
+				<td>remove files and directories (for empty directories use -r, for directories with content use -rf)</td>
+			</tr>	
+			<tr>
+				<td>mv [source] [target]</td>
+				<td>moves/renames files and directories</td>
+			</tr>	
+			<tr style="background-color:lightgrey">
+				<td>mkdir [name]</td>
+				<td>creates directories</td>
+			</tr>	
+			<tr>
+				<td>touch [name]</td>
+				<td>creates file</td>
+			</tr>
+			<tr style="background-color:lightgrey">
+				<td>man</td>
+				<td>displays manual page for commands</td>
+			</tr>	
+			<tr>
+				<td>chmod</td>
+				<td>changes file permissions</td>
+			</tr>
+			<tr style="background-color:lightgrey">
+				<td>chmod 753 public_html</td>
+				<td>rights are given in groups of three - each meaning <strong>R</strong>ead, <strong>W</strong>rite, e<strong>X</strong>ecute</br>
+				the groups are: owner, group, others</br>
+				7 = 111 in binary, 5=101, 3=001</br>
+				owner can rwx, group can r_x, others can x
+				</td>				
+			</tr>	
+			<tr>
+				<td>chmod o+r</td>
+				<td>all others can <strong>R</strong>ead</td>
+			</tr>	
+			<tr style="background-color:lightgrey">
+				<td>sudo</td>
+				<td>execute commands as superuser</td>
+			</tr>	
+			<tr>
+				<td>apt-get</td>
+				<td>get files from the internet using the apt-packagemanager</td>
+			</tr>
+			</tr>	
+			<tr style="background-color:lightgrey">
+				<td>exit</td>
+				<td>exit the current shell session</td>
+			</tr>	
+			<tr>
+				<td>shutdown [now]</td>
+				<td>shuts the machine down (default is 1 Minute)</td>
+			</tr>
+			<tr style="background-color:lightgrey">
+				<td>echo</td>
+				<td>displays lines of text</td>
+			</tr>	
+			<tr>
+				<td>passwd</td>
+				<td>change user password</td>
+			</tr>
+			</tr>	
+			<tr style="background-color:lightgrey">
+				<td>shred</td>
+				<td>overwrites file to hide its contents</td>
+			</tr>	
+			<tr>
+				<td>less</td>
+				<td>inspects file's contents</td>
+			</tr>
+			</tr>	
+			<tr style="background-color:lightgrey">
+				<td>head/tail</td>
+				<td>displays first/last lines of a file</td>
+			</tr>	
+			<tr>
+				<td>whoami</td>
+				<td>outputs username</td>
+			</tr>
+			<tr style="background-color:lightgrey">
+				<td>whatis</td>
+				<td>one-lined description</td>
+			</tr>	
+			<tr>
+				<td>su [user]</td>
+				<td>switch user to [user]</td>
+			</tr>
+			</tr>	
+			<tr style="background-color:lightgrey">
+				<td>Ctrl + D</td>
+				<td>End of input</td>
+			</tr>	
+			<tr>
+				<td>apt install [name]</td>
+				<td>install software</td>
+			</tr>
+						<tr style="background-color:lightgrey">
+				<td>sudo apt update && apt upgrade</td>
+				<td>updates and upgrades installed software</td>
+			</tr>	
+			<tr>
+				<td>./</td>
+				<td>current directory (e.g. for cp)</td>
+			</tr>
+			</tr>	
+			<tr style="background-color:lightgrey">
+				<td>f4</td>
+				<td></td>
+			</tr>	
+			<tr>
+				<td>history</td>
+				<td>shows a list of previously used commands</td>
+			</tr>
+			<tr style="background-color:lightgrey">
+				<td>which</td>
+				<td>outputs the full path of shell commands</br>
+				e.g. which python --> #/usr/bin/python</td>
+			</tr>	
+			<tr>
+				<td>grep ["expression"] [file]</td>
+				<td>searches txt files for regular expressions</br>
+				grep "linux" file.txt --> searches file.txt for "linux"</td>
+			</tr>
+			</tr>	
+			<tr style="background-color:lightgrey">
+				<td>[command] --help</td>
+				<td>outputs help for the command</td>
+			</tr>	
+			<tr>
+				<td>su -</td>
+				<td>switch user with login-shell</td>
+			</tr>
+			</tr>	
+			<tr style="background-color:lightgrey">
+				<td>apt install</td>
+				<td>installs programm from APT</td>
+			</tr>	
+			<tr>
+				<td>apt search</td>
+				<td>sort of search enginge for APT</td>
+			</tr>
+			<tr style="background-color:lightgrey">
+				<td>CTRL+D</td>
+				<td>end of input</td>
+			</tr>	
+			<tr>
+				<td>ALT+.</td>
+				<td>resuse last expression from last input</td>
+			</tr>
+			</tr>	
+			<tr style="background-color:lightgrey">
+				<td>htop</td>
+				<td>view machine's resources</td>
+			</tr>	
+			<tr>
+				<td>sudo apt install [name]</td>
+				<td>installs program [name]</td>
+			</tr>
+			<tr style="background-color:lightgrey">
+				<td>$User</td>
+				<td>current User</td>
+			</tr>	
+			<tr>
+				<td>cat</td>
+				<td>concatenate files</td>
+			</tr>
+			<tr style="background-color:lightgrey">
+				<td>kill [e.g. firefox]</td>
+				<td>terminates processes</td>
+			</tr>	
+			<tr>
+				<td>ping [e.g. orf.at]</td>
+				<td>test network connectivity</td>
+			</tr>
+			</tr>
+			<tr style="background-color:lightgrey">
+				<td>passwd</td>
+				<td>change password</td>
+			</tr>	
+			<tr>
+				<td></td>
+				<td></td>
+			</tr>
+			</tr>
+			<tr style="background-color:lightgrey">
+				<td></td>
+				<td></td>
+			</tr>	
+			<tr>
+				<td></td>
+				<td></td>
+			</tr>
+			</tr>
+			<tr style="background-color:lightgrey">
+				<td></td>
+				<td></td>
+			</tr>	
+			<tr>
+				<td></td>
+				<td></td>
+			</tr>
+			</tr>
+			<tr style="background-color:lightgrey">
+				<td></td>
+				<td></td>
+			</tr>	
+			<tr>
+				<td></td>
+				<td></td>
+			</tr>
+		</table>
+
+
+
+		<hr>	
+		<section id="C8">
+			<h2>1. Segelsport</h2>	
+			<figure>
+				<img src="https://images.pexels.com/photos/1266884/pexels-photo-1266884.jpeg" alt="A blue and white Sailboat" style="width:700px;height:500px;">
+				<figcaption>Ich <strong>liebe</strong> Segeln! Fotocredit: <a href="https://images.pexels.com/photos/1266884/pexels-photo-1266884.jpeg" target="_blank">Pexels</a>
+			</figure>
+	 		<h3>Meine bisherigen Segeltörns als Skipper:</h2>
+	   			<ol>
+				    <li>Sommertörn 2021-8</li>
+				    <li>Sommertörn 2022-8</li>
+				    <li>Übungstörn 2023-4 (hier gehts zum Video: <a href="https://youtu.be/E77nVAmDoh8") target="_blank">LINK!</a>)</li>
+				    <li>Sommertörn 2023-7 (hier gehts zum Video: <a href="https://youtu.be/BJ-42f2RYjo") target="_blank">LINK!</a>)</li>
+	  			</ol>
+			<p>In Summe habe ich <strong>1876 nautische Meilen</strong> (=3474 Kilometer) auf See zurückgelegt, davon <strong>613 Meilen</strong> (=1136 Kilometer) als Schiffsführer. <br>
+			Bislang (leider nur) im Adriatischen Meer.<br>
+			<em>Many more to come!</em></p>	
+		</section>
+
+		<section>
+
+			<h1>Let's see, if i can embed my latest Video:</h1>
+
+			<iframe width="560" height="315" src="https://www.youtube.com/embed/E77nVAmDoh8?si=xyDsCR1AiP0q3oIK" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+			<iframe width="560" height="315" src="https://www.youtube.com/embed/BJ-42f2RYjo?si=kwbIvBFCgH99SVwv" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+			<iframe width="560" height="315" src="https://www.youtube.com/embed/lk-5UJNoFVc?si=FGatOqD__xiMgzgN" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+			
+			<iframe 
+				width="560" 
+				height="315" 
+				src="https://www.youtube.com/embed/Em-FQVRz5JM?si=aMv0IJrapT1NtR9C" 
+				title="YouTube video player" 
+				frameborder="0" 
+				allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+				referrerpolicy="strict-origin-when-cross-origin" 
+				allowfullscreen>
+			</iframe>		
+		</section>
+
+			
+		<section>
+			<h2>2. Katzen</h2>
+			<figure>
+				<img src="https://images.pexels.com/photos/20787/pexels-photo.jpg" alt="A cat" style="width:700px;height:500px;">
+				<figcaption>KATZEN! SIND! <strong>CUTE!!</strong> Fotocredit: <a href="https://images.pexels.com/photos/20787/pexels-photo.jpg" target="_blank">Pexels</a>
+			</figure>
+
+			<h3>Anmeldung zum Katzen-Newsletter</h3>
+			<form>
+			   	<input type="text" name="vorname" placeholder="Dein Vorname hier" required><br>
+				<input type="text" name="nachname" placeholder="Dein Nachname hier" required><br>
+				<input type="text" name="mail" placeholder="Deine Mailadresse hier" required><br>
+				<input type="number" name="alter" placeholder="Dein Alter hier" required><br>
+				<input id="werbun" type ="checkbox" name="werbun" value="werbun" checked> <label for ="werbun">Bitte Werbung schicken</label><br>
+			   	<button type="submit">OK</button>
+			 </form>
+		</section>
+
+	</body>
+	<footer>
+		<p>(c) 2023</p>
+	</footer>
+</html>
