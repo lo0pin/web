@@ -1,0 +1,25 @@
+body {
+	background-color: f5f0e1;
+	color: #1E3C58;
+}
+
+p {
+	font-family: helvetica;
+	color: 1e3d59;
+}
+
+a{
+	color: grey;
+	font-family:serif;
+	font-size:16;
+}
+
+a:hover{
+	color: brown;
+	font-family:sans-serif;
+	font-size:18;
+}
+
+a:active{
+	color:pink;
+}
