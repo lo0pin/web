@@ -1,33 +1,74 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Meine Homepage</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Julian — Home</title>
 
-  <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="stylesheet" href="assets/css/main.css" />
 </head>
-<body>
 
+<body>
   <header class="site-header">
-    <h1>Julian</h1>
-    <nav>
-      <ul class="nav-list">
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Projekte</a></li>
-        <li><a href="#">Kontakt</a></li>
-        <li><a href="archive.html">Archive</a></li>
-      </ul>
-    </nav>
+    <div class="header-inner">
+      <h1 class="site-title">Julian</h1>
+
+      <nav class="top-nav" aria-label="Top navigation">
+        <a href="about.html">About Me</a>
+        <a href="projects.html">My Projects</a>
+        <a href="notes.html">Few Notes</a>
+        <a href="contact.html">Get in Contact</a>
+      </nav>
+    </div>
   </header>
 
   <main class="content">
-    <section>
-      <h2>Hi</h2>
-      <p>
-        this is my personal web-space – currently under construction using HTML, CSS and JavaScript.
-        Hosted by GitHub Pages.
+    <hr class="divider" />
+
+    <!-- "Wide banner" section (no real image, just the format) -->
+    <section class="hero" aria-label="Essence">
+      <p class="hero-quote">
+        I build things — with code, craft, electronics, and words.
       </p>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- Tile grid -->
+    <section class="tile-section" aria-label="Sections">
+      <div class="tile-grid">
+
+        <a class="tile" href="sailing/" aria-label="Sailing">
+          <img class="tile-image" src="assets/img/sailing.jpg" alt="" />
+          <span class="tile-label">🌊 Sailing</span>
+        </a>
+
+        <a class="tile" href="code/" aria-label="Code">
+          <img class="tile-image" src="assets/img/code.jpg" alt="" />
+          <span class="tile-label">💻 Code</span>
+        </a>
+
+        <a class="tile" href="electronics/" aria-label="Electronics">
+          <img class="tile-image" src="assets/img/electronics.jpg" alt="" />
+          <span class="tile-label">⚡ Electronics</span>
+        </a>
+
+        <a class="tile" href="making/" aria-label="Making">
+          <img class="tile-image" src="assets/img/making.jpg" alt="" />
+          <span class="tile-label">🛠 Making</span>
+        </a>
+
+        <a class="tile" href="games/" aria-label="Games">
+          <img class="tile-image" src="assets/img/games.jpg" alt="" />
+          <span class="tile-label">🎮 Games</span>
+        </a>
+
+        <a class="tile" href="words/" aria-label="Words">
+          <img class="tile-image" src="assets/img/words.jpg" alt="" />
+          <span class="tile-label">📚 Words</span>
+        </a>
+
+      </div>
     </section>
   </main>
 
