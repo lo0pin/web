@@ -48,8 +48,15 @@ Future extensions (e.g. APIs or self-hosted services) will be handled separately
 - [ ] History
 - [ ] Philosophy
 - [ ] Homebrew Browsergames
+- [ ] 3d printing
+
+- [ ] nerdism
+    - lotr
+    - gothic
+    - max payne
 
 - [ ] Words: 
     - Kommunikationswissenschaft, 
     - Sprachwissenschaft und 
     - Literatur
+    - 
