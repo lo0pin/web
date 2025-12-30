@@ -1,56 +1,212 @@
-/* ===== Reset & Base ===== */
+/* =========================================================
+   main.css — clean landing page + tile hover labels
+   ========================================================= */
+
+/* ---------- Base / Reset ---------- */
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
 
+:root {
+  --bg: #f7f7f7;
+  --surface: #ffffff;
+  --text: #1f2328;
+  --muted: #6b7280;
+  --border: #e5e7eb;
+  --link: #0b5fff;
+  --maxw: 980px;
+  --radius: 16px;
+}
+
+html, body {
+  height: 100%;
+}
+
 body {
   margin: 0;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
   line-height: 1.6;
-  color: #222;
-  background-color: #FFF3E8;
+  color: var(--text);
+  background: var(--bg);
 }
 
-/* ===== Layout ===== */
-.site-header,
-.site-footer {
-  background-color: #EFE8D8;
-  padding: 1rem 2rem;
-  border-bottom: 1px solid #ddd;
+/* ---------- Header ---------- */
+.site-header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
 }
 
-.site-footer {
-  border-top: 1px solid #ddd;
-  border-bottom: none;
-  text-align: center;
-}
-
-.content {
-  max-width: 800px;
-  margin: 2rem auto;
-  padding: 0 1rem;
-}
-
-/* ===== Navigation ===== */
-.nav-list {
-  list-style: none;
-  padding: 0;
+.header-inner {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 1.25rem 1rem;
   display: flex;
+  align-items: baseline;
+  justify-content: space-between;
   gap: 1rem;
 }
 
-.nav-list a {
+.site-title {
+  margin: 0;
+  font-size: 1.4rem;
+  letter-spacing: 0.2px;
+}
+
+.top-nav {
+  display: flex;
+  gap: 0.9rem;
+  flex-wrap: wrap;
+}
+
+.top-nav a {
+  font-size: 0.95rem;
+  color: var(--muted);
   text-decoration: none;
-  color: #0077cc;
 }
 
-.nav-list a:hover {
+.top-nav a:hover {
+  color: var(--text);
   text-decoration: underline;
+  text-underline-offset: 4px;
 }
 
-/* ===== Headings ===== */
-h1, h2 {
-  margin-top: 0;
+/* ---------- Main content ---------- */
+.content {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 1.25rem 1rem 3rem;
+}
+
+.divider {
+  border: 0;
+  border-top: 1px solid var(--border);
+  margin: 1.25rem 0;
+}
+
+/* ---------- "Wide banner" / hero ---------- */
+.hero {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem 1.25rem;
+  min-height: 160px;            /* gives it the "banner" feel */
+  display: grid;
+  place-items: center;
+}
+
+.hero-quote {
+  margin: 0;
+  max-width: 42ch;
+  text-align: center;
+  font-size: 1.35rem;
+  line-height: 1.35;
+}
+
+/* ---------- Tile grid ---------- */
+.tile-section {
+  margin-top: 0.5rem;
+}
+
+.tile-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+/* Responsive columns */
+@media (max-width: 900px) {
+  .tile-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .header-inner {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .tile-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.tile {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: #111; /* fallback if images are missing */
+  text-decoration: none;
+  aspect-ratio: 16 / 10; /* "photo tile" feeling */
+}
+
+/* Image fills the tile */
+.tile-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transform: scale(1.01);
+  transition: transform 180ms ease;
+}
+
+/* Dark overlay for hover/focus */
+.tile::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0);
+  transition: background 180ms ease;
+  pointer-events: none;
+}
+
+/* Label hidden by default */
+.tile-label {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0.85rem 1rem;
+  color: #fff;
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+/* Hover + keyboard focus */
+.tile:hover .tile-image,
+.tile:focus-visible .tile-image {
+  transform: scale(1.06);
+}
+
+.tile:hover::before,
+.tile:focus-visible::before {
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.tile:hover .tile-label,
+.tile:focus-visible .tile-label {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Better keyboard focus */
+.tile:focus-visible {
+  outline: 3px solid rgba(11, 95, 255, 0.45);
+  outline-offset: 3px;
+}
+
+/* ---------- Footer ---------- */
+.site-footer {
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+  padding: 1.25rem 1rem;
+  text-align: center;
+  color: var(--muted);
 }
