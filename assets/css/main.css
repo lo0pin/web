@@ -1,208 +1,320 @@
 /* =========================================================
    main.css — clean landing page + tile hover labels
+
+   Ziel dieses Stylesheets:
+   - Schlichtes, modernes Layout (Header → Banner → Kacheln → Footer)
+   - Responsive Grid (passt sich an Bildschirmgrößen an)
+   - Kachel-Hover: Bild zoomt leicht, wird abgedunkelt, Text blendet ein
    ========================================================= */
 
-/* ---------- Base / Reset ---------- */
+
+/* =========================================================
+   1) BASE / RESET
+   ---------------------------------------------------------
+   "Reset" bedeutet: Wir machen Grundregeln, damit Browser
+   möglichst gleich reagieren (sonst hat jeder Browser kleine
+   Standard-Unterschiede).
+   ========================================================= */
+
+/* Setzt für ALLE Elemente ein berechenbares Box-Modell:
+   - width/height beinhalten dann auch padding & border
+   - vermeidet "warum ist das plötzlich breiter?!" */
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
 
+/* CSS-Variablen: wiederverwendbare Werte an einem Ort.
+   Vorteil: Du kannst später Farb- oder Größen-Themen ändern,
+   ohne überall im CSS suchen zu müssen. */
 :root {
-  --bg: #f7f7f7;
-  --surface: #ffffff;
-  --text: #1f2328;
-  --muted: #6b7280;
-  --border: #e5e7eb;
-  --link: #0b5fff;
-  --maxw: 980px;
-  --radius: 16px;
+  --bg: #f7f7f7;          /* Hintergrundfarbe der Seite */
+  --surface: #ffffff;     /* "Karten"-Hintergrund (Header, Banner, Footer) */
+  --text: #1f2328;        /* Standard-Textfarbe */
+  --muted: #6b7280;       /* "leiser" Text (z. B. Navigation, Footer) */
+  --border: #e5e7eb;      /* feine Linien / Rahmen */
+  --link: #0b5fff;        /* Linkfarbe (hier nur als Option; später nutzbar) */
+  --maxw: 980px;          /* maximale Inhaltsbreite (zentriertes Layout) */
+  --radius: 16px;         /* abgerundete Ecken (Banner/Kacheln) */
 }
 
+/* Damit Layouts mit 100% Höhe sauber funktionieren können,
+   setzen wir html & body auf volle Höhe. */
 html, body {
   height: 100%;
 }
 
+/* Grundstil der gesamten Seite */
 body {
-  margin: 0;
+  margin: 0; /* Browser-Standardrand entfernen */
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-  line-height: 1.6;
-  color: var(--text);
-  background: var(--bg);
+  line-height: 1.6;       /* Zeilenabstand → besser lesbar */
+  color: var(--text);     /* Standard-Textfarbe */
+  background: var(--bg);  /* Seitenhintergrund */
 }
 
-/* ---------- Header ---------- */
+
+/* =========================================================
+   2) HEADER (oben: Titel + kleine Navigation)
+   ========================================================= */
+
+/* Der Header ist eine "Surface" (weißer Block) + feine Linie unten */
 .site-header {
   background: var(--surface);
   border-bottom: 1px solid var(--border);
 }
 
+/* Innerer Header-Container:
+   - zentriert und begrenzt auf max Breite
+   - Flexbox: Title links, Navigation rechts */
 .header-inner {
   max-width: var(--maxw);
-  margin: 0 auto;
-  padding: 1.25rem 1rem;
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 1rem;
+  margin: 0 auto;                 /* zentriert den Container */
+  padding: 1.25rem 1rem;          /* Innenabstand */
+  display: flex;                  /* horizontale Anordnung */
+  align-items: baseline;          /* Titel & Links auf "Textlinie" ausrichten */
+  justify-content: space-between; /* maximaler Abstand zwischen links/rechts */
+  gap: 1rem;                      /* Abstand, falls es umbrechen muss */
 }
 
+/* Der Seitentitel (Name) */
 .site-title {
-  margin: 0;
-  font-size: 1.4rem;
-  letter-spacing: 0.2px;
+  margin: 0;             /* Standardabstände entfernen */
+  font-size: 1.4rem;     /* moderat groß */
+  letter-spacing: 0.2px; /* minimal "luftiger" */
 }
 
+/* Navigation als horizontale Linkliste */
 .top-nav {
   display: flex;
-  gap: 0.9rem;
-  flex-wrap: wrap;
+  gap: 0.9rem;      /* Abstand zwischen Links */
+  flex-wrap: wrap;  /* wenn wenig Platz: Zeilenumbruch statt Überlappung */
 }
 
+/* Links in der Top-Navigation: eher leise (muted) */
 .top-nav a {
   font-size: 0.95rem;
   color: var(--muted);
-  text-decoration: none;
+  text-decoration: none; /* Unterstreichung weg */
 }
 
+/* Hover-Effekt: wird kräftiger & unterstrichen */
 .top-nav a:hover {
   color: var(--text);
   text-decoration: underline;
-  text-underline-offset: 4px;
+  text-underline-offset: 4px; /* Unterstreichung etwas "unter" dem Text */
 }
 
-/* ---------- Main content ---------- */
+
+/* =========================================================
+   3) MAIN CONTENT (zentrierte Inhaltsfläche)
+   ========================================================= */
+
 .content {
   max-width: var(--maxw);
-  margin: 0 auto;
-  padding: 1.25rem 1rem 3rem;
+  margin: 0 auto;                 /* zentriert */
+  padding: 1.25rem 1rem 3rem;     /* unten mehr Platz, wirkt luftiger */
 }
 
+/* Der <hr>-Divider: wir stylen ihn, damit er "clean" aussieht */
 .divider {
-  border: 0;
-  border-top: 1px solid var(--border);
-  margin: 1.25rem 0;
+  border: 0;                          /* Standardrahmen entfernen */
+  border-top: 1px solid var(--border);/* nur eine feine Linie oben */
+  margin: 1.25rem 0;                  /* Abstand nach oben/unten */
 }
 
-/* ---------- "Wide banner" / hero ---------- */
+
+/* =========================================================
+   4) "WIDE BANNER" / HERO
+   ---------------------------------------------------------
+   Das ist dein "Breitbild"-Bereich:
+   - kein Bild, aber Banner-Format
+   - zentrierter Satz / Zitat
+   ========================================================= */
+
 .hero {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 2rem 1.25rem;
-  min-height: 160px;            /* gives it the "banner" feel */
+  background: var(--surface);          /* weißer Banner */
+  border: 1px solid var(--border);     /* feiner Rahmen */
+  border-radius: var(--radius);        /* abgerundete Ecken */
+  padding: 2rem 1.25rem;               /* Innenabstand */
+  min-height: 160px;                   /* macht es "bannerartig" */
   display: grid;
-  place-items: center;
+  place-items: center;                 /* zentriert Inhalt horizontal+vertikal */
 }
 
+/* Text im Banner:
+   - begrenzte Zeilenlänge (max-width in Zeichen)
+   - zentriert und etwas größer */
 .hero-quote {
   margin: 0;
-  max-width: 42ch;
+  max-width: 42ch;        /* "ch" = ungefähre Zeichenbreite → gute Lesbarkeit */
   text-align: center;
   font-size: 1.35rem;
   line-height: 1.35;
 }
 
-/* ---------- Tile grid ---------- */
+
+/* =========================================================
+   5) TILE GRID (Fotokacheln)
+   ---------------------------------------------------------
+   Du hast ein Raster mit Kacheln.
+   Jede Kachel ist:
+   - ein Link (klickbar)
+   - hat ein Bild
+   - beim Hover:
+       * Bild zoomt leicht
+       * dunkler Overlay
+       * Label blendet ein
+   ========================================================= */
+
+/* Optionaler Abstand nach oben (klein) */
 .tile-section {
   margin-top: 0.5rem;
 }
 
+/* Das Grid: 3 Spalten standardmäßig */
 .tile-grid {
   display: grid;
-  gap: 1rem;
+  gap: 1rem; /* Abstand zwischen Kacheln */
   grid-template-columns: repeat(3, minmax(0, 1fr));
+  /* repeat(3, ...) = 3 gleiche Spalten
+     1fr = je ein Drittel der Breite
+     minmax(0, 1fr) verhindert overflow-Probleme */
 }
 
-/* Responsive columns */
+
+/* =========================================================
+   6) RESPONSIVE DESIGN (Media Queries)
+   ---------------------------------------------------------
+   Damit es auf Tablet/Handy gut aussieht.
+   ========================================================= */
+
+/* Ab 900px und kleiner: nur 2 Spalten (mehr Platz pro Kachel) */
 @media (max-width: 900px) {
   .tile-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
+/* Ab 560px und kleiner: Navigation unter den Titel + 1 Spalte Kacheln */
 @media (max-width: 560px) {
   .header-inner {
-    align-items: flex-start;
-    flex-direction: column;
+    align-items: flex-start;   /* oben ausrichten */
+    flex-direction: column;    /* Titel über Navigation */
   }
   .tile-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr; /* eine Spalte */
   }
 }
 
+
+/* =========================================================
+   7) KACHEL-STYLING (Tile + Bild + Overlay + Label)
+   ========================================================= */
+
+/* Die Kachel selbst ist ein Link <a>:
+   - relative Position, damit Label & Overlay absolut platziert werden können
+   - overflow hidden, damit Zoom nicht über die Kachel hinaus "rausläuft"
+   - aspect-ratio sorgt für ein einheitliches Format, egal wie groß das Bild ist */
 .tile {
   position: relative;
-  display: block;
+  display: block;                 /* macht den Link block-weit klickbar */
   overflow: hidden;
   border-radius: var(--radius);
   border: 1px solid var(--border);
-  background: #111; /* fallback if images are missing */
-  text-decoration: none;
-  aspect-ratio: 16 / 10; /* "photo tile" feeling */
+  background: #111;               /* Fallback: falls Bild fehlt, sieht's ok aus */
+  text-decoration: none;          /* Link-Unterstreichung weg */
+  aspect-ratio: 16 / 10;          /* einheitliche "Foto-Kachel" Proportion */
 }
 
-/* Image fills the tile */
+/* Das Bild füllt die Kachel komplett.
+   object-fit: cover bedeutet:
+   - Bild wird NICHT verzerrt
+   - Bild wird ggf. beschnitten, damit es das Format füllt */
 .tile-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block;
-  transform: scale(1.01);
-  transition: transform 180ms ease;
+  display: block;                 /* verhindert kleine "Bild-Unterkante" Lücken */
+  transform: scale(1.01);         /* minimaler Zoom (sieht oft nicer aus) */
+  transition: transform 180ms ease; /* sanfter Zoom beim Hover */
 }
 
-/* Dark overlay for hover/focus */
+/* Der dunkle Overlay ist kein extra HTML-Element, sondern ein pseudo-element.
+   Vorteil: du brauchst im HTML keinen extra <div>.
+   Standardmäßig ist er unsichtbar (rgba alpha 0). */
 .tile::before {
   content: "";
   position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0);
+  inset: 0;                         /* = top/right/bottom/left: 0 */
+  background: rgba(0, 0, 0, 0);     /* transparent */
   transition: background 180ms ease;
-  pointer-events: none;
+  pointer-events: none;             /* Overlay blockiert nicht den Klick */
 }
 
-/* Label hidden by default */
+/* Der Text (Label) unten:
+   - absolut positioniert
+   - zunächst unsichtbar (opacity 0) und leicht nach unten verschoben */
 .tile-label {
   position: absolute;
   left: 0;
   right: 0;
   bottom: 0;
+
   padding: 0.85rem 1rem;
   color: #fff;
+
   font-size: 1.05rem;
   font-weight: 600;
   letter-spacing: 0.2px;
-  opacity: 0;
-  transform: translateY(10px);
+
+  opacity: 0;                        /* zunächst unsichtbar */
+  transform: translateY(10px);       /* leicht nach unten */
   transition: opacity 180ms ease, transform 180ms ease;
 }
 
-/* Hover + keyboard focus */
+
+/* =========================================================
+   8) HOVER + FOCUS BEHAVIOR
+   ---------------------------------------------------------
+   Hover = Maus drüber
+   Focus = Tastatur-Navigation (Tab)
+   focus-visible = zeigt Fokus nur, wenn wirklich per Tastatur
+   ========================================================= */
+
+/* Wenn du hoverst oder per Tastatur fokussierst:
+   - Bild zoomt etwas stärker */
 .tile:hover .tile-image,
 .tile:focus-visible .tile-image {
   transform: scale(1.06);
 }
 
+/* Overlay wird sichtbar (dunkelt ab), damit Label gut lesbar ist */
 .tile:hover::before,
 .tile:focus-visible::before {
   background: rgba(0, 0, 0, 0.35);
 }
 
+/* Label blendet ein und "rutscht" nach oben */
 .tile:hover .tile-label,
 .tile:focus-visible .tile-label {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* Better keyboard focus */
+/* Fokus-Rahmen für Tastaturbenutzer (Accessibility):
+   - zeigt klar, welche Kachel aktiv ist */
 .tile:focus-visible {
   outline: 3px solid rgba(11, 95, 255, 0.45);
   outline-offset: 3px;
 }
 
-/* ---------- Footer ---------- */
+
+/* =========================================================
+   9) FOOTER
+   ========================================================= */
+
 .site-footer {
   border-top: 1px solid var(--border);
   background: var(--surface);

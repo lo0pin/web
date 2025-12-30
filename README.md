@@ -37,7 +37,19 @@ https://<username>.github.io/homepage/
 
 
 
-📌 Notes
+## 📌 Notes
 
 This is a static website without a backend.
 Future extensions (e.g. APIs or self-hosted services) will be handled separately.
+
+
+## 📝 To Dos
+- [ ] Astronomy
+- [ ] History
+- [ ] Philosophy
+- [ ] Homebrew Browsergames
+
+- [ ] Words: 
+    - Kommunikationswissenschaft, 
+    - Sprachwissenschaft und 
+    - Literatur

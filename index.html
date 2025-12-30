@@ -1,19 +1,92 @@
 <!DOCTYPE html>
+<!--
+  DOCTYPE sagt dem Browser: "Das ist modernes HTML5."
+  Ohne DOCTYPE kann der Browser in einen alten Kompatibilitätsmodus fallen (Quirks Mode),
+  und dann verhalten sich CSS/Layouts oft "komisch".
+-->
 <html lang="en">
+<!--
+  <html lang="en"> legt die Sprache der Seite fest.
+  Das hilft:
+  - Screenreadern (Accessibility)
+  - Suchmaschinen (SEO)
+  - Browser-Funktionen wie automatische Übersetzung
+  Wenn du später Deutsch möchtest: lang="de" oder eine eigene DE-Seite /de/ mit lang="de".
+-->
+
 <head>
+  <!--
+    <meta charset="UTF-8" />
+    Zeichencodierung: UTF-8 ist Standard und erlaubt Umlaute, Emojis etc.
+    Ohne das könnten Sonderzeichen "kaputt" angezeigt werden.
+  -->
   <meta charset="UTF-8" />
+
+  <!--
+    <meta name="viewport" ...>
+    Wichtig für Smartphones/Tablets:
+    - width=device-width: nutze die echte Gerätebreite
+    - initial-scale=1.0: starte mit normalem Zoom
+    Ohne viewport sieht eine Seite am Handy oft "herausgezoomt" und winzig aus.
+  -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!--
+    <title> ... </title>
+    Titel der Seite:
+    - erscheint im Browser-Tab
+    - wird in Suchmaschinen als Titel angezeigt
+    - wird beim Bookmark/Favoriten genutzt
+  -->
   <title>Julian — Home</title>
 
+  <!--
+    <link rel="stylesheet" href="...">
+    Bindet dein CSS ein.
+    Pfad ist relativ, d.h. bezogen auf die Position dieser index.html.
+    Hier: index.html im Root und CSS liegt in assets/css/main.css.
+  -->
   <link rel="stylesheet" href="assets/css/main.css" />
 </head>
 
 <body>
+  <!--
+    HEADER = oberer Bereich der Seite.
+    Typischer Inhalt:
+    - Seitentitel / Branding
+    - Hauptnavigation
+    Hinweis: header ist semantisch. Es ist nicht nur "ein div", sondern sagt: "das ist Kopfbereich".
+  -->
   <header class="site-header">
+
+    <!--
+      "header-inner" ist ein Container, der:
+      - die maximale Breite begrenzt (max-width im CSS)
+      - den Inhalt zentriert
+      - per Flexbox Titel links und Navigation rechts anordnet
+    -->
     <div class="header-inner">
+
+      <!--
+        <h1> ist die wichtigste Überschrift der Seite.
+        Idealerweise gibt es pro Seite genau ein <h1>.
+        Screenreader & Suchmaschinen verstehen: das ist die Hauptüberschrift.
+      -->
       <h1 class="site-title">Julian</h1>
 
+      <!--
+        <nav> ist die Navigation (semantisch).
+        aria-label beschreibt, WAS diese Navigation ist, falls mehrere navs existieren.
+        (z.B. später: Footer-Navigation, Sidebar-Navigation, etc.)
+      -->
       <nav class="top-nav" aria-label="Top navigation">
+
+        <!--
+          Navigation-Links:
+          - zeigen auf andere HTML-Seiten (about.html etc.)
+          - diese Seiten müssen später auch wirklich existieren
+          Wichtig: relative Links (ohne https://...) bleiben stabil bei Domainwechsel.
+        -->
         <a href="about.html">About Me</a>
         <a href="projects.html">My Projects</a>
         <a href="notes.html">Few Notes</a>
@@ -22,24 +95,82 @@
     </div>
   </header>
 
+  <!--
+    <main> ist der Hauptinhalt.
+    Es sollte pro Seite nur ein main geben.
+    Hilft Screenreadern: "Hier beginnt der eigentliche Content."
+  -->
   <main class="content">
+
+    <!--
+      <hr> ist eine thematische Trennung (horizontal rule).
+      Du nutzt es hier sehr bewusst als "Abschnitts-Zäsur":
+      - Header oben
+      - dann Banner
+      - dann Kacheln
+      Mit class="divider" stylst du die Linie im CSS schön dezent.
+    -->
     <hr class="divider" />
 
-    <!-- "Wide banner" section (no real image, just the format) -->
+    <!--
+      HERO / "Wide banner"
+      Das ist dein "Breitbild" ohne echtes Bild:
+      - großflächiger Block
+      - ein Satz / ein Zitat
+      aria-label beschreibt den Zweck: Essence (Essenz).
+      Screenreader können so besser navigieren.
+    -->
     <section class="hero" aria-label="Essence">
+
+      <!--
+        Der eigentliche Satz im Banner.
+        <p> steht für Absatztext.
+        class="hero-quote" macht den Text größer und zentriert.
+      -->
       <p class="hero-quote">
-        I build things — with code, craft, electronics, and words.
+        I build things — with code, craft, electronics, words and ♡
       </p>
     </section>
 
+    <!-- zweite Trennlinie zwischen Banner und Kachelbereich -->
     <hr class="divider" />
 
-    <!-- Tile grid -->
+    <!--
+      TILE GRID SECTION
+      Das ist das Herzstück: Kacheln (Fotos) als Links in die einzelnen Bereiche.
+      aria-label="Sections" sagt: hier sind die Hauptbereiche der Website.
+    -->
     <section class="tile-section" aria-label="Sections">
+
+      <!--
+        tile-grid ist der Grid-Container.
+        Im CSS wird daraus ein Raster mit:
+        - 3 Spalten am Desktop
+        - 2 Spalten am Tablet
+        - 1 Spalte am Handy
+      -->
       <div class="tile-grid">
 
+        <!--
+          Jede Kachel ist ein <a> (Link), der als "card" gestylt ist.
+          Vorteil: Die ganze Kachel ist klickbar (nicht nur Text).
+          aria-label ist wichtig, weil das Bild alt="" hat (dekorativ).
+          So wissen Screenreader: wohin führt der Link.
+        -->
+
         <a class="tile" href="sailing/" aria-label="Sailing & Travel">
+          <!--
+            <img> zeigt das Foto.
+            alt="" bedeutet: dekoratives Bild → Screenreader sollen es ignorieren,
+            weil der Link schon über aria-label beschrieben wird.
+            Wichtig: das Bild muss unter assets/img/sailing.jpg existieren.
+          -->
           <img class="tile-image" src="assets/img/sailing.jpg" alt="" />
+
+          <!--
+            tile-label ist der Text, der beim Hover eingeblendet wird (via CSS).
+            Er liegt über dem Bild.
+          -->
           <span class="tile-label">🌊 Sailing & Travel</span>
         </a>
 
@@ -68,6 +199,13 @@
           <span class="tile-label">📚 Words & Art</span>
         </a>
 
+        <!--
+          Zusätzliche Bereiche, die du ergänzt hast:
+          botanics, music, cats.
+          Hinweis: Für GitHub Pages sind Ordnerlinks wie "botanics/" super,
+          wenn dort eine botanics/index.html liegt.
+        -->
+
         <a class="tile" href="botanics/" aria-label="Botanics">
           <img class="tile-image" src="assets/img/botanics.jpg" alt="" />
           <span class="tile-label">🌱 Botanics</span>
@@ -87,10 +225,22 @@
     </section>
   </main>
 
+  <!--
+    FOOTER = unterer Seitenbereich.
+    Typisch für:
+    - Copyright
+    - ggf. kleine Links (Impressum/Privacy), wenn du das später brauchst
+  -->
   <footer class="site-footer">
     <p>© 2025 Julian</p>
   </footer>
 
+  <!--
+    JavaScript einbinden:
+    - defer bedeutet: Script wird geladen, aber erst ausgeführt,
+      nachdem das HTML geparst wurde.
+    Vorteil: Das Script blockiert nicht das Rendering der Seite.
+  -->
   <script src="assets/js/main.js" defer></script>
 </body>
 </html>
