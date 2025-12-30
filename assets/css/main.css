@@ -265,7 +265,8 @@ body {
   padding: 0.85rem 1rem;
   color: #fff;
 
-  font-size: 1.05rem;
+  font-size: 1.75rem;
+  text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.612); /* Die Syntax: text-shadow: [rechts] [unten] [unschärfe] [farbe]; */
   font-weight: 600;
   letter-spacing: 0.2px;
 
