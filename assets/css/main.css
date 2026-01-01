@@ -338,32 +338,34 @@ body.has-bg {
 /* The background image layer (blurred + desaturated) */
 body.has-bg::before {
   content: "";
-  position: fixed;      /* stays in place while scrolling */
-  inset: 0;             /* top/right/bottom/left = 0 */
-  z-index: -2;          /* behind everything */
+  position: fixed;
+  inset: 0;
+  z-index: -2;
   background: var(--page-bg) center / cover no-repeat;
 
-  /* The "subtle" look */
-  filter: grayscale(1) saturate(0.35) blur(10px);
-  transform: scale(1.05); /* avoids seeing edges after blur */
+  filter: grayscale(1) saturate(0.35) blur(12px);
+  transform: scale(1.08);
 
-  opacity: 0.22;        /* overall visibility (tune this) */
+  opacity: 0.55; /* TEST: deutlich */
 }
 
-/* Overlay to guarantee readability and style consistency */
 body.has-bg::after {
   content: "";
   position: fixed;
   inset: 0;
   z-index: -1;
 
-  /* Soft overlay: keeps your clean look and protects text */
-  background: linear-gradient(
-    to bottom,
-    rgba(247, 247, 247, 0.92),
-    rgba(247, 247, 247, 0.98)
-  );
+ 
+  background: rgba(247, 247, 247, 0.399); /* TEST: weniger Weiß, mehr "Durchscheinen" */
 }
+
+/*ZIELWERTE, ABER PASSEN NICHT*/
+/*
+body.has-bg::before { opacity: 0.28; filter: grayscale(1) saturate(0.25) blur(10px); }
+body.has-bg::after  { background: rgba(247, 247, 247, 0.78); }
+*/
+
+
 
 /* Define per-section background images via CSS variables */
 body.bg-sailing      { --page-bg: url("../img/sailing.jpg"); }
@@ -374,3 +376,6 @@ body.bg-nerdism      { --page-bg: url("../img/nerdism.jpg"); }
 body.bg-words        { --page-bg: url("../img/words.jpg"); }
 body.bg-botanics     { --page-bg: url("../img/botanics.jpg"); }
 body.bg-music        { --page-bg: url("../img/music.jpg"); }
+
+
+
