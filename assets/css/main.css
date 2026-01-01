@@ -323,3 +323,54 @@ body {
   text-align: center;
   color: var(--muted);
 }
+
+
+/* =========================================================
+   Subtle page background images (blurred + desaturated)
+   Apply by adding: <body class="has-bg bg-sailing">
+   ========================================================= */
+
+   
+body.has-bg {
+  position: relative; /* needed so ::before/::after can be positioned */
+}
+
+/* The background image layer (blurred + desaturated) */
+body.has-bg::before {
+  content: "";
+  position: fixed;      /* stays in place while scrolling */
+  inset: 0;             /* top/right/bottom/left = 0 */
+  z-index: -2;          /* behind everything */
+  background: var(--page-bg) center / cover no-repeat;
+
+  /* The "subtle" look */
+  filter: grayscale(1) saturate(0.35) blur(10px);
+  transform: scale(1.05); /* avoids seeing edges after blur */
+
+  opacity: 0.22;        /* overall visibility (tune this) */
+}
+
+/* Overlay to guarantee readability and style consistency */
+body.has-bg::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+
+  /* Soft overlay: keeps your clean look and protects text */
+  background: linear-gradient(
+    to bottom,
+    rgba(247, 247, 247, 0.92),
+    rgba(247, 247, 247, 0.98)
+  );
+}
+
+/* Define per-section background images via CSS variables */
+body.bg-sailing      { --page-bg: url("../img/sailing.jpg"); }
+body.bg-code         { --page-bg: url("../img/code.jpg"); }
+body.bg-electronics  { --page-bg: url("../img/electronics.jpg"); }
+body.bg-making       { --page-bg: url("../img/making.jpg"); }
+body.bg-nerdism      { --page-bg: url("../img/nerdism.jpg"); }
+body.bg-words        { --page-bg: url("../img/words.jpg"); }
+body.bg-botanics     { --page-bg: url("../img/botanics.jpg"); }
+body.bg-music        { --page-bg: url("../img/music.jpg"); }
