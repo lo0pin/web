@@ -1,0 +1,1314 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Quest Editor (Web) → HTML Export</title>
+
+  <style>
+    :root{
+      --bg: #eef4ff;
+      --card: #ffffff;
+      --text: #111827;
+      --muted: #475569;
+      --line: rgba(15, 23, 42, .12);
+      --accent: #2f6feb;
+      --accent-soft: rgba(47,111,235,.12);
+      --danger: #b42318;
+      --shadow: 0 10px 24px rgba(15,23,42,.08);
+      --radius: 14px;
+    }
+    *{ box-sizing: border-box; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.45;
+    }
+    header, main{
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 18px 18px;
+    }
+    header{
+      padding-top: 22px;
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    header h1{
+      margin:0;
+      font-size: clamp(1.2rem, 2.2vw, 1.8rem);
+      letter-spacing: .2px;
+    }
+    header .hint{
+      color: var(--muted);
+      font-size: .95rem;
+    }
+
+    .layout{
+      display:grid;
+      grid-template-columns: 360px 1fr;
+      gap: 14px;
+      align-items: start;
+    }
+    @media (max-width: 980px){
+      .layout{ grid-template-columns: 1fr; }
+    }
+
+    .card{
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 14px;
+    }
+    .card h2{
+      margin:0 0 10px 0;
+      font-size: 1.1rem;
+    }
+    .muted{ color: var(--muted); }
+    hr{
+      border:0;
+      border-top: 1px solid var(--line);
+      margin: 12px 0;
+    }
+
+    label{
+      font-size: .92rem;
+      color: var(--muted);
+      display:block;
+      margin: 10px 0 4px 0;
+    }
+    input[type="text"], textarea, select{
+      width:100%;
+      padding: 10px 10px;
+      border: 1px solid rgba(15,23,42,.18);
+      border-radius: 12px;
+      background: #fff;
+      font: inherit;
+      outline: none;
+    }
+    textarea{ min-height: 90px; resize: vertical; }
+    .row2{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    @media (max-width: 980px){
+      .row2{ grid-template-columns: 1fr; }
+    }
+
+    .btnbar{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    button{
+      appearance:none;
+      border: 1px solid rgba(47,111,235,.25);
+      background: var(--accent-soft);
+      color: var(--accent);
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-weight: 700;
+      cursor:pointer;
+    }
+    button:hover{ filter: brightness(.98); text-decoration: underline; }
+    button.danger{
+      border-color: rgba(180,35,24,.25);
+      background: rgba(180,35,24,.08);
+      color: var(--danger);
+    }
+    button.ghost{
+      background: transparent;
+      border-color: rgba(15,23,42,.12);
+      color: var(--muted);
+      font-weight: 600;
+      text-decoration: none;
+    }
+    button.primary{
+      background: rgba(47,111,235,.14);
+      border-color: rgba(47,111,235,.35);
+    }
+
+    .nodeList{
+      width:100%;
+      border: 1px solid rgba(15,23,42,.12);
+      border-radius: 12px;
+      overflow:hidden;
+      background:#fff;
+    }
+    .nodeListHeader{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding: 10px 10px;
+      background: rgba(15,23,42,.03);
+      border-bottom: 1px solid rgba(15,23,42,.08);
+      gap: 10px;
+    }
+    .nodeListHeader strong{ font-size:.95rem; }
+    .nodeListItems{
+      max-height: 360px;
+      overflow:auto;
+    }
+    .nodeItem{
+      padding: 10px 10px;
+      border-bottom: 1px solid rgba(15,23,42,.06);
+      cursor:pointer;
+      display:flex;
+      flex-direction:column;
+      gap:2px;
+    }
+    .nodeItem:last-child{ border-bottom:0; }
+    .nodeItem .id{ font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace; font-size: .9rem; color: var(--muted); }
+    .nodeItem.active{
+      outline: 2px solid rgba(47,111,235,.35);
+      outline-offset: -2px;
+      background: rgba(47,111,235,.06);
+    }
+
+    .splitHeader{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .table{
+      width:100%;
+      border-collapse: collapse;
+      border: 1px solid rgba(15,23,42,.12);
+      border-radius: 12px;
+      overflow:hidden;
+      background:#fff;
+    }
+    .table th, .table td{
+      padding: 10px 10px;
+      border-bottom: 1px solid rgba(15,23,42,.08);
+      text-align:left;
+      vertical-align: top;
+      font-size: .95rem;
+    }
+    .table th{ background: rgba(15,23,42,.03); color: var(--muted); font-weight: 700; }
+    .table tr:last-child td{ border-bottom:0; }
+
+    .small{
+      font-size: .9rem;
+    }
+    .warn{
+      color: var(--danger);
+      font-weight: 700;
+      font-size: .92rem;
+    }
+    .pill{
+      display:inline-block;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: rgba(15,23,42,.06);
+      border: 1px solid rgba(15,23,42,.10);
+      color: var(--muted);
+      font-size: .85rem;
+      font-weight: 700;
+    }
+
+    .stickySave{
+      position: sticky;
+      top: 10px;
+      z-index: 5;
+      background: linear-gradient(180deg, rgba(238,244,255,1), rgba(238,244,255,0));
+      padding-top: 8px;
+      margin-top: -8px;
+    }
+
+    .footerNote{
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: .9rem;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div>
+      <h1>Quest Editor (Web) → HTML Export</h1>
+      <div class="hint">Client-side. Läuft auf GitHub Pages. Keine Server-Magie, kein Backend-Drama.</div>
+    </div>
+    <div class="pill" id="dirtyPill" title="Änderungsstatus">bereit</div>
+  </header>
+
+  <main>
+    <div class="layout">
+
+      <!-- LEFT -->
+      <aside class="card">
+        <h2>Quest Metadaten</h2>
+
+        <label>Questname</label>
+        <input id="meta_quest_name" type="text" placeholder="Neue Quest">
+
+        <label>Region / Ort</label>
+        <input id="meta_region" type="text" placeholder="Unbekannt">
+
+        <div class="row2">
+          <div>
+            <label>Questgeber</label>
+            <input id="meta_quest_giver" type="text" placeholder="">
+          </div>
+          <div>
+            <label>Voraussetzung</label>
+            <input id="meta_prereq" type="text" placeholder="">
+          </div>
+        </div>
+
+        <label>Art</label>
+        <input id="meta_type" type="text" placeholder="z.B. Laufbursche, Moralisches Dilemma">
+
+        <label>Kurzbeschreibung</label>
+        <textarea id="meta_short_desc" placeholder="Kurzbeschreibung hier…"></textarea>
+
+        <label>Meta-Kurzbeschreibung</label>
+        <textarea id="meta_meta_short" placeholder="Meta-Kurzbeschreibung…"></textarea>
+
+        <label>Belohnungen</label>
+        <textarea id="meta_rewards" placeholder="Gold, Ruf, Folgequest…"></textarea>
+
+        <label>Wichtige Flags</label>
+        <textarea id="meta_important_flags" placeholder="quest_trade_started = true ..."></textarea>
+
+        <label>Stand (Datum/Version)</label>
+        <input id="meta_version" type="text" placeholder="yyyy-mm-dd hh:mm">
+
+        <div class="btnbar">
+          <button class="primary" id="btn_save_json">💾 Projekt speichern (JSON)</button>
+          <button id="btn_open_json">📂 Projekt öffnen (JSON)</button>
+          <button class="primary" id="btn_export_html">🧾 HTML exportieren</button>
+        </div>
+
+        <hr>
+
+        <div class="nodeList" aria-label="Knotenliste">
+          <div class="nodeListHeader">
+            <strong>Knoten</strong>
+            <div class="btnbar" style="margin:0">
+              <button id="btn_add_node" title="Knoten hinzufügen">＋</button>
+              <button class="danger" id="btn_del_node" title="Knoten löschen">－</button>
+              <button id="btn_move_up" class="ghost" title="Nach oben">↑</button>
+              <button id="btn_move_down" class="ghost" title="Nach unten">↓</button>
+            </div>
+          </div>
+          <div class="nodeListItems" id="nodeListItems"></div>
+        </div>
+
+        <div class="footerNote">
+          Tipp: Knoten-Optionen sollten auf existierende Ziel-IDs zeigen. Unbekannte Ziele werden beim HTML-Export markiert.
+        </div>
+      </aside>
+
+      <!-- RIGHT -->
+      <section class="card">
+        <div class="splitHeader">
+          <h2 style="margin:0">Knoten bearbeiten</h2>
+          <div class="btnbar" style="margin:0">
+            <button class="primary" id="btn_apply_node">💾 Änderungen übernehmen</button>
+            <button class="ghost" id="btn_preview_html">👁️ Vorschau</button>
+          </div>
+        </div>
+
+        <div class="stickySave small muted" id="nodeStatus"></div>
+
+        <div class="row2">
+          <div>
+            <label>Knoten-ID (Anchor)</label>
+            <input id="node_id" type="text" placeholder="start">
+          </div>
+          <div>
+            <label>Titel</label>
+            <input id="node_title" type="text" placeholder="Start: Ardea">
+          </div>
+        </div>
+
+        <div class="btnbar">
+          <button id="btn_id_from_title">ID aus Titel</button>
+          <span class="small muted" id="idCollisionInfo"></span>
+        </div>
+
+        <label>Szene (optional)</label>
+        <textarea id="node_scene" placeholder="Lagermeister Pandor steht im Lagerhaus…"></textarea>
+
+        <label>Inhalt (Freitext)</label>
+        <textarea id="node_content" placeholder="Was passiert hier?"></textarea>
+
+        <label>Dialog (Pre-Block)</label>
+        <textarea id="node_dialog" placeholder="wenn Ruf &gt; x:\n  Pandor: ...\nsonst:\n  Pandor: ..."></textarea>
+
+        <label>Wichtige Info (je Zeile 1 Punkt)</label>
+        <textarea id="node_info" placeholder="[Hinweis 1]\n[Hinweis 2]"></textarea>
+
+        <label>Technik/Flags (je Zeile 1 Punkt)</label>
+        <textarea id="node_tech" placeholder="Setze Flag: quest_trade_started = true"></textarea>
+
+        <label>Outcomes/Enden (je Zeile 1 Punkt)</label>
+        <textarea id="node_outcomes" placeholder="Gutes Ende: ...\nNeutrales Ende: ..."></textarea>
+
+        <label>Notizen (optional)</label>
+        <textarea id="node_notes" placeholder="Follow-ups, Weltinfos, offene Fragen…"></textarea>
+
+        <hr>
+
+        <div class="splitHeader">
+          <h2 style="margin:0">Optionen dieses Knotens</h2>
+          <div class="btnbar" style="margin:0">
+            <button id="btn_add_opt">＋ Option</button>
+            <button class="danger" id="btn_del_opt">－ Entfernen</button>
+          </div>
+        </div>
+
+        <table class="table" aria-label="Optionen">
+          <thead>
+            <tr>
+              <th style="width:55%">Label (Text der Option)</th>
+              <th style="width:25%">Ziel-Knoten-ID</th>
+              <th style="width:20%">Status</th>
+            </tr>
+          </thead>
+          <tbody id="optTableBody"></tbody>
+        </table>
+
+        <div class="footerNote">
+          „Denk für mich mit“: Du hast zusätzlich <em>Inhalt</em>, <em>Wichtige Info</em>, <em>Technik/Flags</em>, <em>Outcomes</em> und <em>Notizen</em>. Damit kannst du ohne Lore-Spoiler schon handwerklich sauber bauen.
+        </div>
+
+      </section>
+
+    </div>
+
+    <!-- Hidden file inputs -->
+    <input type="file" id="fileOpenJson" accept=".json,application/json" style="display:none">
+  </main>
+
+  <script>
+    /***********************
+     * Data Model (JS)
+     ***********************/
+    function nowStamp(){
+      const d = new Date();
+      const pad = n => String(n).padStart(2,"0");
+      return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+    }
+
+    function sanitizeId(raw){
+      raw = (raw ?? "").trim().toLowerCase();
+      raw = raw
+        .replaceAll("ä","ae").replaceAll("ö","oe").replaceAll("ü","ue").replaceAll("ß","ss");
+      raw = raw.replace(/[^a-z0-9\-_]+/g, "-");
+      raw = raw.replace(/-{2,}/g, "-").replace(/^-+|-+$/g, "");
+      return raw || "node";
+    }
+
+    function linesToList(text){
+      return (text || "")
+        .split(/\r?\n/)
+        .map(s => s.trim())
+        .filter(Boolean);
+    }
+
+    function listToLines(items){
+      return (items || []).join("\n");
+    }
+
+    function htmlEscape(s){
+      return String(s ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;");
+    }
+
+    function defaultProject(){
+      return {
+        meta: {
+          quest_name: "Neue Quest",
+          region: "Unbekannt",
+          short_description: "Kurzbeschreibung hier…",
+          quest_giver: "",
+          prerequisite: "",
+          quest_type: "",
+          meta_short: "",
+          rewards: "",
+          important_flags: "",
+          version_stamp: nowStamp()
+        },
+        nodes: [
+          {
+            node_id: "start",
+            title: "Start: Ardea",
+            scene: "",
+            dialog: "",
+            content: "",
+            info_items: [],
+            tech_flags: [],
+            outcomes: [],
+            notes: "",
+            options: [
+              { label: "Weiter", target: "end" }
+            ]
+          }
+        ]
+      };
+    }
+
+    let project = defaultProject();
+    let currentNodeIndex = 0;
+    let dirty = false;
+
+    /***********************
+     * HTML Renderer (same structure as your Python)
+     ***********************/
+    const CSS_BLOCK = `
+  <style>
+    :root{
+      --bg: #eef4ff;
+      --card: #ffffff;
+      --text: #111827;
+      --muted: #475569;
+      --line: rgba(15, 23, 42, .12);
+      --accent: #2f6feb;
+      --accent-soft: rgba(47,111,235,.12);
+      --shadow: 0 10px 24px rgba(15,23,42,.08);
+      --radius: 14px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body{
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+    }
+    header, main, footer{
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 18px 18px;
+    }
+    header{ padding-top: 28px; }
+    header h1{
+      margin: 0 0 6px 0;
+      font-size: clamp(1.4rem, 2.3vw, 2rem);
+      letter-spacing: .2px;
+    }
+    header p{ margin: 6px 0 0 0; color: var(--muted); }
+    hr{
+      border: 0;
+      border-top: 1px solid var(--line);
+      margin: 18px 0;
+    }
+    section{
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 18px 18px;
+      margin: 14px 0;
+      scroll-margin-top: 14px;
+    }
+    main { padding-bottom: 45vh; }
+
+    section h2{ margin: 0 0 10px 0; font-size: 1.25rem; }
+    section h3{ margin: 14px 0 8px 0; font-size: 1.05rem; }
+
+    section:target{
+      border-color: var(--accent);
+      background: linear-gradient(0deg, #fff, #fff) padding-box,
+                  linear-gradient(135deg, rgba(47,111,235,.35), rgba(47,111,235,0)) border-box;
+      box-shadow: 0 14px 35px rgba(47,111,235,.18), var(--shadow);
+      position: relative;
+    }
+    section:target::before{
+      content: "Aktiver Knoten";
+      position: absolute;
+      top: -10px;
+      right: 14px;
+      font-size: .78rem;
+      color: var(--accent);
+      background: #fff;
+      border: 1px solid rgba(47,111,235,.35);
+      padding: 4px 8px;
+      border-radius: 999px;
+      box-shadow: 0 8px 16px rgba(15,23,42,.08);
+    }
+
+    nav{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    nav a{
+      display: inline-block;
+      text-decoration: none;
+      color: var(--accent);
+      background: var(--accent-soft);
+      border: 1px solid rgba(47,111,235,.25);
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: .92rem;
+    }
+    nav a:hover{ filter: brightness(0.98); text-decoration: underline; }
+
+    ul, ol { margin: 8px 0 0 22px; }
+    li { margin: 4px 0; }
+
+    details{
+      margin-top: 10px;
+      padding: 10px 12px;
+      border: 1px dashed rgba(15,23,42,.18);
+      border-radius: 12px;
+      background: rgba(255,255,255,.6);
+    }
+    summary{ cursor: pointer; font-weight: 700; color: var(--text); }
+
+    blockquote{
+      margin: 10px 0;
+      padding: 10px 12px;
+      border-left: 4px solid rgba(47,111,235,.45);
+      background: rgba(47,111,235,.06);
+      border-radius: 10px;
+      color: #0f172a;
+    }
+    pre{
+      margin: 0;
+      padding: 10px 12px;
+      background: rgba(15,23,42,.06);
+      border: 1px solid rgba(15,23,42,.10);
+      border-radius: 10px;
+      overflow: auto;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: .92rem;
+      white-space: pre-wrap;
+    }
+    code{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: .92em;
+    }
+
+    footer small{ color: var(--muted); }
+
+    .flash{ animation: flashGlow .7s ease-out; }
+    @keyframes flashGlow{
+      0% { box-shadow: 0 0 0 rgba(47,111,235,0); }
+      40% { box-shadow: 0 0 0 6px rgba(47,111,235,.18), 0 16px 36px rgba(47,111,235,.20); }
+      100% { box-shadow: 0 0 0 rgba(47,111,235,0); }
+    }
+  </style>`.trim();
+
+    const JS_BLOCK = `
+  <script>
+    (function(){
+      function focusTargetFromHash(){
+        const id = location.hash ? location.hash.slice(1) : "";
+        if(!id) return;
+        const el = document.getElementById(id);
+        if(!el) return;
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+        el.classList.add("flash");
+        setTimeout(()=> el.classList.remove("flash"), 700);
+      }
+      window.addEventListener("load", focusTargetFromHash);
+      window.addEventListener("hashchange", focusTargetFromHash);
+    })();
+  </script>`.trim();
+
+    function renderNav(nodes){
+      let parts = [`<nav aria-label="Quest-Navigation">`, `<a href="#top">Übersicht</a>`];
+      for(const n of nodes){
+        const label = htmlEscape(n.title || n.node_id);
+        parts.push(`<a href="#${htmlEscape(n.node_id)}">${label}</a>`);
+      }
+      parts.push(`</nav>`);
+      return parts.join("\n      ");
+    }
+
+    function renderMetaList(meta){
+      const items = [
+        ["Questgeber", meta.quest_giver],
+        ["Voraussetzung", meta.prerequisite],
+        ["Art", meta.quest_type],
+        ["Kurzbeschreibung", meta.meta_short],
+        ["Belohnungen", meta.rewards],
+        ["Wichtige Flags", meta.important_flags],
+      ];
+      return items.map(([k,v])=>{
+        const vv = (v||"").trim() || "—";
+        return `<li><strong>${htmlEscape(k)}:</strong> ${htmlEscape(vv)}</li>`;
+      }).join("\n        ");
+    }
+
+    function renderListBlock(title, items){
+      if(!items || items.length===0) return "";
+      const lis = items.map(it => `<li>${htmlEscape(it)}</li>`).join("\n        ");
+      return `
+      <p><strong>${htmlEscape(title)}:</strong></p>
+      <ul>
+        ${lis}
+      </ul>`.trim();
+    }
+
+    function renderDetails(title, items){
+      if(!items || items.length===0) return "";
+      const lis = items.map(it => `<li>${htmlEscape(it)}</li>`).join("\n          ");
+      return `
+      <details>
+        <summary>${htmlEscape(title)}</summary>
+        <ul>
+          ${lis}
+        </ul>
+      </details>`.trim();
+    }
+
+    function renderOptions(node, nodeIds){
+      if(!node.options || node.options.length===0) return `<p><em>Keine Optionen.</em></p>`;
+      const out = [`<h3>Optionen</h3>`, `<ol>`];
+      for(const opt of node.options){
+        const label = htmlEscape((opt.label||"").trim() || "Option");
+        const target = (opt.target||"").trim();
+        if(!target || !nodeIds.includes(target)){
+          out.push(`<li><a href="#${htmlEscape(target || "top")}">${label}</a> <em style="color:#b42318;">(Ziel unbekannt)</em></li>`);
+        }else{
+          out.push(`<li><a href="#${htmlEscape(target)}">${label}</a></li>`);
+        }
+      }
+      out.push(`</ol>`);
+      return out.join("\n      ");
+    }
+
+    function renderNodeSection(node, nodeIds){
+      const h2 = htmlEscape((node.title||"").trim() || node.node_id);
+      const scene = (node.scene||"").trim();
+      const dialog = (node.dialog||"").trim();
+      const content = (node.content||"").trim();
+      const notes = (node.notes||"").trim();
+
+      let parts = [
+        `<section id="${htmlEscape(node.node_id)}">`,
+        `  <h2>${h2}</h2>`
+      ];
+
+      if(scene) parts.push(`  <p><strong>Szene:</strong> ${htmlEscape(scene)}</p>`);
+      if(content) parts.push(`  <p><strong>Inhalt:</strong> ${htmlEscape(content)}</p>`);
+
+      if(dialog){
+        parts.push(`  <p><strong>Dialog:</strong></p>`);
+        parts.push(`  <blockquote>`);
+        parts.push(`    <pre>`);
+        parts.push(htmlEscape(dialog));
+        parts.push(`    </pre>`);
+        parts.push(`  </blockquote>`);
+      }
+
+      const infoBlock = renderListBlock("Wichtige Information", node.info_items);
+      if(infoBlock) parts.push(infoBlock);
+
+      const techDetails = renderDetails("Technik/Flags", node.tech_flags);
+      if(techDetails) parts.push(techDetails);
+
+      const outDetails = renderDetails("Enden/Outcomes (Notizblock)", node.outcomes);
+      if(outDetails) parts.push(outDetails);
+
+      parts.push(renderOptions(node, nodeIds));
+
+      if(notes) parts.push(`  <p><strong>Notizen:</strong> ${htmlEscape(notes)}</p>`);
+
+      parts.push(`  <p><a href="#top">↑ Zur Übersicht</a></p>`);
+      parts.push(`</section>`);
+      return parts.join("\n    ");
+    }
+
+    function renderHtml(project, includeJs=true){
+      const meta = project.meta;
+      const nodes = project.nodes || [];
+      const nodeIds = nodes.map(n => n.node_id);
+      const title = `Quest-Präsentator: ${meta.quest_name}`.trim();
+      const nav = renderNav(nodes);
+      const version = (meta.version_stamp||"").trim() || nowStamp();
+
+      const topSection = `
+    <section id="top">
+      <h2>Übersicht</h2>
+      <p><strong>Kurzbeschreibung:</strong> ${htmlEscape((meta.short_description||"").trim() || "—")}</p>
+      <p><strong>Quest Metadaten</strong></p>
+      <ul>
+        ${renderMetaList(meta)}
+      </ul>
+      <hr>
+      <p><a href="#${htmlEscape(nodes[0]?.node_id || "top")}">→ Zum Start</a></p>
+    </section>`.trim();
+
+      const nodeSections = nodes.map(n => renderNodeSection(n, nodeIds)).join("\n\n    ");
+
+      return `<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>${htmlEscape(title)}</title>
+${CSS_BLOCK}
+</head>
+<body>
+
+  <header>
+    <h1>Quest: ${htmlEscape((meta.quest_name||"").trim() || "—")}</h1>
+    <p><strong>Region:</strong> ${htmlEscape((meta.region||"").trim() || "—")}</p>
+    ${nav}
+    <hr>
+  </header>
+
+  <main>
+${topSection}
+
+    ${nodeSections}
+
+    <section id="end">
+      <h2>Ende / Notizen</h2>
+      <p>[Hier kannst du „Was der Spieler gelernt hat“, „Welche Weltinfos gesetzt wurden“ und „Follow-ups“ reinschreiben.]</p>
+      <p><a href="#top">↑ Zur Übersicht</a></p>
+    </section>
+  </main>
+
+  <footer>
+    <hr>
+    <p><small>Quest-Präsentator — Stand: ${htmlEscape(version)}</small></p>
+  </footer>
+
+${includeJs ? JS_BLOCK : ""}
+
+</body>
+</html>`;
+    }
+
+    /***********************
+     * UI Wiring
+     ***********************/
+    const els = {
+      dirtyPill: document.getElementById("dirtyPill"),
+      nodeStatus: document.getElementById("nodeStatus"),
+
+      // meta
+      meta_quest_name: document.getElementById("meta_quest_name"),
+      meta_region: document.getElementById("meta_region"),
+      meta_quest_giver: document.getElementById("meta_quest_giver"),
+      meta_prereq: document.getElementById("meta_prereq"),
+      meta_type: document.getElementById("meta_type"),
+      meta_short_desc: document.getElementById("meta_short_desc"),
+      meta_meta_short: document.getElementById("meta_meta_short"),
+      meta_rewards: document.getElementById("meta_rewards"),
+      meta_important_flags: document.getElementById("meta_important_flags"),
+      meta_version: document.getElementById("meta_version"),
+
+      // nodes list
+      nodeListItems: document.getElementById("nodeListItems"),
+
+      // node editor
+      node_id: document.getElementById("node_id"),
+      node_title: document.getElementById("node_title"),
+      node_scene: document.getElementById("node_scene"),
+      node_content: document.getElementById("node_content"),
+      node_dialog: document.getElementById("node_dialog"),
+      node_info: document.getElementById("node_info"),
+      node_tech: document.getElementById("node_tech"),
+      node_outcomes: document.getElementById("node_outcomes"),
+      node_notes: document.getElementById("node_notes"),
+      idCollisionInfo: document.getElementById("idCollisionInfo"),
+
+      optTableBody: document.getElementById("optTableBody"),
+
+      // buttons
+      btn_add_node: document.getElementById("btn_add_node"),
+      btn_del_node: document.getElementById("btn_del_node"),
+      btn_move_up: document.getElementById("btn_move_up"),
+      btn_move_down: document.getElementById("btn_move_down"),
+      btn_apply_node: document.getElementById("btn_apply_node"),
+      btn_id_from_title: document.getElementById("btn_id_from_title"),
+      btn_add_opt: document.getElementById("btn_add_opt"),
+      btn_del_opt: document.getElementById("btn_del_opt"),
+      btn_save_json: document.getElementById("btn_save_json"),
+      btn_open_json: document.getElementById("btn_open_json"),
+      btn_export_html: document.getElementById("btn_export_html"),
+      btn_preview_html: document.getElementById("btn_preview_html"),
+
+      fileOpenJson: document.getElementById("fileOpenJson"),
+    };
+
+    function setDirty(v){
+      dirty = v;
+      els.dirtyPill.textContent = dirty ? "ungespeichert" : "bereit";
+      els.dirtyPill.style.background = dirty ? "rgba(180,35,24,.10)" : "rgba(15,23,42,.06)";
+      els.dirtyPill.style.border = dirty ? "1px solid rgba(180,35,24,.20)" : "1px solid rgba(15,23,42,.10)";
+      els.dirtyPill.style.color = dirty ? "var(--danger)" : "var(--muted)";
+    }
+
+    function bindDirtyInputs(){
+      const watch = [
+        // meta
+        els.meta_quest_name, els.meta_region, els.meta_quest_giver, els.meta_prereq,
+        els.meta_type, els.meta_short_desc, els.meta_meta_short, els.meta_rewards,
+        els.meta_important_flags, els.meta_version,
+        // node
+        els.node_id, els.node_title, els.node_scene, els.node_content, els.node_dialog,
+        els.node_info, els.node_tech, els.node_outcomes, els.node_notes
+      ];
+      for(const el of watch){
+        el.addEventListener("input", ()=> setDirty(true));
+      }
+    }
+
+    function loadMetaToUi(){
+      const m = project.meta;
+      els.meta_quest_name.value = m.quest_name || "";
+      els.meta_region.value = m.region || "";
+      els.meta_quest_giver.value = m.quest_giver || "";
+      els.meta_prereq.value = m.prerequisite || "";
+      els.meta_type.value = m.quest_type || "";
+      els.meta_short_desc.value = m.short_description || "";
+      els.meta_meta_short.value = m.meta_short || "";
+      els.meta_rewards.value = m.rewards || "";
+      els.meta_important_flags.value = m.important_flags || "";
+      els.meta_version.value = m.version_stamp || nowStamp();
+    }
+
+    function applyMetaFromUi(){
+      const m = project.meta;
+      m.quest_name = els.meta_quest_name.value.trim();
+      m.region = els.meta_region.value.trim();
+      m.quest_giver = els.meta_quest_giver.value.trim();
+      m.prerequisite = els.meta_prereq.value.trim();
+      m.quest_type = els.meta_type.value.trim();
+      m.short_description = els.meta_short_desc.value.trim();
+      m.meta_short = els.meta_meta_short.value.trim();
+      m.rewards = els.meta_rewards.value.trim();
+      m.important_flags = els.meta_important_flags.value.trim();
+      m.version_stamp = els.meta_version.value.trim();
+    }
+
+    function refreshNodeList(){
+      els.nodeListItems.innerHTML = "";
+      project.nodes.forEach((n, idx)=>{
+        const div = document.createElement("div");
+        div.className = "nodeItem" + (idx===currentNodeIndex ? " active" : "");
+        div.innerHTML = `
+          <div><strong>${htmlEscape(n.title || n.node_id)}</strong></div>
+          <div class="id">${htmlEscape(n.node_id)}</div>
+        `;
+        div.addEventListener("click", ()=>{
+          selectNode(idx);
+        });
+        els.nodeListItems.appendChild(div);
+      });
+    }
+
+    function loadNodeToUi(idx){
+      const n = project.nodes[idx];
+      els.node_id.value = n.node_id || "";
+      els.node_title.value = n.title || "";
+      els.node_scene.value = n.scene || "";
+      els.node_content.value = n.content || "";
+      els.node_dialog.value = n.dialog || "";
+      els.node_info.value = listToLines(n.info_items || []);
+      els.node_tech.value = listToLines(n.tech_flags || []);
+      els.node_outcomes.value = listToLines(n.outcomes || []);
+      els.node_notes.value = n.notes || "";
+      els.nodeStatus.textContent = `Aktiver Knoten: ${n.node_id} — ${n.title}`;
+      refreshOptionsTable();
+      showIdCollisionHint("");
+    }
+
+    function showIdCollisionHint(msg){
+      els.idCollisionInfo.textContent = msg || "";
+      els.idCollisionInfo.className = msg ? "warn" : "small muted";
+    }
+
+    function applyCurrentNode({silent=false}={}){
+      const n = project.nodes[currentNodeIndex];
+      let nodeId = sanitizeId(els.node_id.value);
+      const title = els.node_title.value.trim();
+
+      if(nodeId !== n.node_id){
+        const existing = new Set(project.nodes.map(x=>x.node_id));
+        if(existing.has(nodeId)){
+          if(!silent) alert(`Die Knoten-ID '${nodeId}' gibt es schon. Wähle eine andere.`);
+          els.node_id.value = n.node_id;
+          return false;
+        }
+      }
+
+      n.node_id = nodeId;
+      n.title = title || nodeId;
+      n.scene = els.node_scene.value.trim();
+      n.content = els.node_content.value.trim();
+      n.dialog = els.node_dialog.value.replace(/\s+$/,""); // rstrip-ish
+      n.info_items = linesToList(els.node_info.value);
+      n.tech_flags = linesToList(els.node_tech.value);
+      n.outcomes = linesToList(els.node_outcomes.value);
+      n.notes = els.node_notes.value.trim();
+
+      // options are edited live in table -> already in data
+      refreshNodeList();
+      loadNodeToUi(currentNodeIndex);
+      setDirty(true);
+      return true;
+    }
+
+    function selectNode(idx){
+      // save previous node
+      applyCurrentNode({silent:true});
+      currentNodeIndex = idx;
+      refreshNodeList();
+      loadNodeToUi(idx);
+    }
+
+    function addNode(){
+      applyMetaFromUi();
+      applyCurrentNode({silent:true});
+
+      const existing = new Set(project.nodes.map(n=>n.node_id));
+      let i = 1;
+      let newId = `knoten-${i}`;
+      while(existing.has(newId)){
+        i++;
+        newId = `knoten-${i}`;
+      }
+
+      project.nodes.push({
+        node_id: newId,
+        title: `Knoten ${i}`,
+        scene: "",
+        dialog: "",
+        content: "",
+        info_items: [],
+        tech_flags: [],
+        outcomes: [],
+        notes: "",
+        options: [{ label: "Weiter", target: "end" }]
+      });
+
+      currentNodeIndex = project.nodes.length - 1;
+      refreshNodeList();
+      loadNodeToUi(currentNodeIndex);
+      setDirty(true);
+    }
+
+    function deleteNode(){
+      if(project.nodes.length <= 1){
+        alert("Mindestens ein Knoten muss bleiben. (Sonst stolpert die HTML über die Leere.)");
+        return;
+      }
+      const n = project.nodes[currentNodeIndex];
+      if(!confirm(`Knoten '${n.node_id}' wirklich löschen?`)) return;
+
+      project.nodes.splice(currentNodeIndex, 1);
+      currentNodeIndex = Math.max(0, currentNodeIndex - 1);
+      refreshNodeList();
+      loadNodeToUi(currentNodeIndex);
+      setDirty(true);
+    }
+
+    function moveNode(direction){
+      const idx = currentNodeIndex;
+      const newIdx = idx + direction;
+      if(newIdx < 0 || newIdx >= project.nodes.length) return;
+
+      applyCurrentNode({silent:true});
+      const tmp = project.nodes[idx];
+      project.nodes[idx] = project.nodes[newIdx];
+      project.nodes[newIdx] = tmp;
+
+      currentNodeIndex = newIdx;
+      refreshNodeList();
+      loadNodeToUi(currentNodeIndex);
+      setDirty(true);
+    }
+
+    /***********************
+     * Options table editing (live)
+     ***********************/
+    function refreshOptionsTable(){
+      const n = project.nodes[currentNodeIndex];
+      const nodeIds = new Set(project.nodes.map(x=>x.node_id).concat(["top","end"]));
+      els.optTableBody.innerHTML = "";
+
+      (n.options || []).forEach((opt, i)=>{
+        const tr = document.createElement("tr");
+
+        const tdLabel = document.createElement("td");
+        const inpLabel = document.createElement("input");
+        inpLabel.type = "text";
+        inpLabel.value = opt.label || "";
+        inpLabel.addEventListener("input", ()=>{
+          opt.label = inpLabel.value;
+          setDirty(true);
+        });
+        tdLabel.appendChild(inpLabel);
+
+        const tdTarget = document.createElement("td");
+        const inpTarget = document.createElement("input");
+        inpTarget.type = "text";
+        inpTarget.value = opt.target || "";
+        inpTarget.addEventListener("input", ()=>{
+          opt.target = sanitizeId(inpTarget.value);
+          inpTarget.value = opt.target; // keep sanitized
+          setDirty(true);
+          refreshOptionsTable(); // update status column
+        });
+        tdTarget.appendChild(inpTarget);
+
+        const tdStatus = document.createElement("td");
+        const t = (opt.target||"").trim();
+        if(!t){
+          tdStatus.innerHTML = `<span class="warn">kein Ziel</span>`;
+        }else if(!nodeIds.has(t)){
+          tdStatus.innerHTML = `<span class="warn">unbekannt</span>`;
+        }else{
+          tdStatus.innerHTML = `<span class="muted">ok</span>`;
+        }
+
+        tr.appendChild(tdLabel);
+        tr.appendChild(tdTarget);
+        tr.appendChild(tdStatus);
+
+        tr.addEventListener("click", ()=>{
+          // select row visually by focus
+          inpLabel.focus();
+        });
+
+        els.optTableBody.appendChild(tr);
+      });
+    }
+
+    function addOption(){
+      const n = project.nodes[currentNodeIndex];
+      n.options = n.options || [];
+      n.options.push({ label: "Neue Option", target: "top" });
+      refreshOptionsTable();
+      setDirty(true);
+    }
+
+    function removeLastOption(){
+      const n = project.nodes[currentNodeIndex];
+      n.options = n.options || [];
+      if(n.options.length===0) return;
+      n.options.pop();
+      refreshOptionsTable();
+      setDirty(true);
+    }
+
+    /***********************
+     * JSON import/export
+     ***********************/
+    function downloadText(filename, text, mime="text/plain"){
+      const blob = new Blob([text], {type: mime});
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(()=> URL.revokeObjectURL(a.href), 500);
+    }
+
+    function saveProjectJson(){
+      applyMetaFromUi();
+      applyCurrentNode({silent:true});
+
+      const data = JSON.stringify(project, null, 2);
+      const name = sanitizeId(project.meta.quest_name || "quest");
+      downloadText(`${name}.json`, data, "application/json");
+      setDirty(false);
+    }
+
+    function openProjectJson(){
+      els.fileOpenJson.value = "";
+      els.fileOpenJson.click();
+    }
+
+    els.fileOpenJson.addEventListener("change", async ()=>{
+      const f = els.fileOpenJson.files?.[0];
+      if(!f) return;
+
+      try{
+        const txt = await f.text();
+        const obj = JSON.parse(txt);
+
+        // soft-validate & normalize
+        if(!obj || typeof obj !== "object") throw new Error("Ungültiges JSON.");
+        if(!obj.meta) obj.meta = {};
+        if(!Array.isArray(obj.nodes)) obj.nodes = [];
+
+        // ensure at least one node
+        if(obj.nodes.length===0){
+          obj.nodes.push({
+            node_id: "start", title:"Start", scene:"", dialog:"", content:"",
+            info_items:[], tech_flags:[], outcomes:[], notes:"",
+            options:[{label:"Weiter", target:"end"}]
+          });
+        }
+
+        // normalize ids
+        const seen = new Set();
+        obj.nodes.forEach((n, idx)=>{
+          n.node_id = sanitizeId(n.node_id || `node-${idx+1}`);
+          if(seen.has(n.node_id)){
+            // make unique
+            let i=2;
+            let base=n.node_id;
+            let cand = `${base}-${i}`;
+            while(seen.has(cand)){ i++; cand = `${base}-${i}`; }
+            n.node_id = cand;
+          }
+          seen.add(n.node_id);
+          n.title = n.title || n.node_id;
+          n.scene ||= ""; n.dialog ||= ""; n.content ||= ""; n.notes ||= "";
+          n.info_items = Array.isArray(n.info_items) ? n.info_items : [];
+          n.tech_flags = Array.isArray(n.tech_flags) ? n.tech_flags : [];
+          n.outcomes = Array.isArray(n.outcomes) ? n.outcomes : [];
+          n.options = Array.isArray(n.options) ? n.options : [];
+          n.options = n.options.map(o=>({
+            label: (o?.label ?? ""),
+            target: sanitizeId(o?.target ?? "top")
+          }));
+        });
+
+        // meta normalize
+        obj.meta.quest_name ||= "Neue Quest";
+        obj.meta.region ||= "Unbekannt";
+        obj.meta.short_description ||= "";
+        obj.meta.quest_giver ||= "";
+        obj.meta.prerequisite ||= "";
+        obj.meta.quest_type ||= "";
+        obj.meta.meta_short ||= "";
+        obj.meta.rewards ||= "";
+        obj.meta.important_flags ||= "";
+        obj.meta.version_stamp ||= nowStamp();
+
+        project = obj;
+        currentNodeIndex = 0;
+        loadMetaToUi();
+        refreshNodeList();
+        loadNodeToUi(currentNodeIndex);
+        setDirty(false);
+      }catch(e){
+        alert("Konnte Projekt nicht laden: " + (e?.message || e));
+      }
+    });
+
+    /***********************
+     * HTML export & preview
+     ***********************/
+    function exportHtml(){
+      applyMetaFromUi();
+      applyCurrentNode({silent:true});
+
+      // sanity: unique ids
+      const ids = project.nodes.map(n=>n.node_id);
+      const set = new Set(ids);
+      if(ids.length !== set.size){
+        alert("Es gibt doppelte Knoten-IDs. Bitte korrigieren.");
+        return;
+      }
+
+      const html = renderHtml(project, true);
+      const name = sanitizeId(project.meta.quest_name || "quest");
+      downloadText(`${name}.html`, html, "text/html");
+      setDirty(false);
+    }
+
+    function previewHtml(){
+      applyMetaFromUi();
+      applyCurrentNode({silent:true});
+      const html = renderHtml(project, true);
+
+      const w = window.open("", "_blank");
+      if(!w){
+        alert("Popup blockiert. Erlaube Popups für die Vorschau – oder exportiere direkt HTML.");
+        return;
+      }
+      w.document.open();
+      w.document.write(html);
+      w.document.close();
+    }
+
+    /***********************
+     * ID helpers
+     ***********************/
+    function idFromTitle(){
+      const t = (els.node_title.value || "").trim();
+      if(!t) return;
+      const cand = sanitizeId(t);
+      const existing = new Set(project.nodes.map(n=>n.node_id));
+      const cur = project.nodes[currentNodeIndex].node_id;
+
+      if(cand !== cur && existing.has(cand)){
+        showIdCollisionHint(`⚠️ '${cand}' existiert bereits – bitte manuell anpassen.`);
+      }else{
+        els.node_id.value = cand;
+        showIdCollisionHint("");
+        setDirty(true);
+      }
+    }
+
+    els.node_id.addEventListener("input", ()=>{
+      const cand = sanitizeId(els.node_id.value);
+      const existing = new Set(project.nodes.map(n=>n.node_id));
+      const cur = project.nodes[currentNodeIndex].node_id;
+      if(cand !== cur && existing.has(cand)){
+        showIdCollisionHint(`⚠️ '${cand}' existiert bereits.`);
+      }else{
+        showIdCollisionHint("");
+      }
+    });
+
+    /***********************
+     * Init + Events
+     ***********************/
+    function init(){
+      loadMetaToUi();
+      refreshNodeList();
+      loadNodeToUi(currentNodeIndex);
+      bindDirtyInputs();
+      setDirty(false);
+
+      // buttons
+      els.btn_add_node.addEventListener("click", addNode);
+      els.btn_del_node.addEventListener("click", deleteNode);
+      els.btn_move_up.addEventListener("click", ()=> moveNode(-1));
+      els.btn_move_down.addEventListener("click", ()=> moveNode(1));
+      els.btn_apply_node.addEventListener("click", ()=> applyCurrentNode({silent:false}));
+      els.btn_id_from_title.addEventListener("click", idFromTitle);
+
+      els.btn_add_opt.addEventListener("click", addOption);
+      els.btn_del_opt.addEventListener("click", removeLastOption);
+
+      els.btn_save_json.addEventListener("click", saveProjectJson);
+      els.btn_open_json.addEventListener("click", openProjectJson);
+      els.btn_export_html.addEventListener("click", exportHtml);
+      els.btn_preview_html.addEventListener("click", previewHtml);
+
+      // warn on close if dirty
+      window.addEventListener("beforeunload", (e)=>{
+        if(!dirty) return;
+        e.preventDefault();
+        e.returnValue = "";
+      });
+    }
+
+    init();
+  </script>
+</body>
+</html>
