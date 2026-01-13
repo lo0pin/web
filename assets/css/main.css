@@ -369,7 +369,7 @@ body.has-bg::after  { background: rgba(247, 247, 247, 0.78); }
 
 /* Define per-section background images via CSS variables */
 body.bg-sailing      { --page-bg: url("../img/sailing.jpg"); }
-body.bg-code         { --page-bg: url("../img/code.jpg"); }
+body.bg-code         { --page-bg: url("../img/code.png"); }
 body.bg-electronics  { --page-bg: url("../img/electronics.jpg"); }
 body.bg-making       { --page-bg: url("../img/making.jpg"); }
 body.bg-nerdism      { --page-bg: url("../img/nerdism.jpg"); }
