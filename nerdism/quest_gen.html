@@ -610,7 +610,7 @@
     }
   </style>`.trim();
 
-    const JS_BLOCK = `
+const JS_BLOCK = `
   <script>
     (function(){
       function focusTargetFromHash(){
@@ -625,7 +625,8 @@
       window.addEventListener("load", focusTargetFromHash);
       window.addEventListener("hashchange", focusTargetFromHash);
     })();
-  </script>`.trim();
+  </scr` + `ipt>`.trim();
+
 
     function renderNav(nodes){
       let parts = [`<nav aria-label="Quest-Navigation">`, `<a href="#top">Übersicht</a>`];
