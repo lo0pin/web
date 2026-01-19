@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Meshtastic — Notes & Setup</title>
+
+  <!-- same global stylesheet -->
+  <link rel="stylesheet" href="../assets/css/main.css" />
+</head>
+
+<body class="has-bg bg-code">
+  <header class="site-header">
+    <div class="header-inner">
+      <h1 class="site-title">Meshtastic</h1>
+
+      <nav class="top-nav" aria-label="Top navigation">
+        <a href="../">home</a>
+        <a href="home.html">back</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="content">
+    <hr class="divider" />
+
+    <section class="hero" aria-label="Essence">
+      <p class="hero-quote">
+        A tiny radio network — built for when the “normal” network isn’t there.
+      </p>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- Intro card -->
+    <article class="card">
+      <h2 class="card-title">What is Meshtastic?</h2>
+      <p class="card-meta">Status: learning-in-public · Last updated: <time datetime="2026-01-19">Jan 19, 2026</time></p>
+
+      <p>
+        Meshtastic is an open-source mesh communication system that typically uses LoRa radios.
+        Nodes relay messages for each other, so the network can cover more ground than a single device.
+        This page is my practical documentation: what I bought, what worked, what didn’t, and what I learned.
+      </p>
+
+      <figure class="media">
+        <!-- Replace with a real image later -->
+        <div class="media-placeholder" role="img" aria-label="Image placeholder">
+          Image placeholder (e.g. my first node / setup photo)
+        </div>
+        <figcaption>First steps: my initial Meshtastic node(s) and setup.</figcaption>
+      </figure>
+    </article>
+
+    <!-- Table-of-contents style card -->
+    <article class="card">
+      <h2 class="card-title">On this page</h2>
+      <ul class="toc">
+        <li><a href="#why">Why I got into it</a></li>
+        <li><a href="#hardware">Hardware</a></li>
+        <li><a href="#setup">Setup (quick)</a></li>
+        <li><a href="#fieldnotes">Field notes</a></li>
+        <li><a href="#plans">Next steps</a></li>
+      </ul>
+    </article>
+
+    <!-- Why -->
+    <article class="card" id="why">
+      <h2 class="card-title">Why I got into it</h2>
+      <p>
+        I like systems that keep working off-grid: sailing, electronics, and now radio. Meshtastic feels like
+        “DIY infrastructure” — small, resilient, and surprisingly educational.
+      </p>
+
+      <figure class="media">
+        <div class="media-placeholder" role="img" aria-label="Image placeholder">
+          Image placeholder (map / skyline / “coverage idea”)
+        </div>
+        <figcaption>Idea: placement and coverage — where a node would actually help.</figcaption>
+      </figure>
+    </article>
+
+    <!-- Hardware -->
+    <article class="card" id="hardware">
+      <h2 class="card-title">Hardware</h2>
+      <p class="card-meta">What I use right now</p>
+
+      <ul>
+        <li><strong>Node:</strong> [Your board model here]</li>
+        <li><strong>Antenna:</strong> [Your antenna here]</li>
+        <li><strong>Power:</strong> [Powerbank / battery / USB]</li>
+        <li><strong>Case / mounting:</strong> [Optional]</li>
+      </ul>
+
+      <p class="hint">
+        Tip: keep a short “bill of materials” here. It makes future upgrades much easier.
+      </p>
+
+      <figure class="media">
+        <div class="media-placeholder" role="img" aria-label="Image placeholder">
+          Image placeholder (hardware close-up)
+        </div>
+        <figcaption>Hardware lineup: board, antenna, power.</figcaption>
+      </figure>
+    </article>
+
+    <!-- Setup -->
+    <article class="card" id="setup">
+      <h2 class="card-title">Setup (quick)</h2>
+      <ol>
+        <li>Flash firmware (device + version)</li>
+        <li>Pair with phone / connect via USB</li>
+        <li>Set region, channel, and radio settings</li>
+        <li>Name the node and enable encryption if needed</li>
+        <li>Test: message delivery + range check</li>
+      </ol>
+
+      <figure class="media">
+        <div class="media-placeholder" role="img" aria-label="Image placeholder">
+          Image placeholder (app screenshot / settings)
+        </div>
+        <figcaption>App settings I used (replace with real screenshots later).</figcaption>
+      </figure>
+    </article>
+
+    <!-- Field notes -->
+    <article class="card" id="fieldnotes">
+      <h2 class="card-title">Field notes</h2>
+      <p class="card-meta">What I noticed in practice</p>
+
+      <ul>
+        <li><strong>Range:</strong> [e.g. “urban: X km, line-of-sight: Y km”]</li>
+        <li><strong>Good spots:</strong> [e.g. “high points, near windows”]</li>
+        <li><strong>Bad spots:</strong> [e.g. “behind thick walls”]</li>
+        <li><strong>Battery life:</strong> [observations]</li>
+        <li><strong>Surprises:</strong> [something you didn’t expect]</li>
+      </ul>
+
+      <figure class="media">
+        <div class="media-placeholder" role="img" aria-label="Image placeholder">
+          Image placeholder (field photo)
+        </div>
+        <figcaption>Testing day: where I placed the node(s) and what happened.</figcaption>
+      </figure>
+    </article>
+
+    <!-- Next steps -->
+    <article class="card" id="plans">
+      <h2 class="card-title">Next steps</h2>
+      <ul>
+        <li>Add a second node (mobile vs fixed)</li>
+        <li>Try a better antenna placement</li>
+        <li>Document a clean “beginner setup”</li>
+        <li>Explore repeater vs second node use-cases</li>
+      </ul>
+    </article>
+
+    <hr class="divider" />
+
+    <p><a href="../">← Back to section</a></p>
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2025 Julian</p>
+  </footer>
+
+  <script src="../assets/js/main.js" defer></script>
+</body>
+</html>
