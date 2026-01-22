@@ -379,67 +379,232 @@ body.bg-music        { --page-bg: url("../img/music.jpg"); }
 
 
 
+
+
 /* =========================================================
-   Blog-like cards (rounded text panels + media placeholders)
+   Card / Blog-Post UI-Bausteine - Für Endkonoten (Artikel)
+   ---------------------------------------------------------
+   Ziel:
+   - “Karten” (Cards) für blogartige Einträge: Titel + Meta + Text + Medien
+   - Platzhalter für Bilder/Medien (z.B. solange noch kein Foto vorhanden ist)
+   - Ein kleines Inhaltsverzeichnis (TOC) mit sauberen Links
+   ---------------------------------------------------------
+   Hinweis:
+   - Die Variablen (z.B. --surface, --border, --radius, --text, --muted)
+     sollten irgendwo global definiert sein (meist :root).
    ========================================================= */
 
+
+/* ---------------------------------------------------------
+   .card
+   ---------------------------------------------------------
+   Der Container für einen Post/Abschnitt:
+   - bekommt einen “Panel”-Hintergrund
+   - leichte Umrandung (Border)
+   - abgerundete Ecken
+   - Innenabstand (Padding) für Luft
+   - Außenabstand (Margin), damit mehrere Cards nicht kleben
+--------------------------------------------------------- */
 .card {
+  /* Hintergrundfarbe über CSS-Variable:
+     Vorteil: Dark-Mode/Theme-Wechsel nur über Variablen nötig */
   background: var(--surface);
+
+  /* Dezente Umrandung, ebenfalls per Variable steuerbar */
   border: 1px solid var(--border);
+
+  /* Einheitlicher Radius für “weiche” Cards */
   border-radius: var(--radius);
+
+  /* Innenabstand: 1.25rem links/rechts & oben/unten
+     rem skaliert mit der Schriftgröße (zugänglicher/responsiver) */
   padding: 1.25rem 1.25rem;
+
+  /* Außenabstand: oben/unten 1rem, links/rechts 0
+     -> Cards stehen untereinander mit angenehmer Distanz */
   margin: 1rem 0;
 }
 
+
+/* ---------------------------------------------------------
+   .card-title
+   ---------------------------------------------------------
+   Titel innerhalb einer Card.
+   Typisch: h2/h3 oder ein <div> mit dieser Klasse.
+--------------------------------------------------------- */
 .card-title {
+  /* margin: 0 0 0.5rem;
+     - oben 0: damit der Titel nicht “nach oben rausdrückt”
+     - unten 0.5rem: kleiner Abstand zum nächsten Element (Meta/Text) */
   margin: 0 0 0.5rem;
+
+  /* leicht größere Schrift als Fließtext:
+     1.15rem ist subtil (nicht “Zeitungsüberschrift”, eher “Section Title”) */
   font-size: 1.15rem;
 }
 
+
+/* ---------------------------------------------------------
+   .card-meta
+   ---------------------------------------------------------
+   Meta-Infos: Datum, Kategorie, Tags, Lesedauer, Autor, etc.
+   Wird optisch “leiser” gemacht als der Haupttext.
+--------------------------------------------------------- */
 .card-meta {
+  /* Kein Abstand oben (hängt direkt am Titel),
+     dafür etwas mehr unten, damit der Bodytext Luft hat */
   margin: 0 0 0.9rem;
+
+  /* Muted-Farbe: weniger Kontrast -> wirkt sekundär */
   color: var(--muted);
+
+  /* Minimal kleiner als normaler Text:
+     Lesbar, aber klar “Meta” */
   font-size: 0.95rem;
 }
 
+
+/* ---------------------------------------------------------
+   .hint
+   ---------------------------------------------------------
+   Kleine Hinweise/Infotexte, z.B.:
+   “Tipp: Klick auf …”, “Hinweis: …”, “TODO: …”
+--------------------------------------------------------- */
 .hint {
+  /* Auch hier gedämpfte Farbe,
+     damit es nicht wie Hauptcontent wirkt */
   color: var(--muted);
+
+  /* Konsistent zur Meta-Größe */
   font-size: 0.95rem;
 }
 
+
+/* ---------------------------------------------------------
+   .media
+   ---------------------------------------------------------
+   Wrapper um Medieninhalte (figure/img/video).
+   Typisch: unterhalb vom Text.
+--------------------------------------------------------- */
 .media {
+  /* Abstand nach oben:
+     Der Medienblock soll nicht direkt am Text kleben.
+     left/right/bottom bleiben 0, weil die Card schon padding hat. */
   margin: 1rem 0 0;
 }
 
+
+/* ---------------------------------------------------------
+   .media-placeholder
+   ---------------------------------------------------------
+   Platzhalterfläche für Bilder/Medien:
+   - solange noch kein Bild vorhanden ist
+   - oder als “Dropzone”-Optik
+--------------------------------------------------------- */
 .media-placeholder {
+  /* Gepunktete/gestrichelte Linie signalisiert “Platzhalter / kommt noch” */
   border: 1px dashed var(--border);
+
+  /* Ein klein wenig weniger Radius als die Card,
+     damit es “eingebettet” wirkt */
   border-radius: calc(var(--radius) - 4px);
+
+  /* Heller Hintergrund (leicht transparent):
+     - auf hellen Themes sehr sanft
+     - auf dunklen Themes musst du ggf. anpassen, siehe Hinweis unten */
   background: rgba(255, 255, 255, 0.6);
+
+  /* Mindesthöhe sorgt dafür, dass die Box “wie ein Bild” wirkt,
+     auch wenn nur Text drin steht */
   min-height: 220px;
+
+  /* Zentrierung des Inhalts:
+     display:grid + place-items:center ist ein knackiger Weg,
+     Text/Icons landen sauber mittig */
   display: grid;
   place-items: center;
+
+  /* Gedämpfte Textfarbe, wieder “sekundär” */
   color: var(--muted);
+
+  /* Innenabstand: damit Text nicht an der Border klebt */
   padding: 1rem;
+
+  /* Zentrierter Text macht Placeholder-Messages ruhiger */
   text-align: center;
 }
 
+
+/* ---------------------------------------------------------
+   .media figcaption
+   ---------------------------------------------------------
+   Bild-/Medienunterschrift im figure-Element.
+   Beispiel:
+   <figure class="media">
+     <img ...>
+     <figcaption>…</figcaption>
+   </figure>
+--------------------------------------------------------- */
 .media figcaption {
+  /* Abstand zur Bildkante nach oben */
   margin-top: 0.5rem;
+
+  /* Unterschrift ist sekundär: muted */
   color: var(--muted);
+
+  /* Etwas kleiner, aber noch gut lesbar */
   font-size: 0.95rem;
 }
 
+
+/* ---------------------------------------------------------
+   .toc
+   ---------------------------------------------------------
+   Table of contents (Inhaltsverzeichnis), meist ein <ul> oder <ol>.
+   Wir setzen:
+   - keine extra margin (damit es sauber in Cards passt)
+   - einheitliches left-padding für die Listenpunkte
+--------------------------------------------------------- */
 .toc {
+  /* margin 0: Liste soll nicht extra Abstand nach außen erzeugen,
+     besonders praktisch in kompakten Seitenleisten oder in Cards */
   margin: 0;
+
+  /* Linke Einrückung der Liste:
+     1.2rem ist “klassisch angenehm” für bullets/nummern */
   padding-left: 1.2rem;
 }
 
+
+/* ---------------------------------------------------------
+   .toc a
+   ---------------------------------------------------------
+   Links im Inhaltsverzeichnis:
+   - gleiche Farbe wie normaler Text (wirkt “integriert”)
+   - keine Unterstreichung im Normalzustand (clean)
+--------------------------------------------------------- */
 .toc a {
+  /* Textfarbe: nutzt die normale Textfarbe,
+     damit es nicht wie “Fremdkörper-Linkblau” wirkt */
   color: var(--text);
+
+  /* Unterstreichung erst bei Hover,
+     sonst wirkt das TOC “ruhiger” */
   text-decoration: none;
 }
 
+
+/* ---------------------------------------------------------
+   Hover-Zustand für TOC-Links
+   ---------------------------------------------------------
+   Unterstreichung nur beim Drüberfahren:
+   - klare Interaktivitätsrückmeldung
+   - underlined offset gibt ein bisschen Luft zur Schrift
+--------------------------------------------------------- */
 .toc a:hover {
   text-decoration: underline;
+
+  /* Abstand der Unterstreichung zur Schrift:
+     wirkt edler und besser lesbar */
   text-underline-offset: 3px;
 }
