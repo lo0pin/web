@@ -209,6 +209,30 @@ body {
 }
 
 
+.media img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.media-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.media-row .media {
+  display: flex;
+  flex-direction: column;
+}
+
+.media-row img {
+  width: 100%;
+  height: 760px;          /* fixe, gewollte Höhe */
+  object-fit: cover;     /* beschneidet statt verzerrt */
+  display: block;
+}
+
 /* =========================================================
    7) KACHEL-STYLING (Tile + Bild + Overlay + Label)
    ========================================================= */
