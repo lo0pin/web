@@ -48,21 +48,50 @@
     <!-- Intro card -->
     <article class="card">
       <h2 class="card-title">What is Meshtastic?</h2>
-      <p class="card-meta">Status: learning-in-public · Last updated: <time datetime="2026-01-19">Jan 19, 2026</time></p>
+      <p class="card-meta">Status: learning-in-public · Last updated: <time datetime="2026-01-31">Jan 31, 2026</time></p>
 
       <p>
-        Meshtastic is an open-source mesh communication system that typically uses LoRa radios.
-        Nodes relay messages for each other, so the network can cover more ground than a single device.
-        This page is my practical documentation: what I bought, what worked, what didn’t, and what I learned.
-      </p>
+Meshtastic is an open-source project that lets small, low-power devices form a decentralized, long-range messaging network using <a href="https://en.wikipedia.org/wiki/LoRa#LoRaWAN">LoRa radio</a>.
+In plain terms: it’s a way to send text messages and small data without the internet, cellular networks, or centralized infrastructure.
+<br><br>
+<strong>How it works</strong>
+Each device (a node) has a LoRa radio and a microcontroller (often ESP32-based).
+Nodes automatically connect to nearby nodes, creating a mesh.
+Messages hop from node to node until they reach their destination.
+Your phone connects to a node via Bluetooth or USB, acting as the keyboard and screen.
+<br><br>
+<strong>What it’s used for</strong>
+<ul>
+  <li>Off-grid communication (hiking, sailing, rural areas)</li>
+  <li>Emergency and disaster scenarios</li>
+  <li>Privacy-focused messaging</li>
+  <li>Community or hobbyist mesh networks</li>
+</ul>
 
+<strong>Key characteristics</strong>
+<ul>
+  <li>Long range: kilometers, sometimes tens of kilometers with good antennas and terrain</li>
+  <li>Low power: devices can run for days or weeks on batteries</li>
+  <li>Encrypted: supports end-to-end encryption for private channels</li>
+  <li>Resilient: no single point of failure—if one node dies, the mesh reroutes</li>
+</ul>
+
+<strong>Limitations</strong>
+<ul>
+  <li>Very low bandwidth (text and small data only)</li>
+  <li>Latency can be noticeable</li>
+  <li>Not meant for voice, images, or real-time chat theatrics</li>
+</ul>
+
+      </p>
+<!--
       <figure class="media">
-        <!-- Replace with a real image later -->
+        
         <div class="media-placeholder" role="img" aria-label="Image placeholder">
           Image placeholder (e.g. my first node / setup photo)
         </div>
         <figcaption>First steps: my initial Meshtastic node(s) and setup.</figcaption>
-      </figure>
+      </figure>-->
     </article>
 
 
@@ -70,35 +99,37 @@
     <article class="card" id="why">
       <h2 class="card-title">Why I got into it</h2>
       <p>
-        I like systems that keep working off-grid: sailing, electronics, and now radio. Meshtastic feels like
-        “DIY infrastructure” — small, resilient, and surprisingly educational.
+I got into Meshtastic for autonomy and resilience.
+It enables communication <strong>off-grid</strong>, without cellular networks or central infrastructure—ideal for outdoor use and situations where reliability matters more than convenience.
+
+It’s about being prepared, independent, and connected even when everything else goes quiet.
       </p>
 
-      <figure class="media">
+      <!--<figure class="media">
         <div class="media-placeholder" role="img" aria-label="Image placeholder">
           Image placeholder (map / skyline / “coverage idea”)
         </div>
         <figcaption>Idea: placement and coverage — where a node would actually help.</figcaption>
-      </figure>
+      </figure>-->
     </article>
 
 
     <article class="card">
-      <h2 class="card-title">Hardware finally arrived</h2>
+      <h2 class="card-title">NEWS: my Hardware finally arrived</h2>
       <p class="card-meta">Status: Setting up · Last updated: <time datetime="2026-01-26">Jan 26, 2026</time></p>
 
       <p>
-        finally i recieved a parcel with the long awaited hardware
+        Freshly arrived Meshtastic hardware — the first building blocks of an off-grid, autonomous network, ready to be configured and taken outdoors.
       </p>
 
       <figure class="media">
         <!-- Replace with a real image later -->
           <img
     src="../assets/img/meshtastic_hw,jpg.jpeg"
-    alt="Erster Meshtastic-Knoten auf dem Schreibtisch, Heltec-Board mit Antenne"
+    alt="First Meshtastic node on the desk — a Heltec board equipped with an external antenna."
     loading="lazy"
   >
-        <figcaption>First steps: my initial Meshtastic node(s) and setup.</figcaption>
+        <figcaption>First Meshtastic node on the desk — a Heltec board equipped with an external antenna.</figcaption>
       </figure>
     </article>
 
@@ -107,14 +138,26 @@
       <h2 class="card-title">Hardware</h2>
       <p class="card-meta">What I use right now</p>
 
-      <ul>
-        <li><strong>Node:</strong> [Your board model here]</li>
-        <li><strong>Antenna:</strong> [Your antenna here]</li>
-        <li><strong>Power:</strong> [Powerbank / battery / USB]</li>
-        <li><strong>Case / mounting:</strong> [Optional]</li>
-      </ul>
+<h3 class="card-title" style="font-size: 1.05rem; margin-top: 1rem;"><a href="https://www.amazon.de/dp/B0DGXFF74V">Set 1 – Heltec V3 (ESP32-S3)</a></h3>
+  <ul>
+    <li><strong>Node:</strong> Heltec LoRa32 V3 (ESP32-S3, SX1262, 868&nbsp;MHz)</li>
+    <li><strong>Antenna:</strong> 5&nbsp;dBi SMA antenna (included with the board)</li>
+    <li><strong>Connectivity:</strong> LoRa + WiFi + Bluetooth LE</li>
+    <li><strong>Power:</strong> USB (later: 18650)</li>
+    <li><strong>Case / mounting:</strong> None yet — desktop testing setup (later: 3d printed custom case)</li>
+  </ul>
+  
 
-      <p class="hint">
+<h3 class="card-title" style="font-size: 1.05rem; margin-top: 1.25rem;">Set 2 – Heltec V2 / NodeMCU ESP32</h3>
+  <ul>
+    <li><strong>Node:</strong> NodeMCU ESP32 with 0.96″ OLED &amp; 868&nbsp;MHz LoRa (<a href="https://www.az-delivery.de/products/nodemcu-esp32-mit-integrierten-oled-display?variant=5989609111579">Heltec V2, SX1276</a>)</li>
+    <li><strong>Antenna adapter:</strong> IPEX / u.FL to SMA pigtail cable (<a href="https://www.amazon.de/dp/B0BN8TK71Y">AZDelivery</a>)</li>
+    <li><strong>Antenna:</strong> 868&nbsp;MHz SMA antenna, 3&nbsp;dBi, magnetic base, 3&nbsp;m RG174 cable (<a href="https://www.amazon.de/dp/B08LPCDLR1">Vecys</a>)</li>
+    <li><strong>Power:</strong> USB (later: 18650)</li>
+    <li><strong>Case / mounting:</strong> planned to be stationary at home</li>
+  </ul>
+
+      <!--<p class="hint">
         Tip: keep a short “bill of materials” here. It makes future upgrades much easier.
       </p>
 
@@ -123,29 +166,36 @@
           Image placeholder (hardware close-up)
         </div>
         <figcaption>Hardware lineup: board, antenna, power.</figcaption>
-      </figure>
+      </figure>-->
     </article>
 
     <!-- Setup -->
     <article class="card" id="setup">
       <h2 class="card-title">Setup (quick)</h2>
       <ol>
-        <li>Flash firmware (device + version)</li>
+        <li>Flash firmware (device + version) -- <a href="https://flasher.meshtastic.org/">Meshtastic Web Flasher</a></li>
         <li>Pair with phone / connect via USB</li>
         <li>Set region, channel, and radio settings</li>
         <li>Name the node and enable encryption if needed</li>
         <li>Test: message delivery + range check</li>
       </ol>
 
+      <p class="hint">
+Note: The Heltec V2 is no longer supported by the official Meshtastic web flasher.
+Because of this, flashing had to be done using an alternative, community-maintained tool.
+For that purpose, the <a href="https://github.com/eeEUSERee/meshtastic_heltecv2">meshtastic_heltecv2 flasher</a> was used, which specifically targets the Heltec V2 hardware and allows installing current Meshtastic firmware despite the dropped web support.
+      </p>
+<!--
       <figure class="media">
         <div class="media-placeholder" role="img" aria-label="Image placeholder">
           Image placeholder (app screenshot / settings)
         </div>
         <figcaption>App settings I used (replace with real screenshots later).</figcaption>
-      </figure>
+      </figure>-->
     </article>
 
     <!-- Field notes -->
+    <!--
     <article class="card" id="fieldnotes">
       <h2 class="card-title">Field notes</h2>
       <p class="card-meta">What I noticed in practice</p>
@@ -165,17 +215,23 @@
         <figcaption>Testing day: where I placed the node(s) and what happened.</figcaption>
       </figure>
     </article>
+    -->
 
     <!-- Next steps -->
-    <article class="card" id="plans">
-      <h2 class="card-title">Next steps</h2>
-      <ul>
-        <li>Add a second node (mobile vs fixed)</li>
-        <li>Try a better antenna placement</li>
-        <li>Document a clean “beginner setup”</li>
-        <li>Explore repeater vs second node use-cases</li>
-      </ul>
-    </article>
+<article class="card" id="plans">
+  <h2 class="card-title">Next steps</h2>
+  <ul>
+    <li>Define clear roles for both nodes (mobile node vs. stationary node)</li>
+    <li>Build a reliable 18650-based power system with proper charging and protection</li>
+    <li>Implement solar power for the stationary node to enable long-term off-grid operation</li>
+    <li>Evaluate MPPT vs. simpler charging solutions based on panel size and real-world efficiency</li>
+    <li>Design and 3D-print a compact, weather-resistant enclosure</li>
+    <li>Optimize antenna placement for range, stability, and terrain</li>
+    <li>Use one node as a dedicated mobile companion while hiking or traveling</li>
+    <li>Document a clean, reproducible setup from flashing to deployment</li>
+    <li>Compare repeater mode vs. second-node behavior under realistic conditions</li>
+  </ul>
+</article>
 
     <hr class="divider" />
 
