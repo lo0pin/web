@@ -632,3 +632,37 @@ body.bg-music        { --page-bg: url("../img/music.jpg"); }
      wirkt edler und besser lesbar */
   text-underline-offset: 3px;
 }
+
+
+/* =========================================================
+   GLOBAL LINK STYLING
+   ---------------------------------------------------------
+   Ziel:
+   - Links klar erkennbar, aber nicht „blau schreiend“
+   - Unterstreichung als Bedeutungsträger, nicht als Deko
+   - Gute Lesbarkeit + sauberes Hover-/Focus-Verhalten
+   ========================================================= */
+
+a {
+  color: var(--text);                 /* integriert in den Text */
+  text-decoration: underline;
+  text-decoration-color: rgba(31, 35, 40, 0.35); /* subtil */
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+
+  transition:
+    color 120ms ease,
+    text-decoration-color 120ms ease;
+}
+
+/* Hover: klarer, aber nicht laut */
+a:hover {
+  color: var(--text);
+  text-decoration-color: currentColor;
+}
+
+/* Fokus (Tastatur!) */
+a:focus-visible {
+  outline: 2px solid rgba(11, 95, 255, 0.45);
+  outline-offset: 2px;
+}
