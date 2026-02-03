@@ -367,7 +367,7 @@ body.has-bg::before {
   z-index: -2;
   background: var(--page-bg) center / cover no-repeat;
 
-  filter: grayscale(1) saturate(0.35) blur(12px);
+  filter: /*grayscale(1)*/ saturate(.5) blur(3px);
   transform: scale(1.08);
 
   opacity: 0.55; /* TEST: deutlich */
