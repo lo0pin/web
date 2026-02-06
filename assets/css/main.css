@@ -233,6 +233,11 @@ body {
   display: block;
 }
 
+.media-row--compact img {
+  height: 380px;       /* 50 % von 760px */
+  object-fit: cover;
+}
+
 /* =========================================================
    7) KACHEL-STYLING (Tile + Bild + Overlay + Label)
    ========================================================= */
