@@ -3,6 +3,7 @@
     {
       "id": "2026-02-09-botanik-himbeeren",
       "topic": "botanik",
+      "subtopic": "raspberry",
       "date": "2026-02-09",
       "title": "Himbeeren: Raus auf den Balkon",
       "format": "markdown",
@@ -14,6 +15,7 @@
     {
       "id": "2026-02-08-making-printer-unboxing",
       "topic": "making",
+      "subtopic": "3dprint",
       "date": "2026-02-08",
       "title": "3D-Drucker: Unboxing & Assembly",
       "format": "html",
@@ -22,6 +24,7 @@
     {
       "id": "2026-02-10-botanik-raspberry",
       "topic": "botanik",
+      "subtopic": "raspberry",
       "date": "2026-02-09",
       "title": "Raspberry — early growth, carefully slowed down",
       "format": "html",
@@ -30,6 +33,7 @@
     {
       "id": "2026-02-09-botanik-himbeeren",
       "topic": "botanik",
+      "subtopic": "raspberry",
       "date": "2026-02-10",
       "title": "Raspberry — early growth, carefully slowed down",
       "format": "markdown",
