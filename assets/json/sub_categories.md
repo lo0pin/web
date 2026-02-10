@@ -3,6 +3,8 @@
 
 ### Subcategories
 "subtopic": "raspberry",
+"subtopic": "ribisl"
+"subtopic": "fig"
 
 ## Making
 "topic": "making",
