@@ -1,0 +1,23 @@
+{
+  "posts": [
+    {
+      "id": "2026-02-09-botanik-himbeeren",
+      "topic": "botanik",
+      "date": "2026-02-09",
+      "title": "Himbeeren: Raus auf den Balkon",
+      "format": "markdown",
+      "content": "Heute tagsüber 8°C, nachts leicht unter 0.\n\n**Plan:** tagsüber raus, nachts rein, wenn’s unter -2°C geht.\n\n- Sonne nutzen\n- Windschutz\n- Gießen: sparsam",
+      "images": [
+        { "src": "/img/botanik/himbeeren-2026-02-09.jpg", "alt": "Himbeeren am Balkon" }
+      ]
+    },
+    {
+      "id": "2026-02-08-making-printer-unboxing",
+      "topic": "making",
+      "date": "2026-02-08",
+      "title": "3D-Drucker: Unboxing & Assembly",
+      "format": "html",
+      "content": "<p>Auspacken, Achsen prüfen, Schrauben nachziehen.</p><ul><li>Firmware updaten</li><li>Erstkalibrierung</li></ul>"
+    }
+  ]
+}
