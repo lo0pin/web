@@ -59,12 +59,24 @@
           ? mdToHtml(post.content || "")
           : `<p>${escapeHtml(post.content || "")}</p>`;
 
-    const img = post.images?.[0];
-    const media = img ? `
-      <figure class="media">
-        <img src="${escapeHtml(img.src)}" alt="${escapeHtml(img.alt || post.title)}" loading="lazy">
-        ${img.caption ? `<figcaption>${escapeHtml(img.caption)}</figcaption>` : ""}
-      </figure>` : "";
+  const imgs = Array.isArray(post.images) ? post.images.slice(0, 2) : [];
+  
+  const media = imgs.length ? `
+    <div class="media-row media-row--compact">
+      ${imgs.map(img => `
+        <figure class="media">
+          <img
+            src="${escapeHtml(img.src)}"
+            alt="${escapeHtml(img.alt || post.title)}"
+            loading="lazy"
+            decoding="async"
+          >
+          ${img.caption ? `<figcaption>${escapeHtml(img.caption)}</figcaption>` : ""}
+        </figure>
+      `).join("")}
+    </div>
+  ` : "";
+    
 
     return `
       <article class="card news-item">
