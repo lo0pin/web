@@ -112,10 +112,12 @@
 
   document.querySelectorAll(selectors).forEach(el => {
     const topic = el.dataset.newsTopic;
+    const subtopic = el.dataset.newsSubtopic || "";
     const mode  = el.dataset.newsMode || "all";
-
+    
     const filtered = posts
       .filter(p => !topic || p.topic === topic)
+      .filter(p => !subtopic || p.subtopic === subtopic)
       .filter(p => !p.draft)
       .sort(byDateDesc);
 
