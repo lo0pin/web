@@ -18,6 +18,54 @@
       "title": "3D-Drucker: Unboxing & Assembly",
       "format": "html",
       "content": "<p>Auspacken, Achsen prüfen, Schrauben nachziehen.</p><ul><li>Firmware updaten</li><li>Erstkalibrierung</li></ul>"
+    },    
+    {
+      "id": "2026-02-10-botanik-himbeeren",
+      "topic": "botanik",
+      "date": "2026-02-10",
+      "title": "Raspberry — early growth, carefully slowed down",
+      "format": "html",
+      "content": "<p class="card-meta">February · autumn-bearing raspberry · 25&nbsp;cm pot · south-facing balcony · Last updated: <time datetime="2026-02-07">Feb 07, 2026</time></p>
+      <p>
+        The raspberry has clearly left dormancy and is pushing fresh, healthy shoots from the base.
+        Leaf colour is bright and compact, indicating good vitality rather than stress-driven growth.
+        Despite the early start, conditions are still winter-like.
+    </p>
+
+    <div class="media-row media-row--compact">
+    <figure class="media">
+        <img src="../assets/img/him10.jpeg" alt="">
+        <figcaption></figcaption>
+    </figure>
+
+    <figure class="media" >
+        <img src="../assets/img/him11.jpeg" alt="">
+        
+        <figcaption></figcaption>
+    </figure>
+    </div>
+
+
+    <p>
+        <strong>What I did:</strong> removed all dead, old canes; kept the plant bright and cool;
+        avoided fertilizer; started short, daytime balcony exposure to improve light quality and harden the young growth,
+        while bringing the pot back indoors overnight due to frost.
+    </p>
+
+    <p>
+        <strong>Next steps:</strong> continue controlled day–night acclimation until night temperatures stay above freezing.
+        Once permanently outdoors and shoots reach 10–15&nbsp;cm, begin light organic feeding.
+        Later in spring, reduce the number of canes to a few strong shoots suited to the small container.
+    </p>
+
+    <p class="hint">
+        The focus right now is structure and resilience, not speed.
+        Strong canes matter more than early growth.
+    </p>"
+      ]
     }
   ]
 }
+
+
+
