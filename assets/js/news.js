@@ -1,5 +1,6 @@
 (async function () {
-  const DATA_URL = "../json/posts.json";
+  const DATA_URL = new URL("../json/posts.json", import.meta.url);
+
   // ↑ relativ von /assets/js/ nach /assets/json/
 
   const selectors = "[data-news-topic]";
