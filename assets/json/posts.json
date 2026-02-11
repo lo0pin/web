@@ -1,46 +1,56 @@
 {
   "posts": [
+
     {
-      "id": "2026-02-09-botanik-himbeeren",
+      "id": "2026-02-07-botanik-himbeeren",
       "topic": "botanik",
       "subtopic": "raspberry",
-      "date": "2026-02-09",
-      "title": "Himbeeren: Raus auf den Balkon",
-      "format": "markdown",
-      "content": "Heute tagsüber 8°C, nachts leicht unter 0.\n\n**Plan:** tagsüber raus, nachts rein, wenn’s unter -2°C geht.\n\n- Sonne nutzen\n- Windschutz\n- Gießen: sparsam",
-      "images": [
-        { "src": "/img/botanik/himbeeren-2026-02-09.jpg", "alt": "Himbeeren am Balkon" }
-      ]
-    },
-    {
-      "id": "2026-02-08-making-printer-unboxing",
-      "topic": "making",
-      "subtopic": "3dprint",
-      "date": "2026-02-08",
-      "title": "3D-Drucker: Unboxing & Assembly",
-      "format": "html",
-      "content": "<p>Auspacken, Achsen prüfen, Schrauben nachziehen.</p><ul><li>Firmware updaten</li><li>Erstkalibrierung</li></ul>"
-    },
-    {
-      "id": "2026-02-10-botanik-raspberry",
-      "topic": "botanik",
-      "subtopic": "raspberry",
-      "date": "2026-02-09",
-      "title": "Raspberry — early growth, carefully slowed down",
-      "format": "html",
-      "content": "<p class=\"card-meta\">February · autumn-bearing raspberry · 25&nbsp;cm pot · south-facing balcony · Last updated: <time datetime=\"2026-02-07\">Feb 07, 2026</time></p>\n<p>\n  The raspberry has clearly left dormancy and is pushing fresh, healthy shoots from the base.\n  Leaf colour is bright and compact, indicating good vitality rather than stress-driven growth.\n  Despite the early start, conditions are still winter-like.\n</p>\n\n<div class=\"media-row media-row--compact\">\n  <figure class=\"media\">\n    <img src=\"../assets/img/him10.jpeg\" alt=\"\">\n    <figcaption></figcaption>\n  </figure>\n\n  <figure class=\"media\">\n    <img src=\"../assets/img/him11.jpeg\" alt=\"\">\n    <figcaption></figcaption>\n  </figure>\n</div>\n\n<p>\n  <strong>What I did:</strong> removed all dead, old canes; kept the plant bright and cool;\n  avoided fertilizer; started short, daytime balcony exposure to improve light quality and harden the young growth,\n  while bringing the pot back indoors overnight due to frost.\n</p>\n\n<p>\n  <strong>Next steps:</strong> continue controlled day–night acclimation until night temperatures stay above freezing.\n  Once permanently outdoors and shoots reach 10–15&nbsp;cm, begin light organic feeding.\n  Later in spring, reduce the number of canes to a few strong shoots suited to the small container.\n</p>\n\n<p class=\"hint\">\n  The focus right now is structure and resilience, not speed.\n  Strong canes matter more than early growth.\n</p>"
-    },
-    {
-      "id": "2026-02-09-botanik-himbeeren",
-      "topic": "botanik",
-      "subtopic": "raspberry",
-      "date": "2026-02-10",
+      "date": "2026-02-07",
       "title": "Raspberry — early growth, carefully slowed down",
       "format": "markdown",
       "content": "**What I did:** removed all dead, old canes; kept the plant bright and cool; avoided fertilizer; started short, daytime balcony exposure to improve light quality and harden the young growth, while bringing the pot back indoors overnight due to frost.\n\n**Next steps:** continue controlled day–night acclimation until night temperatures stay above freezing. Once permanently outdoors and shoots reach 10–15 cm, begin light organic feeding. Later in spring, reduce the number of canes to a few strong shoots suited to the small container.\nThe focus right now is structure and resilience, not speed. Strong canes matter more than early growth.\n\n*The focus right now is structure and resilience, not speed. Strong canes matter more than early growth.*",
       "images": [
         { "src": "../assets/img/him10.jpeg", "alt": "Himbeeren am Balkon" },
         { "src": "../assets/img/him11.jpeg", "alt": "Raspberry" }
+      ]
+    },
+    {
+      "id": "2026-02-03-botanik-himbeeren",
+      "topic": "botanik",
+      "subtopic": "raspberry",
+      "date": "2026-02-03",
+      "title": "Raspberry — still alive, visibly rebooting; late-winter recovery",
+      "format": "markdown",
+      "content": "*The old canes look done, but the plant has started pushing fresh shoots from the base. That’s the real health indicator: it’s investing energy where it matters.*\n\n**What I did:** removed fully dead, dry canes close to the soil line; kept watering conservative and consistent; no feeding yet; kept it bright but avoided “forcing” it with warmth.\n\n**Next steps:** wait until the new shoots turn a deeper green and gain height. Once growth is stable (ideally after moving it outdoors for real light and airflow), start a mild, organic feed. Later in spring, reduce excess shoots so a few strong canes get all the energy. ~Rule of thumb right now: lightly moist soil, no swamp, no fertilizer.~",
+      "images": [
+        { "src": "../assets/img/him01.jpg", "alt": "Raspberry" },
+        { "src": "../assets/img/him02.jpg", "alt": "Raspberry" }
+      ]
+    },
+    {
+      "id": "2026-02-03-botinik-fig",
+      "topic": "botanik",
+      "subtopic": "fig",
+      "date": "2026-02-03",
+      "title": "Fig — woke up too early, premature budbreak",
+      "format": "markdown",
+      "content": "*The fig has already started leafing out, and a few early fruitlets are present. It’s not dying — it’s simply overly optimistic because indoor conditions feel like spring.*\n\n**What I did:** did not prune; reduced watering; absolutely no fertilizer. The main goal is to slow it down, not encourage soft, weak growth.\n\n**Next steps:** keep it as cool and bright as possible (cold window zone, away from heat sources). If outdoor placement becomes feasible without harsh frost, transition gradually and protect the pot from cold stress. Feeding only starts after stable spring conditions and steady leaf expansion.\n\n~If some early fruitlets drop: normal. The priority is a strong plant, not February heroics.~",
+      "images": [
+        { "src": "../assets/img/fig01.jpg", "alt": "Fig" },
+        { "src": "../assets/img/fig02.jpg", "alt": "Fig" }
+      ]
+    },
+    {
+      "id": "2026-02-03-botanik-ribisl",
+      "topic": "botanik",
+      "subtopic": "ribisl",
+      "date": "2026-02-03",
+      "title": "Redcurrant (Jonkheer van Tets) — pruned and ready",
+      "format": "markdown",
+      "content": "*The plant is still in dormancy, buds are plump, and the framework is healthy. This is the ideal timing window for shaping in a container: fewer canes, better fruit quality.*\n\n**What I did:** selected and kept **six main canes** for a clean, airy structure; removed weak/crowded growth; kept the short 5–10 cm side shoots intact (they’re productive on redcurrant).\n\n**Next steps:** leave it alone now: bright, cool, and only minimal watering. Start a gentle, organic feed once leaf-out is clearly underway. After harvest, consider removing one of the oldest canes at the base to keep the plant young and productive.\n\n~Container logic: remove wood rather than “topping” it. Short side shoots are assets, not clutter.~",
+      "images": [
+        { "src": "../assets/img/rib02.jpg", "alt": "Redcurrant" },
+        { "src": "../assets/img/rib02.jpg", "alt": "Redcurrant" }
       ]
     }
   ]

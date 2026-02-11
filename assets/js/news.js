@@ -20,7 +20,9 @@
     const flushP = () => {
       if (!pBuf.length) return "";
       const txt = pBuf.join(" ").trim()
-        .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+        .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
+        .replace(/\*(?!\*)(.+?)\*/g, "<em>$1</em>");
+
       pBuf = [];
       return `<p>${txt}</p>`;
     };
@@ -34,17 +36,34 @@
         continue;
       }
 
+      // ~hint~ block (whole line)
+      if (line.trim().startsWith("~") && line.trim().endsWith("~")) {
+        if (inList) { html += "</ul>"; inList = false; }
+        html += flushP();
+
+        // Variante A: Hint nur Text (keine Markdown im Hint)
+        const hintText = escapeHtml(line.trim().slice(1, -1))
+          .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
+          .replace(/\*(?!\*)(.+?)\*/g, "<em>$1</em>");
+        html += `<p class="hint">${hintText}</p>`;
+        continue;
+      }
+
       if (line.startsWith("- ")) {
         html += flushP();
         if (!inList) { html += "<ul>"; inList = true; }
+
         const item = escapeHtml(line.slice(2))
-          .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+          .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
+          .replace(/\*(?!\*)(.+?)\*/g, "<em>$1</em>");
+
         html += `<li>${item}</li>`;
       } else {
         if (inList) { html += "</ul>"; inList = false; }
         pBuf.push(escapeHtml(line));
       }
     }
+
 
     if (inList) html += "</ul>";
     html += flushP();
