@@ -112,7 +112,7 @@
 
   async function loadPosts() {
     const res = await fetch(DATA_URL, { cache: "no-store" });
-    if (!res.ok) throw new Error("posts.json konnte nicht geladen werden");
+    if (!res.ok) throw new Error("posts.json not available");
     const data = await res.json();
     return Array.isArray(data.posts) ? data.posts : [];
   }
@@ -124,7 +124,7 @@
   } catch (e) {
     console.error(e);
     document.querySelectorAll(selectors).forEach(el => {
-      el.innerHTML = `<p class="hint">News konnten nicht geladen werden.</p>`;
+      el.innerHTML = `<p class="hint">News not available.</p>`;
     });
     return;
   }
@@ -144,6 +144,6 @@
 
     el.innerHTML = chosen.length
       ? chosen.map(renderPost).join("")
-      : `<p class="hint">Noch keine Beiträge.</p>`;
+      : `<p class="hint">No etries yet.</p>`;
   });
 })();
