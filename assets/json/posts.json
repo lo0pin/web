@@ -52,6 +52,17 @@
         { "src": "../assets/img/rib02.jpg", "alt": "Redcurrant" },
         { "src": "../assets/img/rib02.jpg", "alt": "Redcurrant" }
       ]
+    },
+    {
+      "id": "2026-02-08-segeln-video",
+      "topic": "sailing",
+      "date": "2026-02-08",
+      "title": "From Wind to Wake – Our New Sailing Film Is Live",
+      "format": "markdown",
+      "content": "Our latest sailing video is finished, trimmed to the essentials, and now live on [YouTube](https://youtu.be/EEyXTLKDoIc?si=xBxKvwbbK22xsdyH). Cast off with us and enjoy a few honest miles of wind, water, and quiet obsession.",
+      "images": [
+
+      ]
     }
   ]
 }

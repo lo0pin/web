@@ -1,16 +1,48 @@
 (async function () {
   const DATA_URL = new URL("../json/posts.json", import.meta.url);
-
   // ↑ relativ von /assets/js/ nach /assets/json/
 
   const selectors = "[data-news-mode]";
 
-
   // --- helpers --------------------------------------------------------------
   const escapeHtml = (s) =>
     String(s).replace(/[&<>"']/g, (c) => ({
-      "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;",
     }[c]));
+
+  // Inline-Markdown: **bold**, *em*, [text](url), nackte http(s)-URLs
+  // Wichtig: Diese Funktion erwartet "already escaped" Text.
+  function formatInline(escapedText) {
+    let t = String(escapedText);
+
+    // bold / italic
+    t = t
+      .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
+      .replace(/\*(?!\*)(.+?)\*/g, "<em>$1</em>");
+
+    // Markdown-Links: [Label](https://...)
+    // URL bewusst auf http(s) eingeschränkt.
+    t = t.replace(
+      /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g,
+      `<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>`
+    );
+
+    // Optional: nackte URLs automatisch verlinken
+    // Schneidet häufiges Satzzeichen am Ende sauber ab.
+    t = t.replace(/(https?:\/\/[^\s<]+)(?![^<]*>)/g, (m) => {
+      // trailing punctuation abtrennen
+      const match = m.match(/^(.*?)([).,;:!?]+)?$/);
+      const url = match ? match[1] : m;
+      const trail = match && match[2] ? match[2] : "";
+      return `<a href="${url}" target="_blank" rel="noopener noreferrer">${url}</a>${trail}`;
+    });
+
+    return t;
+  }
 
   function mdToHtml(md) {
     const lines = String(md).split("\n");
@@ -20,10 +52,8 @@
 
     const flushP = () => {
       if (!pBuf.length) return "";
-      const txt = pBuf.join(" ").trim()
-        .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
-        .replace(/\*(?!\*)(.+?)\*/g, "<em>$1</em>");
-
+      const escaped = escapeHtml(pBuf.join(" ").trim());
+      const txt = formatInline(escaped);
       pBuf = [];
       return `<p>${txt}</p>`;
     };
@@ -32,39 +62,47 @@
       const line = raw.trimEnd();
 
       if (line.trim() === "") {
-        if (inList) { html += "</ul>"; inList = false; }
+        if (inList) {
+          html += "</ul>";
+          inList = false;
+        }
         html += flushP();
         continue;
       }
 
       // ~hint~ block (whole line)
       if (line.trim().startsWith("~") && line.trim().endsWith("~")) {
-        if (inList) { html += "</ul>"; inList = false; }
+        if (inList) {
+          html += "</ul>";
+          inList = false;
+        }
         html += flushP();
 
-        // Variante A: Hint nur Text (keine Markdown im Hint)
-        const hintText = escapeHtml(line.trim().slice(1, -1))
-          .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
-          .replace(/\*(?!\*)(.+?)\*/g, "<em>$1</em>");
+        // Hint: erlaubt Inline-Markdown (bold/italic/links)
+        const hintEscaped = escapeHtml(line.trim().slice(1, -1));
+        const hintText = formatInline(hintEscaped);
         html += `<p class="hint">${hintText}</p>`;
         continue;
       }
 
       if (line.startsWith("- ")) {
         html += flushP();
-        if (!inList) { html += "<ul>"; inList = true; }
+        if (!inList) {
+          html += "<ul>";
+          inList = true;
+        }
 
-        const item = escapeHtml(line.slice(2))
-          .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
-          .replace(/\*(?!\*)(.+?)\*/g, "<em>$1</em>");
-
+        const itemEscaped = escapeHtml(line.slice(2));
+        const item = formatInline(itemEscaped);
         html += `<li>${item}</li>`;
       } else {
-        if (inList) { html += "</ul>"; inList = false; }
-        pBuf.push(escapeHtml(line));
+        if (inList) {
+          html += "</ul>";
+          inList = false;
+        }
+        pBuf.push(line); // erst beim flush escapen → sauberer Absatz-Join
       }
     }
-
 
     if (inList) html += "</ul>";
     html += flushP();
@@ -80,10 +118,11 @@
           : `<p>${escapeHtml(post.content || "")}</p>`;
 
     const imgs = Array.isArray(post.images) ? post.images.slice(0, 2) : [];
-    
-    const media = imgs.length ? `
+
+    const media = imgs.length
+      ? `
       <div class="media-row media-row--compact">
-        ${imgs.map(img => `
+        ${imgs.map((img) => `
           <figure class="media">
             <img
               src="${escapeHtml(img.src)}"
@@ -95,8 +134,8 @@
           </figure>
         `).join("")}
       </div>
-    ` : "";
-      
+    `
+      : "";
 
     return `
       <article class="card news-item">
@@ -124,25 +163,25 @@
     posts = await loadPosts();
   } catch (e) {
     console.error(e);
-    document.querySelectorAll(selectors).forEach(el => {
+    document.querySelectorAll(selectors).forEach((el) => {
       el.innerHTML = `<p class="hint">News not available.</p>`;
     });
     return;
   }
 
-  document.querySelectorAll(selectors).forEach(el => {
-    const topic = el.dataset.newsTopic || "";          // optional
-    const subtopic = el.dataset.newsSubtopic || "";    // optional
-    const mode = el.dataset.newsMode || "all";         // should exist
+  document.querySelectorAll(selectors).forEach((el) => {
+    const topic = el.dataset.newsTopic || "";       // optional
+    const subtopic = el.dataset.newsSubtopic || ""; // optional
+    const mode = el.dataset.newsMode || "all";      // should exist
 
-    const rawLimit = el.dataset.newsLimit;             // optional
+    const rawLimit = el.dataset.newsLimit;          // optional
     const limit = rawLimit ? Number.parseInt(rawLimit, 10) : NaN;
     const hasLimit = Number.isFinite(limit) && limit > 0;
 
     const filtered = posts
-      .filter(p => !topic || p.topic === topic)
-      .filter(p => !subtopic || p.subtopic === subtopic)
-      .filter(p => !p.draft)
+      .filter((p) => !topic || p.topic === topic)
+      .filter((p) => !subtopic || p.subtopic === subtopic)
+      .filter((p) => !p.draft)
       .sort(byDateDesc);
 
     let chosen;
@@ -157,5 +196,4 @@
       ? chosen.map(renderPost).join("")
       : `<p class="hint">No entries yet.</p>`;
   });
-
 })();

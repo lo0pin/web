@@ -41,7 +41,7 @@
 
 
 ## Limit
-<div data-news-topic="botanik" data-news-mode="latest" data-news-limit="3"></div>
+<div data-news-topic="botanik"  data-news-subtopic="raspberry" data-news-mode="latest" data-news-limit="3"></div>
 <script type="module" src="../assets/js/news.js"></script>
 
 
