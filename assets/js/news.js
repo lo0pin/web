@@ -3,7 +3,8 @@
 
   // ↑ relativ von /assets/js/ nach /assets/json/
 
-  const selectors = "[data-news-topic]";
+  const selectors = "[data-news-mode]";
+
 
   // --- helpers --------------------------------------------------------------
   const escapeHtml = (s) =>
@@ -130,20 +131,31 @@
   }
 
   document.querySelectorAll(selectors).forEach(el => {
-    const topic = el.dataset.newsTopic;
-    const subtopic = el.dataset.newsSubtopic || "";
-    const mode  = el.dataset.newsMode || "all";
-    
+    const topic = el.dataset.newsTopic || "";          // optional
+    const subtopic = el.dataset.newsSubtopic || "";    // optional
+    const mode = el.dataset.newsMode || "all";         // should exist
+
+    const rawLimit = el.dataset.newsLimit;             // optional
+    const limit = rawLimit ? Number.parseInt(rawLimit, 10) : NaN;
+    const hasLimit = Number.isFinite(limit) && limit > 0;
+
     const filtered = posts
       .filter(p => !topic || p.topic === topic)
       .filter(p => !subtopic || p.subtopic === subtopic)
       .filter(p => !p.draft)
       .sort(byDateDesc);
 
-    const chosen = mode === "latest" ? filtered.slice(0, 1) : filtered;
+    let chosen;
+    if (mode === "latest") {
+      const n = hasLimit ? limit : 1;
+      chosen = filtered.slice(0, n);
+    } else {
+      chosen = hasLimit ? filtered.slice(0, limit) : filtered;
+    }
 
     el.innerHTML = chosen.length
       ? chosen.map(renderPost).join("")
       : `<p class="hint">No entries yet.</p>`;
   });
+
 })();
