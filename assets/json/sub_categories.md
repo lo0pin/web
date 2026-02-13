@@ -1,12 +1,12 @@
 ## Botanik
 "topic": "botanik",
-"topic": "code" 
+
 
 ### Subcategories
 - "subtopic": "raspberry"
 - "subtopic": "ribisl"
 - "subtopic": "fig"
-- "subtopic": "html"
+
 
 ## Making
 "topic": "making",
@@ -14,6 +14,24 @@
 ### Subcategories
 "subtopic": "3dprint",
 
+## Code
+"topic": "code" 
+
+### SubC
+- "subtopic": "html"
+- "subtopic": "python"
+- "subtopic": "cpp"
+
+## Words
+"topic": "words"
+
+### SubC
+- "subtopic": "communication"
+- "subtopic": "history"
+- "subtopic": "linguistics"
+- "subtopic": "literature"
+- "subtopic": "philosophy"
+- "subtopic": "poetry"
 
 ```json
     {
