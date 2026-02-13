@@ -33,6 +33,18 @@
 - "subtopic": "philosophy"
 - "subtopic": "poetry"
 
+## Electronics
+"topic": "electronics"
+
+### SubC
+- "subtopic": "mesh"
+
+
+## Limit
+<div data-news-topic="botanik" data-news-mode="latest" data-news-limit="3"></div>
+<script type="module" src="../assets/js/news.js"></script>
+
+
 ```json
     {
       "id": "2026-02-09-botanik-himbeeren",
