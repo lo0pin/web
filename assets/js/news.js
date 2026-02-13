@@ -78,24 +78,24 @@
           ? mdToHtml(post.content || "")
           : `<p>${escapeHtml(post.content || "")}</p>`;
 
-  const imgs = Array.isArray(post.images) ? post.images.slice(0, 2) : [];
-  
-  const media = imgs.length ? `
-    <div class="media-row media-row--compact">
-      ${imgs.map(img => `
-        <figure class="media">
-          <img
-            src="${escapeHtml(img.src)}"
-            alt="${escapeHtml(img.alt || post.title)}"
-            loading="lazy"
-            decoding="async"
-          >
-          ${img.caption ? `<figcaption>${escapeHtml(img.caption)}</figcaption>` : ""}
-        </figure>
-      `).join("")}
-    </div>
-  ` : "";
+    const imgs = Array.isArray(post.images) ? post.images.slice(0, 2) : [];
     
+    const media = imgs.length ? `
+      <div class="media-row media-row--compact">
+        ${imgs.map(img => `
+          <figure class="media">
+            <img
+              src="${escapeHtml(img.src)}"
+              alt="${escapeHtml(img.alt || post.title)}"
+              loading="lazy"
+              decoding="async"
+            >
+            ${img.caption ? `<figcaption>${escapeHtml(img.caption)}</figcaption>` : ""}
+          </figure>
+        `).join("")}
+      </div>
+    ` : "";
+      
 
     return `
       <article class="card news-item">
@@ -144,6 +144,6 @@
 
     el.innerHTML = chosen.length
       ? chosen.map(renderPost).join("")
-      : `<p class="hint">No etries yet.</p>`;
+      : `<p class="hint">No entries yet.</p>`;
   });
 })();
