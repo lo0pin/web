@@ -75,6 +75,19 @@
       "images": [
         { "src": "../assets/img/meshtastic_hw,jpg.jpeg", "alt": "mesh node" }  
       ]
+    },
+    {
+      "id": "2026-02-14-my-webpage",
+      "topic": "code",
+      "subtopic": "html",
+      "date": "2026-02-14",
+      "title": "Building this very Site - my own webpage",
+      "format": "markdown",
+      "content": "In January, I began building exactly this website — the one you are currently browsing. It has been an unexpectedly joyful undertaking and something I’ve wanted to do for a long time: a place of my own on the web, shaped line by line.\n\nThis project is very much a work in progress. It grows iteratively — through experiments, refactoring, occasional frustration, and small, satisfying breakthroughs. Along the way, I’ve learned a great deal through [freeCodeCamp](https://www.freecodecamp.org/), whose structured courses helped me strengthen my foundations in web development.\n\nThe site serves two purposes:\n- It is a platform to document and reflect on my interests and hobbies, from technical builds to creative pursuits\n- at the same time an ongoing exercise in web development. A laboratory, a notebook, and a workshop combined.\n\nThanks for visiting while it’s still taking shape.",
+      "images": [
+        { "src": "../assets/img/webdev01.jpg", "alt": "" },
+        { "src": "../assets/img/webdev02.jpg.png", "alt": "" }    
+      ]
     }
   ]
 }
