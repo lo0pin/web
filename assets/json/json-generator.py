@@ -2,10 +2,32 @@ import json
 import tkinter as tk
 from tkinter import ttk
 from tkinter.scrolledtext import ScrolledText
-from datetime import date
+from datetime import datetime, date
 
 
 ASSET_PREFIX = "../assets/img/"
+
+TOPICS = {
+    "": [""],  # leere Auswahl erlaubt
+    "botanik": ["", "raspberry", "ribisl", "fig"],
+    "making": ["", "3dprint"],
+    "code": ["", "html", "python", "cpp"],
+    "words": ["", "communication", "history", "linguistics", "literature", "philosophy", "poetry"],
+    "electronics": ["", "mesh"],
+}
+
+
+def sanitize_token(s: str) -> str:
+    """
+    - trim
+    - spaces -> underscores
+    - collapse multiple underscores
+    - remove leading/trailing underscores
+    """
+    s = (s or "").strip().replace(" ", "_")
+    while "__" in s:
+        s = s.replace("__", "_")
+    return s.strip("_")
 
 
 class JsonPostGui(tk.Tk):
@@ -22,7 +44,6 @@ class JsonPostGui(tk.Tk):
         root = ttk.Frame(self, padding=12)
         root.pack(fill="both", expand=True)
 
-        # Layout: left = form, right = output
         root.columnconfigure(0, weight=3)
         root.columnconfigure(1, weight=2)
         root.rowconfigure(0, weight=1)
@@ -32,42 +53,60 @@ class JsonPostGui(tk.Tk):
         left.grid(row=0, column=0, sticky="nsew", padx=(0, 10))
         right.grid(row=0, column=1, sticky="nsew")
 
-        for i in range(10):
+        for i in range(12):
             left.rowconfigure(i, weight=0)
-        left.rowconfigure(6, weight=1)   # content grows
-        left.rowconfigure(9, weight=0)
+        left.rowconfigure(7, weight=1)   # content grows
 
-        # --- Simple fields ---
-        self.var_id = tk.StringVar()
-        self.var_topic = tk.StringVar()
-        self.var_subtopic = tk.StringVar()
-        self.var_date = tk.StringVar()
-        self.var_title = tk.StringVar()
+        # --- Vars ---
+        self.var_id = tk.StringVar()  # auto-generated, read-only in UI
+        self.var_topic = tk.StringVar(value="")
+        self.var_subtopic = tk.StringVar(value="")
+        self.var_date = tk.StringVar(value="")
+        self.var_title = tk.StringVar(value="")
         self.var_format = tk.StringVar(value="markdown")
 
+        # --- ID (readonly) ---
         row = 0
-        row = self._labeled_entry(left, row, "id", self.var_id)
-        row = self._labeled_entry(left, row, "topic", self.var_topic)
-        row = self._labeled_entry(left, row, "subtopic", self.var_subtopic)
+        ttk.Label(left, text="id (auto)").grid(row=row, column=0, sticky="w", pady=(6, 2))
+        e_id = ttk.Entry(left, textvariable=self.var_id, state="readonly")
+        e_id.grid(row=row, column=1, sticky="ew", pady=(6, 2))
+        row += 1
 
-        # date + heute
+        # --- topic dropdown ---
+        ttk.Label(left, text="topic").grid(row=row, column=0, sticky="w", pady=(6, 2))
+        self.cmb_topic = ttk.Combobox(left, textvariable=self.var_topic, state="readonly",
+                                      values=list(TOPICS.keys()))
+        self.cmb_topic.grid(row=row, column=1, sticky="ew", pady=(6, 2))
+        self.cmb_topic.bind("<<ComboboxSelected>>", self._on_topic_changed)
+        row += 1
+
+        # --- subtopic dropdown (depends on topic) ---
+        ttk.Label(left, text="subtopic").grid(row=row, column=0, sticky="w", pady=(6, 2))
+        self.cmb_subtopic = ttk.Combobox(left, textvariable=self.var_subtopic, state="readonly",
+                                         values=TOPICS.get(self.var_topic.get(), [""]))
+        self.cmb_subtopic.grid(row=row, column=1, sticky="ew", pady=(6, 2))
+        row += 1
+
+        # --- date + heute ---
         ttk.Label(left, text="date").grid(row=row, column=0, sticky="w", pady=(6, 2))
         date_row = ttk.Frame(left)
         date_row.grid(row=row, column=1, sticky="ew", pady=(6, 2))
         date_row.columnconfigure(0, weight=1)
+
         ttk.Entry(date_row, textvariable=self.var_date).grid(row=0, column=0, sticky="ew")
         ttk.Button(date_row, text="heute", command=self._fill_today).grid(row=0, column=1, padx=(8, 0))
         row += 1
 
+        # --- title ---
         row = self._labeled_entry(left, row, "title", self.var_title)
 
-        # format (entry is ok, but dropdown is nicer)
+        # --- format ---
         ttk.Label(left, text="format").grid(row=row, column=0, sticky="w", pady=(6, 2))
         fmt = ttk.Combobox(left, textvariable=self.var_format, values=["markdown", "html", "text"], state="readonly")
         fmt.grid(row=row, column=1, sticky="ew", pady=(6, 2))
         row += 1
 
-        # --- Content + formatting buttons ---
+        # --- content + formatting buttons ---
         ttk.Label(left, text="content").grid(row=row, column=0, sticky="nw", pady=(6, 2))
         content_area = ttk.Frame(left)
         content_area.grid(row=row, column=1, sticky="nsew", pady=(6, 2))
@@ -148,9 +187,17 @@ class JsonPostGui(tk.Tk):
 
         ttk.Label(
             right,
-            text="Tipp: Content wird im JSON korrekt escaped (\\n, \\\" usw.).",
+            text="Tipp: content wird im JSON korrekt escaped (\\n, \\\" usw.).",
             foreground="#666",
         ).grid(row=2, column=0, sticky="w", pady=(8, 0))
+
+        # --- Reactive ID updates ---
+        self.var_date.trace_add("write", lambda *_: self._update_id())
+        self.var_topic.trace_add("write", lambda *_: self._update_id())
+        self.var_subtopic.trace_add("write", lambda *_: self._update_id())
+
+        # Initial id
+        self._update_id()
 
     def _labeled_entry(self, parent, row, label, var):
         ttk.Label(parent, text=label).grid(row=row, column=0, sticky="w", pady=(6, 2))
@@ -158,6 +205,37 @@ class JsonPostGui(tk.Tk):
         e.grid(row=row, column=1, sticky="ew", pady=(6, 2))
         parent.columnconfigure(1, weight=1)
         return row + 1
+
+    # ---------- Topic/Subtopic logic ----------
+    def _on_topic_changed(self, _evt=None):
+        topic = self.var_topic.get()
+        allowed = TOPICS.get(topic, [""])
+        self.cmb_subtopic.configure(values=allowed)
+
+        # If current subtopic not allowed anymore -> reset to ""
+        if self.var_subtopic.get() not in allowed:
+            self.var_subtopic.set("")
+
+        self._update_id()
+
+    # ---------- ID logic ----------
+    def _update_id(self):
+        """
+        id = date + topic + subtopic + hh_mm
+        joined with underscores, no spaces, empty parts allowed but not emitted as empty underscores.
+        date expected: YYYY-MM-DD (if empty -> omitted)
+        time part always emitted.
+        """
+        d = sanitize_token(self.var_date.get())
+        t = sanitize_token(self.var_topic.get())
+        s = sanitize_token(self.var_subtopic.get())
+        hh_mm = datetime.now().strftime("%H_%M")
+
+        parts = [p for p in [d, t, s, hh_mm] if p]
+        new_id = "_".join(parts) if parts else hh_mm
+
+        # Set readonly entry
+        self.var_id.set(new_id)
 
     # ---------- Helpers ----------
     def _fill_today(self):
@@ -172,7 +250,6 @@ class JsonPostGui(tk.Tk):
             start = self.txt_content.index("sel.first")
             end = self.txt_content.index("sel.last")
         except tk.TclError:
-            # no selection: insert pair and place cursor in between
             self.txt_content.insert("insert", left + right)
             self.txt_content.mark_set("insert", f"insert-{len(right)}c")
             self.txt_content.focus_set()
@@ -185,8 +262,6 @@ class JsonPostGui(tk.Tk):
         self.txt_content.focus_set()
 
     def _make_list(self):
-        # If selection spans lines: prefix each selected line with "- "
-        # Else: insert "- " at cursor.
         try:
             start = self.txt_content.index("sel.first")
             end = self.txt_content.index("sel.last")
@@ -216,12 +291,9 @@ class JsonPostGui(tk.Tk):
         src = ASSET_PREFIX + filename
         self.lst_images.insert("end", f"{src} | {alt}")
         self.var_img_file.set("")
-        # alt bleibt – oft praktisch
 
     def _remove_selected_image(self):
         sel = list(self.lst_images.curselection())
-        if not sel:
-            return
         for idx in reversed(sel):
             self.lst_images.delete(idx)
 
@@ -229,7 +301,6 @@ class JsonPostGui(tk.Tk):
         images = []
         for i in range(self.lst_images.size()):
             item = self.lst_images.get(i)
-            # format: "src | alt"
             if " | " in item:
                 src, alt = item.split(" | ", 1)
             else:
@@ -238,21 +309,19 @@ class JsonPostGui(tk.Tk):
         return images
 
     def _generate(self):
+        # always refresh id at generation time (time-part!)
+        self._update_id()
+
         post = {
-            "id": self.var_id.get().strip(),
-            "topic": self.var_topic.get().strip(),
-            "subtopic": self.var_subtopic.get().strip(),
+            "id": self.var_id.get(),
+            "topic": self.var_topic.get(),
+            "subtopic": self.var_subtopic.get(),
             "date": self.var_date.get().strip(),
             "title": self.var_title.get().strip(),
             "format": self.var_format.get().strip(),
             "content": self.txt_content.get("1.0", "end-1c"),
             "images": self._collect_images(),
         }
-
-        # Minimal sanity: empty strings are allowed, but tell user gently.
-        missing = [k for k in ["id", "topic", "date", "title"] if not post[k]]
-        if missing:
-            self._flash(f"Fehlt noch: {', '.join(missing)}", ok=False)
 
         out = json.dumps(post, ensure_ascii=False, indent=2)
         self.txt_output.delete("1.0", "end")
@@ -269,11 +338,9 @@ class JsonPostGui(tk.Tk):
 
     def _flash(self, msg, ok=True):
         self.lbl_status.configure(text=msg, foreground=("#2a7" if ok else "#b33"))
-        # unaufdringlich wieder verschwinden lassen
         self.after(1600, lambda: self.lbl_status.configure(text=""))
 
 
 if __name__ == "__main__":
     app = JsonPostGui()
     app.mainloop()
-
