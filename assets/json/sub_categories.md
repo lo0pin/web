@@ -1,7 +1,6 @@
 ## Botanik
 "topic": "botanik",
 
-
 ### Subcategories
 - "subtopic": "raspberry"
 - "subtopic": "ribisl"
@@ -13,6 +12,7 @@
 
 ### Subcategories
 "subtopic": "3dprint",
+
 
 ## Code
 "topic": "code" 

@@ -24,17 +24,20 @@
       .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
       .replace(/\*(?!\*)(.+?)\*/g, "<em>$1</em>");
 
-    // Markdown-Links: [Label](https://...)
-    // URL bewusst auf http(s) eingeschränkt.
+    // Markdown-Links: externe URLs
     t = t.replace(
       /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g,
       `<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>`
     );
 
+    // Markdown-Links: Anchor-Links (#hardware)
+    t = t.replace(
+      /\[([^\]]+)\]\((#[a-zA-Z0-9_-]+)\)/g,
+      `<a href="$2">$1</a>`
+    );
+
     // Optional: nackte URLs automatisch verlinken
-    // Schneidet häufiges Satzzeichen am Ende sauber ab.
     t = t.replace(/(https?:\/\/[^\s<]+)(?![^<]*>)/g, (m) => {
-      // trailing punctuation abtrennen
       const match = m.match(/^(.*?)([).,;:!?]+)?$/);
       const url = match ? match[1] : m;
       const trail = match && match[2] ? match[2] : "";

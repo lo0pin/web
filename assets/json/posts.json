@@ -63,6 +63,18 @@
       "images": [
 
       ]
+    },
+    {
+      "id": "2026-01-26-new-hardware",
+      "topic": "electronics",
+      "subtopic": "mesh",
+      "date": "2026-01-26",
+      "title": "Hardware finally arrived",
+      "format": "markdown",
+      "content": "~First Meshtastic node on the desk — a Heltec board equipped with an external antenna.~\n\nFreshly arrived Meshtastic [hardware](#hardware) — the first building blocks of an off-grid, autonomous network, ready to be configured and taken outdoors. [Setup](#setup) was (almost) quite self-explainatory.\n\n**Next steps:**\n- Define clear roles for both nodes (mobile node vs. stationary node)\n- Build a reliable 18650-based power system with proper charging and protection\n- Implement solar power for the stationary node to enable long-term off-grid operation\n- Evaluate MPPT vs. simpler charging solutions based on panel size and real-world efficiency\n- Design and 3D-print a compact, weather-resistant enclosure\n- Optimize antenna placement for range, stability, and terrain\n- Use one node as a dedicated mobile companion while hiking or traveling\n- Document a clean, reproducible setup from flashing to deployment\n- Compare repeater mode vs. second-node behavior under realistic conditions\n- Add basic sensor hardware to collect environmental and system telemetry",
+      "images": [
+        { "src": "../assets/img/meshtastic_hw,jpg.jpeg", "alt": "mesh node" }  
+      ]
     }
   ]
 }
