@@ -10,6 +10,7 @@
 ## Making
 "topic": "making",
 
+
 ### Subcategories
 "subtopic": "3dprint",
 
@@ -39,6 +40,10 @@
 ### SubC
 - "subtopic": "mesh"
 
+
+## Modes
+data-news-mode="all"
+data-news-mode="latest" 
 
 ## Limit
 <div data-news-topic="botanik"  data-news-subtopic="raspberry" data-news-mode="latest" data-news-limit="3"></div>

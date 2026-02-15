@@ -103,6 +103,65 @@
           "alt": "Web Generator"
         }
       ]
+    },
+    {
+      "id": "2026-02-07_making_3dprint_16_32",
+      "topic": "making",
+      "subtopic": "3dprint",
+      "date": "2026-02-07",
+      "title": "Unboxing and assembling",
+      "format": "markdown",
+      "content": "I unpacked the printer carefully, removing all transport locks, foam inserts, and protective films. The frame is unfolded and secured, axes checked for free movement, and the toolhead and build plate mounted according to the guide. Cables are routed cleanly, strain reliefs checked, and all fasteners tightened with care. Once assembled, I run a first inspection and calibration—only then is the printer ready for its first print. \n\n**Next steps:**\n- Power on and run initial self-checks\n- Update firmware to the latest stable release\n- Perform first calibration (bed, axes, extrusion)\n- Load filament and verify material flow\n- Print a small test model and inspect tolerances\n- Fine-tune settings based on first results\n",
+      "images": [
+        {
+          "src": "../assets/img/3dp_assemble03.jpeg",
+          "alt": "3dp_assemble03.jpeg"
+        },
+        {
+          "src": "../assets/img/3dp_final01.jpeg",
+          "alt": "3dp_final01.jpeg"
+        }
+      ]
+    },
+    {
+      "id": "2026-02-15_making_3dprint_16_45",
+      "topic": "making",
+      "subtopic": "3dprint",
+      "date": "2026-02-15",
+      "title": "First Print Project: Custom Case for my Meshtastic Node",
+      "format": "markdown",
+      "content": "The first real project is done — not a test cube, not a calibration plate, but something functional.\n\nI designed and printed a custom case for my Meshtastic node. The model was created in Fusion 360 and consists of two parts: a base enclosure and a separate lid.\n\n**Inside the case:**\n- Heltec V3 ESP32 board\n- 18650 battery\n- Slide switch for power control\n\nThe enclosure includes:\n- Display window opening\n- USB port access (for charging)\n- Antenna routed cleanly through the housing\n- Threaded holes for screws (lid fixation and switch mounting)\n\nThe print itself was surprisingly efficient.\n\n**Print stats:**\n- Case: 42 minutes · ~25 g filament\n- Lid: 20 minutes · ~9 g filament\n- Material: Bambu Lab PLA Basic (grey)\n\nWhat I like about this project: it’s not decorative — it solves a problem. It protects electronics, manages space, and turns a loose collection of components into a compact, field-ready device.\n\nDesign meets physics. Idea meets layer height.\n\nMore iterations will follow.",
+      "images": [
+        {
+          "src": "../assets/img/3dp_mesh_node001.jpg",
+          "alt": "Fusion 360 model of the Meshtastic node case"
+        },
+        {
+          "src": "../assets/img/3dprint003.jpeg",
+          "alt": "Printing the base enclosure"
+        }
+
+      ]
+    },
+    {
+      "id": "2026-02-15_electronics_mesh_17_05",
+      "topic": "electronics",
+      "subtopic": "mesh",
+      "date": "2026-02-15",
+      "title": "Meshtastic Node – Now Field-Ready",
+      "format": "markdown",
+      "content": "The Meshtastic node is no longer a collection of parts on a desk — it is now a compact, mobile device.\n\nWith the custom 3D-printed enclosure completed, the electronics are protected, integrated, and ready for real-world use. The Heltec V3 ESP32, powered by a single 18650 cell, is securely mounted inside the case, together with a dedicated slide switch for clean power control.\n\n**Operational features:**\n- Bluetooth connectivity for configuration and messaging\n- USB-C charging access without opening the case\n- Removable external antenna for transport and field optimization\n- Dedicated display window for status monitoring\n\nThe device is now truly portable: self-contained power, mechanical protection, and antenna flexibility in one compact form factor.\n\nFrom here on, it’s about range tests, network topology experiments, and real outdoor deployment.\n\nFor details on the enclosure design and print process, see the related build article:\n[Custom 3D-Printed Case](../making/3d_printing.html#3dprintnews)",
+      "images": [
+        {
+          "src": "../assets/img/meshnode002.jpeg",
+          "alt": "Meshtastic node interior with 18650 battery and Heltec V3"
+        },
+        {
+          "src": "../assets/img/meshnode001.jpeg",
+          "alt": "Finished Meshtastic node in custom enclosure"
+        }
+
+      ]
     }
   ]
 }
