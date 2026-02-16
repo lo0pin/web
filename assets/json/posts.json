@@ -183,11 +183,11 @@
       "content": "I took my new mobile Meshtastic node — 3D printed case, 18650 inside — for a walk and kept sending messages to my stationary node at home. *The experiment turned out to be more revealing than expected.*\n\n**Not all messages were transmitted successfully.** \n- Some never arrived at all. \n- Others appeared to fail, triggered new send attempts, and were eventually delivered multiple times. \n- In one case, the same message was received four times. \nOn the sender, however, only the very last transmission at 18:33 was visible. On the receiving node, all delivery attempts between 18:22 and 18:33 appeared individually.\n\nThe final message must have been a **direct transmission**, as it included the link parameters “SNR −12.25 dB” and “RSSI −133 dBm.” According to Google Maps, the straight-line distance was about 370 meters, with several buildings and dense trees in between. From my position, the home node was located behind the far-facing window — essentially on the shielded side of the building.\n\nIt was a small but very concrete reminder: LoRa works astonishingly well under harsh conditions, but reliability is not binary. Geometry, obstruction, retries, and marginal link budgets shape what actually arrives — and what only appears to have been sent.",
       "images": [
         {
-          "src": "../assets/img/mesh_walk01.jepg",
+          "src": "../assets/img/mesh_walk01.jpeg",
           "alt": "mesh_walk01.jepg"
         },
         {
-          "src": "../assets/img/mesh_walk02.jepg",
+          "src": "../assets/img/mesh_walk02.jpeg",
           "alt": "mesh_walk02.jepg"
         }
       ]
