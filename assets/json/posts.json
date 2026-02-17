@@ -191,6 +191,25 @@
           "alt": "mesh_walk02.jepg"
         }
       ]
+    },
+    {
+      "id": "2026-02-17_electronics_mesh_13_35",
+      "topic": "electronics",
+      "subtopic": "mesh",
+      "date": "2026-02-17",
+      "title": "Same Channel, Different Reality",
+      "format": "markdown",
+      "content": "I took my mobile Meshtastic node out for another walk and noticed something unexpected: the open broadcast channel looked different depending on which node I was viewing.\n\nThe mobile node received noticeably more public messages than my stationary home node. Same channel, same network — but a different RF perspective. Changing position, elevation, and surrounding obstacles clearly altered what each device was able to “see” in the mesh.\n\nI was particularly puzzled when someone responded to other messages in the channel but not to mine — most likely, my transmission never reached them in the first place.\n\nThe two screenshots show the difference in received broadcast traffic side by side (stationary: left, mobile: right)",
+      "images": [
+        {
+          "src": "../assets/img/mesh_walk03.jpeg",
+          "alt": "mesh_walk03.jpeg"
+        },
+        {
+          "src": "../assets/img/mesh_walk05.jpeg",
+          "alt": "mesh_walk05.jpeg"
+        }
+      ]
     }
   ]
 }
