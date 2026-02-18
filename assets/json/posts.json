@@ -215,6 +215,25 @@
           "alt": "mesh_walk05.jpeg"
         }
       ]
+    },
+    {
+      "id": "2026-02-18_making_3dprint_12_58",
+      "topic": "making",
+      "subtopic": "3dprint",
+      "date": "2026-02-18",
+      "title": "Dedicated Enclosure for My Home Node",
+      "format": "markdown",
+      "content": "I printed another custom case — this time for my stationary mesh node. Designed for a clean, permanent setup with proper cable routing and antenna placement. The node is now neatly housed and ready for long-term operation.",
+      "images": [
+        {
+          "src": "../assets/img/3dprint_mesh_case00.jpeg",
+          "alt": "3dprint_mesh_case00.jpeg"
+        },
+        {
+          "src": "../assets/img/3dprint_mesh_case01.jpeg",
+          "alt": "3dprint_mesh_case01.jpeg"
+        }
+      ]
     }
   ]
 }
