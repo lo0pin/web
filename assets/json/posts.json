@@ -234,9 +234,30 @@
           "alt": "3dprint_mesh_case01.jpeg"
         }
       ]
+    },
+    {
+      "id": "2026-02-19_making_3dprint_11_54",
+      "topic": "making",
+      "subtopic": "3dprint",
+      "date": "2026-02-19",
+      "title": "From Cat Chaos to Creative Overload",
+      "format": "markdown",
+      "content": "I recently designed and printed a small but highly effective upgrade for our home: **a custom “shield wall” for the litter boxes**. Modelled in Fusion 360 and printed in PLA, it now prevents my cat from enthusiastically excavating half the litter onto the surrounding floor. What used to look like an archaeological dig site now looks—almost—civilized.\n\nMore broadly, **my experience with 3D printing** has shifted my entire perspective. I initially considered it a somewhat unnecessary source of plastic, and apart from two or three concrete ideas, *I had no clear sense of what I would even print*. That illusion lasted about a week. Once you own a printer, you start seeing potential projects everywhere—small annoyances, broken parts, design improvements. It is less about producing objects and more about reclaiming control over them.\n\n~At this point, I would buy a 3D printer again without hesitation. What began as cautious curiosity has turned into genuine enthusiasm—and the real challenge is no longer whether to print, but which idea to tackle next.~",
+      "images": [
+        {
+          "src": "../assets/img/3dprint_klo00.jpg",
+          "alt": "3dprint_klo00.jpg"
+        },
+        {
+          "src": "../assets/img/3dprint_klo01.jpg",
+          "alt": "3dprint_klo01.jpg"
+        }
+      ]
     }
   ]
 }
+
+
 
 
 
