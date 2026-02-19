@@ -263,6 +263,26 @@
       "format": "markdown",
       "content": "Gothic modding is not about bigger swords, louder magic, or more spectacle. It is about **world logic**. A Gothic world works when its rules are consistent, its silences intentional, and its people behave as if they existed before the player arrived — and will continue after he leaves. Modding means learning how that illusion is built — and how to extend it without breaking the spell. \n\nI grew up with games that trusted the player to listen, observe, and think. Gothic was one of them. It never explained itself fully. It hinted. It implied. It expected attention. At some point, playing was no longer enough. I wanted to understand **why** a line of dialogue felt heavy, **why** a village felt hostile without anyone saying so, **why** a quest worked even when nothing “happened”. Modding was the natural next step: not to rewrite Gothic — but to speak its language fluently. ",
       "images": []
+    },
+    {
+      "id": "2026-01-27_nerdism_gothic_mod_13_07",
+      "topic": "nerdism",
+      "subtopic": "gothic_mod",
+      "date": "2026-01-27",
+      "title": "What Gothic modding actually is",
+      "format": "markdown",
+      "content": " A Gothic mod is a **fan-made extension** built on the original engine. You do not replace the game — you converse with it. That conversation happens across several disciplines:\n\n- logic (scripts)\n- space (worlds)\n- rhythm (NPC routines)\n- restraint (knowing what not to add)\n\n~Good mods feel like lost chapters. Bad mods feel like noise. ~\n\n\n\n**Core disciplines**\n\n**> Scripting (Daedalus)**\nDaedalus is the nervous system of Gothic. Dialogue, quests, NPC behavior, attributes, routines — all of it lives here. It is not a forgiving language, but it is honest. If something breaks, it breaks for a reason. And once you understand that reason, you gain absolute control. Scripting teaches discipline: clear structure, explicit intent, no magic shortcuts.\n\n**> World building (Spacer)**\nThe Spacer is where theory becomes geography. Every object — a torch, a pan, a windlass, a chair — must be placed with intent. Worlds are not “decorated”; they are **constructed**. Trigger zones, freepoints, paths, and interactions shape how the player moves without being told where to go. A good Spacer does not create scenery. He creates **habitable space**.\n\n**> World building (Meshing)**\nCustom worlds demand assets: meshes, textures, props, architecture. Today, Blender and modern toolchains make this accessible — but technical ability alone is not enough. Everything must fit Gothic’s visual grammar: rough, grounded, functional, slightly worn. If an object looks like it wants attention, it already failed.\n\n\n**The roles behind a mod**\nA functioning mod is rarely a solo act. Typical roles include:\n- Scripter — logic, dialogue, quests, routines\n- Spacer — world layout, object placement, flow\n- 3D Artist — environments, items, architecture\n- 2D Artist — textures, UI elements\n- Concept & Audio — mood, coherence, restraint\n\n~The key is not talent — it is coordination. Clear ownership beats creative chaos every time. ~\n\n\n**Starting small (and why that matters)**\nEveryone dreams of “*the next Gothic*”. That is the fastest way to fail. The first mod should be:\n\n- short\n- contained\n- focused\n- finishable\n\nOne village.\nOne storyline.\nOne or two hours of playtime.\n\n~Anything more is ambition without structure — and Gothic punishes that mercilessly. ~\n\n\n**Learning resources & community**\nGothic modding survives because knowledge is shared — slowly, meticulously, sometimes painfully. Wikis, forums, IRC channels, and long-forgotten guides still matter. Not because they are modern — but because they are **tested**. If you ask good questions, people will answer. If you ask lazy ones, the engine will teach you instead. \n\n\n\n**Philosophy**\nModding Gothic is not about self-expression. It is about **respect**. Respect for the engine’s limits. Respect for the player’s intelligence. Respect for silence, implication, and restraint. When it works, nobody says: \"Nice mod.\" They say: \"*This feels like Gothic*.\" And that is the highest *compliment* there is.\n",
+      "images": []
+    },
+    {
+      "id": "2026-01-30_nerdism_gothic_mod_13_11",
+      "topic": "nerdism",
+      "subtopic": "gothic_mod",
+      "date": "2026-01-30",
+      "title": "Steps completed & Steps ahead",
+      "format": "markdown",
+      "content": "**Steps completed**\n\n- Learned to create NPCs\n- Learned to spawn NPCs\n- Learned to create Dialogs\n- Learned about if-clauses\n- Learned about variables and constants\n- Learned how to implement subtitles and custom voice-over\n- Lore/Quests: [Quest-Generator](../nerdism/quest_gen.html) built\n\n\n\n**Steps ahead**\n\n- Learn how to create diary-entries\n- Learn how to create trading-dialogues\n- Learn about dialogue-choises\n- Get deeper into NPC interaction\n- literally everything else 😱\n\n\n",
+      "images": []
     }
   ]
 }
