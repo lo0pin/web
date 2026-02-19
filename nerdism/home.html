@@ -31,8 +31,27 @@
 
     <hr class="divider" />
 
+    <section class="card">
+      <h2 class="card-title">On this Page</h2>
+      <ul>
+        <li><a href="#nerd_news">Latest News</a></li>
+        <li><a href="#nerd_sub" >Subsections</a></li>
 
-    <section class="tile-section" aria-label="Sections">
+      </ul>
+    </section>     
+
+    <hr class="divider" />
+
+
+    <section class="card" id="nerd_news">
+      <h2 class="card-title">Latest News</h2>
+    </section> 
+      <div data-news-topic="nerdism" data-news-limit="2" data-news-mode="latest"></div>
+    <script type="module" src="../assets/js/news.js"></script>  
+    <hr class="divider" />
+
+
+    <section class="tile-section" aria-label="Sections" id="nerd_sub">
       <div class="tile-grid">
         <a class="tile" href="" aria-label="Middle-earth & Tolkien">
           <img class="tile-image" src="../assets/img/nerdism_tolkien.png" alt="" />

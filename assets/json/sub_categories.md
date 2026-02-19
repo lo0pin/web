@@ -40,6 +40,13 @@
 ### SubC
 - "subtopic": "mesh"
 
+## Topic nerdism
+"topic": "nerdism" 
+
+### Subtopics
+"subtopic": "gothic_mod"
+"subtopic": "lotr"
+"subtopic": "games"
 
 ## Modes
 data-news-mode="all"
