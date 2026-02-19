@@ -253,6 +253,16 @@
           "alt": "3dprint_klo01.jpg"
         }
       ]
+    },
+    {
+      "id": "2026-01-26_nerdism_gothic_mod_12_54",
+      "topic": "nerdism",
+      "subtopic": "gothic_mod",
+      "date": "2026-01-26",
+      "title": "What this is about & Why I got into modding",
+      "format": "markdown",
+      "content": "Gothic modding is not about bigger swords, louder magic, or more spectacle. It is about **world logic**. A Gothic world works when its rules are consistent, its silences intentional, and its people behave as if they existed before the player arrived — and will continue after he leaves. Modding means learning how that illusion is built — and how to extend it without breaking the spell. \n\nI grew up with games that trusted the player to listen, observe, and think. Gothic was one of them. It never explained itself fully. It hinted. It implied. It expected attention. At some point, playing was no longer enough. I wanted to understand **why** a line of dialogue felt heavy, **why** a village felt hostile without anyone saying so, **why** a quest worked even when nothing “happened”. Modding was the natural next step: not to rewrite Gothic — but to speak its language fluently. ",
+      "images": []
     }
   ]
 }
