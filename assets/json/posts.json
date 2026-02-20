@@ -10,8 +10,8 @@
       "format": "markdown",
       "content": "**What I did:** removed all dead, old canes; kept the plant bright and cool; avoided fertilizer; started short, daytime balcony exposure to improve light quality and harden the young growth, while bringing the pot back indoors overnight due to frost.\n\n**Next steps:** continue controlled day–night acclimation until night temperatures stay above freezing. Once permanently outdoors and shoots reach 10–15 cm, begin light organic feeding. Later in spring, reduce the number of canes to a few strong shoots suited to the small container.\nThe focus right now is structure and resilience, not speed. Strong canes matter more than early growth.\n\n*The focus right now is structure and resilience, not speed. Strong canes matter more than early growth.*",
       "images": [
-        { "src": "../assets/img/him10.jpeg", "alt": "Himbeeren am Balkon" },
-        { "src": "../assets/img/him11.jpeg", "alt": "Raspberry" }
+        { "src": "/web/assets/img/him10.jpeg", "alt": "Himbeeren am Balkon" },
+        { "src": "/web/assets/img/him11.jpeg", "alt": "Raspberry" }
       ]
     },
     {
@@ -23,8 +23,8 @@
       "format": "markdown",
       "content": "*The old canes look done, but the plant has started pushing fresh shoots from the base. That’s the real health indicator: it’s investing energy where it matters.*\n\n**What I did:** removed fully dead, dry canes close to the soil line; kept watering conservative and consistent; no feeding yet; kept it bright but avoided “forcing” it with warmth.\n\n**Next steps:** wait until the new shoots turn a deeper green and gain height. Once growth is stable (ideally after moving it outdoors for real light and airflow), start a mild, organic feed. Later in spring, reduce excess shoots so a few strong canes get all the energy. ~Rule of thumb right now: lightly moist soil, no swamp, no fertilizer.~",
       "images": [
-        { "src": "../assets/img/him01.jpg", "alt": "Raspberry" },
-        { "src": "../assets/img/him02.jpg", "alt": "Raspberry" }
+        { "src": "/web/assets/img/him01.jpg", "alt": "Raspberry" },
+        { "src": "/web/assets/img/him02.jpg", "alt": "Raspberry" }
       ]
     },
     {
@@ -36,8 +36,8 @@
       "format": "markdown",
       "content": "*The fig has already started leafing out, and a few early fruitlets are present. It’s not dying — it’s simply overly optimistic because indoor conditions feel like spring.*\n\n**What I did:** did not prune; reduced watering; absolutely no fertilizer. The main goal is to slow it down, not encourage soft, weak growth.\n\n**Next steps:** keep it as cool and bright as possible (cold window zone, away from heat sources). If outdoor placement becomes feasible without harsh frost, transition gradually and protect the pot from cold stress. Feeding only starts after stable spring conditions and steady leaf expansion.\n\n~If some early fruitlets drop: normal. The priority is a strong plant, not February heroics.~",
       "images": [
-        { "src": "../assets/img/fig01.jpg", "alt": "Fig" },
-        { "src": "../assets/img/fig02.jpg", "alt": "Fig" }
+        { "src": "/web/assets/img/fig01.jpg", "alt": "Fig" },
+        { "src": "/web/assets/img/fig02.jpg", "alt": "Fig" }
       ]
     },
     {
@@ -49,8 +49,8 @@
       "format": "markdown",
       "content": "*The plant is still in dormancy, buds are plump, and the framework is healthy. This is the ideal timing window for shaping in a container: fewer canes, better fruit quality.*\n\n**What I did:** selected and kept **six main canes** for a clean, airy structure; removed weak/crowded growth; kept the short 5–10 cm side shoots intact (they’re productive on redcurrant).\n\n**Next steps:** leave it alone now: bright, cool, and only minimal watering. Start a gentle, organic feed once leaf-out is clearly underway. After harvest, consider removing one of the oldest canes at the base to keep the plant young and productive.\n\n~Container logic: remove wood rather than “topping” it. Short side shoots are assets, not clutter.~",
       "images": [
-        { "src": "../assets/img/rib02.jpg", "alt": "Redcurrant" },
-        { "src": "../assets/img/rib02.jpg", "alt": "Redcurrant" }
+        { "src": "/web/assets/img/rib02.jpg", "alt": "Redcurrant" },
+        { "src": "/web/assets/img/rib02.jpg", "alt": "Redcurrant" }
       ]
     },
     {
@@ -73,7 +73,7 @@
       "format": "markdown",
       "content": "~First Meshtastic node on the desk — a Heltec board equipped with an external antenna.~\n\nFreshly arrived Meshtastic [hardware](#hardware) — the first building blocks of an off-grid, autonomous network, ready to be configured and taken outdoors. [Setup](#setup) was (almost) quite self-explainatory.\n\n**Next steps:**\n- Define clear roles for both nodes (mobile node vs. stationary node)\n- Build a reliable 18650-based power system with proper charging and protection\n- Implement solar power for the stationary node to enable long-term off-grid operation\n- Evaluate MPPT vs. simpler charging solutions based on panel size and real-world efficiency\n- Design and 3D-print a compact, weather-resistant enclosure\n- Optimize antenna placement for range, stability, and terrain\n- Use one node as a dedicated mobile companion while hiking or traveling\n- Document a clean, reproducible setup from flashing to deployment\n- Compare repeater mode vs. second-node behavior under realistic conditions\n- Add basic sensor hardware to collect environmental and system telemetry",
       "images": [
-        { "src": "../assets/img/meshtastic_hw,jpg.jpeg", "alt": "mesh node" }  
+        { "src": "/web/assets/img/meshtastic_hw,jpg.jpeg", "alt": "mesh node" }  
       ]
     },
     {
@@ -85,8 +85,8 @@
       "format": "markdown",
       "content": "In January, I began building exactly this website — the one you are currently browsing. It has been an unexpectedly joyful undertaking and something I’ve wanted to do for a long time: a place of my own on the web, shaped line by line.\n\nThis project is very much a work in progress. It grows iteratively — through experiments, refactoring, occasional frustration, and small, satisfying breakthroughs. Along the way, I’ve learned a great deal through [freeCodeCamp](https://www.freecodecamp.org/), whose structured courses helped me strengthen my foundations in web development.\n\nThe site serves two purposes:\n- It is a platform to document and reflect on my interests and hobbies, from technical builds to creative pursuits\n- at the same time an ongoing exercise in web development. A laboratory, a notebook, and a workshop combined.\n\nThanks for visiting while it’s still taking shape.",
       "images": [
-        { "src": "../assets/img/webdev01.jpg", "alt": "" },
-        { "src": "../assets/img/webdev02.jpg.png", "alt": "" }    
+        { "src": "/web/assets/img/webdev01.jpg", "alt": "" },
+        { "src": "/web/assets/img/webdev02.jpg.png", "alt": "" }    
       ]
     },
     {
@@ -96,10 +96,10 @@
       "date": "2026-02-14",
       "title": "Web Generator Live: JSON Posts Directly in the Browser",
       "format": "markdown",
-      "content": "The JSON post generator is now running as a lightweight browser app. No build steps, no dependencies — fill in the fields, hit **Generate**, click the output, and it copies itself to the clipboard.\n\n**Features:**\n- Automatic ID built from date_topic_subtopic_hh_mm\n- Topic/Subtopic dropdown (subtopics depend on the selected topic)\n- Markdown helpers (bold, italic, ~quote~, lists)\n- Predefined image path prefix (../assets/img/…)\n\n**Next steps:**\n\n- Optional live time refresh for the ID\n- Preset templates for recurring post types\n- Minimal validation for date and required fields\n\n [Open JSON_GEN](./html/json_webgen.html)",
+      "content": "The JSON post generator is now running as a lightweight browser app. No build steps, no dependencies — fill in the fields, hit **Generate**, click the output, and it copies itself to the clipboard.\n\n**Features:**\n- Automatic ID built from date_topic_subtopic_hh_mm\n- Topic/Subtopic dropdown (subtopics depend on the selected topic)\n- Markdown helpers (bold, italic, ~quote~, lists)\n- Predefined image path prefix (/web/assets/img/…)\n\n**Next steps:**\n\n- Optional live time refresh for the ID\n- Preset templates for recurring post types\n- Minimal validation for date and required fields\n\n [Open JSON_GEN](./html/json_webgen.html)",
       "images": [
         {
-          "src": "../assets/img/jsongen01.jpg",
+          "src": "/web/assets/img/jsongen01.jpg",
           "alt": "Web Generator"
         }
       ]
@@ -114,11 +114,11 @@
       "content": "I unpacked the printer carefully, removing all transport locks, foam inserts, and protective films. The frame is unfolded and secured, axes checked for free movement, and the toolhead and build plate mounted according to the guide. Cables are routed cleanly, strain reliefs checked, and all fasteners tightened with care. Once assembled, I run a first inspection and calibration—only then is the printer ready for its first print. \n\n**Next steps:**\n- Power on and run initial self-checks\n- Update firmware to the latest stable release\n- Perform first calibration (bed, axes, extrusion)\n- Load filament and verify material flow\n- Print a small test model and inspect tolerances\n- Fine-tune settings based on first results\n",
       "images": [
         {
-          "src": "../assets/img/3dp_assemble03.jpeg",
+          "src": "/web/assets/img/3dp_assemble03.jpeg",
           "alt": "3dp_assemble03.jpeg"
         },
         {
-          "src": "../assets/img/3dp_final01.jpeg",
+          "src": "/web/assets/img/3dp_final01.jpeg",
           "alt": "3dp_final01.jpeg"
         }
       ]
@@ -133,11 +133,11 @@
       "content": "The first real project is done — not a test cube, not a calibration plate, but something functional.\n\nI designed and printed a custom case for my Meshtastic node. The model was created in Fusion 360 and consists of two parts: a base enclosure and a separate lid.\n\n**Inside the case:**\n- Heltec V3 ESP32 board\n- 18650 battery\n- Slide switch for power control\n\nThe enclosure includes:\n- Display window opening\n- USB port access (for charging)\n- Antenna routed cleanly through the housing\n- Threaded holes for screws (lid fixation and switch mounting)\n\nThe print itself was surprisingly efficient.\n\n**Print stats:**\n- Case: 42 minutes · ~25 g filament\n- Lid: 20 minutes · ~9 g filament\n- Material: Bambu Lab PLA Basic (grey)\n\nWhat I like about this project: it’s not decorative — it solves a problem. It protects electronics, manages space, and turns a loose collection of components into a compact, field-ready device.\n\nDesign meets physics. Idea meets layer height.\n\nMore iterations will follow.",
       "images": [
         {
-          "src": "../assets/img/3dp_mesh_node001.jpg",
+          "src": "/web/assets/img/3dp_mesh_node001.jpg",
           "alt": "Fusion 360 model of the Meshtastic node case"
         },
         {
-          "src": "../assets/img/3dprint003.jpeg",
+          "src": "/web/assets/img/3dprint003.jpeg",
           "alt": "Printing the base enclosure"
         }
 
@@ -150,14 +150,14 @@
       "date": "2026-02-15",
       "title": "Meshtastic Node – Now Field-Ready",
       "format": "markdown",
-      "content": "The Meshtastic node is no longer a collection of parts on a desk — it is now a compact, mobile device.\n\nWith the custom 3D-printed enclosure completed, the electronics are protected, integrated, and ready for real-world use. The Heltec V3 ESP32, powered by a single 18650 cell, is securely mounted inside the case, together with a dedicated slide switch for clean power control.\n\n**Operational features:**\n- Bluetooth connectivity for configuration and messaging\n- USB-C charging access without opening the case\n- Removable external antenna for transport and field optimization\n- Dedicated display window for status monitoring\n\nThe device is now truly portable: self-contained power, mechanical protection, and antenna flexibility in one compact form factor.\n\nFrom here on, it’s about range tests, network topology experiments, and real outdoor deployment.\n\nFor details on the enclosure design and print process, see the related build article:\n[Custom 3D-Printed Case](../making/3d_printing.html#3dprintnews)",
+      "content": "The Meshtastic node is no longer a collection of parts on a desk — it is now a compact, mobile device.\n\nWith the custom 3D-printed enclosure completed, the electronics are protected, integrated, and ready for real-world use. The Heltec V3 ESP32, powered by a single 18650 cell, is securely mounted inside the case, together with a dedicated slide switch for clean power control.\n\n**Operational features:**\n- Bluetooth connectivity for configuration and messaging\n- USB-C charging access without opening the case\n- Removable external antenna for transport and field optimization\n- Dedicated display window for status monitoring\n\nThe device is now truly portable: self-contained power, mechanical protection, and antenna flexibility in one compact form factor.\n\nFrom here on, it’s about range tests, network topology experiments, and real outdoor deployment.\n\nFor details on the enclosure design and print process, see the related build article:\n[Custom 3D-Printed Case](/web/making/3d_printing.html#3dprintnews)",
       "images": [
         {
-          "src": "../assets/img/meshnode002.jpeg",
+          "src": "/web/assets/img/meshnode002.jpeg",
           "alt": "Meshtastic node interior with 18650 battery and Heltec V3"
         },
         {
-          "src": "../assets/img/meshnode001.jpeg",
+          "src": "/web/assets/img/meshnode001.jpeg",
           "alt": "Finished Meshtastic node in custom enclosure"
         }
 
@@ -173,7 +173,7 @@
       "content": "I plan experimenting with antenna positioning to improve both **transmit and receive performance** of my Meshtastic node. The conclusion is simple: *RF does not forgive sloppy geometry*.\n\n**First rule:** polarization must match. Standard LoRa nodes operate with vertical polarization. The antenna must stand perfectly upright. \n\n~A 90° mismatch can introduce losses of up to 20 dB — not “a bit less range”, but “why is nothing arriving?”.~\n\nAt 868 MHz, physics is ruthless. Line of sight is king. Every additional meter of height often improves the link more effectively than increasing transmit power. \n*Windowsill > desk > floor. Balcony railing > inside the apartment. Mast > balcony.*\n\n~The reason is the Fresnel zone: obstacles inside it attenuate signals subtly but dramatically. When testing, optimize height first — only then tweak antennas.~\n\n\n**Keep clearance from metal:** \n- Maintain at least 1–2 cm distance to batteries, screws, ground planes, or enclosure hardware. \n- Do not mount a 18650 parallel and close to the antenna. \n- Do not press PCB ground planes against the radiator. \n- Do not route the antenna through metal. \n- Metal detunes the antenna, increases SWR, and reduces effective radiated power.\n\n**Indoor environments are hostile:** \n- Reinforced concrete is a radio enemy. \n- Coated thermal windows behave like shields. \n- Radiators and refrigerators act as miniature Faraday cages. \n- If indoors, place the antenna near glass and avoid metal blinds.\n\n~Outdoors is simple: free, high, vertical.~\n\n**Cables introduce loss:**\nAt 868 MHz, expect roughly 0.3–0.6 dB attenuation per meter depending on cable quality. Thin, cheap coax can silently kill range. If possible, raise the node together with the antenna instead of extending the cable.\n\n**Test realistically:** \n- Use fixed distances, \n- identical orientation, \n- and log RSSI and SNR. \n- Compare flat vs upright, \n- +1 m, +2 m, \n- window vs room. \n*You will be surprised how much difference even 30 cm can make.*\n\n\n**Understanding RSSI and SNR is essential:**\n\n**RSSI** (*Received Signal Strength Indicator*) measures **absolute received power in dBm** and includes signal, noise, and interference. **Typical LoRa values** range from −30 dBm (extremely strong) to −130 dBm (near sensitivity limit). *A high RSSI does not automatically mean a clean link.*\n\n**SNR** (*Signal-to-Noise Ratio*) measures **signal clarity relative to noise** and can be positive or negative. \n- +10 dB is luxurious, \n- +5 dB stable, \n- 0 dB borderline, \n- −5 dB still functional. \n*LoRa can even decode below the noise floor — negative SNR is not magic, it is spread-spectrum processing gain.*\n\n**Example comparisons:**\n- RSSI −90 dBm / SNR +8 dB → strong and clean.\n- RSSI −90 dBm / SNR −8 dB → strong but noisy.\n- RSSI −120 dBm / SNR +7 dB → weak but clean, often more reliable than a noisy strong signal.\n\n~RSSI tells you how loud it is. SNR tells you how clear it is.~\n\nIf RSSI is fine but SNR is poor, you likely face interference. If RSSI is weak but SNR is good, it is primarily a distance or geometry issue.\n\n\nFor 868 MHz LoRa (SF7–SF12), sensitivity typically ranges from −120 to −137 dBm depending on spreading factor. SNR thresholds can go down to roughly −20 dB at high spreading factors. A link with RSSI −125 dBm and SNR −10 dB can still work.\n\nThe biggest mistake is assuming: “*The antenna is good, so everything is fine.*”\n\n~In reality, most range issues stem from incorrect polarization, insufficient height, building attenuation, or metal detuning — not firmware, transmit power, or channel configuration.~",
       "images": [
         {
-          "src": "../assets/img/mesh_antenna00.jpeg",
+          "src": "/web/assets/img/mesh_antenna00.jpeg",
           "alt": "Finished Meshtastic node in custom enclosure"
         }
       ]
@@ -188,11 +188,11 @@
       "content": "I took my new mobile Meshtastic node — 3D printed case, 18650 inside — for a walk and kept sending messages to my stationary node at home. *The experiment turned out to be more revealing than expected.*\n\n**Not all messages were transmitted successfully.** \n- Some never arrived at all. \n- Others appeared to fail, triggered new send attempts, and were eventually delivered multiple times. \n- In one case, the same message was received four times. \nOn the sender, however, only the very last transmission at 18:33 was visible. On the receiving node, all delivery attempts between 18:22 and 18:33 appeared individually.\n\nThe final message must have been a **direct transmission**, as it included the link parameters “SNR −12.25 dB” and “RSSI −133 dBm.” According to Google Maps, the straight-line distance was about 370 meters, with several buildings and dense trees in between. From my position, the home node was located behind the far-facing window — essentially on the shielded side of the building.\n\nIt was a small but very concrete reminder: LoRa works astonishingly well under harsh conditions, but reliability is not binary. Geometry, obstruction, retries, and marginal link budgets shape what actually arrives — and what only appears to have been sent.",
       "images": [
         {
-          "src": "../assets/img/mesh_walk01.jpeg",
+          "src": "/web/assets/img/mesh_walk01.jpeg",
           "alt": "mesh_walk01.jepg"
         },
         {
-          "src": "../assets/img/mesh_walk02.jpeg",
+          "src": "/web/assets/img/mesh_walk02.jpeg",
           "alt": "mesh_walk02.jepg"
         }
       ]
@@ -207,11 +207,11 @@
       "content": "I took my mobile Meshtastic node out for another walk and noticed something unexpected: the open broadcast channel looked different depending on which node I was viewing.\n\nThe mobile node received noticeably more public messages than my stationary home node. Same channel, same network — but a different RF perspective. Changing position, elevation, and surrounding obstacles clearly altered what each device was able to “see” in the mesh.\n\nI was particularly puzzled when someone responded to other messages in the channel but not to mine — most likely, my transmission never reached them in the first place.\n\nThe two screenshots show the difference in received broadcast traffic side by side (stationary: left, mobile: right)",
       "images": [
         {
-          "src": "../assets/img/mesh_walk03.jpeg",
+          "src": "/web/assets/img/mesh_walk03.jpeg",
           "alt": "mesh_walk03.jpeg"
         },
         {
-          "src": "../assets/img/mesh_walk05.jpeg",
+          "src": "/web/assets/img/mesh_walk05.jpeg",
           "alt": "mesh_walk05.jpeg"
         }
       ]
@@ -226,11 +226,11 @@
       "content": "I printed another custom case — this time for my stationary mesh node. Designed for a clean, permanent setup with proper cable routing and antenna placement. The node is now neatly housed and ready for long-term operation.",
       "images": [
         {
-          "src": "../assets/img/3dprint_mesh_case00.jpeg",
+          "src": "/web/assets/img/3dprint_mesh_case00.jpeg",
           "alt": "3dprint_mesh_case00.jpeg"
         },
         {
-          "src": "../assets/img/3dprint_mesh_case01.jpeg",
+          "src": "/web/assets/img/3dprint_mesh_case01.jpeg",
           "alt": "3dprint_mesh_case01.jpeg"
         }
       ]
@@ -245,11 +245,11 @@
       "content": "I recently designed and printed a small but highly effective upgrade for our home: **a custom “shield wall” for the litter boxes**. Modelled in Fusion 360 and printed in PLA, it now prevents my cat from enthusiastically excavating half the litter onto the surrounding floor. What used to look like an archaeological dig site now looks—almost—civilized.\n\nMore broadly, **my experience with 3D printing** has shifted my entire perspective. I initially considered it a somewhat unnecessary source of plastic, and apart from two or three concrete ideas, *I had no clear sense of what I would even print*. That illusion lasted about a week. Once you own a printer, you start seeing potential projects everywhere—small annoyances, broken parts, design improvements. It is less about producing objects and more about reclaiming control over them.\n\n~At this point, I would buy a 3D printer again without hesitation. What began as cautious curiosity has turned into genuine enthusiasm—and the real challenge is no longer whether to print, but which idea to tackle next.~",
       "images": [
         {
-          "src": "../assets/img/3dprint_klo00.jpg",
+          "src": "/web/assets/img/3dprint_klo00.jpg",
           "alt": "3dprint_klo00.jpg"
         },
         {
-          "src": "../assets/img/3dprint_klo01.jpg",
+          "src": "/web/assets/img/3dprint_klo01.jpg",
           "alt": "3dprint_klo01.jpg"
         }
       ]
@@ -281,7 +281,7 @@
       "date": "2026-01-30",
       "title": "Steps completed & Steps ahead",
       "format": "markdown",
-      "content": "**Steps completed**\n\n- Learned to create NPCs\n- Learned to spawn NPCs\n- Learned to create Dialogs\n- Learned about if-clauses\n- Learned about variables and constants\n- Learned how to implement subtitles and custom voice-over\n- Lore/Quests: [Quest-Generator](../nerdism/quest_gen.html) built\n\n\n\n**Steps ahead**\n\n- Learn how to create diary-entries\n- Learn how to create trading-dialogues\n- Learn about dialogue-choises\n- Get deeper into NPC interaction\n- literally everything else 😱\n\n\n",
+      "content": "**Steps completed**\n\n- Learned to create NPCs\n- Learned to spawn NPCs\n- Learned to create Dialogs\n- Learned about if-clauses\n- Learned about variables and constants\n- Learned how to implement subtitles and custom voice-over\n- Lore/Quests: [Quest-Generator](/web/nerdism/quest_gen.html) built\n\n\n\n**Steps ahead**\n\n- Learn how to create diary-entries\n- Learn how to create trading-dialogues\n- Learn about dialogue-choises\n- Get deeper into NPC interaction\n- literally everything else 😱\n\n\n",
       "images": []
     },
     {
