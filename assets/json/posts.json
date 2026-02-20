@@ -283,6 +283,25 @@
       "format": "markdown",
       "content": "**Steps completed**\n\n- Learned to create NPCs\n- Learned to spawn NPCs\n- Learned to create Dialogs\n- Learned about if-clauses\n- Learned about variables and constants\n- Learned how to implement subtitles and custom voice-over\n- Lore/Quests: [Quest-Generator](../nerdism/quest_gen.html) built\n\n\n\n**Steps ahead**\n\n- Learn how to create diary-entries\n- Learn how to create trading-dialogues\n- Learn about dialogue-choises\n- Get deeper into NPC interaction\n- literally everything else 😱\n\n\n",
       "images": []
+    },
+    {
+      "id": "2026-02-20_electronics_mesh_11_13",
+      "topic": "electronics",
+      "subtopic": "mesh",
+      "date": "2026-02-20",
+      "title": "Another day - another field experiment",
+      "format": "markdown",
+      "content": "~Why There Is No Chat History (And Why That’s Not a Bug)~\n\nI recently ran a small field experiment:\n15 short private messages, sent while walking in the direction of my home node. The mobile node showed “**RECEIVED**” — meaning the intended node acknowledged the message.\nBack home, I connected to the stationary node.\nOnly the last three messages were there.\nAt first glance, that feels like a failure.\nIt isn’t.\nIt’s architecture.\n\n**ACK ≠ Archive**\nIn Meshtastic there are two relevant acknowledgement states:\n- **DELIVERED** → acknowledged somewhere in the mesh\n- **RECEIVED** → acknowledged by the intended node\n\nWhat it does **not** mean:\n*“This message has been permanently stored in a chat history.”*\n\nMeshtastic nodes are radios with RAM buffers — not servers.\nThey confirm packet reception. They do not maintain long-term message archives.\nThis distinction matters.\n\n\n**What Actually Happens Internally**\nEach message is:\n- fragmented into LoRa frames\n- assigned an ID\n- possibly retried\n- possibly forwarded over hops\n- stored temporarily in RAM\n\nEven a “10 character” message creates more internal traffic than one might assume.\nNodes:\n- maintain routing tables\n- keep duplicate-suppression caches\n- handle acknowledgements\n- rebroadcast when needed\nRAM is finite.\n\nOld packets get evicted. FIFO. No sentimentality.\n\nThat explains why:\n- Earlier messages (possibly with hops and retries) were overwritten\n- The last three (direct link, stable SNR, zero hops) survived in the buffer\n\nNothing malfunctioned.\nThe system behaved exactly as designed.\n\n\n**The Philosophical Reality of Mesh**\nLoRa mesh is \n- Best effort delivery\n- Opportunistic routing\n- Minimal state retention\n\nIf you expect a messenger, you will be disappointed.\nIf you expect a resilient radio network, you will be impressed.\n\n\n**The Real Question: How Do You Get Reliable Chat History?**\n- Store & Forward Node\n- MQTT Gateway (Turning Radio Into Data, this is where things get interesting)\n- Direct Serial Logging (Simplest method: Connect the stationary node via USB to a PC or Raspberry Pi\n\nFor now, I accept the system as it is, but the next step is clear. I want to add a memory to the mesh.\n**And that’s a project for the near future.**\n\n",
+      "images": [
+        {
+          "src": "../assets/img/mesh_new_experiment00.jpeg",
+          "alt": "mesh_new_experiment00.jpeg"
+        },
+        {
+          "src": "../assets/img/mesh_new_experiment01.jpeg",
+          "alt": "mesh_new_experiment01.jpeg"
+        }
+      ]
     }
   ]
 }
