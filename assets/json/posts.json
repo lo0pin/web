@@ -302,6 +302,25 @@
           "alt": "mesh_new_experiment01.jpeg"
         }
       ]
+    },
+    {
+      "id": "2026-02-22_code_html_12_54",
+      "topic": "code",
+      "subtopic": "html",
+      "date": "2026-02-22",
+      "title": "Update: Live Rendering for the JSON Post Generator",
+      "format": "markdown",
+      "content": "I’ve just extended my browser-based JSON Post Generator with a live rendering preview — and it genuinely changes the workflow. Instead of generating the JSON, switching context, and hoping the Markdown behaves as intended, I now see immediately how the post will look once rendered on the homepage.\n\nThe preview uses the same rendering logic as the actual site: inline Markdown, lists, hint blocks, relative links, even image handling. What you see is what you’ll get — no interpretative surprises later. It turns the generator from a mere JSON helper into a small, self-contained publishing lab.\n\nIronically, the tool I built to simplify writing posts has now become something I enjoy refining almost as much as the posts themselves. And yes — this entry exists mainly to test it.",
+      "images": [
+        {
+          "src": "/web/assets/img/code-html-update-json00.jpg",
+          "alt": "code-html-update-json00.jpg"
+        },
+        {
+          "src": "/web/assets/img/code-html-update-json01.jpg",
+          "alt": "code-html-update-json01.jpg"
+        }
+      ]
     }
   ]
 }

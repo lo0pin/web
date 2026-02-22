@@ -123,6 +123,55 @@
     }
     .status.ok{color:var(--ok)}
     .status.bad{color:var(--bad)}
+
+    /* --- NEW: right column stack + preview styling ----------------------- */
+    .rightcol{
+      display:grid;
+      gap:14px;
+      align-content:start;
+    }
+    #preview{
+      min-height:520px;
+    }
+    /* Minimal „Homepage-Look“ fürs Preview */
+    .news-item{padding:14px}
+    .card-title{margin:0 0 6px; font-size:1.05rem; font-weight:750}
+    .card-meta{margin:0 0 10px; color:var(--muted); font-size:.92rem}
+    .news-body p{margin:10px 0}
+    .news-body ul{margin:10px 0 10px 18px}
+    .news-body li{margin:6px 0}
+    .news-body a{color:var(--focus); text-decoration:none}
+    .news-body a:hover{text-decoration:underline}
+    .news-body .hint{
+      border:1px dashed #36405a;
+      padding:10px 12px;
+      border-radius:12px;
+      background:#0f1320;
+      margin:10px 0;
+    }
+    .media-row{
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap:10px;
+      margin:10px 0 12px;
+    }
+    @media (max-width: 980px){
+      .media-row{grid-template-columns:1fr}
+    }
+    figure.media{margin:0}
+    figure.media img{
+      width:100%;
+      height:auto;
+      display:block;
+      border-radius:12px;
+      border:1px solid rgba(42,50,68,.9);
+      background:#0f1320;
+    }
+    figure.media figcaption{
+      margin-top:6px;
+      color:var(--muted);
+      font-size:.9rem;
+    }
   </style>
 </head>
 
@@ -215,16 +264,26 @@
       </div>
     </section>
 
-    <!-- RIGHT -->
-    <section class="card">
-      <div class="hint" style="margin:0 0 8px">
-        Output (click to copy). JSON escapt sauber: <span class="mono">\n</span>, <span class="mono">\"</span> usw.
-      </div>
-      <textarea id="output" readonly></textarea>
-      <div class="hint" style="margin-top:10px">
-        Kleine Gemeinheit der Physik: die Zeit in der ID wird beim <span class="mono">Generate</span> aktualisiert.
-      </div>
-    </section>
+    <!-- RIGHT (stacked) -->
+    <div class="rightcol">
+      <section class="card">
+        <div class="hint" style="margin:0 0 8px">
+          Output (click to copy). JSON escapt sauber: <span class="mono">\n</span>, <span class="mono">\"</span> usw.
+        </div>
+        <textarea id="output" readonly></textarea>
+        <div class="hint" style="margin-top:10px">
+          Kleine Gemeinheit der Physik: die Zeit in der ID wird beim <span class="mono">Generate</span> aktualisiert.
+        </div>
+      </section>
+
+      <!-- NEW: Live Preview -->
+      <section class="card">
+        <div class="hint" style="margin:0 0 8px">
+          Live Rendering (so ähnlich sieht’s auf der Homepage aus).
+        </div>
+        <div id="preview"></div>
+      </section>
+    </div>
   </div>
 </div>
 
@@ -369,11 +428,13 @@
     el("imgFile").value = "";
     el("imgAlt").value = "";
     renderImages();
+    schedulePreview();
   }
 
   function removeImage(idx){
     state.images.splice(idx, 1);
     renderImages();
+    schedulePreview();
   }
 
   function renderImages(){
@@ -409,6 +470,7 @@
 
     el("output").value = JSON.stringify(post, null, 2);
     setStatus("Generiert. Klick ins Output-Feld kopiert.", "ok");
+    schedulePreview();
   }
 
   function resetAll(){
@@ -433,6 +495,7 @@
 
     // id refresh
     updateId();
+    schedulePreview();
   }
 
   async function copyOutput(){
@@ -450,17 +513,205 @@
     }
   }
 
+  // -------------------------------------------------------------------------
+  // NEW: Live Preview (same renderer logic as on homepage)
+  // -------------------------------------------------------------------------
+  const escapeHtml = (s) =>
+    String(s).replace(/[&<>"']/g, (c) => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;",
+    }[c]));
+
+  function formatInline(escapedText) {
+    let t = String(escapedText);
+
+    // bold / italic
+    t = t
+      .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
+      .replace(/\*(?!\*)(.+?)\*/g, "<em>$1</em>");
+
+    // Externe Links
+    t = t.replace(
+      /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g,
+      `<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>`
+    );
+
+    // Anchor-Links
+    t = t.replace(
+      /\[([^\]]+)\]\((#[a-zA-Z0-9_-]+)\)/g,
+      `<a href="$2">$1</a>`
+    );
+
+    // Relative Links
+    t = t.replace(
+      /\[([^\]]+)\]\(((?:\/|\.\.?\/)[^\s)]+)\)/g,
+      `<a href="$2">$1</a>`
+    );
+
+    // Nackte URLs
+    t = t.replace(/(https?:\/\/[^\s<]+)(?![^<]*>)/g, (m) => {
+      const match = m.match(/^(.*?)([).,;:!?]+)?$/);
+      const url = match ? match[1] : m;
+      const trail = match && match[2] ? match[2] : "";
+      return `<a href="${url}" target="_blank" rel="noopener noreferrer">${url}</a>${trail}`;
+    });
+
+    return t;
+  }
+
+  function mdToHtml(md) {
+    const lines = String(md).split("\n");
+    let html = "";
+    let inList = false;
+    let pBuf = [];
+
+    const flushP = () => {
+      if (!pBuf.length) return "";
+      const escaped = escapeHtml(pBuf.join(" ").trim());
+      const txt = formatInline(escaped);
+      pBuf = [];
+      return `<p>${txt}</p>`;
+    };
+
+    for (const raw of lines) {
+      const line = raw.trimEnd();
+
+      if (line.trim() === "") {
+        if (inList) {
+          html += "</ul>";
+          inList = false;
+        }
+        html += flushP();
+        continue;
+      }
+
+      // ~hint~ block (whole line)
+      if (line.trim().startsWith("~") && line.trim().endsWith("~")) {
+        if (inList) {
+          html += "</ul>";
+          inList = false;
+        }
+        html += flushP();
+
+        const hintEscaped = escapeHtml(line.trim().slice(1, -1));
+        const hintText = formatInline(hintEscaped);
+        html += `<p class="hint">${hintText}</p>`;
+        continue;
+      }
+
+      if (line.startsWith("- ")) {
+        html += flushP();
+        if (!inList) {
+          html += "<ul>";
+          inList = true;
+        }
+
+        const itemEscaped = escapeHtml(line.slice(2));
+        const item = formatInline(itemEscaped);
+        html += `<li>${item}</li>`;
+      } else {
+        if (inList) {
+          html += "</ul>";
+          inList = false;
+        }
+        pBuf.push(line);
+      }
+    }
+
+    if (inList) html += "</ul>";
+    html += flushP();
+    return html;
+  }
+
+  function renderPost(post) {
+    const body =
+      post.format === "html"
+        ? String(post.content || "")
+        : post.format === "markdown"
+          ? mdToHtml(post.content || "")
+          : `<p>${escapeHtml(post.content || "")}</p>`;
+
+    const imgs = Array.isArray(post.images) ? post.images.slice(0, 2) : [];
+
+    const media = imgs.length
+      ? `
+      <div class="media-row media-row--compact">
+        ${imgs.map((img) => `
+          <figure class="media">
+            <img
+              src="${escapeHtml(img.src)}"
+              alt="${escapeHtml(img.alt || post.title)}"
+              loading="lazy"
+              decoding="async"
+            >
+            ${img.caption ? `<figcaption>${escapeHtml(img.caption)}</figcaption>` : ""}
+          </figure>
+        `).join("")}
+      </div>
+    `
+      : "";
+
+    return `
+      <article class="card news-item">
+        <h3 class="card-title">${escapeHtml(post.title || "(ohne Titel)")}</h3>
+        <p class="card-meta">${escapeHtml(post.date || "(ohne Datum)")}</p>
+        ${media}
+        <div class="news-body">${body}</div>
+      </article>`;
+  }
+
+  function buildPostFromInputs(){
+    return {
+      id: el("id").value,
+      topic: el("topic").value,
+      subtopic: el("subtopic").value,
+      date: el("date").value.trim(),
+      title: el("title").value.trim(),
+      format: el("format").value.trim(),
+      content: el("content").value,
+      images: state.images.slice()
+    };
+  }
+
+  function renderPreviewNow(){
+    const post = buildPostFromInputs();
+    el("preview").innerHTML = renderPost(post);
+  }
+
+  function schedulePreview(){
+    window.clearTimeout(schedulePreview._t);
+    schedulePreview._t = window.setTimeout(renderPreviewNow, 80);
+  }
+
   // ----- init -----
   populateTopics();
   populateSubtopics(el("topic").value);
   updateId();
+  renderPreviewNow();
 
   // topic/subtopic changes
-  el("topic").addEventListener("change", (e)=>populateSubtopics(e.target.value));
-  el("subtopic").addEventListener("change", updateId);
+  el("topic").addEventListener("change", (e)=>{
+    populateSubtopics(e.target.value);
+    schedulePreview();
+  });
+  el("subtopic").addEventListener("change", ()=>{
+    updateId();
+    schedulePreview();
+  });
 
   // date changes
-  el("date").addEventListener("input", updateId);
+  el("date").addEventListener("input", ()=>{
+    updateId();
+    schedulePreview();
+  });
+
+  // title/format/content live
+  el("title").addEventListener("input", schedulePreview);
+  el("format").addEventListener("change", schedulePreview);
+  el("content").addEventListener("input", schedulePreview);
 
   // today button
   el("today").addEventListener("click", ()=>{
@@ -468,20 +719,26 @@
     const iso = d.toISOString().slice(0,10); // YYYY-MM-DD
     el("date").value = iso;
     updateId();
+    schedulePreview();
   });
 
   // content toolbar
   document.querySelectorAll("[data-wrap]").forEach(btn=>{
     btn.addEventListener("click", ()=>{
       wrapSelection(el("content"), btn.getAttribute("data-wrap"));
+      schedulePreview();
     });
   });
-  el("mklist").addEventListener("click", ()=>makeList(el("content")));
+  el("mklist").addEventListener("click", ()=>{
+    makeList(el("content"));
+    schedulePreview();
+  });
   el("blank").addEventListener("click", ()=>{
     const ta = el("content");
     const pos = ta.selectionStart;
     ta.setRangeText("\n\n", pos, ta.selectionEnd, "end");
     ta.focus();
+    schedulePreview();
   });
 
   // images
