@@ -321,7 +321,26 @@
           "alt": "code-html-update-json01.jpg"
         }
       ]
+    },
+
+    {
+      "id": "2026-02-23_making_3dprint_12_31",
+      "topic": "making",
+      "subtopic": "3dprint",
+      "date": "2026-02-23",
+      "title": "When Ventilation Slots Start to “Melt”",
+      "format": "markdown",
+      "teaser": "A simple kitchen sponge holder turned into a small lesson in physics and machine dynamics. What looked like clean, functional ventilation slots slowly transformed into something resembling stacked wet clay. Why do thin vertical structures suddenly lose their precision halfway up – and what does that reveal about temperature, cooling, and mechanical resonance in 3D printing?",
+      "content": "While printing a kitchen sponge holder, I added vertical ventilation slots – thin columns designed to improve airflow and drying. Simple in theory. Not entirely in practice.\n\nAround mid-height, the print quality visibly changed. The once smooth lines turned irregular. The material looked as if wet clay was being stacked upward instead of clean layer deposition.\n\n~“Tall, thin features follow their own printing physics.”~\n\nThis behavior isn’t random and doesn’t mean the printer is defective. Slender vertical structures begin to oscillate slightly as they grow taller. Each new layer is deposited onto a structure that is no longer perfectly rigid. Combined with temperature, cooling, and speed, this leads to the characteristic “mud stacking” appearance.\n\nCommon causes:\n- slightly too high extrusion temperature\n- insufficient cooling\n- not enough minimum layer time\n- mechanical resonance\n- printing thin features too fast\n\nPossible improvements:\n- reduce temperature by a few degrees\n- slow down outer walls\n- increase fan speed\n- adjust minimum layer time\n- print two objects simultaneously to allow better cooling\n\nWhat started as a functional airflow detail became a small lesson in material behavior and machine dynamics.\n\nAnd that is precisely why I enjoy 3D printing so much:\nEvery object teaches something new.",
+      "content_de": "**Wenn Belüftungsschlitze plötzlich „schmelzen“**\n\nBeim Druck eines Küchenschwammhalters wollte ich funktionale Belüftungsschlitze integrieren – vertikale, schlanke Säulen, damit die Schwämme sauber trocknen können. Klingt trivial. War es nicht.\n\nAb etwa der halben Höhe begann sich das Druckbild sichtbar zu verändern: Die glatten, gleichmäßigen Linien wurden unruhig, das Material wirkte, als würde man nassen Schlamm auftürmen. Keine saubere Layerstruktur mehr, sondern knubbelige Ablagerungen entlang der Säulen.\n\n~„Dünne, hohe Features haben ihre eigene Druckphysik.“~\n\nWas hier passiert, ist kein Zufall und auch kein Defekt am Drucker. Schlanke, hohe Strukturen beginnen ab einer gewissen Höhe minimal mitzuschwingen. Jede neue Schicht trifft auf ein Bauteil, das nicht mehr vollkommen starr ist. In Kombination mit Temperatur, Kühlung und Geschwindigkeit entstehen dann genau diese typischen „Schlamm“-Strukturen.\n\nTypische Ursachen:\n- leichte Überextrusion oder zu hohe Temperatur\n- unzureichende Kühlung\n- zu kurze Layer-Abkühlzeit\n- mechanische Resonanz des Druckers\n- zu hohe Druckgeschwindigkeit bei dünnen Features\n\nLösungsideen:\n- Temperatur um einige Grad senken\n- Außenwände langsamer drucken\n- Lüfterleistung erhöhen\n- Minimum Layer Time anpassen\n- ggf. zwei Teile gleichzeitig drucken, um mehr Abkühlzeit zu erzeugen\n\nWas als funktionales Detail gedacht war, wurde zu einer kleinen Lektion in Materialphysik und Maschinenmechanik.\n\nUnd genau deshalb macht 3D-Druck so viel Freude:\nMan lernt mit jedem Objekt.",
+      "images": [
+        {
+          "src": "/web/assets/img/3dprint_fail.jpeg",
+          "alt": "3dprint_fail.jpeg"
+        }
+      ]
     }
+    
   ]
 }
 
