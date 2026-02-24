@@ -125,6 +125,30 @@ body {
 }
 
 
+/* Trennlinie zwischen EN/DE: extra subtil */
+.lang-divider{
+  border:0;
+  border-top:1px solid rgba(42,50,68,.55);
+  margin: .9rem 0;
+}
+
+/* Optional: Details-Blocks leicht „gerahmt“, aber unaufdringlich */
+details.news-details{
+  border:1px solid rgba(42,50,68,.55);
+  border-radius:12px;
+  padding:.5rem .65rem;
+  background:rgba(15,19,32,.35);
+  margin:.75rem 0;
+}
+details.news-details > summary{
+  cursor:pointer;
+  color:var(--muted);
+  font-weight:700;
+  list-style:none;
+}
+details.news-details > summary::-webkit-details-marker{display:none}
+details.news-details[open] > summary{color:var(--text)}
+
 /* =========================================================
    4) "WIDE BANNER" / HERO
    ---------------------------------------------------------
