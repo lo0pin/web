@@ -157,7 +157,7 @@
     const body = isBilingual
       ? `
         <div class="news-teaser">${teaserHtml}</div>
-        <details class="news-details" open>
+        <details class="news-details">
           <summary>English</summary>
           <div class="news-body">${enHtml}</div>
         </details>
