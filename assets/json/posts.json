@@ -339,8 +339,19 @@
           "alt": "3dprint_fail.jpeg"
         }
       ]
+    },
+    {
+      "id": "2026-02-22_code_html_21_05",
+      "topic": "code",
+      "subtopic": "html",
+      "date": "2026-02-22",
+      "title": "Bilingual Posts: Teaser + Details Blocks",
+      "format": "markdown",
+      "teaser": "I’m switching my news posts to a bilingual format: a short English abstract up front, and two expandable full texts underneath (English + German). The goal is simple: keep the feed readable without sacrificing depth.",
+      "content_en": "~The long version lives behind a fold now.~\n\n**What changed:**\n- A short, English-only teaser (target: < 100 words)\n- Full English text in a `<details>` block\n- A subtle divider\n- Full German text in a second `<details>` block\n\nThis keeps the timeline compact while still allowing proper write-ups when needed.\n\n- Next step: migrate a few older posts\n- Then: see how it feels in real reading flow",
+      "content_de": "~Die Langfassung sitzt jetzt hinter einer Klappe.~\n\n**Was sich geändert hat:**\n- Ein kurzer Teaser auf Englisch (Ziel: < 100 Wörter)\n- Der vollständige englische Text im `<details>`-Block\n- Dazwischen eine sehr feine Trennlinie\n- Der vollständige deutsche Text in einem zweiten `<details>`-Block\n\nSo bleibt der Feed schlank, ohne dass ich Inhalte amputieren muss.\n\n- Nächster Schritt: ein paar ältere Posts migrieren\n- Danach: schauen, ob sich das beim Lesen wirklich „richtig“ anfühlt",
+      "images": []
     }
-    
   ]
 }
 
