@@ -137,7 +137,7 @@ details.news-details{
   border:1px solid rgba(42,50,68,.55);
   border-radius:12px;
   padding:.5rem .65rem;
-  background:rgba(15,19,32,.1);
+  background:rgba(15,19,32,.01);
   margin:.75rem 0;
 }
 details.news-details > summary{
