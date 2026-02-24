@@ -158,12 +158,12 @@
       ? `
         <div class="news-teaser">${teaserHtml}</div>
         <details class="news-details">
-          <summary>English</summary>
+          <summary>read more</summary>
           <div class="news-body">${enHtml}</div>
         </details>
         <hr class="lang-divider" />
         <details class="news-details">
-          <summary>Deutsch</summary>
+          <summary>mehr erfahren</summary>
           <div class="news-body">${deHtml}</div>
         </details>
       `
