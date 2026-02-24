@@ -48,6 +48,11 @@
 "subtopic": "lotr"
 "subtopic": "games"
 
+## Topic Astro
+"topic": "astro"
+
+
+
 ## Modes
 data-news-mode="all"
 data-news-mode="latest" 
