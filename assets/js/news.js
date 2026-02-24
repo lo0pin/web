@@ -65,7 +65,6 @@
     return t;
   }
 
-
   function mdToHtml(md) {
     const lines = String(md).split("\n");
     let html = "";
@@ -132,12 +131,43 @@
   }
 
   function renderPost(post) {
-    const body =
-      post.format === "html"
-        ? String(post.content || "")
-        : post.format === "markdown"
-          ? mdToHtml(post.content || "")
-          : `<p>${escapeHtml(post.content || "")}</p>`;
+    // ---------------------------------------------------------------------
+    // Bilingual posts (new schema)
+    // - teaser: short English abstract (recommendation: < 100 words)
+    // - content_en / content_de: full texts, each rendered inside <details>
+    // Backwards compatible: if teaser/content_en/content_de are missing,
+    // we fall back to the legacy single-field "content".
+    // ---------------------------------------------------------------------
+
+    const isBilingual =
+      ("teaser" in post) || ("content_en" in post) || ("content_de" in post);
+
+    const renderAny = (val) => {
+      if (post.format === "html") return String(val || "");
+      if (post.format === "markdown") return mdToHtml(val || "");
+      return `<p>${escapeHtml(val || "")}</p>`;
+    };
+
+    const teaserHtml = isBilingual ? renderAny(post.teaser || "") : "";
+    const enHtml = isBilingual ? renderAny(post.content_en || "") : "";
+    const deHtml = isBilingual ? renderAny(post.content_de || "") : "";
+
+    const legacyBody = renderAny(post.content || "");
+
+    const body = isBilingual
+      ? `
+        <div class="news-teaser">${teaserHtml}</div>
+        <details class="news-details" open>
+          <summary>English</summary>
+          <div class="news-body">${enHtml}</div>
+        </details>
+        <hr class="lang-divider" />
+        <details class="news-details">
+          <summary>Deutsch</summary>
+          <div class="news-body">${deHtml}</div>
+        </details>
+      `
+      : `<div class="news-body">${legacyBody}</div>`;
 
     const imgs = Array.isArray(post.images) ? post.images.slice(0, 2) : [];
 
@@ -164,7 +194,7 @@
         <h3 class="card-title">${escapeHtml(post.title)}</h3>
         <p class="card-meta">${escapeHtml(post.date)}</p>
         ${media}
-        <div class="news-body">${body}</div>
+        ${body}
       </article>`;
   }
 
