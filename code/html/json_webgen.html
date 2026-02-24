@@ -53,6 +53,9 @@
       font-size:.98rem;
     }
     textarea{min-height:220px; resize:vertical; font-family:var(--sans)}
+    #teaser{min-height:120px}
+    #contentEn,#contentDe{min-height:240px}
+
     input[readonly]{opacity:.9}
     input:focus, select:focus, textarea:focus{
       border-color:var(--focus);
@@ -149,6 +152,28 @@
       background:#0f1320;
       margin:10px 0;
     }
+    .lang-divider{
+      border:0;
+      border-top:1px solid rgba(42,50,68,.55);
+      margin:12px 0;
+    }
+    details.news-details{
+      border:1px solid rgba(42,50,68,.55);
+      border-radius:12px;
+      padding:8px 10px;
+      background:rgba(15,19,32,.55);
+      margin:10px 0;
+    }
+    details.news-details > summary{
+      cursor:pointer;
+      color:var(--muted);
+      font-weight:700;
+      list-style:none;
+      outline:none;
+    }
+    details.news-details > summary::-webkit-details-marker{display:none}
+    details.news-details[open] > summary{color:var(--text)}
+
     .media-row{
       display:grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -164,7 +189,7 @@
       height:auto;
       display:block;
       border-radius:12px;
-      border:1px solid rgba(42,50,68,.9);
+      border:1px solid rgba(42,50,68,9);
       background:#0f1320;
     }
     figure.media figcaption{
@@ -220,7 +245,7 @@
       </div>
 
       <div class="row">
-        <label for="content">content</label>
+        <label for="teaser">teaser (EN)</label>
         <div>
           <div class="toolbar" style="margin-bottom:8px">
             <button class="btn small" data-wrap="**">**fett**</button>
@@ -229,14 +254,25 @@
             <button class="btn small" id="mklist">Liste (-)</button>
             <button class="btn small" id="blank">Leerzeile</button>
           </div>
-          <textarea id="content" spellcheck="false"></textarea>
+          <textarea id="teaser" spellcheck="false" placeholder="Short English abstract (recommended < 100 words)"></textarea>
+          <div class="hint">Word count: <span class="mono" id="teaserCount">0</span> (target: &lt; 100)</div>
         </div>
+      </div>
+
+      <div class="row">
+        <label for="contentEn">content (EN)</label>
+        <textarea id="contentEn" spellcheck="false"></textarea>
+      </div>
+
+      <div class="row">
+        <label for="contentDe">content (DE)</label>
+        <textarea id="contentDe" spellcheck="false"></textarea>
       </div>
 
       <div class="row">
         <label>images</label>
         <div class="images">
-          <div class="hint">Pfad-Prefix ist fix: <span class="mono">../assets/img/</span>…</div>
+          <div class="hint">Pfad-Prefix ist fix: <span class="mono">/web/assets/img/</span>…</div>
 
           <div class="row" style="grid-template-columns: 110px 1fr; margin:10px 0 0">
             <label for="imgFile" style="padding-top:6px">Dateiname</label>
@@ -264,8 +300,8 @@
       </div>
     </section>
 
-    <!-- RIGHT (stacked) -->
-    <div class="rightcol">
+    <!-- RIGHT -->
+    <section class="rightcol">
       <section class="card">
         <div class="hint" style="margin:0 0 8px">
           Output (click to copy). JSON escapt sauber: <span class="mono">\n</span>, <span class="mono">\"</span> usw.
@@ -276,14 +312,13 @@
         </div>
       </section>
 
-      <!-- NEW: Live Preview -->
       <section class="card">
         <div class="hint" style="margin:0 0 8px">
-          Live Rendering (so ähnlich sieht’s auf der Homepage aus).
+          Live Rendering (wie auf der Website)
         </div>
         <div id="preview"></div>
       </section>
-    </div>
+    </section>
   </div>
 </div>
 
@@ -305,6 +340,22 @@
   const state = {
     images: [] // {src, alt}
   };
+
+  // Toolbar should operate on the textarea the user last focused.
+  let activeTA = null;
+  const getTA = () => activeTA || el("contentEn");
+
+  function wordCount(s){
+    const words = String(s || "").trim().split(/\s+/).filter(Boolean);
+    return words.length;
+  }
+
+  function updateTeaserCount(){
+    const n = wordCount(el("teaser").value);
+    el("teaserCount").textContent = String(n);
+    // gentle nudge: show a short warning if it grows too long
+    if (n > 100) setStatus("Teaser ist > 100 Wörter (nur Empfehlung).", "bad");
+  }
 
   function sanitizeToken(s){
     s = (s ?? "").trim().replaceAll(" ", "_");
@@ -464,7 +515,9 @@
       date: el("date").value.trim(),
       title: el("title").value.trim(),
       format: el("format").value.trim(),
-      content: el("content").value,
+      teaser: el("teaser").value,
+      content_en: el("contentEn").value,
+      content_de: el("contentDe").value,
       images: state.images.slice()
     };
 
@@ -481,7 +534,9 @@
     el("date").value = "";
     el("title").value = "";
     el("format").value = "markdown";
-    el("content").value = "";
+    el("teaser").value = "";
+    el("contentEn").value = "";
+    el("contentDe").value = "";
 
     // images
     state.images = [];
@@ -495,6 +550,7 @@
 
     // id refresh
     updateId();
+    updateTeaserCount();
     schedulePreview();
   }
 
@@ -514,7 +570,7 @@
   }
 
   // -------------------------------------------------------------------------
-  // NEW: Live Preview (same renderer logic as on homepage)
+  // Live Preview (Renderer-Logik wie auf der Website)
   // -------------------------------------------------------------------------
   const escapeHtml = (s) =>
     String(s).replace(/[&<>"']/g, (c) => ({
@@ -525,6 +581,8 @@
       "'": "&#39;",
     }[c]));
 
+  // Inline-Markdown: **bold**, *em*, [text](url), nackte http(s)-URLs
+  // Wichtig: Diese Funktion erwartet "already escaped" Text.
   function formatInline(escapedText) {
     let t = String(escapedText);
 
@@ -627,12 +685,35 @@
   }
 
   function renderPost(post) {
-    const body =
-      post.format === "html"
-        ? String(post.content || "")
-        : post.format === "markdown"
-          ? mdToHtml(post.content || "")
-          : `<p>${escapeHtml(post.content || "")}</p>`;
+    const isBilingual =
+      ("teaser" in post) || ("content_en" in post) || ("content_de" in post);
+
+    const renderAny = (val) => {
+      if (post.format === "html") return String(val || "");
+      if (post.format === "markdown") return mdToHtml(val || "");
+      return `<p>${escapeHtml(val || "")}</p>`;
+    };
+
+    const teaserHtml = isBilingual ? renderAny(post.teaser || "") : "";
+    const enHtml = isBilingual ? renderAny(post.content_en || "") : "";
+    const deHtml = isBilingual ? renderAny(post.content_de || "") : "";
+
+    const legacyBody = renderAny(post.content || "");
+
+    const body = isBilingual
+      ? `
+        <div class="news-teaser">${teaserHtml}</div>
+        <details class="news-details" open>
+          <summary>read more</summary>
+          <div class="news-body">${enHtml}</div>
+        </details>
+        <hr class="lang-divider" />
+        <details class="news-details">
+          <summary>mehr dazu</summary>
+          <div class="news-body">${deHtml}</div>
+        </details>
+      `
+      : `<div class="news-body">${legacyBody}</div>`;
 
     const imgs = Array.isArray(post.images) ? post.images.slice(0, 2) : [];
 
@@ -659,7 +740,7 @@
         <h3 class="card-title">${escapeHtml(post.title || "(ohne Titel)")}</h3>
         <p class="card-meta">${escapeHtml(post.date || "(ohne Datum)")}</p>
         ${media}
-        <div class="news-body">${body}</div>
+        ${body}
       </article>`;
   }
 
@@ -671,7 +752,9 @@
       date: el("date").value.trim(),
       title: el("title").value.trim(),
       format: el("format").value.trim(),
-      content: el("content").value,
+      teaser: el("teaser").value,
+      content_en: el("contentEn").value,
+      content_de: el("contentDe").value,
       images: state.images.slice()
     };
   }
@@ -690,6 +773,8 @@
   populateTopics();
   populateSubtopics(el("topic").value);
   updateId();
+  activeTA = el("contentEn");
+  updateTeaserCount();
   renderPreviewNow();
 
   // topic/subtopic changes
@@ -708,10 +793,18 @@
     schedulePreview();
   });
 
-  // title/format/content live
+  // title/format live
   el("title").addEventListener("input", schedulePreview);
   el("format").addEventListener("change", schedulePreview);
-  el("content").addEventListener("input", schedulePreview);
+
+  // text fields live
+  ["teaser","contentEn","contentDe"].forEach((id)=>{
+    el(id).addEventListener("focus", ()=>{ activeTA = el(id); });
+    el(id).addEventListener("input", ()=>{
+      if (id === "teaser") updateTeaserCount();
+      schedulePreview();
+    });
+  });
 
   // today button
   el("today").addEventListener("click", ()=>{
@@ -722,19 +815,19 @@
     schedulePreview();
   });
 
-  // content toolbar
+  // content toolbar (operates on active textarea)
   document.querySelectorAll("[data-wrap]").forEach(btn=>{
     btn.addEventListener("click", ()=>{
-      wrapSelection(el("content"), btn.getAttribute("data-wrap"));
+      wrapSelection(getTA(), btn.getAttribute("data-wrap"));
       schedulePreview();
     });
   });
   el("mklist").addEventListener("click", ()=>{
-    makeList(el("content"));
+    makeList(getTA());
     schedulePreview();
   });
   el("blank").addEventListener("click", ()=>{
-    const ta = el("content");
+    const ta = getTA();
     const pos = ta.selectionStart;
     ta.setRangeText("\n\n", pos, ta.selectionEnd, "end");
     ta.focus();
