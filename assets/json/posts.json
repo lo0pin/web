@@ -362,10 +362,10 @@
       ]
     },
     {
-      "id": "2026-02-22_electronics_mesh_19_41",
+      "id": "2026-02-25_electronics_mesh_19_41",
       "topic": "electronics",
       "subtopic": "mesh",
-      "date": "2026-02-22",
+      "date": "2026-02-25",
       "title": "Does my Meshtastic node really store only three direct messages? A field test",
       "format": "markdown",
       ""content_en": "During a hiking test, I sent a series of messages from my mobile node to my stationary node – some as direct messages, others via a private channel. The goal was to test a specific assumption:\n\n~The stationary node stores only the last three direct messages locally.~\n\nOn the mobile device, the full sequence is visible: “Neuer Test”, “Stoffbauer”, “Spiegel1/2”, “A Wildgans1/2”, “Sorger1/2”, “Pre-Hilmi1”, “2 hops Pre-Hilmi1”, “1 hop hilmwies”, “Runde ende”. The messages show proper ACK indicators – checkmarks and cloud icons – meaning they were acknowledged and delivered within the mesh.\n\nHowever, on the stationary node the situation is different:\n\n- In the direct chat (“Crno”), only\n- “2 hops Pre-Hilmi1”\n- “1 hop hilmwies”\n- “Runde ende”\nare visible.\n- All earlier direct messages are missing.\n- In the private channel chat, a much longer history is retained.\n\nSignal metrics provide additional context. “2 hops Pre-Hilmi1” was received with SNR −13 dB and RSSI −133 dBm, which is near the sensitivity limit. “1 hop hilmwies” also showed negative SNR values around −6 to −7 dB and RSSI around −125 dBm. The final “Runde ende” message arrived with strong values (SNR above +10 dB, RSSI around −65 to −70 dBm).\n\nThe crucial point: Even messages received under good signal conditions are not retained beyond the last three entries. The ACK icons confirm delivery, yet the local storage is clearly limited.\n\nThis strongly suggests a RAM-based limitation for direct message history. Only the last three direct messages appear to be kept locally, while older ones are overwritten. Channel messages seem to follow a different retention behavior.\n\n**Conclusion:**\nDirect messages appear to be stored only temporarily. Anyone requiring reliable history should consider logging solutions, external storage, or systematic synchronization."
