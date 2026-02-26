@@ -32,38 +32,53 @@
     <hr class="divider" />
 
 
-    <section class="tile-section" aria-label="Sections">
+    <section class="card">
+      <h2 class="card-title">On this Page</h2>
+      <ul>
+        <li><a href="#astro_news">Latest News</a></li>
+        <li><a href="#astro_sub" >Subsections</a></li>
+
+      </ul>
+    </section>     
+
+    <hr class="divider" />
+
+    <section class="card" id="astro_news">
+      <h2 class="card-title">Latest News</h2>
+    </section> 
+      <div data-news-topic="astro" data-news-limit="2" data-news-mode="latest"></div>
+    <script type="module" src="../assets/js/news.js"></script>  
+
+    <hr class="divider" />
+
+    <section class="tile-section" id="astro_sub" aria-label="Sections">
       <div class="tile-grid">
          
-        <a class="tile" href="" aria-label="Project">
+        <a class="tile" href="significant.html" aria-label="Significant Stars">
           <img class="tile-image" src="../assets/img/astronomy_project.png" alt="" />
-          <span class="tile-label">🌊 Project</span>
+          <span class="tile-label">✨ Significant Stars</span>
         </a>
 
         <a class="tile" href="" aria-label="Project">
           <img class="tile-image" src="../assets/img/astronomy_project2.png" alt="" />
-          <span class="tile-label">💻 Project</span>
+          <span class="tile-label">⭐ Project</span>
+        </a>
+
+        <a class="tile" href="" aria-label="Significant Stars">
+          <img class="tile-image" src="../assets/img/astronomy_project.png" alt="" />
+          <span class="tile-label">🌟 Project</span>
         </a>
         <!--
         <a class="tile" href="" aria-label="Project">
-          <img class="tile-image" src="../assets/img/astronomy_project.png" alt="" />
-          <span class="tile-label">🌊 Project</span>
+          <img class="tile-image" src="../assets/img/astronomy_project2.png" alt="" />
+          <span class="tile-label">🌠 Project</span>
         </a>
         
         <a class="tile" href="" aria-label="Project">
-          <img class="tile-image" src="../assets/img/astronomy_project2.png" alt="" />
-          <span class="tile-label">💻 Project</span>
-        </a>
-
-        <a class="tile" href="" aria-label="Project">
           <img class="tile-image" src="../assets/img/astronomy_project.png" alt="" />
-          <span class="tile-label">🌊 Project</span>
+          <span class="tile-label">💫🌠🌟⭐✨ Project</span>
         </a>
 
-        <a class="tile" href="" aria-label="Project">
-          <img class="tile-image" src="../assets/img/astronomy_project2.png" alt="" />
-          <span class="tile-label">💻 Project</span>
-        </a>
         -->
       </div>
     </section>
