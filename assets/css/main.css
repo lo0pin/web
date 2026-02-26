@@ -690,7 +690,7 @@ body.bg-astronomy    { --page-bg: url("../img/astronomy_astro.png"); }
 
 
 .toc_column {
-  column-count: 3;       /* Anzahl der Spalten */
+  column-count: 4;       /* Anzahl der Spalten */
   column-gap: 2rem;      /* Abstand zwischen Spalten */
 }
 
