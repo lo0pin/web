@@ -269,6 +269,19 @@ details.news-details[open] > summary{color:var(--text)}
 }
 
 /* =========================================================
+   Astronomy Image Style
+   Nur für Sternkarten / Astro-Inhalte
+   ========================================================= */
+
+.astronomy img {
+  width: 100%;
+  height: 380px;
+  object-fit: contain;   /* vollständige Sternkarte sichtbar */
+  background: #000;      /* füllt leere Fläche sauber */
+  display: block;
+}
+
+/* =========================================================
    7) KACHEL-STYLING (Tile + Bild + Overlay + Label)
    ========================================================= */
 
