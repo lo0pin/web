@@ -48,8 +48,14 @@
 "subtopic": "lotr"
 "subtopic": "games"
 
+
+Noch nicht im JSON GENERATOR:
+
 ## Topic Astro
 "topic": "astro"
+
+## Topic Outdoor
+"topic": "outdoor"
 
 
 
