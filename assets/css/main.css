@@ -683,6 +683,17 @@ body.bg-astronomy    { --page-bg: url("../img/astronomy_astro.png"); }
 }
 
 
+.toc_column {
+  column-count: 3;       /* Anzahl der Spalten */
+  column-gap: 2rem;      /* Abstand zwischen Spalten */
+}
+
+.toc_column li {
+  break-inside: avoid;
+  margin-bottom: 0.35rem;
+}
+
+
 /* =========================================================
    GLOBAL LINK STYLING
    ---------------------------------------------------------
