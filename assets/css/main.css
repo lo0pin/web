@@ -225,6 +225,9 @@ details.news-details[open] > summary{color:var(--text)}
   .tile-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+  .toc_column {
+    column-count: 2;
+  }
 }
 
 /* Ab 560px und kleiner: Navigation unter den Titel + 1 Spalte Kacheln */
@@ -235,6 +238,9 @@ details.news-details[open] > summary{color:var(--text)}
   }
   .tile-grid {
     grid-template-columns: 1fr; /* eine Spalte */
+  }
+  .toc_column {
+    column-count: 1;
   }
 }
 
