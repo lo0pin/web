@@ -401,6 +401,27 @@
           "alt": "astronomy_project2.png"
         }
       ]
+    },
+    {
+      "id": "2026-02-27_19_32",
+      "topic": "outdoor",
+      "subtopic": "",
+      "date": "2026-02-27",
+      "title": "New Category: Outdoor",
+      "format": "markdown",
+      "teaser": "A new section dedicated to **movement, landscape, and exploration** — documenting moments outside, where distance creates clarity and every path begins with a decision to step forward.",
+      "content_en": "It was time to give the outside its own space.\n\nWith “Outdoor”, a new category finds its place on this site — dedicated to everything that happens beyond walls. To paths that were never planned. To viewpoints that reveal more than landscapes. To moments when wind, cold, heat, or silence reshape your thoughts.\n\nThis is where I will document activities in nature, small explorations, quiet expeditions, and spontaneous departures — from winter overlooks above the city to longer walks into the unknown.\n\nNot as a travel guide.\nNot as a performance log.\n\nBut as a collection of places walked — and reflections gathered along the way.\n\nStep outside.\nThe map is optional.",
+      "content_de": "🌄 New Category: Outdoor\n\nEs war an der Zeit, dem Draußen einen eigenen Raum zu geben.\n\nMit „Outdoor“ entsteht eine neue Kategorie auf dieser Seite – ein Ort für alles, was nicht zwischen Wänden stattfindet. Für Wege, die nicht geplant waren. Für Aussichtspunkte, die mehr zeigen als nur Landschaft. Für Momente, in denen Wind, Kälte, Hitze oder Stille etwas in Bewegung bringen.\n\nHier werde ich künftig Aktivitäten in der Natur, kleine Expeditionen, Erkundungen und spontane Aufbrüche dokumentieren – vom winterlichen Blick über die Stadt bis zu längeren Touren ins Unbekannte.\n\nNicht als Reiseführer.\nNicht als Leistungsbericht.\n\nSondern als Sammlung von Wegen, die gegangen wurden – und Gedanken, die dabei entstanden sind.\n\nGeh raus.\nEgal ob mit Karte oder ohne.",
+      "images": [
+        {
+          "src": "/web/assets/img/outdoor00.jpeg",
+          "alt": "outdoor00.jpeg"
+        },
+        {
+          "src": "/web/assets/img/outdoor01.jpeg",
+          "alt": "outdoor01.jpeg"
+        }
+      ]
     }
   ]
 }
