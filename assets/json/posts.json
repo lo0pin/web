@@ -401,6 +401,27 @@
           "alt": "astronomy_project2.png"
         }
       ]
+    },
+    {
+      "id": "2026-02-28_code_html_23_42",
+      "topic": "code",
+      "subtopic": "html",
+      "date": "2026-02-28",
+      "title": "JSON-Post online converter",
+      "format": "markdown",
+      "teaser": "I’ve upgraded my news workflow: posts are now bilingual, structured with a concise English abstract and two expandable full texts (EN/DE). To migrate older entries efficiently, I built a browser-based conversion tool that handles both single posts and entire posts.json files. Cleaner feed, same depth.",
+      "content_en": "~Less scrolling. Same substance.~\n\nI’ve restructured my news system into a bilingual format. Each post now begins with a short English abstract (ideally under 100 words), followed by two expandable sections: one for the full English version and one for the German version.\n\nThe goal is clarity and restraint.\nThe timeline stays readable, but depth remains available.\n\nTo migrate older entries, I built a small browser-based conversion tool. It can handle:\n\na single legacy post object\n\nan entire posts.json file\n\noptional custom teaser and/or German text\n\nautomatic teaser generation from existing content\n\noptional preservation of the legacy field\n\nNo server. No dependencies. Just a standalone HTML file I can use from anywhere.\n\nThe result: cleaner structure, future-proof posts, and a workflow that feels deliberate instead of improvised.",
+      "content_de": "~Weniger Scrollen. Gleiche Substanz.~\n\nIch habe mein News-System auf ein zweisprachiges Format umgestellt. Jeder Beitrag beginnt nun mit einem kurzen englischen Abstract (ideal: unter 100 Wörter), gefolgt von zwei ausklappbaren Abschnitten: einer für die vollständige englische Version und einer für die deutsche Version.\n\nDas Ziel ist Klarheit und Reduktion.\nDer Feed bleibt lesbar, ohne inhaltliche Tiefe zu verlieren.\n\nFür die Migration älterer Beiträge habe ich ein kleines browserbasiertes Konvertierungstool gebaut. Es kann:\n\neinzelne Legacy-Posts umwandeln\n\nkomplette posts.json-Dateien verarbeiten\n\noptional einen eigenen Teaser oder deutschen Text übernehmen\n\nautomatisch einen Teaser generieren\n\ndas alte content-Feld optional archivieren\n\nKein Server. Keine Abhängigkeiten. Nur eine eigenständige HTML-Datei, die ich mobil von überall verwenden kann.\n\nDas Ergebnis: eine klarere Struktur, zukunftssichere Beiträge und ein Workflow, der nicht mehr improvisiert wirkt, sondern bewusst gestaltet ist.",
+      "images": [
+        {
+          "src": "/web/assets/img/news_generator_two_lang_converter00.jpg",
+          "alt": "news_generator_two_lang_converter00.jpg"
+        },
+        {
+          "src": "/web/assets/img/news_generator_two_lang_converter01.jpg",
+          "alt": "news_generator_two_lang_converter01.jpg"
+        }
+      ]
     }
   ]
 }
