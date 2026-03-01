@@ -170,6 +170,8 @@
       : `<div class="news-body">${legacyBody}</div>`;
 
     const imgs = Array.isArray(post.images) ? post.images : [];
+    //hard cap für 4 bilder maximal
+    //const imgs = Array.isArray(post.images) ? post.images.slice(0, 4) : [];
 
     const media = imgs.length
       ? `
