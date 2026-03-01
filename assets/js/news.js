@@ -169,7 +169,7 @@
       `
       : `<div class="news-body">${legacyBody}</div>`;
 
-    const imgs = Array.isArray(post.images) ? post.images.slice(0, 2) : [];
+    const imgs = Array.isArray(post.images) ? post.images : [];
 
     const media = imgs.length
       ? `

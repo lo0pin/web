@@ -54,6 +54,10 @@ Noch nicht im JSON GENERATOR:
 ## Topic Astro
 "topic": "astro"
 
+### Suptopics
+"subtopic": "moon"
+
+
 ## Topic Outdoor
 "topic": "outdoor"
 

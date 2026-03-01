@@ -443,6 +443,35 @@
           "alt": "news_generator_two_lang_converter01.jpg"
         }
       ]
+    },
+    {
+      "id": "2026-03-01_astro_moon_19_09",
+      "topic": "astro",
+      "subtopic": "moon",
+      "date": "2026-03-01",
+      "title": "Handheld astronomy on the Plabutsch — smartphone astrophotography attempt",
+      "format": "markdown",
+      "teaser": "Photographing the waxing Moon through binoculars turned out to be far more chaotic (and rewarding) than expected.",
+      "content_en": "I recently took my smartphone up to the Plabutsch and tried something slightly ambitious: photographing the waxing Moon through my Swarovski binoculars.\n\n- No tracking mount.\n- No tripod adapter.\n- No proper phone holder.\n\nJust patience, steady hands, and a good amount of stubbornness.\n\nAligning a phone camera with binocular optics sounds simple — until you try it. The slightest movement shifts the entire frame. The Moon disappears. The focus jumps. The exposure blows out. And then you start again.\n\n*It was, quite frankly, a bit of a pain.*\n\nBut in between frustration and micro-adjustments, something interesting happened: a few surprisingly detailed shots emerged. Mare structures became visible. The terminator showed texture. Even a wide-field frame captured a passing aircraft crossing the sky near the Moon — an accidental but beautiful contrast between celestial permanence and human motion.\n\n- Technically imperfect? Yes.\n- Rewarding? Absolutely.\n\nThis little experiment also sparked an idea: instead of wrestling optics with bare hands, I might design and 3D-print a dedicated smartphone holder for my binoculars. A simple adapter could transform this chaotic setup into something reproducible — and much sharper.\n\n~Sometimes progress starts with annoyance.~\n\n**More attempts will follow.**\n\n",
+      "content_de": "**Zunehmender Mond am Plabutsch — Smartphone durch das Fernglas**\n\nIch war am Plabutsch unterwegs und habe versucht, den zunehmenden Mond mit meiner Handykamera durch mein Swarovski-Fernglas zu fotografieren.\n\n- Ohne Adapter.\n- Ohne fixe Halterung.\n- Ohne Stativ.\n\nNur mit Geduld, ruhiger Hand und einer gewissen Portion Trotz.\n\nWas in der Theorie simpel klingt, ist in der Praxis erstaunlich mühsam. Die Kamera exakt über die Austrittspupille zu positionieren, ohne dass der Mond wieder aus dem Bild springt, ist eine Geduldsprobe. Minimalste Bewegungen ruinieren den Fokus. Die Belichtung kippt sofort ins Überstrahlte. Und dann beginnt das Ausrichten von vorne.\n\n*Kurz gesagt: Es war ein ziemlicher Pain in the Ass.*\n\nUnd trotzdem sind einige wirklich interessante Aufnahmen entstanden. Mare-Strukturen sind klar erkennbar, der Terminator zeigt schöne Kontraste, und in einer Weitwinkelaufnahme kreuzt sogar ein Flugzeug mit Kondensstreifen das Bild — ein spannender Kontrast zwischen Technik und Himmelskörper.\n\nTechnisch nicht perfekt, aber atmosphärisch stark.\n\nDas Ganze hat mich auf eine Idee gebracht: Warum nicht eine maßgeschneiderte Handy-Halterung für das Fernglas mit dem 3D-Drucker entwerfen? Ein sauberer Adapter würde das Setup stabilisieren und die Wiederholbarkeit massiv verbessern.\n\n~Manchmal beginnt ein neues Projekt genau dort, wo etwas nervt.~\n\n**Fortsetzung folgt.**\n",
+      "images": [
+        {
+          "src": "/web/assets/img/moon_plabutsch00.jpeg",
+          "alt": "moon_plabutsch00.jpeg"
+        },
+        {
+          "src": "/web/assets/img/moon_plabutsch01.jpeg",
+          "alt": "moon_plabutsch01.jpeg"
+        },
+        {
+          "src": "/web/assets/img/moon_plabutsch02.jpeg",
+          "alt": "moon_plabutsch02.jpeg"
+        },
+        {
+          "src": "/web/assets/img/moon_plabutsch03.jpeg",
+          "alt": "moon_plabutsch03.jpeg"
+        }
+      ]
     }
   ]
 }
