@@ -39,6 +39,16 @@
   --radius: 16px;         /* abgerundete Ecken (Banner/Kacheln) */
 }
 
+/* Aktiviert ein sanftes Scrollen bei Anker-Links (#id),
+   sodass die Seite weich zum Ziel gleitet statt abrupt zu springen. */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Deaktiviert sanftes Scrollen für Nutzer:innen,
+   die in ihrem System „Bewegung reduzieren“ aktiviert haben. */
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
 /* Damit Layouts mit 100% Höhe sauber funktionieren können,
    setzen wir html & body auf volle Höhe. */
 html, body {
@@ -215,7 +225,7 @@ details.news-details[open] > summary{color:var(--text)}
 
 
 /* =========================================================
-   6) RESPONSIVE DESIGN (Media Queries)
+   6) RESPONSIVE DESIGN ( Queries)
    ---------------------------------------------------------
    Damit es auf Tablet/Handy gut aussieht.
    ========================================================= */
