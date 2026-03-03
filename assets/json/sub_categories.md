@@ -56,6 +56,7 @@ Noch nicht im JSON GENERATOR:
 
 ### Suptopics
 "subtopic": "moon"
+"subtopic": "drone"
 
 
 ## Topic Outdoor
