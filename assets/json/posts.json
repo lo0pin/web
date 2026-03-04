@@ -510,6 +510,27 @@
           "alt": "new_drone_category.jpeg"
         }
       ]
+    },
+    {
+      "id": "2026-03-04_18_00",
+      "topic": "electronics",
+      "subtopic": "oled_bme",
+      "date": "2026-03-04",
+      "title": "Weather Display — Part 1: A Small Station That Remembers",
+      "format": "markdown",
+      "teaser": "A compact OLED weather station is simple. A compact OLED weather station with a **real-time clock, 24-hour ring buffer, and versioned EEPROM persistence** is where it stops being a demo and starts being engineering.",
+      "content_en": "This project started with a simple but consequential question: what is the value of a weather display that forgets everything after a power loss?\n\nSo I built a compact Arduino-based weather station that displays **temperature, humidity, pressure, date and time** on a 128×32 SSD1306 OLED — and stores a full **24-hour history persistently in EEPROM**.\n\nAt first glance, the hardware is conventional:\n\n- Arduino (Uno/Nano/Pro Mini compatible)\n- BME280 (I²C 0x76)\n- SSD1306 OLED (I²C 0x3C)\n- DS3231 RTC with battery backup\n- Two navigation buttons (D3 / D9)\n\nAll devices share the same I²C bus (SDA A4, SCL A5 on Uno/Nano), separated only by address.\n\nThe design goal, however, was continuity.\n\nTimekeeping is handled by a DS3231 real-time clock instead of relying on millis(). This ensures stable time across resets and allows precise hourly aggregation.\n\nSensor values are internally stored as **int16_t scaled by ×10** (e.g. 23.5°C → 235). This keeps memory usage predictable, avoids floating-point overhead in the main logic, and eliminates dynamic String allocation.\n\nThe system maintains three 24-slot arrays:\n\n- temp_messungen[24]\n- humid_messungen[24]\n- baro_messungen[24]\n\nEach slot represents one hour. When the hour changes, the averaged value of the previous hour is written into the corresponding index. The arrays behave as a ring buffer.\n\nTo survive resets, the complete dataset is written to EEPROM as a structured image consisting of:\n\n- Magic number (0xBEE5)\n- Layout version\n- Fletcher-16 checksum\n- Payload (24h arrays + state variables)\n\nOn boot, the system validates the image before restoring data. If the checksum or version fails, the arrays remain initialized.\n\nThis first part outlines the concept and architectural decisions. In the next entries, I will go deeper into:\n\n- the sampling and averaging strategy\n- the EEPROM layout and integrity checking\n- EU daylight saving time handling\n- graph rendering on a 128×32 display under tight constraints\n\nSmall hardware. Strict structure. Persistent data.",
+      "content_de": "Dieses Projekt begann mit einer einfachen, aber entscheidenden Frage: Welchen Wert hat eine Wetteranzeige, die nach einem Stromausfall alles vergisst?\n\nAlso entstand eine kompakte Arduino-basierte Wetterstation, die **Temperatur, Luftfeuchtigkeit, Luftdruck, Datum und Uhrzeit** auf einem 128×32 SSD1306 OLED darstellt — und einen vollständigen **24-Stunden-Verlauf dauerhaft im EEPROM speichert**.\n\nDie Hardware ist zunächst klassisch:\n\n- Arduino (Uno/Nano/Pro Mini kompatibel)\n- BME280 (I²C 0x76)\n- SSD1306 OLED (I²C 0x3C)\n- DS3231 RTC mit Batterie-Backup\n- Zwei Navigationstaster (D3 / D9)\n\nAlle Komponenten teilen sich denselben I²C-Bus (SDA A4, SCL A5 bei Uno/Nano), getrennt ausschließlich durch ihre Adresse.\n\nDer eigentliche Fokus lag jedoch auf Kontinuität.\n\nDie Zeitbasis übernimmt eine DS3231-Echtzeituhr statt millis(). Dadurch bleibt die Zeit auch nach Resets stabil und stündliche Aggregation wird exakt möglich.\n\nMesswerte werden intern als **int16_t im ×10-Format** gespeichert (z. B. 23,5 °C → 235). Das reduziert Speicherbedarf, vermeidet unnötige Floating-Point-Operationen im Kernsystem und verhindert Heap-Probleme durch dynamische Strings.\n\nDas System verwaltet drei 24-Slot-Arrays:\n\n- temp_messungen[24]\n- humid_messungen[24]\n- baro_messungen[24]\n\nJeder Slot repräsentiert eine Stunde. Beim Stundenwechsel wird der gemittelte Wert der vorherigen Stunde in den entsprechenden Index geschrieben. Die Arrays arbeiten als Ringpuffer.\n\nDamit die Daten Resets überstehen, wird der komplette Zustand als strukturiertes EEPROM-Image gespeichert, bestehend aus:\n\n- Magic Number (0xBEE5)\n- Layout-Version\n- Fletcher-16-Prüfsumme\n- Payload (24h-Arrays + Statusvariablen)\n\nBeim Start prüft das System Integrität und Version. Ist das Image ungültig, bleiben die Arrays initialisiert.\n\nTeil 1 beschreibt Konzept und Architektur. In den nächsten Beiträgen folgen:\n\n- Sampling- und Mittelwertstrategie\n- EEPROM-Layout und Integritätsprüfung\n- EU-Sommer-/Winterzeit-Logik\n- Graphendarstellung auf 128×32 Pixeln unter Ressourcenbeschränkung\n\nKleine Hardware. Strikte Struktur. Persistente Daten.",
+      "images": [
+        {
+          "src": "/web/assets/img/oled_bme_10.jpg",
+          "alt": "OLED weather station overview"
+        },
+        {
+          "src": "/web/assets/img/oled_bme_11.jpg",
+          "alt": "OLED weather station overview"
+        }
+      ]
     }
   ]
 }
