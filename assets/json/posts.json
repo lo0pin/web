@@ -523,11 +523,11 @@
       "content_de": "Dieses Projekt begann mit einer einfachen, aber entscheidenden Frage: Welchen Wert hat eine Wetteranzeige, die nach einem Stromausfall alles vergisst?\n\nAlso entstand eine kompakte Arduino-basierte Wetterstation, die **Temperatur, Luftfeuchtigkeit, Luftdruck, Datum und Uhrzeit** auf einem 128×32 SSD1306 OLED darstellt — und einen vollständigen **24-Stunden-Verlauf dauerhaft im EEPROM speichert**.\n\nDie Hardware ist zunächst klassisch:\n\n- Arduino (Uno/Nano/Pro Mini kompatibel)\n- BME280 (I²C 0x76)\n- SSD1306 OLED (I²C 0x3C)\n- DS3231 RTC mit Batterie-Backup\n- Zwei Navigationstaster (D3 / D9)\n\nAlle Komponenten teilen sich denselben I²C-Bus (SDA A4, SCL A5 bei Uno/Nano), getrennt ausschließlich durch ihre Adresse.\n\nDer eigentliche Fokus lag jedoch auf Kontinuität.\n\nDie Zeitbasis übernimmt eine DS3231-Echtzeituhr statt millis(). Dadurch bleibt die Zeit auch nach Resets stabil und stündliche Aggregation wird exakt möglich.\n\nMesswerte werden intern als **int16_t im ×10-Format** gespeichert (z. B. 23,5 °C → 235). Das reduziert Speicherbedarf, vermeidet unnötige Floating-Point-Operationen im Kernsystem und verhindert Heap-Probleme durch dynamische Strings.\n\nDas System verwaltet drei 24-Slot-Arrays:\n\n- temp_messungen[24]\n- humid_messungen[24]\n- baro_messungen[24]\n\nJeder Slot repräsentiert eine Stunde. Beim Stundenwechsel wird der gemittelte Wert der vorherigen Stunde in den entsprechenden Index geschrieben. Die Arrays arbeiten als Ringpuffer.\n\nDamit die Daten Resets überstehen, wird der komplette Zustand als strukturiertes EEPROM-Image gespeichert, bestehend aus:\n\n- Magic Number (0xBEE5)\n- Layout-Version\n- Fletcher-16-Prüfsumme\n- Payload (24h-Arrays + Statusvariablen)\n\nBeim Start prüft das System Integrität und Version. Ist das Image ungültig, bleiben die Arrays initialisiert.\n\nTeil 1 beschreibt Konzept und Architektur. In den nächsten Beiträgen folgen:\n\n- Sampling- und Mittelwertstrategie\n- EEPROM-Layout und Integritätsprüfung\n- EU-Sommer-/Winterzeit-Logik\n- Graphendarstellung auf 128×32 Pixeln unter Ressourcenbeschränkung\n\nKleine Hardware. Strikte Struktur. Persistente Daten.",
       "images": [
         {
-          "src": "/web/assets/img/oled_bme_10.jpeg",
+          "src": "/web/assets/img/oled_bme10.jpeg",
           "alt": "OLED weather station overview"
         },
         {
-          "src": "/web/assets/img/oled_bme_11.jpeg",
+          "src": "/web/assets/img/oled_bme11.jpeg",
           "alt": "OLED weather station overview"
         }
       ]
