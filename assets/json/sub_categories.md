@@ -38,7 +38,8 @@
 "topic": "electronics"
 
 ### SubC
-- "subtopic": "mesh"
+"subtopic": "mesh"
+"subtopic": "oled_bme"
 
 ## Topic nerdism
 "topic": "nerdism" 
@@ -56,11 +57,12 @@ Noch nicht im JSON GENERATOR:
 
 ### Suptopics
 "subtopic": "moon"
-"subtopic": "drone"
-
 
 ## Topic Outdoor
 "topic": "outdoor"
+
+# Subtopic
+"subtopic": "drone"
 
 
 
