@@ -554,10 +554,10 @@
       ]
     },
     {
-      "id": "2026-03-02_electronics_mesh_stefanienwarte_18_12",
+      "id": "2026-03-06_electronics_mesh_stefanienwarte_18_12",
       "topic": "electronics",
       "subtopic": "mesh",
-      "date": "2026-03-02",
+      "date": "2026-03-06",
       "title": "Hilltop Link Test — Citywide Coverage from Stefanienwarte",
       "format": "markdown",
       "teaser": "From the Stefanienwarte overlook, I tested real-world Meshtastic performance: multi-hop routes, marginal SNR at distance, and surprisingly strong line-of-sight returns across the city.",
