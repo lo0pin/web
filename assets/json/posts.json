@@ -552,6 +552,27 @@
           "alt": ""
         }
       ]
+    },
+    {
+      "id": "2026-03-02_electronics_mesh_stefanienwarte_18_12",
+      "topic": "electronics",
+      "subtopic": "mesh",
+      "date": "2026-03-02",
+      "title": "Hilltop Link Test — Citywide Coverage from Stefanienwarte",
+      "format": "markdown",
+      "teaser": "From the Stefanienwarte overlook, I tested real-world Meshtastic performance: multi-hop routes, marginal SNR at distance, and surprisingly strong line-of-sight returns across the city.",
+      "content_en": "I hiked up to the Stefanienwarte — not primarily for the view (though the winter panorama over the city was impressive), but for something more technical: altitude.\n\nA hilltop is not just scenic. It is RF leverage.\n\nFrom this elevated position overlooking the entire urban basin, I ran a series of transmission tests between my mobile unit and my stationary node at home.\n\n**Observed link characteristics:**\n- Direct city-facing transmissions showed strong returns: RSSI around -65 to -70 dBm with SNR > 10 dB.\n- More obstructed directions dropped significantly: RSSI between -125 and -135 dBm, SNR down to -14 dB.\n- Several packets successfully routed via 1–2 hops when line-of-sight degraded.\n- Repeated \"ping\" messages confirmed route stability.\n\nThe data tells a clear story.\nHeight matters. Geometry matters. Urban attenuation is real — but so is mesh resilience.\n\nOne particularly interesting pattern: when positioned toward the open valley side, the link quality improved drastically. When facing denser terrain and structural obstructions, performance dropped but did not collapse — the mesh compensated via intermediate nodes.\n\nThis was not a laboratory test.\nCold air, wet snow underfoot, fluctuating conditions.\n\nAnd yet: stable bidirectional communication.\n\nThe takeaway is simple and satisfying:\nA well-placed stationary node combined with a modest elevation gain creates city-scale coverage without infrastructure.\n\nMeshtastic in its purest form — decentralized, opportunistic, topology-driven.\n\nThe skyline was the backdrop.\nThe mesh was the real view.",
+      "content_de": "Ich bin zur Stefanienwarte hinaufgewandert – nicht primär wegen des Ausblicks (auch wenn der winterliche Blick über die Stadt beeindruckend war), sondern wegen der Höhe.\n\nEin Aussichtspunkt ist funktechnisch kein Romantik-Ort, sondern ein Multiplikator.\n\nVon oben, mit freier Sicht über das gesamte Stadtbecken, habe ich mehrere Testnachrichten zwischen meinem mobilen Node und meinem stationären Heim-Node gesendet.\n\n**Beobachtungen aus den Screenshots:**\n- Bei günstiger Ausrichtung Richtung Stadt: RSSI etwa -65 bis -70 dBm, SNR über 10 dB – sehr stabile Verbindung.\n- Bei stärkerer Abschattung: RSSI bis -135 dBm, SNR bis -14 dB – grenzwertig, aber noch zustellbar.\n- Mehrere Nachrichten liefen über 1–2 Hops, wenn direkte Sichtverbindung nicht optimal war.\n- Wiederholte „Ping“-Nachrichten bestätigten die Routenstabilität.\n\nDie Erkenntnis ist eindeutig:\nTopografie schlägt Sendeleistung.\n\nSchon wenige Dutzend Höhenmeter verändern das Linkbudget massiv. In Richtung offenes Tal war die Verbindung deutlich besser als in Richtung dichter Bebauung und bewaldeter Hänge.\n\nBesonders spannend: Selbst bei schlechten SNR-Werten blieb das Netz funktional. Das Mesh reagierte adaptiv, nutzte Zwischenknoten und hielt die Kommunikation aufrecht.\n\nKein Labor. Keine idealen Bedingungen. Schneereste, kalte Luft, reale Umgebung.\n\nUnd dennoch: stabile Zwei-Wege-Kommunikation über mehrere Kilometer.\n\nFazit:\nEin strategisch platzierter stationärer Node plus ein mobiler Endpunkt auf erhöhter Position genügt, um großflächige Stadtabdeckung zu erreichen – ganz ohne zentrale Infrastruktur.\n\nNicht der Ausblick war hier die Hauptsache.\nSondern das unsichtbare Netz, das darüber lag.",
+      "images": [
+        {
+          "src": "/web/assets/img/stefanienwarte_mesh00.jpeg",
+          "alt": "Winter panorama view from Stefanienwarte overlooking the city basin"
+        },
+        {
+          "src": "/web/assets/img/stefanienwarte_mesh01.png",
+          "alt": "Meshtastic signal log showing RSSI and SNR values during hilltop test"
+        }
+      ]
     }
   ]
 }
