@@ -596,10 +596,10 @@
       ]
     },
     {
-      "id": "2026-03-09_20_15",
+      "id": "2026-03-08_20_15",
       "topic": "electronics",
       "subtopic": "oled_bme",
-      "date": "2026-03-09",
+      "date": "2026-03-08",
       "title": "Weather Display — Part IV: EEPROM Architecture and Data Integrity",
       "format": "markdown",
       "teaser": "Storing values in EEPROM is easy. Storing them in a way that survives corruption, version changes, and invalid layouts — that is where structure matters.",
