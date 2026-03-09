@@ -615,6 +615,35 @@
           "alt": "OLED weather station overview"
         }
       ]
+    },
+    {
+      "id": "2026-03-09_21_05",
+      "topic": "botanik",
+      "subtopic": "ribisl",
+      "date": "2026-03-09",
+      "title": "Red Currant — Managing New Basal Shoots",
+      "format": "markdown",
+      "teaser": "New basal shoots have emerged — a sign of vitality, but also a decision point. In a 35 cm container, growth must be curated, not accumulated.",
+      "content_en": "The red currant (Jonkheer van Tets) has begun pushing several new basal shoots — four to five fresh green stems emerging directly from the base.\n\nThis is not a problem. It is a sign of stored energy and structural renewal.\n\nHowever, in a 35 cm container, space is finite. Every additional shoot competes for root volume, nutrients, and light.\n\nFor now, I am allowing the new shoots to grow slightly to assess strength and positioning. Within the next one to two weeks, I will select the strongest two and remove the remaining shoots at soil level.\n\nThe long-term structure remains intentional: a maximum of six well-spaced, vigorous canes.\n\nIn a container, discipline produces better fruit than abundance.\n\nThe goal is not more wood.\nThe goal is better berries.",
+      "content_de": "Die Rote Ribisel (Jonkheer van Tets) hat mehrere neue Bodentriebe gebildet – vier bis fünf frische grüne Stängel direkt aus dem Stock.\n\nDas ist kein Problem, sondern ein Zeichen von Vitalität und Verjüngung.\n\nIm 35-cm-Topf ist der Wurzelraum jedoch begrenzt. Jeder zusätzliche Trieb konkurriert um Nährstoffe, Licht und Platz.\n\nDie neuen Triebe dürfen zunächst kurz weiterwachsen, um ihre Stärke und Position besser beurteilen zu können. In ein bis zwei Wochen werden die kräftigsten zwei ausgewählt, die übrigen bodeneben entfernt.\n\nDie Zielstruktur bleibt klar: maximal sechs gut verteilte, vitale Triebe.\n\nIm Topf bringt Disziplin bessere Beeren als Überfluss.\n\nNicht mehr Holz.\nSondern bessere Früchte.",
+      "images": [
+        {
+          "src": "/web/assets/img/ribisl20.jpeg",
+          "alt": "New basal shoots of red currant"
+        },
+        {
+          "src": "/web/assets/img/ribisl21.jpeg",
+          "alt": "Red currant container structure"
+        },
+        {
+          "src": "/web/assets/img/ribisl22.jpeg",
+          "alt": "New basal shoots of red currant"
+        },
+        {
+          "src": "/web/assets/img/ribisl23.jpeg",
+          "alt": "New basal shoots of red currant"
+        }
+      ]
     }
   ]
 }
