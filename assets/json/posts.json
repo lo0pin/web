@@ -665,6 +665,27 @@
           "alt": "OLED weather station overview"
         }
       ]
+    },
+    {
+      "id": "2026-03-11_botanik_raspberry_winter_transition",
+      "topic": "botanik",
+      "subtopic": "raspberry",
+      "date": "2026-03-11",
+      "title": "Raspberry after winter indoors — surprisingly healthy",
+      "format": "markdown",
+      "teaser": "A raspberry that spent winter indoors is now showing vigorous new basal growth. The foliage is somewhat pale and slightly soft, but overall the plant looks healthy and ready for its full transition outdoors.",
+      "content_en": "This raspberry spent the winter indoors in the living room, with occasional trips outside for gradual hardening. A slightly odd setup perhaps — but not an entirely unsuccessful one.\n\nA few days into brighter spring conditions, the plant is now showing a fairly clear response. Several fresh shoots are emerging directly from the base, and that alone is a good sign: the root system is active, the plant has reserves, and it is trying to move forward rather than merely survive.\n\nThe leaves look structurally sound. I see no obvious pest damage, no fungal spotting, and no major deformities. What is noticeable, however, is the very light green color. The foliage is paler than ideal and the growth somewhat soft. That is not especially mysterious: winter indoors usually means less light, and less light tends to produce stretched, gentler growth with lower chlorophyll density.\n\nSo this is not a sick raspberry. It is a raspberry that grew under civilized but suboptimal conditions.\n\nThe good news is that this is usually reversible. Once it remains outside consistently, receives stronger light, and settles into a proper spring rhythm, the newer growth should become sturdier and darker.\n\nFor now, the next steps are simple:\n\n- keep it outdoors consistently, provided temperatures stay reasonable\n- give it a light dose of fertilizer or compost\n- observe how many new canes develop and thin them later if needed\n\nOne other thing is already becoming apparent: raspberries are not shy about occupying a pot. If growth continues like this, a larger container will likely be necessary later in the season.\n\nAt the moment, though, the verdict is reassuring. The plant looks healthy, the pale foliage is explainable, and the transition from indoor wintering to outdoor growth seems to be working.\n\n~Sometimes plants endure our improvisations with more dignity than we do.~",
+      "content_de": "Diese Himbeere hat den Winter im Wohnzimmer verbracht – mit gelegentlichen Ausflügen nach draußen zur schrittweisen Abhärtung. Ein etwas eigenwilliges Setup vielleicht, aber keineswegs ein völlig verfehltes.\n\nEinige Tage unter helleren Frühlingsbedingungen später zeigt die Pflanze nun eine recht klare Reaktion. Mehrere frische Triebe kommen direkt aus der Basis, und das ist bereits ein gutes Zeichen: Das Wurzelsystem ist aktiv, die Pflanze verfügt über Reserven und versucht nicht bloß zu überleben, sondern weiterzuwachsen.\n\nDie Blätter wirken strukturell gesund. Es sind keine offensichtlichen Schädlingsspuren zu sehen, keine Pilzflecken und keine gravierenden Verformungen. Auffällig ist allerdings das sehr helle Blattgrün. Das Laub ist blasser als ideal, der Wuchs insgesamt etwas weich. Das ist kein großes Rätsel: Winter im Innenraum bedeutet meist Lichtmangel, und Lichtmangel führt oft zu gestrecktem, zarterem Wachstum mit geringerer Chlorophylldichte.\n\nEs handelt sich hier also nicht um eine kranke Himbeere. Es ist eine Himbeere, die unter höflichen, aber botanisch nicht ganz idealen Bedingungen überwintert hat.\n\nDie gute Nachricht: Das lässt sich meist korrigieren. Sobald sie dauerhaft draußen steht, mehr Licht bekommt und in einen normalen Frühlingsrhythmus findet, sollte der neue Austrieb kräftiger und dunkler werden.\n\nDie nächsten Schritte sind daher recht schlicht:\n\n- nun möglichst konsequent draußen lassen, sofern die Temperaturen vernünftig bleiben\n- moderat düngen oder etwas Kompost geben\n- beobachten, wie viele neue Ruten sich entwickeln, und später bei Bedarf auslichten\n\nNoch etwas wird bereits sichtbar: Himbeeren sind im Topf nicht gerade bescheiden. Wenn das Wachstum so weitergeht, wird im Lauf der Saison vermutlich ein größeres Gefäß nötig werden.\n\nIm Moment lautet das Urteil jedenfalls: beruhigend. Die Pflanze wirkt gesund, das helle Laub ist gut erklärbar, und der Übergang von der Innenraum-Überwinterung zum Wachstum im Freien scheint zu funktionieren.\n\n~Manche Pflanzen ertragen unsere Improvisationen würdevoller, als wir selbst es tun.~",
+      "images": [
+        {
+          "src": "/web/assets/img/raspberry_winter_transition00.jpg",
+          "alt": "Fresh basal raspberry shoots after winter indoors"
+        },
+        {
+          "src": "/web/assets/img/raspberry_winter_transition01.jpg",
+          "alt": "Container-grown raspberry transitioning to outdoor spring growth"
+        }
+      ]
     }
   ]
 }
