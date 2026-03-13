@@ -709,6 +709,29 @@
           "caption": "The entire challenge was not collecting data, but making it readable."
         }
       ]
+    },
+    {
+      "id": "2026-03-08_botanik_fig_tree_winter_stress",
+      "topic": "botanik",
+      "subtopic": "fig",
+      "date": "2026-03-08",
+      "title": "Fig tree after winter indoors — stress marks, not disease",
+      "format": "markdown",
+      "teaser": "*The fig looks rougher than it actually is: older indoor-grown leaves show stress marks, but the fresh growth is vigorous and healthy.*",
+      "content_en": "After spending the entire winter in the living room, my potted fig tree is now back outside on the balcony. During the colder months, I tried a cautious approach: moderate watering, decent light, and occasional short outdoor sessions to harden the plant gradually.\n\nNow that spring is arriving, the fig is clearly waking up again. New shoots are emerging, fresh leaves are forming, and growth has visibly accelerated.\n\nSome of the older leaves show pale areas between the veins and uneven coloration. At first glance, this looks suspiciously like disease — but the more likely explanation is far less dramatic: **winter stress and transition damage**.\n\nLeaves formed indoors develop under weak light, different humidity, and generally softer conditions. Once exposed to real outdoor sun, wind, and fluctuating temperatures, they often reveal their shortcomings. That does not automatically mean the plant is ill.\n\nA few leaves also show irregular holes. These are most likely minor feeding marks from small insects or slight mechanical damage while the leaves were still unfolding. What matters more is what is *not* visible: there are no spreading necrotic lesions, no powdery coating, and no convincing fungal pattern.\n\nThe strongest argument for a healthy plant is the new growth. The fresh shoots look active, the young leaves are better formed, and the overall habit is vigorous.\n\n## Next steps\n\n- keep the fig outdoors permanently as long as no severe cold returns\n- remove only the worst of the old, stressed leaves\n- begin light fertilization every two to three weeks\n- water consistently, but avoid waterlogging\n\n~In short: the fig is not sick. It is simply shedding the aesthetic dignity of winter and returning to business.~",
+      "content_de": "Nach dem gesamten Winter im Wohnzimmer steht meine Feige nun wieder draußen am Balkon. In den kalten Monaten bin ich bewusst vorsichtig vorgegangen: mäßig gegossen, brauchbares Licht genutzt und die Pflanze immer wieder kurz ins Freie gestellt, um sie langsam abzuhärten.\n\nMit dem beginnenden Frühling wacht sie nun deutlich auf. Neue Triebe erscheinen, frische Blätter bilden sich, und das Wachstum hat sichtbar angezogen.\n\nEin Teil der älteren Blätter zeigt allerdings blasse Bereiche zwischen den Blattadern sowie eine ungleichmäßige Färbung. Auf den ersten Blick wirkt das beinahe wie eine Blattkrankheit — tatsächlich spricht aber deutlich mehr für **Winterstress und Umstellungsschäden**.\n\nBlätter, die in Innenräumen gebildet wurden, entstehen unter schwächerem Licht, anderer Luftfeuchtigkeit und insgesamt weicheren Bedingungen. Wenn sie dann wieder echter Sonne, Wind und stärkeren Temperaturschwankungen ausgesetzt sind, zeigen sich diese Schwächen oft recht deutlich. Das heißt noch lange nicht, dass die Pflanze krank ist.\n\nZusätzlich sind auf manchen Blättern ein paar unregelmäßige Löcher zu sehen. Das dürfte eher auf leichten Insektenfraß oder kleine mechanische Schäden während des Entfaltens zurückgehen. Entscheidend ist vielmehr, was **nicht** zu sehen ist: keine typischen Pilzbeläge, keine sich ausbreitenden Nekrosen, kein überzeugendes Krankheitsmuster.\n\nDer überzeugendste Hinweis auf eine insgesamt gesunde Pflanze ist der Neuaustrieb. Die frischen Triebe wirken aktiv, die jungen Blätter sind besser geformt, und der Gesamteindruck ist kräftig.\n\n## Nächste Schritte\n\n- die Feige nun dauerhaft draußen lassen, solange keine stärkeren Kälterückfälle mehr drohen\n- nur die am stärksten gestressten Altblätter entfernen\n- alle zwei bis drei Wochen leicht düngen\n- gleichmäßig gießen, aber Staunässe konsequent vermeiden\n\n~Kurz gesagt: Die Feige ist nicht krank. Sie sieht nur so aus, als hätte der Winter ihr ins Gesicht gegriffen.~",
+      "images": [
+        {
+          "src": "/web/assets/img/fig_tree_balcony_overview00.jpg",
+          "alt": "Potted fig tree on the balcony after winter indoors",
+          "caption": "The overall plant is vigorous again, with clear new growth despite visible stress on some older leaves."
+        },
+        {
+          "src": "/web/assets/img/fig_tree_balcony_overview01.jpg",
+          "alt": "Older fig leaf with discoloration and minor damage",
+          "caption": "Older indoor-grown leaves show stress marks and minor damage, but not a convincing pattern of disease."
+        }
+      ]
     }
   ]
 }
