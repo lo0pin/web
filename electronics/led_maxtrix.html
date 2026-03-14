@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>OLED, BME280, RTC</title>
+  <title>LED Matrix</title>
 
   <!-- same global stylesheet -->
   <link rel="stylesheet" href="../assets/css/main.css" />
@@ -13,7 +13,7 @@
 <body class="has-bg bg-code" id="top">
   <header class="site-header" id="top">
     <div class="header-inner">
-      <h1 class="site-title">OLED, BME280, RTC</h1>
+      <h1 class="site-title">LED Matrix</h1>
 
       <nav class="top-nav" aria-label="Top navigation">
         <a href="../index.html">⌂ home</a>
@@ -27,7 +27,7 @@
 
     <section class="hero" aria-label="Essence">
       <p class="hero-quote">
-        Four wires, a few sensors, and suddenly the world begins to speak in numbers.
+        A 32×8 matrix forces data to become movement.
       </p>
     </section>
 
@@ -38,10 +38,7 @@
       <h2 class="card-title">On this page</h2>
       <ul class="toc">
         <li><a href="#oled_bme_news">Latest News</a></li>
-        <li><a href="#what">What it is</a></li>
-        <li><a href="#why">Why I did it</a></li>
-        <li><a href="#hardware">Hardware</a></li>
-
+        <li><a href="#what">What it is & Why I did it</a></li>
       </ul>
     </article>
 
@@ -51,92 +48,41 @@
       <h2 class="card-title">Latest News</h2>
     </section> 
 
-    <div data-news-topic="electronics" data-news-subtopic="oled_bme" data-news-mode="all"></div>
+    <div data-news-topic="electronics" data-news-subtopic="led_matrix" data-news-mode="all"></div>
     <script type="module" src="../assets/js/news.js"></script>
     
     <hr class="divider" />
 
-    <!-- Intro card -->
-    <article class="card" id="what">
-      <h2 class="card-title">What it is</h2>
-      <p class="card-meta">Status: learning-in-public · Last updated: <time datetime="2026-03-04">Mar 04, 2026</time></p>
-
-      <p>
-          This project is a small standalone environmental monitoring node built around an 
-          <strong>Arduino Nano</strong>. A <strong>BME sensor</strong> measures temperature, humidity and air pressure, 
-          while a <strong>real-time clock (RTC)</strong> keeps precise time. The values are displayed on a tiny 
-          <strong>OLED screen</strong>, turning the device into a quiet little weather station.
-        </p>
-
-        <p>
-          Unlike many modern IoT projects, this device is intentionally simple. 
-          No WiFi, no cloud, no external dependencies. Just a microcontroller, 
-          a few sensors and a display — measuring the atmosphere in real time.
-        </p>
-
-        <p>
-          It serves as a compact reference instrument on my desk and as a 
-          playground for experimenting with sensors, I²C communication, and 
-          small embedded systems.
-        </p>
-
-    </article>
-
-
-    <!-- Why -->
-    <article class="card" id="why">
-      <h2 class="card-title">Why I got into it</h2>
-      <p>
-        Many of my projects revolve around observing systems: radio networks, 
-        electronics, the night sky, or the physical environment around me. 
-        This little device follows the same philosophy.
-      </p>
-
-      <p>
-        Instead of relying on abstract weather data from the internet, I wanted 
-        to see what the air around me is actually doing — in real time. 
-        Temperature changes during the day, pressure shifts before a storm, 
-        humidity rising after rain.
-      </p>
-
-      <p>
-        The project also provided a good excuse to return to a very direct form 
-        of electronics: small components, simple buses, and code that runs 
-        entirely on a microcontroller. No frameworks, no operating system — 
-        just hardware doing exactly what it was designed to do.
-      </p>
-
-
-    </article>
-
-
     <!-- Hardware -->
-    <article class="card" id="hardware">
-      <h2 class="card-title">Hardware</h2>
-      <p class="card-meta">What I use right now</p>
-
-      <ul>
-        <li><strong>Arduino Nano</strong> – the central microcontroller running the program</li>
-        <li><strong>BME280 environmental sensor</strong> – measures temperature, humidity and air pressure</li>
-        <li><strong>RTC module (DS3231)</strong> – provides accurate timekeeping</li>
-        <li><strong>0.96" OLED display (SSD1306)</strong> – displays the measured data</li>
-        <li><strong>I²C bus</strong> – connects the sensors and display to the Nano</li>
-      </ul>
-
+    <article class="card" id="what">
       <p>
-        All components communicate via the I²C bus, which keeps the wiring 
-        simple and compact. The Arduino periodically reads the sensor data, 
-        retrieves the current time from the RTC, and renders the information 
-        on the OLED display.
+        This project explores a different way of visualizing environmental data.
+        Instead of a structured OLED interface, the measurements appear on a
+        <strong>32×8 LED matrix</strong> as scrolling text and a small barometric trend graph.
       </p>
 
       <p>
-        The result is a tiny self-contained instrument that continuously 
-        observes the surrounding atmosphere.
+        At the core sits an <strong>Arduino Nano</strong> reading atmospheric data from a
+        <strong>BME280 sensor</strong> while a <strong>DS3231 real-time clock</strong>
+        provides precise timekeeping.
       </p>
 
+      <p>
+        The display consists of four cascaded <strong>MAX7219 8×8 LED modules</strong>,
+        forming a narrow but expressive 32-pixel wide window where values,
+        timestamps and weather information continuously scroll by.
+      </p>
 
+      <p>
+        Unlike the static layout of the OLED version, the LED matrix turns
+        measurements into motion. The device does not present data as fields —
+        it performs them as a continuous stream of light.
+      </p>
     </article>
+
+
+
+
 
 
     <hr class="divider" />
