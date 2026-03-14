@@ -41,6 +41,7 @@
 ### SubC
 "subtopic": "mesh"
 "subtopic": "oled_bme"
+"subtopic": "led_matrix"
 
 ## Topic nerdism
 "topic": "nerdism" 
