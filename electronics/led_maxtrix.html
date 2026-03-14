@@ -78,6 +78,37 @@
         measurements into motion. The device does not present data as fields —
         it performs them as a continuous stream of light.
       </p>
+
+
+      <p>
+        Compared to the OLED version, the LED matrix display follows a very
+        different philosophy.
+      </p>
+
+      <p>
+        The OLED presents information in a structured layout: numbers,
+        labels and clear sections.
+      </p>
+
+      <p>
+        The LED matrix does the opposite.
+        It compresses everything into a narrow 32-pixel strip and lets the
+        information scroll through it — turning temperature, pressure,
+        humidity and time into a moving sequence.
+      </p>
+
+      <p>
+        It is less structured, but far more dynamic.
+      </p>
+
+      <strong>Hardware:</strong>
+      <ul>
+        <li><strong>Arduino Nano</strong> – central microcontroller running the display logic</li>
+        <li><strong>BME280 environmental sensor</strong> – temperature, humidity and air pressure</li>
+        <li><strong>DS3231 RTC module</strong> – precise timekeeping and hourly data reference</li>
+        <li><strong>32×8 LED matrix</strong> – four cascaded MAX7219 8×8 modules</li>
+        <li><strong>SPI interface</strong> – communication between Nano and LED driver modules</li>
+      </ul>
     </article>
 
 
