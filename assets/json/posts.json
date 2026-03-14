@@ -746,11 +746,13 @@
       "images": [
         {
           "src": "/web/assets/img/oled_bme70.jpeg",
-          "alt": "OLED weather station overview"
+          "alt": "OLED weather station overview",
+          "caption": "OLED weather station overview"
         },
         {
           "src": "/web/assets/img/oled_bme71.jpeg",
-          "alt": "OLED weather station overview"
+          "alt": "OLED weather station overview",
+          "caption": "OLED weather station code snippet"
         }
       ]
     }
