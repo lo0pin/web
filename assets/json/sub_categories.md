@@ -43,6 +43,7 @@
 "subtopic": "oled_bme"
 "subtopic": "led_matrix"
 "subtopic": "solar"
+"subtopic": "pc_build"
 
 ## Topic nerdism
 "topic": "nerdism" 
