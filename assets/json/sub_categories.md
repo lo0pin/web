@@ -2,10 +2,11 @@
 "topic": "botanik",
 
 ### Subcategories
-- "subtopic": "raspberry"
-- "subtopic": "ribisl"
-- "subtopic": "fig"
--  subtopic="lemon"
+"subtopic": "raspberry"
+"subtopic": "ribisl"
+"subtopic": "fig"
+"subtopic": "lemon"
+"subtopic": "bonsai"
 
 
 ## Making
