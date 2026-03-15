@@ -467,8 +467,346 @@
     <hr class="divider" /> 
 
     
-    <section class="card" id="html">
-      <h2 class="card-title">HTML</h2>
+<section class="card" id="html">
+  <h2 class="card-title">HTML</h2>
+  <p>
+    HTML is the structural backbone of a webpage. It does not make things “pretty” by itself — 
+    it tells the browser what something <em>is</em>: a heading, a paragraph, a link, an image, a section, a form field.
+  </p>
+
+  <p>
+    This cheatsheet focuses on the HTML things you actually use all the time: document structure, 
+    text elements, links, images, lists, semantic layout, forms, metadata and a few common traps.
+  </p>
+
+  <ul class="toc">
+    <li><a href="#html-basics">Document basics</a></li>
+    <li><a href="#html-text">Text & structure</a></li>
+    <li><a href="#html-links-media">Links & media</a></li>
+    <li><a href="#html-lists-grouping">Lists & grouping</a></li>
+    <li><a href="#html-semantic">Semantic layout</a></li>
+    <li><a href="#html-forms">Forms</a></li>
+    <li><a href="#html-head">Head & metadata</a></li>
+    <li><a href="#html-rules">Practical rules</a></li>
+  </ul>
+
+  <hr class="divider" />
+
+  <h3 id="html-basics">Document basics</h3>
+
+  <div class="cheat-grid">
+    <article class="cheat-item">
+      <h4>Basic document structure</h4>
+      <p><strong>Use:</strong> The minimum clean HTML skeleton for a normal page.</p>
+      <pre class="code code-html"><code><span class="tag">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;html</span> <span class="attr">lang</span>=<span class="val">"en"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;head&gt;</span>
+  <span class="tag">&lt;meta</span> <span class="attr">charset</span>=<span class="val">"UTF-8"</span> <span class="tag">/&gt;</span>
+  <span class="tag">&lt;meta</span> <span class="attr">name</span>=<span class="val">"viewport"</span> <span class="attr">content</span>=<span class="val">"width=device-width, initial-scale=1.0"</span> <span class="tag">/&gt;</span>
+  <span class="tag">&lt;title&gt;</span>My page<span class="tag">&lt;/title&gt;</span>
+<span class="tag">&lt;/head&gt;</span>
+<span class="tag">&lt;body&gt;</span>
+  ...
+<span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></code></pre>
+      <p class="hint">Use this as the default starting point for every new HTML file.</p>
+    </article>
+
+    <article class="cheat-item">
+      <h4><code>&lt;head&gt;</code> vs <code>&lt;body&gt;</code></h4>
+      <p><strong>Head:</strong> invisible page metadata, title, CSS, SEO.</p>
+      <p><strong>Body:</strong> everything visible on the page.</p>
+      <pre class="code code-html"><code><span class="tag">&lt;head&gt;</span>
+  <span class="tag">&lt;title&gt;</span>Cheatsheets<span class="tag">&lt;/title&gt;</span>
+<span class="tag">&lt;/head&gt;</span>
+
+<span class="tag">&lt;body&gt;</span>
+  <span class="tag">&lt;h1&gt;</span>Hello<span class="tag">&lt;/h1&gt;</span>
+<span class="tag">&lt;/body&gt;</span></code></pre>
+    </article>
+
+    <article class="cheat-item">
+      <h4>Attributes</h4>
+      <p>
+        Attributes add extra information to an element, for example <code>href</code>, <code>src</code>, 
+        <code>alt</code>, <code>class</code> or <code>id</code>.
+      </p>
+      <pre class="code code-html"><code><span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="val">"about.html"</span> <span class="attr">class</span>=<span class="val">"button"</span><span class="tag">&gt;</span>About<span class="tag">&lt;/a&gt;</span></code></pre>
+    </article>
+  </div>
+
+  <hr class="divider" />
+
+  <h3 id="html-text">Text & structure</h3>
+
+  <div class="cheat-grid">
+    <article class="cheat-item">
+      <h4>Headings: <code>h1</code> to <code>h6</code></h4>
+      <p><strong>Use:</strong> Page and section structure.</p>
+      <pre class="code code-html"><code><span class="tag">&lt;h1&gt;</span>Main page title<span class="tag">&lt;/h1&gt;</span>
+<span class="tag">&lt;h2&gt;</span>Section title<span class="tag">&lt;/h2&gt;</span>
+<span class="tag">&lt;h3&gt;</span>Subsection title<span class="tag">&lt;/h3&gt;</span></code></pre>
+      <p class="hint">Use headings for structure, not just because they look big.</p>
+    </article>
+
+    <article class="cheat-item">
+      <h4>Paragraph: <code>p</code></h4>
+      <p><strong>Use:</strong> Normal blocks of text.</p>
+      <pre class="code code-html"><code><span class="tag">&lt;p&gt;</span>This is a paragraph of text.<span class="tag">&lt;/p&gt;</span></code></pre>
+    </article>
+
+    <article class="cheat-item">
+      <h4>Emphasis: <code>strong</code> and <code>em</code></h4>
+      <p><strong>Use:</strong> Meaningful emphasis, not just decoration.</p>
+      <pre class="code code-html"><code><span class="tag">&lt;p&gt;</span>This is <span class="tag">&lt;strong&gt;</span>important<span class="tag">&lt;/strong&gt;</span> and this is <span class="tag">&lt;em&gt;</span>emphasized<span class="tag">&lt;/em&gt;</span>.<span class="tag">&lt;/p&gt;</span></code></pre>
+    </article>
+
+    <article class="cheat-item">
+      <h4>Line break and rule: <code>br</code>, <code>hr</code></h4>
+      <p><strong>Use:</strong> Small structural helpers.</p>
+      <pre class="code code-html"><code><span class="tag">&lt;p&gt;</span>Line one<span class="tag">&lt;br&gt;</span>Line two<span class="tag">&lt;/p&gt;</span>
+
+<span class="tag">&lt;hr&gt;</span></code></pre>
+      <p class="hint">Do not use <code>&lt;br&gt;</code> as a lazy substitute for CSS spacing.</p>
+    </article>
+  </div>
+
+  <hr class="divider" />
+
+  <h3 id="html-links-media">Links & media</h3>
+
+  <div class="cheat-grid">
+    <article class="cheat-item">
+      <h4>Link: <code>a</code></h4>
+      <p><strong>Use:</strong> Navigation to pages, sections or external websites.</p>
+      <pre class="code code-html"><code><span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="val">"about.html"</span><span class="tag">&gt;</span>About me<span class="tag">&lt;/a&gt;</span></code></pre>
+    </article>
+
+    <article class="cheat-item">
+      <h4>External link in new tab</h4>
+      <pre class="code code-html"><code><span class="tag">&lt;a</span> 
+  <span class="attr">href</span>=<span class="val">"https://example.com"</span> 
+  <span class="attr">target</span>=<span class="val">"_blank"</span> 
+  <span class="attr">rel</span>=<span class="val">"noopener noreferrer"</span><span class="tag">&gt;</span>
+  External page
+<span class="tag">&lt;/a&gt;</span></code></pre>
+    </article>
+
+    <article class="cheat-item">
+      <h4>Jump link with <code>id</code></h4>
+      <pre class="code code-html"><code><span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="val">"#contact"</span><span class="tag">&gt;</span>Go to contact<span class="tag">&lt;/a&gt;</span>
+
+<span class="tag">&lt;section</span> <span class="attr">id</span>=<span class="val">"contact"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;h2&gt;</span>Contact<span class="tag">&lt;/h2&gt;</span>
+<span class="tag">&lt;/section&gt;</span></code></pre>
+    </article>
+
+    <article class="cheat-item">
+      <h4>Image: <code>img</code></h4>
+      <p><strong>Use:</strong> Photos, graphics, illustrations.</p>
+      <pre class="code code-html"><code><span class="tag">&lt;img</span> 
+  <span class="attr">src</span>=<span class="val">"images/boat.jpg"</span> 
+  <span class="attr">alt</span>=<span class="val">"Small sailing boat in calm evening light"</span><span class="tag">&gt;</span></code></pre>
+      <p class="hint">The <code>alt</code> text matters. “image” is useless. Describe what is actually there.</p>
+    </article>
+
+    <article class="cheat-item">
+      <h4><code>figure</code> and <code>figcaption</code></h4>
+      <pre class="code code-html"><code><span class="tag">&lt;figure&gt;</span>
+  <span class="tag">&lt;img</span> <span class="attr">src</span>=<span class="val">"drone.jpg"</span> <span class="attr">alt</span>=<span class="val">"Drone on a field"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;figcaption&gt;</span>First outdoor drone test.<span class="tag">&lt;/figcaption&gt;</span>
+<span class="tag">&lt;/figure&gt;</span></code></pre>
+    </article>
+  </div>
+
+  <hr class="divider" />
+
+  <h3 id="html-lists-grouping">Lists & grouping</h3>
+
+  <div class="cheat-grid">
+    <article class="cheat-item">
+      <h4>Unordered list: <code>ul</code></h4>
+      <pre class="code code-html"><code><span class="tag">&lt;ul&gt;</span>
+  <span class="tag">&lt;li&gt;</span>HTML<span class="tag">&lt;/li&gt;</span>
+  <span class="tag">&lt;li&gt;</span>CSS<span class="tag">&lt;/li&gt;</span>
+  <span class="tag">&lt;li&gt;</span>JavaScript<span class="tag">&lt;/li&gt;</span>
+<span class="tag">&lt;/ul&gt;</span></code></pre>
+    </article>
+
+    <article class="cheat-item">
+      <h4>Ordered list: <code>ol</code></h4>
+      <pre class="code code-html"><code><span class="tag">&lt;ol&gt;</span>
+  <span class="tag">&lt;li&gt;</span>Create file<span class="tag">&lt;/li&gt;</span>
+  <span class="tag">&lt;li&gt;</span>Add structure<span class="tag">&lt;/li&gt;</span>
+  <span class="tag">&lt;li&gt;</span>Open in browser<span class="tag">&lt;/li&gt;</span>
+<span class="tag">&lt;/ol&gt;</span></code></pre>
+    </article>
+
+    <article class="cheat-item">
+      <h4><code>div</code></h4>
+      <p><strong>Use:</strong> Neutral block container for grouping content.</p>
+      <pre class="code code-html"><code><span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="val">"card"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;h2&gt;</span>News<span class="tag">&lt;/h2&gt;</span>
+  <span class="tag">&lt;p&gt;</span>Today I learned HTML.<span class="tag">&lt;/p&gt;</span>
+<span class="tag">&lt;/div&gt;</span></code></pre>
+    </article>
+
+    <article class="cheat-item">
+      <h4><code>span</code></h4>
+      <p><strong>Use:</strong> Neutral inline wrapper inside text.</p>
+      <pre class="code code-html"><code><span class="tag">&lt;p&gt;</span>This is <span class="tag">&lt;span</span> <span class="attr">class</span>=<span class="val">"highlight"</span><span class="tag">&gt;</span>highlighted<span class="tag">&lt;/span&gt;</span> text.<span class="tag">&lt;/p&gt;</span></code></pre>
+    </article>
+
+    <article class="cheat-item">
+      <h4><code>class</code> vs <code>id</code></h4>
+      <p><strong>class:</strong> reusable group name.</p>
+      <p><strong>id:</strong> unique identifier on the page.</p>
+      <pre class="code code-html"><code><span class="tag">&lt;h2</span> <span class="attr">class</span>=<span class="val">"section-title"</span><span class="tag">&gt;</span>Projects<span class="tag">&lt;/h2&gt;</span>
+<span class="tag">&lt;section</span> <span class="attr">id</span>=<span class="val">"about"</span><span class="tag">&gt;</span>...<span class="tag">&lt;/section&gt;</span></code></pre>
+    </article>
+  </div>
+
+  <hr class="divider" />
+
+  <h3 id="html-semantic">Semantic layout</h3>
+
+  <div class="cheat-grid">
+    <article class="cheat-item">
+      <h4>Semantic page structure</h4>
+      <p>
+        These elements describe the role of a block. Much better than endless anonymous 
+        <code>div</code> soup.
+      </p>
+      <pre class="code code-html"><code><span class="tag">&lt;header&gt;</span>...<span class="tag">&lt;/header&gt;</span>
+<span class="tag">&lt;nav&gt;</span>...<span class="tag">&lt;/nav&gt;</span>
+<span class="tag">&lt;main&gt;</span>...<span class="tag">&lt;/main&gt;</span>
+<span class="tag">&lt;section&gt;</span>...<span class="tag">&lt;/section&gt;</span>
+<span class="tag">&lt;article&gt;</span>...<span class="tag">&lt;/article&gt;</span>
+<span class="tag">&lt;footer&gt;</span>...<span class="tag">&lt;/footer&gt;</span></code></pre>
+    </article>
+
+    <article class="cheat-item">
+      <h4>Example semantic layout</h4>
+      <pre class="code code-html"><code><span class="tag">&lt;header&gt;</span>
+  <span class="tag">&lt;h1&gt;</span>My website<span class="tag">&lt;/h1&gt;</span>
+  <span class="tag">&lt;nav&gt;</span>
+    <span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="val">"#about"</span><span class="tag">&gt;</span>About<span class="tag">&lt;/a&gt;</span>
+    <span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="val">"#projects"</span><span class="tag">&gt;</span>Projects<span class="tag">&lt;/a&gt;</span>
+  <span class="tag">&lt;/nav&gt;</span>
+<span class="tag">&lt;/header&gt;</span>
+
+<span class="tag">&lt;main&gt;</span>
+  <span class="tag">&lt;section</span> <span class="attr">id</span>=<span class="val">"about"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;h2&gt;</span>About<span class="tag">&lt;/h2&gt;</span>
+    <span class="tag">&lt;p&gt;</span>Some text.<span class="tag">&lt;/p&gt;</span>
+  <span class="tag">&lt;/section&gt;</span>
+
+  <span class="tag">&lt;article&gt;</span>
+    <span class="tag">&lt;h2&gt;</span>Latest post<span class="tag">&lt;/h2&gt;</span>
+    <span class="tag">&lt;p&gt;</span>New entry here.<span class="tag">&lt;/p&gt;</span>
+  <span class="tag">&lt;/article&gt;</span>
+<span class="tag">&lt;/main&gt;</span>
+
+<span class="tag">&lt;footer&gt;</span>
+  <span class="tag">&lt;p&gt;</span>© 2026 Julian<span class="tag">&lt;/p&gt;</span>
+<span class="tag">&lt;/footer&gt;</span></code></pre>
+    </article>
+  </div>
+
+  <hr class="divider" />
+
+  <h3 id="html-forms">Forms</h3>
+
+  <div class="cheat-grid">
+    <article class="cheat-item">
+      <h4>Basic form</h4>
+      <pre class="code code-html"><code><span class="tag">&lt;form</span> <span class="attr">action</span>=<span class="val">"/send"</span> <span class="attr">method</span>=<span class="val">"post"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;label</span> <span class="attr">for</span>=<span class="val">"name"</span><span class="tag">&gt;</span>Name<span class="tag">&lt;/label&gt;</span>
+  <span class="tag">&lt;input</span> <span class="attr">type</span>=<span class="val">"text"</span> <span class="attr">id</span>=<span class="val">"name"</span> <span class="attr">name</span>=<span class="val">"name"</span><span class="tag">&gt;</span>
+
+  <span class="tag">&lt;label</span> <span class="attr">for</span>=<span class="val">"message"</span><span class="tag">&gt;</span>Message<span class="tag">&lt;/label&gt;</span>
+  <span class="tag">&lt;textarea</span> <span class="attr">id</span>=<span class="val">"message"</span> <span class="attr">name</span>=<span class="val">"message"</span><span class="tag">&gt;&lt;/textarea&gt;</span>
+
+  <span class="tag">&lt;button</span> <span class="attr">type</span>=<span class="val">"submit"</span><span class="tag">&gt;</span>Send<span class="tag">&lt;/button&gt;</span>
+<span class="tag">&lt;/form&gt;</span></code></pre>
+      <p class="hint">Always connect <code>label for="..."</code> with the matching input <code>id</code>.</p>
+    </article>
+
+    <article class="cheat-item">
+      <h4>Common input types</h4>
+      <pre class="code code-html"><code><span class="tag">&lt;input</span> <span class="attr">type</span>=<span class="val">"text"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;input</span> <span class="attr">type</span>=<span class="val">"email"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;input</span> <span class="attr">type</span>=<span class="val">"password"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;input</span> <span class="attr">type</span>=<span class="val">"checkbox"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;input</span> <span class="attr">type</span>=<span class="val">"radio"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;input</span> <span class="attr">type</span>=<span class="val">"file"</span><span class="tag">&gt;</span></code></pre>
+    </article>
+
+    <article class="cheat-item">
+      <h4>Buttons</h4>
+      <pre class="code code-html"><code><span class="tag">&lt;button</span> <span class="attr">type</span>=<span class="val">"button"</span><span class="tag">&gt;</span>Click<span class="tag">&lt;/button&gt;</span>
+<span class="tag">&lt;button</span> <span class="attr">type</span>=<span class="val">"submit"</span><span class="tag">&gt;</span>Submit<span class="tag">&lt;/button&gt;</span>
+<span class="tag">&lt;button</span> <span class="attr">type</span>=<span class="val">"reset"</span><span class="tag">&gt;</span>Reset<span class="tag">&lt;/button&gt;</span></code></pre>
+    </article>
+  </div>
+
+  <hr class="divider" />
+
+  <h3 id="html-head">Head & metadata</h3>
+
+  <div class="cheat-grid">
+    <article class="cheat-item">
+      <h4>Character encoding</h4>
+      <pre class="code code-html"><code><span class="tag">&lt;meta</span> <span class="attr">charset</span>=<span class="val">"UTF-8"</span> <span class="tag">/&gt;</span></code></pre>
+      <p class="hint">Without this, umlauts and special characters may break.</p>
+    </article>
+
+    <article class="cheat-item">
+      <h4>Responsive viewport</h4>
+      <pre class="code code-html"><code><span class="tag">&lt;meta</span> <span class="attr">name</span>=<span class="val">"viewport"</span> <span class="attr">content</span>=<span class="val">"width=device-width, initial-scale=1.0"</span> <span class="tag">/&gt;</span></code></pre>
+      <p class="hint">Without this, mobile layout may look completely wrong.</p>
+    </article>
+
+    <article class="cheat-item">
+      <h4>CSS, JS and favicon</h4>
+      <pre class="code code-html"><code><span class="tag">&lt;link</span> <span class="attr">rel</span>=<span class="val">"stylesheet"</span> <span class="attr">href</span>=<span class="val">"style.css"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;link</span> <span class="attr">rel</span>=<span class="val">"icon"</span> <span class="attr">href</span>=<span class="val">"favicon.ico"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;script</span> <span class="attr">src</span>=<span class="val">"script.js"</span> <span class="attr">defer</span><span class="tag">&gt;&lt;/script&gt;</span></code></pre>
+    </article>
+
+    <article class="cheat-item">
+      <h4>Meta description</h4>
+      <pre class="code code-html"><code><span class="tag">&lt;meta</span> 
+  <span class="attr">name</span>=<span class="val">"description"</span> 
+  <span class="attr">content</span>=<span class="val">"Personal website about electronics, sailing and projects."</span> 
+<span class="tag">/&gt;</span></code></pre>
+    </article>
+  </div>
+
+  <hr class="divider" />
+
+  <h3 id="html-rules">Practical rules</h3>
+
+  <ul>
+    <li><strong>HTML is for structure.</strong> CSS is for looks. JavaScript is for behavior.</li>
+    <li><strong>Use semantic elements when possible.</strong> Avoid endless <code>div</code> soup.</li>
+    <li><strong>Use headings in logical order.</strong> Do not jump around wildly for visual size.</li>
+    <li><strong>Always give images a meaningful <code>alt</code> text.</strong></li>
+    <li><strong>Use <code>class</code> for reusable styling and <code>id</code> for unique anchors or targets.</strong></li>
+    <li><strong>Do not use tables for layout.</strong> Tables are for real tabular data.</li>
+    <li><strong>Check file paths carefully.</strong> Broken images and broken links are usually just bad paths.</li>
+    <li><strong>Indent your code cleanly.</strong> Future-you will otherwise curse present-you.</li>
+    <li><strong>Buttons are actions. Links are navigation.</strong> Do not muddle them up.</li>
+    <li><strong>Use browser dev tools.</strong> They are not optional once things stop working.</li>
+  </ul>
+
+  <p class="hint"><a href="#top">↑ top</a></p>
+</section>
+<hr class="divider" />
+
+
+    <section class="card" id="css">
+      <h2 class="card-title">CSS</h2>
       <!--<p class="card-meta">Stay: over night · shallow · ground: sand · Last updated: <time datetime="2026-03-02">Mar 02, 2026</time></p>-->
       <p>
         kurzer Text über den Fotos – aber nur als „Hook“
@@ -480,8 +818,6 @@
       <p class="hint"><a href="#top">↑ top</a></p>
     </section>
     <hr class="divider" /> 
-
-    
 
     <p class="hint"><a href="#top">↑ top</a>&emsp;<a href="index.html">⌂ home</a></p>
   </main>

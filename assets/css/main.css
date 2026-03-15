@@ -828,3 +828,74 @@ a:focus-visible {
 .news-teaser p + h5 {
   margin-top: 1.35rem;
 }
+
+
+
+/* =========================================================
+   Cheatsheet blocks
+   ---------------------------------------------------------
+   Für HTML/CSS/Python-Cheatsheets:
+   - Kartenartige Einzelblöcke
+   - kleine Codefelder
+   - leichtes Syntax Highlighting
+   ========================================================= */
+
+.cheat-grid {
+  display: grid;
+  gap: 1.25rem;
+  margin: 1rem 0 2rem;
+}
+
+.cheat-item {
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--border);
+  border-radius: calc(var(--radius) - 4px);
+  background: rgba(15, 19, 32, 0.02);
+}
+
+.cheat-item h4 {
+  margin-top: 0;
+  margin-bottom: 0.6rem;
+}
+
+.cheat-code {
+  display: block;
+  overflow-x: auto;
+  margin: 0.85rem 0;
+  padding: 0.9rem 1rem;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: rgba(15, 19, 32, 0.04);
+  line-height: 1.55;
+  font-size: 0.95rem;
+}
+
+.cheat-code code {
+  display: block;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  white-space: pre;
+}
+
+/* Simple HTML syntax highlighting */
+.cheat-code-html .cheat-token-tag {
+  color: #0b5fff;
+}
+
+.cheat-code-html .cheat-token-attr {
+  color: #9a6700;
+}
+
+.cheat-code-html .cheat-token-val {
+  color: #137333;
+}
+
+.cheat-code-html .cheat-token-com {
+  color: var(--muted);
+  font-style: italic;
+}
+
+@media (min-width: 901px) {
+  .cheat-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
