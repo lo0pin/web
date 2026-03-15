@@ -515,7 +515,7 @@ Nutze diese Möglichkeiten **nur wenn sie wirklich passen**:
    - technische Eckpunkte
    - Lessons learned
 
-7. **Inline-Code** mit \`\code\\`  
+7. **Inline-Code** mit \`code\`  
    Nur für Befehle, Dateinamen, Variablen, Pins, Werte, IDs, Pfade, Funktionen, Protokolle etc.
 
 8. **Codeblöcke** mit Triple-Backticks  
@@ -564,7 +564,7 @@ Wenn passend, integriere diese Bausteine:
 
 ## Ausgabevorgabe
 
-Gib am Ende **nur ein einziges vollständiges JSON-Objekt** aus, ohne Markdown-Codeblock und ohne Kommentar.`;
+Gib am Ende **nur ein einziges vollständiges JSON-Objekt** aus, als Markdown-Codeblock und ohne Kommentar.`;
     }
 
     async function copyToClipboard(text) {
@@ -587,7 +587,7 @@ Gib am Ende **nur ein einziges vollständiges JSON-Objekt** aus, ohne Markdown-C
         datum: escapePromptValue(datumEl.value) || todayISO
       };
 
-      const prompt = buildPrompt(data).replace(/`\u0000code`/g, "`` `code` ``");
+      const prompt = buildPrompt(data);
       outputEl.value = prompt;
       setStatus("Prompt erzeugt.", true);
     }
