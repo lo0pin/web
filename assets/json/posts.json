@@ -755,7 +755,40 @@
           "caption": "OLED weather station code snippet"
         }
       ]
-    }
+    },
+    {
+      "id": "2026-03-15_botanik_citrus_14_02",
+      "topic": "botanik",
+      "subtopic": "citrus",
+      "date": "2026-03-15",
+      "title": "Winter Stress on my Indoor Lemon Tree — and the First Signs of Recovery",
+      "format": "markdown",
+      "teaser": "After spending the entire winter in my living room, my lemon tree suddenly dropped a surprising number of leaves. Yet at the same time, bright green new shoots appeared. A closer look reveals a classic case of winter stress in indoor citrus.",
+      "content_en": "My lemon tree spent the entire winter indoors in the living room. The conditions were not extreme, but clearly not ideal either: moderate light, moderate watering, and the typical dry indoor air of the heating season.\n\nOver the last weeks, something curious happened. The tree began to **shed a large number of leaves**, leaving the pot covered in curled green blades. At first glance this looked alarming.\n\nA closer inspection of the remaining foliage showed brown, dry edges spreading inward from the leaf margin. Interestingly, the rest of the leaf surface remained green and healthy.\n\nThis pattern strongly suggests **physiological winter stress rather than a disease**. Citrus trees kept indoors during dark months often struggle to balance light availability with their metabolic activity. When the available light energy drops too low, the plant reduces its leaf surface to conserve resources.\n\nIn other words: the tree sacrifices older leaves to survive the winter.\n\nAt the same time, a much more encouraging sign appeared.\n\nAcross several branches, **fresh light-green shoots have begun to emerge**. New buds are forming and small leaves are unfolding. This indicates that the plant has entered a new growth phase as daylight increases.\n\nSo while the recent leaf drop looked dramatic, it is likely part of a normal recovery cycle.\n\nThe current diagnosis:\n\n- winter light stress\n- partial leaf drop as adaptation\n- active spring growth beginning\n\nNext steps for the plant:\n\n- increase light exposure\n- remove fallen leaves from the soil\n- start light citrus fertilization\n- maintain moderate watering\n\nWith longer days and stronger light, the tree should gradually rebuild its canopy over the coming weeks.\n\nSometimes a plant doesn't fail — it simply endures the winter and waits for the sun.",
+    "content_de": "Mein Zitronenbaum hat den gesamten Winter im Wohnzimmer verbracht. Die Bedingungen waren nicht extrem, aber auch nicht wirklich ideal: mäßiges Licht, zurückhaltendes Gießen und die typische trockene Heizungsluft der Wintermonate.\n\nIn den letzten Wochen geschah etwas Auffälliges. Der Baum begann **eine große Menge an Blättern abzuwerfen**, sodass der Topf bald von eingerollten grünen Blättern bedeckt war. Auf den ersten Blick wirkte das durchaus alarmierend.\n\nEin genauer Blick auf die verbleibenden Blätter zeigte jedoch ein charakteristisches Muster: Von den Blatträndern aus breiten sich **braune, trockene Bereiche** nach innen aus, während der restliche Teil der Blattfläche weiterhin grün und gesund erscheint.\n\nDieses Schadbild spricht sehr deutlich für **physiologischen Winterstress und nicht für eine Krankheit**. Zitruspflanzen, die während der dunklen Monate im Innenraum stehen, geraten häufig in ein energetisches Ungleichgewicht: Die Stoffwechselaktivität der Pflanze bleibt relativ hoch, während gleichzeitig schlicht zu wenig Licht zur Verfügung steht.\n\nSinkt die verfügbare Lichtenergie unter eine gewisse Schwelle, reagiert die Pflanze mit einer Anpassungsstrategie: Sie reduziert ihre Blattmasse, um Energie zu sparen.\n\nOder einfacher gesagt: Der Baum opfert einen Teil seiner älteren Blätter, um den Winter zu überstehen.\n\nGleichzeitig zeigte sich aber auch ein deutlich erfreulicheres Zeichen.\n\nAn mehreren Zweigen erscheinen bereits **frische, hellgrüne Triebe**. Neue Knospen bilden sich und kleine Blätter beginnen sich zu entfalten. Das deutet darauf hin, dass der Baum mit zunehmender Tageslänge wieder in eine aktive Wachstumsphase übergeht.\n\nDer dramatisch wirkende Blattfall dürfte daher eher Teil eines normalen Erholungsprozesses sein.\n\n**Aktuelle Einschätzung:**\n\n- Winterstress durch zu wenig Licht\n- teilweiser Blattverlust als Anpassungsreaktion\n- beginnendes Frühjahrswachstum\n\n**Nächste Schritte:**\n\n- die Lichtmenge erhöhen\n- abgefallene Blätter aus dem Topf entfernen\n- mit leichter Zitrusdüngung beginnen\n- weiterhin moderat gießen\n\nMit längeren Tagen und stärkerem Licht sollte der Baum in den kommenden Wochen langsam wieder eine dichtere Krone aufbauen.\n\nManchmal scheitert eine Pflanze nicht – sie übersteht einfach nur den Winter und wartet geduldig auf die Sonne.",
+      "images": [
+        {
+          "src": "/web/assets/img/lemon_winter_stress00.jpg",
+          "alt": "citrus leaf edge necrosis",
+          "caption": "citrus leaf edge necrosis"
+        },
+        {
+          "src": "/web/assets/img/lemon_winter_stress01.jpg",
+          "alt": "fallen citrus leaves in pot",
+          "caption": "fallen citrus leaves in pot"
+        },
+        {
+          "src": "/web/assets/img/lemon_winter_stress02.jpg",
+          "alt": "lemon tree overall structure",
+          "caption": "lemon tree overall structure"
+        },
+        {
+          "src": "/web/assets/img/lemon_winter_stress03.jpg",
+          "alt": "fresh lemon tree shoots",
+          "caption": "fresh lemon tree shoots"
+        }
+      ]
+    }    
   ]
 }
 
