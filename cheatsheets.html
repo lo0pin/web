@@ -32,9 +32,9 @@
         linux, html or python: This section is my personal library of cheatsheets.
       </p>
       
-      <ul class="toc_column">
+      <ul class="toc">
         <li><a href="#linux">Linux</a></li>
-        <li><a href="#html">HTML/Žut</a></li>
+        <li><a href="#html">HTML</a></li>
       </ul>
     </section>
     <hr class="divider" />
@@ -48,6 +48,404 @@
         kurzer Text über den Fotos – aber nur als „Hook“
       </p>
 
+      <table>
+        <thead>
+          <tr>
+            <th>Priority</th>
+            <th>Command / Flag</th>
+            <th>What it does</th>
+            <th>Typical example</th>
+            <th>Useful flags / notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Very often</td>
+            <td><code>ssh</code></td>
+            <td>Connects to another computer over the network and gives you its terminal.</td>
+            <td><code>ssh name@host.local</code></td>
+            <td><code>-p</code> = use another port,<br><code>-i</code> = use a key file</td>
+          </tr>
+          <tr>
+            <td>Very often</td>
+            <td><code>ls</code></td>
+            <td>Shows the files and folders in the current folder.</td>
+            <td><code>ls</code></td>
+            <td><code>-l</code> = detailed list,<br><code>-a</code> = show hidden files,<br><code>-h</code> = human-readable sizes</td>
+          </tr>
+          <tr>
+            <td>Very often</td>
+            <td><code>cd</code></td>
+            <td>Changes to another folder.</td>
+            <td><code>cd ~/bme280_logger</code></td>
+            <td><code>cd ..</code> = go one folder up,<br><code>cd ~</code> = go home,<br><code>cd -</code> = go back to last folder</td>
+          </tr>
+          <tr>
+            <td>Very often</td>
+            <td><code>pwd</code></td>
+            <td>Shows where you are right now in the file system.</td>
+            <td><code>pwd</code></td>
+            <td>No common flags needed for beginners</td>
+          </tr>
+          <tr>
+            <td>Very often</td>
+            <td><code>sudo</code></td>
+            <td>Runs a command with administrator rights. You need it for important system changes.</td>
+            <td><code>sudo apt update</code></td>
+            <td>Use with care: it gives a command more power</td>
+          </tr>
+          <tr>
+            <td>Very often</td>
+            <td><code>nano</code></td>
+            <td>Opens a simple text editor in the terminal.</td>
+            <td><code>nano test_bme280.py</code></td>
+            <td><code>Ctrl+O</code> = save,<br><code>Ctrl+X</code> = exit</td>
+          </tr>
+          <tr>
+            <td>Very often</td>
+            <td><code>clear</code></td>
+            <td>Clears the terminal screen.</td>
+            <td><code>clear</code></td>
+            <td><code>Ctrl+L</code> does nearly the same thing</td>
+          </tr>
+          <tr>
+            <td>Very often</td>
+            <td><code>mkdir</code></td>
+            <td>Creates a new folder.</td>
+            <td><code>mkdir logs</code></td>
+            <td><code>-p</code> = also create parent folders if needed</td>
+          </tr>
+          <tr>
+            <td>Very often</td>
+            <td><code>touch</code></td>
+            <td>Creates an empty file.</td>
+            <td><code>touch notes.txt</code></td>
+            <td>Also updates the file time if the file already exists</td>
+          </tr>
+          <tr>
+            <td>Very often</td>
+            <td><code>cp</code></td>
+            <td>Copies a file or folder.</td>
+            <td><code>cp test.py backup.py</code></td>
+            <td><code>-r</code> = copy folders too,<br><code>-v</code> = show what is being copied</td>
+          </tr>
+          <tr>
+            <td>Very often</td>
+            <td><code>mv</code></td>
+            <td>Moves a file/folder or renames it.</td>
+            <td><code>mv old.txt new.txt</code></td>
+            <td>Same command for moving and renaming</td>
+          </tr>
+          <tr>
+            <td>Very often</td>
+            <td><code>rm</code></td>
+            <td>Deletes a file or folder.</td>
+            <td><code>rm old.txt</code></td>
+            <td><code>-r</code> = delete folders too,<br><code>-f</code> = force delete,<br><code>-i</code> = ask before deleting</td>
+          </tr>
+          <tr>
+            <td>Very often</td>
+            <td><code>cat</code></td>
+            <td>Prints the content of a file to the terminal.</td>
+            <td><code>cat config.txt</code></td>
+            <td>Good for short files; bad for very long files</td>
+          </tr>
+          <tr>
+            <td>Very often</td>
+            <td><code>tail</code></td>
+            <td>Shows the last lines of a file. Very useful for logs.</td>
+            <td><code>tail log.txt</code></td>
+            <td><code>-f</code> = keep watching for new lines live</td>
+          </tr>
+          <tr>
+            <td>Very often</td>
+            <td><code>head</code></td>
+            <td>Shows the first lines of a file.</td>
+            <td><code>head log.txt</code></td>
+            <td>Useful for quick checks</td>
+          </tr>
+          <tr>
+            <td>Very often</td>
+            <td><code>python</code> / <code>python3</code></td>
+            <td>Runs a Python script.</td>
+            <td><code>python3 test_bme280.py</code></td>
+            <td>On Raspberry Pi,<br><code>python3</code> is usually the safe choice</td>
+          </tr>
+          <tr>
+            <td>Often</td>
+            <td><code>apt update</code></td>
+            <td>Downloads the newest package lists. It does not install updates yet.</td>
+            <td><code>sudo apt update</code></td>
+            <td>Usually run before <code>upgrade</code> or <code>install</code></td>
+          </tr>
+          <tr>
+            <td>Often</td>
+            <td><code>apt upgrade</code></td>
+            <td>Installs available updates for installed software.</td>
+            <td><code>sudo apt upgrade</code></td>
+            <td><code>-y</code> = answer “yes” automatically</td>
+          </tr>
+          <tr>
+            <td>Often</td>
+            <td><code>apt full-upgrade</code></td>
+            <td>Does a bigger system update and may replace or remove packages if needed.</td>
+            <td><code>sudo apt full-upgrade -y</code></td>
+            <td>Useful for full system maintenance</td>
+          </tr>
+          <tr>
+            <td>Often</td>
+            <td><code>apt install</code></td>
+            <td>Installs new software packages.</td>
+            <td><code>sudo apt install -y i2c-tools</code></td>
+            <td><code>-y</code> = skip the confirmation question</td>
+          </tr>
+          <tr>
+            <td>Often</td>
+            <td><code>apt remove</code></td>
+            <td>Removes installed software packages.</td>
+            <td><code>sudo apt remove package-name</code></td>
+            <td>Removes software, but sometimes leaves config files behind</td>
+          </tr>
+          <tr>
+            <td>Often</td>
+            <td><code>find</code></td>
+            <td>Searches for files and folders.</td>
+            <td><code>find . -name "*.py"</code></td>
+            <td><code>.</code> means “start here”</td>
+          </tr>
+          <tr>
+            <td>Often</td>
+            <td><code>grep</code></td>
+            <td>Searches for text inside files or command output.</td>
+            <td><code>grep error log.txt</code></td>
+            <td><code>-i</code> = ignore upper/lower case,<br><code>-r</code> = search inside folders too</td>
+          </tr>
+          <tr>
+            <td>Often</td>
+            <td><code>less</code></td>
+            <td>Opens a file for easy reading, one screen at a time.</td>
+            <td><code>less long_log.txt</code></td>
+            <td>Press <code>q</code> to quit</td>
+          </tr>
+          <tr>
+            <td>Often</td>
+            <td><code>history</code></td>
+            <td>Shows your previous commands.</td>
+            <td><code>history</code></td>
+            <td>Very useful when you forgot what you typed earlier</td>
+          </tr>
+          <tr>
+            <td>Often</td>
+            <td><code>!!</code></td>
+            <td>Runs the last command again.</td>
+            <td><code>sudo !!</code></td>
+            <td>Classic trick: rerun the last command with <code>sudo</code></td>
+          </tr>
+          <tr>
+            <td>Often</td>
+            <td><code>python3 -m venv .venv</code></td>
+            <td>Creates a Python virtual environment for a project.</td>
+            <td><code>python3 -m venv .venv</code></td>
+            <td>Keeps project Python packages separate and tidy</td>
+          </tr>
+          <tr>
+            <td>Often</td>
+            <td><code>source .venv/bin/activate</code></td>
+            <td>Activates the virtual environment.</td>
+            <td><code>source .venv/bin/activate</code></td>
+            <td>After that, Python and pip use the virtual environment</td>
+          </tr>
+          <tr>
+            <td>Often</td>
+            <td><code>jobs</code></td>
+            <td>Shows programs running in the background in your current terminal.</td>
+            <td><code>jobs</code></td>
+            <td>Useful after starting a script with <code>&amp;</code></td>
+          </tr>
+          <tr>
+            <td>Often</td>
+            <td><code>fg</code></td>
+            <td>Brings a background job back to the front.</td>
+            <td><code>fg</code></td>
+            <td>Good if you want to stop it with <code>Ctrl+C</code></td>
+          </tr>
+          <tr>
+            <td>Often</td>
+            <td><code>&amp;</code></td>
+            <td>Starts a command in the background.</td>
+            <td><code>python3 logger.py &amp;</code></td>
+            <td>The terminal stays usable after starting the program</td>
+          </tr>
+          <tr>
+            <td>Regularly</td>
+            <td><code>reboot</code></td>
+            <td>Restarts the Raspberry Pi.</td>
+            <td><code>sudo reboot</code></td>
+            <td>Useful after updates or config changes</td>
+          </tr>
+          <tr>
+            <td>Regularly</td>
+            <td><code>shutdown</code></td>
+            <td>Turns the Raspberry Pi off safely.</td>
+            <td><code>sudo shutdown -h now</code></td>
+            <td><code>-h</code> = halt/power off,<br><code>-r</code> = reboot</td>
+          </tr>
+          <tr>
+            <td>Regularly</td>
+            <td><code>raspi-config</code></td>
+            <td>Opens Raspberry Pi settings like SSH, I2C, SPI, hostname and more.</td>
+            <td><code>sudo raspi-config</code></td>
+            <td>Very important on Raspberry Pi systems</td>
+          </tr>
+          <tr>
+            <td>Regularly</td>
+            <td><code>ip a</code></td>
+            <td>Shows network information like IP addresses.</td>
+            <td><code>ip a</code></td>
+            <td>Good when you want to know how the Pi is connected</td>
+          </tr>
+          <tr>
+            <td>Regularly</td>
+            <td><code>hostname</code></td>
+            <td>Shows the computer name.</td>
+            <td><code>hostname</code></td>
+            <td>Useful for SSH and network setup</td>
+          </tr>
+          <tr>
+            <td>Regularly</td>
+            <td><code>ping</code></td>
+            <td>Tests whether another device or website can be reached over the network.</td>
+            <td><code>ping raspberrypi.com</code></td>
+            <td>Press <code>Ctrl+C</code> to stop it</td>
+          </tr>
+          <tr>
+            <td>Regularly</td>
+            <td><code>i2cdetect -y 1</code></td>
+            <td>Scans the I2C bus and shows connected I2C devices like the BME280.</td>
+            <td><code>i2cdetect -y 1</code></td>
+            <td>Needs <code>i2c-tools</code> installed; on Raspberry Pi, bus <code>1</code> is the normal one</td>
+          </tr>
+          <tr>
+            <td>Regularly</td>
+            <td><code>ps aux</code></td>
+            <td>Shows running processes.</td>
+            <td><code>ps aux</code></td>
+            <td>Useful when you want to find a running script</td>
+          </tr>
+          <tr>
+            <td>Regularly</td>
+            <td><code>top</code></td>
+            <td>Shows live system activity like CPU, memory and running processes.</td>
+            <td><code>top</code></td>
+            <td>Press <code>q</code> to quit</td>
+          </tr>
+          <tr>
+            <td>Regularly</td>
+            <td><code>htop</code></td>
+            <td>A friendlier and clearer version of <code>top</code>.</td>
+            <td><code>htop</code></td>
+            <td>May need installation first: <code>sudo apt install htop</code></td>
+          </tr>
+          <tr>
+            <td>Sometimes</td>
+            <td><code>kill</code></td>
+            <td>Stops a running process by its process ID.</td>
+            <td><code>kill 1234</code></td>
+            <td><code>-9</code> = force stop; use only if normal stop fails</td>
+          </tr>
+          <tr>
+            <td>Sometimes</td>
+            <td><code>man</code></td>
+            <td>Shows the manual page for a command.</td>
+            <td><code>man ls</code></td>
+            <td>Good when you want the official explanation</td>
+          </tr>
+          <tr>
+            <td>Sometimes</td>
+            <td><code>--help</code></td>
+            <td>Shows a short help text for many commands.</td>
+            <td><code>ls --help</code></td>
+            <td>Faster than reading the full manual page</td>
+          </tr>
+          <tr>
+            <td>Sometimes</td>
+            <td><code>Ctrl+C</code></td>
+            <td>Stops the currently running command.</td>
+            <td><code>python3 logger.py</code> then press <code>Ctrl+C</code></td>
+            <td>Extremely important in daily terminal use</td>
+          </tr>
+          <tr>
+            <td>Sometimes</td>
+            <td><code>TAB</code></td>
+            <td>Auto-completes file names and commands.</td>
+            <td>Type <code>cd Doc</code> and press <code>TAB</code></td>
+            <td>Saves time and avoids typing mistakes</td>
+          </tr>
+          <tr>
+            <td>Sometimes</td>
+            <td><code>Arrow Up</code></td>
+            <td>Shows your previous command in the terminal.</td>
+            <td>Press <code>↑</code></td>
+            <td>Perfect for repeating or editing old commands</td>
+          </tr>
+          <tr>
+            <td>Important flags</td>
+            <td><code>-r</code></td>
+            <td>Recursive. Usually means “also go through folders and everything inside them”.</td>
+            <td><code>cp -r myfolder backup/</code></td>
+            <td>Common with <code>cp</code>,<br><code>rm</code>,<br><code>grep</code></td>
+          </tr>
+          <tr>
+            <td>Important flags</td>
+            <td><code>-f</code></td>
+            <td>Force. Do it without asking, even if it may be risky.</td>
+            <td><code>rm -f file.txt</code></td>
+            <td>Dangerous with delete commands</td>
+          </tr>
+          <tr>
+            <td>Important flags</td>
+            <td><code>-y</code></td>
+            <td>Automatically answer “yes” to questions.</td>
+            <td><code>sudo apt install -y i2c-tools</code></td>
+            <td>Useful in package management</td>
+          </tr>
+          <tr>
+            <td>Important flags</td>
+            <td><code>-i</code></td>
+            <td>Interactive. Usually asks before doing something risky.</td>
+            <td><code>rm -i file.txt</code></td>
+            <td>Good for safer deleting</td>
+          </tr>
+          <tr>
+            <td>Important flags</td>
+            <td><code>-v</code></td>
+            <td>Verbose. Shows more details about what the command is doing.</td>
+            <td><code>cp -v a.txt b.txt</code></td>
+            <td>Useful when learning</td>
+          </tr>
+          <tr>
+            <td>Important flags</td>
+            <td><code>-h</code></td>
+            <td>Human-readable. Shows file sizes in an easy form like KB, MB, GB.</td>
+            <td><code>ls -lh</code></td>
+            <td>Very handy when checking file sizes</td>
+          </tr>
+          <tr>
+            <td>Important flags</td>
+            <td><code>-a</code></td>
+            <td>Shows all files, including hidden ones.</td>
+            <td><code>ls -a</code></td>
+            <td>Hidden files often start with a dot, like <code>.bashrc</code></td>
+          </tr>
+          <tr>
+            <td>Important flags</td>
+            <td><code>-l</code></td>
+            <td>Long format. Shows more details like permissions, owner and size.</td>
+            <td><code>ls -l</code></td>
+            <td>Often combined as <code>ls -lah</code></td>
+          </tr>
+        </tbody>
+      </table>
 
 
       
