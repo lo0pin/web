@@ -36,6 +36,8 @@
         <li><a href="#linux">Linux</a></li>
         <li><a href="#html">HTML</a></li>
         <li><a href="#css">CSS</a></li>
+        <li><a href="#python">Python</a></li>
+        <li><a href="#arduino">Arduino (C++)</a></li>
       </ul>
     </section>
     <hr class="divider" />
@@ -1355,6 +1357,1047 @@
     </section>
     <hr class="divider" />
 
+
+    <section class="card" id="python">
+      <h2 class="card-title">Python</h2>
+      <p>
+        Python is a general-purpose language with a clean syntax and a low barrier to entry. 
+        It is excellent for automation, scripting, data handling, small tools, quick experiments and hardware-related projects.
+      </p>
+
+      <p>
+        This cheatsheet focuses on the Python things you actually use all the time: variables, data types, conditions, loops, functions, files, modules, virtual environments and a few common traps.
+      </p>
+
+      <ul class="toc">
+        <li><a href="#python-basics">Basics</a></li>
+        <li><a href="#python-types">Data types</a></li>
+        <li><a href="#python-strings">Strings</a></li>
+        <li><a href="#python-conditions">Conditions</a></li>
+        <li><a href="#python-loops">Loops</a></li>
+        <li><a href="#python-functions">Functions</a></li>
+        <li><a href="#python-collections">Lists, tuples, dicts, sets</a></li>
+        <li><a href="#python-files">Files</a></li>
+        <li><a href="#python-errors">Errors & exceptions</a></li>
+        <li><a href="#python-modules">Modules & imports</a></li>
+        <li><a href="#python-venv">Virtual environments</a></li>
+        <li><a href="#python-practical">Practical rules</a></li>
+      </ul>
+
+      <hr class="divider" />
+
+      <h3 id="python-basics">Basics</h3>
+
+      <div class="cheat-grid">
+        <article class="cheat-item">
+          <h4>Hello world</h4>
+          <pre class="code"><code>print("Hello, world!")</code></pre>
+          <p><strong>Use:</strong> Prints text to the console.</p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Variables</h4>
+          <pre class="code"><code>name = "Julian"
+    age = 28
+    temperature = 21.5
+    is_online = True</code></pre>
+          <p>Python variables do not need explicit type declarations.</p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Comments</h4>
+          <pre class="code"><code># This is a comment
+
+    """
+    This is a multi-line docstring
+    or documentation string.
+    """</code></pre>
+          <p>Use comments for explanations, not for narrating every line like a bad sports commentator.</p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Indentation matters</h4>
+          <pre class="code"><code>if True:
+        print("Indented correctly")
+
+    print("Outside the block")</code></pre>
+          <p class="hint">In Python, indentation is not decoration. It defines the structure.</p>
+        </article>
+      </div>
+
+      <hr class="divider" />
+
+      <h3 id="python-types">Data types</h3>
+
+      <div class="cheat-grid">
+        <article class="cheat-item">
+          <h4>Common data types</h4>
+          <pre class="code"><code>text = "hello"      # str
+    number = 42         # int
+    pi = 3.1415         # float
+    active = True       # bool
+    nothing = None      # NoneType</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Check a type</h4>
+          <pre class="code"><code>value = 42
+    print(type(value))</code></pre>
+          <p>Useful when you are not sure what you are actually handling.</p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Convert between types</h4>
+          <pre class="code"><code>age_text = "28"
+    age_number = int(age_text)
+
+    temperature = "21.5"
+    temperature_number = float(temperature)
+
+    number = 42
+    text = str(number)</code></pre>
+        </article>
+      </div>
+
+      <hr class="divider" />
+
+      <h3 id="python-strings">Strings</h3>
+
+      <div class="cheat-grid">
+        <article class="cheat-item">
+          <h4>Basic string operations</h4>
+          <pre class="code"><code>name = "Julian"
+
+    print(name.lower())
+    print(name.upper())
+    print(len(name))
+    print(name[0])</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>f-strings</h4>
+          <pre class="code"><code>name = "Julian"
+    age = 28
+
+    print(f"My name is {name} and I am {age} years old.")</code></pre>
+          <p class="hint">This is usually the cleanest way to build readable output strings.</p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Useful string methods</h4>
+          <pre class="code"><code>text = "  Hello World  "
+
+    print(text.strip())         # remove outer spaces
+    print(text.replace("World", "Python"))
+    print(text.startswith("  He"))
+    print(text.endswith("  "))
+    print(text.split())</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Multi-line strings</h4>
+          <pre class="code"><code>message = """Line one
+    Line two
+    Line three"""
+
+    print(message)</code></pre>
+        </article>
+      </div>
+
+      <hr class="divider" />
+
+      <h3 id="python-conditions">Conditions</h3>
+
+      <div class="cheat-grid">
+        <article class="cheat-item">
+          <h4><code>if</code>, <code>elif</code>, <code>else</code></h4>
+          <pre class="code"><code>temperature = 18
+
+    if temperature > 25:
+        print("Warm")
+    elif temperature > 15:
+        print("Mild")
+    else:
+        print("Cold")</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Comparison operators</h4>
+          <pre class="code"><code>x == 10   # equal
+    x != 10   # not equal
+    x > 10
+    x < 10
+    x >= 10
+    x <= 10</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Logical operators</h4>
+          <pre class="code"><code>if age >= 18 and country == "AT":
+        print("Allowed")
+
+    if is_admin or is_editor:
+        print("Can edit")
+
+    if not active:
+        print("Inactive")</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Truthy and falsy values</h4>
+          <pre class="code"><code>if []:
+        print("List has content")
+
+    if not []:
+        print("List is empty")</code></pre>
+          <p>Empty strings, empty lists, zero and <code>None</code> are treated as false.</p>
+        </article>
+      </div>
+
+      <hr class="divider" />
+
+      <h3 id="python-loops">Loops</h3>
+
+      <div class="cheat-grid">
+        <article class="cheat-item">
+          <h4><code>for</code> loop</h4>
+          <pre class="code"><code>for i in range(5):
+        print(i)</code></pre>
+          <p>Prints 0 to 4.</p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Loop through a list</h4>
+          <pre class="code"><code>colors = ["red", "green", "blue"]
+
+    for color in colors:
+        print(color)</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4><code>while</code> loop</h4>
+          <pre class="code"><code>count = 0
+
+    while count < 3:
+        print(count)
+        count += 1</code></pre>
+          <p class="hint">Useful, but easy to abuse into infinite nonsense if you forget to update the condition.</p>
+        </article>
+
+        <article class="cheat-item">
+          <h4><code>break</code> and <code>continue</code></h4>
+          <pre class="code"><code>for i in range(10):
+        if i == 3:
+            continue
+        if i == 7:
+            break
+        print(i)</code></pre>
+          <p><code>continue</code> skips one iteration, <code>break</code> stops the loop completely.</p>
+        </article>
+
+        <article class="cheat-item">
+          <h4><code>enumerate()</code></h4>
+          <pre class="code"><code>items = ["a", "b", "c"]
+
+    for index, item in enumerate(items):
+        print(index, item)</code></pre>
+          <p>Very useful when you need both index and value.</p>
+        </article>
+      </div>
+
+      <hr class="divider" />
+
+      <h3 id="python-functions">Functions</h3>
+
+      <div class="cheat-grid">
+        <article class="cheat-item">
+          <h4>Basic function</h4>
+          <pre class="code"><code>def greet(name):
+        print(f"Hello, {name}!")
+
+    greet("Julian")</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Return values</h4>
+          <pre class="code"><code>def add(a, b):
+        return a + b
+
+    result = add(3, 4)
+    print(result)</code></pre>
+          <p><code>return</code> gives a value back to the caller.</p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Default arguments</h4>
+          <pre class="code"><code>def greet(name="world"):
+        print(f"Hello, {name}!")
+
+    greet()
+    greet("Julian")</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Keyword arguments</h4>
+          <pre class="code"><code>def describe(name, age):
+        print(f"{name} is {age} years old.")
+
+    describe(age=28, name="Julian")</code></pre>
+        </article>
+      </div>
+
+      <hr class="divider" />
+
+      <h3 id="python-collections">Lists, tuples, dicts, sets</h3>
+
+      <div class="cheat-grid">
+        <article class="cheat-item">
+          <h4>Lists</h4>
+          <pre class="code"><code>colors = ["red", "green", "blue"]
+
+    colors.append("yellow")
+    colors.remove("green")
+    print(colors[0])
+    print(len(colors))</code></pre>
+          <p>Lists are ordered and mutable.</p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Tuples</h4>
+          <pre class="code"><code>point = (10, 20)
+    print(point[0])</code></pre>
+          <p>Tuples are ordered but immutable.</p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Dictionaries</h4>
+          <pre class="code"><code>person = {
+        "name": "Julian",
+        "age": 28,
+        "city": "Graz"
+    }
+
+    print(person["name"])
+    print(person.get("age"))</code></pre>
+          <p>Dictionaries store key-value pairs.</p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Sets</h4>
+          <pre class="code"><code>numbers = {1, 2, 3, 3}
+    print(numbers)</code></pre>
+          <p>Sets contain unique values only.</p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>List comprehensions</h4>
+          <pre class="code"><code>squares = [x * x for x in range(5)]
+    print(squares)</code></pre>
+          <p>Compact and powerful, though beginners should not turn every line into cryptic wizardry.</p>
+        </article>
+      </div>
+
+      <hr class="divider" />
+
+      <h3 id="python-files">Files</h3>
+
+      <div class="cheat-grid">
+        <article class="cheat-item">
+          <h4>Read a file</h4>
+          <pre class="code"><code>with open("notes.txt", "r", encoding="utf-8") as file:
+        content = file.read()
+
+    print(content)</code></pre>
+          <p><code>with open(...)</code> is the standard clean pattern.</p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Write a file</h4>
+          <pre class="code"><code>with open("output.txt", "w", encoding="utf-8") as file:
+        file.write("Hello, file!")</code></pre>
+          <p><code>"w"</code> overwrites the file if it already exists.</p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Append to a file</h4>
+          <pre class="code"><code>with open("log.txt", "a", encoding="utf-8") as file:
+        file.write("New line\n")</code></pre>
+          <p><code>"a"</code> adds content at the end instead of replacing the file.</p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Read line by line</h4>
+          <pre class="code"><code>with open("data.txt", "r", encoding="utf-8") as file:
+        for line in file:
+            print(line.strip())</code></pre>
+        </article>
+      </div>
+
+      <hr class="divider" />
+
+      <h3 id="python-errors">Errors & exceptions</h3>
+
+      <div class="cheat-grid">
+        <article class="cheat-item">
+          <h4>Basic <code>try</code> / <code>except</code></h4>
+          <pre class="code"><code>try:
+        number = int("abc")
+    except ValueError:
+        print("That was not a valid integer.")</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4><code>else</code> and <code>finally</code></h4>
+          <pre class="code"><code>try:
+        value = int("42")
+    except ValueError:
+        print("Invalid")
+    else:
+        print("Success:", value)
+    finally:
+        print("This always runs")</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Raise your own error</h4>
+          <pre class="code"><code>age = -1
+
+    if age < 0:
+        raise ValueError("Age cannot be negative")</code></pre>
+        </article>
+      </div>
+
+      <hr class="divider" />
+
+      <h3 id="python-modules">Modules & imports</h3>
+
+      <div class="cheat-grid">
+        <article class="cheat-item">
+          <h4>Import a module</h4>
+          <pre class="code"><code>import math
+
+    print(math.sqrt(16))</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Import specific things</h4>
+          <pre class="code"><code>from math import sqrt
+
+    print(sqrt(25))</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Common useful modules</h4>
+          <pre class="code"><code>import os
+    import sys
+    import json
+    import csv
+    import pathlib
+    import datetime</code></pre>
+          <p>These are everyday tools for files, paths, data, dates and system interaction.</p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Main guard</h4>
+          <pre class="code"><code>def main():
+        print("Program starts here")
+
+    if __name__ == "__main__":
+        main()</code></pre>
+          <p class="hint">Useful so code only runs when the file is executed directly.</p>
+        </article>
+      </div>
+
+      <hr class="divider" />
+
+      <h3 id="python-venv">Virtual environments</h3>
+
+      <div class="cheat-grid">
+        <article class="cheat-item">
+          <h4>Create a virtual environment</h4>
+          <pre class="code"><code>python3 -m venv .venv</code></pre>
+          <p>Creates an isolated Python environment for a project.</p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Activate it on Linux / Raspberry Pi</h4>
+          <pre class="code"><code>source .venv/bin/activate</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Install packages</h4>
+          <pre class="code"><code>pip install requests</code></pre>
+          <p>Usually do this after activating the virtual environment.</p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Freeze dependencies</h4>
+          <pre class="code"><code>pip freeze > requirements.txt</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Install from requirements</h4>
+          <pre class="code"><code>pip install -r requirements.txt</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Deactivate</h4>
+          <pre class="code"><code>deactivate</code></pre>
+        </article>
+      </div>
+
+      <hr class="divider" />
+
+      <h3 id="python-practical">Practical rules</h3>
+
+      <ul>
+        <li><strong>Indentation is syntax.</strong> Mess it up and Python bites immediately.</li>
+        <li><strong>Use clear variable names.</strong> <code>temperature_c</code> is better than <code>x</code>.</li>
+        <li><strong>Prefer small functions.</strong> Giant all-purpose blobs become debugging swamps.</li>
+        <li><strong>Use <code>with open(...)</code> for files.</strong> It closes files cleanly and saves you from sloppiness.</li>
+        <li><strong>Use virtual environments for projects.</strong> Global package chaos is a stupid hobby.</li>
+        <li><strong>Print for quick debugging, but do not marry it.</strong> For bigger projects, use proper logging.</li>
+        <li><strong>Use lists for ordered collections, dicts for named values.</strong> Do not hammer everything into one data type.</li>
+        <li><strong>Read error messages carefully.</strong> Python is often blunt, but not usually mysterious.</li>
+        <li><strong>Start simple.</strong> Clever one-liners are overrated and often ugly.</li>
+        <li><strong>Consistency beats cleverness.</strong> Code should still make sense when you reread it two weeks later.</li>
+      </ul>
+
+      <p class="hint"><a href="#top">↑ top</a></p>
+    </section>
+    <hr class="divider" />    
+
+
+    <section class="card" id="arduino">
+      <h2 class="card-title">Arduino</h2>
+      <p>
+        Arduino is a beginner-friendly microcontroller platform for reading sensors, controlling outputs and building small interactive hardware projects.
+        It combines simple hardware access with a lightweight C/C++-style programming model.
+      </p>
+
+      <p>
+        This cheatsheet focuses on the Arduino things you actually use all the time: sketch structure, variables, pins, digital and analog I/O, timing, serial monitor, functions, libraries and a few common traps.
+      </p>
+
+      <ul class="toc">
+        <li><a href="#arduino-basics">Basics</a></li>
+        <li><a href="#arduino-variables">Variables & data types</a></li>
+        <li><a href="#arduino-pins">Pins & pin modes</a></li>
+        <li><a href="#arduino-digital">Digital input & output</a></li>
+        <li><a href="#arduino-analog">Analog input & PWM output</a></li>
+        <li><a href="#arduino-serial">Serial monitor</a></li>
+        <li><a href="#arduino-timing">Timing</a></li>
+        <li><a href="#arduino-conditions">Conditions & logic</a></li>
+        <li><a href="#arduino-loops">Loops & iteration</a></li>
+        <li><a href="#arduino-functions">Functions</a></li>
+        <li><a href="#arduino-libraries">Libraries</a></li>
+        <li><a href="#arduino-practical">Practical rules</a></li>
+      </ul>
+
+      <hr class="divider" />
+
+      <h3 id="arduino-basics">Basics</h3>
+
+      <div class="cheat-grid">
+        <article class="cheat-item">
+          <h4>Basic sketch structure</h4>
+          <pre class="code"><code>void setup() {
+      // runs once at startup
+    }
+
+    void loop() {
+      // runs again and again
+    }</code></pre>
+          <p><strong>setup()</strong> runs once. <strong>loop()</strong> runs forever until power is removed or the board is reset.</p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Hello world on Serial</h4>
+          <pre class="code"><code>void setup() {
+      Serial.begin(9600);
+      Serial.println("Hello, Arduino!");
+    }
+
+    void loop() {
+    }</code></pre>
+          <p>A classic first test. If this does not work, something basic is wrong: board, port, cable or baud rate.</p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Comments</h4>
+          <pre class="code"><code>// Single-line comment
+
+    /*
+      Multi-line comment
+    */</code></pre>
+          <p>Use comments to explain intent, not to narrate every obvious line like a village herald.</p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Semicolon matters</h4>
+          <pre class="code"><code>int ledPin = 13;   // correct
+    int ledPin = 13    // wrong</code></pre>
+          <p class="hint">Unlike Python, Arduino/C++ wants semicolons. Forget them and the compiler sulks immediately.</p>
+        </article>
+      </div>
+
+      <hr class="divider" />
+
+      <h3 id="arduino-variables">Variables & data types</h3>
+
+      <div class="cheat-grid">
+        <article class="cheat-item">
+          <h4>Common data types</h4>
+          <pre class="code"><code>int sensorValue = 0;
+    float temperature = 21.5;
+    bool ledState = true;
+    char letter = 'A';</code></pre>
+          <p>These are the types you will meet constantly in small Arduino projects.</p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Useful integer types</h4>
+          <pre class="code"><code>byte smallValue = 255;
+    unsigned long currentTime = 0;</code></pre>
+          <p><code>unsigned long</code> is especially important for timing with <code>millis()</code>.</p>
+        </article>
+
+        <article class="cheat-item">
+          <h4><code>const</code> for fixed values</h4>
+          <pre class="code"><code>const int ledPin = 13;
+    const int buttonPin = 2;</code></pre>
+          <p>Use <code>const</code> for pin numbers and fixed settings. It keeps the code clearer and safer.</p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Global vs local variables</h4>
+          <pre class="code"><code>int counter = 0;   // global
+
+    void loop() {
+      int localValue = 5;  // local
+      counter++;
+    }</code></pre>
+          <p>Global variables are visible everywhere. Local variables only exist inside their function or block.</p>
+        </article>
+      </div>
+
+      <hr class="divider" />
+
+      <h3 id="arduino-pins">Pins & pin modes</h3>
+
+      <div class="cheat-grid">
+        <article class="cheat-item">
+          <h4><code>pinMode()</code></h4>
+          <pre class="code"><code>void setup() {
+      pinMode(13, OUTPUT);
+      pinMode(2, INPUT);
+    }</code></pre>
+          <p>Before using a pin, tell the microcontroller what role it should play.</p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Common pin modes</h4>
+          <pre class="code"><code>pinMode(13, OUTPUT);
+    pinMode(2, INPUT);
+    pinMode(3, INPUT_PULLUP);</code></pre>
+          <ul>
+            <li><code>OUTPUT</code> = drives LED, relay, etc.</li>
+            <li><code>INPUT</code> = reads an external signal</li>
+            <li><code>INPUT_PULLUP</code> = input with internal pull-up resistor</li>
+          </ul>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Why <code>INPUT_PULLUP</code> matters</h4>
+          <pre class="code"><code>pinMode(3, INPUT_PULLUP);</code></pre>
+          <p class="hint">Very useful for buttons. It avoids floating input chaos and saves an external resistor in many cases.</p>
+        </article>
+      </div>
+
+      <hr class="divider" />
+
+      <h3 id="arduino-digital">Digital input & output</h3>
+
+      <div class="cheat-grid">
+        <article class="cheat-item">
+          <h4>Turn an LED on and off</h4>
+          <pre class="code"><code>const int ledPin = 13;
+
+    void setup() {
+      pinMode(ledPin, OUTPUT);
+    }
+
+    void loop() {
+      digitalWrite(ledPin, HIGH);
+      delay(1000);
+      digitalWrite(ledPin, LOW);
+      delay(1000);
+    }</code></pre>
+          <p><code>HIGH</code> usually means on, <code>LOW</code> means off.</p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Read a button</h4>
+          <pre class="code"><code>const int buttonPin = 2;
+
+    void setup() {
+      pinMode(buttonPin, INPUT_PULLUP);
+      Serial.begin(9600);
+    }
+
+    void loop() {
+      int state = digitalRead(buttonPin);
+      Serial.println(state);
+    }</code></pre>
+          <p>With <code>INPUT_PULLUP</code>, a pressed button often reads <code>LOW</code>, not <code>HIGH</code>. Slightly perverse, but normal.</p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>React to a button press</h4>
+          <pre class="code"><code>const int buttonPin = 2;
+    const int ledPin = 13;
+
+    void setup() {
+      pinMode(buttonPin, INPUT_PULLUP);
+      pinMode(ledPin, OUTPUT);
+    }
+
+    void loop() {
+      if (digitalRead(buttonPin) == LOW) {
+        digitalWrite(ledPin, HIGH);
+      } else {
+        digitalWrite(ledPin, LOW);
+      }
+    }</code></pre>
+        </article>
+      </div>
+
+      <hr class="divider" />
+
+      <h3 id="arduino-analog">Analog input & PWM output</h3>
+
+      <div class="cheat-grid">
+        <article class="cheat-item">
+          <h4>Read an analog value</h4>
+          <pre class="code"><code>int sensorValue = 0;
+
+    void setup() {
+      Serial.begin(9600);
+    }
+
+    void loop() {
+      sensorValue = analogRead(A0);
+      Serial.println(sensorValue);
+      delay(500);
+    }</code></pre>
+          <p>On many Arduino boards, <code>analogRead()</code> returns values from 0 to 1023.</p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>PWM output with <code>analogWrite()</code></h4>
+          <pre class="code"><code>const int ledPin = 9;
+
+    void setup() {
+      pinMode(ledPin, OUTPUT);
+    }
+
+    void loop() {
+      analogWrite(ledPin, 128);
+    }</code></pre>
+          <p>On classic Arduino boards, PWM values usually go from 0 to 255.</p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Map one range to another</h4>
+          <pre class="code"><code>int sensorValue = analogRead(A0);
+    int brightness = map(sensorValue, 0, 1023, 0, 255);
+
+    analogWrite(9, brightness);</code></pre>
+          <p><code>map()</code> is useful when sensor ranges and output ranges do not match.</p>
+        </article>
+
+        <article class="cheat-item">
+          <h4><code>constrain()</code></h4>
+          <pre class="code"><code>int value = 300;
+    value = constrain(value, 0, 255);</code></pre>
+          <p>Keeps a value inside a defined range.</p>
+        </article>
+      </div>
+
+      <hr class="divider" />
+
+      <h3 id="arduino-serial">Serial monitor</h3>
+
+      <div class="cheat-grid">
+        <article class="cheat-item">
+          <h4>Start Serial communication</h4>
+          <pre class="code"><code>void setup() {
+      Serial.begin(9600);
+    }</code></pre>
+          <p>The baud rate in the Serial Monitor must match this value.</p>
+        </article>
+
+        <article class="cheat-item">
+          <h4><code>Serial.print()</code> vs <code>Serial.println()</code></h4>
+          <pre class="code"><code>Serial.print("Value: ");
+    Serial.println(42);</code></pre>
+          <p><code>print()</code> stays on the same line. <code>println()</code> adds a line break.</p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Print several values clearly</h4>
+          <pre class="code"><code>int temp = 23;
+    int humidity = 55;
+
+    Serial.print("Temp: ");
+    Serial.print(temp);
+    Serial.print(" C, Humidity: ");
+    Serial.print(humidity);
+    Serial.println(" %");</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Serial for debugging</h4>
+          <pre class="code"><code>Serial.println("Reached setup()");
+    Serial.println(sensorValue);</code></pre>
+          <p class="hint">Serial output is one of the most useful debugging tools in Arduino land. Primitive, but gold.</p>
+        </article>
+      </div>
+
+      <hr class="divider" />
+
+      <h3 id="arduino-timing">Timing</h3>
+
+      <div class="cheat-grid">
+        <article class="cheat-item">
+          <h4><code>delay()</code></h4>
+          <pre class="code"><code>delay(1000);</code></pre>
+          <p>Pauses the program for 1000 milliseconds = 1 second.</p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Blink without delay using <code>millis()</code></h4>
+          <pre class="code"><code>const int ledPin = 13;
+    unsigned long previousMillis = 0;
+    const unsigned long interval = 1000;
+    bool ledState = false;
+
+    void setup() {
+      pinMode(ledPin, OUTPUT);
+    }
+
+    void loop() {
+      unsigned long currentMillis = millis();
+
+      if (currentMillis - previousMillis >= interval) {
+        previousMillis = currentMillis;
+        ledState = !ledState;
+        digitalWrite(ledPin, ledState);
+      }
+    }</code></pre>
+          <p>This is the classic non-blocking timing pattern. Very important once projects get even mildly serious.</p>
+        </article>
+
+        <article class="cheat-item">
+          <h4><code>millis()</code> basics</h4>
+          <pre class="code"><code>unsigned long now = millis();</code></pre>
+          <p>Returns the number of milliseconds since the board started running.</p>
+        </article>
+
+        <article class="cheat-item">
+          <h4><code>micros()</code></h4>
+          <pre class="code"><code>unsigned long t = micros();</code></pre>
+          <p>Like <code>millis()</code>, but in microseconds. Useful for faster timing needs.</p>
+        </article>
+      </div>
+
+      <hr class="divider" />
+
+      <h3 id="arduino-conditions">Conditions & logic</h3>
+
+      <div class="cheat-grid">
+        <article class="cheat-item">
+          <h4><code>if</code>, <code>else</code></h4>
+          <pre class="code"><code>int value = analogRead(A0);
+
+    if (value > 500) {
+      Serial.println("High");
+    } else {
+      Serial.println("Low");
+    }</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Comparison operators</h4>
+          <pre class="code"><code>x == 10
+    x != 10
+    x > 10
+    x < 10
+    x >= 10
+    x <= 10</code></pre>
+        </article>
+
+    <article class="cheat-item">
+      <h4>Logical operators</h4>
+      <pre class="code"><code>if (temp > 20 && humidity < 70) {
+  Serial.println("Comfortable");
+}
+
+if (buttonPressed || sensorTriggered) {
+  Serial.println("Action");
+}
+
+if (!enabled) {
+  Serial.println("Disabled");
+}</code></pre>
+    </article>
+  </div>
+
+  <hr class="divider" />
+
+  <h3 id="arduino-loops">Loops & iteration</h3>
+
+  <div class="cheat-grid">
+    <article class="cheat-item">
+      <h4><code>for</code> loop</h4>
+      <pre class="code"><code>for (int i = 0; i < 5; i++) {
+  Serial.println(i);
+}</code></pre>
+      <p>Useful for repeated actions, arrays and test output.</p>
+    </article>
+
+    <article class="cheat-item">
+      <h4><code>while</code> loop</h4>
+      <pre class="code"><code>int x = 0;
+
+while (x < 3) {
+  Serial.println(x);
+  x++;
+}</code></pre>
+      <p>Works fine, but be careful: a bad <code>while</code> loop can lock your program into stupidity.</p>
+    </article>
+
+    <article class="cheat-item">
+      <h4>Loop over an array</h4>
+      <pre class="code"><code>int values[] = {10, 20, 30, 40};
+
+for (int i = 0; i < 4; i++) {
+  Serial.println(values[i]);
+}</code></pre>
+    </article>
+  </div>
+
+  <hr class="divider" />
+
+  <h3 id="arduino-functions">Functions</h3>
+
+  <div class="cheat-grid">
+    <article class="cheat-item">
+      <h4>Basic function</h4>
+      <pre class="code"><code>void blinkOnce() {
+  digitalWrite(13, HIGH);
+  delay(200);
+  digitalWrite(13, LOW);
+}</code></pre>
+      <p>Functions help split code into reusable, readable chunks.</p>
+    </article>
+
+    <article class="cheat-item">
+      <h4>Function with parameters</h4>
+      <pre class="code"><code>void blinkLed(int pin, int duration) {
+  digitalWrite(pin, HIGH);
+  delay(duration);
+  digitalWrite(pin, LOW);
+}</code></pre>
+    </article>
+
+    <article class="cheat-item">
+      <h4>Function with return value</h4>
+      <pre class="code"><code>int readSensor() {
+  return analogRead(A0);
+}</code></pre>
+    </article>
+
+    <article class="cheat-item">
+      <h4>Using a function</h4>
+      <pre class="code"><code>void loop() {
+  int value = readSensor();
+  Serial.println(value);
+  delay(500);
+}</code></pre>
+    </article>
+  </div>
+
+  <hr class="divider" />
+
+  <h3 id="arduino-libraries">Libraries</h3>
+
+  <div class="cheat-grid">
+    <article class="cheat-item">
+      <h4>Include a library</h4>
+      <pre class="code"><code>#include &lt;Wire.h&gt;</code></pre>
+      <p>Libraries add functionality for sensors, displays, communication and more.</p>
+    </article>
+
+    <article class="cheat-item">
+      <h4>Typical pattern with an object</h4>
+      <pre class="code"><code>#include &lt;LiquidCrystal_I2C.h&gt;
+
+LiquidCrystal_I2C lcd(0x27, 16, 2);
+
+void setup() {
+  lcd.init();
+  lcd.backlight();
+  lcd.print("Hello");
+}
+
+void loop() {
+}</code></pre>
+      <p>Many Arduino libraries create an object first, then you call methods on it.</p>
+    </article>
+
+    <article class="cheat-item">
+      <h4>Common built-in or standard libraries</h4>
+      <pre class="code"><code>#include &lt;Wire.h&gt;     // I2C
+#include &lt;SPI.h&gt;      // SPI
+#include &lt;EEPROM.h&gt;   // EEPROM
+#include &lt;Servo.h&gt;    // Servo motors</code></pre>
+    </article>
+
+    <article class="cheat-item">
+      <h4>I2C basics with Wire</h4>
+      <pre class="code"><code>#include &lt;Wire.h&gt;
+
+void setup() {
+  Wire.begin();
+}
+
+void loop() {
+}</code></pre>
+      <p>Very common for sensors like BME280, displays and RTC modules.</p>
+    </article>
+  </div>
+
+  <hr class="divider" />
+
+  <h3 id="arduino-practical">Practical rules</h3>
+
+  <ul>
+    <li><strong>Know your board voltage.</strong> Some boards are 5 V, others 3.3 V. Mixing this up can ruin hardware fast.</li>
+    <li><strong>Always set pin modes in <code>setup()</code>.</strong> Random pin behavior is not character development.</li>
+    <li><strong>Use <code>INPUT_PULLUP</code> for buttons when possible.</strong> It simplifies wiring and avoids floating inputs.</li>
+    <li><strong>Use <code>const</code> for pin numbers and fixed settings.</strong> That keeps code cleaner.</li>
+    <li><strong>Use the Serial Monitor constantly while debugging.</strong> It is crude, but brutally effective.</li>
+    <li><strong>Do not overuse <code>delay()</code>.</strong> It blocks the program and makes bigger projects sluggish or blind.</li>
+    <li><strong>Learn the <code>millis()</code> pattern early.</strong> It is one of the first real steps from toy sketches to proper embedded logic.</li>
+    <li><strong>Check your wiring before blaming your code.</strong> Hardware errors are often embarrassingly physical.</li>
+    <li><strong>Read the datasheet or module notes.</strong> Pin labels and logic levels are not decorative folklore.</li>
+    <li><strong>Change one thing at a time when debugging.</strong> Otherwise you create confusion instead of progress.</li>
+  </ul>
+
+  <p class="hint"><a href="#top">↑ top</a></p>
+</section>
+<hr class="divider" />
 
 <!--
     <section class="card" id="css">
