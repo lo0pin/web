@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>News Prompt Generator</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --panel: #111827;
+      --panel-2: #1f2937;
+      --line: #334155;
+      --text: #e5e7eb;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-2: #0ea5e9;
+      --ok: #22c55e;
+      --shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
+      --radius: 18px;
+      --radius-sm: 12px;
+      --font: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background:
+        radial-gradient(circle at top right, rgba(56, 189, 248, 0.14), transparent 28%),
+        radial-gradient(circle at bottom left, rgba(14, 165, 233, 0.12), transparent 25%),
+        var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      min-height: 100%;
+    }
+
+    body {
+      padding: 28px;
+    }
+
+    .wrap {
+      width: min(1200px, 100%);
+      margin: 0 auto;
+      display: grid;
+      gap: 22px;
+    }
+
+    .hero,
+    .panel {
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
+      border: 1px solid rgba(148, 163, 184, 0.16);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(8px);
+    }
+
+    .hero {
+      padding: 28px;
+    }
+
+    .hero h1 {
+      margin: 0 0 10px;
+      font-size: clamp(1.8rem, 2.4vw, 2.8rem);
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+    }
+
+    .hero p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 75ch;
+      line-height: 1.6;
+    }
+
+    .panel {
+      padding: 24px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #f8fafc;
+      letter-spacing: 0.02em;
+    }
+
+    .hint {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-top: -2px;
+    }
+
+    input,
+    textarea,
+    select,
+    button {
+      font: inherit;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      background: rgba(15, 23, 42, 0.78);
+      color: var(--text);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+      transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
+      outline: none;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.14);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 140px;
+      line-height: 1.5;
+    }
+
+    .input-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      margin-top: 6px;
+    }
+
+    button {
+      border: 0;
+      border-radius: 999px;
+      padding: 12px 18px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.15s ease, opacity 0.15s ease, background 0.2s ease;
+    }
+
+    button:hover { transform: translateY(-1px); }
+    button:active { transform: translateY(0); }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #082f49;
+    }
+
+    .btn-secondary {
+      background: rgba(148, 163, 184, 0.12);
+      color: var(--text);
+      border: 1px solid rgba(148, 163, 184, 0.18);
+    }
+
+    .status {
+      min-height: 1.3em;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .status.ok {
+      color: var(--ok);
+    }
+
+    .output-wrap {
+      position: relative;
+    }
+
+    #output {
+      min-height: 420px;
+      white-space: pre-wrap;
+      font-family: "Cascadia Code", "Fira Code", Consolas, monospace;
+      font-size: 0.95rem;
+      line-height: 1.55;
+      cursor: copy;
+    }
+
+    .copy-note {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    .pillbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .pill {
+      font-size: 0.75rem;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(56, 189, 248, 0.08);
+      border: 1px solid rgba(56, 189, 248, 0.18);
+      color: #bae6fd;
+    }
+
+    @media (max-width: 860px) {
+      body { padding: 16px; }
+      .grid { grid-template-columns: 1fr; }
+      .input-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="hero">
+      <h1>News Prompt Generator</h1>
+      <p>
+        Ein kleines, eigenständiges Formular für saubere Prompt-Erzeugung. Kein Server.
+      </p>
+    </section>
+
+    <section class="panel">
+      <div class="grid">
+        <div class="field full">
+          <label for="thema">THEMA</label>
+          <input id="thema" type="text" placeholder="z. B. First BME280 measurements on the Raspberry Pi" />
+        </div>
+
+        <div class="field full">
+          <label for="kontext">KONTEXT / STICHPUNKTE / BEOBACHTUNGEN</label>
+          <textarea id="kontext" placeholder="Hier deine Notizen, Beobachtungen, Rohpunkte, technische Eckdaten, Erkenntnisse, Probleme, nächste Schritte ..."></textarea>
+        </div>
+
+        <div class="field">
+          <label for="topicSelect">TOPIC</label>
+          <div class="input-row">
+            <select id="topicSelect" aria-label="Topic auswählen"></select>
+            <input id="topicCustom" type="text" placeholder="oder eigener Topic-Begriff" />
+          </div>
+          <div class="pillbar" id="topicPills"></div>
+        </div>
+
+        <div class="field">
+          <label for="subtopicSelect">SUBTOPIC</label>
+          <div class="input-row">
+            <select id="subtopicSelect" aria-label="Subtopic auswählen"></select>
+            <input id="subtopicCustom" type="text" placeholder="oder eigener Subtopic-Begriff" />
+          </div>
+          <div class="pillbar" id="subtopicPills"></div>
+        </div>
+
+        <div class="field">
+          <label for="datum">DATUM</label>
+          <input id="datum" type="text" />
+          <div class="hint">Wenn du nichts einträgst, wird das heutige Datum verwendet.</div>
+        </div>
+
+        <div class="field full">
+          <div class="actions">
+            <button class="btn-primary" id="generateBtn" type="button">Generate</button>
+            <button class="btn-secondary" id="clearBtn" type="button">Clear</button>
+          </div>
+          <div class="status" id="status"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel output-wrap">
+      <div class="field full">
+        <label for="output">GENERIERTER PROMPT</label>
+        <textarea id="output" readonly placeholder="Hier erscheint nach dem Klick auf Generate der fertige Prompt."></textarea>
+        <div class="copy-note">Klick ins Feld kopiert den gesamten Prompt automatisch in die Zwischenablage.</div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const taxonomy = {
+      botanik: ["raspberry", "ribisl", "fig", "lemon", "bonsai"],
+      making: ["3dprint"],
+      code: ["html", "python", "cpp"],
+      words: ["communication", "history", "linguistics", "literature", "philosophy", "poetry"],
+      electronics: ["mesh", "oled_bme", "led_matrix", "solar", "pc_build"],
+      nerdism: ["gothic_mod", "lotr", "games"],
+      astro: ["moon"],
+      outdoor: ["drone"]
+    };
+
+    const themaEl = document.getElementById("thema");
+    const kontextEl = document.getElementById("kontext");
+    const topicSelectEl = document.getElementById("topicSelect");
+    const topicCustomEl = document.getElementById("topicCustom");
+    const subtopicSelectEl = document.getElementById("subtopicSelect");
+    const subtopicCustomEl = document.getElementById("subtopicCustom");
+    const datumEl = document.getElementById("datum");
+    const outputEl = document.getElementById("output");
+    const statusEl = document.getElementById("status");
+    const topicPillsEl = document.getElementById("topicPills");
+    const subtopicPillsEl = document.getElementById("subtopicPills");
+    const generateBtn = document.getElementById("generateBtn");
+    const clearBtn = document.getElementById("clearBtn");
+
+    function getTodayISO() {
+      const now = new Date();
+      const y = now.getFullYear();
+      const m = String(now.getMonth() + 1).padStart(2, "0");
+      const d = String(now.getDate()).padStart(2, "0");
+      return `${y}-${m}-${d}`;
+    }
+
+    const todayISO = getTodayISO();
+    datumEl.placeholder = todayISO;
+
+    function setStatus(message = "", isOk = false) {
+      statusEl.textContent = message;
+      statusEl.classList.toggle("ok", Boolean(isOk));
+    }
+
+    function escapePromptValue(value) {
+      return String(value || "").trim();
+    }
+
+    function fillTopicSelect() {
+      topicSelectEl.innerHTML = "";
+
+      const placeholder = document.createElement("option");
+      placeholder.value = "";
+      placeholder.textContent = "Topic auswählen ...";
+      topicSelectEl.appendChild(placeholder);
+
+      Object.keys(taxonomy).forEach((topic) => {
+        const option = document.createElement("option");
+        option.value = topic;
+        option.textContent = topic;
+        topicSelectEl.appendChild(option);
+      });
+
+      renderTopicPills();
+    }
+
+    function fillSubtopicSelect(topic) {
+      subtopicSelectEl.innerHTML = "";
+
+      const placeholder = document.createElement("option");
+      placeholder.value = "";
+      placeholder.textContent = topic ? "Subtopic auswählen ..." : "Erst Topic wählen ...";
+      subtopicSelectEl.appendChild(placeholder);
+
+      const subtopics = taxonomy[topic] || [];
+      subtopics.forEach((subtopic) => {
+        const option = document.createElement("option");
+        option.value = subtopic;
+        option.textContent = subtopic;
+        subtopicSelectEl.appendChild(option);
+      });
+
+      renderSubtopicPills(subtopics);
+    }
+
+    function renderTopicPills() {
+      topicPillsEl.innerHTML = "";
+      Object.keys(taxonomy).forEach((topic) => {
+        const span = document.createElement("span");
+        span.className = "pill";
+        span.textContent = topic;
+        topicPillsEl.appendChild(span);
+      });
+    }
+
+    function renderSubtopicPills(subtopics) {
+      subtopicPillsEl.innerHTML = "";
+      if (!subtopics || !subtopics.length) {
+        const span = document.createElement("span");
+        span.className = "pill";
+        span.textContent = "custom possible";
+        subtopicPillsEl.appendChild(span);
+        return;
+      }
+
+      subtopics.forEach((subtopic) => {
+        const span = document.createElement("span");
+        span.className = "pill";
+        span.textContent = subtopic;
+        subtopicPillsEl.appendChild(span);
+      });
+    }
+
+    function getResolvedTopic() {
+      const custom = escapePromptValue(topicCustomEl.value);
+      const selected = escapePromptValue(topicSelectEl.value);
+      return custom || selected;
+    }
+
+    function getResolvedSubtopic() {
+      const custom = escapePromptValue(subtopicCustomEl.value);
+      const selected = escapePromptValue(subtopicSelectEl.value);
+      return custom || selected;
+    }
+
+    function buildPrompt({ thema, kontext, topic, subtopic, datum }) {
+      return `Erstelle einen Newsbeitrag für meine Webseite als **valide JSON-Objektstruktur** für \`posts.json\`.
+
+WICHTIG:
+- Gib **nur** das JSON-Objekt aus.
+- Kein erklärender Text davor oder danach.
+- Der Beitrag soll im Stil meiner besten vorhandenen Einträge geschrieben sein: präzise, reflektiert, technisch oder essayistisch, gut strukturiert, mit klarer Beobachtung, sauberem Rhythmus und nur dort leicht poetisch, wo es wirklich trägt.
+- Nutze die Formatierungsmöglichkeiten meines Renderers **gezielt und sinnvoll**, nicht mechanisch.
+
+## Zielstruktur
+
+Verwende dieses Schema:
+
+{
+  "id": "YYYY-MM-DD_topic_subtopic_hh_mm",
+  "topic": "<topic>",
+  "subtopic": "<subtopic>",
+  "date": "YYYY-MM-DD",
+  "title": "<clear, elegant title>",
+  "format": "markdown",
+  "teaser": "<short English teaser, ideally 1 short paragraph, max. about 40–80 words>",
+  "content_en": "<full English markdown content>",
+  "content_de": "<full German markdown content>",
+  "images": [
+    {
+      "src": "/web/assets/img/<filename>",
+      "alt": "<meaningful alt text>",
+      "caption": "<short caption if useful>"
+    }
+  ]
+}
+
+## Inhaltliche Anforderungen
+
+Schreibe den Beitrag auf Basis dieses Themas / Materials:
+
+THEMA:
+${thema || "[HIER DAS THEMA EINFÜGEN]"}
+
+KONTEXT / STICHPUNKTE / BEOBACHTUNGEN:
+${kontext || "[HIER DEINE NOTIZEN EINFÜGEN]"}
+
+BILDER:
+Die Bilder werden gemeinsam mit dem Prompt hochgeladen. Leite Dateinamen, Bildinhalt, sinnvolle \`alt\`-Texte und optionale \`caption\`-Texte aus den tatsächlich mitgelieferten Bildern ab. Wenn keine Bilder mitgeliefert wurden, gib \`\"images\": []\` aus.
+
+TOPIC:
+${topic || "[HIER TOPIC EINFÜGEN]"}
+
+SUBTOPIC:
+${subtopic || "[HIER SUBTOPIC EINFÜGEN]"}
+
+DATUM:
+${datum || todayISO}
+
+## Stilregeln
+
+- Der **Teaser** ist auf Englisch und funktioniert als kompakter, eigenständiger Einstieg.
+- \`content_en\` und \`content_de\` sollen **nicht bloß wörtliche Übersetzungen** sein, sondern idiomatisch gut formulierte Fassungen desselben Inhalts.
+- Der Text soll inhaltlich Substanz haben: Beobachtung, Einordnung, Erkenntnis, nächste Schritte, Konsequenz, technischer oder praktischer Mehrwert.
+- Wenn passend, soll der Beitrag den Charakter von:
+  - Werkstattprotokoll,
+  - Feldbeobachtung,
+  - Projektlog,
+  - kleinem Essay
+  kombinieren.
+- Schreibe konkret statt generisch.
+- Keine Floskeln, kein Marketington, kein KI-Sprech.
+
+## Markdown-/Renderer-Regeln: gezielt nutzen
+
+Nutze diese Möglichkeiten **nur wenn sie wirklich passen**:
+
+1. **Absätze**  
+   Verwende normale Absätze als Grundstruktur.
+
+2. **Fett** mit \`**text**\`  
+   Für zentrale Begriffe, Schlüsse, technische Kernaussagen.
+
+3. *Kursiv* mit \`*text*\`  
+   Für feine Betonung oder knappe pointierte Sätze.
+
+4. **Hint-Block** mit einer ganzen Zeile in Tildenform  
+   Beispiel:
+   \`~A small system becomes interesting the moment it stops forgetting.~\`  
+   Verwende 1–3 solcher Zeilen an markanten Stellen.
+
+5. **Überschriften**
+   - \`#\` für größere Abschnittsüberschrift
+   - \`##\` für Unterabschnitt
+   - \`###\` für kleineren Zwischenpunkt  
+   Nur verwenden, wenn der Beitrag wirklich von klarer Gliederung profitiert.
+
+6. **Listen**
+   Nutze \`- \` für:
+   - Beobachtungen
+   - Ursachen
+   - nächste Schritte
+   - technische Eckpunkte
+   - Lessons learned
+
+7. **Inline-Code** mit \`\code\\`  
+   Nur für Befehle, Dateinamen, Variablen, Pins, Werte, IDs, Pfade, Funktionen, Protokolle etc.
+
+8. **Codeblöcke** mit Triple-Backticks  
+   Nur wenn im Beitrag wirklich ein Befehl, Snippet oder Konfigurationsbeispiel sinnvoll ist.  
+   Beispiel:
+   \`\`\`bash
+   python3 logger_bme280.py
+   \`\`\`
+
+9. **Links**
+   Falls sinnvoll, nutze:
+   - externe Links: \`[Text](https://...)\`
+   - Anchor-Links: \`[Setup](#setup)\`
+   - relative Links: \`[Tool](./html/tool.html)\`
+
+## Bildregeln
+
+- \`images\` soll nur dann mehrere Bilder enthalten, wenn das sinnvoll ist.
+- \`alt\` immer konkret und beschreibend.
+- \`caption\` nur setzen, wenn es echten Mehrwert bringt.
+- Keine leeren Felder.
+- Wenn keine Bilder vorgegeben sind, gib \`\"images\": []\` aus.
+
+## Qualitätsmaßstab
+
+Der Beitrag soll haben:
+
+- klare Titel
+- starker, knapper Teaser
+- strukturierter Fließtext
+- präzise Listen
+- markante Hint-Zeilen
+- saubere technische oder beobachtende Einordnung
+- sinnvolle Zweisprachigkeit
+
+## Zusätzliche inhaltliche Erwartung
+
+Wenn passend, integriere diese Bausteine:
+
+- Was konkret gemacht / beobachtet wurde
+- Warum das relevant oder interessant ist
+- Was daraus gelernt wurde
+- Was als Nächstes folgt
+- Falls technisch: klare, reale Begriffe statt vager Beschreibungen
+- Falls botanisch / outdoor / experimentell: konkrete sichtbare Anzeichen statt Allgemeinplätze
+
+## Ausgabevorgabe
+
+Gib am Ende **nur ein einziges vollständiges JSON-Objekt** aus, ohne Markdown-Codeblock und ohne Kommentar.`;
+    }
+
+    async function copyToClipboard(text) {
+      try {
+        await navigator.clipboard.writeText(text);
+        setStatus("Prompt in die Zwischenablage kopiert.", true);
+      } catch (error) {
+        setStatus("Kopieren per Clipboard-API fehlgeschlagen. Feld ist aber markiert.");
+        outputEl.focus();
+        outputEl.select();
+      }
+    }
+
+    function generatePrompt() {
+      const data = {
+        thema: escapePromptValue(themaEl.value),
+        kontext: escapePromptValue(kontextEl.value),
+        topic: getResolvedTopic(),
+        subtopic: getResolvedSubtopic(),
+        datum: escapePromptValue(datumEl.value) || todayISO
+      };
+
+      const prompt = buildPrompt(data).replace(/`\u0000code`/g, "`` `code` ``");
+      outputEl.value = prompt;
+      setStatus("Prompt erzeugt.", true);
+    }
+
+    function clearForm() {
+      themaEl.value = "";
+      kontextEl.value = "";
+      topicSelectEl.value = "";
+      topicCustomEl.value = "";
+      subtopicSelectEl.innerHTML = "";
+      subtopicCustomEl.value = "";
+      datumEl.value = "";
+      outputEl.value = "";
+      fillSubtopicSelect("");
+      setStatus("Formular geleert.");
+    }
+
+    topicSelectEl.addEventListener("change", () => {
+      const topic = topicSelectEl.value;
+      fillSubtopicSelect(topic);
+      if (!topicCustomEl.value.trim()) {
+        subtopicCustomEl.value = "";
+      }
+    });
+
+    topicCustomEl.addEventListener("input", () => {
+      const custom = topicCustomEl.value.trim();
+      if (custom) {
+        fillSubtopicSelect("");
+      } else {
+        fillSubtopicSelect(topicSelectEl.value);
+      }
+    });
+
+    generateBtn.addEventListener("click", generatePrompt);
+    clearBtn.addEventListener("click", clearForm);
+
+    outputEl.addEventListener("click", async () => {
+      if (!outputEl.value.trim()) {
+        setStatus("Noch nichts zu kopieren. Erst generieren.");
+        return;
+      }
+      outputEl.focus();
+      outputEl.select();
+      await copyToClipboard(outputEl.value);
+    });
+
+    outputEl.addEventListener("focus", async () => {
+      if (!outputEl.value.trim()) return;
+      outputEl.select();
+      await copyToClipboard(outputEl.value);
+    });
+
+    fillTopicSelect();
+    fillSubtopicSelect("");
+  </script>
+</body>
+</html>
