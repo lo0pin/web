@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Current Projects</title>
+
+  <!-- Uses the same stylesheet as your landing page -->
+  <link rel="stylesheet" href="assets/css/main.css" />
+</head>
+
+<body>
+  <!-- Same header + navigation as index.html (keeps the site consistent) -->
+  <header class="site-header">
+    <div class="header-inner">
+      <h1 class="site-title">Latest News & Current Projects</h1>
+
+      <nav class="top-nav" aria-label="Top navigation">
+        <a href="./index.html">home</a>
+        <!--<a href="news.html">My Projects</a>
+        <a href="notes.html">Few Notes</a>
+        <a href="contact.html">Get in Contact</a>-->
+      </nav>
+    </div>
+  </header>
+
+  <main class="content">
+    <section class="card">
+    <p>
+      This archive contains the full history of posts — a chronological trail of ideas, experiments, and small discoveries.
+    </p>
+    </section>
+    
+    <hr class="divider" />
+
+    <div data-news-mode="all"></div>
+    <script type="module" src="assets/js/news.js"></script>
+
+    <hr class="divider" />
+
+    <section aria-label="Back to home">
+      <p>
+        <a href="./index.html">← Back to Home</a>
+      </p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2026 Julian</p>
+  </footer>
+
+  <script src="assets/js/main.js" defer></script>
+</body>
+</html>
