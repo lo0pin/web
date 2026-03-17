@@ -68,6 +68,7 @@ Noch nicht im JSON GENERATOR:
 
 ### Subtopic
 "subtopic": "drone"
+"subtopic": "hiking"
 
 
 
