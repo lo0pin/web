@@ -30,7 +30,7 @@
       ]
     },
     {
-      "id": "2026-02-03-botinik-fig",
+      "id": "2026-02-03-botanik-fig",
       "topic": "botanik",
       "subtopic": "fig",
       "date": "2026-02-03",
@@ -53,7 +53,7 @@
       "content_en": "*The plant is still in dormancy, buds are plump, and the framework is healthy. This is the ideal timing window for shaping in a container: fewer canes, better fruit quality.*\n\n**What I did:** selected and kept **six main canes** for a clean, airy structure; removed weak/crowded growth; kept the short 5–10 cm side shoots intact (they’re productive on redcurrant).\n\n**Next steps:** leave it alone now: bright, cool, and only minimal watering. Start a gentle, organic feed once leaf-out is clearly underway. After harvest, consider removing one of the oldest canes at the base to keep the plant young and productive.\n\n~Container logic: remove wood rather than “topping” it. Short side shoots are assets, not clutter.~",
       "content_de": "Die Pflanze befindet sich noch in der Ruhephase, die Knospen sind prall, und das Grundgerüst ist gesund. Das ist das ideale Zeitfenster für die Formgebung im Topf: weniger Ruten, bessere Fruchtqualität.\n\nWas ich gemacht habe: sechs Haupttriebe für eine klare, luftige Struktur ausgewählt und belassen; schwaches bzw. zu dicht stehendes Wachstum entfernt; die kurzen Seitentriebe (5–10 cm) bewusst erhalten (sie sind bei roten Johannisbeeren fruchttragend).\n\nNächste Schritte: vorerst in Ruhe lassen: hell, kühl und nur minimal gießen. Mit einer sanften, organischen Düngung beginnen, sobald der Austrieb deutlich eingesetzt hat. Nach der Ernte ggf. eine der ältesten Ruten bodennah entfernen, um die Pflanze jung und ertragreich zu halten.\n\n~Topf-Logik: Holz entfernen statt „einkürzen“. Kurze Seitentriebe sind kein Ballast, sondern Kapital.~",
       "images": [
-        { "src": "/web/assets/img/rib02.jpg", "alt": "Redcurrant" },
+        { "src": "/web/assets/img/rib01.jpg", "alt": "Redcurrant" },
         { "src": "/web/assets/img/rib02.jpg", "alt": "Redcurrant" }
       ]
     },
@@ -77,9 +77,9 @@
       "title": "Hardware finally arrived",
       "format": "markdown",
       "content_en": "~First Meshtastic node on the desk — a Heltec board equipped with an external antenna.~\n\nFreshly arrived Meshtastic [hardware](#hardware) — the first building blocks of an off-grid, autonomous network, ready to be configured and taken outdoors. [Setup](#setup) was (almost) quite self-explainatory.\n\n**Next steps:**\n- Define clear roles for both nodes (mobile node vs. stationary node)\n- Build a reliable 18650-based power system with proper charging and protection\n- Implement solar power for the stationary node to enable long-term off-grid operation\n- Evaluate MPPT vs. simpler charging solutions based on panel size and real-world efficiency\n- Design and 3D-print a compact, weather-resistant enclosure\n- Optimize antenna placement for range, stability, and terrain\n- Use one node as a dedicated mobile companion while hiking or traveling\n- Document a clean, reproducible setup from flashing to deployment\n- Compare repeater mode vs. second-node behavior under realistic conditions\n- Add basic sensor hardware to collect environmental and system telemetry",
-      "content_de": "Unser neuestes Segelvideo ist fertig, auf das Wesentliche verdichtet und jetzt auf [YouTube](https://youtu.be/EEyXTLKDoIc?si=xBxKvwbbK22xsdyH) verfügbar. Leine los – und begleite uns auf ein paar ehrliche Meilen aus Wind, Wasser und stiller Besessenheit.",
+      "content_de": "~Erster Meshtastic-Node auf dem Schreibtisch — ein Heltec-Board mit externer Antenne.~\n\nFrisch eingetroffene Meshtastic-[Hardware](#hardware) — die ersten Bausteine eines autarken, netzunabhängigen Netzwerks, bereit zur Konfiguration und für den Einsatz im Freien. Das [Setup](#setup) war (fast) selbsterklärend.\n\n**Nächste Schritte:**\n- Klare Rollen für beide Nodes definieren (mobiler Node vs. stationärer Node)\n- Ein zuverlässiges 18650-basiertes Stromversorgungssystem mit sauberem Lade- und Schutzkonzept aufbauen\n- Solarbetrieb für den stationären Node umsetzen, um langfristigen Off-Grid-Betrieb zu ermöglichen\n- MPPT gegenüber einfacheren Ladelösungen anhand von Panelgröße und realer Effizienz evaluieren\n- Ein kompaktes, wetterfestes Gehäuse entwerfen und 3D-drucken\n- Antennenpositionierung für Reichweite, Stabilität und Gelände optimieren\n- Einen Node als mobilen Begleiter beim Wandern oder Reisen einsetzen\n- Ein sauberes, reproduzierbares Setup von Flashen bis Deployment dokumentieren\n- Repeater-Modus vs. Verhalten eines zweiten Nodes unter realistischen Bedingungen vergleichen\n- Einfache Sensorik zur Erfassung von Umwelt- und Systemdaten integrieren",
       "images": [
-        { "src": "/web/assets/img/meshtastic_hw,jpg.jpeg", "alt": "mesh node" }  
+        { "src": "/web/assets/img/meshtastic_hw.jpeg", "alt": "mesh node" }  
       ]
     },
     {
@@ -202,7 +202,7 @@
       "images": [
         {
           "src": "/web/assets/img/mesh_walk01.jpeg",
-          "alt": "mesh_walk01.jepg"
+          "alt": "mesh_walk01.jpeg"
         },
         {
           "src": "/web/assets/img/mesh_walk02.jpeg",
@@ -278,7 +278,7 @@
       "title": "What this is about & Why I got into modding",
       "format": "markdown",
       "content_en": "Gothic modding is not about bigger swords, louder magic, or more spectacle. It is about **world logic**. A Gothic world works when its rules are consistent, its silences intentional, and its people behave as if they existed before the player arrived — and will continue after he leaves. Modding means learning how that illusion is built — and how to extend it without breaking the spell. \n\nI grew up with games that trusted the player to listen, observe, and think. Gothic was one of them. It never explained itself fully. It hinted. It implied. It expected attention. At some point, playing was no longer enough. I wanted to understand **why** a line of dialogue felt heavy, **why** a village felt hostile without anyone saying so, **why** a quest worked even when nothing “happened”. Modding was the natural next step: not to rewrite Gothic — but to speak its language fluently. ",
-      "content_de": "Gothic-Modding dreht sich nicht um größere Schwerter, lautere Magie oder mehr Spektakel. Es geht um **Weltlogik**. Eine Gothic-Welt funktioniert dann, wenn ihre Regeln konsistent sind, ihre Stille bewusst gesetzt ist und ihre Figuren sich so verhalten, als hätten sie bereits existiert, bevor der Spieler eintrifft — und würden weiterleben, nachdem er gegangen ist. Modding bedeutet zu verstehen, wie diese Illusion entsteht — und wie man sie erweitert, ohne den Zauber zu brechen.\n\nIch bin mit Spielen aufgewachsen, die dem Spieler vertraut haben: zuzuhören, zu beobachten, zu denken. Gothic war eines davon. Es hat sich nie vollständig erklärt. Es hat angedeutet, impliziert, Aufmerksamkeit eingefordert. Irgendwann reichte das bloße Spielen nicht mehr. Ich wollte verstehen, **warum** sich eine Dialogzeile schwer anfühlt, **warum** ein Dorf feindselig wirkt, ohne dass es ausgesprochen wird, **warum** eine Quest funktioniert, obwohl scheinbar „nichts passiert“. Modding war der logische nächste Schritt: nicht, um Gothic neu zu schreiben — sondern um seine Sprache fließend zu sprechen."
+      "content_de": "Gothic-Modding dreht sich nicht um größere Schwerter, lautere Magie oder mehr Spektakel. Es geht um **Weltlogik**. Eine Gothic-Welt funktioniert dann, wenn ihre Regeln konsistent sind, ihre Stille bewusst gesetzt ist und ihre Figuren sich so verhalten, als hätten sie bereits existiert, bevor der Spieler eintrifft — und würden weiterleben, nachdem er gegangen ist. Modding bedeutet zu verstehen, wie diese Illusion entsteht — und wie man sie erweitert, ohne den Zauber zu brechen.\n\nIch bin mit Spielen aufgewachsen, die dem Spieler vertraut haben: zuzuhören, zu beobachten, zu denken. Gothic war eines davon. Es hat sich nie vollständig erklärt. Es hat angedeutet, impliziert, Aufmerksamkeit eingefordert. Irgendwann reichte das bloße Spielen nicht mehr. Ich wollte verstehen, **warum** sich eine Dialogzeile schwer anfühlt, **warum** ein Dorf feindselig wirkt, ohne dass es ausgesprochen wird, **warum** eine Quest funktioniert, obwohl scheinbar „nichts passiert“. Modding war der logische nächste Schritt: nicht, um Gothic neu zu schreiben — sondern um seine Sprache fließend zu sprechen.",
       "images": []
     },
     {
