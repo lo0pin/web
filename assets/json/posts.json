@@ -855,6 +855,27 @@
           "caption": "Potted ribisel shrub on a sunny balcony showing new spring growth and older woody canes"
         }
       ]
+    },
+    {
+      "id": "2026-03-18_electronics_ledmatrix_02_21_48",
+      "topic": "electronics",
+      "subtopic": "led_matrix",
+      "date": "2026-03-18",
+      "title": "Scrolling Text Engine — Buffer, Window, Shift",
+      "format": "markdown",
+      "teaser": "A 32×8 LED matrix doesn’t forgive bad timing. This post breaks down the **scrolling engine** behind the weather display — how a message becomes columns, how a window moves across them, and why ~millis()~ matters more than ~delay().",
+      "content_en": "~A display that scrolls is a display that breathes.~\n\nThe most interesting part of the LED matrix project is not the sensor logic.\nIt is the scrolling engine.\n\nOn a 32×8 matrix, you don’t \"print text\".\nYou simulate movement.\n\nThe process is deliberately split into three stages:\n\n- **Message buffer** — a long column-based byte stream\n- **View window** — the currently visible 32 columns\n- **Shift step** — moving the window one column per frame\n\nThe string is assembled first:\n\n~newmessage(message, now, T, P, H, -1, -1);~\n\nThen converted into a column buffer:\n\n~columns = createMessage(message, buf, maxleng, spacerint);~\n\nEach character becomes a series of 8-bit columns. No pixels are drawn yet — only memory is prepared.\n\nRendering happens independently of measurement logic. That’s important.\n\nInstead of blocking delays, the animation uses a time delta check:\n\n~const unsigned long now_timer = millis();~\n~if (now_timer - lastTick < STEP_MS) return;~\n~lastTick = now_timer;~\n~writeMessage(buf, columns, mx, iterations++);~\n\nThis separation ensures:\n\n- sensor reading stays stable\n- EEPROM writes are not disturbed\n- animation remains smooth\n- no visible flicker\n\nThe core idea is simple but powerful:\n\nA long message exists in memory.\nThe matrix only shows a moving window of it.\n\nShift the window.\nRepeat.\n\nThat’s it.\n\nSmall parameters dramatically change the character of the display:\n\n- ~STEP_MS~ → scroll speed\n- ~spacerint~ → character breathing room\n- ~INTENSITY~ → visual comfort at night\n\nThe OLED version later replaced movement with structure.\nBut the LED matrix forced me to think in time, not layout.\n\nAnd that mindset changed how I approach display logic entirely.",
+      "content_de": "~Eine scrollende Anzeige lebt von Zeit.~\n\nDer spannendste Teil des LED-Matrix-Projekts ist nicht die Sensorik.\nEs ist die Laufschrift-Engine.\n\nAuf einer 32×8-Matrix wird Text nicht gedruckt.\nEr wird verschoben.\n\nDer Ablauf besteht bewusst aus drei Ebenen:\n\n- **Message Buffer** — ein langer Spalten-Byte-Strom im Speicher\n- **View Window** — die aktuell sichtbaren 32 Spalten\n- **Shift** — das Verschieben des Fensters um eine Spalte pro Frame\n\nZuerst wird der String erzeugt:\n\n~newmessage(message, now, T, P, H, -1, -1);~\n\nDann in Spalten zerlegt:\n\n~columns = createMessage(message, buf, maxleng, spacerint);~\n\nJedes Zeichen wird zu einer Reihe von 8-Bit-Spalten. Es wird noch nichts angezeigt — nur vorbereitet.\n\nDas Rendern ist strikt von der Messlogik getrennt. Und genau das ist entscheidend.\n\nStatt ~delay()~ wird mit ~millis()~ gearbeitet:\n\n~const unsigned long now_timer = millis();~\n~if (now_timer - lastTick < STEP_MS) return;~\n~lastTick = now_timer;~\n~writeMessage(buf, columns, mx, iterations++);~\n\nDas sorgt dafür, dass:\n\n- Sensorwerte sauber gelesen werden\n- EEPROM-Schreibvorgänge nicht blockieren\n- die Animation flüssig bleibt\n- kein Flackern entsteht\n\nDie Grundidee ist elegant:\n\nEine lange Nachricht existiert im Speicher.\nDie Matrix zeigt nur ein Fenster davon.\n\nFenster verschieben.\nWiederholen.\n\nWenige Parameter bestimmen den Charakter:\n\n- ~STEP_MS~ → Geschwindigkeit\n- ~spacerint~ → Abstand zwischen Zeichen\n- ~INTENSITY~ → Helligkeit\n\nWährend das OLED-Display später Struktur brachte, zwang mich die LED-Matrix dazu, in Zeit zu denken.\n\nUnd genau das war der eigentliche Lernmoment.",
+      "images": [
+        {
+          "src": "/web/assets/img/led_matrix20.png",
+          "alt": "led_matrix20.png"
+        },
+        {
+          "src": "/web/assets/img/led_matrix21.png",
+          "alt": "led_matrix21.png"
+        }
+      ]
     }
   ]
 }
