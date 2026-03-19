@@ -876,6 +876,39 @@
           "alt": "led_matrix21.png"
         }
       ]
+    },
+    {
+      "id": "2026-03-19_outdoor_drone_first_test",
+      "topic": "outdoor",
+      "subtopic": "drone",
+      "date": "2026-03-19",
+      "title": "First Drone Test Flight — Cold Air, Grey Sky, Valuable Lessons",
+      "format": "markdown",
+      "teaser": "A first cautious test flight over snowy hills and winter forests. The footage revealed beautiful views — and a few clear lessons about drone flying: too many pans, overly careful movements, and learning when to brake instead of dodge.",
+      "content_en": "The first real test flight of the drone happened on a quiet winter afternoon. Snow still covered the hills, the sky was heavy with clouds, and the landscape looked almost monochrome — a calm, muted setting for a first attempt in the air.\n\nThe goal of the flight was simple: **get a feeling for the controls and the movement of the camera**.\n\nEven during the first minutes it became clear that flying a drone smoothly is less about technology and more about restraint. The aircraft itself behaves remarkably stable. The real challenge lies in the operator.\n\nLooking at the recorded footage afterwards revealed several useful insights.\n\n**Observations from the first flight:**\n\n- too many camera pans and direction changes\n- movements that were overly cautious\n- tendency to \"dodge\" instead of simply braking\n\nIn the air this often feels natural. When the drone approaches trees or terrain, the instinctive reaction is to steer away. In practice this creates unnecessary camera movement and slightly nervous footage.\n\nA much better strategy in many situations is simply to **stop and hover**. The drone stabilizes almost instantly, which produces far calmer images.\n\nThe winter scenery itself turned out to be a surprisingly good test environment. Snow and leafless trees create strong contrasts, making even small camera movements visible in the footage. That makes it easier to learn what works — and what doesn't.\n\nTechnically, the drone handled the conditions without difficulty. Cold air, light wind, and overcast skies posed no problem at all.\n\nThe real progress from this first flight therefore isn't spectacular footage — it is **understanding the rhythm of aerial movement**.\n\n**Key lessons from the first test:**\n\n- fewer camera pans\n- slower stick inputs\n- prefer braking over evasive steering\n- allow the drone to hover and stabilize\n\nThe next flights will focus on longer, calmer shots and deliberate camera movement.\n\nFlying turns out to be less about steering and more about patience.\n\nOr in simpler terms: the drone already knows how to fly — now the pilot has to learn how to stay still.",
+      "content_de": "Der erste echte Testflug mit der Drohne fand an einem ruhigen Wintertag statt. Schnee lag noch auf den Hügeln, der Himmel war schwer von grauen Wolken, und die Landschaft wirkte fast monochrom – eine ruhige, gedämpfte Kulisse für einen ersten Flugversuch.\n\nDas Ziel dieses Flugs war bewusst einfach: **ein Gefühl für die Steuerung und die Kamerabewegung zu bekommen**.\n\nSchon nach wenigen Minuten wurde klar, dass ruhiges Drohnenfliegen weniger eine Frage der Technik ist als eine Frage der Zurückhaltung. Die Drohne selbst verhält sich erstaunlich stabil. Die eigentliche Herausforderung sitzt am Controller.\n\nBeim späteren Durchsehen der Aufnahmen wurden einige Dinge schnell deutlich.\n\n**Erkenntnisse aus dem ersten Flug:**\n\n- zu viele Schwenks und Richtungswechsel\n- insgesamt sehr vorsichtige Steuerbewegungen\n- die Tendenz auszuweichen, statt einfach zu bremsen\n\nIn der Luft fühlt sich das zunächst logisch an. Wenn sich die Drohne Bäumen oder Gelände nähert, reagiert man instinktiv mit Ausweichbewegungen. In der Aufnahme führt das jedoch zu unnötiger Kamerabewegung und leicht unruhigem Bildmaterial.\n\nIn vielen Situationen ist eine andere Strategie deutlich besser: **einfach kurz stoppen und schweben lassen**. Die Drohne stabilisiert sich nahezu sofort, was wesentlich ruhigere Bilder erzeugt.\n\nDie winterliche Landschaft erwies sich dabei als überraschend gutes Trainingsfeld. Schnee und kahle Bäume erzeugen starke Kontraste, wodurch selbst kleine Kamerabewegungen im Bild sofort sichtbar werden. Das macht es leichter zu erkennen, was funktioniert – und was nicht.\n\nTechnisch hatte die Drohne mit den Bedingungen keinerlei Probleme. Kalte Luft, leichter Wind und ein bedeckter Himmel stellten kein Hindernis dar.\n\nDer eigentliche Fortschritt dieses ersten Flugs liegt daher nicht in spektakulären Bildern, sondern im **Verständnis für den Rhythmus von Luftaufnahmen**.\n\n**Wichtigste Lektionen:**\n\n- weniger Kameraschwenks\n- langsamere Steuerimpulse\n- öfter bremsen statt ausweichen\n- der Drohne Zeit zum stabilen Schweben geben\n\nDie nächsten Flüge werden sich daher auf längere, ruhigere Einstellungen und bewusst geführte Kamerabewegungen konzentrieren.\n\nBeim Drohnenfliegen geht es weniger ums Steuern als um Geduld.\n\nOder anders gesagt: Die Drohne kann schon fliegen – jetzt muss der Pilot lernen, ruhig zu bleiben.",
+      "images": [
+        {
+          "src": "/web/assets/img/drone_test_flight01.jpg",
+          "alt": "winter landscape with forest hills during first drone test flight",
+          "caption": "First test flight over snowy hills and forest."
+        },
+        {
+          "src": "/web/assets/img/drone_test_flight02.jpg",
+          "alt": "winter panorama with distant mountains and cloudy sky",
+          "caption": "Cold winter air and heavy clouds created a calm training environment."
+        },
+        {
+          "src": "/web/assets/img/drone_test_flight03.jpg",
+          "alt": "foggy aerial view over forest and city edge",
+          "caption": "Low clouds and fog reduced visibility but made camera movements very noticeable."
+        },
+        {
+          "src": "/web/assets/img/drone_test_flight04.gif",
+          "alt": "flight over the forest",
+          "caption": "Flight over the forest. resized heavly for better performance (sorry)"
+        }
+      ]
     }
   ]
 }
