@@ -909,6 +909,29 @@
           "caption": "Flight over the forest. resized heavly for better performance (sorry)"
         }
       ]
+    },
+    {
+      "id": "2026-03-20_electronics_ledmatrix_03_22_16",
+      "topic": "electronics",
+      "subtopic": "led_matrix",
+      "date": "2026-03-20",
+      "title": "24h Barograph on 32×8 — Persistence, Mapping, and Restraint",
+      "format": "markdown",
+      "teaser": "Scrolling text shows the present. The 24-hour barograph shows context. This final part focuses on **trend visualization**, EEPROM persistence, and how 24 pressure values become an 8-pixel graph.",
+      "content_en": "~Data becomes meaningful when it gains memory.~\n\nThe LED matrix does more than scroll sensor values.\nIt visualizes change.\n\nEvery hour, one pressure value is written into an array:\n\n- 24 slots\n- one value per hour\n- stored as ~hPa × 10~ in ~int16_t~\n\nPersistence is handled via a small structured block in EEPROM:\n\n- ~magic~ identifier (0xBADA)\n- ~version~ field\n- ~hPa_x10[24]~ array\n- ~checksum~ for validation\n\nTotal size: ~52 bytes.\nSmall enough to be insignificant. Important enough to survive power loss.\n\nAfter restart, the system restores the last 24 hours automatically.\nNo warm-up period. No data gap.\n\nRendering the trend is intentionally minimal.\n\nThe algorithm:\n\n- determine min and max pressure\n- divide the range into 8 steps\n- map each hour to a vertical pixel (0–7)\n- draw one column per hour\n\nThat’s it.\n\nNo smoothing.\nNo interpolation.\nNo fake curves.\n\nJust a compressed, honest representation of change.\n\nThere is a deliberate constraint here: 8 pixels of height.\n\nThat limitation forces restraint.\nIf pressure variation is small, the graph becomes subtle.\nIf weather shifts rapidly, the graph reacts immediately.\n\nThe matrix cannot hide noise.\nIt exposes it.\n\nAnd that makes it surprisingly expressive.\n\nCompared to the OLED version, this approach feels more raw.\nBut it is also more architectural — pressure as shape, not number.\n\nFuture refinements may include:\n\n- smarter scaling for small pressure ranges\n- page-based display modes instead of continuous scroll\n- PROGMEM font optimization\n- adaptive night brightness\n\nBut the core idea remains:\n\nScrolling text shows the moment.\nThe barograph shows the story.",
+      "content_de": "~Daten werden erst relevant, wenn sie Erinnerung bekommen.~\n\nDie LED-Matrix zeigt nicht nur aktuelle Messwerte.\nSie zeigt Veränderung.\n\nEinmal pro Stunde wird ein Luftdruckwert in ein Array geschrieben:\n\n- 24 Speicherplätze\n- ein Wert pro Stunde\n- gespeichert als ~hPa × 10~ in ~int16_t~\n\nDie Persistenz erfolgt über einen strukturierten EEPROM-Block:\n\n- ~magic~-Kennung (0xBADA)\n- ~version~-Feld\n- ~hPa_x10[24]~-Array\n- ~checksum~ zur Validierung\n\nGesamtgröße: ~52 Bytes.\nTechnisch unauffällig. Funktional entscheidend.\n\nNach einem Neustart werden die letzten 24 Stunden automatisch geladen.\nKein Datenverlust. Kein Neuanfang.\n\nDie Darstellung ist bewusst reduziert.\n\nDer Ablauf:\n\n- Minimal- und Maximalwert bestimmen\n- Bereich in 8 Stufen teilen\n- Stundenwert auf Pixelhöhe (0–7) abbilden\n- pro Stunde eine Spalte setzen\n\nKeine Glättung.\nKeine künstliche Kurve.\nKeine Kosmetik.\n\nNur eine verdichtete Darstellung von Veränderung.\n\nDie Beschränkung auf 8 Pixel Höhe ist kein Nachteil.\nSie zwingt zur Klarheit.\n\nBei geringer Druckschwankung bleibt die Linie ruhig.\nBei Wetterumschwung reagiert sie sofort.\n\nDie Matrix kaschiert nichts.\nSie macht Unterschiede sichtbar.\n\nWährend das OLED-Display Zahlen strukturiert, verwandelt die LED-Matrix Druck in Form.\n\nAusblick:\n\n- feinere Skalierung bei kleinen Druckbereichen\n- Seitenwechsel statt Dauerlauf\n- PROGMEM-Optimierung der Fonts\n- adaptive Nacht-Helligkeit\n\nDie Essenz bleibt jedoch:\n\nLaufschrift zeigt den Moment.\nDer Barograph zeigt die Geschichte.",
+      "images": [
+        {
+          "src": "/web/assets/img/led_matrix30.png",
+          "alt": "LED matrix displaying scrolling weather values and barometric trend",
+          "caption": "LED matrix displaying barometric trend"
+        },
+        {
+          "src": "/web/assets/img/led_matrix31.png",
+          "alt": "EEPROM layout showing magic, version, hPa_x10 array and checksum",
+          "caption": "EEPROM layout showing magic, version, hPa_x10 array and checksum"
+        }
+      ]
     }
   ]
 }
