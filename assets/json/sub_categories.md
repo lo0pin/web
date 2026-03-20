@@ -1,5 +1,5 @@
 ## Botanik
-"topic": "botanik",
+"topic": "botanik"
 
 ### Subcategories
 "subtopic": "raspberry"
@@ -10,20 +10,21 @@
 
 
 ## Making
-"topic": "making",
-
+"topic": "making"
 
 ### Subcategories
-"subtopic": "3dprint",
+"subtopic": "3dprint"
+"subtopic": "weben"
 
 
 ## Code
 "topic": "code" 
 
 ### SubC
-- "subtopic": "html"
-- "subtopic": "python"
-- "subtopic": "cpp"
+"subtopic": "html"
+"subtopic": "python"
+"subtopic": "cpp"
+"subtopic": "linux"
 
 ## Words
 "topic": "words"
