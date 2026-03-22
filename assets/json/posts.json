@@ -964,6 +964,39 @@
           "caption": "The plants themselves confirm it: no frost damage, only growth."
         }
       ]
+    },
+    {
+      "id": "2026-03-22_electronics_solar5v_01",
+      "topic": "electronics",
+      "subtopic": "solar",
+      "date": "2026-03-22",
+      "title": "Part I: A Small Solar Experiment on My Balcony",
+      "format": "markdown",
+      "teaser": "What happens if a balcony becomes a laboratory for sunlight? This small project explores a simple idea: **turning raw sunlight into stable 5 V USB power** using a fully self-built solar setup.",
+      "content_en": "~A balcony is a surprisingly good place to study the sun.~\n\nOver the past months I have been experimenting with small self-built electronic systems: sensor displays, microcontrollers, radio nodes, and tiny measurement setups.\n\nAt some point a simple question appeared:\n\n*Could sunlight on my balcony power these devices directly?*\n\nNot with a commercial kit.\nNot with a plug-and-play panel.\n\nBut with a system built from individual parts — solar cells, wiring, a DC/DC converter, and a frame designed specifically for this space.\n\nThe goal of the project is deliberately modest:\n\n- convert sunlight into **stable 5 V USB power**\n- charge **powerbanks as energy buffers**\n- power small devices such as sensors or microcontrollers\n- learn how the system behaves in real outdoor conditions\n\nThe result is a small experimental solar station mounted on the balcony.\n\nA wooden frame holds several solar modules, carefully wired together on the back side. The electrical output is routed through a buck converter that regulates the fluctuating panel voltage down to a clean and stable USB supply.\n\nDuring the first measurements the system already produced promising numbers:\n\n- **5.008 V** output\n- **2.285 A** current\n- roughly **11.4 W** of usable power\n\nFor a system assembled from discrete parts, that is more than enough to run small electronics or slowly charge portable batteries.\n\nThis post marks the beginning of a short project series documenting the system step by step — from the mechanical construction of the frame to the electrical design and the first real-world performance tests.\n\nSunlight may be simple.\n\nBut turning it into reliable energy is an engineering story worth telling.",
+      "content_de": "~Ein Balkon ist ein überraschend guter Ort, um die Sonne zu studieren.~\n\nIn den letzten Monaten habe ich immer wieder kleine Elektronikprojekte gebaut: Sensordisplays, Mikrocontroller-Schaltungen, Funknodes und Messaufbauten.\n\nIrgendwann stellte sich eine einfache Frage:\n\n*Kann das Sonnenlicht auf meinem Balkon diese Geräte direkt versorgen?*\n\nNicht mit einem fertigen Set.\nNicht mit einem Plug-and-Play-Panel.\n\nSondern mit einer Anlage aus einzelnen Komponenten – Solarzellen, Verkabelung, DC/DC-Wandler und einer Konstruktion, die speziell für diesen Balkon gebaut wurde.\n\nDas Ziel des Projekts ist bewusst einfach gehalten:\n\n- Sonnenlicht in **stabile 5 V USB-Spannung** umwandeln\n- **Powerbanks als Energiespeicher** laden\n- kleine Geräte wie Sensoren oder Mikrocontroller betreiben\n- verstehen, wie sich das System unter realen Bedingungen verhält\n\nDafür entstand auf meinem Balkon eine kleine experimentelle Solaranlage.\n\nMehrere Module sind auf einem Holzrahmen montiert und auf der Rückseite miteinander verschaltet. Die erzeugte Spannung wird anschließend über einen Step-Down-Wandler auf eine saubere und stabile USB-Versorgung geregelt.\n\nDie ersten Messungen sind bereits vielversprechend:\n\n- **5,008 V** Ausgangsspannung\n- **2,285 A** Strom\n- rund **11,4 W** nutzbare Leistung\n\nFür eine vollständig selbst aufgebaute Anlage ist das mehr als ausreichend, um kleine Elektronik zu betreiben oder Powerbanks zu laden.\n\nDieser Beitrag ist der Auftakt zu einer kleinen Serie, in der ich den Aufbau der Anlage Schritt für Schritt dokumentiere — von der mechanischen Konstruktion über die elektrische Verschaltung bis zu den ersten Tests im Sonnenlicht.\n\nSonnenlicht ist simpel.\n\nDoch daraus verlässlich Energie zu gewinnen, ist eine Geschichte aus Holz, Kupfer und ein wenig Ingenieursneugier.",
+      "images": [
+        {
+          "src": "/web/assets/img/solar101.jpeg",
+          "alt": "A small balcony, a custom-built solar rig — quietly harvesting light between concrete walls.",
+          "caption": "A small balcony, a custom-built solar rig — quietly harvesting light between concrete walls."
+        },
+        {
+          "src": "/web/assets/img/solar104.jpeg",
+          "alt": "Where the real story lives: wires, junctions, and a system that actually works",
+          "caption": "Where the real story lives: wires, junctions, and a system that actually works."
+        },
+        {
+          "src": "/web/assets/img/solar103.jpeg",
+          "alt": "Minimal footprint, maximum intent — a compact solar setup tuned for real-world conditions",
+          "caption": "Minimal footprint, maximum intent — a compact solar setup tuned for real-world conditions."
+        },
+        {
+          "src": "/web/assets/img/solar102.jpeg",
+          "alt": "Held together by bolts, patience, and a quiet obsession with getting things right",
+          "caption": "Held together by bolts, patience, and a quiet obsession with getting things right."
+        }
+      ]
     }
   ]
 }
