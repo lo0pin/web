@@ -997,6 +997,39 @@
           "caption": "Held together by bolts, patience, and a quiet obsession with getting things right."
         }
       ]
+    },
+    {
+      "id": "2026-03-23_electronics_mesh_20_34",
+      "topic": "electronics",
+      "subtopic": "mesh",
+      "date": "2026-03-23",
+      "title": "Plabutsch Field Test — Line of Sight Changes Everything",
+      "format": "markdown",
+      "teaser": "High above Graz on the Plabutsch, I took my mobile mesh node for a walk — and the network answered. Strong signals, surprising hops, and a reminder that altitude changes everything.",
+      "content_en": "I went hiking on the Plabutsch, one of the most rewarding viewpoints above Graz. Clear air, wide horizon, the city stretched out below like a circuit board in golden light. Naturally, the mobile mesh node came along.\n\nWhat happened up there was more than casual testing — it was a small-scale proof of what elevation does to a LoRa mesh.\n\nFrom the summit I sent pings and short messages across the network. The responses were immediate and telling:\n\n- Direct pings with **SNR +6.5 dB and RSSI -36 dBm** — exceptionally strong.\n- Stable connections across the city.\n- Clean 1-hop routes where, from lower positions, multiple hops would usually be required.\n- Channel utilization temporarily spiking above 50%, while actual air time remained low (around 0.5–2%), showing that reception and decoding load can differ significantly from transmit time.\n\nEarlier tests from lower urban positions showed dramatically weaker values:\n\n- SNR down to **-19.5 dB**\n- RSSI around **-140 dBm**\n\nThe contrast was striking. Same hardware. Same antenna. Completely different propagation behavior.\n\nUp there, line-of-sight opened wide. Buildings stopped absorbing the signal. The mesh suddenly behaved like it was designed to.\n\nIt’s one thing to read about Fresnel zones and terrain shadowing. It’s another to stand on a hill, send a ping, and watch the network light up.\n\nThe takeaway is simple:\nHeight is not an optimization detail. Height is architecture.\n\nAnd yes — the mobile node in the 3D-printed enclosure handled it flawlessly.\n",
+      "content_de": "**Plabutsch-Feldtest — Höhe ist kein Detail, sondern Strategie**\n\nIch war am Plabutsch wandern — einer der schönsten Aussichtspunkte über Graz. Klare Luft, weite Sicht, die Stadt unter mir wie eine ausgebreitete Leiterplatte im Abendlicht. Der mobile Mesh-Node war natürlich mit dabei.\n\nWas dort oben passiert ist, war mehr als ein kleiner Test. Es war eine anschauliche Demonstration dessen, was Topografie mit einem LoRa-Mesh macht.\n\nVom Gipfel aus habe ich Pings und kurze Nachrichten ins Netz geschickt. Die Antworten kamen sofort — und mit erstaunlichen Werten:\n\n- Direkte Pings mit **SNR +6,5 dB und RSSI -36 dBm** — außergewöhnlich stark.\n- Stabile Verbindungen quer durch die Stadt.\n- Saubere 1-Hop-Verbindungen, wo im urbanen Umfeld sonst mehrere Hops nötig wären.\n- Eine Kanalauslastung von zeitweise über 50%, während die tatsächliche Sendezeit („Air Time“) sehr niedrig blieb (ca. 0,5–2%). Empfangs- und Dekodierlast unterscheiden sich eben deutlich von der eigenen Sendeaktivität.\n\nZum Vergleich: Frühere Tests aus tiefer gelegenen Stadtlagen zeigten Werte wie:\n\n- SNR bis **-19,5 dB**\n- RSSI um **-140 dBm**\n\nGleiche Hardware. Gleiche Antenne. Völlig anderes Ausbreitungsverhalten.\n\nDort oben war freie Sicht. Keine Häuserschluchten, keine Betonbarrieren, keine Abschattung. Das Mesh funktionierte plötzlich so, wie man es theoretisch erwartet.\n\nÜber Fresnel-Zonen zu lesen ist das eine. Auf einem Hügel zu stehen, einen Ping zu senden und zuzusehen, wie das Netz antwortet, ist etwas ganz anderes.\n\nDie Erkenntnis ist klar:\nHöhe ist kein Feintuning. Höhe ist Infrastruktur.\n\nUnd der mobile Node im 3D-gedruckten Gehäuse hat das souverän mitgespielt.",
+      "images": [
+        {
+          "src": "/web/assets/img/mesh_plabutsch_feb00.jpeg",
+          "alt": "mesh_plabutsch_feb00.jpeg",
+          "caption": "Testing location on the Plabutsch hill overlooking Graz. The elevated position provides a clear line of sight across large parts of the city — ideal conditions for long-range LoRa experiments."
+        },
+        {
+          "src": "/web/assets/img/mesh_plabutsch_feb01.jpeg",
+          "alt": "mesh_plabutsch_feb01.jpeg",
+          "caption": "The portable Meshtastic test node used during the experiment. A compact ESP32-based device with OLED display and external antenna, built for field testing and quick signal checks."
+        },
+        {
+          "src": "/web/assets/img/mesh_plabutsch_feb02.jpeg",
+          "alt": "mesh_plabutsch_feb02.jpeg",
+          "caption": "Telemetry data from the test session. Battery level remained stable while channel utilization briefly increased during active transmissions."
+        },
+        {
+          "src": "/web/assets/img/mesh_plabutsch_feb03.jpeg",
+          "alt": "mesh_plabutsch_feb03.jpeg",
+          "caption": "Successful ping to the Fürstenstand node. Despite the weak signal (RSSI −140 dBm, SNR −19.5 dB), the message still made it through — a nice demonstration of LoRa’s resilience."
+        }
+      ]
     }
   ]
 }
