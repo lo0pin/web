@@ -949,3 +949,60 @@ a:focus-visible {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
+
+
+
+
+
+/* =========================================================
+   Klickbare News-Bilder
+   ---------------------------------------------------------
+   Ziel:
+   - Wenn ein Bild in einen Link <a> gewrappt ist,
+     soll die gesamte Bildfläche klickbar sein
+   - Keine normale Link-Unterstreichung bei Bildlinks
+   - Dezenter Hover-/Focus-Effekt:
+       * leicht transparenter
+       * minimaler Zoom
+       * klare Fokus-Markierung für Tastatur-Navigation
+   ========================================================= */
+
+/* Der Link direkt um das Bild:
+   - display:block macht die gesamte Fläche sauber klickbar
+   - text-decoration:none entfernt die globale Link-Unterstreichung
+   - gleicher Radius wie das Bild, damit Fokusrahmen und Klickfläche
+     sauber zur Bildform passen */
+.media > a {
+  display: block;
+  text-decoration: none;
+  border-radius: calc(var(--radius) - 4px);
+}
+
+/* Das Bild innerhalb des Links:
+   - display:block verhindert kleine Inline-Bild-Abstände
+   - transition sorgt für weiche Übergänge bei Hover/Focus */
+.media > a img {
+  display: block;
+  transition: opacity 120ms ease, transform 120ms ease;
+}
+
+/* Hover mit Maus + Focus per Tastatur:
+   - Bild wird minimal transparenter
+   - leichter Zoom signalisiert Interaktivität
+   - cursor: zoom-in deutet an, dass sich das Bild größer öffnen lässt */
+.media > a:hover img,
+.media > a:focus-visible img {
+  opacity: 0.92;
+  transform: scale(1.01);
+  cursor: zoom-in;
+}
+
+/* Sichtbarer Fokusrahmen für Accessibility:
+   - wichtig für Tastaturbenutzer:innen
+   - outline liegt außerhalb des Elements und verschiebt das Layout nicht
+   - border-radius hält die Fokuslinie optisch konsistent */
+.media > a:focus-visible {
+  outline: 2px solid rgba(11, 95, 255, 0.45);
+  outline-offset: 3px;
+  border-radius: calc(var(--radius) - 4px);
+}
