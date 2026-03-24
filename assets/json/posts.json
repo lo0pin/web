@@ -1030,6 +1030,39 @@
           "caption": "Successful ping to the Fürstenstand node. Despite the weak signal (RSSI −140 dBm, SNR −19.5 dB), the message still made it through — a nice demonstration of LoRa’s resilience."
         }
       ]
+    },
+    {
+      "id": "2026-03-24_electronics_solar5v_02",
+      "topic": "electronics",
+      "subtopic": "solar",
+      "date": "2026-03-24",
+      "title": "Part II: Building the Frame — The Mechanical Foundation",
+      "format": "markdown",
+      "teaser": "Before electrons flow, something much simpler has to exist first: **a structure that holds the sun.** This project began not with electronics, but with wood, bolts, and the question of how to mount solar panels on a balcony.",
+      "content_en": "~Every electrical system begins with something mechanical.~\n\nBefore any wiring or voltage regulation could happen, the project needed a physical structure.\n\nSolar panels are simple devices in principle, but they demand three things to work well:\n\n- a **stable mounting surface**\n- a **clear orientation toward the sun**\n- enough **structural rigidity** to survive wind and weather\n\nBecause this system is mounted on a balcony, commercial mounting systems were not really an option. The solution became a custom wooden frame built from simple construction timber.\n\nThe frame serves several purposes at once:\n\n- holding multiple small solar modules\n- allowing the panel surface to be tilted toward the sun\n- creating space on the backside for wiring and electronics\n\nThe design is intentionally simple.\n\nTwo vertical supports hold the main panel surface. The modules are mounted on a wooden plate that acts as a carrier board. Bolts and large washers distribute the mechanical load across the frame and allow the panel board to be removed or adjusted if necessary.\n\nThe rear side of the structure also became the natural place for the electrical components: wiring, switches, the voltage converter, and the power buffers.\n\nThis separation between *sun-facing surface* and *technical backside* turned out to be surprisingly useful. It keeps the front visually clean while allowing easy access to the electronics.\n\nThe result is less a finished product than a working laboratory setup — a structure that invites experimentation.\n\nAnd in a solar project, that matters.\n\nBecause once the mechanical structure exists, everything else can evolve around it.",
+      "content_de": "~Jedes elektronische System beginnt mit etwas Mechanischem.~\n\nBevor überhaupt Strom fließen konnte, brauchte das Projekt zunächst eine physische Struktur.\n\nSolarzellen sind im Prinzip einfache Bauteile, stellen aber drei Anforderungen:\n\n- eine **stabile Befestigung**\n- eine **gute Ausrichtung zur Sonne**\n- genügend **mechanische Stabilität** gegen Wind und Wetter\n\nDa die Anlage auf einem Balkon montiert ist, kamen klassische Montagesysteme kaum in Frage. Stattdessen entstand ein eigener Rahmen aus einfachem Konstruktionsholz.\n\nDie Konstruktion erfüllt mehrere Aufgaben gleichzeitig:\n\n- mehrere kleine Solarmodule aufnehmen\n- eine Neigung zur Sonne ermöglichen\n- Platz auf der Rückseite für Elektronik und Verkabelung schaffen\n\nDer Aufbau ist bewusst schlicht gehalten.\n\nZwei senkrechte Stützen tragen die Modulfläche. Die Solarpanels selbst sind auf einer Holzplatte montiert, die als Träger dient. Schrauben und große Unterlegscheiben verteilen die Kräfte im Rahmen und erlauben es, die Modulplatte bei Bedarf wieder zu lösen oder neu auszurichten.\n\nDie Rückseite wurde gleichzeitig zum Technikbereich der Anlage: Hier befinden sich Verkabelung, Schalter, Spannungswandler und Energiespeicher.\n\nDiese Trennung zwischen *sonnenseitiger Fläche* und *technischer Rückseite* hat sich als sehr praktisch erwiesen. Die Vorderseite bleibt klar und reduziert, während die Elektronik leicht zugänglich bleibt.\n\nDas Ergebnis ist weniger ein fertiges Produkt als eine Art experimenteller Aufbau — eine Struktur, die zum Weiterentwickeln einlädt.\n\nUnd genau das ist bei einem Solarprojekt entscheidend.\n\nDenn sobald die mechanische Basis steht, kann sich alles andere darum entwickeln.",
+      "images": [
+        {
+          "src": "/web/assets/img/solar201.jpeg",
+          "alt": "DIY balcony solar array with wooden frame, wiring layout, and power electronics",
+          "caption": "DIY balcony solar array with wooden frame, wiring layout, and power electronics"
+        },
+        {
+          "src": "/web/assets/img/solar202.jpeg",
+          "alt": "Structural wooden joint reinforced with bolts and washers in a solar mount",
+          "caption": "Structural wooden joint reinforced with bolts and washers in a solar mount"
+        },
+        {
+          "src": "/web/assets/img/solar203.jpeg",
+          "alt": "Solar panel mounted to a wooden frame with a bolt and washer detail",
+          "caption": "Solar panel mounted to a wooden frame with a bolt and washer detail"
+        },
+        {
+          "src": "/web/assets/img/solar204.jpeg",
+          "alt": "Hand-wired solar panel connections with terminal block and protection diode",
+          "caption": "Hand-wired solar panel connections with terminal block and protection diode"
+        }
+      ]
     }
   ]
 }
