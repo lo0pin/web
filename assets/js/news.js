@@ -274,11 +274,16 @@
 
     const imgs = Array.isArray(post.images) ? post.images : [];
 
-    const media = imgs.length
-      ? `
-      <div class="media-row media-row--compact">
-        ${imgs.map((img) => `
-          <figure class="media">
+const media = imgs.length
+  ? `
+    <div class="media-row media-row--compact">
+      ${imgs.map((img) => `
+        <figure class="media">
+          <a
+            href="${escapeHtml(img.src)}"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <img
               src="${escapeHtml(img.src)}"
               alt="${escapeHtml(img.alt || post.title)}"
@@ -286,11 +291,12 @@
               decoding="async"
             >
             ${img.caption ? `<figcaption>${escapeHtml(img.caption)}</figcaption>` : ""}
-          </figure>
-        `).join("")}
-      </div>
-    `
-      : "";
+          </a>
+        </figure>
+      `).join("")}
+    </div>
+  `
+  : "";
 
     return `
       <article class="card news-item">
