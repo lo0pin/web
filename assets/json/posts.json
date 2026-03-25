@@ -1077,23 +1077,25 @@
       "images": [
         {
           "src": "/web/assets/img/plabutsch_hike01.jpeg",
-          "alt": "View over Graz from the Fürstenstand on the Plabutsch",
-          "caption": "View over Graz from the Fürstenstand on the Plabutsch"
+          "alt": "Moon above the Graz basin seen from the Plabutsch",
+          "caption": "Moon above the Graz basin seen from the Plabutsch"
+
         },
         {
           "src": "/web/assets/img/plabutsch_hike02.jpeg",
+          "alt": "Winter forest on the trail up to the Fürstenstand",
+          "caption": "Winter forest on the trail up to the Fürstenstand"
+
+        },
+        {
+          "src": "/web/assets/img/plabutsch_hike03.jpeg",
           "alt": "Sunset over the hills west of Graz seen from the Plabutsch ridge",
           "caption": "Sunset over the hills west of Graz seen from the Plabutsch ridge"
         },
         {
-          "src": "/web/assets/img/plabutsch_hike03.jpeg",
-          "alt": "Winter forest on the trail up to the Fürstenstand",
-          "caption": "Winter forest on the trail up to the Fürstenstand"
-        },
-        {
           "src": "/web/assets/img/plabutsch_hike04.jpeg",
-          "alt": "Moon above the Graz basin seen from the Plabutsch",
-          "caption": "Moon above the Graz basin seen from the Plabutsch"
+          "alt": "View over Graz from the Fürstenstand on the Plabutsch",
+          "caption": "View over Graz from the Fürstenstand on the Plabutsch"
         }
       ]
     }
