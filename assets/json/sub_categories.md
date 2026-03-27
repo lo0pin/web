@@ -83,6 +83,68 @@ data-news-mode="latest"
 <script type="module" src="../assets/js/news.js"></script>
 
 
+## Links
+Next up: [Routes & Places](/web/sailing/routes_places.html)
+
+
+
+## Markdown Guide (for this renderer)
+
+### Inline formatting
+* `**bold**` → **bold**
+* `*italic*` → *italic*
+* `` `code` `` → `code`
+
+### Links
+* `[text](https://example.com)` → external link
+* `[section](#anchor)` → anchor link
+* `[file](../path/file.html)` → relative link
+* `https://example.com` → auto-linked
+
+### Structure
+
+* `# Heading` → `<h3>`
+* `## Heading` → `<h4>`
+* `### Heading` → `<h5>`
+
+* Paragraphs = simple line breaks
+
+* Empty line = new paragraph
+
+### Lists
+
+* `- item` → bullet list
+  
+```
+- first
+- second
+```
+
+### Code blocks
+
+<pre>
+```js
+const x = 42;
+```
+</pre>
+
+### Special: Hint
+
+```
+~This is a hint~
+```
+
+→ highlighted hint block
+
+---
+
+### Notes
+
+* HTML is escaped by default
+* Markdown is only interpreted in `"format": "markdown"` posts
+
+
+
 ```json
     {
       "id": "2026-02-09-botanik-himbeeren",
