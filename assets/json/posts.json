@@ -1131,7 +1131,28 @@
           "caption": "DIY balcony solar panel mounted on a wooden frame"
         }
       ]
+    },
+    {
+      "id": "2026-03-27_sailing_routes_places_12_00",
+      "topic": "sailing",
+      "date": "2026-03-27",
+      "title": "Routes & Places: next up",
+      "format": "markdown",
+      "teaser": "Next on the to-do list: the Sailing section. I’m starting with Routes & Places — beginning with Places — to turn scattered notes into a usable logbook.",
+      "content_en": "Time to give the Sailing page some proper attention.\n\nNext up: **Routes & Places** — starting with *Places* first.\nI’m turning scattered memories into a tidy, usable logbook.\n\n~Less browsing. More sailing.~",
+      "content_de": "Als Nächstes ist die **Sailing-Seite** dran.\n\nIch starte mit **Routes & Places** — und dort zuerst mit den *Places*.\nAus losen Notizen wird ein brauchbares Logbuch.\n\n~Weniger Suchen. Mehr Segeln.~",
+      "images": [
+        {
+          "src": "/web/assets/img/sailing_routes_places01.jpeg",
+          "alt": ""
+        },
+        {
+          "src": "/web/assets/img/sailing_routes_places02.jpeg",
+          "alt": ""
+        }
+      ]
     }
+    
   ]
 }
 
