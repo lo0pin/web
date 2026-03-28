@@ -73,6 +73,9 @@ Noch nicht im JSON GENERATOR:
 "subtopic": "metorology"
 
 
+## SRC for IMG
+assets/img/news...
+
 
 ## Modes
 data-news-mode="all"
