@@ -1180,7 +1180,7 @@
           "caption": "USB digital tester displaying 5.008 V and 2.285 A output, measuring real-time power delivery of the solar system."
         }
       ]
-    }
+    },
     {
       "id": "2026-03-29_code_website_three_months",
       "topic": "code",
@@ -1193,14 +1193,10 @@
       "content_de": "Am **29. Dezember** habe ich den ersten Commit erstellt, aus dem später diese Website entstanden ist.\n\nHeute – **genau drei Monate später** – ist ein guter Moment, kurz innezuhalten und zurückzublicken.\n\nDie ursprüngliche Idee war schlicht: einen eigenen Ort im Internet schaffen, der vollständig unter meiner Kontrolle steht. Kein CMS, keine Plattform, kein Algorithmus – nur **HTML, CSS, JavaScript und ein Git-Repository**.\n\nGitHub Pages erwies sich dafür als erstaunlich passende Lösung. Statische Dateien, Versionskontrolle, sofortige Veröffentlichung. Jede Änderung ist einfach ein weiterer Commit.\n\nWas ich nicht erwartet hatte: wie schnell sich die Seite mit tatsächlichen Inhalten füllen würde.\n\nIn den letzten Monaten sind hier bereits mehrere kleine Projekte und Experimente dokumentiert worden:\n\n- ein **Astrofotografie-Versuch**, bei dem ich den Mond durch ein Fernglas mit dem Smartphone fotografiert habe\n- der Beginn eines **Drohnen-Logbuchs**, in dem ich meine ersten Schritte im Drohnenfliegen festhalte\n- botanische Beobachtungen wie der **Winter-Stress meiner Ribiselpflanze auf dem Balkon**\n- der Bau einer kleinen **Arduino-Wetterstation mit OLED-Display und persistentem 24-Stunden-Verlauf**\n- ein browserbasiertes **JSON-Konvertierungstool**, das meinen News-Workflow vereinfacht\n\nJeder dieser Beiträge begann als kleine Neugier.\nZusammen ergeben sie langsam etwas Größeres: eine Art **persönliches Labor- und Projekttagebuch**.\n\nAuch die Website selbst hat sich dabei weiterentwickelt.\n\nDie Startseite wurde zu einem Navigations-Hub mit Bildkacheln. Bereiche verzweigen sich in Unterkategorien. Und selbst kleine gestalterische Ideen sind unterwegs entstanden – etwa die leicht verschwommenen Hintergrundbilder, die aus den Kachelgrafiken der Startseite abgeleitet sind.\n\nWas mir an diesem Ansatz besonders gefällt, ist seine Klarheit.\n\nDie gesamte Seite besteht nur aus Dateien.\n\nKein Backend.\nKein Framework.\nKeine Datenbank.\n\nWenn sich etwas ändert, kann ich im Commit-Verlauf exakt nachvollziehen, *was* passiert ist und *warum*.\n\nDrei Monate sind keine lange Zeit. Aber lang genug, um zu sehen, dass die Idee funktioniert.\n\nDie Website ist zu einem Ort geworden, an dem ich **Experimente sammle, Projekte dokumentiere und Gedanken festhalte**.\n\nUnd es liegt noch viel vor mir.\n\nViele Bereiche sind erst begonnen. Manche Themen nur angerissen. Andere – etwa Meshtastic-Experimente, Elektronikprojekte, Segelrouten oder Code-Notizen – warten noch darauf, sich zu eigenen kleinen Ökosystemen zu entwickeln.\n\nDieser Beitrag ist daher weniger ein Meilenstein als eine Markierung im Logbuch.\n\nDas Schiff hat den Hafen verlassen.\n\nJetzt beginnt die eigentliche Reise.",
       "images": [
         {
-          "src": "/web/assets/img/news/three_months00.png",
-          "alt": "",
-          "caption": ""
+          "src": "/web/assets/img/news/three_months00.png"
         },
         {
-          "src": "/web/assets/img/news/three_months01.png",
-          "alt": "",
-          "caption": ""
+          "src": "/web/assets/img/news/three_months01.png"
         }
       ]
     }
