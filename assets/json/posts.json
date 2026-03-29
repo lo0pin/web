@@ -1181,10 +1181,29 @@
         }
       ]
     }
-
-
-
-    
+    {
+      "id": "2026-03-29_code_website_three_months",
+      "topic": "code",
+      "subtopic": "html",
+      "date": "2026-03-29",
+      "title": "Three Months of Building a Personal Website",
+      "format": "markdown",
+      "teaser": "Exactly three months ago I started building this website via GitHub Pages. What began as a simple experiment has quietly turned into a growing archive of projects, experiments, and ideas.",
+      "content_en": "On **29 December**, I pushed the first commit that would eventually become this website.\n\nToday — **three months later** — it feels like a good moment to pause and look back.\n\nThe original goal was simple: build a personal space on the internet that is entirely under my own control. No CMS, no platforms, no algorithms — just **plain HTML, CSS, JavaScript and a Git repository**.\n\nGitHub Pages turned out to be the perfect host for that idea. Static files, version control, instant deployment. Every change is just another commit.\n\nWhat I did not anticipate was how quickly the site would start to fill with actual content.\n\nOver the past months, several small projects and experiments have found their place here:\n\n- a **handheld astrophotography experiment** photographing the Moon through binoculars\n- the beginning of a **drone exploration log**, documenting the learning process of aerial photography\n- botanical observations like the **winter acclimation stress of my balcony currant**\n- the development of a small **Arduino weather station with OLED display and persistent 24-hour history**\n- a browser-based **JSON post converter** that helped restructure the site's news workflow\n\nEach entry started as a small curiosity. Together they slowly formed something larger: a **structured personal lab notebook**.\n\nThe website itself evolved alongside the content.\n\nThe landing page became a navigation hub built around visual tiles. Sections started branching into sub-categories. Even small design ideas emerged along the way — for example using blurred versions of the tile images as subtle atmospheric backgrounds on the section pages.\n\nWhat I enjoy most about this approach is its clarity.\n\nThe entire site is just files.\n\nNo backend.\nNo framework.\nNo database.\n\nIf something changes, I can see exactly *where* and *why* in the commit history.\n\nThree months is not a long time. But it is long enough to see that the idea works.\n\nThe site has become a place to **collect experiments, document projects, and think in public**.\n\nAnd there is still a lot ahead.\n\nPlanned sections are only partially built. Some topics barely started. Others — like Meshtastic experiments, electronics builds, sailing routes, or code notes — are waiting to grow into their own little ecosystems.\n\nSo this post is less a milestone than a marker in the logbook.\n\nThe ship has left the harbor.\n\nNow the real journey begins.",
+      "content_de": "Am **29. Dezember** habe ich den ersten Commit erstellt, aus dem später diese Website entstanden ist.\n\nHeute – **genau drei Monate später** – ist ein guter Moment, kurz innezuhalten und zurückzublicken.\n\nDie ursprüngliche Idee war schlicht: einen eigenen Ort im Internet schaffen, der vollständig unter meiner Kontrolle steht. Kein CMS, keine Plattform, kein Algorithmus – nur **HTML, CSS, JavaScript und ein Git-Repository**.\n\nGitHub Pages erwies sich dafür als erstaunlich passende Lösung. Statische Dateien, Versionskontrolle, sofortige Veröffentlichung. Jede Änderung ist einfach ein weiterer Commit.\n\nWas ich nicht erwartet hatte: wie schnell sich die Seite mit tatsächlichen Inhalten füllen würde.\n\nIn den letzten Monaten sind hier bereits mehrere kleine Projekte und Experimente dokumentiert worden:\n\n- ein **Astrofotografie-Versuch**, bei dem ich den Mond durch ein Fernglas mit dem Smartphone fotografiert habe\n- der Beginn eines **Drohnen-Logbuchs**, in dem ich meine ersten Schritte im Drohnenfliegen festhalte\n- botanische Beobachtungen wie der **Winter-Stress meiner Ribiselpflanze auf dem Balkon**\n- der Bau einer kleinen **Arduino-Wetterstation mit OLED-Display und persistentem 24-Stunden-Verlauf**\n- ein browserbasiertes **JSON-Konvertierungstool**, das meinen News-Workflow vereinfacht\n\nJeder dieser Beiträge begann als kleine Neugier.\nZusammen ergeben sie langsam etwas Größeres: eine Art **persönliches Labor- und Projekttagebuch**.\n\nAuch die Website selbst hat sich dabei weiterentwickelt.\n\nDie Startseite wurde zu einem Navigations-Hub mit Bildkacheln. Bereiche verzweigen sich in Unterkategorien. Und selbst kleine gestalterische Ideen sind unterwegs entstanden – etwa die leicht verschwommenen Hintergrundbilder, die aus den Kachelgrafiken der Startseite abgeleitet sind.\n\nWas mir an diesem Ansatz besonders gefällt, ist seine Klarheit.\n\nDie gesamte Seite besteht nur aus Dateien.\n\nKein Backend.\nKein Framework.\nKeine Datenbank.\n\nWenn sich etwas ändert, kann ich im Commit-Verlauf exakt nachvollziehen, *was* passiert ist und *warum*.\n\nDrei Monate sind keine lange Zeit. Aber lang genug, um zu sehen, dass die Idee funktioniert.\n\nDie Website ist zu einem Ort geworden, an dem ich **Experimente sammle, Projekte dokumentiere und Gedanken festhalte**.\n\nUnd es liegt noch viel vor mir.\n\nViele Bereiche sind erst begonnen. Manche Themen nur angerissen. Andere – etwa Meshtastic-Experimente, Elektronikprojekte, Segelrouten oder Code-Notizen – warten noch darauf, sich zu eigenen kleinen Ökosystemen zu entwickeln.\n\nDieser Beitrag ist daher weniger ein Meilenstein als eine Markierung im Logbuch.\n\nDas Schiff hat den Hafen verlassen.\n\nJetzt beginnt die eigentliche Reise.",
+      "images": [
+        {
+          "src": "/web/assets/img/news/three_months00.png",
+          "alt": "",
+          "caption": ""
+        },
+        {
+          "src": "/web/assets/img/news/three_months01.png",
+          "alt": "",
+          "caption": ""
+        }
+      ]
+    }
   ]
 }
 
