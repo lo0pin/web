@@ -10,14 +10,13 @@
 </head>
 
 
-<body class="has-bg bg-code">
+<body class="has-bg bg-code" id="top">
   <header class="site-header">
     <div class="header-inner">
 
       <h1 class="site-title">Code</h1>
       <nav class="top-nav" aria-label="Top navigation">
-
-        <a href="../index.html">home</a>
+        <a href="../index.html">⌂ home</a>
       </nav>
     </div>
   </header>
@@ -35,24 +34,11 @@
     <section class="card">
       <h2 class="card-title">On this Page</h2>
       <ul>
-        <li><a href="#code_news">Latest News</a></li>
         <li><a href="#code_hall">Quick Access to Projects</a></li>
         <li><a href="#code_sub" >Subsections</a></li>
+        <li><a href="#code_news">Latest News</a></li>
       </ul>
     </section> 
-
-    <hr class="divider" />
-
-    <section class="card">
-      <h2 class="card-title" id="code_news">Latest News</h2>
-    </section> 
-    <div data-news-topic="code" data-news-mode="latest" data-news-limit="2"></div> <!--data-news-subtopic="html"-->
-    <!--
-    <div data-news-topic="code" data-news-subtopic="python" data-news-mode="latest"></div>
-    <div data-news-topic="code" data-news-subtopic="cpp" data-news-mode="latest"></div>
-    -->
-
-    <script type="module" src="../assets/js/news.js"></script>
 
     <hr class="divider" />
 
@@ -64,6 +50,8 @@
     <section class="card">
       <ul>
         <li><a href="html/json_webgen.html" target="_blank">JSON News Generator</a></li>
+        <li><a href="html/json_updater.html" target="_blank">JSON News Updater</a></li>
+        <li><a href="html/prompt_generator.html" target="_blank">News Entry Prompt Generator</a></li>
         <li><a href="../nerdism/quest_gen.html" target="_blank">RPG Quest Generator</a></li>
 
       </ul>
@@ -91,6 +79,11 @@
           <span class="tile-label">⚙️ C++</span>
         </a>
 
+        <a class="tile" href="linux.html" aria-label="Linux">
+          <img class="tile-image" src="../assets/img/linux_bash.jpg" alt="" />
+          <span class="tile-label">🐧 Linux</span>
+        </a>
+
         <a class="tile" href="" aria-label="Data & Visualization / Algorithms & Thinking">
           <img class="tile-image" src="../assets/img/coding_data_vis.png" alt="" />
           <span class="tile-label">📈 Data & Visualization / Algorithms & Thinking</span>
@@ -106,24 +99,32 @@
         
       </div>
     </section>
+    
+    <hr class="divider" />
+
+    <section class="card">
+      <h2 class="card-title" id="code_news">Latest News</h2>
+    </section> 
+    <div data-news-topic="code" data-news-mode="latest" data-news-limit="2"></div> <!--data-news-subtopic="html"-->
+    <!--
+    <div data-news-topic="code" data-news-subtopic="python" data-news-mode="latest"></div>
+    <div data-news-topic="code" data-news-subtopic="cpp" data-news-mode="latest"></div>
+    -->
+
+    <script type="module" src="../assets/js/news.js"></script>
+
+
+    <hr class="divider" />
+    
+    <p class="hint"><a href="#top">↑ top</a>&emsp;<a href="../index.html">⌂ home</a></p>
   </main>
 
-  <!--
-    FOOTER = unterer Seitenbereich.
-    Typisch für:
-    - Copyright
-    - ggf. kleine Links (Impressum/Privacy), wenn du das später brauchst
-  -->
+
   <footer class="site-footer">
     <p>© 2026 Julian</p>
   </footer>
 
-  <!--
-    JavaScript einbinden:
-    - defer bedeutet: Script wird geladen, aber erst ausgeführt,
-      nachdem das HTML geparst wurde.
-    Vorteil: Das Script blockiert nicht das Rendering der Seite.
-  -->
+
   <script src="../assets/js/main.js" defer></script>
 </body>
 </html>

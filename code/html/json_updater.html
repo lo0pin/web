@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>News Post Migrator — legacy → bilingual</title>
+  <style>
+    :root{
+      --bg:#0f1115; --panel:#141824; --surface:#161b2a;
+      --text:#e9eef7; --muted:#aab4c5; --border:#2a3244;
+      --ok:#34d399; --bad:#f87171; --focus:#7dd3fc;
+      --radius:14px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; background:var(--bg); color:var(--text); font-family:var(--sans);
+      line-height:1.35;
+    }
+    .wrap{max-width:1200px; margin:0 auto; padding:18px}
+    header{display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:14px}
+    header a{color:var(--focus); text-decoration:none; font-weight:700}
+    header a:hover{text-decoration:underline}
+    h1{font-size:1.05rem; margin:0; font-weight:800}
+    .hint{color:var(--muted); font-size:.92rem; margin-top:6px}
+    .grid{
+      display:grid; gap:14px;
+      grid-template-columns: 1fr 1fr;
+    }
+    @media (max-width: 980px){
+      .grid{grid-template-columns:1fr}
+    }
+    .card{
+      background:linear-gradient(180deg, var(--panel), var(--surface));
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:14px;
+      box-shadow: 0 8px 28px rgba(0,0,0,.25);
+    }
+    label{display:block; color:var(--muted); font-size:.92rem; margin:8px 0 6px}
+    textarea, input, select{
+      width:100%;
+      background:#0f1320;
+      border:1px solid var(--border);
+      color:var(--text);
+      border-radius:12px;
+      padding:10px 12px;
+      outline:none;
+      font-size:.98rem;
+      font-family:var(--mono);
+    }
+    textarea{min-height:260px; resize:vertical}
+    textarea.small{min-height:120px}
+    textarea:focus, input:focus, select:focus{
+      border-color:var(--focus);
+      box-shadow:0 0 0 3px rgba(125,211,252,.15);
+    }
+    .row{display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-top:12px}
+    .btn{
+      appearance:none;
+      border:1px solid var(--border);
+      background:#0e1220;
+      color:var(--text);
+      padding:9px 12px;
+      border-radius:12px;
+      cursor:pointer;
+      font-weight:700;
+      font-size:.92rem;
+      user-select:none;
+    }
+    .btn:hover{border-color:#3b4762}
+    .btn:active{transform:translateY(1px)}
+    .btn.primary{background:#101a2a; border-color:#415070}
+    .status{font-size:.92rem; color:var(--muted)}
+    .status.ok{color:var(--ok)}
+    .status.bad{color:var(--bad)}
+    .kbd{font-family:var(--mono); padding:1px 6px; border:1px solid var(--border); border-radius:8px; background:#0f1320; color:var(--muted)}
+    .mono{font-family:var(--mono)}
+    .topbar{
+      display:grid;
+      grid-template-columns: 1fr auto;
+      gap:12px;
+      align-items:end;
+      margin-bottom:14px;
+    }
+    @media (max-width: 980px){
+      .topbar{grid-template-columns:1fr}
+    }
+    .modebox{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      justify-content:flex-end;
+      flex-wrap:wrap;
+    }
+    .pill{
+      border:1px solid var(--border);
+      background:#0f1320;
+      border-radius:999px;
+      padding:8px 10px;
+      display:flex;
+      gap:10px;
+      align-items:center;
+      user-select:none;
+    }
+    .pill label{margin:0; font-size:.9rem; cursor:pointer}
+    .pill input{width:auto; margin:0}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <a href="/web/index.html">← back to home</a>
+      <h1>News Post Migrator — legacy JSON → bilingual (teaser + details)</h1>
+    </header>
+
+    <div class="topbar">
+      <div class="card">
+        <div class="hint" id="modeHelp">
+          Mode: <span class="kbd">Single post</span>. Paste exactly one post object on the left, e.g. <span class="mono">{ "id": "...", "title": "...", "content": "..." }</span>.
+        </div>
+        <div class="hint">
+          Defaults:
+          <span class="mono">teaser</span> is auto-generated (≈ &lt; 100 words) from <span class="mono">content_en</span> or legacy <span class="mono">content</span>.
+          If <span class="mono">content_de</span> is empty and no custom DE is given, it will reuse legacy <span class="mono">content</span>.
+        </div>
+      </div>
+
+      <div class="modebox">
+        <div class="pill" role="group" aria-label="Mode">
+          <label><input type="radio" name="mode" value="single" checked> single post</label>
+          <label><input type="radio" name="mode" value="batch"> whole posts.json</label>
+        </div>
+
+        <div class="pill" title="Keep original content as content_legacy instead of deleting it.">
+          <label><input type="checkbox" id="keepLegacy"> keep legacy</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid">
+      <!-- LEFT: Inputs -->
+      <section class="card">
+        <label for="legacy">Input JSON</label>
+        <textarea id="legacy" placeholder='Single mode: paste one post object.
+Batch mode: paste either { "posts": [ ... ] } or [ ... ].'></textarea>
+
+        <label for="customTeaser">Custom teaser (EN) — optional</label>
+        <textarea id="customTeaser" class="small" placeholder="Single mode: applies to the post.
+Batch mode: if set, applies to ALL posts (otherwise per-post auto)."></textarea>
+
+        <label for="customDe">Custom full text (DE) — optional</label>
+        <textarea id="customDe" class="small" placeholder="Single mode: applies to the post.
+Batch mode: if set, applies to ALL posts (otherwise per-post auto)."></textarea>
+
+        <div class="row">
+          <button class="btn primary" id="convert">Convert</button>
+          <button class="btn" id="reset" type="button">Reset</button>
+          <span id="status" class="status"></span>
+        </div>
+      </section>
+
+      <!-- RIGHT: Output -->
+      <section class="card">
+        <label for="out">Output JSON (click to copy)</label>
+        <textarea id="out" readonly placeholder="Converted JSON appears here."></textarea>
+        <div class="hint">
+          <span class="kbd">Ctrl</span>+<span class="kbd">Enter</span> converts. Output copies on click.
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    const el = (id) => document.getElementById(id);
+
+    function setStatus(msg, kind="ok"){
+      const st = el("status");
+      st.textContent = msg || "";
+      st.classList.remove("ok","bad");
+      if (msg){
+        st.classList.add(kind === "bad" ? "bad" : "ok");
+        window.clearTimeout(setStatus._t);
+        setStatus._t = window.setTimeout(() => setStatus("", "ok"), 2000);
+      }
+    }
+
+    function getMode(){
+      return document.querySelector('input[name="mode"]:checked')?.value || "single";
+    }
+
+    function updateModeHelp(){
+      const mode = getMode();
+      el("modeHelp").innerHTML = (mode === "single")
+        ? `Mode: <span class="kbd">Single post</span>. Paste exactly one post object on the left, e.g. <span class="mono">{ "id": "...", "title": "...", "content": "..." }</span>.`
+        : `Mode: <span class="kbd">whole posts.json</span>. Paste either <span class="mono">{ "posts": [ ... ] }</span> or an array <span class="mono">[ ... ]</span>. Output will be <span class="mono">{ "posts": [...] }</span>.`;
+    }
+
+    function safeJsonParse(txt){
+      const s = String(txt || "").trim();
+      if (!s) throw new Error("Input is empty.");
+      return JSON.parse(s);
+    }
+
+    function stripMarkdownish(md){
+      let t = String(md || "");
+      t = t.replace(/`{1,3}[^`]*`{1,3}/g, " ");        // inline code
+      t = t.replace(/\*\*([^*]+)\*\*/g, "$1");         // bold
+      t = t.replace(/\*([^*]+)\*/g, "$1");             // italic
+      t = t.replace(/~([^~]+)~/g, "$1");               // hint markers
+      t = t.replace(/\[([^\]]+)\]\(([^)]+)\)/g, "$1"); // links -> label
+      t = t.replace(/^\s*-\s+/gm, "");                 // list dashes
+      t = t.replace(/\s+/g, " ").trim();
+      return t;
+    }
+
+    function words(s){
+      return String(s || "").trim().split(/\s+/).filter(Boolean);
+    }
+
+    function makeTeaser(sourceText, maxWords=100){
+      const clean = stripMarkdownish(sourceText);
+      const w = words(clean);
+      if (!w.length) return "";
+      const cut = w.slice(0, maxWords);
+      let teaser = cut.join(" ");
+      if (w.length > maxWords) teaser += "…";
+      return teaser;
+    }
+
+    function normalizeFormat(post){
+      const f = String(post.format || "markdown").trim();
+      return (f === "html" || f === "text" || f === "markdown") ? f : "markdown";
+    }
+
+    function convertOne(post, customTeaser, customDe, keepLegacy){
+      if (typeof post !== "object" || post === null || Array.isArray(post)){
+        throw new Error("Each item must be a post object (not an array).");
+      }
+
+      const out = { ...post };
+      out.format = normalizeFormat(out);
+
+      const legacyContent = String(out.content || "");
+
+      if (out.teaser == null) out.teaser = "";
+      if (out.content_en == null) out.content_en = "";
+      if (out.content_de == null) out.content_de = "";
+
+      const enLong = String(out.content_en || legacyContent || "");
+      const deLong = String(customDe || out.content_de || legacyContent || "");
+      const teaser = String(customTeaser || out.teaser || makeTeaser(enLong, 100) || "");
+
+      out.teaser = teaser;
+      out.content_en = enLong;
+      out.content_de = deLong;
+
+      // Handle legacy "content"
+      if (keepLegacy && ("content" in post)){
+        out.content_legacy = legacyContent;
+      }
+      delete out.content;
+
+      // Deterministic key order
+      const ordered = {};
+      const keyOrder = [
+        "id","topic","subtopic","date","title","format",
+        "teaser","content_en","content_de",
+        "images","draft","content_legacy"
+      ];
+      keyOrder.forEach(k=>{
+        if (k in out) ordered[k] = out[k];
+      });
+      Object.keys(out).forEach(k=>{
+        if (!(k in ordered)) ordered[k] = out[k];
+      });
+
+      return ordered;
+    }
+
+    function parseBatchInput(obj){
+      // Accept {posts:[...]} or [...]
+      if (Array.isArray(obj)) return obj;
+      if (obj && typeof obj === "object" && Array.isArray(obj.posts)) return obj.posts;
+      throw new Error('Batch mode expects either an array [ ... ] or an object { "posts": [ ... ] }.');
+    }
+
+    function convert(){
+      try{
+        const mode = getMode();
+        const keepLegacy = el("keepLegacy").checked;
+        const customTeaser = el("customTeaser").value.trim();
+        const customDe = el("customDe").value.trim();
+
+        const inputObj = safeJsonParse(el("legacy").value);
+
+        if (mode === "single"){
+          const converted = convertOne(inputObj, customTeaser, customDe, keepLegacy);
+          el("out").value = JSON.stringify(converted, null, 2);
+
+          const tWords = words(converted.teaser).length;
+          if (tWords > 100) setStatus(`Converted. Teaser is ${tWords} words (> 100).`, "bad");
+          else setStatus("Converted.", "ok");
+          return;
+        }
+
+        // batch
+        const posts = parseBatchInput(inputObj);
+        const convertedPosts = posts.map((p, i) => {
+          try{
+            return convertOne(p, customTeaser, customDe, keepLegacy);
+          }catch(e){
+            // annotate which entry failed
+            throw new Error(`Post #${i} failed: ${e.message}`);
+          }
+        });
+
+        const outObj = { posts: convertedPosts };
+        el("out").value = JSON.stringify(outObj, null, 2);
+
+        // stats: how many teasers exceed 100 words
+        let tooLong = 0;
+        for (const p of convertedPosts){
+          if (words(p.teaser).length > 100) tooLong++;
+        }
+        if (tooLong) setStatus(`Converted ${convertedPosts.length} posts. ${tooLong} teaser(s) > 100 words.`, "bad");
+        else setStatus(`Converted ${convertedPosts.length} posts.`, "ok");
+      }catch(err){
+        setStatus(err.message || "Conversion failed.", "bad");
+      }
+    }
+
+    function resetAll(){
+      el("legacy").value = "";
+      el("customTeaser").value = "";
+      el("customDe").value = "";
+      el("out").value = "";
+      setStatus("", "ok");
+    }
+
+    async function copyOutput(){
+      const text = el("out").value.trim();
+      if (!text) return;
+      try{
+        await navigator.clipboard.writeText(text);
+        setStatus("Copied to clipboard.", "ok");
+      }catch{
+        el("out").focus();
+        el("out").select();
+        document.execCommand("copy");
+        setStatus("Copied to clipboard.", "ok");
+      }
+    }
+
+    // Bindings
+    el("convert").addEventListener("click", convert);
+    el("reset").addEventListener("click", resetAll);
+    el("out").addEventListener("click", copyOutput);
+    el("out").addEventListener("focus", copyOutput);
+
+    document.querySelectorAll('input[name="mode"]').forEach(r=>{
+      r.addEventListener("change", updateModeHelp);
+    });
+
+    document.addEventListener("keydown", (e)=>{
+      if ((e.ctrlKey || e.metaKey) && e.key === "Enter"){
+        e.preventDefault();
+        convert();
+      }
+    });
+
+    updateModeHelp();
+  </script>
+</body>
+</html>

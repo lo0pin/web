@@ -39,6 +39,16 @@
   --radius: 16px;         /* abgerundete Ecken (Banner/Kacheln) */
 }
 
+/* Aktiviert ein sanftes Scrollen bei Anker-Links (#id),
+   sodass die Seite weich zum Ziel gleitet statt abrupt zu springen. */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Deaktiviert sanftes Scrollen für Nutzer:innen,
+   die in ihrem System „Bewegung reduzieren“ aktiviert haben. */
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
 /* Damit Layouts mit 100% Höhe sauber funktionieren können,
    setzen wir html & body auf volle Höhe. */
 html, body {
@@ -116,6 +126,8 @@ body {
   margin: 0 auto;                 /* zentriert */
   padding: 1.25rem 1rem 3rem;     /* unten mehr Platz, wirkt luftiger */
 }
+
+
 
 /* Der <hr>-Divider: wir stylen ihn, damit er "clean" aussieht */
 .divider {
@@ -215,7 +227,7 @@ details.news-details[open] > summary{color:var(--text)}
 
 
 /* =========================================================
-   6) RESPONSIVE DESIGN (Media Queries)
+   6) RESPONSIVE DESIGN ( Queries)
    ---------------------------------------------------------
    Damit es auf Tablet/Handy gut aussieht.
    ========================================================= */
@@ -244,6 +256,15 @@ details.news-details[open] > summary{color:var(--text)}
   }
 }
 
+/* =========================================================
+   Responsive News / Media Images
+   ---------------------------------------------------------
+   Ziel:
+   - mobil: Bilder untereinander
+   - größere Displays: 2 Bilder nebeneinander
+   - Einzelbild bleibt vollbreit
+   - auf Mobile kontrollierte, einheitliche Höhe
+   ========================================================= */
 
 .media img {
   max-width: 100%;
@@ -253,25 +274,63 @@ details.news-details[open] > summary{color:var(--text)}
 
 .media-row {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr; /* mobil: immer untereinander */
   gap: 1rem;
+}
+
+/* Falls nur ein einziges Bild vorhanden ist:
+   bleibt es immer vollbreit */
+.media-row:has(> .media:only-child) {
+  grid-template-columns: 1fr;
 }
 
 .media-row .media {
   display: flex;
   flex-direction: column;
+  min-width: 0;
 }
 
+/* Mobile / Standard:
+   kontrollierte Höhe, kein wildes Hochwachsen */
 .media-row img {
   width: 100%;
-  height: 760px;          /* fixe, gewollte Höhe */
-  object-fit: cover;     /* beschneidet statt verzerrt */
+  height: 260px;
+  object-fit: cover;
   display: block;
+  border-radius: calc(var(--radius) - 4px);
 }
 
+/* Kompakte News-Bilder auf Mobile etwas niedriger */
 .media-row--compact img {
-  height: 380px;       /* 50 % von 760px */
+  height: 220px;
   object-fit: cover;
+}
+
+/* Ab ausreichend breitem Display:
+   2 Spalten, aber nur wenn mehr als 1 Bild da ist */
+@media (min-width: 700px) {
+  .media-row:not(:has(> .media:only-child)) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .media-row img {
+    height: 760px;
+  }
+
+  .media-row--compact img {
+    height: 380px;
+  }
+}
+
+/* Auf sehr kleinen Displays noch etwas kompakter */
+@media (max-width: 420px) {
+  .media-row img {
+    height: 220px;
+  }
+
+  .media-row--compact img {
+    height: 190px;
+  }
 }
 
 /* =========================================================
@@ -454,7 +513,10 @@ body.bg-nerdism      { --page-bg: url("../img/nerdism.jpg"); }
 body.bg-words        { --page-bg: url("../img/words.jpg"); }
 body.bg-botanics     { --page-bg: url("../img/botanics.jpg"); }
 body.bg-music        { --page-bg: url("../img/music_music2.png"); }
-body.bg-astronomy    { --page-bg: url("../img/astronomy_astro.png"); }
+body.bg-astronomy    { --page-bg: url("../img/moon_plabutsch03.jpeg"); }
+body.bg-outdoor      { --page-bg: url("../img/outdoor001.jpeg"); }
+body.bg-index        { --page-bg: url("../img/index_mashup.png"); }
+
 
 
 
@@ -731,4 +793,216 @@ a:hover {
 a:focus-visible {
   outline: 2px solid rgba(11, 95, 255, 0.45);
   outline-offset: 2px;
+}
+
+
+
+/* =========================================================
+   News Markdown Extras
+   ---------------------------------------------------------
+   Ergänzt news.js um:
+   - # / ## / ### Überschriften
+   - ``` Codeblöcke
+   - `inline code`
+   ========================================================= */
+
+.news-body h3,
+.news-teaser h3 {
+  margin: 1.2rem 0 0.65rem;
+  font-size: 1.2rem;
+  line-height: 1.3;
+}
+
+.news-body h4,
+.news-teaser h4 {
+  margin: 1rem 0 0.55rem;
+  font-size: 1.05rem;
+  line-height: 1.3;
+}
+
+.news-body h5,
+.news-teaser h5 {
+  margin: 0.9rem 0 0.5rem;
+  font-size: 0.98rem;
+  line-height: 1.3;
+  color: var(--muted);
+}
+
+/* Codeblock */
+.news-body pre,
+.news-teaser pre {
+  overflow-x: auto;
+  margin: 1rem 0;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: rgba(15, 19, 32, 0.04);
+  line-height: 1.5;
+}
+
+/* Monospace allgemein */
+.news-body code,
+.news-teaser code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  font-size: 0.92em;
+}
+
+/* Inline-Code */
+.news-body :not(pre) > code,
+.news-teaser :not(pre) > code {
+  padding: 0.12rem 0.38rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: rgba(15, 19, 32, 0.04);
+  white-space: break-spaces;
+}
+
+/* Code innerhalb von pre nicht nochmal dekorieren */
+.news-body pre code,
+.news-teaser pre code {
+  display: block;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  font-size: 0.95em;
+  white-space: pre;
+}
+
+/* Optional: etwas Luft zwischen Absätzen und Überschriften */
+.news-body p + h3,
+.news-body p + h4,
+.news-body p + h5,
+.news-teaser p + h3,
+.news-teaser p + h4,
+.news-teaser p + h5 {
+  margin-top: 1.35rem;
+}
+
+
+
+/* =========================================================
+   Cheatsheet blocks
+   ---------------------------------------------------------
+   Für HTML/CSS/Python-Cheatsheets:
+   - Kartenartige Einzelblöcke
+   - kleine Codefelder
+   - leichtes Syntax Highlighting
+   ========================================================= */
+
+.cheat-grid {
+  display: grid;
+  gap: 1.25rem;
+  margin: 1rem 0 2rem;
+}
+
+.cheat-item {
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--border);
+  border-radius: calc(var(--radius) - 4px);
+  background: rgba(15, 19, 32, 0.02);
+}
+
+.cheat-item h4 {
+  margin-top: 0;
+  margin-bottom: 0.6rem;
+}
+
+.cheat-code {
+  display: block;
+  overflow-x: auto;
+  margin: 0.85rem 0;
+  padding: 0.9rem 1rem;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: rgba(15, 19, 32, 0.04);
+  line-height: 1.55;
+  font-size: 0.95rem;
+}
+
+.cheat-code code {
+  display: block;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  white-space: pre;
+}
+
+/* Simple HTML syntax highlighting */
+.cheat-code-html .cheat-token-tag {
+  color: #0b5fff;
+}
+
+.cheat-code-html .cheat-token-attr {
+  color: #9a6700;
+}
+
+.cheat-code-html .cheat-token-val {
+  color: #137333;
+}
+
+.cheat-code-html .cheat-token-com {
+  color: var(--muted);
+  font-style: italic;
+}
+
+@media (min-width: 901px) {
+  .cheat-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+
+
+
+
+/* =========================================================
+   Klickbare News-Bilder
+   ---------------------------------------------------------
+   Ziel:
+   - Wenn ein Bild in einen Link <a> gewrappt ist,
+     soll die gesamte Bildfläche klickbar sein
+   - Keine normale Link-Unterstreichung bei Bildlinks
+   - Dezenter Hover-/Focus-Effekt:
+       * leicht transparenter
+       * minimaler Zoom
+       * klare Fokus-Markierung für Tastatur-Navigation
+   ========================================================= */
+
+/* Der Link direkt um das Bild:
+   - display:block macht die gesamte Fläche sauber klickbar
+   - text-decoration:none entfernt die globale Link-Unterstreichung
+   - gleicher Radius wie das Bild, damit Fokusrahmen und Klickfläche
+     sauber zur Bildform passen */
+.media > a {
+  display: block;
+  text-decoration: none;
+  border-radius: calc(var(--radius) - 4px);
+}
+
+/* Das Bild innerhalb des Links:
+   - display:block verhindert kleine Inline-Bild-Abstände
+   - transition sorgt für weiche Übergänge bei Hover/Focus */
+.media > a img {
+  display: block;
+  transition: opacity 120ms ease, transform 120ms ease;
+}
+
+/* Hover mit Maus + Focus per Tastatur:
+   - Bild wird minimal transparenter
+   - leichter Zoom signalisiert Interaktivität
+   - cursor: zoom-in deutet an, dass sich das Bild größer öffnen lässt */
+.media > a:hover img,
+.media > a:focus-visible img {
+  opacity: 0.92;
+  transform: scale(1.01);
+  cursor: zoom-in;
+}
+
+/* Sichtbarer Fokusrahmen für Accessibility:
+   - wichtig für Tastaturbenutzer:innen
+   - outline liegt außerhalb des Elements und verschiebt das Layout nicht
+   - border-radius hält die Fokuslinie optisch konsistent */
+.media > a:focus-visible {
+  outline: 2px solid rgba(11, 95, 255, 0.45);
+  outline-offset: 3px;
+  border-radius: calc(var(--radius) - 4px);
 }

@@ -1,7 +1,5 @@
 (async function () {
   const DATA_URL = new URL("../json/posts.json", import.meta.url);
-  // ↑ relativ von /assets/js/ nach /assets/json/
-
   const selectors = "[data-news-mode]";
 
   // --- helpers --------------------------------------------------------------
@@ -14,18 +12,37 @@
       "'": "&#39;",
     }[c]));
 
-  // Inline-Markdown: **bold**, *em*, [text](url), nackte http(s)-URLs
-  // Wichtig: Diese Funktion erwartet "already escaped" Text.
+  // Inline-Markdown:
+  // - **bold**
+  // - *italic*
+  // - `inline code`
+  // - [text](url)
+  // - nackte http(s)-URLs
+  //
+  // WICHTIG:
+  // Diese Funktion erwartet bereits escaped Text.
   function formatInline(escapedText) {
     let t = String(escapedText);
 
-    // bold / italic
+    // ------------------------------------------------------------
+    // 0. Inline code zuerst schützen
+    // ------------------------------------------------------------
+    const codeTokens = [];
+    t = t.replace(/`([^`]+)`/g, (_, code) => {
+      const token = `@@CODE${codeTokens.length}@@`;
+      codeTokens.push(`<code>${code}</code>`);
+      return token;
+    });
+
+    // ------------------------------------------------------------
+    // 1. Bold / Italic
+    // ------------------------------------------------------------
     t = t
       .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
       .replace(/\*(?!\*)(.+?)\*/g, "<em>$1</em>");
 
     // ------------------------------------------------------------
-    // 1. Externe Links (http / https)
+    // 2. Externe Links (http / https)
     // ------------------------------------------------------------
     t = t.replace(
       /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g,
@@ -33,7 +50,7 @@
     );
 
     // ------------------------------------------------------------
-    // 2. Anchor-Links (#hardware)
+    // 3. Anchor-Links (#hardware)
     // ------------------------------------------------------------
     t = t.replace(
       /\[([^\]]+)\]\((#[a-zA-Z0-9_-]+)\)/g,
@@ -41,7 +58,7 @@
     );
 
     // ------------------------------------------------------------
-    // 3. Relative Links
+    // 4. Relative Links
     // erlaubt:
     //   /projects/x.html
     //   ../docs/file.html
@@ -53,7 +70,7 @@
     );
 
     // ------------------------------------------------------------
-    // 4. Nackte URLs automatisch verlinken
+    // 5. Nackte URLs automatisch verlinken
     // ------------------------------------------------------------
     t = t.replace(/(https?:\/\/[^\s<]+)(?![^<]*>)/g, (m) => {
       const match = m.match(/^(.*?)([).,;:!?]+)?$/);
@@ -62,6 +79,11 @@
       return `<a href="${url}" target="_blank" rel="noopener noreferrer">${url}</a>${trail}`;
     });
 
+    // ------------------------------------------------------------
+    // 6. Inline-code-Tokens zurücksetzen
+    // ------------------------------------------------------------
+    t = t.replace(/@@CODE(\d+)@@/g, (_, i) => codeTokens[Number(i)] || "");
+
     return t;
   }
 
@@ -69,6 +91,9 @@
     const lines = String(md).split("\n");
     let html = "";
     let inList = false;
+    let inCodeBlock = false;
+    let codeLang = "";
+    let codeBuf = [];
     let pBuf = [];
 
     const flushP = () => {
@@ -79,10 +104,47 @@
       return `<p>${txt}</p>`;
     };
 
+    const flushCode = () => {
+      if (!codeBuf.length && !codeLang) return "";
+      const code = escapeHtml(codeBuf.join("\n"));
+      const cls = codeLang ? ` class="language-${escapeHtml(codeLang)}"` : "";
+      codeBuf = [];
+      codeLang = "";
+      return `<pre><code${cls}>${code}</code></pre>`;
+    };
+
     for (const raw of lines) {
       const line = raw.trimEnd();
+      const trimmed = line.trim();
 
-      if (line.trim() === "") {
+      // ----------------------------------------------------------
+      // Code fence start / end
+      // ----------------------------------------------------------
+      if (trimmed.startsWith("```")) {
+        if (inCodeBlock) {
+          html += flushCode();
+          inCodeBlock = false;
+        } else {
+          if (inList) {
+            html += "</ul>";
+            inList = false;
+          }
+          html += flushP();
+          inCodeBlock = true;
+          codeLang = trimmed.slice(3).trim(); // optional language
+        }
+        continue;
+      }
+
+      if (inCodeBlock) {
+        codeBuf.push(raw);
+        continue;
+      }
+
+      // ----------------------------------------------------------
+      // Leerzeile
+      // ----------------------------------------------------------
+      if (trimmed === "") {
         if (inList) {
           html += "</ul>";
           inList = false;
@@ -91,54 +153,95 @@
         continue;
       }
 
-      // ~hint~ block (whole line)
-      if (line.trim().startsWith("~") && line.trim().endsWith("~")) {
+      // ----------------------------------------------------------
+      // Hint block (whole line)
+      // ----------------------------------------------------------
+      if (trimmed.startsWith("~") && trimmed.endsWith("~")) {
         if (inList) {
           html += "</ul>";
           inList = false;
         }
         html += flushP();
 
-        // Hint: erlaubt Inline-Markdown (bold/italic/links)
-        const hintEscaped = escapeHtml(line.trim().slice(1, -1));
+        const hintEscaped = escapeHtml(trimmed.slice(1, -1));
         const hintText = formatInline(hintEscaped);
         html += `<p class="hint">${hintText}</p>`;
         continue;
       }
 
-      if (line.startsWith("- ")) {
+      // ----------------------------------------------------------
+      // Headings
+      // ----------------------------------------------------------
+      if (trimmed.startsWith("### ")) {
+        if (inList) {
+          html += "</ul>";
+          inList = false;
+        }
+        html += flushP();
+        const h = formatInline(escapeHtml(trimmed.slice(4)));
+        html += `<h5>${h}</h5>`;
+        continue;
+      }
+
+      if (trimmed.startsWith("## ")) {
+        if (inList) {
+          html += "</ul>";
+          inList = false;
+        }
+        html += flushP();
+        const h = formatInline(escapeHtml(trimmed.slice(3)));
+        html += `<h4>${h}</h4>`;
+        continue;
+      }
+
+      if (trimmed.startsWith("# ")) {
+        if (inList) {
+          html += "</ul>";
+          inList = false;
+        }
+        html += flushP();
+        const h = formatInline(escapeHtml(trimmed.slice(2)));
+        html += `<h3>${h}</h3>`;
+        continue;
+      }
+
+      // ----------------------------------------------------------
+      // Lists
+      // ----------------------------------------------------------
+      if (trimmed.startsWith("- ")) {
         html += flushP();
         if (!inList) {
           html += "<ul>";
           inList = true;
         }
 
-        const itemEscaped = escapeHtml(line.slice(2));
+        const itemEscaped = escapeHtml(trimmed.slice(2));
         const item = formatInline(itemEscaped);
         html += `<li>${item}</li>`;
-      } else {
-        if (inList) {
-          html += "</ul>";
-          inList = false;
-        }
-        pBuf.push(line); // erst beim flush escapen → sauberer Absatz-Join
+        continue;
       }
+
+      // ----------------------------------------------------------
+      // Default: paragraph buffer
+      // ----------------------------------------------------------
+      if (inList) {
+        html += "</ul>";
+        inList = false;
+      }
+      pBuf.push(trimmed);
+    }
+
+    if (inCodeBlock) {
+      html += flushCode();
     }
 
     if (inList) html += "</ul>";
     html += flushP();
+
     return html;
   }
 
   function renderPost(post) {
-    // ---------------------------------------------------------------------
-    // Bilingual posts (new schema)
-    // - teaser: short English abstract (recommendation: < 100 words)
-    // - content_en / content_de: full texts, each rendered inside <details>
-    // Backwards compatible: if teaser/content_en/content_de are missing,
-    // we fall back to the legacy single-field "content".
-    // ---------------------------------------------------------------------
-
     const isBilingual =
       ("teaser" in post) || ("content_en" in post) || ("content_de" in post);
 
@@ -169,13 +272,18 @@
       `
       : `<div class="news-body">${legacyBody}</div>`;
 
-    const imgs = Array.isArray(post.images) ? post.images.slice(0, 2) : [];
+    const imgs = Array.isArray(post.images) ? post.images : [];
 
-    const media = imgs.length
-      ? `
-      <div class="media-row media-row--compact">
-        ${imgs.map((img) => `
-          <figure class="media">
+const media = imgs.length
+  ? `
+    <div class="media-row media-row--compact">
+      ${imgs.map((img) => `
+        <figure class="media">
+          <a
+            href="${escapeHtml(img.src)}"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <img
               src="${escapeHtml(img.src)}"
               alt="${escapeHtml(img.alt || post.title)}"
@@ -183,11 +291,12 @@
               decoding="async"
             >
             ${img.caption ? `<figcaption>${escapeHtml(img.caption)}</figcaption>` : ""}
-          </figure>
-        `).join("")}
-      </div>
-    `
-      : "";
+          </a>
+        </figure>
+      `).join("")}
+    </div>
+  `
+  : "";
 
     return `
       <article class="card news-item">
@@ -222,11 +331,11 @@
   }
 
   document.querySelectorAll(selectors).forEach((el) => {
-    const topic = el.dataset.newsTopic || "";       // optional
-    const subtopic = el.dataset.newsSubtopic || ""; // optional
-    const mode = el.dataset.newsMode || "all";      // should exist
+    const topic = el.dataset.newsTopic || "";
+    const subtopic = el.dataset.newsSubtopic || "";
+    const mode = el.dataset.newsMode || "all";
 
-    const rawLimit = el.dataset.newsLimit;          // optional
+    const rawLimit = el.dataset.newsLimit;
     const limit = rawLimit ? Number.parseInt(rawLimit, 10) : NaN;
     const hasLimit = Number.isFinite(limit) && limit > 0;
 

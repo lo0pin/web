@@ -5,7 +5,9 @@ and published via GitHub Pages.
 
 ## 🚀 Live Version
 The website is available at:
-https://<username>.github.io/homepage/
+
+[https://lo0pin.github.io/web](https://lo0pin.github.io/web)
+
 
 ## 🛠️ Tech Stack
 - HTML5

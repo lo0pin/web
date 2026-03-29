@@ -51,7 +51,7 @@
   <link rel="icon" href="/favicon.ico" type="image/x-icon">
 </head>
 
-<body>
+<body class="has-bg bg-index">
   <!--
     HEADER = oberer Bereich der Seite.
     Typischer Inhalt:
@@ -89,10 +89,13 @@
           - diese Seiten müssen später auch wirklich existieren
           Wichtig: relative Links (ohne https://...) bleiben stabil bei Domainwechsel.
         -->
-        <a href="about.html">About Me</a>
-        <a href="news.html">Latest News</a>
-        <a href="notes.html">Few Notes</a>
-        <a href="contact.html">Get in Contact</a>
+        <a href="about.html">🧭 About</a>
+        <!--<a href="news.html">📰 Latest News</a>-->
+        <a href="archive.html">🗂️ News Archive</a>
+        <a href="notes.html">📝 Notes</a>
+        <a href="cheatsheets.html">📚 Cheatsheets</a>
+        <a href="tools.html">🧰 Toolbox</a>
+        <a href="contact.html">✉ Contact</a>
       </nav>
     </div>
   </header>
@@ -135,7 +138,7 @@
         <br>
         <!--How things are made, how they work, how they become meaningful — and how they help us navigate the world.
         <br><br> -->
-        Making as a way to understand.<br><br>
+        My way of exploring the world.<br><br>
       </p>  
       <br><br><br>
       <p class="hint">
@@ -145,7 +148,12 @@
 
     <!-- zweite Trennlinie zwischen Banner und Kachelbereich -->
     <hr class="divider" />
+    
+    <section class="card">
+      <h2 class="card-title">Things I Build, Explore & Write About</h2>
+    </section> 
 
+  
     <!--
       TILE GRID SECTION
       Das ist das Herzstück: Kacheln (Fotos) als Links in die einzelnen Bereiche.
@@ -223,12 +231,12 @@
         </a>
    
         <a class="tile" href="outdoor/home.html" aria-label="Outdoor">
-          <img class="tile-image" src="assets/img/outdoor00.jpeg" alt="" />
+          <img class="tile-image" src="assets/img/outdoor001.jpeg" alt="" />
           <span class="tile-label">🌄 Outdoor</span>
         </a>
 
         <a class="tile" href="astronomy/home.html" aria-label="Astronomy">
-          <img class="tile-image" src="assets/img/astronomy_astro.png" alt="" />
+          <img class="tile-image" src="assets/img/news/moon_plabutsch03.jpeg" alt="" />
           <span class="tile-label">✨ Astronomy</span>
         </a>
 
@@ -239,6 +247,22 @@
         
       </div>
     </section>
+    <hr class="divider" />
+
+
+    <!-- News Bereich. Ein Beitrag-->
+    <section class="card">
+      <h2 class="card-title">Recent Discoveries from the Workbench</h2>
+      <a class="hint" href="archive.html">View all updates →</a>
+    </section> 
+
+
+    <div data-news-mode="latest" data-news-limit="3"></div>
+    <script type="module" src="assets/js/news.js"></script>
+    
+
+
+    
   </main>
 
   <!--

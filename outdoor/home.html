@@ -9,14 +9,13 @@
   <link rel="stylesheet" href="../assets/css/main.css" />
 </head>
 
-<body class="has-bg bg-astronomy">
+<body class="has-bg bg-outdoor" id="top">
   <header class="site-header">
     <div class="header-inner">
 
       <h1 class="site-title">Outdoor</h1>
       <nav class="top-nav" aria-label="Top navigation">
-
-        <a href="../index.html">home</a>
+        <a href="../index.html">⌂ home</a>
       </nav>
     </div>
   </header>
@@ -35,39 +34,55 @@
     <section class="card">
       <h2 class="card-title">On this Page</h2>
       <ul>
-        <li><a href="#outdoor_news">Latest News</a></li>
         <li><a href="#outdoor_sub" >Subsections</a></li>
-
+        <li><a href="#outdoor_news">Latest News</a></li>
       </ul>
     </section>     
-
-    <hr class="divider" />
-
-    <section class="card" id="outdoor_news">
-      <h2 class="card-title">Latest News</h2>
-    </section> 
-      <div data-news-topic="outdoor" data-news-limit="2" data-news-mode="latest"></div>
-    <script type="module" src="../assets/js/news.js"></script>  
 
     <hr class="divider" />
 
     <section class="tile-section" id="outdoor_sub" aria-label="Sections">
       <div class="tile-grid">
          
-        <a class="tile" href="" aria-label="Project">
-          <img class="tile-image" src="../assets/img/outdoor00.jpeg" alt="" />
-          <span class="tile-label">✨ Project</span>
+        <a class="tile" href="drone.html" aria-label="Drone">
+          <img class="tile-image" src="../assets/img/news/new_drone_category.jpeg" alt="" />
+          <span class="tile-label">🚁 Drone</span>
         </a>
+        
+         <a class="tile" href="hiking.html" aria-label="Hiking">
+          <img class="tile-image" src="../assets/img/outdoor001.jpeg" alt="" />
+          <span class="tile-label">🥾 Hiking</span>
+        </a>   
+        
+        <a class="tile" href="meteorology.html" aria-label="Meteorology">
+          <img class="tile-image" src="../assets/img/meteorology.jpeg" alt="" />
+          <span class="tile-label">⛈️ Meteorology</span>
+        </a>
+        
         <a class="tile" href="" aria-label="Project">
           <img class="tile-image" src="../assets/img/outdoor01.jpeg" alt="" />
           <span class="tile-label">✨ Project</span>
         </a>
+        
         <a class="tile" href="" aria-label="Project">
-          <img class="tile-image" src="../assets/img/outdoor00.jpeg" alt="" />
+          <img class="tile-image" src="../assets/img/news/outdoor00.jpeg" alt="" />
           <span class="tile-label">✨ Project</span>
         </a>
       </div>
     </section>
+
+
+    <hr class="divider" />
+
+    <section class="card" id="outdoor_news">
+      <h2 class="card-title">Latest News</h2>
+    </section> 
+    <div data-news-topic="outdoor" data-news-limit="2" data-news-mode="latest"></div>
+    <script type="module" src="../assets/js/news.js"></script>  
+    
+    <hr class="divider" />
+    
+    <p class="hint"><a href="#top">↑ top</a>&emsp;<a href="../index.html">⌂ home</a></p>
   </main>
 
 

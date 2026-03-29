@@ -1,27 +1,30 @@
 ## Botanik
-"topic": "botanik",
+"topic": "botanik"
 
 ### Subcategories
-- "subtopic": "raspberry"
-- "subtopic": "ribisl"
-- "subtopic": "fig"
+"subtopic": "raspberry"
+"subtopic": "ribisl"
+"subtopic": "fig"
+"subtopic": "lemon"
+"subtopic": "bonsai"
 
 
 ## Making
-"topic": "making",
-
+"topic": "making"
 
 ### Subcategories
-"subtopic": "3dprint",
+"subtopic": "3dprint"
+"subtopic": "weben"
 
 
 ## Code
 "topic": "code" 
 
 ### SubC
-- "subtopic": "html"
-- "subtopic": "python"
-- "subtopic": "cpp"
+"subtopic": "html"
+"subtopic": "python"
+"subtopic": "cpp"
+"subtopic": "linux"
 
 ## Words
 "topic": "words"
@@ -38,8 +41,11 @@
 "topic": "electronics"
 
 ### SubC
-- "subtopic": "mesh"
+"subtopic": "mesh"
 "subtopic": "oled_bme"
+"subtopic": "led_matrix"
+"subtopic": "solar"
+"subtopic": "pc_build"
 
 ## Topic nerdism
 "topic": "nerdism" 
@@ -53,9 +59,20 @@
 ## Topic Astro
 "topic": "astro"
 
+### Suptopics
+"subtopic": "moon"
+
 ## Topic Outdoor
 "topic": "outdoor"
 
+### Subtopic
+"subtopic": "drone"
+"subtopic": "hiking"
+"subtopic": "metorology"
+
+
+## SRC for IMG
+assets/img/news...
 
 
 ## Modes
@@ -65,6 +82,68 @@ data-news-mode="latest"
 ## Limit
 <div data-news-topic="botanik"  data-news-subtopic="raspberry" data-news-mode="latest" data-news-limit="3"></div>
 <script type="module" src="../assets/js/news.js"></script>
+
+
+## Links
+Next up: [Routes & Places](/web/sailing/routes_places.html)
+
+
+
+## Markdown Guide (for this renderer)
+
+### Inline formatting
+* `**bold**` → **bold**
+* `*italic*` → *italic*
+* `` `code` `` → `code`
+
+### Links
+* `[text](https://example.com)` → external link
+* `[section](#anchor)` → anchor link
+* `[file](../path/file.html)` → relative link
+* `https://example.com` → auto-linked
+
+### Structure
+
+* `# Heading` → `<h3>`
+* `## Heading` → `<h4>`
+* `### Heading` → `<h5>`
+
+* Paragraphs = simple line breaks
+
+* Empty line = new paragraph
+
+### Lists
+
+* `- item` → bullet list
+  
+```
+- first
+- second
+```
+
+### Code blocks
+
+<pre>
+```js
+const x = 42;
+```
+</pre>
+
+### Special: Hint
+
+```
+~This is a hint~
+```
+
+→ highlighted hint block
+
+---
+
+### Notes
+
+* HTML is escaped by default
+* Markdown is only interpreted in `"format": "markdown"` posts
+
 
 
 ```json

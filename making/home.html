@@ -9,14 +9,13 @@
   <link rel="stylesheet" href="../assets/css/main.css" />
 </head>
 
-<body class="has-bg bg-making">
+<body class="has-bg bg-making" id="top">
   <header class="site-header">
     <div class="header-inner">
 
       <h1 class="site-title">Making</h1>
       <nav class="top-nav" aria-label="Top navigation">
-
-        <a href="../index.html">home</a>
+        <a href="../index.html">⌂ home</a>
       </nav>
     </div>
   </header>
@@ -34,19 +33,13 @@
     <section class="card">
       <h2 class="card-title">On this Page</h2>
       <ul>
-        <li><a href="#make_news">Latest News</a></li>
         <li><a href="#make_sub" >Subsections & Projects</a></li>
+        <li><a href="#make_news">Latest News</a></li>
+        
 
       </ul>
     </section>     
 
-    <hr class="divider" />
-
-    <section class="card" id="make_news">
-      <h2 class="card-title">Latest News</h2>
-    </section> 
-      <div data-news-topic="making" data-news-limit="2" data-news-mode="latest"></div>
-    <script type="module" src="../assets/js/news.js"></script>  
     <hr class="divider" />
     
     <section class="card" id="make_sub">
@@ -90,6 +83,17 @@
 
       </div>
     </section>
+
+
+    <hr class="divider" />
+    <section class="card" id="make_news">
+      <h2 class="card-title">Latest News</h2>
+    </section> 
+    <div data-news-topic="making" data-news-limit="2" data-news-mode="latest"></div>
+    <script type="module" src="../assets/js/news.js"></script>  
+
+    <hr class="divider" />
+    <p class="hint"><a href="#top">↑ top</a>&emsp;<a href="../index.html">⌂ home</a></p>
   </main>
 
   <!--

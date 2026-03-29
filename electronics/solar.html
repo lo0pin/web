@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Balcony Solar Power System</title>
+
+  <!-- same global stylesheet -->
+  <link rel="stylesheet" href="../assets/css/main.css" />
+</head>
+
+<body class="has-bg bg-electronics" id="top">
+  <header class="site-header" id="top">
+    <div class="header-inner">
+      <h1 class="site-title">Balcony Solar Power System</h1>
+
+      <nav class="top-nav" aria-label="Top navigation">
+        <a href="../index.html">⌂ home</a>
+        <a href="home.html">← back</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="content">
+    <hr class="divider" />
+
+    <section class="hero" aria-label="Essence">
+      <p class="hero-quote">
+        ☀️⚡🔋 turning sunlight into electricity
+      </p>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- Table-of-contents style card -->
+    <article class="card">
+      <h2 class="card-title">On this page</h2>
+      <ul class="toc">
+        <li><a href="#solar_bme_news">Latest News</a></li>
+        <li><a href="#what">What it is</a></li>
+        <li><a href="#why">Why I did it</a></li>
+        <li><a href="#hardware">Hardware</a></li>
+
+      </ul>
+    </article>
+
+    <hr class="divider" />
+
+    <section id="solar_bme_news" class="card">
+      <h2 class="card-title">Latest News</h2>
+    </section> 
+
+    <div data-news-topic="electronics" data-news-subtopic="solar" data-news-mode="all"></div>
+    <script type="module" src="../assets/js/news.js"></script>
+    
+    <hr class="divider" />
+
+    <!-- Intro card -->
+    <article class="card" id="what">
+      <h2 class="card-title">What it is</h2>
+      <p class="card-meta">Status: learning-in-public · Last updated: <time datetime="2026-03-26">Mar 26, 2026</time></p>
+
+      <p>
+        This project is a small experimental <strong>balcony solar power system</strong> designed to turn
+        raw sunlight into a clean and usable <strong>5-volt USB power supply</strong>.
+      </p>
+
+      <p>
+        The system uses <strong>16 small solar panels</strong> arranged in series pairs to produce roughly
+        <strong>11–13 V</strong>. A <strong>buck converter</strong> then regulates this fluctuating solar voltage
+        down to a stable <strong>5 V USB output</strong> suitable for charging electronics.
+      </p>
+
+      <p>
+        Under good sunlight the setup delivers between
+        <strong>10 and 18 watts of real electrical power</strong> — enough to charge powerbanks,
+        run small microcontrollers, or power lightweight electronic devices.
+      </p>
+
+      <p>
+        Rather than being a finished product, the installation acts as a
+        <strong>small open laboratory for solar energy</strong>: a place to observe how photovoltaic
+        systems behave in real weather, partial shade, and daily sunlight cycles.
+      </p>
+    </article>
+
+
+    <!-- Why -->
+    <article class="card" id="why">
+      <h2 class="card-title">Why I got into it</h2>
+
+      <p>
+        Many of my projects revolve around observing systems — radio networks,
+        electronics, sensors, or the night sky.
+        Solar energy fits naturally into that theme.
+      </p>
+
+      <p>
+        Instead of reading theoretical numbers about renewable energy,
+        I wanted to build a small system that produces electricity
+        right where I live: on my own balcony.
+      </p>
+
+      <p>
+        The idea was deliberately simple:
+      </p>
+
+      <ul>
+        <li>capture sunlight with small photovoltaic modules</li>
+        <li>convert the fluctuating voltage into stable USB power</li>
+        <li>store energy in portable powerbanks</li>
+        <li>observe how the system behaves in real conditions</li>
+      </ul>
+
+      <p>
+        What started as a curiosity quickly became a functioning
+        <strong>tiny solar power plant</strong>.
+      </p>
+    </article>
+
+
+    </article>
+
+
+    <!-- Hardware -->
+    <article class="card" id="hardware">
+      <h2 class="card-title">Hardware</h2>
+      <p class="card-meta">Current system components</p>
+
+      <ul>
+        <li><strong>16 small solar panels</strong> – the photovoltaic array capturing sunlight</li>
+        <li><strong>Wooden mounting frame</strong> – custom-built structure for balcony installation</li>
+        <li><strong>Series panel strings</strong> – panels paired to produce ~11 V operating voltage</li>
+        <li><strong>Bypass diodes (1N4007)</strong> – protect strings against partial shading</li>
+        <li><strong>Schottky rectifiers (40CPQ035)</strong> – prevent reverse current into the panels</li>
+        <li><strong>Buck converter</strong> – regulates solar voltage down to stable 5 V USB output</li>
+        <li><strong>USB powerbanks</strong> – portable energy storage charged during daylight</li>
+      </ul>
+
+      <p>
+        Together these components form a small photovoltaic system that converts
+        unstable solar energy into a stable and practical power source for everyday electronics.
+      </p>
+    </article>
+
+
+    <hr class="divider" />
+    <p class="hint"><a href="#top">↑ top</a>&emsp;<a href="../index.html">⌂ home</a>&emsp;<a href="home.html">← back</a></p>
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2026 Julian</p>
+  </footer>
+
+  <script src="../assets/js/main.js" defer></script>
+</body>
+</html>

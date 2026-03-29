@@ -9,14 +9,13 @@
   <link rel="stylesheet" href="../assets/css/main.css" />
 </head>
 
-<body class="has-bg bg-electronics">
+<body class="has-bg bg-electronics" id="top">
   <header class="site-header">
     <div class="header-inner">
 
       <h1 class="site-title">Electronics</h1>
       <nav class="top-nav" aria-label="Top navigation">
-
-        <a href="../index.html">home</a>
+        <a href="../index.html">⌂ home</a>
       </nav>
     </div>
   </header>
@@ -34,21 +33,11 @@
     <section class="card">
       <h2 class="card-title">On this Page</h2>
       <ul>
-        <li><a href="#elec_news">Latest News</a></li>
         <li><a href="#elec_sub" >Subsections</a></li>
-
+        <li><a href="#elec_news">Latest News</a></li>
       </ul>
     </section>   
     
-    <hr class="divider" />
-
-    <section class="card" id="elec_news">
-      <h2 class="card-title">Latest News</h2>
-    </section> 
-
-    <div data-news-topic="electronics" data-news-mode="latest" data-news-limit="2"></div>
-    <script type="module" src="../assets/js/news.js"></script>
-
     <hr class="divider" />
 
     <section class="card" id="elec_sub">
@@ -79,15 +68,28 @@
 
         <a class="tile" href="" aria-label="PLANNED: Network Attached Storage">
           <img class="tile-image" src="../assets/img/electronics_project.png" alt="" />
-          <span class="tile-label">🗄️ Network Attached Storage</span>
+          <span class="tile-label">🗄️ PLANNED: Network Attached Storage</span>
         </a>
         <a class="tile" href="" aria-label="PLANNED: Pi-hole">
           <img class="tile-image" src="../assets/img/electronics_project.png" alt="" />
-          <span class="tile-label">🧱 Pi-hole</span>
+          <span class="tile-label">🧱 PLANNED: Pi-hole</span>
         </a>
         
       </div>
     </section>
+
+    
+    <hr class="divider" />
+
+    <section class="card" id="elec_news">
+      <h2 class="card-title">Latest News</h2>
+    </section> 
+
+    <div data-news-topic="electronics" data-news-mode="latest" data-news-limit="2"></div>
+    <script type="module" src="../assets/js/news.js"></script>
+
+    <hr class="divider" />
+    <p class="hint"><a href="#top">↑ top</a>&emsp;<a href="../index.html">⌂ home</a></p>
   </main>
 
 

@@ -9,14 +9,14 @@
   <link rel="stylesheet" href="assets/css/main.css" />
 </head>
 
-<body>
+<body class="has-bg bg-index">
   <!-- Same header + navigation as index.html (keeps the site consistent) -->
   <header class="site-header">
     <div class="header-inner">
-      <h1 class="site-title">Current Projects</h1>
+      <h1 class="site-title">Latest News & Current Projects</h1>
 
       <nav class="top-nav" aria-label="Top navigation">
-        <a href="./index.html">home</a>
+        <a href="./index.html">⌂ home</a>
         <!--<a href="news.html">My Projects</a>
         <a href="notes.html">Few Notes</a>
         <a href="contact.html">Get in Contact</a>-->
@@ -25,10 +25,15 @@
   </header>
 
   <main class="content">
-    <!--
+    <section class="card">
+    <p>
+      Here are <strong>my 10 most recent posts</strong>. Visit the <a href="archive.html">archive for the full collection</a>.
+    </p>
+    </section>
+    
     <hr class="divider" />
-    -->
-    <div data-news-mode="latest" data-news-limit="20"></div>
+
+    <div data-news-mode="latest" data-news-limit="10"></div>
     <script type="module" src="assets/js/news.js"></script>
 
     <hr class="divider" />
