@@ -39,6 +39,7 @@
 
 ### SubC
 - "subtopic": "mesh"
+"subtopic": "oled_bme"
 
 ## Topic nerdism
 "topic": "nerdism" 
@@ -48,8 +49,6 @@
 "subtopic": "lotr"
 "subtopic": "games"
 
-
-Noch nicht im JSON GENERATOR:
 
 ## Topic Astro
 "topic": "astro"
