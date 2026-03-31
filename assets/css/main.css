@@ -1006,3 +1006,149 @@ a:focus-visible {
   outline-offset: 3px;
   border-radius: calc(var(--radius) - 4px);
 }
+
+
+/* =========================================================
+   Anchorage head block
+   ---------------------------------------------------------
+   Zweck:
+   - Oberer "Steckbrief"-Bereich einer Bucht
+   - Links: Karte / Screenshot
+   - Rechts: kurzer Beschreibungstext + Faktenliste
+   - Mobil: untereinander
+   - Desktop: sauber 50 / 50
+   ========================================================= */
+
+/* ---------------------------------------------------------
+   Container des gesamten Blocks
+   ---------------------------------------------------------
+   - grid: sorgt für klare Spaltenstruktur
+   - mobil: 1 Spalte (untereinander)
+   - gap: Luft zwischen Bild und Text
+--------------------------------------------------------- */
+.anchorage-head {
+  display: grid;
+
+  /* Standard (mobil): alles untereinander */
+  grid-template-columns: 1fr;
+
+  gap: 1rem;                /* Abstand zwischen den Elementen */
+  align-items: start;       /* verhindert vertikales Strecken */
+  margin: 1rem 0 1.25rem;  /* Abstand nach außen */
+}
+
+/* ---------------------------------------------------------
+   Ab Tablet/Desktop:
+   - exakt zwei gleich breite Spalten
+   - bewusst streng → ruhiger Gesamteindruck
+--------------------------------------------------------- */
+@media (min-width: 760px) {
+  .anchorage-head {
+    grid-template-columns: 1fr 1fr; /* 50 / 50 Layout */
+  }
+}
+
+/* ---------------------------------------------------------
+   Beide Spalten (Bild + Text)
+   ---------------------------------------------------------
+   min-width: 0 ist wichtig (!):
+   - verhindert, dass lange Inhalte das Grid sprengen
+   - klassischer Flex/Grid-Fallstrick
+--------------------------------------------------------- */
+.anchorage-map,
+.anchorage-summary {
+  min-width: 0;
+}
+
+/* ---------------------------------------------------------
+   Figure-Reset
+   ---------------------------------------------------------
+   entfernt Standard-Margin von <figure>,
+   damit alles sauber bündig sitzt
+--------------------------------------------------------- */
+.anchorage-map {
+  margin: 0;
+}
+
+/* ---------------------------------------------------------
+   Link um das Bild
+   ---------------------------------------------------------
+   - macht das ganze Bild klickbar
+   - entfernt Unterstreichung
+   - Radius gleich wie Bild → saubere Fokus-/Hover-Kante
+--------------------------------------------------------- */
+.anchorage-map a {
+  display: block;
+  text-decoration: none;
+  border-radius: calc(var(--radius) - 4px);
+}
+
+/* ---------------------------------------------------------
+   Das eigentliche Kartenbild
+   ---------------------------------------------------------
+   - width: 100% → füllt exakt die linke Hälfte
+   - aspect-ratio: erzwingt ein einheitliches Format
+   - object-fit: cover → schneidet ggf. zu, aber bleibt sauber // altenative: contain
+   - border + radius → visuell wie eine "eingesetzte Karte"
+--------------------------------------------------------- */
+.anchorage-map img {
+  display: block;
+  width: 100%;
+
+  aspect-ratio: 3 / 2;   /* definiert sichtbares Format */
+  object-fit: cover;     /* füllt Fläche, ggf. Beschnitt */
+
+  border-radius: calc(var(--radius) - 4px);
+  border: 1px solid var(--border);
+}
+
+/* ---------------------------------------------------------
+   Bildunterschrift (z.B. OSM Copyright)
+   ---------------------------------------------------------
+   - klein, zurückhaltend
+   - klar getrennt vom Bild
+--------------------------------------------------------- */
+.anchorage-map figcaption {
+  margin-top: 0.45rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+/* ---------------------------------------------------------
+   Rechte Spalte: Textbereich
+   ---------------------------------------------------------
+   - flex column → Text + Liste untereinander
+   - gap sorgt für gleichmäßige Abstände
+--------------------------------------------------------- */
+.anchorage-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* ---------------------------------------------------------
+   Erster Absatz im Textblock
+   ---------------------------------------------------------
+   - entfernt Standard-Margin
+   - sorgt für kompakteren, kontrollierten Einstieg
+--------------------------------------------------------- */
+.anchorage-summary > p {
+  margin: 0;
+}
+
+/* ---------------------------------------------------------
+   Faktenliste (kleiner Steckbrief)
+   ---------------------------------------------------------
+   - leicht eingerückt
+   - bewusst schlicht gehalten
+--------------------------------------------------------- */
+.anchorage-facts {
+  margin: 0;
+  padding-left: 1.15rem;
+}
+
+/* Einzelne Listenelemente:
+   - kleiner vertikaler Abstand für bessere Lesbarkeit */
+.anchorage-facts li {
+  margin-bottom: 0.25rem;
+}
