@@ -1245,6 +1245,39 @@
           "caption": "close-up of fresh spring bud on small tree branch"
         }
       ]
+    },
+    {
+      "id": "2026-04-03_electronics_solar5v_06",
+      "topic": "electronics",
+      "subtopic": "solar",
+      "date": "2026-04-03",
+      "title": "Part VI: Real Sun. Real Load. Real Data.",
+      "format": "markdown",
+      "teaser": "Theory is pleasant. Sunlight is better. After building the system, the next step was simple: take it outside and measure what it actually does.",
+      "content_en": "~Solar projects only become interesting once the measurements start.~\n\nAfter the panels, wiring, and regulation electronics were finished, the system was taken outside for real-world testing.\n\nNo laboratory conditions. No controlled light source.\n\nJust sunlight, temperature, and the occasional cloud.\n\n## Open-circuit voltage\n\nThe first measurement was taken directly at the panel array before the buck converter.\n\nMeasured open-circuit voltage:\n\n**≈ 12.6 V**\n\nUnder moderate load the panel voltage settles around:\n\n**≈ 11.8–12 V**\n\nThis is consistent with the electrical design of the array:\n\n- 16 panels total\n- arranged as **8 series pairs**\n\nEach panel has a nominal rating of **5.5 V**, but small solar modules often show higher open-circuit voltages in strong sunlight.\n\n## Typical operating point\n\nWith the buck converter regulating the output to USB voltage, the system typically delivers:\n\n- **5.008 V**\n- **2.13 A**\n\nThat corresponds to roughly:\n\n**≈ 10.7 W output power**\n\nThis level of power is stable enough to charge powerbanks or operate small electronics continuously.\n\n## Maximum measured output\n\nUnder very good midday sunlight, the system briefly reached:\n\n- **4.60 V**\n- **4.01 A**\n\nWhich corresponds to:\n\n**≈ 18.5 W**\n\nOther measurements in similar conditions produced:\n\n- **17.05 W**\n- **13.81 W**\n\nThose values are well within the expected range for a small panel array of this size.\n\n## Partial shading experiment\n\nSolar arrays have an interesting weakness: shade.\n\nEven a single shaded cell can severely reduce output if no protection is used.\n\nThis system uses **bypass diodes on every panel**, allowing current to flow around shaded modules.\n\nTo test this, three panels were deliberately covered.\n\nResult:\n\nThe system still produced usable power.\n\nOutput dropped, but the array continued operating rather than collapsing electrically.\n\nThe bypass diodes effectively prevented shaded modules from blocking the entire string.\n\n## Temperature behaviour\n\nSolar panels lose efficiency as they heat up.\n\nIn strong midday sun the panel surface becomes noticeably warm, and the voltage drops slightly compared to cooler morning conditions.\n\nThis behaviour is normal for silicon photovoltaic cells and is visible in the measured panel voltages.\n\n## What these measurements show\n\nThe system behaves exactly as a small photovoltaic array should:\n\n- panel voltage around **12 V**\n- regulated **5 V USB output**\n- real-world power between **10 and 18 W** depending on sunlight\n\nMost importantly:\n\nThe electrical system remains **stable under load**, even with partial shading.\n\nWhich means the small balcony solar experiment has crossed an important threshold.\n\nIt is no longer a prototype.\n\nIt is a working power source.",
+      "content_de": "~Solaranlagen werden erst spannend, wenn man sie misst.~\n\nNachdem Aufbau, Verkabelung und Spannungsregelung fertig waren, kam der entscheidende Schritt: reale Messungen im Sonnenlicht.\n\nKeine Laborlampe. Keine idealisierten Bedingungen.\n\nNur Sonne, Temperatur und gelegentlich eine vorbeiziehende Wolke.\n\n## Leerlaufspannung der Panels\n\nDie erste Messung erfolgte direkt am Panel-Array vor dem Buck-Converter.\n\nGemessene Leerlaufspannung:\n\n**≈ 12,6 V**\n\nUnter moderater Last stabilisiert sich die Panelspannung bei etwa:\n\n**≈ 11,8–12 V**\n\nDas passt gut zum elektrischen Aufbau der Anlage:\n\n- insgesamt **16 Solarmodule**\n- verschaltet als **8 Serienpaare**\n\nJedes Modul ist mit **5,5 V Nennspannung** angegeben. In der Praxis liegt die Leerlaufspannung kleiner Panels bei starker Sonneneinstrahlung oft etwas höher.\n\n## Typischer Arbeitspunkt\n\nMit aktivem Buck-Converter und stabilisierter USB-Ausgangsspannung liefert das System typischerweise:\n\n- **5,008 V**\n- **2,13 A**\n\nDas entspricht etwa:\n\n**≈ 10,7 W Ausgangsleistung**\n\nDamit lassen sich Powerbanks zuverlässig laden oder kleine Geräte dauerhaft betreiben.\n\n## Maximale gemessene Leistung\n\nBei sehr guter Mittagssonne wurden kurzzeitig folgende Werte erreicht:\n\n- **4,60 V**\n- **4,01 A**\n\nDas ergibt eine Leistung von:\n\n**≈ 18,5 W**\n\nWeitere Messpunkte lagen bei:\n\n- **17,05 W**\n- **13,81 W**\n\nDiese Werte liegen genau in dem Bereich, den man von einer kleinen Modulfläche dieser Größe erwarten würde.\n\n## Teilverschattung\n\nSolaranlagen haben eine bekannte Schwachstelle: Schatten.\n\nSchon einzelne verschattete Zellen können die Leistung stark reduzieren.\n\nIn diesem System besitzt **jedes Panel eine eigene Bypass-Diode**.\n\nUm den Effekt zu testen, wurden drei Panels absichtlich abgedeckt.\n\nDas Ergebnis:\n\nDie Anlage lieferte weiterhin Strom.\n\nDie Leistung sank zwar, aber das System brach nicht vollständig zusammen.\n\nDie Bypass-Dioden verhindern, dass verschattete Module den gesamten Strang blockieren.\n\n## Temperaturverhalten\n\nSolarzellen verlieren mit steigender Temperatur etwas an Spannung.\n\nIn der Mittagssonne erwärmen sich die Module deutlich, was sich in leicht sinkenden Spannungswerten gegenüber kühleren Morgenstunden zeigt.\n\nDieses Verhalten ist typisch für Silizium-Solarzellen.\n\n## Fazit der Messungen\n\nDie Anlage verhält sich genau so, wie man es von einem kleinen Photovoltaik-System erwarten würde:\n\n- Panelspannung um **12 V**\n- stabil geregelte **5 V USB-Ausgangsspannung**\n- reale Leistung zwischen **10 und 18 W** je nach Sonneneinstrahlung\n\nEntscheidend ist jedoch etwas anderes.\n\nDas System bleibt **unter realer Last stabil** — selbst bei Teilverschattung.\n\nDamit ist ein wichtiger Punkt erreicht.\n\nDer Aufbau ist kein Experiment mehr.\n\nEr ist eine funktionierende Energiequelle.",
+      "images": [
+        {
+          "src": "/web/assets/img/solar601.jpeg",
+          "alt": "A handmade solar array, angled toward the sun — simple physics, patiently harvesting light.",
+          "caption": "A handmade solar array, angled toward the sun — simple physics, patiently harvesting light."
+        },
+        {
+          "src": "/web/assets/img/solar602.jpeg",
+          "alt": "11.78 V — raw output under real conditions, no promises, just measurement.",
+          "caption": "11.78 V — raw output under real conditions, no promises, just measurement."
+        },
+        {
+          "src": "/web/assets/img/solar603.jpeg",
+          "alt": "Nearly five volts, just over two amps — a modest stream, quietly doing its work",
+          "caption": "Nearly five volts, just over two amps — a modest stream, quietly doing its work"
+        },
+        {
+          "src": "/web/assets/img/solar604.jpeg",
+          "alt": "4.6 V at 4 A — a small converter, pushing the limits of what sunlight just offered.",
+          "caption": "4.6 V at 4 A — a small converter, pushing the limits of what sunlight just offered."
+        }
+      ]
     }
   ]
 }
