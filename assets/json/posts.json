@@ -1258,22 +1258,22 @@
       "content_de": "~Solaranlagen werden erst spannend, wenn man sie misst.~\n\nNachdem Aufbau, Verkabelung und Spannungsregelung fertig waren, kam der entscheidende Schritt: reale Messungen im Sonnenlicht.\n\nKeine Laborlampe. Keine idealisierten Bedingungen.\n\nNur Sonne, Temperatur und gelegentlich eine vorbeiziehende Wolke.\n\n## Leerlaufspannung der Panels\n\nDie erste Messung erfolgte direkt am Panel-Array vor dem Buck-Converter.\n\nGemessene Leerlaufspannung:\n\n**≈ 12,6 V**\n\nUnter moderater Last stabilisiert sich die Panelspannung bei etwa:\n\n**≈ 11,8–12 V**\n\nDas passt gut zum elektrischen Aufbau der Anlage:\n\n- insgesamt **16 Solarmodule**\n- verschaltet als **8 Serienpaare**\n\nJedes Modul ist mit **5,5 V Nennspannung** angegeben. In der Praxis liegt die Leerlaufspannung kleiner Panels bei starker Sonneneinstrahlung oft etwas höher.\n\n## Typischer Arbeitspunkt\n\nMit aktivem Buck-Converter und stabilisierter USB-Ausgangsspannung liefert das System typischerweise:\n\n- **5,008 V**\n- **2,13 A**\n\nDas entspricht etwa:\n\n**≈ 10,7 W Ausgangsleistung**\n\nDamit lassen sich Powerbanks zuverlässig laden oder kleine Geräte dauerhaft betreiben.\n\n## Maximale gemessene Leistung\n\nBei sehr guter Mittagssonne wurden kurzzeitig folgende Werte erreicht:\n\n- **4,60 V**\n- **4,01 A**\n\nDas ergibt eine Leistung von:\n\n**≈ 18,5 W**\n\nWeitere Messpunkte lagen bei:\n\n- **17,05 W**\n- **13,81 W**\n\nDiese Werte liegen genau in dem Bereich, den man von einer kleinen Modulfläche dieser Größe erwarten würde.\n\n## Teilverschattung\n\nSolaranlagen haben eine bekannte Schwachstelle: Schatten.\n\nSchon einzelne verschattete Zellen können die Leistung stark reduzieren.\n\nIn diesem System besitzt **jedes Panel eine eigene Bypass-Diode**.\n\nUm den Effekt zu testen, wurden drei Panels absichtlich abgedeckt.\n\nDas Ergebnis:\n\nDie Anlage lieferte weiterhin Strom.\n\nDie Leistung sank zwar, aber das System brach nicht vollständig zusammen.\n\nDie Bypass-Dioden verhindern, dass verschattete Module den gesamten Strang blockieren.\n\n## Temperaturverhalten\n\nSolarzellen verlieren mit steigender Temperatur etwas an Spannung.\n\nIn der Mittagssonne erwärmen sich die Module deutlich, was sich in leicht sinkenden Spannungswerten gegenüber kühleren Morgenstunden zeigt.\n\nDieses Verhalten ist typisch für Silizium-Solarzellen.\n\n## Fazit der Messungen\n\nDie Anlage verhält sich genau so, wie man es von einem kleinen Photovoltaik-System erwarten würde:\n\n- Panelspannung um **12 V**\n- stabil geregelte **5 V USB-Ausgangsspannung**\n- reale Leistung zwischen **10 und 18 W** je nach Sonneneinstrahlung\n\nEntscheidend ist jedoch etwas anderes.\n\nDas System bleibt **unter realer Last stabil** — selbst bei Teilverschattung.\n\nDamit ist ein wichtiger Punkt erreicht.\n\nDer Aufbau ist kein Experiment mehr.\n\nEr ist eine funktionierende Energiequelle.",
       "images": [
         {
-          "src": "/web/assets/img/solar601.jpeg",
+          "src": "/web/assets/img/news/solar601.jpeg",
           "alt": "A handmade solar array, angled toward the sun — simple physics, patiently harvesting light.",
           "caption": "A handmade solar array, angled toward the sun — simple physics, patiently harvesting light."
         },
         {
-          "src": "/web/assets/img/solar602.jpeg",
+          "src": "/web/assets/img/news/solar602.jpeg",
           "alt": "11.78 V — raw output under real conditions, no promises, just measurement.",
           "caption": "11.78 V — raw output under real conditions, no promises, just measurement."
         },
         {
-          "src": "/web/assets/img/solar603.jpeg",
+          "src": "/web/assets/img/news/solar603.jpeg",
           "alt": "Nearly five volts, just over two amps — a modest stream, quietly doing its work",
           "caption": "Nearly five volts, just over two amps — a modest stream, quietly doing its work"
         },
         {
-          "src": "/web/assets/img/solar604.jpeg",
+          "src": "/web/assets/img/news/solar604.jpeg",
           "alt": "4.6 V at 4 A — a small converter, pushing the limits of what sunlight just offered.",
           "caption": "4.6 V at 4 A — a small converter, pushing the limits of what sunlight just offered."
         }
