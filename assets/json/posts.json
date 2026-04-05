@@ -1278,6 +1278,43 @@
           "caption": "4.6 V at 4 A — a small converter, pushing the limits of what sunlight just offered."
         }
       ]
+    },
+    {
+      "id": "2026-04-05_outdoor_drone_plabutsch_flight",
+      "topic": "outdoor",
+      "subtopic": "drone",
+      "date": "2026-04-05",
+      "title": "Plabutsch Flight — Stillness, Scale, and the Art of Not Turning",
+      "format": "markdown",
+      "teaser": "A calm evening flight above Graz from the Plabutsch ridge turned into a study in restraint. Soft colors, wide horizons — and the realization that the best drone footage often comes from doing less, not more.",
+      "content_en": "The Plabutsch offers something rare: **elevation without drama**. No cliffs, no spectacle — just a quiet rise above the city, forests fading into rooftops, and the horizon stretching further than expected.\n\nA perfect place to fly.\n\nThe conditions were almost too gentle: clear air, soft pastel gradients in the sky, and barely any wind. The kind of setting where every movement becomes visible — and every mistake, equally so.\n\nReviewing the footage afterwards revealed one central truth:\n\n**The z-axis is unforgiving.**\n\nEven slight rotation around the vertical axis introduces nervousness into the image. What feels like a subtle cinematic pan quickly becomes a restless wobble. The best results came from **barely rotating at all — or committing to extremely slow, deliberate motion**.\n\nIt is less a joystick movement and more a decision.\n\nBeyond that, a few additional \"easy wins\" became clear.\n\n**Simple ways to improve drone footage immediately:**\n\n- avoid vertical axis rotation unless it is intentional and slow\n- combine movement axes sparingly (e.g. forward *or* sideways — not both at once)\n- use long, uninterrupted shots instead of many short ones\n- let the drone hover before and after each movement (gives clean edit points)\n- fly slower than feels necessary — then slow down even more\n- use foreground elements (trees, ridges) to create depth\n- keep the horizon stable and avoid micro-corrections\n- prefer straight lines over curves unless the curve is very controlled\n\nA surprising insight: the most compelling shots were often the simplest ones — **a slow forward drift, a gentle rise, a static hover with the city breathing below**.\n\nThe Plabutsch did not demand cinematic tricks. It rewarded clarity.\n\nIn the end, the lesson is almost paradoxical:\n\nThe drone already knows how to move beautifully.\n\nThe craft lies in knowing when to leave it alone.",
+      "content_de": "Der Plabutsch ist ein unspektakulärer Ort — und genau deshalb ideal. Keine dramatischen Felsen, keine überinszenierte Landschaft. Stattdessen: **ein ruhiger Höhenzug, Wald, Stadt, Horizont**.\n\nPerfekt, um Drohne zu fliegen.\n\nDie Bedingungen waren fast schon zu gut: klare Luft, sanfte Farbverläufe im Himmel, kaum Wind. Eine Umgebung, in der jede Bewegung sichtbar wird — und jeder Fehler ebenso.\n\nBeim Durchsehen des Materials wurde eine Sache sehr schnell klar:\n\n**Die Rotation um die z-Achse verzeiht nichts.**\n\nSchon kleinste Drehbewegungen wirken im Bild unruhig. Was sich in der Luft nach einem sanften Schwenk anfühlt, wird im Video schnell zu einem nervösen Zittern. Die besten Aufnahmen entstanden dann, wenn ich **gar nicht oder nur extrem langsam gedreht habe**.\n\nEs ist weniger eine Bewegung als eine bewusste Entscheidung.\n\nDarüber hinaus haben sich ein paar einfache Prinzipien herauskristallisiert.\n\n**Einfache „Easy Wins“ für bessere Drohnenaufnahmen:**\n\n- Rotation um die z-Achse vermeiden oder extrem langsam ausführen\n- Bewegungsachsen nicht unnötig kombinieren (z. B. vorwärts *oder* seitlich)\n- lieber wenige lange Einstellungen als viele kurze Clips\n- vor und nach jeder Bewegung kurz schweben lassen (saubere Schnittpunkte)\n- langsamer fliegen, als es sich richtig anfühlt — und dann noch langsamer\n- Vordergrund nutzen (Bäume, Kanten), um Tiefe zu erzeugen\n- Horizont stabil halten, Mikro-Korrekturen vermeiden\n- klare Linien statt unruhiger Kurven bevorzugen\n\nÜberraschend war, wie gut die einfachsten Shots funktionieren: **langsames Vorwärtsgleiten, leichtes Steigen, stilles Schweben über der Stadt**.\n\nDer Plabutsch verlangt keine Effekte. Er belohnt Ruhe.\n\nAm Ende bleibt eine fast banale Erkenntnis:\n\nDie Drohne kann bereits fliegen.\n\nDer Pilot muss lernen, nichts zu tun.",
+      "images": [
+        {
+          "src": "/web/assets/img/news/drone_plabutsch_01.jpg",
+          "alt": "wide aerial view over Graz at sunset from Plabutsch with soft pastel sky",
+          "caption": "Graz stretching into the horizon — calm air, soft light, and long lines."
+        },
+        {
+          "src": "/web/assets/img/news/drone_plabutsch_02.gif",
+          "alt": "slow drifting shot over trees with city in the background",
+          "caption": "Subtle forward motion — no rotation, just depth."
+        },
+        {
+          "src": "/web/assets/img/news/drone_plabutsch_03.gif",
+          "alt": "layered hills and mountains seen from above with evening haze",
+          "caption": "Layered hills and mountains seen from above with evening haze."
+        },
+        {
+          "src": "/web/assets/img/news/drone_plabutsch_04.jpg",
+          "alt": "top down drone shot of path, trees and building",
+          "caption": "Top-down perspective — geometry instead of motion."
+        },
+        {
+          "src": "/web/assets/img/news/drone_plabutsch_05.gif",
+          "alt": ""
+        }
+      ]
     }
   ]
 }
