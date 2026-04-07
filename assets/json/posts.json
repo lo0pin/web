@@ -1328,26 +1328,24 @@
       "content_de": "~Jedes technische Projekt endet irgendwann mit einer Liste von Verbesserungen.~\n\nNach einigen Tagen Tests im echten Sonnenlicht hat die Anlage eine wichtige Erkenntnis geliefert: Sie funktioniert. Die Panels liefern Leistung, der Spannungswandler erzeugt stabile 5 Volt, und die Powerbanks werden zuverlässig geladen.\n\nDoch kein Prototyp überlebt den Kontakt mit der Realität, ohne ein paar Schwachstellen preiszugeben.\n\nHier sind einige Dinge, die eine zweite Version vermutlich anders machen würde.\n\n## Kabelmanagement\n\nElektrisch funktioniert der Aufbau gut — optisch erinnert er noch stark an ein Experimentierbrett.\n\nAuf der Rückseite des Rahmens laufen mehrere Leitungen zusammen, und bei der Fehlersuche folgt man gelegentlich einem roten Kabel durch eine Landschaft aus anderen roten Kabeln.\n\nEine nächste Version würde wahrscheinlich beinhalten:\n\n- saubere Kabelführungen\n- kürzere Leitungswege\n- farblich eindeutigere Verbindungen\n\nElektrische Zuverlässigkeit entsteht nicht nur durch Bauteile, sondern auch durch Übersicht.\n\n## Wetterfestigkeit\n\nDer Aufbau ist derzeit vor allem als Experiment gedacht.\n\nViele Komponenten sind offen montiert:\n\n- Verkabelung\n- Schraubklemmen\n- der Buck-Converter\n\nWährend die Solarmodule problemlos im Freien arbeiten, würden sich die elektronischen Bauteile über etwas Schutz freuen.\n\nMögliche Verbesserungen wären:\n\n- ein kleines wetterfestes Elektronikgehäuse\n- Zugentlastung für Kabel\n- Schutz vor Regen und Kondensation\n\nSonnenlicht ist willkommen.\n\nWasser eher weniger.\n\n## Effizienz\n\nFür eine kleine DIY-Anlage arbeitet das System bereits erstaunlich ordentlich und liefert zwischen **10 und 18 Watt** Leistung.\n\nDennoch gibt es entlang der Energiekette kleine Verluste:\n\n- Spannungsabfall an Dioden\n- Wirkungsgradverluste im Buck-Converter\n- Leitungsverluste\n\nJeder einzelne Effekt ist klein — zusammen kosten sie jedoch ein paar Watt.\n\nEine überarbeitete Version könnte hier durch kürzere Leitungen, verlustärmere Bauteile oder eine optimierte Regelung noch etwas effizienter werden.\n\n## Mechanische Verbesserungen\n\nDer Holzrahmen erfüllt seine Aufgabe zuverlässig. Er trägt die Module stabil und erlaubt eine sinnvolle Neigung zur Sonne.\n\nDoch im praktischen Betrieb zeigen sich schnell kleine Details:\n\nWind, Temperaturänderungen und schlichtes Handling legen nahe:\n\n- verstellbare Neigungswinkel\n- verstärkte Verbindungen\n- etwas robustere Montageplatten\n\nDer Unterschied zwischen „funktioniert“ und „funktioniert elegant“ liegt oft in der Mechanik.\n\n## Der Gedanke an MPPT\n\nDerzeit nutzt die Anlage einen einfachen **Buck-Converter**, der die Panelspannung auf 5 Volt herunterregelt.\n\nDas funktioniert gut — aber der Arbeitspunkt der Panels wird dabei nicht aktiv optimiert.\n\nGrößere Solaranlagen verwenden deshalb **MPPT-Regler (Maximum Power Point Tracking)**.\n\nSolche Regler passen die Last kontinuierlich so an, dass die Solarmodule genau an dem Punkt betrieben werden, an dem sie die maximale Leistung liefern.\n\nIn der Theorie könnte ein MPPT-Regler aus denselben Panels noch etwas mehr Energie herausholen, besonders bei wechselnden Lichtverhältnissen.\n\nOb sich diese zusätzliche Komplexität für eine kleine Balkonanlage lohnt, bleibt eine offene Frage.\n\nAber als nächster Entwicklungsschritt ist der Gedanke durchaus reizvoll.\n\n## Die stille Wahrheit von Prototypen\n\nEin fertiges Produkt strebt Perfektion an.\n\nEin Prototyp strebt Verständnis an.\n\nUnd in diesem Sinne hat dieses kleine Solarprojekt bereits gewonnen.\n\nEs hat Sonnenlicht in Daten, Erfahrungen und Ideen für Version zwei verwandelt.",
       "images": [
         {
-          "src": "/web/assets/img/solar701.jpeg",
+          "src": "/web/assets/img/news/solar701.jpeg",
           "caption": "Rear view of a DIY solar panel array mounted on a wooden frame, with visible wiring, terminal blocks, and power electronics attached",
           "alt": "Rear view of a DIY solar panel array mounted on a wooden frame, with visible wiring, terminal blocks, and power electronics attached"
         },
         {
-          "src": "/web/assets/img/solar702.jpeg",
+          "src": "/web/assets/img/news/solar702.jpeg",
           "caption": "Close-up of a solar panel junction with diode protection and screw terminal connections for positive and negative leads",
           "alt": "Close-up of a solar panel junction with diode protection and screw terminal connections for positive and negative leads"
         },
         {
-          "src": "/web/assets/img/solar703.jpeg",
-          solar703.jpeg:
-          "caption": "Detail of a mounted power transistor or rectifier with connected wiring and a rocker switch integrated into the wooden frame",
-          "alt": "Detail of a mounted power transistor or rectifier with connected wiring and a rocker switch integrated into the wooden frame"
+          "src": "/web/assets/img/news/solar703.jpeg",
+          "caption": "Detail of a mounted rectifier with connected wiring and a rocker switch integrated into the wooden frame",
+          "alt": "Detail of a mounted rectifier with connected wiring and a rocker switch integrated into the wooden frame"
         },
         {
-          "src": "/web/assets/img/solar704.jpeg",
-          solar703.jpeg:
-          "caption": "Detail of a mounted power transistor or rectifier with connected wiring and a rocker switch integrated into the wooden frame",
-          "alt": "Detail of a mounted power transistor or rectifier with connected wiring and a rocker switch integrated into the wooden frame"
+          "src": "/web/assets/img/news/solar704.jpeg",
+          "caption": "Underside view of the solar setup showing a DC-DC converter module, wiring distribution, and structural wooden elements",
+          "alt": "Underside view of the solar setup showing a DC-DC converter module, wiring distribution, and structural wooden elements"
         }
       ]
     }    
