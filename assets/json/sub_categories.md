@@ -36,6 +36,7 @@
 - "subtopic": "literature"
 - "subtopic": "philosophy"
 - "subtopic": "poetry"
+- "subtopic": "video"
 
 ## Electronics
 "topic": "electronics"
