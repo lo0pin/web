@@ -1422,6 +1422,34 @@
       ]
     },
     {
+      "id": "2026-04-15_sailing_places_launch_21_10",
+      "topic": "sailing",
+      "date": "2026-04-15",
+      "title": "Places: first anchorages, harbours and marinas online",
+      "format": "markdown",
+      "teaser": "The first entries of my sailing logbook are now online: anchorages, harbours and marinas. It’s still growing, but you can already browse a small atlas of places worth remembering.",
+      "content_en": "I’ve finally started building the [places](/web/sailing/routes_places.html) section of the sailing pages.\n\nThe first anchorages, harbours and marinas are now online, and the structure is beginning to take shape. The goal is simple: a small personal atlas of places I’ve actually sailed to — with notes, impressions and the occasional photograph.\n\nEven in this early stage, a few memorable stops already stand out:\n\n**Piškera (ACI Kornati) + Vrulje (Kornati)**  \nRight in the middle of the Kornati National Park. Almost surreal. Anchoring, hiking, and a landscape that feels stripped down to the essence of sailing.\n\n**Skradin (Krka)**  \nSailing upriver into the Krka valley — a rare and strangely calm experience.\n\n**Blaca (Brač)**  \nA monastery hidden in a dramatic coastal valley. History carved into stone and cliffs.\n\n**Venice – Isola Sant’Elena**  \nArriving in Venice by boat never quite feels real.\n\nMore places will follow — slowly turning scattered logbook memories into a navigable map.",
+      "content_de": "Ich habe nun endlich begonnen, die [Places-Sektion](/web/sailing/routes_places.html) meiner Sailing-Seiten aufzubauen.\n\nDie ersten **Ankerplätze, Häfen und Marinas** sind bereits eingetragen, sodass man sich langsam einen Überblick verschaffen kann. Ziel ist eine kleine persönliche Karte von Orten, an denen ich tatsächlich war — mit kurzen Notizen, Eindrücken und Fotos.\n\nSchon jetzt finden sich darunter ein paar echte Perlen:\n\n**Piškera (ACI Kornati) + Vrulje (Kornaten)**  \nMitten im Kornati-Nationalpark. Fast schon surreal. Ankern, Wandern und diese karge Landschaft — sehr viel Segel-Essenz.\n\n**Skradin (Krka)**  \nFlussaufwärts in die Krka zu segeln ist eine seltene Erfahrung.\n\n**Blaca (Brač)**  \nEine Klosterbucht mit Geschichte, eingerahmt von einer dramatischen Küste.\n\n**Venedig – Isola Sant’Elena**  \nMit dem eigenen Boot in Venedig anzukommen bleibt jedes Mal ein besonderer Moment.\n\nWeitere Orte werden nach und nach ergänzt — bis aus einzelnen Erinnerungen eine navigierbare Karte meiner Segelplätze entsteht.",
+      "images": [
+        {
+          "src": "/web/assets/img/sail_routes_places/anchorages/ankaran_osm.png",
+          "alt": "ankaran_osm.png"
+        },
+        {
+          "src": "/web/assets/img/sail_routes_places/anchorages/blaca04.jpeg",
+          "alt": "ankaran_osm.png"
+        },
+        {
+          "src": "/web/assets/img/sail_routes_places/anchorages/lamjanamala03.jpeg",
+          "alt": "ankaran_osm.png"
+        },
+        {
+          "src": "/web/assets/img/sail_routes_places/anchorages/lukapodsvetikriz_north_01.jpeg",
+          "alt": "ankaran_osm.png"
+        }
+      ]
+    },
+    {
       "id": "2026-04-15_making_3dprint_a1_fusion_learnings",
       "topic": "making",
       "subtopic": "3d_print",
@@ -1508,34 +1536,6 @@
           "src": "/web/assets/img/news/sailing_regatta_04.jpeg",
           "alt": "Editing workstation with large amount of video footage",
           "caption": "Hundreds of gigabytes later — the long journey from footage to film begins"
-        }
-      ]
-    },
-    {
-      "id": "2026-04-15_sailing_places_launch_21_10",
-      "topic": "sailing",
-      "date": "2026-04-15",
-      "title": "Places: first anchorages, harbours and marinas online",
-      "format": "markdown",
-      "teaser": "The first entries of my sailing logbook are now online: anchorages, harbours and marinas. It’s still growing, but you can already browse a small atlas of places worth remembering.",
-      "content_en": "I’ve finally started building the [places](/web/sailing/routes_places.html) section of the sailing pages.\n\nThe first anchorages, harbours and marinas are now online, and the structure is beginning to take shape. The goal is simple: a small personal atlas of places I’ve actually sailed to — with notes, impressions and the occasional photograph.\n\nEven in this early stage, a few memorable stops already stand out:\n\n**Piškera (ACI Kornati) + Vrulje (Kornati)**  \nRight in the middle of the Kornati National Park. Almost surreal. Anchoring, hiking, and a landscape that feels stripped down to the essence of sailing.\n\n**Skradin (Krka)**  \nSailing upriver into the Krka valley — a rare and strangely calm experience.\n\n**Blaca (Brač)**  \nA monastery hidden in a dramatic coastal valley. History carved into stone and cliffs.\n\n**Venice – Isola Sant’Elena**  \nArriving in Venice by boat never quite feels real.\n\nMore places will follow — slowly turning scattered logbook memories into a navigable map.",
-      "content_de": "Ich habe nun endlich begonnen, die [Places-Sektion](/web/sailing/routes_places.html) meiner Sailing-Seiten aufzubauen.\n\nDie ersten **Ankerplätze, Häfen und Marinas** sind bereits eingetragen, sodass man sich langsam einen Überblick verschaffen kann. Ziel ist eine kleine persönliche Karte von Orten, an denen ich tatsächlich war — mit kurzen Notizen, Eindrücken und Fotos.\n\nSchon jetzt finden sich darunter ein paar echte Perlen:\n\n**Piškera (ACI Kornati) + Vrulje (Kornaten)**  \nMitten im Kornati-Nationalpark. Fast schon surreal. Ankern, Wandern und diese karge Landschaft — sehr viel Segel-Essenz.\n\n**Skradin (Krka)**  \nFlussaufwärts in die Krka zu segeln ist eine seltene Erfahrung.\n\n**Blaca (Brač)**  \nEine Klosterbucht mit Geschichte, eingerahmt von einer dramatischen Küste.\n\n**Venedig – Isola Sant’Elena**  \nMit dem eigenen Boot in Venedig anzukommen bleibt jedes Mal ein besonderer Moment.\n\nWeitere Orte werden nach und nach ergänzt — bis aus einzelnen Erinnerungen eine navigierbare Karte meiner Segelplätze entsteht.",
-      "images": [
-        {
-          "src": "/web/assets/img/sail_routes_places/anchorages/ankaran_osm.png",
-          "alt": "ankaran_osm.png"
-        },
-        {
-          "src": "/web/assets/img/sail_routes_places/anchorages/blaca04.jpeg",
-          "alt": "ankaran_osm.png"
-        },
-        {
-          "src": "/web/assets/img/sail_routes_places/anchorages/lamjanamala03.jpeg",
-          "alt": "ankaran_osm.png"
-        },
-        {
-          "src": "/web/assets/img/img/sail_routes_places/anchorages/lukapodsvetikriz_north_01.jpeg",
-          "alt": "ankaran_osm.png"
         }
       ]
     }
