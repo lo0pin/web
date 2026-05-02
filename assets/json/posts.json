@@ -1538,6 +1538,39 @@
           "caption": "Hundreds of gigabytes later — the long journey from footage to film begins"
         }
       ]
+    },
+    {
+      "id": "2026-05-02_code_video_shotcut_18_40",
+      "topic": "words",
+      "subtopic": "video",
+      "date": "2026-05-02",
+      "title": "From Footage to Story — Shotcut Quickstart for Sailing Videos",
+      "format": "markdown",
+      "teaser": "After a week at sea and hundreds of gigabytes of footage, the next step begins turning raw material into something watchable. Shotcut turned out to be a surprisingly capable, no-nonsense tool for that job.",
+      "content_en": "~Filming is memory. Editing is meaning.~\n\nAfter returning from the regatta week — strong winds, first spinnaker, and far too much footage — the real work quietly shifted from sea to screen.\n\nSorting.\nCutting.\nDeciding what actually matters.\n\nFor this, I ended up using Shotcut.\n\n## Why Shotcut\n\nShotcut is an open-source video editor.\n\nNo subscriptions.\nNo ecosystem lock-in.\nNo drama.\n\nJust:\n\n- timeline-based editing\n- solid codec support (thanks to FFmpeg)\n- real-time preview\n- enough tools to get serious work done\n\nIt is not flashy.\nIt is not creative-suite-polished.\n\nBut it is honest software.\n\nAnd for a project like a sailing video — where clarity matters more than effects — that is exactly right.\n\n## Quickstart — from raw clips to timeline\n\n### 1. Import footage\n\n- open Shotcut\n- drag your video files into the playlist panel\n- from there, drag clips onto the timeline\n\nThink of the playlist as your raw archive.\nThe timeline is where decisions begin.\n\n### 2. Basic cutting\n\n- move the playhead\n- press S → split clip\n- delete unwanted parts\n\nThat’s already 80% of editing.\n\nNo joke.\n\n### 3. Arrange sequences\n\n- drag clips left/right to reorder\n- trim edges by dragging clip borders\n\nAt this stage, ignore perfection.\n\nJust build structure.\n\n### 4. Export\n\n- click Export\n- choose preset (e.g. YouTube 1080p)\n- export file\n\nDone.\n\nRough cut achieved.\n\n## Easy Wins (immediate quality boost)\n\nThese matter more than any effect:\n\n- cut aggressively → remove hesitation, dead time, shaky beginnings\n- keep clips longer → sailing benefits from calm, continuous motion\n- stabilize horizon → nothing ruins footage faster than micro-wobble\n- use natural pacing → wind and water already provide rhythm\n- start/end cleanly → let clips breathe before cutting\n\n~Good editing often means doing less, not more.~\n\n## Must-Knows (before you get lost)\n\n### Tracks matter\n\nShotcut uses tracks (like layers):\n\n- V1 = main video\n- V2 = overlays (titles, drone shots, etc.)\n- A1 = audio\n\nUnderstanding this early saves confusion later.\n\n### Filters are everything\n\nShotcut is built around filters:\n\n- brightness / contrast\n- color grading\n- fade in / fade out\n- audio gain\n\nSelect a clip → open Filters → add what you need.\n\n### Proxy & performance\n\nLarge files (hello GoPro + drone…) can lag.\n\nUse:\n\n- Settings → Proxy\n- or lower preview resolution\n\nOtherwise your laptop will protest.\n\n### Audio is half the video\n\nWind noise, waves, silence.\n\n- normalize audio levels\n- reduce harsh peaks\n- don’t overdo music\n\nBad audio kills good footage faster than bad visuals.\n\n## Editing a sailing video — a different mindset\n\nSailing footage is not fast.\n\nIt is:\n\n- wind building\n- sails filling\n- water moving in long lines\n\nSo the edit should reflect that.\n\nAvoid:\n\n- rapid cuts\n- overused transitions\n- artificial drama\n\nInstead:\n\n- long shots\n- minimal cuts\n- natural pacing\n\nLet the boat move.\nLet the viewer feel it.\n\n## From sea to story\n\nRight now, the footage is still raw.\n\nHundreds of gigabytes of potential.\n\nSomewhere inside:\n\n- the first spinnaker moment\n- the pressure of wind\n- the quiet evenings at anchor\n\nEditing is the process of finding those moments.\n\nAnd giving them a shape.\n\nNot everything belongs in the final video.\n\nOnly what remains meaningful after the wind is gone.",
+      "content_de": "~Filmen ist Erinnerung. Schneiden ist Bedeutung.~\n\nNach der Regattawoche — viel Wind, erster Spinnaker, und absurd viel Videomaterial — hat sich die Arbeit leise verschoben.\n\nWeg vom Wasser.\nHin zum Bildschirm.\n\nSichten.\nKürzen.\nEntscheiden.\n\nDafür nutze ich aktuell Shotcut.\n\n## Warum Shotcut\n\nShotcut ist ein Open-Source-Videoeditor.\n\nKein Abo.\nKeine Plattformbindung.\nKein Overhead.\n\nDafür:\n\n- klassische Timeline\n- breite Formatunterstützung (FFmpeg)\n- Echtzeit-Vorschau\n- alles, was man für ernsthafte Projekte braucht\n\nNicht spektakulär.\nNicht überladen.\n\nAber genau deshalb angenehm.\n\n## Quickstart — von Rohmaterial zur Timeline\n\n### 1. Clips importieren\n\n- Shotcut öffnen\n- Dateien in die Playlist ziehen\n- von dort auf die Timeline\n\nPlaylist = Sammlung.\nTimeline = Entscheidung.\n\n### 2. Schneiden\n\n- Abspielkopf positionieren\n- S drücken → Schnitt\n- unnötige Teile löschen\n\nDas ist der Kern von allem.\n\n### 3. Anordnen\n\n- Clips verschieben\n- Länge durch Ziehen anpassen\n\nErst Struktur bauen.\nDann verfeinern.\n\n### 4. Export\n\n- Export klicken\n- Preset wählen (z. B. YouTube 1080p)\n- Datei erzeugen\n\nFertig.\n\n## Easy Wins\n\n- konsequent kürzen\n- lieber längere ruhige Einstellungen\n- Horizont stabil halten\n- natürliche Geschwindigkeit beibehalten\n- klare Anfangs- und Endpunkte\n\n## Must-Knows\n\n### Tracks verstehen\n\n- V1 = Video\n- V2 = Overlays\n- A1 = Audio\n\n### Filter nutzen\n\n- Helligkeit / Kontrast\n- Farben\n- Fade In / Out\n- Audio\n\n### Performance beachten\n\nGroße Dateien → Proxy oder reduzierte Vorschau nutzen.\n\n### Audio ernst nehmen\n\nTon ist kein Nebenprodukt.\n\nEr ist die Hälfte des Videos.\n\n## Segelvideo schneiden heißt Ruhe zulassen\n\nSegeln ist kein Actionfilm.\n\nEs lebt von:\n\n- gleichmäßiger Bewegung\n- Raum\n- Zeit\n\nAlso:\n\n- weniger Schnitte\n- längere Einstellungen\n- keine Effekthascherei\n\nDie Bewegung kommt vom Wind.\n\nNicht vom Schnitt.\n\n## Fazit\n\nDas Material ist da.\n\nJetzt beginnt die eigentliche Arbeit:\n\nAus Momenten eine Geschichte bauen.\n\nUnd dabei genau so viel weglassen,\n\nbis nur noch das Wesentliche bleibt.",
+      "images": [
+        {
+          "src": "/web/assets/img/news/sailing_edit_may01_01.jpeg",
+          "alt": "Shotcut interface showing multiple sailing video clips arranged in a timeline",
+          "caption": "Raw material: fragments of wind, water, and motion"
+        },
+        {
+          "src": "/web/assets/img/news/sailing_edit_may01_02.jpeg",
+          "alt": "Sailing scene from onboard perspective with two people trimming sails on open water",
+          "caption": "At sea: rhythm, tension, and quiet coordination"
+        },
+        {
+          "src": "/web/assets/img/news/sailing_edit_may01_03.jpeg",
+          "alt": "Video editing controls and toolbar in Shotcut with filter and export options visible",
+          "caption": "Tools at hand: simple interface, deliberate choices"
+        },
+        {
+          "src": "/web/assets/img/news/sailing_edit_may01_04.jpeg",
+          "alt": "Timeline view with cut sailing clips and visible audio waveform",
+          "caption": "Structure emerges: cuts, timing, and flow"
+        }
+      ]
     }
   ]
 }
