@@ -1616,6 +1616,39 @@
           "caption": "Static website code and project structure on screen"
         }
       ]
+    },
+    {
+      "id": "2026-05-08_botanik_himbeer_recovery",
+      "topic": "botanik",
+      "subtopic": "himbeer",
+      "date": "2026-05-08",
+      "title": "Raspberry: From Overfed to Recovering",
+      "format": "markdown",
+      "teaser": "This one went downhill fast — yellow leaves, dying growth, clear stress signals. The cause was likely self-inflicted. The recovery, however, is already underway.",
+      "content_en": "~Plants rarely die of neglect alone. More often, they are loved to death.~\n\nThis raspberry plant tells a very clear story — just not a comfortable one.\n\n## What went wrong\n\nThe lower part of the plant shows:\n\n- strong yellowing (chlorosis)\n- green veins with pale tissue in between\n- dried, collapsing leaves\n- partial dieback of older growth\n\nClassic symptoms of **root stress and nutrient imbalance**.\n\nMost likely cause:\n\n### Overfertilization\n\n- excess salts in the soil\n- roots unable to properly absorb water\n- \"burn\" effect despite moist substrate\n\nIn short:\n\nThe plant wasn’t starving.\n\nIt was overwhelmed.\n\n## The turning point\n\nThe intervention was exactly right:\n\n- flushing the substrate\n- repotting into fresh soil\n\nAnd the plant responded immediately.\n\n## What we see now\n\nThe upper growth tells a completely different story:\n\n- fresh, saturated green leaves\n- upright structure\n- clean leaf geometry\n\nThis is **active recovery**.\n\nThe plant is reallocating energy away from damaged tissue\nand investing in new growth.\n\n## What to do next\n\nNow comes the delicate part: doing less.\n\n### 1. Remove dead weight\n\n- cut off completely dried leaves and stems\n- keep anything still partially green\n\n### 2. Water — but with discipline\n\n- evenly moist, not wet\n- no standing water in the pot\n\n### 3. Pause fertilization\n\n- no fertilizer for at least 2–3 weeks\n- let roots stabilize first\n\n### 4. Light & position\n\n- bright, but avoid extreme midday stress\n- airflow helps recovery\n\n## What not to do\n\n- no \"compensation fertilizing\"\n- no drastic pruning of healthy shoots\n- no constant repotting\n\n## Final assessment\n\nThis is no longer a dying plant.\n\nIt is a plant **in recovery after stress trauma**.\n\nAnd the trajectory is — cautiously — positive.\n\n## A small lesson in restraint\n\nThe instinct to help is often the problem.\n\nPlants don’t reward intensity.\n\nThey reward consistency.\n\nAnd sometimes, the most intelligent intervention\n\nis simply to stop interfering.",
+      "content_de": "~Pflanzen sterben selten an Vernachlässigung. Meist sterben sie an zu viel Fürsorge.~\n\nDiese Himbeere erzählt eine recht eindeutige Geschichte.\n\n## Was passiert ist\n\nIm unteren Bereich sieht man klar:\n\n- starke Vergilbung (Chlorose)\n- grüne Blattadern, dazwischen helles Gewebe\n- vertrocknete, kollabierende Blätter\n- teilweises Absterben älterer Triebe\n\nDas ist ein klassisches Bild von **Wurzelstress durch Nährstoffungleichgewicht**.\n\nDie wahrscheinlichste Ursache:\n\n### Überdüngung\n\n- zu viele Salze im Substrat\n- gestörte Wasseraufnahme\n- \"Verbrennung\" trotz feuchter Erde\n\nKurz gesagt:\n\nDie Pflanze hatte nicht zu wenig.\n\nSie hatte zu viel.\n\n## Der Wendepunkt\n\nDie Gegenmaßnahmen waren exakt richtig:\n\n- Substrat gespült\n- umgetopft\n\nUnd die Pflanze reagiert.\n\n## Aktueller Zustand\n\nIm oberen Bereich zeigt sich:\n\n- frischer, kräftiger Neuaustrieb\n- sattes Grün\n- stabile Blattstruktur\n\nDas ist **aktive Regeneration**.\n\nDie Pflanze investiert nicht mehr in beschädigte Bereiche,\nsondern baut neu auf.\n\n## Weiteres Vorgehen\n\nJetzt ist Zurückhaltung gefragt.\n\n### 1. Totes entfernen\n\n- komplett vertrocknete Blätter abschneiden\n- alles halbwegs vitale stehen lassen\n\n### 2. Gießen\n\n- gleichmäßig, aber nicht nass\n- keine Staunässe\n\n### 3. Düngen pausieren\n\n- mindestens 2–3 Wochen kein Dünger\n- Wurzeln stabilisieren lassen\n\n### 4. Standort\n\n- hell, aber keine extreme Mittagshitze\n- etwas Luftbewegung hilft\n\n## Was du vermeiden solltest\n\n- kein \"Nachdüngen aus schlechtem Gewissen\"\n- kein radikaler Rückschnitt gesunder Triebe\n- kein weiteres Umtopfen\n\n## Gesamtbewertung\n\nDie Pflanze ist nicht mehr am Absterben.\n\nSie ist in der **Erholungsphase nach Stress**.\n\nUnd die Entwicklung geht in die richtige Richtung.\n\n## Die eigentliche Lektion\n\nDas Problem war nicht zu wenig Pflege.\n\nSondern zu viel.\n\nPflanzen brauchen keine Intensität.\n\nSie brauchen Konstanz.\n\nUnd manchmal ist die klügste Handlung\n\neinfach nichts mehr zu tun.",
+      "images": [
+        {
+          "src": "/web/assets/img/news/bot_himi_may01.jpeg",
+          "alt": "Healthy new raspberry growth with strong green leaves after recovery",
+          "caption": "New growth — clear signal that the plant is recovering"
+        },
+        {
+          "src": "/web/assets/img/news/bot_himi_may02.jpeg",
+          "alt": "Yellowing and dried raspberry leaves showing stress symptoms from overfertilization",
+          "caption": "Damage from earlier stress — likely caused by excess nutrients"
+        },
+        {
+          "src": "/web/assets/img/news/bot_himi_may03.jpeg",
+          "alt": "Mixed state raspberry plant with both healthy and damaged leaves",
+          "caption": "Two states at once: decline below, recovery above"
+        },
+        {
+          "src": "/web/assets/img/news/bot_himi_may04.jpeg",
+          "alt": "",
+          "caption": "Raspberry: healthy growth"
+        }
+      ]
     }
   ]
 }
