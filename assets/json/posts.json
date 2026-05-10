@@ -1649,6 +1649,39 @@
           "caption": "Raspberry: healthy growth"
         }
       ]
+    },
+    {
+      "id": "2026-05-10_botanik_citrus_container",
+      "topic": "botanik",
+      "subtopic": "citrus",
+      "date": "2026-05-10",
+      "title": "Citrus: Between Recovery and Momentum",
+      "format": "markdown",
+      "teaser": "Fresh growth at the top, stress signals below. This citrus is not failing — it’s transitioning.",
+      "content_en": "~Recovery in plants rarely looks symmetrical.~\n\nAt first glance, this citrus plant seems vibrant:\n\n- glossy, deep green leaves\n- active new shoots\n- upright growth\n\nBut the lower canopy tells a different story.\n\n## What we actually see\n\nTwo layers of reality:\n\n### Upper section (new growth)\n- fresh, light green leaves\n- intact structure\n- active shoot tips\n\n→ clear sign: **the plant is growing**\n\n### Lower section (older leaves)\n- yellowing between veins (interveinal chlorosis)\n- slight curling and deformation\n- some residual stress marks\n\n→ clear sign: **the plant was under nutrient stress**\n\n## Likely cause\n\nThis pattern is classic:\n\n- temporary nutrient imbalance (often iron or magnesium)\n- possibly combined with watering inconsistency or pH issues\n\nCitrus in containers are notoriously sensitive here.\n\n## The key insight\n\nThe important part is not the damage.\n\nIt’s the direction.\n\nAnd the direction is upward.\n\nNew growth is healthy.\n\nWhich means:\n\nThe system is stabilizing.\n\n## What to do next\n\nNow is not the time for heroics.\n\n### 1. Stay consistent\n- regular watering (not too wet, not too dry)\n- avoid fluctuations\n\n### 2. Feed carefully\n- use a proper citrus fertilizer\n- include micronutrients (especially iron)\n- low dose, but regularly\n\n### 3. Watch the new leaves\n\nThey are your indicator:\n\n- if they stay green → you're on the right path\n- if they turn pale → adjust nutrients\n\n### 4. Do not remove too much\n\n- keep slightly damaged leaves for now\n- they still contribute to photosynthesis\n\n## What to avoid\n\n- overfertilizing (classic citrus killer)\n- \"correcting\" everything at once\n- constant repotting or moving\n\n## Final assessment\n\nThis is not a sick plant.\n\nThis is a plant in **recovery mode**.\n\nAnd recovery, in plants, is rarely elegant.\n\n## A quiet detail\n\nThe new shoots already know\n\nwhat the old leaves went through.\n\nAnd they are growing differently.\n\nThat’s how you know:\n\nIt will be fine.",
+      "content_de": "~Erholung verläuft bei Pflanzen selten symmetrisch.~\n\nAuf den ersten Blick wirkt diese Citrus-Pflanze vital:\n\n- glänzende, satte Blätter\n- frische Triebe\n- aufrechter Wuchs\n\nDoch im unteren Bereich zeigt sich die Vorgeschichte.\n\n## Was tatsächlich sichtbar ist\n\nZwei Ebenen:\n\n### Oberer Bereich (Neuwuchs)\n- hellgrüne, frische Blätter\n- saubere Struktur\n- aktive Triebspitzen\n\n→ eindeutiges Zeichen: **die Pflanze wächst**\n\n### Unterer Bereich (ältere Blätter)\n- Aufhellungen zwischen den Blattadern (interveinale Chlorose)\n- leichte Verformungen\n- Stressspuren\n\n→ Hinweis: **es gab Nährstoffprobleme**\n\n## Wahrscheinliche Ursache\n\nTypisches Bild für:\n\n- temporären Nährstoffmangel (häufig Eisen oder Magnesium)\n- eventuell kombiniert mit Gießfehlern oder pH-Problemen\n\nCitruspflanzen im Topf reagieren darauf besonders sensibel.\n\n## Die entscheidende Beobachtung\n\nNicht der Schaden ist relevant.\n\nSondern die Entwicklung.\n\nUnd die zeigt nach oben.\n\nDer Neuwuchs ist gesund.\n\nDas bedeutet:\n\nDas System stabilisiert sich.\n\n## Weiteres Vorgehen\n\nJetzt zählt Konstanz.\n\n### 1. Gleichmäßiges Gießen\n- weder austrocknen lassen noch dauerhaft nass halten\n\n### 2. Maßvoll düngen\n- geeigneter Citrus-Dünger\n- mit Spurenelementen (v. a. Eisen)\n- regelmäßig, aber moderat\n\n### 3. Neuwuchs beobachten\n\nEr ist dein Indikator:\n\n- bleibt er sattgrün → alles passt\n- wird er blass → nachjustieren\n\n### 4. Alte Blätter vorerst behalten\n\n- auch geschwächte Blätter leisten noch Photosynthese\n\n## Was du vermeiden solltest\n\n- Überdüngung\n- hektisches Gegensteuern in mehrere Richtungen\n- ständiges Umtopfen oder Standortwechsel\n\n## Gesamtbewertung\n\nDiese Pflanze ist nicht krank.\n\nSie ist **in der Erholung**.\n\nUnd die ist selten schön,\n\naber fast immer wirksam.\n\n## Die leise Pointe\n\nDie neuen Triebe\n\nmachen keine Fehler mehr,\n\nweil die Pflanze sie bereits gemacht hat.\n\nUnd genau deshalb\n\nwird sie stärker daraus hervorgehen.",
+      "images": [
+        {
+          "src": "/web/assets/img/news/bot_cit_may03.jpeg",
+          "alt": "Healthy citrus leaves with glossy green surface and visible vein structure",
+          "caption": "New growth: glossy, structured, and stable"
+        },
+        {
+          "src": "/web/assets/img/news/bot_cit_may00.jpeg",
+          "alt": "Citrus plant showing mixed leaf condition with older chlorotic leaves and new healthy shoots",
+          "caption": "Old stress below, fresh momentum above"
+        },
+        {
+          "src": "/web/assets/img/news/bot_cit_may02.jpeg",
+          "alt": "Healthy citrus leaves with glossy green surface and visible vein structure",
+          "caption": "Healthy citrus leaves with glossy green surface and visible vein structure"
+        },
+        {
+          "src": "/web/assets/img/news/bot_cit_may01.jpeg",
+          "alt": "Healthy citrus leaves with glossy green surface and visible vein structure",
+          "caption": "Citrus plant showing mixed leaf condition"
+        }
+      ]
     }
   ]
 }
