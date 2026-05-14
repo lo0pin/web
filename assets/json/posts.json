@@ -1575,7 +1575,6 @@
     {
       "id": "2026-05-04_botanik_raritaeten_01",
       "topic": "botanik",
-      "subtopic": "general",
       "date": "2026-05-04",
       "title": "Rarities, Soil, and Quiet Expectations",
       "format": "markdown",
@@ -1620,7 +1619,7 @@
     {
       "id": "2026-05-08_botanik_himbeer_recovery",
       "topic": "botanik",
-      "subtopic": "himbeer",
+      "subtopic": "raspberry",
       "date": "2026-05-08",
       "title": "Raspberry: From Overfed to Recovering",
       "format": "markdown",
@@ -1653,7 +1652,7 @@
     {
       "id": "2026-05-10_botanik_citrus_container",
       "topic": "botanik",
-      "subtopic": "citrus",
+      "subtopic": "lemon",
       "date": "2026-05-10",
       "title": "Citrus: Between Recovery and Momentum",
       "format": "markdown",
@@ -1696,6 +1695,29 @@
       "images": [
         {
           "src": "/web/assets/img/news/cheatsheet_html.png"
+        }
+      ]
+    },
+    {
+      "id": "2026-05-14_botanik_feige_container",
+      "topic": "botanik",
+      "subtopic": "fig",
+      "date": "2026-05-14",
+      "title": "Fig Tree: Quietly Doing Fine",
+      "format": "markdown",
+      "teaser": "Sparse foliage, lots of wood, but no real distress. This fig isn’t struggling — it’s simply taking its time.",
+      "content_en": "~Not every sparse plant is an unhealthy one.~\n\nAt first glance, this fig tree looks underwhelming:\n\n- relatively few leaves\n- a lot of bare wood\n- uneven growth distribution\n\nBut look closer.\n\n## What we actually see\n\nThe leaves themselves tell the truth:\n\n- deep, even green\n- clean vein structure\n- no chlorosis, no burn marks\n- intact leaf edges\n\nThis is not a stressed plant.\n\nThis is a plant **growing conservatively**.\n\n## Likely context\n\nThis pattern fits well with:\n\n- container growth (limited root space)\n- recent repositioning or repotting\n- early season development\n\nFigs tend to invest first in structure,\nthen in leaf mass.\n\nAnd they do it on their own schedule.\n\n## What might be happening\n\n- roots are still establishing\n- energy is allocated into woody growth\n- leaf production is intentionally moderate\n\nIn short:\n\nNothing is wrong.\n\nIt’s just not in a hurry.\n\n## What to do next\n\nThis is where most people ruin it.\n\n### 1. Do not overreact\n\n- no aggressive pruning\n- no \"boost\" fertilizing\n\n### 2. Water properly\n\n- deep, but infrequent watering\n- let the top layer dry slightly between cycles\n\n### 3. Give it space and light\n\n- full sun is fine\n- figs can handle heat well once established\n\n### 4. Optional: gentle feeding\n\n- only if growth stalls completely\n- light organic fertilizer, low frequency\n\n## What to avoid\n\n- constant repositioning\n- wet soil over long periods\n- \"fixing\" something that isn’t broken\n\n## Final assessment\n\nThis fig tree is not weak.\n\nIt is simply **economical**.\n\nAnd in container culture,\nthat’s often the difference between survival\n\nand quiet success.\n\n## A note on expectations\n\nFigs don’t perform on command.\n\nThey negotiate.\n\nAnd once they settle,\n\nthey tend to reward patience\n\nwith sudden, unapologetic growth.",
+      "content_de": "~Nicht jede spärlich wirkende Pflanze ist krank.~\n\nAuf den ersten Blick wirkt diese Feige etwas dünn:\n\n- wenig Blattmasse\n- viel nacktes Holz\n- ungleichmäßiger Wuchs\n\nAber entscheidend ist nicht die Menge,\nsondern die Qualität.\n\n## Was wirklich sichtbar ist\n\nDie Blätter zeigen:\n\n- sattes, gleichmäßiges Grün\n- klare Blattadern\n- keine Chlorosen oder Verbrennungen\n- intakte Blattränder\n\nDas ist keine gestresste Pflanze.\n\nDas ist eine Pflanze, die **ökonomisch wächst**.\n\n## Wahrscheinlicher Kontext\n\nDas passt gut zu:\n\n- Topfkultur (begrenzter Wurzelraum)\n- möglichem Umtopfen oder Standortwechsel\n- früher Saisonphase\n\nFeigen investieren zuerst in Struktur,\n\nerst danach in Blattmasse.\n\n## Was hier passiert\n\n- Wurzeln etablieren sich noch\n- Energie geht in Holz und Stabilität\n- Blattwachstum erfolgt kontrolliert\n\nKurz gesagt:\n\nEs fehlt ihr nichts.\n\nSie hat nur keinen Stress.\n\n## Weiteres Vorgehen\n\nHier entscheidet sich alles.\n\n### 1. Nicht eingreifen aus Ungeduld\n\n- kein radikaler Rückschnitt\n- kein „Aufpäppeln“ mit Dünger\n\n### 2. Richtig gießen\n\n- durchdringend, aber nicht ständig\n- Oberfläche leicht antrocknen lassen\n\n### 3. Standort\n\n- viel Licht, gerne volle Sonne\n- Feigen sind hitzetolerant\n\n### 4. Optional düngen\n\n- nur bei echtem Wachstumsstillstand\n- moderat und selten\n\n## Was du vermeiden solltest\n\n- ständiges Umstellen\n- dauerhaft nasse Erde\n- Aktionismus ohne Anlass\n\n## Gesamtbewertung\n\nDiese Feige ist nicht schwach.\n\nSie ist **zurückhaltend effizient**.\n\nUnd genau das funktioniert im Topf oft besser\n\nals üppiges, unkontrolliertes Wachstum.\n\n## Die eigentliche Erkenntnis\n\nFeigen wachsen nicht für den Beobachter.\n\nSie wachsen für sich.\n\nUnd wenn man sie lässt,\n\nkommen die großen Schritte\n\nmeist überraschend.",
+      "images": [
+        {
+          "src": "/web/assets/img/news/bot_fig_may00.jpeg",
+          "alt": "Healthy fig leaf with strong green color and clear vein structure",
+          "caption": "Leaf quality matters more than quantity"
+        },
+        {
+          "src": "/web/assets/img/news/bot_fig_may01.jpeg",
+          "alt": "Container-grown fig tree with sparse foliage and woody structure",
+          "caption": "Sparse canopy — but structurally sound"
         }
       ]
     }
