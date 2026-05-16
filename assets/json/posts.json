@@ -1720,6 +1720,29 @@
           "caption": "Sparse canopy — but structurally sound"
         }
       ]
+    },
+    {
+      "id": "2026-05-16_electronics_solar_sunfinder",
+      "topic": "electronics",
+      "subtopic": "solar",
+      "date": "2026-05-16",
+      "title": "Printing a Sun Finder for Better Solar Alignment",
+      "format": "markdown",
+      "teaser": "To squeeze a little more power out of my balcony solar setup, I printed a small alignment tool that uses shadow geometry to reveal the perfect orientation towards the sun.",
+      "content_en": "Even small solar systems deserve proper alignment.\n\nMy balcony setup already produces a stable **5 V output** through a DC/DC converter and charges several powerbanks during sunny hours. But one limitation quickly became obvious: the panel orientation is often *almost* correct — rarely perfect.\n\nSo I printed a small **\"sun finder\"**.\n\nThe principle is beautifully simple. Two vertical fins form a narrow ridge. When the panel points exactly towards the sun, the shadow of the ridge falls perfectly into the center line. As long as the shadow drifts to one side, the angle still needs adjustment.\n\nNo electronics. No sensors.\nJust geometry and sunlight.\n\nIt turns the somewhat vague question *\"Is the panel facing the sun correctly?\"* into an immediate visual answer.\n\nFor a small system that only produces around **10–12 W**, proper alignment actually matters. A few degrees of error can noticeably reduce the output. The tool now allows me to quickly re-aim the frame whenever the sun moves across the balcony.\n\nSometimes improving a technical system does not require more complexity.\n\nSometimes a small piece of printed plastic — and a shadow — is enough.",
+      "content_de": "Auch kleine Solaranlagen profitieren von einer sauberen Ausrichtung.\n\nMein Balkon-Setup liefert inzwischen über einen DC/DC-Wandler stabile **5 V** und lädt tagsüber mehrere Powerbanks. Eine Einschränkung zeigte sich jedoch schnell: Die Ausrichtung der Module ist oft *fast* richtig – aber selten perfekt.\n\nDeshalb habe ich einen kleinen **„Sonnenfinder“** gedruckt.\n\nDas Prinzip ist erstaunlich schlicht. Zwei senkrechte Stege bilden eine schmale Kante. Wenn das Panel exakt zur Sonne ausgerichtet ist, fällt der Schatten dieser Kante genau auf die Mittelachse. Wandert der Schatten nach links oder rechts, stimmt der Winkel noch nicht.\n\nKeine Elektronik. Keine Sensoren.\nNur Geometrie und Sonnenlicht.\n\nDamit wird aus der vagen Frage *„Steht das Panel richtig zur Sonne?“* eine sofort sichtbare Antwort.\n\nBei einer kleinen Anlage mit rund **10–12 W Leistung** macht die Ausrichtung tatsächlich einen spürbaren Unterschied. Schon wenige Grad Abweichung reduzieren den Ertrag merklich. Mit dem Tool kann ich den Rahmen nun schnell nachjustieren, wenn die Sonne über den Balkon wandert.\n\nManchmal braucht es zur Verbesserung eines Systems nicht mehr Komplexität.\n\nManchmal reicht ein kleines Stück gedrucktes Plastik – und ein Schatten.",
+      "images": [
+        {
+          "src": "/web/assets/img/news/sonnenfinder00.jpeg",
+          "alt": "",
+          "caption": "The 3d model - ready to be printed"
+        },
+        {
+          "src": "/web/assets/img/news/sonnenfinder01.jpeg",
+          "alt": "",
+          "caption": "Real world application"
+        }
+      ]
     }
   ]
 }
