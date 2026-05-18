@@ -62,6 +62,7 @@
 
 ### Suptopics
 "subtopic": "moon"
+"subtopic": "solar_system"
 
 ## Topic Outdoor
 "topic": "outdoor"
