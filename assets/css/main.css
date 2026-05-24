@@ -1152,3 +1152,98 @@ a:focus-visible {
 .anchorage-facts li {
   margin-bottom: 0.25rem;
 }
+
+
+/* =========================================================
+   News Meta Links
+   ---------------------------------------------------------
+   Zweck:
+   - Wird von news.js verwendet, wenn Datum + Topic + Subtopic
+     in der News-Meta-Zeile ausgegeben werden.
+   - Beispiel:
+       2026-02-15 · Electronics · Mesh
+   - Dabei können Topic und Subtopic klickbar sein.
+   - Diese Links sollen wie Meta-Information wirken:
+       ruhig, klein, sekundär
+     und nicht wie normale Fließtext-Links.
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   .card-meta .news-meta-link
+   ---------------------------------------------------------
+   Betrifft nur Links innerhalb der Meta-Zeile einer Card.
+
+   Beispiel aus dem gerenderten HTML:
+   <p class="card-meta">
+     <time>2026-02-15</time> ·
+     <a class="news-meta-link" href="/web/electronics/home.html">
+       Electronics
+     </a>
+   </p>
+
+   Wichtig:
+   - .card-meta gibt bereits Farbe und Schriftgröße vor.
+   - Diese Regel sorgt nur dafür, dass der Link optisch
+     in diese Meta-Zeile hineinpasst.
+--------------------------------------------------------- */
+.card-meta .news-meta-link {
+  /* Der Link übernimmt die Textfarbe der .card-meta.
+     Da .card-meta bei dir color: var(--muted) hat,
+     bleibt der Link dezent und sekundär. */
+  color: inherit;
+
+  /* Entfernt die normale Link-Unterstreichung.
+     Sonst würde das globale Link-Styling greifen und die
+     Meta-Zeile optisch unruhiger machen. */
+  text-decoration: none;
+
+  /* Statt normaler Unterstreichung bekommt der Link eine
+     punktierte Linie unten.
+     Das signalisiert: klickbar — aber zurückhaltend. */
+  border-bottom: 1px dotted currentColor;
+}
+
+
+/* ---------------------------------------------------------
+   Hover + Tastatur-Fokus
+   ---------------------------------------------------------
+   Betrifft:
+   - :hover          → Maus fährt über den Link
+   - :focus-visible  → Link ist per Tastatur fokussiert
+
+   Warum beides?
+   - Hover ist angenehm für Mausbenutzer.
+   - Focus-visible ist wichtig für Tastaturbedienung
+     und Accessibility.
+--------------------------------------------------------- */
+.card-meta .news-meta-link:hover,
+.card-meta .news-meta-link:focus-visible {
+  /* Beim Interagieren wird der Link bewusst etwas sichtbarer.
+     var(--link) ist bei dir bereits in :root definiert. */
+  color: var(--link);
+
+  /* Die punktierte Linie wird zu einer durchgehenden Linie.
+     Kleines Signal: Dieser Meta-Eintrag ist aktiv/klickbar. */
+  border-bottom-style: solid;
+}
+
+
+/* ---------------------------------------------------------
+   .card-meta .news-meta-text
+   ---------------------------------------------------------
+   Wird verwendet, wenn ein Topic/Subtopic zwar angezeigt wird,
+   aber kein Link dafür hinterlegt ist.
+
+   Beispiel:
+   <span class="news-meta-text">Unknown Topic</span>
+
+   Vorteil:
+   - Der Text sieht gleich aus wie der Rest der Meta-Zeile.
+   - Aber er verhält sich nicht wie ein Link.
+--------------------------------------------------------- */
+.card-meta .news-meta-text {
+  /* Auch normaler, nicht klickbarer Meta-Text übernimmt
+     die Farbe der .card-meta. */
+  color: inherit;
+}
