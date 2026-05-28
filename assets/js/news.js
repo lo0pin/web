@@ -121,7 +121,7 @@
       literature: "words/literature.html",
       philosophy: "words/philosophy.html",
       poetry: "words/poetry.html",
-      video: "words/video.html",
+      video: "words/videography.html",
     },
     electronics: {
       mesh: "electronics/mesh.html",
