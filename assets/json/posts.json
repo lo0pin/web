@@ -1928,7 +1928,6 @@
         { "src": "/web/assets/img/news/wall_mount03.jpg", 
           "caption": "Fusion 360 design of the wall plate.", 
           "alt": "Fusion 360 design of the wall plate."
-          
         },
         { "src": "/web/assets/img/news/wall_mount00.jpg", 
           "caption": "Painting the printed parts — masking and gold accents." , 
@@ -1942,6 +1941,20 @@
           "caption": "Final installation on the wall.", 
           "alt": "Final installation on the wall."
         }
+      ]
+    },
+    {
+      "id": "2026-06-03_code_arduino-cpp_17_32",
+      "topic": "code",
+      "subtopic": "cpp",
+      "date": "2026-06-03",
+      "title": "An Arduino-C++ Cheat Sheet for Microcontroller Projects",
+      "format": "markdown",
+      "teaser": "I added an Arduino-C++ cheat sheet to my website as a compact working reference for microcontroller projects. It collects the functions, patterns and small reminders that repeatedly appear when building hardware: pin handling, timing, serial debugging, sensors and small program structures. Like all good tools, it will grow through use.",
+      "content_en": "I have now added a dedicated **Arduino-C++ cheat sheet** to my site — because embedded projects tend to revolve around a surprisingly small set of recurring building blocks.\n\nDigital pins, analog readings, timing loops, interrupts, serial debugging, sensor libraries, and the familiar `setup()` / `loop()` structure appear again and again. Individually they are simple. In combination they quickly become the skeleton of a real device.\n\n~Embedded work is built from small pieces that must behave precisely.~\n\nThat is exactly why a compact working reference is useful.\n\n## What this sheet is meant to capture\n\n- common Arduino functions such as `pinMode()`, `digitalWrite()`, `digitalRead()` and `analogRead()`\n- timing patterns using `millis()` instead of blocking delays\n- typical serial debugging routines with `Serial.print()`\n- structure patterns for small sketches\n- reminders for working with sensors, buses and libraries\n\nThe intention is not to reproduce the entire Arduino documentation. That would be redundant and unnecessarily heavy. Instead the sheet focuses on **high-frequency building blocks** that show up in real microcontroller work.\n\n## Why I added it now\n\nMore and more of my projects involve small embedded systems: sensor nodes, displays, communication modules, logging devices and experimental hardware setups. In those projects the friction rarely comes from deep theory — it comes from the small details one half remembers.\n\nA cheat sheet removes exactly that friction.\n\n### What I expect to expand over time\n\n- pin and timing patterns for responsive sketches\n- common sensor communication patterns (`I2C`, `SPI`, `UART`)\n- structured sketch layouts\n- debugging helpers\n- reusable code fragments for small hardware tools\n\n~Good embedded code rarely looks spectacular. It simply behaves reliably.~\n\nThis page therefore becomes a small but practical companion to my hardware projects. Whenever a pattern proves useful more than once, it will likely end up on this sheet.",
+      "content_de": "Ich habe meiner Webseite nun einen eigenen **Arduino-C++-Cheat-Sheet** hinzugefügt — denn Embedded-Projekte kreisen erstaunlich oft um denselben kleinen Satz an Bausteinen.\n\nDigitale Pins, analoge Messungen, Zeitsteuerung, Interrupts, serielle Debug-Ausgaben, Sensorbibliotheken und die vertraute Struktur aus `setup()` und `loop()` tauchen immer wieder auf. Für sich genommen ist alles simpel. Zusammen bilden sie rasch das Skelett eines echten Geräts.\n\n~Embedded-Systeme entstehen aus kleinen Teilen, die präzise zusammenspielen müssen.~\n\nGerade deshalb ist eine kompakte Arbeitsreferenz sinnvoll.\n\n## Was dieses Blatt festhalten soll\n\n- typische Arduino-Funktionen wie `pinMode()`, `digitalWrite()`, `digitalRead()` und `analogRead()`\n- Zeitmuster mit `millis()` statt blockierendem `delay()`\n- serielle Debug-Ausgaben mit `Serial.print()`\n- Grundstrukturen für kleine Sketches\n- Erinnerungen zum Arbeiten mit Sensoren, Bussen und Bibliotheken\n\nZiel ist nicht, die gesamte Arduino-Dokumentation nachzubilden. Das wäre redundant und unnötig schwerfällig. Stattdessen konzentriert sich das Blatt auf **hochfrequente Bausteine**, die in echter Mikrocontrollerarbeit ständig auftreten.\n\n## Warum ich es jetzt angelegt habe\n\nImmer mehr meiner Projekte bewegen sich im Bereich kleiner Embedded-Systeme: Sensorknoten, Displays, Kommunikationsmodule, Logging-Geräte oder experimentelle Hardwareaufbauten. In solchen Projekten entstehen Probleme selten aus tiefer Theorie — meist sind es die kleinen Details, die man nur halb erinnert.\n\nEin Cheat Sheet reduziert genau diese Reibung.\n\n### Was ich künftig ergänzen werde\n\n- Pin- und Timing-Muster für reaktionsfähige Sketches\n- typische Sensor-Kommunikation (`I2C`, `SPI`, `UART`)\n- strukturierte Sketch-Layouts\n- Debugging-Hilfen\n- wiederverwendbare Codefragmente für kleine Hardware-Werkzeuge\n\n~Guter Embedded-Code wirkt selten spektakulär. Er funktioniert einfach zuverlässig.~\n\nDiese Seite wird damit zu einem kleinen, aber praktischen Begleiter meiner Hardwareprojekte. Immer wenn sich ein Muster mehr als einmal bewährt, landet es wahrscheinlich hier.",
+      "images": [
+        { "src": "/web/assets/img/news/cheatsheet_arduino.png"}
       ]
     }
   ]
