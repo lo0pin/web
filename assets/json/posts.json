@@ -1986,22 +1986,22 @@
       "content_de": "Dieses Upgrade war kein Warenkorb-Klick, sondern eine kleine Hardware-Archäologie.\n\nAus einem ausgemusterten PC habe ich ausgebaut:\n\n- 4× 8 GB DDR4-2400 (Samsung, gleiche Modellnummer, unterschiedliche Produktionschargen)\n- 1 TB SATA-Festplatte\n\nDas Spendergehäuse war eher Staubarchiv als Computer. Der Ausbau erforderte Geduld – und eine gewisse Gelassenheit gegenüber historischen Ablagerungen.\n\n---\n\n## RAM-Upgrade\n\nAlle vier Module tragen die identische Bezeichnung (Samsung M378A1K43CB2-CRC), stammen jedoch aus zwei Chargen:\n\n- 2× Made in Philippinen\n- 2× Made in China\n\nZunächst wurden nur die beiden Philippinen-Riegel in **DIMM1 + DIMM3** eingesetzt. Das System startete stabil mit 16 GB.\n\nDer erste vollständige Bestückungsversuch führte zu:\n\n- POST-Fehler (2E1 – Memory Size Error)\n- Schwarzem Bildschirm\n- Kein Signal über DisplayPort\n\nDiagnose:\n\n- GPU- und Mainboard-Ausgänge geprüft\n- Minimal-Boot-Konfiguration\n- CMOS-Reset (Batterie entfernt + Reststrom entladen)\n\nDer CMOS-Reset war der Wendepunkt. HP-OEM-Boards behalten alte Speichertrainingsdaten – erst das Zurücksetzen erzwingt eine saubere Neuinitialisierung.\n\nEndgültige Verteilung für 32 GB:\n\n| Slot  | Modul        |\n|--------|--------------|\n| DIMM1 | Philippinen  |\n| DIMM2 | China        |\n| DIMM3 | Philippinen  |\n| DIMM4 | China        |\n\nErgebnis: **32 GB RAM stabil erkannt, 2400 MHz.**\n\n---\n\n## Festplatte\n\nDie 1-TB-SATA-HDD wurde angeschlossen über:\n\n- SATA-Datenkabel → Mainboard\n- SATA-Strom → vom Netzteil durchgeschleift\n\nWindows erkannte die Platte sofort in der Datenträgerverwaltung.\n\n---\n\n## Fazit\n\n- +16 GB RAM (gesamt: 32 GB)\n- +1 TB zusätzlicher Speicher\n- Keine Neuanschaffung\n\nSchwarzer Bildschirm, POST-Fehler, CMOS-Reset – es war kein Plug-and-Play-Moment. Aber genau deshalb fühlt sich das Ergebnis verdient an.\n\nManchmal ist Aufrüsten kein Konsumakt.\nSondern ein Akt des Verstehens.",
       "images": [
         {
-          "src": "/web/assets/img/ram_upgrade01.jpeg",
+          "src": "/web/assets/img/news/ram_upgrade01.jpeg",
           "alt": "Open case overview during RAM and HDD upgrade",
           "caption": "Open case overview during RAM and HDD upgrade"
         },
         {
-          "src": "/web/assets/img/ram_upgrade02.jpeg",
+          "src": "/web/assets/img/news/ram_upgrade02.jpeg",
           "alt": "Four DDR4 modules installed in DIMM slots",
           "caption": "Four DDR4 modules installed in DIMM slots"
         },
         {
-          "src": "/web/assets/img/ram_upgrade03.jpeg",
+          "src": "/web/assets/img/news/ram_upgrade03.jpeg",
           "alt": "POST error 2E1 Memory Size Error screen",
           "caption": "POST error 2E1 Memory Size Error screen"
         },
         {
-          "src": "/web/assets/img/ram_upgrade04.jpeg",
+          "src": "/web/assets/img/news/ram_upgrade04.jpeg",
           "alt": "BIOS screen showing 32 GB RAM detected",
           "caption": "BIOS screen showing 32 GB RAM detected"
         }
