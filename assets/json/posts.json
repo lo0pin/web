@@ -2006,6 +2006,29 @@
           "caption": "BIOS screen showing 32 GB RAM detected"
         }
       ]
+    },
+    {
+      "id": "2026-06-11_15_00",
+      "topic": "making",
+      "subtopic": "3d_print",
+      "date": "2026-06-11",
+      "title": "Bambu MakerLab — A First Print That Exists Purely for Joy",
+      "format": "markdown",
+      "teaser": "While exploring the Bambu MakerLab I discovered something delightful: ready-to-print mechanical designs that are less about utility and more about playful engineering. My first experiment — a hypnotic fidget made from interlocked hexagons.",
+      "content_en": "While browsing through the **Bambu MakerLab**, I stumbled upon a part of the ecosystem that feels almost like a playground for mechanical curiosity.\n\nMakerLab is essentially a curated collection of parametric tools and ready-to-print designs created by the Bambu community. Instead of downloading a static STL and hoping it prints well, many of these models are generated directly inside the browser. You choose parameters — size, spacing, pattern — and the system produces a model that is already optimized for printing.\n\nFor someone who enjoys both engineering and playful mechanisms, this is a surprisingly addictive corner of the internet.\n\nFor my first MakerLab print I deliberately chose something that is, strictly speaking, **not particularly useful**.\n\nBut it is deeply satisfying.\n\nThe model consists of a series of **interlocked hexagonal rings** arranged concentrically. Each layer is printed in place and slightly offset, allowing the individual segments to rotate relative to each other once the print finishes.\n\nThe result is a small mechanical object that behaves almost like a geometric iris. With a light twist of the fingers the hexagons shift, slide, and realign into hypnotic patterns.\n\nThere is no sensor.\nNo electronics.\nNo grand purpose.\n\nJust geometry, tolerances, and motion.\n\nAnd somehow that is exactly the point.\n\nObjects like this remind me that 3D printing is not only about brackets, enclosures, and functional parts. Sometimes it is about exploring form and movement — discovering what happens when mechanical constraints meet mathematical symmetry.\n\nThis little hexagonal fidget took only a short time to print, but it delivered an outsized amount of delight.\n\nNot everything has to be useful.\nSometimes it just has to be **beautifully mechanical**.",
+      "content_de": "Beim Durchstöbern des **Bambu MakerLab** bin ich auf eine Ecke des Bambu-Ökosystems gestoßen, die sich ein bisschen wie ein Spielplatz für mechanische Neugier anfühlt.\n\nMakerLab ist im Grunde eine Sammlung von Tools und Designs aus der Community, die direkt im Browser generiert werden können. Statt einfach ein fertiges STL herunterzuladen, lassen sich viele Modelle parametrisch anpassen: Größe, Abstände, Muster oder Geometrie werden ausgewählt – und daraus entsteht automatisch ein Modell, das bereits druckbereit ist.\n\nFür jemanden, der sowohl Technik als auch kleine mechanische Spielereien liebt, ist das erstaunlich faszinierend.\n\nFür meinen ersten MakerLab-Druck habe ich bewusst etwas gewählt, das **vordergründig nicht besonders sinnvoll** ist.\n\nAber enorm befriedigend.\n\nDas Objekt besteht aus mehreren **ineinander verschachtelten Sechsecken**, die konzentrisch angeordnet sind. Die einzelnen Elemente werden direkt zusammen gedruckt („print-in-place“) und können sich nach dem Druck gegeneinander verdrehen.\n\nDadurch entsteht eine kleine mechanische Struktur, die sich fast wie eine geometrische Iris bewegt. Dreht man sie zwischen den Fingern, verschieben sich die Sechsecke gegeneinander und erzeugen immer neue Muster.\n\nKeine Elektronik.\nKein Sensor.\nKeine große Funktion.\n\nNur Geometrie, Toleranzen und Bewegung.\n\nUnd genau darin liegt der Reiz.\n\nSolche Objekte erinnern daran, dass 3D-Druck nicht nur für Halterungen, Gehäuse oder funktionale Bauteile da ist. Manchmal geht es einfach um Form, Bewegung und mathematische Symmetrie.\n\nDieses kleine Hexagon-Fidget war schnell gedruckt – hat aber erstaunlich viel Freude gemacht.\n\nNicht alles muss einen Zweck erfüllen.\nManches darf einfach **mechanisch schön** sein.",
+      "images": [
+        {
+          "src": "/web/assets/img/news/makerlab_hex_fidget01.jpeg",
+          "alt": "3D printed interlocking hexagon fidget tool",
+          "caption": "3D printed interlocking hexagon fidget tool"
+        },
+        {
+          "src": "/web/assets/img/news/makerlab_hex_fidget02.jpeg",
+          "alt": "Rotated configuration of the hexagon fidget mechanism",
+          "caption": "Rotated configuration of the hexagon fidget mechanism"
+        }
+      ]
     }
   ]
 }
