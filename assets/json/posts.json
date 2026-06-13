@@ -2029,6 +2029,39 @@
           "caption": "Rotated configuration of the hexagon fidget mechanism"
         }
       ]
+    },
+    {
+      "id": "2026-03-25_botanics_raspberry_chlorosis",
+      "topic": "botanics",
+      "subtopic": "raspberry",
+      "date": "2026-03-25",
+      "title": "Reading Leaves — When a Raspberry Turns Pale",
+      "format": "markdown",
+      "teaser": "A small potted raspberry started to fade into a pale, almost translucent green. The leaves were not just losing color — they were telling a precise story. And like most plant problems, it was not a lack of care, but a mismatch of the right elements.",
+      "content_en": "~Plants rarely fail silently. They signal — if you learn how to read them.~\n\nThis raspberry plant presented a very characteristic pattern: leaves turning **yellow between the veins**, while the veins themselves remained distinctly green.\n\nAt first glance, this looks like a general weakness. But it is anything but vague.\n\nIt is a precise biochemical symptom.\n\n## The Pattern\n\n- Interveinal chlorosis (yellowing between veins)\n- Older leaves affected more strongly than new ones\n- Increasingly patchy, almost marbled structure\n- Beginning necrotic spots in stressed tissue\n\nThis combination points with remarkable clarity to one thing:\n\n→ **Magnesium deficiency**\n\nMagnesium is a central component of chlorophyll. When it becomes scarce, the plant starts reallocating it toward new growth. Older leaves are effectively \"sacrificed\" — their green fades first.\n\n## The Misleading Fix\n\nThe plant had recently been fertilized — even twice.\n\nBut the fertilizer used contained only **0.3% magnesium**, while being relatively rich in other components like sulfur.\n\nThis creates a subtle but important problem:\n\n> Not every deficiency is solved by adding \"more fertilizer\".\n\nIn fact, adding more of an unbalanced fertilizer can worsen the situation. High salt concentration in the soil can reduce nutrient uptake and further lock out magnesium.\n\nThe plant is not underfed.\nIt is **misfed**.\n\n## The Mechanism\n\nIn container culture, this happens easily:\n\n- Limited soil volume\n- Rapid nutrient depletion or imbalance\n- Salt accumulation from repeated fertilization\n\nThe result is a system where nutrients are present — but not accessible.\n\n## The Correction\n\nThe solution is not complex, but it is specific:\n\n1. Remove excess surface fertilizer if present\n2. Flush the soil thoroughly with water\n3. Add magnesium directly (e.g. magnesium sulfate / Epsom salt)\n\nThis restores what the plant actually lacks — instead of adding more of what it cannot use.\n\n## A Subtle Lesson\n\nWhat looks like weakness is often structure.\n\nThe leaves are not just fading.\nThey are mapping the internal priorities of the plant.\n\nAnd once you recognize the pattern, the problem stops being mysterious.\n\nIt becomes almost mechanical.\n\nA missing element.\nA blocked pathway.\nA system slightly out of balance.\n\nAnd a leaf, quietly documenting all of it.",
+      "content_de": "~Pflanzen scheitern selten still. Sie zeigen es – wenn man lernt, ihre Sprache zu lesen.~\n\nDiese Himbeere zeigte ein sehr charakteristisches Muster: **gelbe Blattflächen zwischen klar grünen Blattadern**.\n\nAuf den ersten Blick wirkt das wie eine allgemeine Schwäche. In Wahrheit ist es ein erstaunlich präzises Signal.\n\n## Das Muster\n\n- Interveinale Chlorose (Aufhellung zwischen den Adern)\n- Ältere Blätter stärker betroffen als junge\n- Marmorierte, fleckige Struktur\n- Erste nekrotische Stellen in geschwächtem Gewebe\n\nDiese Kombination deutet mit hoher Sicherheit auf:\n\n→ **Magnesiummangel**\n\nMagnesium ist ein zentraler Bestandteil des Chlorophylls. Wird es knapp, verlagert die Pflanze es in neue Triebe. Ältere Blätter verlieren zuerst ihre Farbe – sie werden gewissermaßen \"aufgegeben\".\n\n## Der trügerische Lösungsversuch\n\nDie Pflanze wurde kürzlich gedüngt – sogar mehrfach.\n\nDer verwendete Dünger enthielt jedoch nur **0,3 % Magnesium**, dafür vergleichsweise viel von anderen Bestandteilen wie Schwefel.\n\nHier liegt der entscheidende Punkt:\n\n> Nicht jeder Mangel lässt sich durch „mehr Dünger“ beheben.\n\nIm Gegenteil: Eine Überdüngung mit einem unausgewogenen Dünger kann die Aufnahme bestimmter Nährstoffe zusätzlich blockieren.\n\nDie Pflanze ist nicht unterversorgt.\nSie ist **falsch versorgt**.\n\n## Der Mechanismus im Topf\n\nIn der Topfkultur passiert das besonders leicht:\n\n- begrenztes Erdvolumen\n- schnelle Verschiebung von Nährstoffverhältnissen\n- Anreicherung von Salzen durch wiederholtes Düngen\n\nDie Folge: Nährstoffe sind vorhanden – aber nicht mehr verfügbar.\n\n## Die Korrektur\n\nDie Lösung ist unspektakulär, aber gezielt:\n\n1. Überschüssigen Dünger an der Oberfläche entfernen\n2. Substrat gründlich durchspülen\n3. Magnesium direkt zuführen (z. B. Bittersalz)\n\nDamit bekommt die Pflanze genau das, was ihr fehlt – und nicht noch mehr von dem, was sie ohnehin nicht verwerten kann.\n\n## Eine kleine Beobachtung am Rand\n\nWas wie Schwäche aussieht, ist oft Struktur.\n\nDie Blätter „verblassen“ nicht einfach.\nSie zeichnen ein inneres Ungleichgewicht nach.\n\nHat man das Muster einmal erkannt, verliert das Problem seinen Zufallscharakter.\n\nEs wird fast technisch.\n\nEin fehlendes Element.\nEin blockierter Prozess.\nEin System, das leicht aus dem Gleichgewicht geraten ist.\n\nUnd ein Blatt, das all das sichtbar macht.",
+      "images": [
+        {
+          "src": "/web/assets/img/news/raspberry_chlorosis01.jpeg",
+          "alt": "Raspberry leaf showing interveinal chlorosis with green veins and yellow tissue",
+          "caption": "Interveinal chlorosis: green veins remain while surrounding tissue turns pale"
+        },
+        {
+          "src": "/web/assets/img/news/raspberry_chlorosis02.jpeg",
+          "alt": "Close-up of raspberry leaf with patchy yellowing and early necrotic spots",
+          "caption": "Patchy yellowing and first necrotic spots in stressed leaf tissue"
+        },
+        {
+          "src": "/web/assets/img/news/raspberry_chlorosis03.jpeg",
+          "alt": "Young raspberry plant in pot with overall pale green foliage under sunlight",
+          "caption": "Overall chlorosis in the plant: new growth still active, but visibly lightened"
+        },
+        {
+          "src": "/web/assets/img/news/raspberry_chlorosis04.jpeg",
+          "alt": "Raspberry leaf with structural vein pattern highlighted by magnesium deficiency",
+          "caption": "The vein network becomes visible as magnesium deficiency progresses"
+        }
+      ]
     }
   ]
 }
