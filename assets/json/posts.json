@@ -2062,6 +2062,40 @@
           "caption": "The vein network becomes visible as magnesium deficiency progresses"
         }
       ]
+    },
+    {
+      "id": "2026-06-15_code_html_clickable_news_images_18_40",
+      "topic": "code",
+      "subtopic": "html",
+      "date": "2026-06-15",
+      "title": "News Images Now Open in a New Tab",
+      "format": "markdown",
+      "teaser": "The images in my news section are now **clickable**. A click opens the full image in a **new tab**, so interested readers can inspect details without being thrown off the page they were actually reading.",
+      "content_en": "~Sometimes a small interface change removes a surprisingly large amount of friction.~\n\nI have now made the images in my news section **clickable**.\n\nThat means: anyone who wants to look more closely at a build detail, a screenshot, a graph, or a photograph can simply click the image and open the original file directly in a **new browser tab**.\n\nThe important part is not merely that the image opens.\nIt opens with `target=\"_blank\"`.\n\nSo the current page stays exactly where it is.\nThe website is not abandoned just because someone wants a closer look.\n\n## What changed technically\n\nThe image rendering in `news.js` was extended so that each news image is no longer output as a bare `<img>`, but wrapped inside an anchor element:\n\n```html\n<a href=\"...\" target=\"_blank\" rel=\"noopener noreferrer\">\n  <img ...>\n</a>\n```\n\nIn plain terms:\n\n- the image itself becomes the clickable area\n- the `href` points to the original image source\n- `target=\"_blank\"` opens it in a new tab\n- `rel=\"noopener noreferrer\"` keeps that behavior clean and sane from a security perspective\n\nThis is one of those changes that is visually modest but functionally very useful.\n\n## Why I wanted this\n\nSome images in the news feed are not decorative filler.\nThey contain actual information:\n\n- component close-ups\n- UI screenshots\n- wiring details\n- small text elements\n- visual comparisons\n\nInside the compact card layout, that is fine for overview.\nBut sometimes overview is not enough.\nSometimes one wants to inspect the washer, the solder joint, the graph label, the tiny design decision hiding in a corner.\n\nThat is exactly what this change is for.\n\n## A small improvement in interaction\n\nThe images also got a more explicit interactive behavior.\nOn hover and keyboard focus, they respond visually instead of sitting there like mute furniture.\n\nThat matters because clickable things should look clickable.\nAnything else is bad manners in interface design.\n\n## The underlying principle\n\nI want the site to stay lightweight and quiet — but not inert.\n\nThis was a small step toward that balance:\ncompact in the feed,\nopen to inspection when needed,\nand polite enough not to drag the reader away from the page.\n\nA minor feature, perhaps.\nBut a useful one.\n\nThe kind of improvement that does not shout.\nIt simply stops being annoying.",
+      "content_de": "~Manchmal beseitigt eine kleine Interface-Änderung erstaunlich viel Reibung.~\n\nIch habe die Bilder in meiner News-Sektion nun **klickbar** gemacht.\n\nWer also ein Projektdetail, einen Screenshot, einen Graphen oder ein Foto genauer ansehen möchte, kann jetzt einfach auf das jeweilige Bild klicken und die Originaldatei direkt in einem **neuen Tab** öffnen.\n\nDer entscheidende Punkt ist dabei nicht nur, *dass* sich das Bild öffnet.\nSondern *wie* es sich öffnet:\nmit `target=\"_blank\"`.\n\nDie aktuelle Seite bleibt also genau dort, wo sie ist.\nMan fliegt nicht aus der Website hinaus, nur weil man ein Detail näher betrachten möchte.\n\n## Was sich technisch geändert hat\n\nDas Rendering in `news.js` wurde so erweitert, dass ein News-Bild nicht mehr bloß als nacktes `<img>` ausgegeben wird, sondern von einem Link umschlossen ist:\n\n```html\n<a href=\"...\" target=\"_blank\" rel=\"noopener noreferrer\">\n  <img ...>\n</a>\n```\n\nKonkret bedeutet das:\n\n- das Bild selbst wird zur klickbaren Fläche\n- das `href` zeigt auf die eigentliche Bilddatei\n- `target=\"_blank\"` öffnet sie in einem neuen Tab\n- `rel=\"noopener noreferrer\"` sorgt dafür, dass das Ganze sicher und sauber bleibt\n\nVisuell ist das kein dramatischer Umbau.\nFunktional aber sehr sinnvoll.\n\n## Warum ich das wollte\n\nDie Bilder im News-Feed sind nicht bloß Dekoration.\nViele davon transportieren tatsächliche Information:\n\n- Detailaufnahmen von Bauteilen\n- Screenshots von Oberflächen\n- Verkabelung\n- kleine Beschriftungen\n- visuelle Vergleiche\n\nIm kompakten Kartenlayout reicht das für einen Überblick.\nAber manchmal will man eben mehr als Überblick.\nMan will die Schraube sehen, die Lötstelle, den Text im Screenshot, das kleine technische Detail, das im Feed sonst zu klein bleibt.\n\nGenau dafür ist diese Änderung gedacht.\n\n## Kleine Verbesserung, spürbarer Effekt\n\nZusätzlich verhalten sich die Bilder nun auch klarer wie interaktive Elemente.\nBei Hover und Fokus reagieren sie sichtbar, statt bloß passiv herumzuliegen wie unbeteiligtes Mobiliar.\n\nSo gehört sich das auch.\nKlickbare Dinge sollten als klickbar erkennbar sein.\nAlles andere ist UI-Unhöflichkeit.\n\n## Der eigentliche Gedanke dahinter\n\nIch möchte, dass die Website leichtgewichtig und ruhig bleibt — aber nicht stumpf.\n\nDiese Änderung ist ein kleiner Schritt in genau diese Richtung:\nkompakt im Feed,\nbei Bedarf offen für genauere Betrachtung,\nund höflich genug, den Leser dabei nicht aus der Seite hinauszuwerfen.\n\nKeine große Revolution.\nAber eine nützliche Verbesserung.\n\nEine jener Änderungen, die nicht laut werden müssen.\nSie hören einfach auf, lästig zu sein.",
+
+      "images": [
+        {
+          "src": "/web/assets/img/news/new_feature_clickable01.gif",
+          "alt": "A single click reveals the new behavior",
+          "caption": "A single click reveals the new behavior."
+        },
+        {
+          "src": "/web/assets/img/news/new_feature_clickable02.gif",
+          "alt": "The image now opens in a new tab",
+          "caption": "The image now opens in a new tab."
+        },
+        {
+          "src": "/web/assets/img/news/new_feature_clickable03.jpeg",
+          "alt": "The feature required extending the codebase",
+          "caption": "The feature required extending the codebase."
+        },
+        {
+          "src": "/web/assets/img/news/new_feature_clickable04.jpeg",
+          "alt": "The update also refined the CSS layer",
+          "caption": "The update also refined the CSS layer."
+        }
+      ]
     }
   ]
 }
