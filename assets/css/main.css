@@ -1247,3 +1247,149 @@ a:focus-visible {
      die Farbe der .card-meta. */
   color: inherit;
 }
+
+
+/* =========================================================
+   Sailing Glossary Table
+   ---------------------------------------------------------
+   Ergänzt deine bestehenden .card-, .hint- und Link-Styles.
+   Nutzt bewusst deine globalen Variablen:
+   --surface, --border, --radius, --text, --muted, --link
+   ========================================================= */
+
+.glossary-card {
+  overflow: hidden;
+}
+
+.glossary-table-wrap {
+  margin-top: 1rem;
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: calc(var(--radius) - 4px);
+  background: var(--surface);
+}
+
+.glossary-table {
+  width: 100%;
+  min-width: 680px;
+  border-collapse: collapse;
+}
+
+.glossary-table caption {
+  padding: 0.85rem 1rem;
+  text-align: left;
+  color: var(--muted);
+  font-size: 0.95rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.glossary-table th,
+.glossary-table td {
+  padding: 0.9rem 1rem;
+  vertical-align: top;
+  border-top: 1px solid var(--border);
+}
+
+.glossary-table thead th {
+  border-top: 0;
+  text-align: left;
+  font-size: 0.95rem;
+  color: var(--muted);
+  background: rgba(15, 19, 32, 0.04);
+}
+
+.glossary-table tbody th {
+  width: 32%;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.glossary-table tbody tr:hover {
+  background: rgba(15, 19, 32, 0.025);
+}
+
+/* Der eigentliche Anchor-Zielpunkt */
+.glossary-term {
+  font-style: normal;
+  scroll-margin-top: 1.25rem;
+}
+
+/* Wird sichtbar, wenn man per #term-... direkt zum Begriff springt */
+.glossary-term:target {
+  display: inline-block;
+  padding: 0.05rem 0.25rem;
+  border-radius: 0.35rem;
+  background: rgba(11, 95, 255, 0.10);
+  box-shadow: 0 0 0 0.22rem rgba(11, 95, 255, 0.10);
+}
+
+/* Kleiner Direktlink neben jedem Begriff */
+.glossary-anchor {
+  margin-left: 0.35rem;
+  color: var(--muted);
+  text-decoration: none;
+  opacity: 0.45;
+  font-weight: 650;
+}
+
+.glossary-table tbody tr:hover .glossary-anchor,
+.glossary-anchor:focus-visible,
+.glossary-term:target + .glossary-anchor {
+  opacity: 1;
+}
+
+/* Mobile: Tabelle wird zu kleinen Karten, statt seitlich wegzulaufen */
+@media (max-width: 640px) {
+  .glossary-table-wrap {
+    overflow: visible;
+    border: 0;
+    background: transparent;
+  }
+
+  .glossary-table {
+    min-width: 0;
+    border-collapse: separate;
+    border-spacing: 0 0.75rem;
+  }
+
+  .glossary-table caption {
+    padding: 0 0 0.75rem;
+    border-bottom: 0;
+  }
+
+  .glossary-table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .glossary-table,
+  .glossary-table tbody,
+  .glossary-table tr,
+  .glossary-table th,
+  .glossary-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .glossary-table tr {
+    padding: 0.85rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: calc(var(--radius) - 4px);
+    background: var(--surface);
+  }
+
+  .glossary-table th,
+  .glossary-table td {
+    padding: 0;
+    border-top: 0;
+  }
+
+  .glossary-table td {
+    margin-top: 0.35rem;
+  }
+}
+
