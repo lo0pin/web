@@ -7,7 +7,11 @@
 "subtopic": "fig"
 "subtopic": "lemon"
 "subtopic": "bonsai"
-
+"subtopic": "tomato"
+"subtopic": "kapuziner"
+"subtopic": "mais"
+"subtopic": "tabak"
+"subtopic": "zucchi"
 
 ## Making
 "topic": "making"
