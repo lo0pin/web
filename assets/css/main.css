@@ -1393,3 +1393,165 @@ a:focus-visible {
   }
 }
 
+
+
+/* =========================================================
+   SEGELTRIMM-TABELLEN
+   Gilt nur für:
+   <section class="card" id="table"> ... </section>
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   1. Grundlayout der Tabellen-Section
+   --------------------------------------------------------- */
+
+section.card#table {
+  /* Verhindert, dass breite Tabellen das Layout sprengen */
+  overflow-x: auto;
+
+  /* Etwas Luft nach innen, falls deine .card das nicht ohnehin macht */
+  box-sizing: border-box;
+}
+
+
+/* ---------------------------------------------------------
+   2. Tabellen-Grundstil
+   --------------------------------------------------------- */
+
+section.card#table .trim_table {
+  /* Tabelle nutzt die volle Breite der Section */
+  width: 100%;
+
+  /* Tabelle darf nicht breiter als der Container werden */
+  max-width: 100%;
+
+  /* Saubere, zusammenhängende Linien statt doppelter Rahmen */
+  border-collapse: collapse;
+
+  /* Gleichmäßige Spaltenbreiten;
+     verhindert, dass lange Inhalte einzelne Spalten brutal aufblasen */
+  table-layout: fixed;
+
+  /* Abstand zwischen mehreren Tabellen */
+  margin: 1rem 0 2rem 0;
+
+  /* Optional: etwas kleinere Schrift, damit viel Inhalt besser passt */
+  font-size: 0.95rem;
+}
+
+
+/* ---------------------------------------------------------
+   3. Tabellenzellen
+   --------------------------------------------------------- */
+
+section.card#table .trim_table th,
+section.card#table .trim_table td {
+  padding: 0.65rem 0.75rem;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+
+  text-align: left;
+  vertical-align: top;
+
+  /* Lange Wörter oder Wortgruppen dürfen umbrechen */
+  overflow-wrap: break-word;
+  word-break: normal;
+
+  /* Wichtig bei table-layout: fixed */
+  box-sizing: border-box;
+}
+
+
+/* ---------------------------------------------------------
+   4. Tabellenkopf
+   --------------------------------------------------------- */
+
+section.card#table .trim_table thead th {
+  font-weight: 700;
+  background: rgba(0, 0, 0, 0.06);
+}
+
+
+/* Kleine Zusatzzeile in den Spaltenüberschriften,
+   z. B. "1–2 Beaufort" */
+section.card#table .trim_table thead th span {
+  font-weight: 400;
+  font-size: 0.85em;
+  opacity: 0.8;
+}
+
+
+/* ---------------------------------------------------------
+   5. Erste Spalte: Trimmbereich
+   --------------------------------------------------------- */
+
+section.card#table .trim_table th:first-child {
+  /* Erste Spalte etwas schmäler, damit die Wind-Spalten Platz bekommen */
+  width: 24%;
+  font-weight: 700;
+}
+
+
+/* ---------------------------------------------------------
+   6. Dezente Lesbarkeit: Zebra-Streifen
+   --------------------------------------------------------- */
+
+section.card#table .trim_table tbody tr:nth-child(even) {
+  background: rgba(0, 0, 0, 0.025);
+}
+
+
+/* ---------------------------------------------------------
+   7. Überschriften innerhalb der Tabellen-Section
+   --------------------------------------------------------- */
+
+section.card#table h3 {
+  margin-top: 2.5rem;
+}
+
+section.card#table h4 {
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+
+/* ---------------------------------------------------------
+   8. Mobile Darstellung
+   ---------------------------------------------------------
+   Auf kleinen Bildschirmen wird die Tabelle nicht zerquetscht,
+   sondern horizontal scrollbar. Das ist bei vielen Spalten
+   meist die sauberste Lösung.
+   --------------------------------------------------------- */
+
+@media (max-width: 768px) {
+  section.card#table {
+    overflow-x: auto;
+  }
+
+  section.card#table .trim_table {
+    /* Mindestbreite, damit die Tabelle lesbar bleibt */
+    min-width: 720px;
+  }
+
+  section.card#table .trim_table th,
+  section.card#table .trim_table td {
+    padding: 0.55rem 0.6rem;
+    font-size: 0.9rem;
+  }
+}
+
+
+/* ---------------------------------------------------------
+   9. Sehr kleine Bildschirme
+   --------------------------------------------------------- */
+
+@media (max-width: 480px) {
+  section.card#table .trim_table {
+    min-width: 680px;
+  }
+
+  section.card#table .trim_table th,
+  section.card#table .trim_table td {
+    font-size: 0.85rem;
+  }
+}
