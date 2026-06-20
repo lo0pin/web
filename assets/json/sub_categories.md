@@ -8,10 +8,10 @@
 "subtopic": "lemon"
 "subtopic": "bonsai"
 "subtopic": "tomato"
-"subtopic": "kapuziner"
-"subtopic": "mais"
-"subtopic": "tabak"
-"subtopic": "zucchi"
+"subtopic": "kapu"
+"subtopic": "corn"
+"subtopic": "tobacco"
+"subtopic": "cucumber"
 
 ## Making
 "topic": "making"
