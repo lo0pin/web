@@ -58,18 +58,24 @@
 
   <section>
     <h2>1. Grundprinzip: privater und öffentlicher Schlüssel</h2>
+
     <p>
       Ein SSH-Key besteht immer aus zwei Teilen: einem <strong>privaten Schlüssel</strong> und einem
       <strong>öffentlichen Schlüssel</strong>.
     </p>
+
     <h3>Privater Schlüssel</h3>
+
     <p>
       Der private Schlüssel bleibt ausschließlich auf dem eigenen Gerät, also zum Beispiel auf dem
       Stand-PC, Laptop oder Tablet. Er ist der eigentliche Haustürschlüssel und darf nicht weitergegeben
       oder auf fremde Geräte kopiert werden.
     </p>
+
     <pre><code>~/.ssh/id_ed25519</code></pre>
+
     <h3>Öffentlicher Schlüssel</h3>
+
     <p>
       Der öffentliche Schlüssel darf auf Zielgeräte kopiert werden, etwa auf einen Raspberry Pi,
       einen Server oder ein anderes Linux-System mit SSH-Zugang.
@@ -88,90 +94,122 @@
       Diese Datei ist gewissermaßen die Gästeliste des Zielsystems. Jeder dort eingetragene öffentliche
       Schlüssel darf sich anmelden, sofern der passende private Schlüssel auf dem Client vorhanden ist.
     </p>
+
   </section>
 
   <section>
+
     <h2>2. Braucht jedes Remote-Gerät einen eigenen Schlüssel?</h2>
+
     <p>
       Nicht zwingend. Sinnvoll ist meist folgende Regel:
     </p>
+
     <pre><code>Ein Client-Gerät = ein eigenes Schlüsselpaar.
     Ein Remote-Gerät = enthält die erlaubten öffentlichen Schlüssel.</code></pre>
+
     <p>
       Beispiel:
     </p>
+
     <ul>
       <li>Der Stand-PC hat seinen eigenen privaten und öffentlichen Schlüssel.</li>
       <li>Das Tablet hat ebenfalls seinen eigenen privaten und öffentlichen Schlüssel.</li>
       <li>Der Raspberry Pi enthält in <code>authorized_keys</code> beide öffentlichen Schlüssel.</li>
     </ul>
+
     <p>
       Dadurch können sich sowohl Stand-PC als auch Tablet am Raspberry Pi anmelden, ohne dass private
       Schlüssel zwischen Geräten herumkopiert werden müssen.
     </p>
+
   </section>
 
   <section>
     <h2>3. Prüfen, ob auf Windows bereits ein SSH-Key vorhanden ist</h2>
+
     <p>
       Unter Windows funktioniert der Linux-Befehl <code>ls -la</code> in der klassischen PowerShell
       nicht wie erwartet. PowerShell kennt zwar <code>ls</code> als Alias, aber nicht die Linux-Option
       <code>-la</code>.
     </p>
+
     <p>Der Versuch führt daher zu einer Fehlermeldung wie:</p>
+
     <pre><code>Get-ChildItem : Es wurde kein Parameter gefunden,
     der dem Parameternamen "la" entspricht.</code></pre>
+
     <p>
       Stattdessen verwendet man unter Windows PowerShell:
     </p>
+
     <pre><code>dir $env:USERPROFILE\.ssh</code></pre>
+
     <p>
       Oder gezielt für ED25519-Schlüssel:
     </p>
+
     <pre><code>dir $env:USERPROFILE\.ssh\id_ed25519*</code></pre>
+
     <p>
       Wenn Dateien wie diese vorhanden sind, existiert bereits ein SSH-Key:
     </p>
+
     <pre><code>id_ed25519
     id_ed25519.pub</code></pre>
+
     <p>
       Der öffentliche Schlüssel kann mit folgendem Befehl angezeigt werden:
     </p>
+
     <pre><code>cat ~/.ssh/id_ed25519.pub</code></pre>
+
     <p>
       Die Ausgabe sieht ungefähr so aus:
     </p>
+
     <pre><code>ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAA... benutzer@example.com</code></pre>
+
     <p>
       Diese Zeile darf auf das Zielgerät kopiert werden. Der private Schlüssel
       <code>id_ed25519</code> bleibt dagegen auf dem Windows-PC.
     </p>
+
   </section>
 
   <section>
     <h2>4. Verbindung zum Raspberry Pi testen</h2>
+
     <p>
       Wenn der Raspberry Pi im Netzwerk unter dem Hostnamen <code>sailsense.local</code> erreichbar ist
       und der Benutzer <code>user</code> heißt, lautet der SSH-Befehl:
     </p>
+
     <pre><code>ssh user@sailsense.local</code></pre>
+
     <p>
       Beim ersten Verbindungsaufbau erscheint normalerweise eine Meldung wie:
     </p>
+
     <pre><code>The authenticity of host 'sailsense.local' can't be established.
     Are you sure you want to continue connecting (yes/no/[fingerprint])?</code></pre>
+
     <p>
       Diese Meldung bedeutet: Der Computer kennt dieses Zielgerät noch nicht. Wenn man sicher ist, dass
       es sich um den eigenen Raspberry Pi handelt, bestätigt man mit:
     </p>
+
     <pre><code>yes</code></pre>
+
     <p>
       Danach wird der Raspberry Pi in die Datei <code>known_hosts</code> eingetragen.
     </p>
+
     <p>
       Wenn anschließend noch nach dem Passwort gefragt wird, ist der SSH-Key noch nicht richtig
       eingerichtet oder wird vom Raspberry Pi noch nicht akzeptiert.
     </p>
+    
   </section>
 
   <section>
@@ -445,67 +483,60 @@
   <section>
     <h2>11. Passwortlogin erst später deaktivieren</h2>
 
-```
-<p>
-  Der Passwortlogin sollte erst deaktiviert werden, wenn die Anmeldung per SSH-Key sicher funktioniert.
-  Sonst sperrt man sich schlimmstenfalls selbst aus. Das ist kein Sicherheitskonzept, sondern ein
-  digitaler Tritt auf die eigene Harke.
-</p>
+    <p>
+      Der Passwortlogin sollte erst deaktiviert werden, wenn die Anmeldung per SSH-Key sicher funktioniert.
+      Sonst sperrt man sich schlimmstenfalls selbst aus. Das ist kein Sicherheitskonzept, sondern ein
+      digitaler Tritt auf die eigene Harke.
+    </p>
 
-<p>
-  Erst wenn der Login ohne Raspberry-Passwort funktioniert, kann man die SSH-Konfiguration bearbeiten:
-</p>
+    <p>
+      Erst wenn der Login ohne Raspberry-Passwort funktioniert, kann man die SSH-Konfiguration bearbeiten:
+    </p>
 
-<pre><code>sudo nano /etc/ssh/sshd_config</code></pre>
+    <pre><code>sudo nano /etc/ssh/sshd_config</code></pre>
 
-<p>
-  Dort setzt man:
-</p>
+    <p>
+      Dort setzt man:
+    </p>
 
-<pre><code>PasswordAuthentication no</code></pre>
+    <pre><code>PasswordAuthentication no</code></pre>
 
-<p>
-  Danach wird SSH neu gestartet:
-</p>
+    <p>
+      Danach wird SSH neu gestartet:
+    </p>
 
-<pre><code>sudo systemctl restart ssh</code></pre>
+    <pre><code>sudo systemctl restart ssh</code></pre>
 
-<p>
-  Wichtig: Vorher ein zweites Terminal offen lassen und testen, ob der Key-Login wirklich funktioniert.
-</p>
-```
+    <p>
+      Wichtig: Vorher ein zweites Terminal offen lassen und testen, ob der Key-Login wirklich funktioniert.
+    </p>
 
   </section>
 
   <section>
     <h2>12. Kurzfassung</h2>
 
-```
-<ul>
-  <li>Der private Schlüssel bleibt auf dem eigenen Gerät.</li>
-  <li>Der öffentliche Schlüssel kommt auf das Zielgerät.</li>
-  <li>Auf dem Zielgerät steht der öffentliche Schlüssel in <code>~/.ssh/authorized_keys</code>.</li>
-  <li>Der Ordner <code>~/.ssh</code> braucht die Rechte <code>700</code>.</li>
-  <li>Die Datei <code>authorized_keys</code> braucht die Rechte <code>600</code>.</li>
-  <li>Ein versehentliches <code>chmod 600 ~/.ssh</code> macht den Ordner unbetretbar.</li>
-  <li>Wenn SSH weiter nach dem Passwort fragt, mit <code>ssh -v</code> debuggen.</li>
-</ul>
+    <ul>
+      <li>Der private Schlüssel bleibt auf dem eigenen Gerät.</li>
+      <li>Der öffentliche Schlüssel kommt auf das Zielgerät.</li>
+      <li>Auf dem Zielgerät steht der öffentliche Schlüssel in <code>~/.ssh/authorized_keys</code>.</li>
+      <li>Der Ordner <code>~/.ssh</code> braucht die Rechte <code>700</code>.</li>
+      <li>Die Datei <code>authorized_keys</code> braucht die Rechte <code>600</code>.</li>
+      <li>Ein versehentliches <code>chmod 600 ~/.ssh</code> macht den Ordner unbetretbar.</li>
+      <li>Wenn SSH weiter nach dem Passwort fragt, mit <code>ssh -v</code> debuggen.</li>
+    </ul>
 
-<p>
-  Für das konkrete Raspberry-Pi-Setup lautet die wichtigste Reparatur:
-</p>
+    <p>
+      Für das konkrete Raspberry-Pi-Setup lautet die wichtigste Reparatur:
+    </p>
 
-<pre><code>chmod 700 ~/.ssh
-```
+    <pre><code>chmod 700 ~/.ssh
+    chmod 600 ~/.ssh/authorized_keys
+    chown -R user:user ~/.ssh</code></pre>
 
-chmod 600 ~/.ssh/authorized_keys
-chown -R user:user ~/.ssh</code></pre>
-
-```
-<p>
-  Danach sollte der Login vom Windows-PC oder Tablet per SSH-Key funktionieren.
-</p>
-```
+    <p>
+      Danach sollte der Login vom Windows-PC oder Tablet per SSH-Key funktionieren.
+    </p>
 
   </section>
 </article>
