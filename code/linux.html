@@ -44,9 +44,474 @@
     <hr class="divider" />
 
 
-    <section class="card" id="ssh">
-     
-    </section>
+
+<article class="card ssh-article" id="ssh">
+  <header>
+    <p class="eyebrow">Linux · Raspberry Pi · SSH</p>
+    <h1>SSH-Key auf Windows, Tablet und Raspberry Pi einrichten</h1>
+    <p class="lead">
+      SSH-Schlüssel wirken am Anfang wie dunkle Konsolenmagie. Tatsächlich ist das Prinzip einfach:
+      Der private Schlüssel bleibt auf dem eigenen Gerät, der öffentliche Schlüssel kommt auf jene
+      Geräte, auf die man sich anmelden möchte.
+    </p>
+  </header>
+
+  <section>
+    <h2>1. Grundprinzip: privater und öffentlicher Schlüssel</h2>
+    <p>
+      Ein SSH-Key besteht immer aus zwei Teilen: einem <strong>privaten Schlüssel</strong> und einem
+      <strong>öffentlichen Schlüssel</strong>.
+    </p>
+    <h3>Privater Schlüssel</h3>
+    <p>
+      Der private Schlüssel bleibt ausschließlich auf dem eigenen Gerät, also zum Beispiel auf dem
+      Stand-PC, Laptop oder Tablet. Er ist der eigentliche Haustürschlüssel und darf nicht weitergegeben
+      oder auf fremde Geräte kopiert werden.
+    </p>
+    <pre><code>~/.ssh/id_ed25519</code></pre>
+    <h3>Öffentlicher Schlüssel</h3>
+    <p>
+      Der öffentliche Schlüssel darf auf Zielgeräte kopiert werden, etwa auf einen Raspberry Pi,
+      einen Server oder ein anderes Linux-System mit SSH-Zugang.
+    </p>
+
+    <pre><code>~/.ssh/id_ed25519.pub</code></pre>
+
+    <p>
+      Auf dem Zielgerät wird dieser öffentliche Schlüssel in die Datei
+      <code>authorized_keys</code> eingetragen:
+    </p>
+
+    <pre><code>~/.ssh/authorized_keys</code></pre>
+
+    <p>
+      Diese Datei ist gewissermaßen die Gästeliste des Zielsystems. Jeder dort eingetragene öffentliche
+      Schlüssel darf sich anmelden, sofern der passende private Schlüssel auf dem Client vorhanden ist.
+    </p>
+  </section>
+
+  <section>
+    <h2>2. Braucht jedes Remote-Gerät einen eigenen Schlüssel?</h2>
+    <p>
+      Nicht zwingend. Sinnvoll ist meist folgende Regel:
+    </p>
+    <pre><code>Ein Client-Gerät = ein eigenes Schlüsselpaar.
+    Ein Remote-Gerät = enthält die erlaubten öffentlichen Schlüssel.</code></pre>
+    <p>
+      Beispiel:
+    </p>
+    <ul>
+      <li>Der Stand-PC hat seinen eigenen privaten und öffentlichen Schlüssel.</li>
+      <li>Das Tablet hat ebenfalls seinen eigenen privaten und öffentlichen Schlüssel.</li>
+      <li>Der Raspberry Pi enthält in <code>authorized_keys</code> beide öffentlichen Schlüssel.</li>
+    </ul>
+    <p>
+      Dadurch können sich sowohl Stand-PC als auch Tablet am Raspberry Pi anmelden, ohne dass private
+      Schlüssel zwischen Geräten herumkopiert werden müssen.
+    </p>
+  </section>
+
+  <section>
+    <h2>3. Prüfen, ob auf Windows bereits ein SSH-Key vorhanden ist</h2>
+    <p>
+      Unter Windows funktioniert der Linux-Befehl <code>ls -la</code> in der klassischen PowerShell
+      nicht wie erwartet. PowerShell kennt zwar <code>ls</code> als Alias, aber nicht die Linux-Option
+      <code>-la</code>.
+    </p>
+    <p>Der Versuch führt daher zu einer Fehlermeldung wie:</p>
+    <pre><code>Get-ChildItem : Es wurde kein Parameter gefunden,
+    der dem Parameternamen "la" entspricht.</code></pre>
+    <p>
+      Stattdessen verwendet man unter Windows PowerShell:
+    </p>
+    <pre><code>dir $env:USERPROFILE\.ssh</code></pre>
+    <p>
+      Oder gezielt für ED25519-Schlüssel:
+    </p>
+    <pre><code>dir $env:USERPROFILE\.ssh\id_ed25519*</code></pre>
+    <p>
+      Wenn Dateien wie diese vorhanden sind, existiert bereits ein SSH-Key:
+    </p>
+    <pre><code>id_ed25519
+    id_ed25519.pub</code></pre>
+    <p>
+      Der öffentliche Schlüssel kann mit folgendem Befehl angezeigt werden:
+    </p>
+    <pre><code>cat ~/.ssh/id_ed25519.pub</code></pre>
+    <p>
+      Die Ausgabe sieht ungefähr so aus:
+    </p>
+    <pre><code>ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAA... benutzer@example.com</code></pre>
+    <p>
+      Diese Zeile darf auf das Zielgerät kopiert werden. Der private Schlüssel
+      <code>id_ed25519</code> bleibt dagegen auf dem Windows-PC.
+    </p>
+  </section>
+
+  <section>
+    <h2>4. Verbindung zum Raspberry Pi testen</h2>
+    <p>
+      Wenn der Raspberry Pi im Netzwerk unter dem Hostnamen <code>sailsense.local</code> erreichbar ist
+      und der Benutzer <code>user</code> heißt, lautet der SSH-Befehl:
+    </p>
+    <pre><code>ssh user@sailsense.local</code></pre>
+    <p>
+      Beim ersten Verbindungsaufbau erscheint normalerweise eine Meldung wie:
+    </p>
+    <pre><code>The authenticity of host 'sailsense.local' can't be established.
+    Are you sure you want to continue connecting (yes/no/[fingerprint])?</code></pre>
+    <p>
+      Diese Meldung bedeutet: Der Computer kennt dieses Zielgerät noch nicht. Wenn man sicher ist, dass
+      es sich um den eigenen Raspberry Pi handelt, bestätigt man mit:
+    </p>
+    <pre><code>yes</code></pre>
+    <p>
+      Danach wird der Raspberry Pi in die Datei <code>known_hosts</code> eingetragen.
+    </p>
+    <p>
+      Wenn anschließend noch nach dem Passwort gefragt wird, ist der SSH-Key noch nicht richtig
+      eingerichtet oder wird vom Raspberry Pi noch nicht akzeptiert.
+    </p>
+  </section>
+
+  <section>
+    <h2>5. Öffentlichen Schlüssel auf dem Raspberry Pi eintragen</h2>
+
+    <p>
+      Auf dem Raspberry Pi muss der öffentliche Schlüssel des Windows-PCs oder Tablets in die Datei
+      <code>authorized_keys</code> eingetragen werden.
+    </p>
+
+    <p>Zuerst am Raspberry Pi einloggen:</p>
+
+    <pre><code>ssh user@sailsense.local</code></pre>
+
+    <p>Dann das SSH-Verzeichnis anlegen beziehungsweise absichern:</p>
+
+    <pre><code>mkdir -p ~/.ssh
+    chmod 700 ~/.ssh</code></pre>
+
+    <p>Nun die Datei <code>authorized_keys</code> öffnen:</p>
+
+    <pre><code>nano ~/.ssh/authorized_keys</code></pre>
+
+    <p>
+      Dort wird der öffentliche Schlüssel eingefügt. Eine solche Datei kann zum Beispiel so aussehen:
+    </p>
+
+    <pre><code>ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAA... standpc@example.com
+    ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAA... [tablet@example.com](mailto:tablet@example.com)</code></pre>
+
+    <p>
+      Wichtig: Jeder öffentliche Schlüssel steht in einer eigenen Zeile.
+    </p>
+
+    <p>Danach werden die Dateirechte gesetzt:</p>
+
+    <pre><code>chmod 600 ~/.ssh/authorized_keys</code></pre>
+  </section>
+
+  <section>
+    <h2>6. Der typische Fehler: falsche Rechte auf <code>~/.ssh</code></h2>
+
+    <p>
+      Ein häufiger Fehler ist dieser Befehl:
+    </p>
+
+    <pre><code>chmod 600 ~/.ssh</code></pre>
+
+    <p>
+      Das sieht harmlos aus, ist aber falsch. <code>~/.ssh</code> ist ein Ordner. Ein Ordner braucht
+      Ausführungsrechte, damit er betreten werden kann. Ohne dieses Recht kann SSH die Datei
+      <code>authorized_keys</code> nicht zuverlässig lesen.
+    </p>
+
+    <p>
+      Die Folge kann eine merkwürdige Ausgabe sein:
+    </p>
+
+    <pre><code>ls: cannot access '/home/user/.ssh/authorized_keys': Permission denied
+    d????????? ? ? ? ? ? .
+    -????????? ? ? ? ? ? authorized_keys</code></pre>
+
+    <p>
+      Das bedeutet sinngemäß: Das System sieht, dass dort etwas liegt, darf aber nicht sauber darauf
+      zugreifen. SSH fällt dann auf die Passwortabfrage zurück.
+    </p>
+
+    <p>
+      Die korrekten Rechte lauten:
+    </p>
+
+    <pre><code>chmod 700 ~/.ssh
+    chmod 600 ~/.ssh/authorized_keys</code></pre>
+
+    <p>
+      Zusätzlich kann man sicherstellen, dass der Benutzer auch wirklich Eigentümer der Dateien ist:
+    </p>
+
+    <pre><code>chown -R user:user ~/.ssh</code></pre>
+
+    <p>
+      Danach sollte die Kontrolle so aussehen:
+    </p>
+
+    <pre><code>ls -la ~/.ssh</code></pre>
+
+    <p>Erwartete Ausgabe:</p>
+
+    <pre><code>drwx------ 2 user user 4096 ... .
+    drwx------ 7 user user 4096 ... ..
+    -rw------- 1 user user  211 ... authorized_keys</code></pre>
+    <p>
+      Merksatz:
+    </p>
+
+    <pre><code>.ssh              → 700
+    authorized_keys   → 600</code></pre>
+
+  </section>
+
+  <section>
+    <h2>7. Warum fragt SSH trotz eingetragenem Schlüssel noch nach dem Passwort?</h2>
+
+    <p>
+      Wenn SSH weiterhin nach dem Passwort fragt, obwohl der öffentliche Schlüssel eingetragen wurde,
+      kommen meist diese Ursachen infrage:
+    </p>
+
+    <ul>
+      <li>Die Rechte von <code>~/.ssh</code> oder <code>authorized_keys</code> sind falsch.</li>
+      <li>Der öffentliche Schlüssel wurde in die falsche Benutzerkennung eingetragen.</li>
+      <li>Der eingetragene öffentliche Schlüssel passt nicht zum privaten Schlüssel des Client-Geräts.</li>
+      <li>Der SSH-Client verwendet einen anderen Schlüssel als erwartet.</li>
+      <li>Der Inhalt von <code>authorized_keys</code> wurde beschädigt, etwa durch Zeilenumbrüche mitten im Schlüssel.</li>
+    </ul>
+
+    <p>
+      Wichtig ist besonders der Benutzername. Wer sich so verbindet:
+    </p>
+
+    <pre><code>ssh user@sailsense.local</code></pre>
+
+    <p>
+      muss den Schlüssel hier eintragen:
+    </p>
+
+    <pre><code>/home/user/.ssh/authorized_keys</code></pre>
+
+    <p>
+      Würde man sich als <code>pi</code> anmelden, müsste der Schlüssel stattdessen in:
+    </p>
+
+    <pre><code>/home/pi/.ssh/authorized_keys</code></pre>
+
+    <p>
+      SSH ist hier pedantisch. Verschiedene Benutzer sind verschiedene Türen.
+    </p>
+
+  </section>
+
+  <section>
+    <h2>8. Verbindung mit Debug-Ausgabe prüfen</h2>
+
+    <p>
+      Wenn unklar ist, welcher Schlüssel verwendet wird, hilft die Debug-Ausgabe:
+    </p>
+
+    <pre><code>ssh -v user@sailsense.local</code></pre>
+
+    <p>
+      Interessant sind Zeilen wie:
+    </p>
+
+    <pre><code>Offering public key: C:\Users\julka\.ssh\id_ed25519</code></pre>
+
+    <p>
+      Das bedeutet: Der Client bietet diesen Schlüssel an.
+    </p>
+
+    <p>
+      Ideal wäre danach eine Meldung wie:
+    </p>
+
+    <pre><code>Server accepts key</code></pre>
+
+    <p>
+      Wenn der Schlüssel angeboten, aber nicht akzeptiert wird, liegt das Problem fast immer auf dem
+      Zielgerät: falscher Eintrag, falscher Benutzer, falsche Rechte oder falscher Besitzer.
+    </p>
+
+    <p>
+      Man kann einen bestimmten Schlüssel auch ausdrücklich angeben:
+    </p>
+
+    <pre><code>ssh -i $env:USERPROFILE\.ssh\id_ed25519 user@sailsense.local</code></pre>
+
+  </section>
+
+  <section>
+    <h2>9. SSH-Key vom Tablet auf den Raspberry Pi einrichten</h2>
+
+    <p>
+      Auf einem Tablet hängt die genaue Vorgehensweise vom System ab. Unter Android wird häufig
+      Termux verwendet. Dort kann man wie unter Linux arbeiten.
+    </p>
+
+    <p>Zuerst prüfen, ob schon ein Schlüssel vorhanden ist:</p>
+
+    <pre><code>ls -la ~/.ssh</code></pre>
+
+    <p>Falls noch kein Schlüssel vorhanden ist, erzeugt man einen neuen:</p>
+
+    <pre><code>ssh-keygen -t ed25519 -C "tablet"</code></pre>
+
+    <p>
+      Der Standardpfad kann in der Regel mit Enter übernommen werden:
+    </p>
+
+    <pre><code>~/.ssh/id_ed25519</code></pre>
+
+    <p>
+      Danach wird der öffentliche Schlüssel angezeigt:
+    </p>
+
+    <pre><code>cat ~/.ssh/id_ed25519.pub</code></pre>
+
+    <p>
+      Diese komplette Zeile wird anschließend auf dem Raspberry Pi in
+      <code>~/.ssh/authorized_keys</code> eingefügt.
+    </p>
+
+    <p>
+      Auf dem Raspberry Pi:
+    </p>
+
+    <pre><code>mkdir -p ~/.ssh
+
+    chmod 700 ~/.ssh
+    nano ~/.ssh/authorized_keys
+    chmod 600 ~/.ssh/authorized_keys</code></pre>
+
+    <p>
+      Danach kann vom Tablet getestet werden:
+    </p>
+
+    <pre><code>ssh user@sailsense.local</code></pre>
+
+  </section>
+
+  <section>
+    <h2>10. Praktische SSH-Konfiguration</h2>
+
+    <p>
+      Damit man nicht jedes Mal den vollständigen Hostnamen und Benutzernamen eintippen muss,
+      kann man auf dem Client eine SSH-Konfiguration anlegen.
+    </p>
+
+    <p>Unter Linux, macOS oder Termux:</p>
+
+    <pre><code>nano ~/.ssh/config</code></pre>
+
+    <p>Unter Windows liegt die Datei hier:</p>
+
+    <pre><code>C:\Users\BENUTZERNAME\.ssh\config</code></pre>
+
+    <p>Beispielinhalt:</p>
+
+    <pre><code>Host sailsense
+    HostName sailsense.local
+    User user
+    IdentityFile ~/.ssh/id_ed25519</code></pre>
+
+    <p>
+      Danach genügt:
+    </p>
+
+    <pre><code>ssh sailsense</code></pre>
+
+    <p>
+      Falls <code>sailsense.local</code> im Netzwerk nicht zuverlässig aufgelöst wird, kann statt des
+      Hostnamens auch die IP-Adresse eingetragen werden:
+    </p>
+
+    <pre><code>Host sailsense
+    HostName 192.168.1.123
+    User user
+    IdentityFile ~/.ssh/id_ed25519</code></pre>
+
+  </section>
+
+  <section>
+    <h2>11. Passwortlogin erst später deaktivieren</h2>
+
+```
+<p>
+  Der Passwortlogin sollte erst deaktiviert werden, wenn die Anmeldung per SSH-Key sicher funktioniert.
+  Sonst sperrt man sich schlimmstenfalls selbst aus. Das ist kein Sicherheitskonzept, sondern ein
+  digitaler Tritt auf die eigene Harke.
+</p>
+
+<p>
+  Erst wenn der Login ohne Raspberry-Passwort funktioniert, kann man die SSH-Konfiguration bearbeiten:
+</p>
+
+<pre><code>sudo nano /etc/ssh/sshd_config</code></pre>
+
+<p>
+  Dort setzt man:
+</p>
+
+<pre><code>PasswordAuthentication no</code></pre>
+
+<p>
+  Danach wird SSH neu gestartet:
+</p>
+
+<pre><code>sudo systemctl restart ssh</code></pre>
+
+<p>
+  Wichtig: Vorher ein zweites Terminal offen lassen und testen, ob der Key-Login wirklich funktioniert.
+</p>
+```
+
+  </section>
+
+  <section>
+    <h2>12. Kurzfassung</h2>
+
+```
+<ul>
+  <li>Der private Schlüssel bleibt auf dem eigenen Gerät.</li>
+  <li>Der öffentliche Schlüssel kommt auf das Zielgerät.</li>
+  <li>Auf dem Zielgerät steht der öffentliche Schlüssel in <code>~/.ssh/authorized_keys</code>.</li>
+  <li>Der Ordner <code>~/.ssh</code> braucht die Rechte <code>700</code>.</li>
+  <li>Die Datei <code>authorized_keys</code> braucht die Rechte <code>600</code>.</li>
+  <li>Ein versehentliches <code>chmod 600 ~/.ssh</code> macht den Ordner unbetretbar.</li>
+  <li>Wenn SSH weiter nach dem Passwort fragt, mit <code>ssh -v</code> debuggen.</li>
+</ul>
+
+<p>
+  Für das konkrete Raspberry-Pi-Setup lautet die wichtigste Reparatur:
+</p>
+
+<pre><code>chmod 700 ~/.ssh
+```
+
+chmod 600 ~/.ssh/authorized_keys
+chown -R user:user ~/.ssh</code></pre>
+
+```
+<p>
+  Danach sollte der Login vom Windows-PC oder Tablet per SSH-Key funktionieren.
+</p>
+```
+
+  </section>
+</article>
+
+
+
 
 
 
