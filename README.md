@@ -28,14 +28,6 @@ The website is available at:
 └── README.md
 ```
 
-/
-├── index.html
-└── assets/
-    ├── css/
-    │   └── main.css
-    └── js/
-        └── main.js
-
 
 
 
@@ -46,19 +38,8 @@ Future extensions (e.g. APIs or self-hosted services) will be handled separately
 
 
 ## 📝 To Dos
-- [ ] Astronomy
-- [ ] History
-- [ ] Philosophy
 - [ ] Homebrew Browsergames
-- [ ] 3d printing
 
 - [ ] nerdism
-    - lotr
-    - gothic
     - max payne
 
-- [ ] Words: 
-    - Kommunikationswissenschaft, 
-    - Sprachwissenschaft und 
-    - Literatur
-    - 
