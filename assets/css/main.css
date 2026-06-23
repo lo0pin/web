@@ -1555,3 +1555,20 @@ section.card#table h4 {
     font-size: 0.85rem;
   }
 }
+
+
+/* ---------------------------------------------------------
+   für bilder, die nicht beschnitten werden sollen
+   --------------------------------------------------------- */
+
+.image-contain-full {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+
+  object-fit: contain;
+  object-position: center;
+
+  max-height: none;
+}
