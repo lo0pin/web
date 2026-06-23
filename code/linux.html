@@ -139,7 +139,7 @@ auch ssh-article ist fragwürdig-->
     <p>Der Versuch führt daher zu einer Fehlermeldung wie:</p>
 
     <pre><code>Get-ChildItem : Es wurde kein Parameter gefunden,
-    der dem Parameternamen "la" entspricht.</code></pre>
+der dem Parameternamen "la" entspricht.</code></pre>
 
     <p>
       Stattdessen verwendet man unter Windows PowerShell:
@@ -158,7 +158,7 @@ auch ssh-article ist fragwürdig-->
     </p>
 
     <pre><code>id_ed25519
-    id_ed25519.pub</code></pre>
+id_ed25519.pub</code></pre>
 
     <p>
       Der öffentliche Schlüssel kann mit folgendem Befehl angezeigt werden:
@@ -194,7 +194,7 @@ auch ssh-article ist fragwürdig-->
     </p>
 
     <pre><code>The authenticity of host 'sailsense.local' can't be established.
-    Are you sure you want to continue connecting (yes/no/[fingerprint])?</code></pre>
+Are you sure you want to continue connecting (yes/no/[fingerprint])?</code></pre>
 
     <p>
       Diese Meldung bedeutet: Der Computer kennt dieses Zielgerät noch nicht. Wenn man sicher ist, dass
@@ -229,7 +229,7 @@ auch ssh-article ist fragwürdig-->
     <p>Dann das SSH-Verzeichnis anlegen beziehungsweise absichern:</p>
 
     <pre><code>mkdir -p ~/.ssh
-    chmod 700 ~/.ssh</code></pre>
+chmod 700 ~/.ssh</code></pre>
 
     <p>Nun die Datei <code>authorized_keys</code> öffnen:</p>
 
@@ -240,7 +240,7 @@ auch ssh-article ist fragwürdig-->
     </p>
 
     <pre><code>ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAA... standpc@example.com
-    ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAA... [tablet@example.com](mailto:tablet@example.com)</code></pre>
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAA... [tablet@example.com](mailto:tablet@example.com)</code></pre>
 
     <p>
       Wichtig: Jeder öffentliche Schlüssel steht in einer eigenen Zeile.
@@ -271,8 +271,8 @@ auch ssh-article ist fragwürdig-->
     </p>
 
     <pre><code>ls: cannot access '/home/user/.ssh/authorized_keys': Permission denied
-    d????????? ? ? ? ? ? .
-    -????????? ? ? ? ? ? authorized_keys</code></pre>
+d????????? ? ? ? ? ? .
+-????????? ? ? ? ? ? authorized_keys</code></pre>
 
     <p>
       Das bedeutet sinngemäß: Das System sieht, dass dort etwas liegt, darf aber nicht sauber darauf
@@ -284,7 +284,7 @@ auch ssh-article ist fragwürdig-->
     </p>
 
     <pre><code>chmod 700 ~/.ssh
-    chmod 600 ~/.ssh/authorized_keys</code></pre>
+chmod 600 ~/.ssh/authorized_keys</code></pre>
 
     <p>
       Zusätzlich kann man sicherstellen, dass der Benutzer auch wirklich Eigentümer der Dateien ist:
@@ -301,14 +301,14 @@ auch ssh-article ist fragwürdig-->
     <p>Erwartete Ausgabe:</p>
 
     <pre><code>drwx------ 2 user user 4096 ... .
-    drwx------ 7 user user 4096 ... ..
-    -rw------- 1 user user  211 ... authorized_keys</code></pre>
+drwx------ 7 user user 4096 ... ..
+-rw------- 1 user user  211 ... authorized_keys</code></pre>
     <p>
       Merksatz:
     </p>
 
     <pre><code>.ssh              → 700
-    authorized_keys   → 600</code></pre>
+authorized_keys   → 600</code></pre>
 
   </section>
 
@@ -428,10 +428,9 @@ auch ssh-article ist fragwürdig-->
     </p>
 
     <pre><code>mkdir -p ~/.ssh
-
-    chmod 700 ~/.ssh
-    nano ~/.ssh/authorized_keys
-    chmod 600 ~/.ssh/authorized_keys</code></pre>
+chmod 700 ~/.ssh
+nano ~/.ssh/authorized_keys
+chmod 600 ~/.ssh/authorized_keys</code></pre>
 
     <p>
       Danach kann vom Tablet getestet werden:
@@ -460,9 +459,9 @@ auch ssh-article ist fragwürdig-->
     <p>Beispielinhalt:</p>
 
     <pre><code>Host sailsense
-    HostName sailsense.local
-    User user
-    IdentityFile ~/.ssh/id_ed25519</code></pre>
+HostName sailsense.local
+User user
+IdentityFile ~/.ssh/id_ed25519</code></pre>
 
     <p>
       Danach genügt:
@@ -476,9 +475,9 @@ auch ssh-article ist fragwürdig-->
     </p>
 
     <pre><code>Host sailsense
-    HostName 192.168.1.123
-    User user
-    IdentityFile ~/.ssh/id_ed25519</code></pre>
+HostName 192.168.1.123
+User user
+IdentityFile ~/.ssh/id_ed25519</code></pre>
 
   </section>
 
@@ -533,8 +532,8 @@ auch ssh-article ist fragwürdig-->
     </p>
 
     <pre><code>chmod 700 ~/.ssh
-    chmod 600 ~/.ssh/authorized_keys
-    chown -R user:user ~/.ssh</code></pre>
+chmod 600 ~/.ssh/authorized_keys
+chown -R user:user ~/.ssh</code></pre>
 
     <p>
       Danach sollte der Login vom Windows-PC oder Tablet per SSH-Key funktionieren.
