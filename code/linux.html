@@ -59,6 +59,24 @@ auch ssh-article ist fragwürdig-->
   </header>
 
   <section>
+      <h2 class="card-title">Inhalte</h2>
+      <ul>
+        <li><a href="#ssh_1" >Grundprinzip</a></li>
+        <li><a href="#ssh_2" >Schlüssel</a></li>
+        <li><a href="#ssh_3" >Prüfung, ob Schlüssel vorhanden</a></li>
+        <li><a href="#ssh_4" >Verbindung testen</a></li>
+        <li><a href="#ssh_5" >Öffentlichen Schlüssel eintragen</a></li>
+        <li><a href="#ssh_6" >Typischer Fehler: falsche Rechte</a></li>
+        <li><a href="#ssh_7" >Typischer Fehler: weiterhin Passwortabfrage</a></li>
+        <li><a href="#ssh_8" >Debug-Ausgabe</a></li>
+        <li><a href="#ssh_9" >Zweitgerät: SSH-Key einrichten</a></li>
+        <li><a href="#ssh_10" >SSH-Konfiguration</a></li>
+        <li><a href="#ssh_11" >Passwortlogin deaktivieren</a></li>
+        <li><a href="#ssh_12" >Kurzfassung</a></li>
+      </ul>
+  </section>
+
+  <section id="ssh_1">
     <h2>1. Grundprinzip: privater und öffentlicher Schlüssel</h2>
 
     <p>
@@ -99,7 +117,7 @@ auch ssh-article ist fragwürdig-->
 
   </section>
 
-  <section>
+  <section  id="ssh_2">
 
     <h2>2. Braucht jedes Remote-Gerät einen eigenen Schlüssel?</h2>
 
@@ -127,7 +145,7 @@ auch ssh-article ist fragwürdig-->
 
   </section>
 
-  <section>
+  <section id="ssh_3">
     <h2>3. Prüfen, ob auf Windows bereits ein SSH-Key vorhanden ist</h2>
 
     <p>
@@ -179,7 +197,7 @@ id_ed25519.pub</code></pre>
 
   </section>
 
-  <section>
+  <section id="ssh_4">
     <h2>4. Verbindung zum Raspberry Pi testen</h2>
 
     <p>
@@ -214,7 +232,7 @@ Are you sure you want to continue connecting (yes/no/[fingerprint])?</code></pre
 
   </section>
 
-  <section>
+  <section id="ssh_5">
     <h2>5. Öffentlichen Schlüssel auf dem Raspberry Pi eintragen</h2>
 
     <p>
@@ -251,7 +269,7 @@ ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAA... [tablet@example.com](mailto:tablet@examp
     <pre><code>chmod 600 ~/.ssh/authorized_keys</code></pre>
   </section>
 
-  <section>
+  <section id="ssh_6"
     <h2>6. Der typische Fehler: falsche Rechte auf <code>~/.ssh</code></h2>
 
     <p>
@@ -312,7 +330,7 @@ authorized_keys   → 600</code></pre>
 
   </section>
 
-  <section>
+  <section id="ssh_7">
     <h2>7. Warum fragt SSH trotz eingetragenem Schlüssel noch nach dem Passwort?</h2>
 
     <p>
@@ -352,7 +370,7 @@ authorized_keys   → 600</code></pre>
 
   </section>
 
-  <section>
+  <section id="ssh_8">
     <h2>8. Verbindung mit Debug-Ausgabe prüfen</h2>
 
     <p>
@@ -390,7 +408,7 @@ authorized_keys   → 600</code></pre>
 
   </section>
 
-  <section>
+  <section id="ssh_9">
     <h2>9. SSH-Key vom Tablet auf den Raspberry Pi einrichten</h2>
 
     <p>
@@ -440,7 +458,7 @@ chmod 600 ~/.ssh/authorized_keys</code></pre>
 
   </section>
 
-  <section>
+  <section id="ssh_10">
     <h2>10. Praktische SSH-Konfiguration</h2>
 
     <p>
@@ -481,7 +499,7 @@ IdentityFile ~/.ssh/id_ed25519</code></pre>
 
   </section>
 
-  <section>
+  <section id="ssh_11">
     <h2>11. Passwortlogin erst später deaktivieren</h2>
 
     <p>
@@ -514,7 +532,7 @@ IdentityFile ~/.ssh/id_ed25519</code></pre>
 
   </section>
 
-  <section>
+  <section id="ssh_12">
     <h2>12. Kurzfassung</h2>
 
     <ul>
