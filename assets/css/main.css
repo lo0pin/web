@@ -1572,3 +1572,10 @@ section.card#table h4 {
 
   max-height: none;
 }
+
+.media:has(.image-contain-full),
+.media-row:has(.image-contain-full) {
+  height: auto;
+  overflow: visible;
+  aspect-ratio: auto;
+}
