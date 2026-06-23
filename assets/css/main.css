@@ -1579,3 +1579,49 @@ section.card#table h4 {
   overflow: visible;
   aspect-ratio: auto;
 }
+
+
+
+/* 
+  Kopfzeile eines Zusammenfassungsblocks:
+  Überschrift und "↑ top"-Link stehen nebeneinander.
+*/
+.summary-heading {
+  /* Aktiviert flexible horizontale Anordnung */
+  display: flex;
+
+  /* Richtet Überschrift und Link an der Textgrundlinie aus */
+  align-items: baseline;
+
+  /* Abstand zwischen h3 und Top-Link */
+  gap: 0.75rem;
+
+  /* Abstand zur folgenden Liste / zum folgenden Inhalt */
+  margin-bottom: 0.75rem;
+}
+
+/* 
+  Entfernt den Standard-Außenabstand der h3,
+  damit die Flex-Ausrichtung sauber funktioniert.
+*/
+.summary-heading h3 {
+  margin: 0;
+}
+
+/* 
+  Gestaltung des "↑ top"-Links:
+  kleiner, unaufdringlich, aber gut klickbar.
+*/
+.summary-heading .top-link {
+  /* Etwas kleiner als der normale Fließtext */
+  font-size: 0.85rem;
+
+  /* Leicht hervorgehoben, aber nicht fett wie ein Vorschlaghammer */
+  font-weight: 500;
+
+  /* Entfernt die Standard-Unterstreichung */
+  text-decoration: none;
+
+  /* Verhindert einen Zeilenumbruch innerhalb von "↑ top" */
+  white-space: nowrap;
+}
