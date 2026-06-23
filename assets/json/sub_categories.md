@@ -1,37 +1,37 @@
 ## Botanik
-"topic": "botanik"
+- "topic": "botanik"
 
 ### Subcategories
-"subtopic": "raspberry"
-"subtopic": "ribisl"
-"subtopic": "fig"
-"subtopic": "lemon"
-"subtopic": "bonsai"
-"subtopic": "tomato"
-"subtopic": "kapu"
-"subtopic": "corn"
-"subtopic": "tobacco"
-"subtopic": "cucumber"
+- "subtopic": "raspberry"
+- "subtopic": "ribisl"
+- "subtopic": "fig"
+- "subtopic": "lemon"
+- "subtopic": "bonsai"
+- "subtopic": "tomato"
+- "subtopic": "kapu"
+- "subtopic": "corn"
+- "subtopic": "tobacco"
+- "subtopic": "cucumber"
 
 ## Making
-"topic": "making"
+- "topic": "making"
 
 ### Subcategories
-"subtopic": "3dprint"
-"subtopic": "weben"
+- "subtopic": "3dprint"
+- "subtopic": "weben"
 
 
 ## Code
-"topic": "code" 
+- "topic": "code" 
 
 ### SubC
-"subtopic": "html"
-"subtopic": "python"
-"subtopic": "cpp"
-"subtopic": "linux"
+- "subtopic": "html"
+- "subtopic": "python"
+- "subtopic": "cpp"
+- "subtopic": "linux"
 
 ## Words
-"topic": "words"
+- "topic": "words"
 
 ### SubC
 - "subtopic": "communication"
@@ -46,35 +46,35 @@
 "topic": "electronics"
 
 ### SubC
-"subtopic": "mesh"
-"subtopic": "oled_bme"
-"subtopic": "led_matrix"
-"subtopic": "solar"
-"subtopic": "pc_build"
+- "subtopic": "mesh"
+- "subtopic": "oled_bme"
+- "subtopic": "led_matrix"
+- "subtopic": "solar"
+- "subtopic": "pc_build"
 
 ## Topic nerdism
-"topic": "nerdism" 
+- "topic": "nerdism" 
 
 ### Subtopics
-"subtopic": "gothic_mod"
-"subtopic": "lotr"
-"subtopic": "games"
+- "subtopic": "gothic_mod"
+- "subtopic": "lotr"
+- "subtopic": "games"
 
 
 ## Topic Astro
-"topic": "astro"
+- "topic": "astro"
 
 ### Suptopics
-"subtopic": "moon"
-"subtopic": "solar_system"
+- "subtopic": "moon"
+- "subtopic": "solar_system"
 
 ## Topic Outdoor
-"topic": "outdoor"
+- "topic": "outdoor"
 
 ### Subtopic
-"subtopic": "drone"
-"subtopic": "hiking"
-"subtopic": "metorology"
+- "subtopic": "drone"
+- "subtopic": "hiking"
+- "subtopic": "metorology"
 
 
 ## SRC for IMG
