@@ -60,8 +60,9 @@ auch ssh-article ist fragwürdig-->
       Geräte, auf die man sich anmelden möchte.
     </p>
   </header>
-
+  <details>
   <section>
+    
       <h2 class="card-title">Inhalte</h2>
       <ul>
         <li><a href="#ssh_1" >Grundprinzip</a></li>
@@ -559,8 +560,9 @@ chown -R user:user ~/.ssh</code></pre>
     <p>
       Danach sollte der Login vom Windows-PC oder Tablet per SSH-Key funktionieren.
     </p>
-
+  
   </section>
+  </details>
 </article>
 
 <hr class="divider">
@@ -574,6 +576,10 @@ chown -R user:user ~/.ssh</code></pre>
     automatisch starten, sobald der Pi hochfährt. Genau dafür verwendet man unter Raspberry Pi OS
     in der Regel <strong>systemd-Services</strong>.
   </p>
+
+  <details>
+
+  
 
   <p>
     Ein Service ist ein Hintergrunddienst: ein Programm, das vom Betriebssystem gestartet,
@@ -1161,6 +1167,7 @@ WantedBy=multi-user.target</code></pre>
     <strong>Start</strong> startet jetzt. <strong>Enable</strong> startet künftig beim Booten.
     <strong>Status</strong> sagt, ob es lebt. <strong>Journalctl</strong> sagt, warum es gestorben ist.
   </p>
+  </details>
 </section>
 
 
