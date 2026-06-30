@@ -1625,3 +1625,39 @@ section.card#table h4 {
   /* Verhindert einen Zeilenumbruch innerhalb von "↑ top" */
   white-space: nowrap;
 }
+
+
+
+/* 
+  Spezielle Spaltenbreiten nur für die Beaufort-Tabelle.
+  Die allgemeine .weather-table bleibt davon unberührt.
+*/
+.beaufort-table {
+  width: 100%;
+  table-layout: fixed;
+}
+
+/* 1. Spalte: Bft-Zahl, sehr schmal */
+.beaufort-table .col-bft {
+  width: 7%;
+}
+
+/* 2. Spalte: Bezeichnung */
+.beaufort-table .col-name {
+  width: 17%;
+}
+
+/* 3. Spalte: Windwerte — etwas breiter */
+.beaufort-table .col-wind {
+  width: 24%;
+}
+
+/* 4. Spalte: See / Wellenhöhe — etwas breiter */
+.beaufort-table .col-see {
+  width: 22%;
+}
+
+/* 5. Spalte: Beschreibung — dafür etwas schmaler */
+.beaufort-table .col-signs {
+  width: 30%;
+}
