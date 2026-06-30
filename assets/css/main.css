@@ -1668,3 +1668,71 @@ section.card#table h4 {
   text-align: center;
   vertical-align: middle;
 }
+
+
+
+/* =========================================================
+   Medienbilder ohne Beschnitt
+   ---------------------------------------------------------
+   Verwendung:
+   <div class="media-row media-row--no-crop">
+     ...
+   </div>
+
+   Ziel:
+   - Bild nutzt die volle verfügbare Breite
+   - Höhe passt sich automatisch proportional an
+   - kein Abschneiden oben/unten
+   - überschreibt die Standard-Regeln von .media-row img
+     und .media-row--compact img
+   ========================================================= */
+
+/* 
+  Spezialfall für Bildreihen, deren Bilder NICHT beschnitten werden sollen.
+  Die Klasse kommt zusätzlich auf die media-row.
+*/
+.media-row.media-row--no-crop {
+  /* Bilder sollen sich an ihrer natürlichen Höhe orientieren */
+  align-items: start;
+}
+
+/* 
+  Der Link um das Bild bleibt blockartig und vollbreit klickbar.
+*/
+.media-row.media-row--no-crop .media > a {
+  display: block;
+  width: 100%;
+  text-decoration: none;
+}
+
+/* 
+  Das eigentliche Bild:
+  - width: 100% = volle verfügbare Breite
+  - height: auto = Höhe proportional zur Bildbreite
+  - object-fit: contain = kein Beschnitt
+  - max-height: none = keine künstliche Höhenbegrenzung
+*/
+.media-row.media-row--no-crop img {
+  width: 100%;
+  max-width: 100%;
+
+  height: auto;
+  max-height: none;
+
+  object-fit: contain;
+  object-position: center;
+
+  display: block;
+  border-radius: calc(var(--radius) - 4px);
+}
+
+/* 
+  Deaktiviert den leichten Hover-Zoom für No-Crop-Bilder.
+  Sonst kann das Bild optisch minimal über seine Fläche hinauswachsen.
+*/
+.media-row.media-row--no-crop .media > a:hover img,
+.media-row.media-row--no-crop .media > a:focus-visible img {
+  transform: none;
+  opacity: 0.92;
+  cursor: zoom-in;
+}
