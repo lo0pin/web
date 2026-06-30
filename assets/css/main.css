@@ -1661,3 +1661,10 @@ section.card#table h4 {
 .beaufort-table .col-signs {
   width: 30%;
 }
+
+/* Text horizontal und vertikal zentrieren */
+.beaufort-table th,
+.beaufort-table td {
+  text-align: center;
+  vertical-align: middle;
+}
