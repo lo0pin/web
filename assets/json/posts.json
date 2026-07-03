@@ -2286,14 +2286,38 @@
       "content_en": "~A date tells when something happened. A category tells where it belongs.~\n\nI have updated the news rendering system so that each post now shows not only its date, but also its **category** and, where available, its **subcategory**.\n\nWhat used to be a simple meta line like this:\n\n`2026-05-24`\n\ncan now become something more useful:\n\n`2026-05-24 · Code · HTML`\n\nThe important part is not just that the labels are visible.\n\nThey are now **clickable**.\n\n## What changed\n\nThe news system still reads its content from `posts.json`.\n\nThe JSON structure remains clean:\n\n- `topic` defines the main section\n- `subtopic` defines the more precise area\n- `date` still anchors the post in time\n\nBut `news.js` now interprets those values more intelligently. It maps technical identifiers such as `code`, `botanik`, `astro`, or `3dprint` to readable labels and corresponding HTML pages.\n\nThat means a post about 3D printing can lead directly to the 3D printing page. A post about Meshtastic can lead to Electronics or Mesh. A plant update can point back into Botanics.\n\nSmall metadata becomes real navigation.\n\n## Why this matters\n\nThis website is not meant to be just a chronological blog feed.\n\nIt is a growing documentation platform.\n\nThat means chronology is useful, but not sufficient. A post belongs to a date, yes — but also to a field, a project, a branch of thought.\n\nThe new meta line makes this visible.\n\nIt lets posts sit in the feed while still pointing back to their proper home.\n\n~A timeline shows sequence. Taxonomy shows structure.~\n\n## A deliberately simple solution\n\nThe change stays lightweight:\n\n- no framework\n- no build step\n- no external dependency\n- no change to the JSON schema\n\nInstead, the path logic lives centrally in `news.js`. That keeps the content files clean and prevents every post from carrying around its own navigation baggage.\n\nIf a topic or subtopic has a mapped page, it becomes a link.\nIf not, it is simply displayed as text.\n\nNo drama. No collapsing machinery. No tiny JavaScript bonfire in the corner.\n\n## The result\n\nThe news feed now feels less isolated.\n\nEach post becomes part of a larger system:\n\n- date for time\n- category for place\n- subcategory for precision\n\nIt is a small interface improvement, but a meaningful structural one.\n\nThe site now does a slightly better job at what it is supposed to become:\n\nnot just a collection of entries,\nbut a connected map of work, experiments, notes, and projects.",
       "content_de": "~Ein Datum sagt, wann etwas passiert ist. Eine Kategorie sagt, wohin es gehört.~\n\nIch habe das News-Rendering erweitert: Jeder Beitrag zeigt nun nicht mehr nur das Datum, sondern auch die **Kategorie** und — sofern vorhanden — die **Subkategorie**.\n\nAus einer einfachen Meta-Zeile wie:\n\n`2026-05-24`\n\nkann nun also werden:\n\n`2026-05-24 · Code · HTML`\n\nDer eigentliche Punkt ist aber nicht bloß, dass diese Informationen sichtbar sind.\n\nSie sind nun **klickbar**.\n\n## Was sich geändert hat\n\nDas News-System liest seine Inhalte weiterhin aus `posts.json`.\n\nDie JSON-Struktur bleibt sauber:\n\n- `topic` definiert den Hauptbereich\n- `subtopic` definiert den genaueren Bereich\n- `date` verankert den Beitrag zeitlich\n\nNeu ist, dass `news.js` diese Werte intelligenter auswertet. Technische Bezeichner wie `code`, `botanik`, `astro` oder `3dprint` werden in lesbare Labels und passende HTML-Pfade übersetzt.\n\nEin Beitrag über 3D-Druck kann dadurch direkt zur 3D-Druck-Seite führen. Ein Meshtastic-Beitrag verweist auf Electronics oder Mesh. Ein Pflanzenupdate landet wieder sauber in Botanics.\n\nAus bloßer Metainformation wird echte Navigation.\n\n## Warum das wichtig ist\n\nDiese Webseite soll kein klassischer chronologischer Blog sein.\n\nSie ist eher eine wachsende Dokumentations- und Projektplattform.\n\nChronologie ist dafür nützlich, aber nicht ausreichend. Ein Beitrag gehört zwar zu einem Datum — aber ebenso zu einem Themenfeld, einem Projekt, einem Denkzweig.\n\nDie neue Meta-Zeile macht genau das sichtbar.\n\nBeiträge bleiben im Newsfeed, zeigen aber zugleich zurück an ihren eigentlichen Ort im System.\n\n~Eine Timeline zeigt Reihenfolge. Taxonomie zeigt Struktur.~\n\n## Bewusst schlicht gelöst\n\nDie Änderung bleibt leichtgewichtig:\n\n- kein Framework\n- kein Build-Schritt\n- keine externe Abhängigkeit\n- keine Änderung am JSON-Schema\n\nDie Pfadlogik liegt stattdessen zentral in `news.js`. So bleiben die Content-Daten sauber, und nicht jeder einzelne Beitrag muss seine eigene Navigationslogik mitschleppen wie einen zu schweren Rucksack.\n\nWenn für Topic oder Subtopic ein Ziel hinterlegt ist, wird daraus ein Link.\nWenn nicht, wird der Eintrag schlicht als Text angezeigt.\n\nKein Drama. Kein Maschinenraumbrand. Kein JavaScript-Kasperltheater.\n\n## Das Ergebnis\n\nDer Newsfeed wirkt nun weniger isoliert.\n\nJeder Beitrag wird klarer Teil eines größeren Systems:\n\n- Datum für die Zeit\n- Kategorie für den Ort\n- Subkategorie für die Genauigkeit\n\nDas ist nur eine kleine Interface-Verbesserung, aber eine sinnvolle strukturelle.\n\nDie Seite tut damit ein bisschen besser, was sie werden soll:\n\nkeine bloße Sammlung einzelner Einträge,\nsondern eine verbundene Karte aus Arbeit, Experimenten, Notizen und Projekten.",
       "images": [
-            {
-              "src": "/web/assets/img/news/js_category_clickable_01.jpeg"
-            },
-            {
-              "src": "/web/assets/img/news/js_category_clickable_02.jpeg"
-    
-            }
-       ]
+        {
+          "src": "/web/assets/img/news/js_category_clickable_01.jpeg"
+        },
+        {
+          "src": "/web/assets/img/news/js_category_clickable_02.jpeg"
+        }
+      ]
+    },
+    {
+      "id": "2026-07-03_sailing_places_complete_22_30",
+      "topic": "sailing",
+      "subtopic": "",
+      "date": "2026-07-03",
+      "title": "Places: first section complete",
+      "format": "markdown",
+      "teaser": "The first chapter of the sailing logbook is now complete. What started as scattered notes has taken shape as a small, coherent atlas of places — ready to be used, not just remembered.",
+      "content_en": "The **Places** section has reached a quiet milestone: the first iteration is complete.\n\nWhat began as scattered notes, photos and half-remembered anchorages has now settled into something more deliberate — a small, structured atlas of places I’ve actually sailed to.\n\nNot exhaustive.\nNot polished to perfection.\n\nBut coherent.\nUsable.\n\nEach entry now carries just enough context to be meaningful again when revisiting it — and just enough restraint to leave space for the next journey.\n\nThe section will continue to grow, of course.\n\nBut for now, it feels… whole.\n\n~A map, not of the sea — but of where I’ve been within it.~",
+      "content_de": "Die **Places-Sektion** hat einen ersten, stillen Meilenstein erreicht: Die erste Iteration ist abgeschlossen.\n\nAus verstreuten Notizen, Bildern und fragmentarischen Erinnerungen ist ein kleines, strukturiertes Gesamtbild entstanden — eine persönliche Karte von Orten, die ich tatsächlich angesteuert habe.\n\nNicht vollständig.\nNicht bis ins Letzte ausgearbeitet.\n\nAber stimmig.\nNutzbar.\n\nJeder Eintrag trägt nun genug Kontext in sich, um beim Wiedersehen wieder Bedeutung zu entfalten — und gleichzeitig genug Zurückhaltung, um Raum für kommende Reisen zu lassen.\n\nNatürlich wird die Sammlung weiter wachsen.\n\nAber im Moment wirkt sie… geschlossen.\n\n~Keine Karte des Meeres — sondern eine Karte meiner Wege darin.~",
+      "images": [
+        {
+          "src": "/web/assets/img/sail_routes_places/anchorages/blaca04.jpeg",
+        },
+        {
+          "src": "/web/assets/img/sail_routes_places/anchorages/lukapodsvetikriz_south_04.jpeg",
+        },
+        {
+          "src": "/web/assets/img/sail_routes_places/anchorages/lukapodsvetikriz_south_04.jpeg",
+        },
+        {
+          "src": "/web/assets/img/sail_routes_places/harbours/martinscica_01.jpeg",
+        }
+      ]
     }
   ]
 }
