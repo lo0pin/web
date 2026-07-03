@@ -2297,7 +2297,6 @@
     {
       "id": "2026-07-03_sailing_places_complete_22_30",
       "topic": "sailing",
-      "subtopic": "",
       "date": "2026-07-03",
       "title": "Places: first section complete",
       "format": "markdown",
@@ -2306,13 +2305,13 @@
       "content_de": "Die **Places-Sektion** hat einen ersten, stillen Meilenstein erreicht: Die erste Iteration ist abgeschlossen.\n\nAus verstreuten Notizen, Bildern und fragmentarischen Erinnerungen ist ein kleines, strukturiertes Gesamtbild entstanden — eine persönliche Karte von Orten, die ich tatsächlich angesteuert habe.\n\nNicht vollständig.\nNicht bis ins Letzte ausgearbeitet.\n\nAber stimmig.\nNutzbar.\n\nJeder Eintrag trägt nun genug Kontext in sich, um beim Wiedersehen wieder Bedeutung zu entfalten — und gleichzeitig genug Zurückhaltung, um Raum für kommende Reisen zu lassen.\n\nNatürlich wird die Sammlung weiter wachsen.\n\nAber im Moment wirkt sie… geschlossen.\n\n~Keine Karte des Meeres — sondern eine Karte meiner Wege darin.~",
       "images": [
         {
-          "src": "/web/assets/img/sail_routes_places/anchorages/blaca04.jpeg",
+          "src": "/web/assets/img/sail_routes_places/anchorages/blaca04.jpeg"
         },
         {
-          "src": "/web/assets/img/sail_routes_places/anchorages/lukapodsvetikriz_south_04.jpeg",
+          "src": "/web/assets/img/sail_routes_places/anchorages/lukapodsvetikriz_south_04.jpeg"
         },
         {
-          "src": "/web/assets/img/sail_routes_places/anchorages/lukapodsvetikriz_south_04.jpeg",
+          "src": "/web/assets/img/sail_routes_places/anchorages/lukapodsvetikriz_south_04.jpeg"
         },
         {
           "src": "/web/assets/img/sail_routes_places/harbours/martinscica_01.jpeg"
