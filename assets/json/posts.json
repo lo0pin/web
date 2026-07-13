@@ -2386,6 +2386,29 @@
           "caption": "Bitwise operations allow precise control over individual pins without affecting others."
         }
       ]
+    },
+    {
+      "id": "2026-07-13_electronics_microcontroller_02_first_light",
+      "topic": "electronics",
+      "subtopic": "microcontroller",
+      "date": "2026-07-13",
+      "title": "First Light — LEDs, Timing, and a Predictable Loop",
+      "format": "markdown",
+      "teaser": "Three LEDs, a breadboard, and a byte written into a register. This post documents the first working setup — including wiring, resistor calculation, and the initial delay-based control loop.",
+      "content_en": "~The first time hardware responds exactly as intended, something shifts.~\n\nAfter understanding how registers control pins, the next step was simple in theory: **make something visible happen**.\n\nThe setup consisted of:\n\n- Arduino Nano\n- 3 LEDs\n- series resistors\n- breadboard wiring\n\n---\n\n## Hardware Setup\n\nEach LED was connected to a digital output pin via a current-limiting resistor.\n\nTypical LED parameters:\n\n- forward voltage ~2 V\n- desired current ~10 mA\n\nResistor calculation:\n\n```\nR = (U_B - U_D) / I_F\n  = (5 V - 2 V) / 0.01 A\n  ≈ 300 Ω\n```\n\nThis ensures safe operation within the LED’s limits.\n\n---\n\n## Register Configuration\n\nInstead of using Arduino abstractions, the pins were configured directly:\n\n```cpp\nDDRD = 0b01110000;\n```\n\nThis sets three pins of Port D as outputs.\n\nThe system is now ready to drive LEDs.\n\n---\n\n## First Control Loop\n\nThe initial implementation follows a strictly sequential pattern:\n\n```cpp\nPORTD |= (1 << PORTD5);\ndelay(1000);\nPORTD &= ~(1 << PORTD5);\n\nPORTD |= (1 << PORTD6);\ndelay(1000);\nPORTD &= ~(1 << PORTD6);\n\nPORTD |= (1 << PORTD7);\ndelay(1000);\nPORTD &= ~(1 << PORTD7);\n```\n\nEach LED is activated one after another.\n\nThe result is a simple running light.\n\n---\n\n## Observations\n\n- the behavior is fully deterministic\n- timing is easy to understand\n- code execution is strictly linear\n\nEvery action blocks the next.\n\nNothing happens in parallel.\n\nThis is both a strength and a limitation.\n\n---\n\n## What This Teaches\n\nAt this stage, the system behaves like a **mechanical sequence**:\n\n1. set output\n2. wait\n3. clear output\n4. move to next step\n\nThere is no concept of reaction.\n\nNo external input.\n\nNo concurrency.\n\nOnly timing and order.\n\n---\n\n## Limitations of `delay()`\n\nThe use of `delay()` pauses the entire program.\n\nDuring this time:\n\n- no inputs are read\n- no conditions are checked\n- no alternative paths exist\n\nThe system is effectively **blind while waiting**.\n\nThis becomes relevant as soon as interaction is introduced.\n\n---\n\n## Result\n\nThe setup achieves its goal:\n\n- correct wiring\n- stable output\n- predictable timing\n\nIt is the first complete loop from configuration to visible behavior.\n\n---\n\n~A system that can only act is not yet a system that can react.~\n\nThe next step will introduce variability — and with it, the first break from strict sequencing.",
+      "content_de": "~Der Moment, in dem Hardware exakt das tut, was man beabsichtigt, verändert die Perspektive.~\n\nNach dem Verständnis der Registersteuerung war der nächste Schritt naheliegend: **sichtbares Verhalten erzeugen**.\n\nDer Aufbau bestand aus:\n\n- Arduino Nano\n- 3 LEDs\n- Vorwiderstände\n- Breadboard\n\n---\n\n## Hardware-Aufbau\n\nJede LED wurde über einen Vorwiderstand an einen digitalen Ausgang angeschlossen.\n\nTypische LED-Werte:\n\n- Durchlassspannung ~2 V\n- Strom ~10 mA\n\nBerechnung:\n\n```\nR = (U_B - U_D) / I_F\n  = (5 V - 2 V) / 0,01 A\n  ≈ 300 Ω\n```\n\nDamit wird ein sicherer Betrieb gewährleistet.\n\n---\n\n## Register-Konfiguration\n\nDie Pins wurden direkt über Register gesetzt:\n\n```cpp\nDDRD = 0b01110000;\n```\n\nDrei Pins von Port D sind damit Ausgänge.\n\n---\n\n## Erste Ablaufsteuerung\n\nDie Steuerung erfolgt streng sequentiell:\n\n```cpp\nPORTD |= (1 << PORTD5);\ndelay(1000);\nPORTD &= ~(1 << PORTD5);\n\nPORTD |= (1 << PORTD6);\ndelay(1000);\nPORTD &= ~(1 << PORTD6);\n\nPORTD |= (1 << PORTD7);\ndelay(1000);\nPORTD &= ~(1 << PORTD7);\n```\n\nDas Ergebnis ist ein einfaches Lauflicht.\n\n---\n\n## Beobachtungen\n\n- deterministisches Verhalten\n- klar nachvollziehbares Timing\n- strikt lineare Ausführung\n\nJeder Schritt blockiert den nächsten.\n\nEs passiert nichts gleichzeitig.\n\n---\n\n## Erkenntnis\n\nDas System arbeitet wie eine **starre Abfolge**:\n\n1. Ausgang setzen\n2. warten\n3. Ausgang löschen\n4. nächster Schritt\n\nKeine Reaktion.\nKeine Parallelität.\nNur Reihenfolge und Zeit.\n\n---\n\n## Problem von `delay()`\n\nWährend `delay()` läuft:\n\n- werden keine Eingaben verarbeitet\n- werden keine Zustände überprüft\n- existiert keine Alternative\n\nDas System ist in dieser Zeit praktisch **blind**.\n\n---\n\n## Ergebnis\n\nDer Aufbau funktioniert zuverlässig:\n\n- korrekte Verdrahtung\n- stabile Ausgabe\n- reproduzierbares Verhalten\n\nEs ist der erste vollständige Durchlauf von Konfiguration zu sichtbarem Ergebnis.\n\n---\n\n~Ein System, das nur handeln kann, kann noch nicht reagieren.~\n\nDer nächste Schritt bringt Variation — und damit die erste Aufweichung dieser starren Struktur.",
+      "images": [
+        {
+          "src": "/web/assets/img/news/arduino_basic_21.jpg",
+          "alt": "breadboard setup with Arduino Nano and three LEDs connected via resistors",
+          "caption": "Basic setup: Arduino Nano driving three LEDs through current-limiting resistors."
+        },
+        {
+          "src": "/web/assets/img/news/arduino_basic_22.jpg",
+          "alt": "code snippet showing DDRD configuration and PORTD bitwise operations",
+          "caption": "Direct register control replaces high-level Arduino functions."
+        }
+      ]
     }
   ]
 }
