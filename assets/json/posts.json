@@ -2367,7 +2367,7 @@
     {
       "id": "2026-07-09_electronics_microcontroller_01_registers",
       "topic": "electronics",
-      "subtopic": "microcontroller",
+      "subtopic": "arduino",
       "date": "2026-07-09",
       "title": "Talking to Hardware — Registers, Bits, and Control",
       "format": "markdown",
@@ -2390,7 +2390,7 @@
     {
       "id": "2026-07-13_electronics_microcontroller_02_first_light",
       "topic": "electronics",
-      "subtopic": "microcontroller",
+      "subtopic": "arduino",
       "date": "2026-07-13",
       "title": "First Light — LEDs, Timing, and a Predictable Loop",
       "format": "markdown",
