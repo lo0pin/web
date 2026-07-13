@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Arduino</title>
+
+  <!-- same global stylesheet -->
+  <link rel="stylesheet" href="../assets/css/main.css" />
+</head>
+
+<body class="has-bg bg-electronics" id="top">
+  <header class="site-header" id="top">
+    <div class="header-inner">
+      <h1 class="site-title">Arduino</h1>
+
+      <nav class="top-nav" aria-label="Top navigation">
+        <a href="../index.html">⌂ home</a>
+        <a href="home.html">← back</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="content">
+
+    <hr class="divider" />
+
+    <!-- Table-of-contents style card 
+    <article class="card">
+      <h2 class="card-title">On this page</h2>
+      <ul class="toc">
+        <li><a href="#oled_bme_news">Latest News</a></li>
+        <li><a href="#what">What it is & Why I did it</a></li>
+      </ul>
+    </article>
+    
+    <hr class="divider" />
+    -->
+    
+    <section id="oled_bme_news" class="card">
+      <h2 class="card-title">Latest News</h2>
+    </section> 
+
+    <div data-news-topic="electronics" data-news-subtopic="arduino" data-news-mode="all"></div>
+    <script type="module" src="../assets/js/news.js"></script>
+    
+    <hr class="divider" />
+
+    <!-- Hardware -->
+    <article class="card" id="what">
+      <h2 class="card-title">What it is & Why I did it</h2>
+      <p>
+        This project explores a different way of visualizing environmental data.
+        Instead of a structured OLED interface, the measurements appear on a
+        <strong>32×8 Arduino</strong> as scrolling text and a small barometric trend graph.
+      </p>
+
+      <p>
+        At the core sits an <strong>Arduino Nano</strong> reading atmospheric data from a
+        <strong>BME280 sensor</strong> while a <strong>DS3231 real-time clock</strong>
+        provides precise timekeeping.
+      </p>
+
+      <p>
+        The display consists of four cascaded <strong>MAX7219 8×8 LED modules</strong>,
+        forming a narrow but expressive 32-pixel wide window where values,
+        timestamps and weather information continuously scroll by.
+      </p>
+
+      <p>
+        Unlike the static layout of the OLED version, the Arduino turns
+        measurements into motion. The device does not present data as fields —
+        it performs them as a continuous stream of light.
+      </p>
+
+
+      <p>
+        Compared to the OLED version, the Arduino display follows a very
+        different philosophy.
+      </p>
+
+      <p>
+        The OLED presents information in a structured layout: numbers,
+        labels and clear sections.
+      </p>
+
+      <p>
+        The Arduino does the opposite.
+        It compresses everything into a narrow 32-pixel strip and lets the
+        information scroll through it — turning temperature, pressure,
+        humidity and time into a moving sequence.
+      </p>
+
+      <p>
+        It is less structured, but far more dynamic.
+      </p>
+
+      <strong>Hardware:</strong>
+      <ul>
+        <li><strong>Arduino Nano</strong> – central microcontroller running the display logic</li>
+        <li><strong>BME280 environmental sensor</strong> – temperature, humidity and air pressure</li>
+        <li><strong>DS3231 RTC module</strong> – precise timekeeping and hourly data reference</li>
+        <li><strong>32×8 Arduino</strong> – four cascaded MAX7219 8×8 modules</li>
+        <li><strong>SPI interface</strong> – communication between Nano and LED driver modules</li>
+      </ul>
+    </article>
+
+
+
+
+
+
+    <hr class="divider" />
+    <p class="hint"><a href="#top">↑ top</a>&emsp;<a href="../index.html">⌂ home</a>&emsp;<a href="home.html">← back</a></p>
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2026 Julian</p>
+  </footer>
+
+  <script src="../assets/js/main.js" defer></script>
+</body>
+</html>
