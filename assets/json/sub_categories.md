@@ -51,6 +51,7 @@
 - "subtopic": "led_matrix"
 - "subtopic": "solar"
 - "subtopic": "pc_build"
+- "subtopic": "arduino"
 
 ## Topic nerdism
 - "topic": "nerdism" 
