@@ -2409,6 +2409,29 @@
           "caption": "Direct register control replaces high-level Arduino functions."
         }
       ]
+    },
+    {
+      "id": "2026-07-14_making_3d_printing_01",
+      "topic": "making",
+      "subtopic": "3dprint",
+      "date": "2026-07-14",
+      "title": "A Vacuum Cleaner, Not Yet Chosen",
+      "format": "markdown",
+      "teaser": "Sometimes the gift is not the object itself, but the thought process behind it. This time: a vacuum cleaner that doesn’t exist yet — and a 3D-printed promise of one.",
+      "content_en": "~Some gifts arrive fully formed. Others are still in negotiation with reality.~\n\nMy mom wants a cordless vacuum cleaner.\n\nOne of those sleek, slightly overengineered machines that turn cleaning into something almost… satisfying.\n\nThe problem is not *whether* she should get one.\nThe problem is *which one*.\n\nAnd that question — as trivial as it sounds — opens a small abyss of comparisons, reviews, edge cases, and personal preferences.\n\nSo instead of pretending certainty where there is none, I chose a different approach:\n\nI gave her **freedom of choice**.\n\nTranslated into reality, that means:\n\n- money, instead of a fixed product\n- but wrapped in something that hints at what it wants to become\n\n## A placeholder, made physical\n\nRather than handing over an envelope (uninspired, almost offensive in its lack of imagination), I designed and printed a small **3D model of a cordless vacuum cleaner**.\n\nMinimal.\nRecognizable.\nA little tongue-in-cheek.\n\nThe actual gift — the money — is hidden inside.\n\nSo what she receives is not just currency.\nIt is a **promise shaped like an object**.\n\n## Why this felt right\n\nThere is something oddly fitting about this solution.\n\nA vacuum cleaner is, in essence, a tool that turns chaos into order.\n\nThis gift does something similar, just one step earlier:\n\n- it acknowledges uncertainty\n- it avoids a wrong decision\n- and it still tells a clear story\n\nIt says:\n\n*I know what you want.*  \n*I respect that you might know better which one.*  \n*And I cared enough to not just transfer money, but meaning.*\n\n## Making as translation\n\nThis is one of those small moments where making becomes a kind of language.\n\nThe 3D print is not the gift.\n\nIt is the sentence wrapped around it.\n\nA quiet, slightly nerdy way of saying:\n\n~This will become something useful. You get to decide what.~\n",
+      "content_de": "~Manche Geschenke sind fertig. Andere sind noch im Werden.~\n\nMeine Mama wünscht sich einen Akku-Staubsauger.\n\nSo ein modernes Gerät, irgendwo zwischen Haushaltswerkzeug und Designobjekt — effizient, leise, ein bisschen zu klug für das, was es tut.\n\nDas Problem ist nicht das *Ob*.\nSondern das *Welcher*.\n\nUnd genau diese Frage ist tückisch:\n\nZu viele Modelle.\nZu viele Meinungen.\nZu viele Details, die am Ende doch zählen.\n\nAlso habe ich mich entschieden, keine falsche Sicherheit vorzutäuschen.\n\nStattdessen bekommt sie:\n\n- **das Budget** für genau den Staubsauger, den sie wirklich will\n- aber verpackt in etwas, das mehr ist als ein Kuvert\n\n## Ein Platzhalter mit Form\n\nIch habe einen kleinen **Akku-Staubsauger als 3D-Modell gedruckt**.\n\nReduziert.\nErkennbar.\nMit einem leichten Augenzwinkern.\n\nIm Inneren: das eigentliche Geschenk.\n\nDamit wird aus Geld etwas Greifbares.\n\nNicht einfach ein Betrag — sondern ein **Versprechen in Objektform**.\n\n## Warum das besser ist\n\nEinfach Geld zu schenken ist funktional.\n\nAber oft auch ein wenig seelenlos.\n\nDieses kleine Objekt verändert die Geste:\n\n- es zeigt, dass ich mir Gedanken gemacht habe\n- es lässt die Entscheidung bewusst offen\n- und es gibt dem Ganzen eine Geschichte\n\nEs sagt:\n\n*Ich weiß, was du brauchst.*  \n*Ich traue dir zu, die beste Wahl zu treffen.*  \n*Und ich habe mir Mühe gegeben, das nicht lieblos zu lösen.*\n\n## Making als Sprache\n\nSolche Momente mag ich besonders.\n\nWeil sie zeigen, dass „machen“ mehr sein kann als Funktion.\n\nDer 3D-Druck ist hier nicht das Geschenk.\n\nEr ist die Formulierung.\n\nEine kleine, stille Übersetzung von Gedanken in etwas, das man in die Hand nehmen kann.\n\n~Noch kein Staubsauger. Aber schon die Idee davon.~\n",
+      "images": [
+        {
+          "src": "/web/assets/img/news/vacuum_print01.jpeg",
+          "alt": "A compact CAD assembly — base plate and angled holder designed as a single, stable structure",
+          "caption": "A compact CAD assembly — base plate and angled holder designed as a single, stable structure."
+        },
+        {
+          "src": "/web/assets/img/news/vacuum_print02.jpeg",
+          "alt": "Print layout prepared — components separated, oriented, and ready for fabrication",
+          "caption": "Print layout prepared — components separated, oriented, and ready for fabrication."
+        }
+      ]
     }
   ]
 }
