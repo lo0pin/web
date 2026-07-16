@@ -335,15 +335,20 @@ details.news-details[open] > summary{color:var(--text)}
 
 /* =========================================================
    Astronomy Image Style
-   Nur für Sternkarten / Astro-Inhalte
+   Sternkarten ohne künstliche Seitenflächen
    ========================================================= */
 
-.astronomy img {
-  width: 100%;
-  height: 380px;
-  object-fit: contain;   /* vollständige Sternkarte sichtbar */
-  background: #000;      /* füllt leere Fläche sauber */
+.card.astronomy .media img {
   display: block;
+
+  width: auto;
+  max-width: 100%;
+
+  height: auto;
+  max-height: 380px;
+
+  margin: 0 auto;
+  background: transparent;
 }
 
 /* =========================================================
