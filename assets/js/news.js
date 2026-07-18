@@ -82,6 +82,7 @@
     astro: {
       moon: "Moon",
       solar_system: "Solar System",
+      significant_stars: "Significant Stars",
     },
     outdoor: {
       drone: "Drone",
@@ -149,6 +150,7 @@
     astro: {
       moon: "astronomy/moon.html",
       solar_system: "astronomy/solar_system.html",
+      significant_stars: "astronomy/significant.html",
     },
     outdoor: {
       drone: "outdoor/drone.html",

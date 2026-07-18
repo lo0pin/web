@@ -65,9 +65,11 @@
 ## Topic Astro
 - "topic": "astro"
 
+
 ### Suptopics
 - "subtopic": "moon"
 - "subtopic": "solar_system"
+- "subtopic": "significant_stars"
 
 ## Topic Outdoor
 - "topic": "outdoor"
