@@ -52,6 +52,8 @@
 - "subtopic": "solar"
 - "subtopic": "pc_build"
 - "subtopic": "arduino"
+- "subtopic": "nas"
+
 
 ## Topic nerdism
 - "topic": "nerdism" 
