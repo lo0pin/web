@@ -787,6 +787,180 @@
         </article>
       </div>
 
+      <hr class="divider">
+
+      <h3 id="html-escaping">Escaping HTML &amp; displaying code</h3>
+
+      <div class="cheat-grid">
+        <article class="cheat-item">
+          <h4>Why HTML must be escaped</h4>
+          <p>
+            The browser normally interprets angle brackets as HTML elements. To display HTML code as text,
+            replace reserved characters with their corresponding HTML entities.
+          </p>
+
+          <p><strong>HTML written normally:</strong></p>
+
+          <pre class="code code-html"><code><span class="tag">&lt;p&gt;</span>Hello World<span class="tag">&lt;/p&gt;</span></code></pre>
+
+          <p>
+            The browser interprets this as a paragraph. To display the tag itself, write:
+          </p>
+
+          <pre class="code code-html"><code>&amp;lt;p&amp;gt;Hello World&amp;lt;/p&amp;gt;</code></pre>
+
+          <p class="hint">
+            The browser then displays <code>&lt;p&gt;Hello World&lt;/p&gt;</code> instead of creating a paragraph.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Common HTML entities</h4>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Character</th>
+                <th>HTML entity</th>
+                <th>Meaning</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td><code>&lt;</code></td>
+                <td><code>&amp;lt;</code></td>
+                <td>Less-than sign</td>
+              </tr>
+
+              <tr>
+                <td><code>&gt;</code></td>
+                <td><code>&amp;gt;</code></td>
+                <td>Greater-than sign</td>
+              </tr>
+
+              <tr>
+                <td><code>&amp;</code></td>
+                <td><code>&amp;amp;</code></td>
+                <td>Ampersand</td>
+              </tr>
+
+              <tr>
+                <td><code>&quot;</code></td>
+                <td><code>&amp;quot;</code></td>
+                <td>Double quotation mark</td>
+              </tr>
+
+              <tr>
+                <td><code>&#39;</code></td>
+                <td><code>&amp;#39;</code></td>
+                <td>Single quotation mark</td>
+              </tr>
+
+              <tr>
+                <td>Non-breaking space</td>
+                <td><code>&amp;nbsp;</code></td>
+                <td>Space without a possible line break</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p class="hint">
+            Escape the ampersand first when converting text automatically. Otherwise newly created entities
+            may be escaped a second time.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Display a code block: <code>pre</code> and <code>code</code></h4>
+
+          <p>
+            <code>&lt;code&gt;</code> marks content as source code.
+            <code>&lt;pre&gt;</code> preserves spaces, indentation and line breaks.
+          </p>
+
+          <pre class="code code-html"><code><span class="tag">&lt;pre&gt;&lt;code&gt;</span>
+      &amp;lt;section class=&amp;quot;card&amp;quot;&amp;gt;
+        &amp;lt;h2&amp;gt;Heading&amp;lt;/h2&amp;gt;
+        &amp;lt;p&amp;gt;Some text.&amp;lt;/p&amp;gt;
+      &amp;lt;/section&amp;gt;
+      <span class="tag">&lt;/code&gt;&lt;/pre&gt;</span></code></pre>
+
+          <p class="hint">
+            Use <code>&lt;pre&gt;&lt;code&gt;</code> for complete code blocks and
+            <code>&lt;code&gt;</code> alone for short fragments inside normal text.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Inline code</h4>
+
+          <p>
+            Use a standalone <code>&lt;code&gt;</code> element when mentioning a tag, attribute,
+            filename or command inside a sentence.
+          </p>
+
+          <pre class="code code-html"><code><span class="tag">&lt;p&gt;</span>
+        Add the <span class="tag">&lt;code&gt;</span>&amp;lt;main&amp;gt;<span class="tag">&lt;/code&gt;</span> element once per page.
+      <span class="tag">&lt;/p&gt;</span></code></pre>
+
+          <p>
+            Result: Add the <code>&lt;main&gt;</code> element once per page.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>HTML escaping vs JSON escaping</h4>
+
+          <p>
+            HTML and JSON use different escaping rules. When HTML code is stored inside a JSON string,
+            both layers may matter.
+          </p>
+
+          <ul>
+            <li><strong>HTML:</strong> escape angle brackets with <code>&amp;lt;</code> and <code>&amp;gt;</code>.</li>
+            <li><strong>JSON:</strong> escape quotation marks with <code>\"</code>.</li>
+            <li><strong>JSON:</strong> represent line breaks with <code>\n</code>.</li>
+          </ul>
+
+          <pre class="code"><code>{
+        "content_de": "The attribute is class=\"card\".\nThis is a new line."
+      }</code></pre>
+
+          <p class="hint">
+            HTML entities begin with <code>&amp;</code>. JSON escape sequences begin with a backslash.
+            They solve different problems despite looking equally cryptic.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Escape dynamic text with JavaScript</h4>
+
+          <p>
+            When text comes from JSON, form input or another external source, escape it before inserting
+            it into HTML.
+          </p>
+
+          <pre class="code"><code>function escapeHtml(value) {
+        return String(value).replace(/[&amp;&lt;&gt;"']/g, character =&gt; ({
+          "&amp;": "&amp;amp;",
+          "&lt;": "&amp;lt;",
+          "&gt;": "&amp;gt;",
+          '"': "&amp;quot;",
+          "'": "&amp;#39;"
+        })[character]);
+      }</code></pre>
+
+          <p class="hint">
+            Escaping prevents text such as <code>&lt;script&gt;</code> from becoming executable HTML.
+            Never insert untrusted text directly with <code>innerHTML</code>.
+          </p>
+        </article>
+      </div>
+
+      <p class="hint"><a href="#top">↑ top</a></p>
+
+
       <hr class="divider" />
 
       <h3 id="html-rules">Practical rules</h3>
