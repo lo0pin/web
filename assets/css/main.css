@@ -1762,16 +1762,16 @@ section.card#table h4 {
 }
 
 
+/*
+  
+*/
 .star-data {
   text-align: left;
 }
-
 .star-data th:nth-child(1),
 .star-data td:nth-child(1) {
   width: 35%;
 }
-
-
 .star-data th:nth-child(2),
 .star-data td:nth-child(2) {
   width: 65%;
