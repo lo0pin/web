@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Meshtastic — Notes & Setup</title>
+  <title>NAS — Notes & Setup</title>
 
   <!-- same global stylesheet -->
   <link rel="stylesheet" href="../assets/css/main.css" />
@@ -13,7 +13,7 @@
 <body class="has-bg bg-electronics" id="top">
   <header class="site-header">
     <div class="header-inner">
-      <h1 class="site-title">Meshtastic</h1>
+      <h1 class="site-title">NAS</h1>
 
       <nav class="top-nav" aria-label="Top navigation">
         <a href="../index.html">⌂ home</a>
@@ -26,9 +26,7 @@
     <hr class="divider" />
 
     <section class="hero" aria-label="Essence">
-      <p class="hero-quote">
-        A tiny radio network — built for when the “normal” network isn’t there.
-      </p>
+      <p class="hero-quote">  </p>
     </section>
 
     <hr class="divider" />
@@ -37,11 +35,7 @@
     <article class="card">
       <h2 class="card-title">On this page</h2>
       <ul class="toc">
-        <li><a href="#mesh_news">Latest News</a></li>
-        <li><a href="#what">What is Meshtastic?</a></li>
-        <li><a href="#why">Why I got into it</a></li>
-        <li><a href="#hardware">Hardware</a></li>
-        <li><a href="#setup">Setup (quick)</a></li>
+        <li></li>
       </ul>
     </article>
 
@@ -57,44 +51,1205 @@
     <hr class="divider" />
 
     <!-- Intro card -->
-    <article class="card" id="what">
-      <h2 class="card-title">What is Meshtastic?</h2>
-      <p class="card-meta">Status: learning-in-public · Last updated: <time datetime="2026-01-31">Jan 31, 2026</time></p>
+    <article class="card" id="buy">
+      <h2 class="card-title">What is NAS?</h2>
 
-      <p>
-Meshtastic is an open-source project that lets small, low-power devices form a decentralized, long-range messaging network using <a href="https://en.wikipedia.org/wiki/LoRa#LoRaWAN">LoRa radio</a>.
-In plain terms: it’s a way to send text messages and small data without the internet, cellular networks, or centralized infrastructure.
-<br><br>
-<strong>How it works</strong>
-Each device (a node) has a LoRa radio and a microcontroller (often ESP32-based).
-Nodes automatically connect to nearby nodes, creating a mesh.
-Messages hop from node to node until they reach their destination.
-Your phone connects to a node via Bluetooth or USB, acting as the keyboard and screen.
-<br><br>
-<strong>What it’s used for</strong>
-<ul>
-  <li>Off-grid communication (hiking, sailing, rural areas)</li>
-  <li>Emergency and disaster scenarios</li>
-  <li>Privacy-focused messaging</li>
-  <li>Community or hobbyist mesh networks</li>
+
+
+  <header>
+    <h1>NAS kaufen: Geräte, Festplatten, Kosten, Aufwand und Lernkurve</h1>
+
+
+<p>
+  Ein NAS ist weit mehr als eine externe Festplatte mit Netzwerkanschluss. Es ist ein kleiner,
+  dauerhaft verfügbarer Dateiserver für Backups, Dokumente, Fotos, Videos, Medienbibliotheken,
+  Synchronisierung und zahlreiche weitere Dienste.
+</p>
+
+<p>
+  Dieser Leitfaden erklärt, worauf beim Kauf eines NAS zu achten ist, welche Geräteklassen sinnvoll
+  sind, wie viel Speicher benötigt wird, was RAID tatsächlich leistet und mit welchem Aufwand zu
+  rechnen ist.
+</p>
+
+
+  </header>
+
+  <nav aria-label="Inhaltsverzeichnis">
+    <h2>Inhalt</h2>
+
+
+<ul class="toc">
+  <li><a href="#nas-definition">Was ist ein NAS?</a></li>
+  <li><a href="#nas-einsatz">Wofür kann ein NAS verwendet werden?</a></li>
+  <li><a href="#nas-bays">Zwei oder vier Laufwerksschächte?</a></li>
+  <li><a href="#nas-capacity">Wie viel Speicher wird benötigt?</a></li>
+  <li><a href="#nas-hardware">Wichtige Hardwareeigenschaften</a></li>
+  <li><a href="#nas-drives">Die richtigen Festplatten</a></li>
+  <li><a href="#nas-raid">RAID, SHR und Datensicherheit</a></li>
+  <li><a href="#nas-backup">Warum RAID kein Backup ist</a></li>
+  <li><a href="#nas-brands">Hersteller und Systeme</a></li>
+  <li><a href="#nas-costs">Kosten und Preisbereiche</a></li>
+  <li><a href="#nas-accessories">Sinnvolles Zubehör</a></li>
+  <li><a href="#nas-power">Stromverbrauch und Lautstärke</a></li>
+  <li><a href="#nas-effort">Einrichtungsaufwand und Lernkurve</a></li>
+  <li><a href="#nas-security">Sicherheit und Wartung</a></li>
+  <li><a href="#nas-recommendations">Beispielkonfigurationen</a></li>
+  <li><a href="#nas-checklist">Kaufcheckliste</a></li>
 </ul>
 
-<strong>Key characteristics</strong>
+
+  </nav>
+
+  <section id="nas-definition">
+    <h2>Was ist ein NAS?</h2>
+
+
+<p>
+  Die Abkürzung NAS steht für <em>Network Attached Storage</em>. Gemeint ist ein Speichergerät,
+  das über das lokale Netzwerk erreichbar ist. Anders als eine gewöhnliche USB-Festplatte besitzt
+  ein NAS einen eigenen Prozessor, Arbeitsspeicher und ein Betriebssystem.
+</p>
+
+<p>Typische Bestandteile eines NAS sind:</p>
+
 <ul>
-  <li>Long range: kilometers, sometimes tens of kilometers with good antennas and terrain</li>
-  <li>Low power: devices can run for days or weeks on batteries</li>
-  <li>Encrypted: supports end-to-end encryption for private channels</li>
-  <li>Resilient: no single point of failure—if one node dies, the mesh reroutes</li>
+  <li>ein oder mehrere Festplattenschächte,</li>
+  <li>Prozessor und Arbeitsspeicher,</li>
+  <li>Ethernet-Anschlüsse,</li>
+  <li>ein eigenes Betriebssystem,</li>
+  <li>Benutzerkonten und Zugriffsrechte,</li>
+  <li>Backup-, Foto- und Synchronisierungssoftware,</li>
+  <li>optional Docker, virtuelle Maschinen und Medienserver.</li>
 </ul>
 
-<strong>Limitations</strong>
+<p>
+  Ein NAS wird normalerweise per Ethernet-Kabel mit einem Router oder Netzwerk-Switch verbunden.
+  Computer, Smartphones, Fernseher und andere Geräte können anschließend auf die freigegebenen
+  Ordner und Dienste zugreifen.
+</p>
+
+
+  </section>
+
+  <section id="nas-einsatz">
+    <h2>Wofür kann ein NAS verwendet werden?</h2>
+
+
+<p>Ein NAS eignet sich unter anderem für folgende Aufgaben:</p>
+
 <ul>
-  <li>Very low bandwidth (text and small data only)</li>
-  <li>Latency can be noticeable</li>
-  <li>Not meant for voice, images, or real-time chat theatrics</li>
+  <li>automatische Backups von Windows-, Linux- und macOS-Geräten,</li>
+  <li>automatische Sicherung von Smartphone-Fotos und -Videos,</li>
+  <li>zentrale Ablage von Dokumenten und Projekten,</li>
+  <li>Synchronisierung von Dateien zwischen mehreren Geräten,</li>
+  <li>private Cloud-Funktionen,</li>
+  <li>Fotoverwaltung und Bilderkennung,</li>
+  <li>Musik-, Film- und Medienserver,</li>
+  <li>Speicherung großer Foto- und Videodateien,</li>
+  <li>Git-Server, Datenbanken und kleine Webdienste,</li>
+  <li>Docker-Container und Smart-Home-Anwendungen,</li>
+  <li>Aufzeichnung von Überwachungskameras.</li>
 </ul>
 
-      </p>
+<aside class="note">
+  <p>
+    <strong>Wichtig:</strong> Ein NAS kann Cloudspeicher ergänzen oder teilweise ersetzen.
+    Es ersetzt jedoch nicht automatisch eine vollständige Backupstrategie.
+  </p>
+</aside>
+
+
+  </section>
+
+  <section id="nas-bays">
+    <h2>Zwei oder vier Laufwerksschächte?</h2>
+
+
+<p>
+  Die Anzahl der Laufwerksschächte bestimmt, wie viele Festplatten eingebaut werden können.
+  Im privaten Bereich sind Geräte mit zwei oder vier Schächten am verbreitetsten.
+</p>
+
+<h3>NAS mit zwei Schächten</h3>
+
+<p>
+  Ein Zwei-Schacht-NAS ist sinnvoll, wenn die Datenmenge überschaubar ist und das Gerät hauptsächlich
+  für Dokumente, Fotos und normale Backups verwendet wird.
+</p>
+
+<h4>Vorteile</h4>
+
+<ul>
+  <li>geringerer Anschaffungspreis,</li>
+  <li>kleineres Gehäuse,</li>
+  <li>meist etwas geringerer Stromverbrauch,</li>
+  <li>einfache Konfiguration.</li>
+</ul>
+
+<h4>Nachteile</h4>
+
+<ul>
+  <li>begrenzte Erweiterbarkeit,</li>
+  <li>bei Spiegelung nur die Kapazität einer Festplatte nutzbar,</li>
+  <li>spätere Erweiterung erfordert häufig den Austausch beider Festplatten.</li>
+</ul>
+
+<h3>NAS mit vier Schächten</h3>
+
+<p>
+  Ein Vier-Schacht-NAS ist sinnvoll, wenn größere Datenmengen gespeichert werden, das System über
+  mehrere Jahre wachsen soll oder zusätzliche Dienste vorgesehen sind.
+</p>
+
+<h4>Vorteile</h4>
+
+<ul>
+  <li>deutlich bessere Erweiterbarkeit,</li>
+  <li>effizientere Speichernutzung bei RAID 5 oder vergleichbaren Systemen,</li>
+  <li>mehr Flexibilität bei Festplattengröße und Redundanz,</li>
+  <li>besser für große Foto-, Video- und Medienarchive geeignet.</li>
+</ul>
+
+<h4>Nachteile</h4>
+
+<ul>
+  <li>höherer Anschaffungspreis,</li>
+  <li>größeres Gehäuse,</li>
+  <li>höherer Stromverbrauch bei voller Bestückung,</li>
+  <li>mehr Festplatten bedeuten auch mehr Geräuschentwicklung.</li>
+</ul>
+
+<aside class="recommendation">
+  <p>
+    <strong>Faustregel:</strong> Für eine reine Dokumenten- und Fotosammlung reichen häufig zwei
+    Schächte. Für umfangreiche Videosammlungen, mehrere Geräte oder langfristiges Wachstum sind vier
+    Schächte meist die bessere Investition.
+  </p>
+</aside>
+
+
+  </section>
+
+  <section id="nas-capacity">
+    <h2>Wie viel Speicher wird benötigt?</h2>
+
+
+<p>
+  Die benötigte Kapazität sollte nicht nur anhand des aktuellen Datenbestands berechnet werden.
+  Backups, Dateiversionen, Snapshots, Fotos und Videos lassen den Speicherbedarf über die Jahre
+  erheblich wachsen.
+</p>
+
+<p>Eine brauchbare Planungsformel lautet:</p>
+
+<p>
+  <strong>Aktueller Datenbestand × 2 bis 3</strong>
+</p>
+
+<p>Zusätzliche Reserve ist sinnvoll, weil:</p>
+
+<ul>
+  <li>Backups und Dateiversionen zusätzlichen Platz benötigen,</li>
+  <li>Snapshots Änderungen über längere Zeit aufbewahren,</li>
+  <li>Foto- und Videosammlungen meist kontinuierlich wachsen,</li>
+  <li>ein NAS nicht dauerhaft bis zur letzten freien Gigabyte-Grenze gefüllt sein sollte,</li>
+  <li>der spätere Austausch mehrerer Festplatten teuer und zeitaufwendig ist.</li>
+</ul>
+
+<table>
+  <caption>Typische Festplattenkonfigurationen</caption>
+
+  <thead>
+    <tr>
+      <th scope="col">Konfiguration</th>
+      <th scope="col">Nutzbare Kapazität</th>
+      <th scope="col">Typischer Einsatz</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>2 × 4 TB, RAID 1</td>
+      <td>ca. 4 TB</td>
+      <td>Dokumente, Fotos, kleine Backups</td>
+    </tr>
+    <tr>
+      <td>2 × 8 TB, RAID 1</td>
+      <td>ca. 8 TB</td>
+      <td>Privathaushalt mit mehreren Geräten</td>
+    </tr>
+    <tr>
+      <td>2 × 12 TB, RAID 1</td>
+      <td>ca. 12 TB</td>
+      <td>Fotos, Videos und größere Backups</td>
+    </tr>
+    <tr>
+      <td>4 × 8 TB, RAID 5</td>
+      <td>ca. 24 TB</td>
+      <td>umfangreiches Medienarchiv</td>
+    </tr>
+    <tr>
+      <td>4 × 12 TB, RAID 5</td>
+      <td>ca. 36 TB</td>
+      <td>große Video- und Projektsammlungen</td>
+    </tr>
+    <tr>
+      <td>4 × 12 TB, RAID 6</td>
+      <td>ca. 24 TB</td>
+      <td>höhere Ausfallsicherheit</td>
+    </tr>
+  </tbody>
+</table>
+
+<aside class="note">
+  <p>
+    Festplattenhersteller rechnen mit Dezimalwerten. Betriebssysteme zeigen häufig Binärwerte an.
+    Eine als 12 TB verkaufte Festplatte erscheint daher im System nur mit ungefähr 10,9 TiB.
+    Dabei geht kein Speicher verloren; es werden lediglich unterschiedliche Maßeinheiten verwendet.
+  </p>
+</aside>
+
+
+  </section>
+
+  <section id="nas-hardware">
+    <h2>Wichtige Hardwareeigenschaften</h2>
+
+
+<h3>Prozessor</h3>
+
+<p>
+  Die erforderliche Prozessorleistung hängt stark davon ab, ob das NAS nur Dateien speichern oder
+  zusätzlich Anwendungen ausführen soll.
+</p>
+
+<h4>ARM-Prozessor</h4>
+
+<p>Geeignet für:</p>
+
+<ul>
+  <li>Dateiablage,</li>
+  <li>einfache Backups,</li>
+  <li>Fotoupload,</li>
+  <li>wenige gleichzeitig aktive Dienste.</li>
+</ul>
+
+<p>Weniger geeignet für:</p>
+
+<ul>
+  <li>Docker,</li>
+  <li>virtuelle Maschinen,</li>
+  <li>umfangreiche Fotoindizierung,</li>
+  <li>Medientranscoding,</li>
+  <li>mehrere parallele Serverdienste.</li>
+</ul>
+
+<h4>x86-Prozessor von Intel oder AMD</h4>
+
+<p>
+  Ein x86-Prozessor ist empfehlenswert, wenn Docker, Datenbanken, Medienserver oder andere
+  Zusatzdienste geplant sind.
+</p>
+
+<p>
+  Für Videotranscoding sind Intel-Prozessoren mit integrierter Grafikeinheit und Hardwarebeschleunigung
+  häufig besonders geeignet. Dabei sollte jedoch geprüft werden, ob die verwendete Medienserver-Software
+  und das konkrete Videoformat unterstützt werden.
+</p>
+
+<h3>Arbeitsspeicher</h3>
+
+<table>
+  <caption>Orientierung für die benötigte RAM-Größe</caption>
+
+  <thead>
+    <tr>
+      <th scope="col">Arbeitsspeicher</th>
+      <th scope="col">Geeigneter Einsatz</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>2 GB</td>
+      <td>Dateien, Backups und einfache Fotoverwaltung</td>
+    </tr>
+    <tr>
+      <td>4 GB</td>
+      <td>solider Alltagsbetrieb mit mehreren Anwendungen</td>
+    </tr>
+    <tr>
+      <td>8 GB</td>
+      <td>Docker, Datenbanken, Medienverwaltung und mehrere Dienste</td>
+    </tr>
+    <tr>
+      <td>16 GB oder mehr</td>
+      <td>virtuelle Maschinen und umfangreiche Homelab-Anwendungen</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Netzwerkanschluss</h3>
+
+<h4>1 Gigabit Ethernet</h4>
+
+<ul>
+  <li>theoretisch bis zu 125 MB/s,</li>
+  <li>praktisch häufig etwa 100 bis 115 MB/s,</li>
+  <li>für normale Backups und Medienstreaming ausreichend.</li>
+</ul>
+
+<h4>2,5 Gigabit Ethernet</h4>
+
+<ul>
+  <li>theoretisch bis zu 312,5 MB/s,</li>
+  <li>praktisch häufig etwa 250 bis 290 MB/s,</li>
+  <li>für größere Backups und Videodateien deutlich angenehmer,</li>
+  <li>bei einem Neukauf häufig der sinnvollste Standard.</li>
+</ul>
+
+<h4>10 Gigabit Ethernet</h4>
+
+<ul>
+  <li>sinnvoll für direkte Videobearbeitung vom NAS,</li>
+  <li>geeignet für große SSD-Arrays und mehrere schnelle Clients,</li>
+  <li>für normale Dokumenten- und Fotosicherungen meist überdimensioniert.</li>
+</ul>
+
+<aside class="note">
+  <p>
+    Die tatsächliche Geschwindigkeit wird immer durch die langsamste Komponente begrenzt.
+    NAS, Switch, Netzwerkkarte und Verkabelung müssen die gewünschte Geschwindigkeit unterstützen.
+  </p>
+</aside>
+
+<h3>Dateisystem</h3>
+
+<p>Bei der Auswahl sollte auf ein modernes Dateisystem mit Snapshot-Unterstützung geachtet werden.</p>
+
+<ul>
+  <li><strong>Btrfs:</strong> häufig bei Synology und anderen Fertig-NAS-Systemen verfügbar.</li>
+  <li><strong>ZFS:</strong> verbreitet bei TrueNAS und bestimmten QNAP-Systemen.</li>
+  <li><strong>ext4:</strong> robust, aber je nach NAS mit weniger modernen Schutzfunktionen.</li>
+</ul>
+
+<p>
+  Btrfs und ZFS bieten unter anderem Prüfsummen, Snapshots und zusätzliche Möglichkeiten zur
+  Erkennung oder Begrenzung stiller Datenfehler.
+</p>
+
+
+  </section>
+
+  <section id="nas-drives">
+    <h2>Die richtigen Festplatten</h2>
+
+
+<p>
+  Für ein NAS sollten Festplatten verwendet werden, die für Dauerbetrieb und RAID-Systeme ausgelegt
+  sind. Gewöhnliche Desktop-Festplatten sind zwar technisch oft verwendbar, aber nicht immer für
+  den Dauerbetrieb in einem vibrationsreichen Mehrplattengehäuse optimiert.
+</p>
+
+<p>Verbreitete NAS-Festplattenserien sind:</p>
+
+<ul>
+  <li>Seagate IronWolf,</li>
+  <li>Western Digital Red Plus,</li>
+  <li>Toshiba N300,</li>
+  <li>Seagate IronWolf Pro,</li>
+  <li>Western Digital Red Pro,</li>
+  <li>verschiedene Enterprise-Festplatten.</li>
+</ul>
+
+<h3>CMR statt SMR</h3>
+
+<p>
+  Für RAID-Systeme sollten möglichst Festplatten mit
+  <abbr title="Conventional Magnetic Recording">CMR</abbr> verwendet werden.
+  Modelle mit <abbr title="Shingled Magnetic Recording">SMR</abbr> können bei langen Schreibvorgängen
+  und RAID-Wiederherstellungen deutlich einbrechen.
+</p>
+
+<h3>5400 oder 7200 Umdrehungen pro Minute?</h3>
+
+<ul>
+  <li>
+    <strong>Langsamere Modelle:</strong> meist leiser, kühler und sparsamer.
+  </li>
+  <li>
+    <strong>7200-rpm-Modelle:</strong> meist schneller, aber häufig lauter und wärmer.
+  </li>
+</ul>
+
+<p>
+  Für ein normales Heim-NAS ist maximale Drehzahl selten entscheidend. Netzwerkgeschwindigkeit,
+  Zugriffsart und Cache beeinflussen die Alltagserfahrung häufig stärker.
+</p>
+
+<h3>SSD und NVMe-Cache</h3>
+
+<p>
+  NVMe-SSDs sind bei einem NAS nicht automatisch notwendig. Sie helfen vor allem bei vielen kleinen,
+  zufälligen Zugriffen, Datenbanken, virtuellen Maschinen und mehreren gleichzeitigen Benutzern.
+</p>
+
+<p>
+  Beim Kopieren großer Video- oder Backup-Dateien ist der Nutzen eines SSD-Caches oft gering.
+  NVMe-SSDs sollten daher erst gekauft werden, wenn eine konkrete Anwendung davon profitiert.
+</p>
+
+
+  </section>
+
+  <section id="nas-raid">
+    <h2>RAID, SHR und Datensicherheit</h2>
+
+
+<p>
+  RAID verbindet mehrere Festplatten zu einem gemeinsamen Speicherverbund. Je nach RAID-Level
+  stehen Geschwindigkeit, Kapazität oder Redundanz im Vordergrund.
+</p>
+
+<h3>RAID 1</h3>
+
+<p>
+  Bei RAID 1 werden die Daten auf zwei Festplatten gespiegelt.
+</p>
+
+<ul>
+  <li>eine Festplatte darf ausfallen,</li>
+  <li>die nutzbare Kapazität entspricht einer Festplatte,</li>
+  <li>geeignet für Zwei-Schacht-NAS-Systeme.</li>
+</ul>
+
+<h3>RAID 5</h3>
+
+<p>
+  RAID 5 benötigt mindestens drei Festplatten. Die Daten und Paritätsinformationen werden über alle
+  Laufwerke verteilt.
+</p>
+
+<ul>
+  <li>eine Festplatte darf ausfallen,</li>
+  <li>die Kapazität einer Festplatte wird für Redundanz verwendet,</li>
+  <li>guter Kompromiss für private Vier-Schacht-Systeme.</li>
+</ul>
+
+<h3>RAID 6</h3>
+
+<ul>
+  <li>mindestens vier Festplatten erforderlich,</li>
+  <li>zwei Festplatten dürfen gleichzeitig ausfallen,</li>
+  <li>Kapazität von zwei Laufwerken wird für Redundanz benötigt.</li>
+</ul>
+
+<h3>RAID 0</h3>
+
+<ul>
+  <li>volle Kapazität und hohe Geschwindigkeit,</li>
+  <li>keine Redundanz,</li>
+  <li>der Ausfall einer einzigen Festplatte zerstört den gesamten Verbund.</li>
+</ul>
+
+<aside class="warning">
+  <p>
+    <strong>Warnung:</strong> RAID 0 ist für wichtige Daten ungeeignet.
+  </p>
+</aside>
+
+<h3>Herstellerspezifische Systeme</h3>
+
+<p>
+  Einige Hersteller bieten flexiblere Varianten klassischer RAID-Systeme an. Synology verwendet
+  beispielsweise <abbr title="Synology Hybrid RAID">SHR</abbr>.
+</p>
+
+<p>
+  SHR-1 ähnelt funktional RAID 5 beziehungsweise RAID 1, erlaubt aber häufig eine flexiblere
+  Erweiterung mit unterschiedlich großen Festplatten. Für viele private Synology-Systeme ist SHR-1
+  daher die praktischste Wahl.
+</p>
+
+
+  </section>
+
+  <section id="nas-backup">
+    <h2>Warum RAID kein Backup ist</h2>
+
+
+<p>
+  RAID schützt hauptsächlich vor dem Ausfall einer Festplatte. Es schützt nicht zuverlässig vor:
+</p>
+
+<ul>
+  <li>versehentlichem Löschen,</li>
+  <li>Fehlkonfiguration,</li>
+  <li>Schadsoftware und Ransomware,</li>
+  <li>Diebstahl,</li>
+  <li>Feuer- oder Wasserschäden,</li>
+  <li>Überspannung,</li>
+  <li>Defekten am gesamten NAS,</li>
+  <li>beschädigten oder synchronisierten Datenbeständen.</li>
+</ul>
+
+<blockquote>
+  <p>
+    RAID erhöht die Verfügbarkeit. Ein Backup schützt die Daten.
+  </p>
+</blockquote>
+
+<h3>Die 3-2-1-Regel</h3>
+
+<ul>
+  <li><strong>3</strong> Kopien wichtiger Daten,</li>
+  <li>auf mindestens <strong>2</strong> unterschiedlichen Speichermedien,</li>
+  <li>davon <strong>1</strong> Kopie außer Haus oder offline.</li>
+</ul>
+
+<p>Eine mögliche private Backupstrategie:</p>
+
+<ol>
+  <li>Originaldaten auf Computer oder NAS,</li>
+  <li>automatisches Backup auf dem NAS,</li>
+  <li>zusätzliches Backup auf eine externe USB-Festplatte,</li>
+  <li>besonders wichtige Daten verschlüsselt in der Cloud oder auf einer extern gelagerten Platte.</li>
+</ol>
+
+<p>
+  Nicht alle Daten müssen gleich aufwendig gesichert werden. Unersetzliche Fotos, Dokumente und
+  Projekte verdienen eine externe Kopie. Leicht ersetzbare Medien oder temporäre Dateien können
+  mit geringerer Priorität behandelt werden.
+</p>
+
+
+  </section>
+
+  <section id="nas-brands">
+    <h2>Hersteller und Systeme</h2>
+
+
+<h3>Synology</h3>
+
+<h4>Stärken</h4>
+
+<ul>
+  <li>sehr übersichtliches Betriebssystem,</li>
+  <li>gute Backup-, Foto- und Synchronisierungssoftware,</li>
+  <li>einfache Benutzer- und Rechteverwaltung,</li>
+  <li>große Community und viele Anleitungen,</li>
+  <li>vergleichsweise geringe Lernkurve.</li>
+</ul>
+
+<h4>Schwächen</h4>
+
+<ul>
+  <li>Hardwareleistung häufig geringer als bei ähnlich teuren Konkurrenzmodellen,</li>
+  <li>RAM- und SSD-Kompatibilität teilweise eingeschränkt,</li>
+  <li>bestimmte Modelle verwenden ältere Prozessorplattformen.</li>
+</ul>
+
+<p>
+  Synology eignet sich besonders für Benutzer, die ein möglichst unkompliziertes und ausgereiftes
+  Gesamtsystem suchen.
+</p>
+
+<h3>UGREEN</h3>
+
+<h4>Stärken</h4>
+
+<ul>
+  <li>leistungsfähige Hardware,</li>
+  <li>häufig moderne Intel-Prozessoren,</li>
+  <li>vergleichsweise viel Arbeitsspeicher ab Werk,</li>
+  <li>2,5- oder 10-Gigabit-Ethernet bei vielen Modellen,</li>
+  <li>HDMI-, USB- und M.2-Anschlüsse,</li>
+  <li>gutes Verhältnis aus Hardware und Preis.</li>
+</ul>
+
+<h4>Schwächen</h4>
+
+<ul>
+  <li>jüngeres Betriebssystem,</li>
+  <li>weniger langjährig erprobtes Software-Ökosystem,</li>
+  <li>weniger Anwendungen und Anleitungen als bei etablierten Plattformen.</li>
+</ul>
+
+<p>
+  UGREEN ist interessant, wenn starke Hardware, Docker und schnelle Netzwerkanschlüsse wichtiger
+  sind als ein über viele Jahre gereiftes Softwareangebot.
+</p>
+
+<h3>QNAP</h3>
+
+<h4>Stärken</h4>
+
+<ul>
+  <li>leistungsfähige und vielseitige Hardware,</li>
+  <li>viele Netzwerk- und Erweiterungsmöglichkeiten,</li>
+  <li>Docker, virtuelle Maschinen, HDMI und M.2,</li>
+  <li>teilweise ZFS-Unterstützung.</li>
+</ul>
+
+<h4>Schwächen</h4>
+
+<ul>
+  <li>komplexere Benutzeroberfläche,</li>
+  <li>mehr Einstellungen und administrativer Aufwand,</li>
+  <li>für Einsteiger teilweise unübersichtlicher.</li>
+</ul>
+
+<p>
+  QNAP ist eine gute Wahl für technisch versierte Anwender, die viele Funktionen und
+  Erweiterungsmöglichkeiten wünschen.
+</p>
+
+<h3>TrueNAS und Unraid</h3>
+
+<p>
+  TrueNAS und Unraid werden meist auf selbst gebauter oder frei gewählter PC-Hardware betrieben.
+  Sie bieten deutlich mehr Freiheit als ein klassisches Fertig-NAS.
+</p>
+
+<h4>Vorteile</h4>
+
+<ul>
+  <li>freie Hardwarewahl,</li>
+  <li>große Erweiterbarkeit,</li>
+  <li>ZFS beziehungsweise flexible Speicherverbünde,</li>
+  <li>zahlreiche Docker- und Virtualisierungsfunktionen,</li>
+  <li>leichter reparier- und aufrüstbar.</li>
+</ul>
+
+<h4>Nachteile</h4>
+
+<ul>
+  <li>höherer Einrichtungsaufwand,</li>
+  <li>mehr Wartung und Fehlerdiagnose,</li>
+  <li>potenziell höherer Stromverbrauch,</li>
+  <li>Hardware- und Treiberfragen müssen selbst gelöst werden.</li>
+</ul>
+
+<p>
+  Ein selbst gebautes NAS ist ideal als Homelab und Lernprojekt. Als unkompliziertes Backupgerät
+  ist ein Fertig-NAS meist bequemer.
+</p>
+
+
+  </section>
+
+  <section id="nas-costs">
+    <h2>Kosten und Preisbereiche</h2>
+
+
+<p>
+  Bei einem NAS besteht der Gesamtpreis aus mehr als dem eigentlichen Gehäuse. Festplatten,
+  Backupmedien, Netzwerkzubehör und eine USV können einen erheblichen Teil der Kosten ausmachen.
+</p>
+
+<table>
+  <caption>Typische Preisbereiche für NAS-Systeme</caption>
+
+  <thead>
+    <tr>
+      <th scope="col">Kategorie</th>
+      <th scope="col">Ungefährer Preisbereich</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>Einfaches Zwei-Schacht-Leergehäuse</td>
+      <td>ca. 250 bis 450 Euro</td>
+    </tr>
+    <tr>
+      <td>Leistungsfähiges Zwei-Schacht-Leergehäuse</td>
+      <td>ca. 350 bis 600 Euro</td>
+    </tr>
+    <tr>
+      <td>Vier-Schacht-Leergehäuse</td>
+      <td>ca. 450 bis 800 Euro</td>
+    </tr>
+    <tr>
+      <td>Zwei NAS-Festplatten mit jeweils 8 TB</td>
+      <td>ca. 500 bis 800 Euro</td>
+    </tr>
+    <tr>
+      <td>Zwei NAS-Festplatten mit jeweils 12 TB</td>
+      <td>ca. 750 bis 1.100 Euro</td>
+    </tr>
+    <tr>
+      <td>USV</td>
+      <td>ca. 90 bis 180 Euro</td>
+    </tr>
+    <tr>
+      <td>Externe Backupfestplatte</td>
+      <td>abhängig von Kapazität und Modell</td>
+    </tr>
+    <tr>
+      <td>2,5-Gigabit-Switch</td>
+      <td>ca. 60 bis 150 Euro</td>
+    </tr>
+    <tr>
+      <td>2,5-Gigabit-USB-Netzwerkadapter</td>
+      <td>ca. 25 bis 60 Euro</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Beispiel: solider Zwei-Schacht-Einstieg</h3>
+
+<ul>
+  <li>Zwei-Schacht-NAS,</li>
+  <li>2 × 8 TB NAS-Festplatten,</li>
+  <li>RAID 1 oder vergleichbare Spiegelung,</li>
+  <li>ungefähr 8 TB nutzbarer Speicher.</li>
+</ul>
+
+<p>
+  Gesamtpreis inklusive Festplatten: meist ungefähr 900 bis 1.300 Euro.
+</p>
+
+<h3>Beispiel: erweiterbares Vier-Schacht-System</h3>
+
+<ul>
+  <li>Vier-Schacht-NAS,</li>
+  <li>zunächst 2 × 12 TB NAS-Festplatten,</li>
+  <li>zwei freie Schächte für spätere Erweiterung,</li>
+  <li>ungefähr 12 TB nutzbarer Speicher zu Beginn.</li>
+</ul>
+
+<p>
+  Gesamtpreis inklusive Festplatten: meist ungefähr 1.300 bis 1.900 Euro.
+</p>
+
+<aside class="note">
+  <p>
+    Preise für Festplatten schwanken stark. Vor dem Kauf sollten deshalb der Preis pro Terabyte,
+    Garantie, Lautstärke, Stromverbrauch und Lieferumfang verglichen werden.
+  </p>
+</aside>
+
+
+  </section>
+
+  <section id="nas-accessories">
+    <h2>Sinnvolles Zubehör</h2>
+
+
+<h3>Unverzichtbar</h3>
+
+<h4>NAS-Festplatten</h4>
+
+<p>
+  Viele NAS-Geräte werden als Leergehäuse geliefert. Die Festplatten müssen separat gekauft werden.
+</p>
+
+<h4>Ethernet-Verbindung</h4>
+
+<p>
+  Ein NAS sollte per Netzwerkkabel mit dem Router oder Switch verbunden werden. WLAN eignet sich
+  für die Endgeräte, ist aber für große Sicherungen und dauerhafte Datenübertragung meist nicht ideal.
+</p>
+
+<h3>Sehr empfehlenswert</h3>
+
+<h4>Unterbrechungsfreie Stromversorgung</h4>
+
+<p>
+  Eine <abbr title="Unterbrechungsfreie Stromversorgung">USV</abbr> überbrückt kurze Stromausfälle
+  und kann das NAS bei längeren Unterbrechungen kontrolliert herunterfahren.
+</p>
+
+<p>Empfehlenswerte Eigenschaften:</p>
+
+<ul>
+  <li>ungefähr 650 bis 900 VA,</li>
+  <li>USB-Datenverbindung,</li>
+  <li>Unterstützung durch das NAS-Betriebssystem,</li>
+  <li>ausreichend Steckdosen für NAS und gegebenenfalls Netzwerkgeräte.</li>
+</ul>
+
+<h4>Externe USB-Festplatte</h4>
+
+<p>
+  Eine externe Festplatte kann als zusätzliches, physisch getrenntes Backup dienen. Besonders sicher
+  ist sie, wenn sie nach dem Backup ausgeworfen und vom NAS getrennt wird.
+</p>
+
+<h3>Optional</h3>
+
+<ul>
+  <li>2,5-Gigabit- oder 10-Gigabit-Switch,</li>
+  <li>schneller Netzwerkadapter für Computer oder Notebook,</li>
+  <li>RAM-Erweiterung,</li>
+  <li>NVMe-SSDs,</li>
+  <li>zweites NAS an einem anderen Standort,</li>
+  <li>Cloudspeicher für verschlüsselte Offsite-Backups.</li>
+</ul>
+
+
+  </section>
+
+  <section id="nas-power">
+    <h2>Stromverbrauch und Lautstärke</h2>
+
+
+<p>
+  Ein NAS läuft häufig rund um die Uhr. Stromverbrauch und Geräuschentwicklung sollten daher schon
+  vor dem Kauf berücksichtigt werden.
+</p>
+
+<h3>Typischer Stromverbrauch</h3>
+
+<ul>
+  <li>Zwei-Schacht-NAS: häufig etwa 15 bis 25 Watt,</li>
+  <li>Vier-Schacht-NAS: häufig etwa 20 bis 40 Watt,</li>
+  <li>selbst gebaute Server: je nach Hardware deutlich mehr.</li>
+</ul>
+
+<table>
+  <caption>Beispielhafte jährliche Stromkosten bei 0,30 Euro pro kWh</caption>
+
+  <thead>
+    <tr>
+      <th scope="col">Dauerleistung</th>
+      <th scope="col">Ungefähre Kosten pro Jahr</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>15 Watt</td>
+      <td>ca. 39 Euro</td>
+    </tr>
+    <tr>
+      <td>25 Watt</td>
+      <td>ca. 66 Euro</td>
+    </tr>
+    <tr>
+      <td>40 Watt</td>
+      <td>ca. 105 Euro</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Lautstärke</h3>
+
+<p>
+  Die Festplatten sind häufig lauter als der Gehäuselüfter. Schreib- und Lesezugriffe können sich
+  als deutliches Klackern oder Brummen bemerkbar machen.
+</p>
+
+<p>Empfehlungen für die Aufstellung:</p>
+
+<ul>
+  <li>nicht im Schlafzimmer aufstellen,</li>
+  <li>nicht direkt auf resonierenden Holzmöbeln platzieren,</li>
+  <li>für ausreichende Belüftung sorgen,</li>
+  <li>keinen vollständig geschlossenen Schrank ohne Luftaustausch verwenden,</li>
+  <li>gegebenenfalls eine vibrationsdämpfende Unterlage verwenden.</li>
+</ul>
+
+
+  </section>
+
+  <section id="nas-effort">
+    <h2>Einrichtungsaufwand und Lernkurve</h2>
+
+
+<h3>Physischer Aufbau</h3>
+
+<p><strong>Schwierigkeitsgrad:</strong> leicht</p>
+
+<ol>
+  <li>Festplatten in die Einschübe einsetzen,</li>
+  <li>NAS mit Router oder Switch verbinden,</li>
+  <li>Stromversorgung anschließen,</li>
+  <li>Gerät einschalten,</li>
+  <li>Installationsoberfläche im Browser öffnen.</li>
+</ol>
+
+<p>
+  Der physische Aufbau dauert normalerweise ungefähr 20 bis 40 Minuten.
+</p>
+
+<h3>Grundeinrichtung</h3>
+
+<p><strong>Schwierigkeitsgrad:</strong> leicht bis mittel</p>
+
+<p>Folgende Begriffe müssen verstanden werden:</p>
+
+<ul>
+  <li>Speicherpool,</li>
+  <li>Volume,</li>
+  <li>RAID oder SHR,</li>
+  <li>freigegebene Ordner,</li>
+  <li>Benutzer und Gruppen,</li>
+  <li>SMB-Netzlaufwerke,</li>
+  <li>Snapshots und Versionierung.</li>
+</ul>
+
+<p>
+  Für die grundlegende Einrichtung sollten ungefähr ein bis zwei Stunden eingeplant werden.
+</p>
+
+<h3>Vollständige Einrichtung</h3>
+
+<p>Eine saubere Gesamteinrichtung umfasst:</p>
+
+<ul>
+  <li>automatische Computer-Backups,</li>
+  <li>Smartphone-Fotoupload,</li>
+  <li>Snapshots,</li>
+  <li>USB- oder Cloud-Backup,</li>
+  <li>Benachrichtigungen,</li>
+  <li>Zwei-Faktor-Authentifizierung,</li>
+  <li>Updateeinstellungen,</li>
+  <li>Fernzugriff,</li>
+  <li>einen ersten Wiederherstellungstest.</li>
+</ul>
+
+<p>
+  Beim ersten NAS sind dafür ungefähr drei bis sechs Stunden realistisch. Der Aufwand kann auf
+  mehrere Abende verteilt werden.
+</p>
+
+<h3>Lernkurve nach System</h3>
+
+<table>
+  <caption>Ungefähre Lernkurve verschiedener NAS-Systeme</caption>
+
+  <thead>
+    <tr>
+      <th scope="col">System</th>
+      <th scope="col">Einstieg</th>
+      <th scope="col">Fortgeschrittene Nutzung</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>Synology DSM</td>
+      <td>sehr einfach</td>
+      <td>mittel</td>
+    </tr>
+    <tr>
+      <td>UGREEN UGOS Pro</td>
+      <td>einfach</td>
+      <td>mittel</td>
+    </tr>
+    <tr>
+      <td>QNAP QTS</td>
+      <td>mittel</td>
+      <td>mittel bis hoch</td>
+    </tr>
+    <tr>
+      <td>Unraid</td>
+      <td>mittel</td>
+      <td>hoch</td>
+    </tr>
+    <tr>
+      <td>TrueNAS</td>
+      <td>mittel bis hoch</td>
+      <td>hoch</td>
+    </tr>
+  </tbody>
+</table>
+
+
+  </section>
+
+  <section id="nas-security">
+    <h2>Sicherheit und Wartung</h2>
+
+
+<p>
+  Ein NAS ist ein Server und sollte entsprechend behandelt werden. Es benötigt zwar keine tägliche
+  Betreuung, aber regelmäßige Updates, kontrollierte Backups und eine sichere Konfiguration.
+</p>
+
+<h3>Bei der Einrichtung</h3>
+
+<ul>
+  <li>ein eigenes Administratorkonto anlegen,</li>
+  <li>Standardkonten wie „admin“ deaktivieren,</li>
+  <li>starke und einzigartige Passwörter verwenden,</li>
+  <li>Zwei-Faktor-Authentifizierung aktivieren,</li>
+  <li>normale Benutzer ohne Administratorrechte verwenden,</li>
+  <li>automatische Sicherheitsupdates aktivieren,</li>
+  <li>Benachrichtigungen per E-Mail oder App einrichten,</li>
+  <li>Snapshots und Versionierung aktivieren,</li>
+  <li>Papierkorb- und Versionsgrößen begrenzen.</li>
+</ul>
+
+<h3>Fernzugriff</h3>
+
+<p>
+  Die Verwaltungsoberfläche sollte nicht einfach über offen weitergeleitete Router-Ports im Internet
+  erreichbar gemacht werden.
+</p>
+
+<p>Bessere Möglichkeiten sind:</p>
+
+<ul>
+  <li>der abgesicherte Fernzugriffsdienst des Herstellers,</li>
+  <li>ein VPN,</li>
+  <li>WireGuard,</li>
+  <li>Tailscale,</li>
+  <li>gezielt veröffentlichte Anwendungen mit zusätzlicher Authentifizierung.</li>
+</ul>
+
+<h3>Regelmäßige Wartung</h3>
+
+<ul>
+  <li>monatlich Statusmeldungen und Updates prüfen,</li>
+  <li>SMART-Schnelltests regelmäßig ausführen,</li>
+  <li>vollständige Festplattentests gelegentlich planen,</li>
+  <li>RAID-Scrubbing oder Dateisystemprüfung aktivieren,</li>
+  <li>Backupberichte kontrollieren,</li>
+  <li>gelegentlich eine Datei testweise wiederherstellen.</li>
+</ul>
+
+<blockquote>
+  <p>
+    Ein erfolgreich gemeldetes Backup ist beruhigend. Ein erfolgreich getestetes Restore ist Gewissheit.
+  </p>
+</blockquote>
+
+
+  </section>
+
+  <section id="nas-recommendations">
+    <h2>Beispielkonfigurationen</h2>
+
+
+<h3>Variante 1: Einfaches Backup-NAS</h3>
+
+<ul>
+  <li>Zwei-Schacht-NAS,</li>
+  <li>ARM- oder sparsamer x86-Prozessor,</li>
+  <li>2 bis 4 GB RAM,</li>
+  <li>2 × 4 oder 8 TB NAS-Festplatten,</li>
+  <li>RAID 1 oder SHR-1,</li>
+  <li>1- oder 2,5-Gigabit-Ethernet,</li>
+  <li>externe USB-Festplatte als Zusatzbackup.</li>
+</ul>
+
+<p>
+  Geeignet für Dokumente, Fotos, Smartphone-Backups und wenige Computer.
+</p>
+
+<h3>Variante 2: Universelles Heim-NAS</h3>
+
+<ul>
+  <li>Vier-Schacht-NAS,</li>
+  <li>x86-Prozessor,</li>
+  <li>4 bis 8 GB RAM,</li>
+  <li>zunächst 2 × 8 oder 12 TB NAS-Festplatten,</li>
+  <li>zwei freie Schächte für spätere Erweiterung,</li>
+  <li>Btrfs oder ZFS,</li>
+  <li>2,5-Gigabit-Ethernet,</li>
+  <li>USV und externes Backup.</li>
+</ul>
+
+<p>
+  Geeignet für größere Backups, Fotos, Videos, Medienserver und einige Docker-Dienste.
+</p>
+
+<h3>Variante 3: Leistungsfähiges Medien- und Docker-NAS</h3>
+
+<ul>
+  <li>Vier oder mehr Laufwerksschächte,</li>
+  <li>moderner Intel- oder AMD-Prozessor,</li>
+  <li>mindestens 8 GB RAM,</li>
+  <li>2,5- oder 10-Gigabit-Ethernet,</li>
+  <li>M.2-Steckplätze,</li>
+  <li>Docker- und Virtualisierungsunterstützung,</li>
+  <li>USV, externe Backups und gegebenenfalls Offsite-Kopie.</li>
+</ul>
+
+<p>
+  Geeignet für große Videoarchive, mehrere gleichzeitige Nutzer, Datenbanken, Container und
+  anspruchsvollere Serverdienste.
+</p>
+
+<h3>Variante 4: Selbst gebautes NAS</h3>
+
+<ul>
+  <li>Standard-PC-Hardware,</li>
+  <li>TrueNAS, Unraid oder ein Linux-System,</li>
+  <li>beliebig viele Laufwerke,</li>
+  <li>freie Wahl bei Netzwerk, CPU und RAM,</li>
+  <li>höherer Einrichtungs- und Wartungsaufwand.</li>
+</ul>
+
+<p>
+  Geeignet für technisch versierte Anwender, die maximale Kontrolle und Erweiterbarkeit wünschen.
+</p>
+
+
+  </section>
+
+  <section id="nas-checklist">
+    <h2>Kaufcheckliste</h2>
+
+
+<ul class="checklist">
+  <li>Wie groß ist der aktuelle Datenbestand?</li>
+  <li>Wie stark wird der Speicherbedarf in den nächsten Jahren wachsen?</li>
+  <li>Reichen zwei Schächte oder sind vier langfristig sinnvoller?</li>
+  <li>Wird das NAS nur als Speicher oder auch als Server verwendet?</li>
+  <li>Werden Docker, virtuelle Maschinen oder Medienserver benötigt?</li>
+  <li>Ist 2,5-Gigabit-Ethernet vorhanden oder geplant?</li>
+  <li>Unterstützt das Gerät Btrfs, ZFS oder Snapshots?</li>
+  <li>Sind die gewünschten Festplatten offiziell oder praktisch kompatibel?</li>
+  <li>Handelt es sich bei den Festplatten um CMR-Modelle?</li>
+  <li>Ist eine RAM-Erweiterung möglich?</li>
+  <li>Wird Hardwaretranscoding benötigt?</li>
+  <li>Wie wird das NAS zusätzlich gesichert?</li>
+  <li>Ist eine USV vorgesehen?</li>
+  <li>Wo kann das NAS kühl, trocken und geräuschverträglich aufgestellt werden?</li>
+  <li>Wie werden Fernzugriff und Zwei-Faktor-Authentifizierung umgesetzt?</li>
+  <li>Wie werden Wiederherstellungen regelmäßig getestet?</li>
+</ul>
+
+
+  </section>
+
+  <section id="nas-conclusion">
+    <h2>Fazit</h2>
+
+
+<p>
+  Für einfache Backups und Fotos genügt häufig ein Zwei-Schacht-NAS mit zwei gespiegelten
+  NAS-Festplatten. Wer größere Medienbestände, mehrere Computer oder zusätzliche Serverdienste plant,
+  sollte ein Vier-Schacht-Gerät mit x86-Prozessor und 2,5-Gigabit-Ethernet bevorzugen.
+</p>
+
+<p>
+  Eine gute Standardkonfiguration besteht aus einem Vier-Schacht-NAS, zunächst zwei ausreichend
+  großen CMR-NAS-Festplatten, einem modernen Dateisystem, RAID 1 beziehungsweise SHR-1, einer USV
+  und einem zusätzlichen externen Backup.
+</p>
+
+<p>
+  Entscheidend ist nicht allein das NAS-Gehäuse. Die eigentlichen Kosten entstehen durch Festplatten,
+  Redundanz, Backups und Netzwerkzubehör. Wer diese Komponenten von Anfang an mitplant, erhält ein
+  zuverlässiges System, das über viele Jahre mitwachsen kann.
+</p>
+
+<p>
+  Der wichtigste Grundsatz bleibt dabei unverändert:
+  <strong>RAID verhindert Ausfallzeiten, ein Backup verhindert Datenverlust.</strong>
+</p>
+
+
+  </section>
+
+
+
 
     </article>
     <p class="hint"><a href="#top">↑ top</a></p>
@@ -104,7 +1259,7 @@ Your phone connects to a node via Bluetooth or USB, acting as the keyboard and s
     <article class="card" id="why">
       <h2 class="card-title">Why I got into it</h2>
       <p>
-I got into Meshtastic for autonomy and resilience.
+I got into NAS for autonomy and resilience.
 It enables communication <strong>off-grid</strong>, without cellular networks or central infrastructure—ideal for outdoor use and situations where reliability matters more than convenience.
 
 It’s about being prepared, independent, and connected even when everything else goes quiet.
@@ -145,7 +1300,7 @@ It’s about being prepared, independent, and connected even when everything els
     <article class="card" id="setup">
       <h2 class="card-title">Setup (quick)</h2>
       <ol>
-        <li>Flash firmware (device + version) -- <a href="https://flasher.meshtastic.org/">Meshtastic Web Flasher</a></li>
+        <li>Flash firmware (device + version) -- <a href="https://flasher.meshtastic.org/">NAS Web Flasher</a></li>
         <li>Pair with phone / connect via USB</li>
         <li>Set region, channel, and radio settings</li>
         <li>Name the node and enable encryption if needed</li>
@@ -153,9 +1308,9 @@ It’s about being prepared, independent, and connected even when everything els
       </ol>
 
       <p class="hint">
-Note: The Heltec V2 is no longer supported by the official Meshtastic web flasher.
+Note: The Heltec V2 is no longer supported by the official NAS web flasher.
 Because of this, flashing had to be done using an alternative, community-maintained tool.
-For that purpose, the <a href="https://github.com/eeEUSERee/meshtastic_heltecv2">meshtastic_heltecv2 flasher</a> was used, which specifically targets the Heltec V2 hardware and allows installing current Meshtastic firmware despite the dropped web support (<a href="https://www.reddit.com/r/meshtastic/comments/1hrancs/guide_heltec_v2v21_build_latest_meshtastic/">Source + Guide</a>). 
+For that purpose, the <a href="https://github.com/eeEUSERee/meshtastic_heltecv2">meshtastic_heltecv2 flasher</a> was used, which specifically targets the Heltec V2 hardware and allows installing current NAS firmware despite the dropped web support (<a href="https://www.reddit.com/r/meshtastic/comments/1hrancs/guide_heltec_v2v21_build_latest_meshtastic/">Source + Guide</a>). 
       </p>
 
     </article>
