@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Segelroute rekonstruieren</title>
+
+  <!-- Leaflet CSS -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""
+  >
+
+  <!-- Leaflet JavaScript -->
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin="">
+  </script>
+
+  <style>
+    body {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem;
+      font-family: system-ui, sans-serif;
+      line-height: 1.5;
+    }
+
+    /*
+     * Leaflet benötigt zwingend eine definierte Höhe.
+     */
+    #route-map {
+      width: 100%;
+      height: 70vh;
+      min-height: 500px;
+      border: 1px solid #aaa;
+      border-radius: 0.5rem;
+      overflow: hidden;
+    }
+
+    .route-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+
+    .route-controls button {
+      padding: 0.65rem 1rem;
+      cursor: pointer;
+    }
+
+    #route-coordinates {
+      max-height: 350px;
+      padding: 1rem;
+      overflow: auto;
+      white-space: pre-wrap;
+      background: #f2f2f2;
+      border-radius: 0.5rem;
+    }
+  </style>
+</head>
+
+<body>
+
+  <main>
+    <h1>Segelroute rekonstruieren</h1>
+
+    <p>
+      Klicke nacheinander entlang der zurückgelegten Route.
+      Jeder Klick erzeugt einen neuen Wegpunkt.
+    </p>
+
+    <div class="route-controls">
+      <button id="undo-point" type="button">
+        Letzten Punkt löschen
+      </button>
+
+      <button id="copy-points" type="button">
+        Koordinaten kopieren
+      </button>
+
+      <button id="reset-route" type="button">
+        Route zurücksetzen
+      </button>
+    </div>
+
+    <div
+      id="route-map"
+      role="application"
+      aria-label="Interaktive Karte zum Rekonstruieren der Segelroute">
+    </div>
+
+    <h2>Koordinaten</h2>
+
+    <pre id="route-coordinates">Noch keine Punkte gesetzt.</pre>
+  </main>
+
+  <script>
+    "use strict";
+
+    /*
+     * Karte erzeugen.
+     *
+     * Die Koordinaten zeigen ungefähr auf Pula.
+     * Der zweite Wert ist die anfängliche Zoomstufe.
+     */
+    const map = L.map("route-map", {
+      scrollWheelZoom: true
+    }).setView([44.8666, 13.8496], 10);
+
+    /*
+     * OpenStreetMap als Grundkarte.
+     */
+    const baseMap = L.tileLayer(
+      "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+      {
+        maxZoom: 19,
+
+        referrerPolicy: "strict-origin-when-cross-origin",
+
+        attribution:
+          '&copy; <a href="https://www.openstreetmap.org/copyright">' +
+          "OpenStreetMap-Mitwirkende</a>"
+      }
+    ).addTo(map);
+
+    /*
+     * OpenSeaMap als transparente Ebene darüber.
+     *
+     * Diese Ebene enthält unter anderem Seezeichen,
+     * Feuer, Tonnen und nautische Informationen.
+     */
+    const seaMarks = L.tileLayer(
+      "https://tiles.openseamap.org/seamark/{z}/{x}/{y}.png",
+      {
+        maxZoom: 18,
+
+        referrerPolicy: "strict-origin-when-cross-origin",
+
+        attribution:
+          '&copy; <a href="https://www.openseamap.org">' +
+          "OpenSeaMap-Mitwirkende</a>"
+      }
+    ).addTo(map);
+
+    /*
+     * Hier werden alle angeklickten Koordinaten gespeichert.
+     *
+     * Leaflet verwendet die Reihenfolge:
+     * [Breitengrad, Längengrad]
+     */
+    const routePoints = [];
+
+    /*
+     * Die aktuell gezeichnete Route.
+     */
+    const routeLine = L.polyline([], {
+      color: "#d33",
+      weight: 4,
+      opacity: 0.9,
+      lineJoin: "round",
+      lineCap: "round"
+    }).addTo(map);
+
+    /*
+     * Marker der einzelnen Klickpunkte.
+     */
+    const pointMarkers = L.layerGroup().addTo(map);
+
+    const coordinateOutput =
+      document.getElementById("route-coordinates");
+
+    const undoButton =
+      document.getElementById("undo-point");
+
+    const copyButton =
+      document.getElementById("copy-points");
+
+    const resetButton =
+      document.getElementById("reset-route");
+
+    /*
+     * Gibt die Koordinaten in einem Format aus,
+     * das direkt in die spätere Karte kopiert werden kann.
+     */
+    function updateCoordinateOutput() {
+      if (routePoints.length === 0) {
+        coordinateOutput.textContent =
+          "Noch keine Punkte gesetzt.";
+
+        return;
+      }
+
+      coordinateOutput.textContent =
+        "const routePoints = " +
+        JSON.stringify(routePoints, null, 2) +
+        ";";
+    }
+
+    /*
+     * Zeichnet Route und Punktmarker vollständig neu.
+     */
+    function redrawRoute() {
+      routeLine.setLatLngs(routePoints);
+
+      pointMarkers.clearLayers();
+
+      routePoints.forEach((point, index) => {
+        const marker = L.circleMarker(point, {
+          radius: 5,
+          weight: 2,
+          fillOpacity: 1
+        });
+
+        marker.bindTooltip(
+          `Punkt ${index + 1}`,
+          {
+            direction: "top"
+          }
+        );
+
+        marker.addTo(pointMarkers);
+      });
+
+      updateCoordinateOutput();
+    }
+
+    /*
+     * Bei jedem Klick wird ein neuer Punkt ergänzt.
+     */
+    map.on("click", function (event) {
+      const point = [
+        Number(event.latlng.lat.toFixed(6)),
+        Number(event.latlng.lng.toFixed(6))
+      ];
+
+      routePoints.push(point);
+
+      redrawRoute();
+    });
+
+    /*
+     * Letzten gesetzten Punkt entfernen.
+     */
+    undoButton.addEventListener("click", function () {
+      routePoints.pop();
+
+      redrawRoute();
+    });
+
+    /*
+     * Gesamte Route löschen.
+     */
+    resetButton.addEventListener("click", function () {
+      const reallyReset = window.confirm(
+        "Soll die gesamte Route gelöscht werden?"
+      );
+
+      if (!reallyReset) {
+        return;
+      }
+
+      routePoints.length = 0;
+
+      redrawRoute();
+    });
+
+    /*
+     * Koordinaten in die Zwischenablage kopieren.
+     */
+    copyButton.addEventListener("click", async function () {
+      if (routePoints.length === 0) {
+        window.alert(
+          "Es wurden noch keine Punkte gesetzt."
+        );
+
+        return;
+      }
+
+      const textToCopy =
+        "const routePoints = " +
+        JSON.stringify(routePoints, null, 2) +
+        ";";
+
+      try {
+        await navigator.clipboard.writeText(textToCopy);
+
+        copyButton.textContent = "Kopiert";
+
+        window.setTimeout(function () {
+          copyButton.textContent =
+            "Koordinaten kopieren";
+        }, 1500);
+      } catch (error) {
+        console.error(
+          "Koordinaten konnten nicht kopiert werden:",
+          error
+        );
+
+        window.alert(
+          "Automatisches Kopieren fehlgeschlagen. " +
+          "Markiere den Text unterhalb der Karte manuell."
+        );
+      }
+    });
+  </script>
+
+</body>
+</html>
