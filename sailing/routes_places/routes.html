@@ -60,293 +60,6 @@ Lorem ipsum
 
     <hr class="divider" />
 
-const routePoints = [
-  [
-    44.843197,
-    13.842462
-  ],
-  [
-    44.837837,
-    13.840917
-  ],
-  [
-    44.833816,
-    13.842634
-  ],
-  [
-    44.827725,
-    13.836109
-  ],
-  [
-    44.811731,
-    13.844894
-  ],
-  [
-    44.758868,
-    13.897056
-  ],
-  [
-    44.756373,
-    13.924231
-  ],
-  [
-    44.764912,
-    13.959949
-  ],
-  [
-    44.821625,
-    14.094355
-  ],
-  [
-    44.939462,
-    14.295611
-  ],
-  [
-    44.943237,
-    14.304346
-  ],
-  [
-    44.942173,
-    14.307866
-  ],
-  [
-    44.945243,
-    14.307394
-  ],
-  [
-    44.94427,
-    14.311901
-  ],
-  [
-    44.949803,
-    14.310098
-  ],
-  [
-    44.952665,
-    14.31162
-  ],
-  [
-    44.958538,
-    14.365157
-  ],
-  [
-    44.957039,
-    14.393771
-  ],
-  [
-    44.952723,
-    14.408367
-  ],
-  [
-    44.946948,
-    14.413691
-  ]
-];
-
-const routePoints = [
-  [
-    44.946826,
-    14.414206
-  ],
-  [
-    44.953756,
-    14.406135
-  ],
-  [
-    44.956431,
-    14.39214
-  ],
-  [
-    44.955129,
-    14.335603
-  ],
-  [
-    44.951968,
-    14.298855
-  ],
-  [
-    44.935917,
-    14.288208
-  ],
-  [
-    44.89723,
-    14.274814
-  ],
-  [
-    44.876051,
-    14.28546
-  ],
-  [
-    44.833425,
-    14.293359
-  ],
-  [
-    44.80559,
-    14.312056
-  ],
-  [
-    44.802177,
-    14.34846
-  ],
-  [
-    44.809978,
-    14.355329
-  ],
-  [
-    44.817796,
-    14.351081
-  ]
-];
-
-const routePoints = [
-  [
-    44.817922,
-    14.350579
-  ],
-  [
-    44.768028,
-    14.357195
-  ],
-  [
-    44.730448,
-    14.375741
-  ],
-  [
-    44.713847,
-    14.35376
-  ],
-  [
-    44.715707,
-    14.333932
-  ],
-  [
-    44.691959,
-    14.271625
-  ],
-  [
-    44.675051,
-    14.248768
-  ],
-  [
-    44.654645,
-    14.230909
-  ],
-  [
-    44.640712,
-    14.234
-  ],
-  [
-    44.636296,
-    14.244294
-  ],
-  [
-    44.638985,
-    14.242834
-  ]
-];
-
-
-const routePoints = [
-  [
-    44.635723,
-    14.243788
-  ],
-  [
-    44.635967,
-    14.227646
-  ],
-  [
-    44.627654,
-    14.214939
-  ],
-  [
-    44.609076,
-    14.222835
-  ],
-  [
-    44.587057,
-    14.242068
-  ],
-  [
-    44.556461,
-    14.269543
-  ],
-  [
-    44.527947,
-    14.302328
-  ],
-  [
-    44.515812,
-    14.313817
-  ],
-  [
-    44.512595,
-    14.312901
-  ],
-  [
-    44.512174,
-    14.311162
-  ],
-  [
-    44.512557,
-    14.310561
-  ]
-];
-
-const routePoints = [
-  [
-    44.512083,
-    14.311174
-  ],
-  [
-    44.515232,
-    14.315365
-  ],
-  [
-    44.52552,
-    14.303865
-  ],
-  [
-    44.568986,
-    14.253042
-  ],
-  [
-    44.60985,
-    14.216637
-  ],
-  [
-    44.748935,
-    13.914081
-  ],
-  [
-    44.767626,
-    13.8884
-  ],
-  [
-    44.812737,
-    13.843753
-  ],
-  [
-    44.826469,
-    13.834779
-  ],
-  [
-    44.832622,
-    13.839415
-  ],
-  [
-    44.835973,
-    13.843966
-  ],
-  [
-    44.83847,
-    13.841733
-  ],
-  [
-    44.844074,
-    13.842764
-  ]
-];
 
 
     <article class="card" id="pula-cres-susak-2021">
@@ -360,12 +73,19 @@ const routePoints = [
         🌙 <strong>Night navigation:</strong> Martinšćica – Unije, 21.5 nm
       </p>
 
-      <figure class="anchorage-map">
-        <a href="../../assets/img/sail_routes_places/marinas/betina_osm.png" target="_blank" rel="noopener noreferrer">
-          <img src="../../assets/img/sail_routes_places/marinas/betina_osm.png" alt="OpenStreetMap screenshot of Betina marina and surrounding coastline">
-        </a>
-        <figcaption>© OpenStreetMap & OpenSeaMap contributors · ODbL  CC BY-SA 2.0</figcaption>
-      </figure>
+      <section class="card" >
+        <h2>Route des Segeltörns 2021</h2>
+
+        <div
+          id="sailing-route-map"
+          class="sailing-route-map"
+          role="application"
+          aria-label="Interaktive Karte der rekonstruierten Segelroute">
+        </div>
+        <p class="hint">
+          Rekonstruierter Routenverlauf – keine exakte GPS-Aufzeichnung.
+        </p>
+      </section>
 
       <div class="anchorage-summary">
         <p>
@@ -554,5 +274,525 @@ const routePoints = [
   </footer>
 
   <script src="../../assets/js/main.js" defer></script>
+
+  <script>
+    "use strict";
+
+    const routeDay1  = [
+      [
+        44.843197,
+        13.842462
+      ],
+      [
+        44.837837,
+        13.840917
+      ],
+      [
+        44.833816,
+        13.842634
+      ],
+      [
+        44.827725,
+        13.836109
+      ],
+      [
+        44.811731,
+        13.844894
+      ],
+      [
+        44.758868,
+        13.897056
+      ],
+      [
+        44.756373,
+        13.924231
+      ],
+      [
+        44.764912,
+        13.959949
+      ],
+      [
+        44.821625,
+        14.094355
+      ],
+      [
+        44.939462,
+        14.295611
+      ],
+      [
+        44.943237,
+        14.304346
+      ],
+      [
+        44.942173,
+        14.307866
+      ],
+      [
+        44.945243,
+        14.307394
+      ],
+      [
+        44.94427,
+        14.311901
+      ],
+      [
+        44.949803,
+        14.310098
+      ],
+      [
+        44.952665,
+        14.31162
+      ],
+      [
+        44.958538,
+        14.365157
+      ],
+      [
+        44.957039,
+        14.393771
+      ],
+      [
+        44.952723,
+        14.408367
+      ],
+      [
+        44.946948,
+        14.413691
+      ]
+    ];
+
+    const routeDay2 = [
+      [
+        44.946826,
+        14.414206
+      ],
+      [
+        44.953756,
+        14.406135
+      ],
+      [
+        44.956431,
+        14.39214
+      ],
+      [
+        44.955129,
+        14.335603
+      ],
+      [
+        44.951968,
+        14.298855
+      ],
+      [
+        44.935917,
+        14.288208
+      ],
+      [
+        44.89723,
+        14.274814
+      ],
+      [
+        44.876051,
+        14.28546
+      ],
+      [
+        44.833425,
+        14.293359
+      ],
+      [
+        44.80559,
+        14.312056
+      ],
+      [
+        44.802177,
+        14.34846
+      ],
+      [
+        44.809978,
+        14.355329
+      ],
+      [
+        44.817796,
+        14.351081
+      ]
+    ];
+
+    const routeDay3 = [
+      [
+        44.817922,
+        14.350579
+      ],
+      [
+        44.768028,
+        14.357195
+      ],
+      [
+        44.730448,
+        14.375741
+      ],
+      [
+        44.713847,
+        14.35376
+      ],
+      [
+        44.715707,
+        14.333932
+      ],
+      [
+        44.691959,
+        14.271625
+      ],
+      [
+        44.675051,
+        14.248768
+      ],
+      [
+        44.654645,
+        14.230909
+      ],
+      [
+        44.640712,
+        14.234
+      ],
+      [
+        44.636296,
+        14.244294
+      ],
+      [
+        44.638985,
+        14.242834
+      ]
+    ];
+
+
+    const routeDay4 = [
+      [
+        44.635723,
+        14.243788
+      ],
+      [
+        44.635967,
+        14.227646
+      ],
+      [
+        44.627654,
+        14.214939
+      ],
+      [
+        44.609076,
+        14.222835
+      ],
+      [
+        44.587057,
+        14.242068
+      ],
+      [
+        44.556461,
+        14.269543
+      ],
+      [
+        44.527947,
+        14.302328
+      ],
+      [
+        44.515812,
+        14.313817
+      ],
+      [
+        44.512595,
+        14.312901
+      ],
+      [
+        44.512174,
+        14.311162
+      ],
+      [
+        44.512557,
+        14.310561
+      ]
+    ];
+
+    const routeDay5 = [
+      [
+        44.512083,
+        14.311174
+      ],
+      [
+        44.515232,
+        14.315365
+      ],
+      [
+        44.52552,
+        14.303865
+      ],
+      [
+        44.568986,
+        14.253042
+      ],
+      [
+        44.60985,
+        14.216637
+      ],
+      [
+        44.748935,
+        13.914081
+      ],
+      [
+        44.767626,
+        13.8884
+      ],
+      [
+        44.812737,
+        13.843753
+      ],
+      [
+        44.826469,
+        13.834779
+      ],
+      [
+        44.832622,
+        13.839415
+      ],
+      [
+        44.835973,
+        13.843966
+      ],
+      [
+        44.83847,
+        13.841733
+      ],
+      [
+        44.844074,
+        13.842764
+      ]
+    ];
+
+
+
+    /*
+    * Karte erzeugen.
+    */
+    const sailingMap = L.map("sailing-route-map", {
+      scrollWheelZoom: false
+    });
+
+    /*
+    * Grundkarte.
+    */
+    L.tileLayer(
+      "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+      {
+        maxZoom: 19,
+
+        referrerPolicy: "strict-origin-when-cross-origin",
+
+        attribution:
+          '&copy; <a href="https://www.openstreetmap.org/copyright">' +
+          "OpenStreetMap-Mitwirkende</a>"
+      }
+    ).addTo(sailingMap);
+
+    /*
+    * Nautische Zeichen als zusätzliche Ebene.
+    */
+    L.tileLayer(
+      "https://tiles.openseamap.org/seamark/{z}/{x}/{y}.png",
+      {
+        maxZoom: 18,
+
+        referrerPolicy: "strict-origin-when-cross-origin",
+
+        attribution:
+          '&copy; <a href="https://www.openseamap.org">' +
+          "OpenSeaMap-Mitwirkende</a>"
+      }
+    ).addTo(sailingMap);
+
+    /*
+    * =========================================================
+    * TAGESETAPPEN ZEICHNEN
+    * =========================================================
+    */
+
+    const routeDay1Line = L.polyline(routeDay1, {
+      color: "#d33",
+      weight: 4,
+      opacity: 0.9,
+      dashArray: "10 8",
+      lineJoin: "round",
+      lineCap: "round"
+    })
+      .addTo(sailingMap)
+      .bindPopup("<strong>Day 1</strong><br>Pula → Cres");
+
+
+    const routeDay2Line = L.polyline(routeDay2, {
+      color: "#e67e22",
+      weight: 4,
+      opacity: 0.9,
+      dashArray: "10 8",
+      lineJoin: "round",
+      lineCap: "round"
+    })
+      .addTo(sailingMap)
+      .bindPopup("<strong>Day 2</strong><br>Cres → Martinšćica");
+
+
+    const routeDay3Line = L.polyline(routeDay3, {
+      color: "#8e44ad",
+      weight: 4,
+      opacity: 0.9,
+      dashArray: "10 8",
+      lineJoin: "round",
+      lineCap: "round"
+    })
+      .addTo(sailingMap)
+      .bindPopup("<strong>Day 3</strong><br>Martinšćica → Unije");
+
+
+    const routeDay4Line = L.polyline(routeDay4, {
+      color: "#168aad",
+      weight: 4,
+      opacity: 0.9,
+      dashArray: "10 8",
+      lineJoin: "round",
+      lineCap: "round"
+    })
+      .addTo(sailingMap)
+      .bindPopup("<strong>Day 4</strong><br>Unije → Susak");
+
+
+    const routeDay5Line = L.polyline(routeDay5, {
+      color: "#2a9d58",
+      weight: 4,
+      opacity: 0.9,
+      dashArray: "10 8",
+      lineJoin: "round",
+      lineCap: "round"
+    })
+      .addTo(sailingMap)
+      .bindPopup("<strong>Day 5</strong><br>Susak → Pula");
+
+
+    /*
+    * Alle Tagesetappen in einer Gruppe zusammenfassen.
+    *
+    * Diese Gruppe wird verwendet, um die Kartengrenzen
+    * automatisch auf die gesamte Route einzustellen.
+    */
+    const completeRoute = L.featureGroup([
+      routeDay1Line,
+      routeDay2Line,
+      routeDay3Line,
+      routeDay4Line,
+      routeDay5Line
+    ]);
+
+
+    /*
+    * Karte automatisch auf die gesamte Route zoomen.
+    */
+    sailingMap.fitBounds(
+      completeRoute.getBounds(),
+      {
+        padding: [30, 30],
+        maxZoom: 13
+      }
+    );
+
+
+    /*
+    * =========================================================
+    * MARKER
+    * =========================================================
+    */
+
+    /*
+    * Startpunkt:
+    * erster Punkt der ersten Tagesetappe.
+    */
+    L.marker(routeDay1[0])
+      .addTo(sailingMap)
+      .bindPopup(
+        "<strong>Start</strong><br>Marina Pula"
+      );
+
+
+    /*
+    * Cres:
+    * letzter Punkt von Tag 1.
+    */
+    L.marker(routeDay1[routeDay1.length - 1])
+      .addTo(sailingMap)
+      .bindPopup(
+        "<strong>Cres</strong><br>Overnight stay"
+      );
+
+
+    /*
+    * Martinšćica:
+    * letzter Punkt von Tag 2.
+    */
+    L.marker(routeDay2[routeDay2.length - 1])
+      .addTo(sailingMap)
+      .bindPopup(
+        "<strong>Martinšćica</strong><br>Overnight stay"
+      );
+
+
+    /*
+    * Unije:
+    * letzter Punkt von Tag 3.
+    */
+    L.marker(routeDay3[routeDay3.length - 1])
+      .addTo(sailingMap)
+      .bindPopup(
+        "<strong>Unije</strong><br>Night anchorage"
+      );
+
+
+    /*
+    * Susak:
+    * letzter Punkt von Tag 4.
+    */
+    L.marker(routeDay4[routeDay4.length - 1])
+      .addTo(sailingMap)
+      .bindPopup(
+        "<strong>Susak</strong><br>Intermediate stop"
+      );
+
+
+    /*
+    * Zielpunkt:
+    * letzter Punkt der letzten Tagesetappe.
+    */
+    L.marker(routeDay5[routeDay5.length - 1])
+      .addTo(sailingMap)
+      .bindPopup(
+        "<strong>Finish</strong><br>Marina Pula"
+      );
+
+
+    /*
+    * =========================================================
+    * EBENENAUSWAHL
+    * =========================================================
+    */
+
+    const routeLayers = {
+      "Day 1: Pula – Cres": routeDay1Line,
+      "Day 2: Cres – Martinšćica": routeDay2Line,
+      "Day 3: Martinšćica – Unije": routeDay3Line,
+      "Day 4: Unije – Susak": routeDay4Line,
+      "Day 5: Susak – Pula": routeDay5Line
+    };
+
+    L.control.layers(
+      null,
+      routeLayers,
+      {
+        collapsed: true
+      }
+    ).addTo(sailingMap);
+  </script>
 </body>
 </html>

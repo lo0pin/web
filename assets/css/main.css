@@ -1776,3 +1776,39 @@ section.card#table h4 {
 .star-data td:nth-child(2) {
   width: 65%;
 }
+
+
+/* ==========================================================
+   INTERAKTIVE SEGELKARTE
+   ========================================================== */
+
+.sailing-route-map {
+  width: 100%;
+
+  /*
+   * Leaflet benötigt zwingend eine definierte Höhe.
+   */
+  height: min(70vh, 720px);
+  min-height: 420px;
+
+  margin-top: 1rem;
+
+  border: 1px solid var(--border-color, #b8b8b8);
+  border-radius: 0.75rem;
+
+  overflow: hidden;
+}
+
+.map-note {
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+  font-style: italic;
+  opacity: 0.8;
+}
+
+@media (max-width: 700px) {
+  .sailing-route-map {
+    height: 60vh;
+    min-height: 360px;
+  }
+}
