@@ -491,6 +491,7 @@
         <li><a href="#html-forms">Forms</a></li>
         <li><a href="#html-head">Head & metadata</a></li>
         <li><a href="#html-escaping">Escaping HTML &amp; displaying code</a></li>
+        <li><a href="#html-paths">File paths &amp; URLs</a></li>
         <li><a href="#html-rules">Practical rules</a></li>
       </ul>
 
@@ -960,6 +961,556 @@
 
       <p class="hint"><a href="#top">↑ top</a></p>
 
+      <hr class="divider" />
+      
+      <h3 id="html-paths">File paths &amp; URLs</h3>
+      
+      <p>
+        Paths tell the browser where to find another resource, such as an image, stylesheet,
+        JavaScript file, download or another HTML page. A path may be relative to the current file,
+        relative to the domain root, or a complete external URL.
+      </p>
+      
+      <p class="hint">
+        Most path problems are not HTML problems. They are descriptions of the wrong location.
+      </p>
+      
+      <div class="cheat-grid">
+        <article class="cheat-item">
+          <h4>Example project structure</h4>
+      
+      
+      <p>The examples below assume this folder structure:</p>
+      
+      <pre class="code"><code>web/
+      
+      
+      ├── index.html
+      ├── cheatsheets.html
+      ├── astronomy/
+      │   └── clouds.html
+      └── assets/
+      ├── css/
+      │   └── main.css
+      ├── js/
+      │   └── main.js
+      └── img/
+      └── wolkenbetrachtung/
+      └── stratocumulus01.jpg</code></pre>
+      
+      
+      <p>
+        The correct path depends on the location of the file containing the
+        <code>src</code> or <code>href</code> attribute.
+      </p>
+      
+      
+        </article>
+      
+        <article class="cheat-item">
+          <h4>Relative path</h4>
+      
+      
+      <p>
+        A relative path is resolved from the location of the current HTML file.
+        It does not begin with a slash.
+      </p>
+      
+      <p><strong>From <code>cheatsheets.html</code> in the project root:</strong></p>
+      
+      <pre class="code code-html"><code><span class="tag">&lt;img</span>
+      
+      
+      <span class="attr">src</span>=<span class="val">"assets/img/wolkenbetrachtung/stratocumulus01.jpg"</span> <span class="attr">alt</span>=<span class="val">"Stratocumulus clouds"</span> <span class="tag">></span></code></pre>
+      
+      
+      <p>
+        The browser starts in the folder containing <code>cheatsheets.html</code>
+        and then enters <code>assets</code>, <code>img</code> and
+        <code>wolkenbetrachtung</code>.
+      </p>
+      
+      <p class="hint">
+        Relative paths are usually the most portable choice for a static GitHub Pages project.
+      </p>
+      
+      
+        </article>
+      
+        <article class="cheat-item">
+          <h4>Current folder: <code>./</code></h4>
+      
+      
+      <p>
+        A leading <code>./</code> explicitly means “start in the current folder”.
+        It is usually optional.
+      </p>
+      
+      <pre class="code code-html"><code><span class="tag">&lt;img</span>
+      
+      
+      <span class="attr">src</span>=<span class="val">"./assets/img/photo.jpg"</span> <span class="attr">alt</span>=<span class="val">"Example photograph"</span> <span class="tag">></span></code></pre>
+      
+      
+      <p>These two paths normally mean the same thing:</p>
+      
+      <pre class="code"><code>assets/img/photo.jpg
+      
+      
+      ./assets/img/photo.jpg</code></pre>
+      
+        </article>
+      
+        <article class="cheat-item">
+          <h4>Parent folder: <code>../</code></h4>
+      
+      
+      <p>
+        Two dots mean “go one folder upward”.
+      </p>
+      
+      <p><strong>From <code>astronomy/clouds.html</code>:</strong></p>
+      
+      <pre class="code code-html"><code><span class="tag">&lt;img</span>
+      
+      
+      <span class="attr">src</span>=<span class="val">"../assets/img/wolkenbetrachtung/stratocumulus01.jpg"</span> <span class="attr">alt</span>=<span class="val">"Stratocumulus clouds"</span> <span class="tag">></span></code></pre>
+      
+      
+      <p>The path means:</p>
+      
+      <ol>
+        <li>Leave the <code>astronomy</code> folder with <code>../</code>.</li>
+        <li>Enter <code>assets/img/wolkenbetrachtung/</code>.</li>
+        <li>Open <code>stratocumulus01.jpg</code>.</li>
+      </ol>
+      
+      <pre class="code"><code>../        one folder up
+      
+      
+      ../../      two folders up
+      ../../../   three folders up</code></pre>
+      
+        </article>
+      
+        <article class="cheat-item">
+          <h4>Root-relative path: leading <code>/</code></h4>
+      
+      
+      <p>
+        A path beginning with <code>/</code> starts at the root of the current domain,
+        not at the folder containing the HTML file.
+      </p>
+      
+      <pre class="code code-html"><code><span class="tag">&lt;img</span>
+      
+      
+      <span class="attr">src</span>=<span class="val">"/web/assets/img/wolkenbetrachtung/stratocumulus01.jpg"</span> <span class="attr">alt</span>=<span class="val">"Stratocumulus clouds"</span> <span class="tag">></span></code></pre>
+      
+      
+      <p>On this deployed address:</p>
+      
+      <pre class="code"><code>https://username.github.io/web/astronomy/clouds.html</code></pre>
+      
+      <p>the browser requests:</p>
+      
+      <pre class="code"><code>https://username.github.io/web/assets/img/wolkenbetrachtung/stratocumulus01.jpg</code></pre>
+      
+      <p class="hint">
+        A leading slash means domain root. It does not automatically mean the root of a
+        GitHub repository.
+      </p>
+      
+      
+        </article>
+      
+        <article class="cheat-item">
+          <h4>GitHub Pages project paths</h4>
+      
+      
+      <p>
+        A GitHub Pages project site commonly includes the repository name in its URL:
+      </p>
+      
+      <pre class="code"><code>https://username.github.io/web/</code></pre>
+      
+      <p>In that case:</p>
+      
+      <pre class="code"><code>/assets/img/photo.jpg
+      
+      
+      → https://username.github.io/assets/img/photo.jpg
+      
+      /web/assets/img/photo.jpg
+      → https://username.github.io/web/assets/img/photo.jpg</code></pre>
+      
+      
+      <p>
+        The first path skips the repository folder and is therefore usually wrong for a
+        project site. The second path explicitly includes the repository name.
+      </p>
+      
+      <p class="hint">
+        Root-relative paths such as <code>/web/...</code> couple the site to the repository
+        name. Renaming the repository or using another deployment path then breaks them.
+      </p>
+      
+      
+        </article>
+      
+        <article class="cheat-item">
+          <h4>Complete absolute URL</h4>
+      
+      
+      <p>
+        An absolute URL contains the protocol, domain and complete resource path.
+      </p>
+      
+      <pre class="code code-html"><code><span class="tag">&lt;img</span>
+      
+      
+      <span class="attr">src</span>=<span class="val">"https://username.github.io/web/assets/img/photo.jpg"</span> <span class="attr">alt</span>=<span class="val">"Example photograph"</span> <span class="tag">></span></code></pre>
+      
+      
+      <p><strong>Useful for:</strong></p>
+      
+      <ul>
+        <li>external websites</li>
+        <li>canonical URLs</li>
+        <li>resources that must always point to one particular domain</li>
+      </ul>
+      
+      <p class="hint">
+        For internal links, complete URLs are often unnecessarily rigid.
+      </p>
+      
+      
+        </article>
+      
+        <article class="cheat-item">
+          <h4>Relative, root-relative or absolute?</h4>
+      
+      
+      <table>
+        <thead>
+          <tr>
+            <th>Path</th>
+            <th>Starts from</th>
+            <th>Typical use</th>
+          </tr>
+        </thead>
+      
+        <tbody>
+          <tr>
+            <td><code>assets/img/photo.jpg</code></td>
+            <td>Current HTML folder</td>
+            <td>Files near the current page</td>
+          </tr>
+      
+          <tr>
+            <td><code>../assets/img/photo.jpg</code></td>
+            <td>Parent of current HTML folder</td>
+            <td>Pages inside subfolders</td>
+          </tr>
+      
+          <tr>
+            <td><code>/web/assets/img/photo.jpg</code></td>
+            <td>Domain root</td>
+            <td>Fixed GitHub Pages project path</td>
+          </tr>
+      
+          <tr>
+            <td><code>https://example.com/photo.jpg</code></td>
+            <td>Specified external domain</td>
+            <td>External or permanently fixed resources</td>
+          </tr>
+        </tbody>
+      </table>
+      
+      
+        </article>
+      
+        <article class="cheat-item">
+          <h4>Why <code>web/assets/...</code> may be wrong</h4>
+      
+      
+      <p>Consider this path:</p>
+      
+      <pre class="code"><code>web/assets/img/photo.jpg</code></pre>
+      
+      <p>
+        Because it has no leading slash, it is a relative path. From
+        <code>cheatsheets.html</code>, the browser looks for:
+      </p>
+      
+      <pre class="code"><code>web/
+      
+      
+      └── web/
+      └── assets/
+      └── img/
+      └── photo.jpg</code></pre>
+      
+      
+      <p>
+        It is correct only when there really is another <code>web</code> folder inside
+        the current folder.
+      </p>
+      
+      <p class="hint">
+        The repository name visible in a GitHub Pages URL is not necessarily a folder
+        that should appear in a relative path.
+      </p>
+      
+      
+        </article>
+      
+        <article class="cheat-item">
+          <h4>Paths in HTML, CSS and JavaScript</h4>
+      
+      
+      <p>
+        Relative paths are not always resolved from the same file.
+      </p>
+      
+      <ul>
+        <li>
+          In HTML, <code>src</code> and <code>href</code> are normally relative to the HTML document.
+        </li>
+        <li>
+          In CSS, <code>url(...)</code> is relative to the CSS file containing the rule.
+        </li>
+        <li>
+          In JavaScript, a relative <code>fetch()</code> URL is normally resolved against the page URL.
+        </li>
+        <li>
+          In a JavaScript module, <code>new URL("...", import.meta.url)</code> resolves from the module file.
+        </li>
+      </ul>
+      
+      <p><strong>Example CSS file at <code>assets/css/main.css</code>:</strong></p>
+      
+      <pre class="code"><code>.hero {
+      
+      
+      background-image: url("../img/photo.jpg");
+      }</code></pre>
+      
+      
+      <p>
+        The CSS file goes one folder upward from <code>assets/css/</code> to
+        <code>assets/</code>, then enters <code>img/</code>.
+      </p>
+      
+      
+        </article>
+      
+        <article class="cheat-item">
+          <h4>Folder links and <code>index.html</code></h4>
+      
+      
+      <p>If a folder contains an <code>index.html</code>, these URLs often lead to the same page:</p>
+      
+      <pre class="code"><code>sailing/
+      
+      
+      sailing/index.html</code></pre>
+      
+      
+      <p>
+        However, a folder containing <code>home.html</code> does not automatically open that file.
+        You must link to it explicitly:
+      </p>
+      
+      <pre class="code code-html"><code><span class="tag">&lt;a</span>
+      
+      
+      <span class="attr">href</span>=<span class="val">"sailing/home.html"</span> <span class="tag">></span>Sailing<span class="tag"></a></span></code></pre>
+      
+        </article>
+      
+        <article class="cheat-item">
+          <h4>Fragments and query strings</h4>
+      
+      
+      <p>A URL may contain more than a file path.</p>
+      
+      <pre class="code"><code>article.html#sources
+      
+      
+      archive.html?topic=astro
+      archive.html?topic=astro#moon</code></pre>
+      
+      
+      <ul>
+        <li><code>#sources</code> jumps to an element with <code>id="sources"</code>.</li>
+        <li><code>?topic=astro</code> adds a query string.</li>
+        <li>Neither changes the physical location of the HTML file.</li>
+      </ul>
+      
+      
+        </article>
+      
+        <article class="cheat-item">
+          <h4>Case sensitivity and filenames</h4>
+      
+      
+      <p>
+        GitHub Pages runs on a case-sensitive system. These names are different:
+      </p>
+      
+      <pre class="code"><code>Stratocumulus01.jpg
+      
+      
+      stratocumulus01.jpg
+      stratocumulus01.JPG</code></pre>
+      
+      
+      <p><strong>Recommended filename style:</strong></p>
+      
+      <ul>
+        <li>use lowercase letters</li>
+        <li>avoid spaces</li>
+        <li>use hyphens or underscores consistently</li>
+        <li>check the exact file extension</li>
+      </ul>
+      
+      <pre class="code"><code>stratocumulus-01.jpg
+      
+      
+      stratocumulus01.jpg</code></pre>
+      
+      
+      <p class="hint">
+        A path may work on Windows and still fail after deployment because Windows is often
+        more forgiving about uppercase and lowercase filenames.
+      </p>
+      
+      
+        </article>
+      
+        <article class="cheat-item">
+          <h4>Avoid spaces and special characters</h4>
+      
+      
+      <p>This filename is technically possible but needlessly awkward:</p>
+      
+      <pre class="code"><code>My cloud photo (final).jpg</code></pre>
+      
+      <p>The URL may have to encode spaces and characters:</p>
+      
+      <pre class="code"><code>My%20cloud%20photo%20%28final%29.jpg</code></pre>
+      
+      <p>Prefer:</p>
+      
+      <pre class="code"><code>my-cloud-photo-final.jpg</code></pre>
+      
+      
+        </article>
+      
+        <article class="cheat-item">
+          <h4>Do not confuse file-system paths with URLs</h4>
+      
+      
+      <p>A browser cannot use a Windows file-system path on the deployed website:</p>
+      
+      <pre class="code"><code>C:\Users\Julian\Documents\web\assets\img\photo.jpg</code></pre>
+      
+      <p>Use a web path with forward slashes:</p>
+      
+      <pre class="code"><code>assets/img/photo.jpg</code></pre>
+      
+      <p class="hint">
+        URLs use forward slashes. Backslashes belong to Windows file paths, where they may remain
+        and contemplate their sins.
+      </p>
+      
+      
+        </article>
+      
+        <article class="cheat-item">
+          <h4>The <code>&lt;base&gt;</code> element</h4>
+      
+      
+      <p>
+        A <code>&lt;base&gt;</code> element can redefine the starting point for every relative URL
+        in a document.
+      </p>
+      
+      <pre class="code code-html"><code><span class="tag">&lt;base</span>
+      
+      
+      <span class="attr">href</span>=<span class="val">"/web/"</span> <span class="tag">></span></code></pre>
+      
+      
+      <p>
+        After this, relative links such as <code>assets/img/photo.jpg</code> are resolved from
+        <code>/web/</code> instead of the current document folder.
+      </p>
+      
+      <p class="hint">
+        Use <code>&lt;base&gt;</code> only deliberately. It changes all relative links on the page
+        and can cause impressively confusing breakage.
+      </p>
+      
+      
+        </article>
+      
+        <article class="cheat-item">
+          <h4>Debugging a broken path</h4>
+      
+      
+      <ol>
+        <li>Open the browser developer tools.</li>
+        <li>Open the <strong>Network</strong> tab.</li>
+        <li>Reload the page.</li>
+        <li>Look for a red <code>404</code> request.</li>
+        <li>Inspect the exact URL requested by the browser.</li>
+        <li>Compare uppercase, lowercase, folders and file extension.</li>
+      </ol>
+      
+      <p>You can also copy the image URL and open it directly in a new browser tab.</p>
+      
+      <p class="hint">
+        Do not stare at the HTML and hope the path confesses. Check the URL the browser
+        actually requested.
+      </p>
+      
+      
+        </article>
+      
+        <article class="cheat-item">
+          <h4>Recommended rule for this project</h4>
+      
+      
+      <p>
+        Prefer relative paths so the website works both locally and on GitHub Pages without
+        depending unnecessarily on the repository name.
+      </p>
+      
+      <p><strong>From a root-level HTML file:</strong></p>
+      
+      <pre class="code"><code>assets/img/wolkenbetrachtung/stratocumulus01.jpg</code></pre>
+      
+      <p><strong>From an HTML file one folder deeper:</strong></p>
+      
+      <pre class="code"><code>../assets/img/wolkenbetrachtung/stratocumulus01.jpg</code></pre>
+      
+      <p><strong>Root-relative GitHub Pages alternative:</strong></p>
+      
+      <pre class="code"><code>/web/assets/img/wolkenbetrachtung/stratocumulus01.jpg</code></pre>
+      
+      <p class="hint">
+        Use <code>/web/...</code> only when the deployed site definitely lives below
+        <code>https://domain.example/web/</code> and you accept that dependency.
+      </p>
+      
+      
+        </article>
+      </div>
+      
+      <p class="hint"><a href="#top">↑ top</a></p>
+      
 
       <hr class="divider" />
 
