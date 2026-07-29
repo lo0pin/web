@@ -72,7 +72,9 @@
       led_matrix: "LED Matrix",
       solar: "Solar",
       pc_build: "PC Build",
-      arduino: "Arduino"
+      arduino: "Arduino",
+      nas: "NAS",
+      
     },
     nerdism: {
       gothic_mod: "Gothic Mod",
@@ -140,7 +142,8 @@
       led_matrix: "electronics/led_matrix.html",
       solar: "electronics/solar.html",
       pc_build: "electronics/pc_build.html",
-      arduino: "electronics/arduino.html"
+      arduino: "electronics/arduino.html",
+      nas: "electronics/nas.html",
     },
     nerdism: {
       gothic_mod: "nerdism/gothic_mod.html",
