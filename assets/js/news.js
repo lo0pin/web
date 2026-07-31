@@ -91,6 +91,7 @@
       hiking: "Hiking",
       metorology: "Meteorology",
       meteorology: "Meteorology",
+      moto: "Motobike",
     },
     sailing: {
       routes_places: "Routes & Places",
@@ -160,6 +161,7 @@
       hiking: "outdoor/hiking.html",
       metorology: "outdoor/metorology.html",
       meteorology: "outdoor/meteorology.html",
+      moto: "outdoor/motobike.html"
     },
     sailing: {
       routes_places: "sailing/routes_places.html",
