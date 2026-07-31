@@ -80,6 +80,7 @@
 - "subtopic": "drone"
 - "subtopic": "hiking"
 - "subtopic": "metorology"
+subtopic="moto"
 
 
 ## SRC for IMG
