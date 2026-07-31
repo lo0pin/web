@@ -1,233 +1,297 @@
 <!doctype html>
 <html lang="de">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Quest Editor (Web) → HTML Export</title>
 
   <style>
-    :root{
+    :root {
       --bg: #eef4ff;
       --card: #ffffff;
       --text: #111827;
       --muted: #475569;
       --line: rgba(15, 23, 42, .12);
       --accent: #2f6feb;
-      --accent-soft: rgba(47,111,235,.12);
+      --accent-soft: rgba(47, 111, 235, .12);
       --danger: #b42318;
-      --shadow: 0 10px 24px rgba(15,23,42,.08);
+      --shadow: 0 10px 24px rgba(15, 23, 42, .08);
       --radius: 14px;
     }
-    *{ box-sizing: border-box; }
-    body{
-      margin:0;
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
       background: var(--bg);
       color: var(--text);
       line-height: 1.45;
     }
-    header, main{
+
+    header,
+    main {
       max-width: 1280px;
       margin: 0 auto;
       padding: 18px 18px;
     }
-    header{
+
+    header {
       padding-top: 22px;
-      display:flex;
-      align-items:flex-end;
-      justify-content:space-between;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
       gap: 12px;
       flex-wrap: wrap;
     }
-    header h1{
-      margin:0;
+
+    header h1 {
+      margin: 0;
       font-size: clamp(1.2rem, 2.2vw, 1.8rem);
       letter-spacing: .2px;
     }
-    header .hint{
+
+    header .hint {
       color: var(--muted);
       font-size: .95rem;
     }
 
-    .layout{
-      display:grid;
+    .layout {
+      display: grid;
       grid-template-columns: 360px 1fr;
       gap: 14px;
       align-items: start;
     }
-    @media (max-width: 980px){
-      .layout{ grid-template-columns: 1fr; }
+
+    @media (max-width: 980px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
     }
 
-    .card{
+    .card {
       background: var(--card);
       border: 1px solid var(--line);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       padding: 14px;
     }
-    .card h2{
-      margin:0 0 10px 0;
+
+    .card h2 {
+      margin: 0 0 10px 0;
       font-size: 1.1rem;
     }
-    .muted{ color: var(--muted); }
-    hr{
-      border:0;
+
+    .muted {
+      color: var(--muted);
+    }
+
+    hr {
+      border: 0;
       border-top: 1px solid var(--line);
       margin: 12px 0;
     }
 
-    label{
+    label {
       font-size: .92rem;
       color: var(--muted);
-      display:block;
+      display: block;
       margin: 10px 0 4px 0;
     }
-    input[type="text"], textarea, select{
-      width:100%;
+
+    input[type="text"],
+    textarea,
+    select {
+      width: 100%;
       padding: 10px 10px;
-      border: 1px solid rgba(15,23,42,.18);
+      border: 1px solid rgba(15, 23, 42, .18);
       border-radius: 12px;
       background: #fff;
       font: inherit;
       outline: none;
     }
-    textarea{ min-height: 90px; resize: vertical; }
-    .row2{
-      display:grid;
+
+    textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    .row2 {
+      display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 10px;
     }
-    @media (max-width: 980px){
-      .row2{ grid-template-columns: 1fr; }
+
+    @media (max-width: 980px) {
+      .row2 {
+        grid-template-columns: 1fr;
+      }
     }
 
-    .btnbar{
-      display:flex;
+    .btnbar {
+      display: flex;
       flex-wrap: wrap;
       gap: 8px;
       margin-top: 10px;
     }
-    button{
-      appearance:none;
-      border: 1px solid rgba(47,111,235,.25);
+
+    button {
+      appearance: none;
+      border: 1px solid rgba(47, 111, 235, .25);
       background: var(--accent-soft);
       color: var(--accent);
       border-radius: 999px;
       padding: 8px 12px;
       font-weight: 700;
-      cursor:pointer;
+      cursor: pointer;
     }
-    button:hover{ filter: brightness(.98); text-decoration: underline; }
-    button.danger{
-      border-color: rgba(180,35,24,.25);
-      background: rgba(180,35,24,.08);
+
+    button:hover {
+      filter: brightness(.98);
+      text-decoration: underline;
+    }
+
+    button.danger {
+      border-color: rgba(180, 35, 24, .25);
+      background: rgba(180, 35, 24, .08);
       color: var(--danger);
     }
-    button.ghost{
+
+    button.ghost {
       background: transparent;
-      border-color: rgba(15,23,42,.12);
+      border-color: rgba(15, 23, 42, .12);
       color: var(--muted);
       font-weight: 600;
       text-decoration: none;
     }
-    button.primary{
-      background: rgba(47,111,235,.14);
-      border-color: rgba(47,111,235,.35);
+
+    button.primary {
+      background: rgba(47, 111, 235, .14);
+      border-color: rgba(47, 111, 235, .35);
     }
 
-    .nodeList{
-      width:100%;
-      border: 1px solid rgba(15,23,42,.12);
+    .nodeList {
+      width: 100%;
+      border: 1px solid rgba(15, 23, 42, .12);
       border-radius: 12px;
-      overflow:hidden;
-      background:#fff;
+      overflow: hidden;
+      background: #fff;
     }
-    .nodeListHeader{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
+
+    .nodeListHeader {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       padding: 10px 10px;
-      background: rgba(15,23,42,.03);
-      border-bottom: 1px solid rgba(15,23,42,.08);
+      background: rgba(15, 23, 42, .03);
+      border-bottom: 1px solid rgba(15, 23, 42, .08);
       gap: 10px;
     }
-    .nodeListHeader strong{ font-size:.95rem; }
-    .nodeListItems{
+
+    .nodeListHeader strong {
+      font-size: .95rem;
+    }
+
+    .nodeListItems {
       max-height: 360px;
-      overflow:auto;
+      overflow: auto;
     }
-    .nodeItem{
+
+    .nodeItem {
       padding: 10px 10px;
-      border-bottom: 1px solid rgba(15,23,42,.06);
-      cursor:pointer;
-      display:flex;
-      flex-direction:column;
-      gap:2px;
+      border-bottom: 1px solid rgba(15, 23, 42, .06);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
     }
-    .nodeItem:last-child{ border-bottom:0; }
-    .nodeItem .id{ font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace; font-size: .9rem; color: var(--muted); }
-    .nodeItem.active{
-      outline: 2px solid rgba(47,111,235,.35);
+
+    .nodeItem:last-child {
+      border-bottom: 0;
+    }
+
+    .nodeItem .id {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: .9rem;
+      color: var(--muted);
+    }
+
+    .nodeItem.active {
+      outline: 2px solid rgba(47, 111, 235, .35);
       outline-offset: -2px;
-      background: rgba(47,111,235,.06);
+      background: rgba(47, 111, 235, .06);
     }
 
-    .splitHeader{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      flex-wrap:wrap;
+    .splitHeader {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
     }
 
-    .table{
-      width:100%;
+    .table {
+      width: 100%;
       border-collapse: collapse;
-      border: 1px solid rgba(15,23,42,.12);
+      border: 1px solid rgba(15, 23, 42, .12);
       border-radius: 12px;
-      overflow:hidden;
-      background:#fff;
+      overflow: hidden;
+      background: #fff;
     }
-    .table th, .table td{
+
+    .table th,
+    .table td {
       padding: 10px 10px;
-      border-bottom: 1px solid rgba(15,23,42,.08);
-      text-align:left;
+      border-bottom: 1px solid rgba(15, 23, 42, .08);
+      text-align: left;
       vertical-align: top;
       font-size: .95rem;
     }
-    .table th{ background: rgba(15,23,42,.03); color: var(--muted); font-weight: 700; }
-    .table tr:last-child td{ border-bottom:0; }
 
-    .small{
+    .table th {
+      background: rgba(15, 23, 42, .03);
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .table tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .small {
       font-size: .9rem;
     }
-    .warn{
+
+    .warn {
       color: var(--danger);
       font-weight: 700;
       font-size: .92rem;
     }
-    .pill{
-      display:inline-block;
+
+    .pill {
+      display: inline-block;
       padding: 4px 9px;
       border-radius: 999px;
-      background: rgba(15,23,42,.06);
-      border: 1px solid rgba(15,23,42,.10);
+      background: rgba(15, 23, 42, .06);
+      border: 1px solid rgba(15, 23, 42, .10);
       color: var(--muted);
       font-size: .85rem;
       font-weight: 700;
     }
 
-    .stickySave{
+    .stickySave {
       position: sticky;
       top: 10px;
       z-index: 5;
-      background: linear-gradient(180deg, rgba(238,244,255,1), rgba(238,244,255,0));
+      background: linear-gradient(180deg, rgba(238, 244, 255, 1), rgba(238, 244, 255, 0));
       padding-top: 8px;
       margin-top: -8px;
     }
 
-    .footerNote{
+    .footerNote {
       margin-top: 10px;
       color: var(--muted);
       font-size: .9rem;
@@ -308,7 +372,8 @@
         </div>
 
         <div class="footerNote">
-          <!--Tipp: -->Knoten-Optionen sollten auf existierende Ziel-IDs zeigen. Unbekannte Ziele werden beim HTML-Export markiert.
+          <!--Tipp: -->Knoten-Optionen sollten auf existierende Ziel-IDs zeigen. Unbekannte Ziele werden beim
+          HTML-Export markiert.
         </div>
       </aside>
 
@@ -398,40 +463,40 @@
     /***********************
      * Data Model (JS)
      ***********************/
-    function nowStamp(){
+    function nowStamp() {
       const d = new Date();
-      const pad = n => String(n).padStart(2,"0");
-      return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+      const pad = n => String(n).padStart(2, "0");
+      return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
     }
 
-    function sanitizeId(raw){
+    function sanitizeId(raw) {
       raw = (raw ?? "").trim().toLowerCase();
       raw = raw
-        .replaceAll("ä","ae").replaceAll("ö","oe").replaceAll("ü","ue").replaceAll("ß","ss");
+        .replaceAll("ä", "ae").replaceAll("ö", "oe").replaceAll("ü", "ue").replaceAll("ß", "ss");
       raw = raw.replace(/[^a-z0-9\-_]+/g, "-");
       raw = raw.replace(/-{2,}/g, "-").replace(/^-+|-+$/g, "");
       return raw || "node";
     }
 
-    function linesToList(text){
+    function linesToList(text) {
       return (text || "")
         .split(/\r?\n/)
         .map(s => s.trim())
         .filter(Boolean);
     }
 
-    function listToLines(items){
+    function listToLines(items) {
       return (items || []).join("\n");
     }
 
-    function htmlEscape(s){
+    function htmlEscape(s) {
       return String(s ?? "")
         .replaceAll("&", "&amp;")
         .replaceAll("<", "&lt;")
         .replaceAll(">", "&gt;");
     }
 
-    function defaultProject(){
+    function defaultProject() {
       return {
         meta: {
           quest_name: "Neue Quest",
@@ -610,7 +675,7 @@
     }
   </style>`.trim();
 
-const JS_BLOCK = `
+    const JS_BLOCK = `
   <script>
     (function(){
       function focusTargetFromHash(){
@@ -628,9 +693,9 @@ const JS_BLOCK = `
   </scr` + `ipt>`.trim();
 
 
-    function renderNav(nodes){
+    function renderNav(nodes) {
       let parts = [`<nav aria-label="Quest-Navigation">`, `<a href="#top">Übersicht</a>`];
-      for(const n of nodes){
+      for (const n of nodes) {
         const label = htmlEscape(n.title || n.node_id);
         parts.push(`<a href="#${htmlEscape(n.node_id)}">${label}</a>`);
       }
@@ -638,7 +703,7 @@ const JS_BLOCK = `
       return parts.join("\n      ");
     }
 
-    function renderMetaList(meta){
+    function renderMetaList(meta) {
       const items = [
         ["Questgeber", meta.quest_giver],
         ["Voraussetzung", meta.prerequisite],
@@ -647,14 +712,14 @@ const JS_BLOCK = `
         ["Belohnungen", meta.rewards],
         ["Wichtige Flags", meta.important_flags],
       ];
-      return items.map(([k,v])=>{
-        const vv = (v||"").trim() || "—";
+      return items.map(([k, v]) => {
+        const vv = (v || "").trim() || "—";
         return `<li><strong>${htmlEscape(k)}:</strong> ${htmlEscape(vv)}</li>`;
       }).join("\n        ");
     }
 
-    function renderListBlock(title, items){
-      if(!items || items.length===0) return "";
+    function renderListBlock(title, items) {
+      if (!items || items.length === 0) return "";
       const lis = items.map(it => `<li>${htmlEscape(it)}</li>`).join("\n        ");
       return `
       <p><strong>${htmlEscape(title)}:</strong></p>
@@ -663,8 +728,8 @@ const JS_BLOCK = `
       </ul>`.trim();
     }
 
-    function renderDetails(title, items){
-      if(!items || items.length===0) return "";
+    function renderDetails(title, items) {
+      if (!items || items.length === 0) return "";
       const lis = items.map(it => `<li>${htmlEscape(it)}</li>`).join("\n          ");
       return `
       <details>
@@ -675,15 +740,15 @@ const JS_BLOCK = `
       </details>`.trim();
     }
 
-    function renderOptions(node, nodeIds){
-      if(!node.options || node.options.length===0) return `<p><em>Keine Optionen.</em></p>`;
+    function renderOptions(node, nodeIds) {
+      if (!node.options || node.options.length === 0) return `<p><em>Keine Optionen.</em></p>`;
       const out = [`<h3>Optionen</h3>`, `<ol>`];
-      for(const opt of node.options){
-        const label = htmlEscape((opt.label||"").trim() || "Option");
-        const target = (opt.target||"").trim();
-        if(!target || !nodeIds.includes(target)){
+      for (const opt of node.options) {
+        const label = htmlEscape((opt.label || "").trim() || "Option");
+        const target = (opt.target || "").trim();
+        if (!target || !nodeIds.includes(target)) {
           out.push(`<li><a href="#${htmlEscape(target || "top")}">${label}</a> <em style="color:#b42318;">(Ziel unbekannt)</em></li>`);
-        }else{
+        } else {
           out.push(`<li><a href="#${htmlEscape(target)}">${label}</a></li>`);
         }
       }
@@ -691,22 +756,22 @@ const JS_BLOCK = `
       return out.join("\n      ");
     }
 
-    function renderNodeSection(node, nodeIds){
-      const h2 = htmlEscape((node.title||"").trim() || node.node_id);
-      const scene = (node.scene||"").trim();
-      const dialog = (node.dialog||"").trim();
-      const content = (node.content||"").trim();
-      const notes = (node.notes||"").trim();
+    function renderNodeSection(node, nodeIds) {
+      const h2 = htmlEscape((node.title || "").trim() || node.node_id);
+      const scene = (node.scene || "").trim();
+      const dialog = (node.dialog || "").trim();
+      const content = (node.content || "").trim();
+      const notes = (node.notes || "").trim();
 
       let parts = [
         `<section id="${htmlEscape(node.node_id)}">`,
         `  <h2>${h2}</h2>`
       ];
 
-      if(scene) parts.push(`  <p><strong>Szene:</strong> ${htmlEscape(scene)}</p>`);
-      if(content) parts.push(`  <p><strong>Inhalt:</strong> ${htmlEscape(content)}</p>`);
+      if (scene) parts.push(`  <p><strong>Szene:</strong> ${htmlEscape(scene)}</p>`);
+      if (content) parts.push(`  <p><strong>Inhalt:</strong> ${htmlEscape(content)}</p>`);
 
-      if(dialog){
+      if (dialog) {
         parts.push(`  <p><strong>Dialog:</strong></p>`);
         parts.push(`  <blockquote>`);
         parts.push(`    <pre>`);
@@ -716,35 +781,35 @@ const JS_BLOCK = `
       }
 
       const infoBlock = renderListBlock("Wichtige Information", node.info_items);
-      if(infoBlock) parts.push(infoBlock);
+      if (infoBlock) parts.push(infoBlock);
 
       const techDetails = renderDetails("Technik/Flags", node.tech_flags);
-      if(techDetails) parts.push(techDetails);
+      if (techDetails) parts.push(techDetails);
 
       const outDetails = renderDetails("Enden/Outcomes (Notizblock)", node.outcomes);
-      if(outDetails) parts.push(outDetails);
+      if (outDetails) parts.push(outDetails);
 
       parts.push(renderOptions(node, nodeIds));
 
-      if(notes) parts.push(`  <p><strong>Notizen:</strong> ${htmlEscape(notes)}</p>`);
+      if (notes) parts.push(`  <p><strong>Notizen:</strong> ${htmlEscape(notes)}</p>`);
 
       parts.push(`  <p><a href="#top">↑ Zur Übersicht</a></p>`);
       parts.push(`</section>`);
       return parts.join("\n    ");
     }
 
-    function renderHtml(project, includeJs=true){
+    function renderHtml(project, includeJs = true) {
       const meta = project.meta;
       const nodes = project.nodes || [];
       const nodeIds = nodes.map(n => n.node_id);
       const title = `Quest-Präsentator: ${meta.quest_name}`.trim();
       const nav = renderNav(nodes);
-      const version = (meta.version_stamp||"").trim() || nowStamp();
+      const version = (meta.version_stamp || "").trim() || nowStamp();
 
       const topSection = `
     <section id="top">
       <h2>Übersicht</h2>
-      <p><strong>Kurzbeschreibung:</strong> ${htmlEscape((meta.short_description||"").trim() || "—")}</p>
+      <p><strong>Kurzbeschreibung:</strong> ${htmlEscape((meta.short_description || "").trim() || "—")}</p>
       <p><strong>Quest Metadaten</strong></p>
       <ul>
         ${renderMetaList(meta)}
@@ -766,8 +831,8 @@ ${CSS_BLOCK}
 <body>
 
   <header>
-    <h1>Quest: ${htmlEscape((meta.quest_name||"").trim() || "—")}</h1>
-    <p><strong>Region:</strong> ${htmlEscape((meta.region||"").trim() || "—")}</p>
+    <h1>Quest: ${htmlEscape((meta.quest_name || "").trim() || "—")}</h1>
+    <p><strong>Region:</strong> ${htmlEscape((meta.region || "").trim() || "—")}</p>
     ${nav}
     <hr>
   </header>
@@ -848,7 +913,7 @@ ${includeJs ? JS_BLOCK : ""}
       fileOpenJson: document.getElementById("fileOpenJson"),
     };
 
-    function setDirty(v){
+    function setDirty(v) {
       dirty = v;
       els.dirtyPill.textContent = dirty ? "ungespeichert" : "bereit";
       els.dirtyPill.style.background = dirty ? "rgba(180,35,24,.10)" : "rgba(15,23,42,.06)";
@@ -856,7 +921,7 @@ ${includeJs ? JS_BLOCK : ""}
       els.dirtyPill.style.color = dirty ? "var(--danger)" : "var(--muted)";
     }
 
-    function bindDirtyInputs(){
+    function bindDirtyInputs() {
       const watch = [
         // meta
         els.meta_quest_name, els.meta_region, els.meta_quest_giver, els.meta_prereq,
@@ -866,12 +931,12 @@ ${includeJs ? JS_BLOCK : ""}
         els.node_id, els.node_title, els.node_scene, els.node_content, els.node_dialog,
         els.node_info, els.node_tech, els.node_outcomes, els.node_notes
       ];
-      for(const el of watch){
-        el.addEventListener("input", ()=> setDirty(true));
+      for (const el of watch) {
+        el.addEventListener("input", () => setDirty(true));
       }
     }
 
-    function loadMetaToUi(){
+    function loadMetaToUi() {
       const m = project.meta;
       els.meta_quest_name.value = m.quest_name || "";
       els.meta_region.value = m.region || "";
@@ -885,7 +950,7 @@ ${includeJs ? JS_BLOCK : ""}
       els.meta_version.value = m.version_stamp || nowStamp();
     }
 
-    function applyMetaFromUi(){
+    function applyMetaFromUi() {
       const m = project.meta;
       m.quest_name = els.meta_quest_name.value.trim();
       m.region = els.meta_region.value.trim();
@@ -899,23 +964,23 @@ ${includeJs ? JS_BLOCK : ""}
       m.version_stamp = els.meta_version.value.trim();
     }
 
-    function refreshNodeList(){
+    function refreshNodeList() {
       els.nodeListItems.innerHTML = "";
-      project.nodes.forEach((n, idx)=>{
+      project.nodes.forEach((n, idx) => {
         const div = document.createElement("div");
-        div.className = "nodeItem" + (idx===currentNodeIndex ? " active" : "");
+        div.className = "nodeItem" + (idx === currentNodeIndex ? " active" : "");
         div.innerHTML = `
           <div><strong>${htmlEscape(n.title || n.node_id)}</strong></div>
           <div class="id">${htmlEscape(n.node_id)}</div>
         `;
-        div.addEventListener("click", ()=>{
+        div.addEventListener("click", () => {
           selectNode(idx);
         });
         els.nodeListItems.appendChild(div);
       });
     }
 
-    function loadNodeToUi(idx){
+    function loadNodeToUi(idx) {
       const n = project.nodes[idx];
       els.node_id.value = n.node_id || "";
       els.node_title.value = n.title || "";
@@ -931,20 +996,20 @@ ${includeJs ? JS_BLOCK : ""}
       showIdCollisionHint("");
     }
 
-    function showIdCollisionHint(msg){
+    function showIdCollisionHint(msg) {
       els.idCollisionInfo.textContent = msg || "";
       els.idCollisionInfo.className = msg ? "warn" : "small muted";
     }
 
-    function applyCurrentNode({silent=false}={}){
+    function applyCurrentNode({ silent = false } = {}) {
       const n = project.nodes[currentNodeIndex];
       let nodeId = sanitizeId(els.node_id.value);
       const title = els.node_title.value.trim();
 
-      if(nodeId !== n.node_id){
-        const existing = new Set(project.nodes.map(x=>x.node_id));
-        if(existing.has(nodeId)){
-          if(!silent) alert(`Die Knoten-ID '${nodeId}' gibt es schon. Wähle eine andere.`);
+      if (nodeId !== n.node_id) {
+        const existing = new Set(project.nodes.map(x => x.node_id));
+        if (existing.has(nodeId)) {
+          if (!silent) alert(`Die Knoten-ID '${nodeId}' gibt es schon. Wähle eine andere.`);
           els.node_id.value = n.node_id;
           return false;
         }
@@ -954,7 +1019,7 @@ ${includeJs ? JS_BLOCK : ""}
       n.title = title || nodeId;
       n.scene = els.node_scene.value.trim();
       n.content = els.node_content.value.trim();
-      n.dialog = els.node_dialog.value.replace(/\s+$/,""); // rstrip-ish
+      n.dialog = els.node_dialog.value.replace(/\s+$/, ""); // rstrip-ish
       n.info_items = linesToList(els.node_info.value);
       n.tech_flags = linesToList(els.node_tech.value);
       n.outcomes = linesToList(els.node_outcomes.value);
@@ -967,22 +1032,22 @@ ${includeJs ? JS_BLOCK : ""}
       return true;
     }
 
-    function selectNode(idx){
+    function selectNode(idx) {
       // save previous node
-      applyCurrentNode({silent:true});
+      applyCurrentNode({ silent: true });
       currentNodeIndex = idx;
       refreshNodeList();
       loadNodeToUi(idx);
     }
 
-    function addNode(){
+    function addNode() {
       applyMetaFromUi();
-      applyCurrentNode({silent:true});
+      applyCurrentNode({ silent: true });
 
-      const existing = new Set(project.nodes.map(n=>n.node_id));
+      const existing = new Set(project.nodes.map(n => n.node_id));
       let i = 1;
       let newId = `knoten-${i}`;
-      while(existing.has(newId)){
+      while (existing.has(newId)) {
         i++;
         newId = `knoten-${i}`;
       }
@@ -1006,13 +1071,13 @@ ${includeJs ? JS_BLOCK : ""}
       setDirty(true);
     }
 
-    function deleteNode(){
-      if(project.nodes.length <= 1){
+    function deleteNode() {
+      if (project.nodes.length <= 1) {
         alert("Mindestens ein Knoten muss bleiben. (Sonst stolpert die HTML über die Leere.)");
         return;
       }
       const n = project.nodes[currentNodeIndex];
-      if(!confirm(`Knoten '${n.node_id}' wirklich löschen?`)) return;
+      if (!confirm(`Knoten '${n.node_id}' wirklich löschen?`)) return;
 
       project.nodes.splice(currentNodeIndex, 1);
       currentNodeIndex = Math.max(0, currentNodeIndex - 1);
@@ -1021,12 +1086,12 @@ ${includeJs ? JS_BLOCK : ""}
       setDirty(true);
     }
 
-    function moveNode(direction){
+    function moveNode(direction) {
       const idx = currentNodeIndex;
       const newIdx = idx + direction;
-      if(newIdx < 0 || newIdx >= project.nodes.length) return;
+      if (newIdx < 0 || newIdx >= project.nodes.length) return;
 
-      applyCurrentNode({silent:true});
+      applyCurrentNode({ silent: true });
       const tmp = project.nodes[idx];
       project.nodes[idx] = project.nodes[newIdx];
       project.nodes[newIdx] = tmp;
@@ -1040,19 +1105,19 @@ ${includeJs ? JS_BLOCK : ""}
     /***********************
      * Options table editing (live)
      ***********************/
-    function refreshOptionsTable(){
+    function refreshOptionsTable() {
       const n = project.nodes[currentNodeIndex];
-      const nodeIds = new Set(project.nodes.map(x=>x.node_id).concat(["top","end"]));
+      const nodeIds = new Set(project.nodes.map(x => x.node_id).concat(["top", "end"]));
       els.optTableBody.innerHTML = "";
 
-      (n.options || []).forEach((opt, i)=>{
+      (n.options || []).forEach((opt, i) => {
         const tr = document.createElement("tr");
 
         const tdLabel = document.createElement("td");
         const inpLabel = document.createElement("input");
         inpLabel.type = "text";
         inpLabel.value = opt.label || "";
-        inpLabel.addEventListener("input", ()=>{
+        inpLabel.addEventListener("input", () => {
           opt.label = inpLabel.value;
           setDirty(true);
         });
@@ -1062,7 +1127,7 @@ ${includeJs ? JS_BLOCK : ""}
         const inpTarget = document.createElement("input");
         inpTarget.type = "text";
         inpTarget.value = opt.target || "";
-        inpTarget.addEventListener("input", ()=>{
+        inpTarget.addEventListener("input", () => {
           opt.target = sanitizeId(inpTarget.value);
           inpTarget.value = opt.target; // keep sanitized
           setDirty(true);
@@ -1071,12 +1136,12 @@ ${includeJs ? JS_BLOCK : ""}
         tdTarget.appendChild(inpTarget);
 
         const tdStatus = document.createElement("td");
-        const t = (opt.target||"").trim();
-        if(!t){
+        const t = (opt.target || "").trim();
+        if (!t) {
           tdStatus.innerHTML = `<span class="warn">kein Ziel</span>`;
-        }else if(!nodeIds.has(t)){
+        } else if (!nodeIds.has(t)) {
           tdStatus.innerHTML = `<span class="warn">unbekannt</span>`;
-        }else{
+        } else {
           tdStatus.innerHTML = `<span class="muted">ok</span>`;
         }
 
@@ -1084,20 +1149,20 @@ ${includeJs ? JS_BLOCK : ""}
         tr.appendChild(tdTarget);
         tr.appendChild(tdStatus);
 
-//        tr.addEventListener("click", (e)=>{
-//          // Wenn du direkt in ein Input klickst: nichts erzwingen.
-//          if (e.target && (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA" || e.target.tagName === "SELECT")) {
-//            return;
-//          }
-//          inpLabel.focus();
-//        });
+        //        tr.addEventListener("click", (e)=>{
+        //          // Wenn du direkt in ein Input klickst: nichts erzwingen.
+        //          if (e.target && (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA" || e.target.tagName === "SELECT")) {
+        //            return;
+        //          }
+        //          inpLabel.focus();
+        //        });
 
 
         els.optTableBody.appendChild(tr);
       });
     }
 
-    function addOption(){
+    function addOption() {
       const n = project.nodes[currentNodeIndex];
       n.options = n.options || [];
       n.options.push({ label: "Neue Option", target: "top" });
@@ -1105,10 +1170,10 @@ ${includeJs ? JS_BLOCK : ""}
       setDirty(true);
     }
 
-    function removeLastOption(){
+    function removeLastOption() {
       const n = project.nodes[currentNodeIndex];
       n.options = n.options || [];
-      if(n.options.length===0) return;
+      if (n.options.length === 0) return;
       n.options.pop();
       refreshOptionsTable();
       setDirty(true);
@@ -1117,20 +1182,20 @@ ${includeJs ? JS_BLOCK : ""}
     /***********************
      * JSON import/export
      ***********************/
-    function downloadText(filename, text, mime="text/plain"){
-      const blob = new Blob([text], {type: mime});
+    function downloadText(filename, text, mime = "text/plain") {
+      const blob = new Blob([text], { type: mime });
       const a = document.createElement("a");
       a.href = URL.createObjectURL(blob);
       a.download = filename;
       document.body.appendChild(a);
       a.click();
       a.remove();
-      setTimeout(()=> URL.revokeObjectURL(a.href), 500);
+      setTimeout(() => URL.revokeObjectURL(a.href), 500);
     }
 
-    function saveProjectJson(){
+    function saveProjectJson() {
       applyMetaFromUi();
-      applyCurrentNode({silent:true});
+      applyCurrentNode({ silent: true });
 
       const data = JSON.stringify(project, null, 2);
       const name = sanitizeId(project.meta.quest_name || "quest");
@@ -1138,43 +1203,43 @@ ${includeJs ? JS_BLOCK : ""}
       setDirty(false);
     }
 
-    function openProjectJson(){
+    function openProjectJson() {
       els.fileOpenJson.value = "";
       els.fileOpenJson.click();
     }
 
-    els.fileOpenJson.addEventListener("change", async ()=>{
+    els.fileOpenJson.addEventListener("change", async () => {
       const f = els.fileOpenJson.files?.[0];
-      if(!f) return;
+      if (!f) return;
 
-      try{
+      try {
         const txt = await f.text();
         const obj = JSON.parse(txt);
 
         // soft-validate & normalize
-        if(!obj || typeof obj !== "object") throw new Error("Ungültiges JSON.");
-        if(!obj.meta) obj.meta = {};
-        if(!Array.isArray(obj.nodes)) obj.nodes = [];
+        if (!obj || typeof obj !== "object") throw new Error("Ungültiges JSON.");
+        if (!obj.meta) obj.meta = {};
+        if (!Array.isArray(obj.nodes)) obj.nodes = [];
 
         // ensure at least one node
-        if(obj.nodes.length===0){
+        if (obj.nodes.length === 0) {
           obj.nodes.push({
-            node_id: "start", title:"Start", scene:"", dialog:"", content:"",
-            info_items:[], tech_flags:[], outcomes:[], notes:"",
-            options:[{label:"Weiter", target:"end"}]
+            node_id: "start", title: "Start", scene: "", dialog: "", content: "",
+            info_items: [], tech_flags: [], outcomes: [], notes: "",
+            options: [{ label: "Weiter", target: "end" }]
           });
         }
 
         // normalize ids
         const seen = new Set();
-        obj.nodes.forEach((n, idx)=>{
-          n.node_id = sanitizeId(n.node_id || `node-${idx+1}`);
-          if(seen.has(n.node_id)){
+        obj.nodes.forEach((n, idx) => {
+          n.node_id = sanitizeId(n.node_id || `node-${idx + 1}`);
+          if (seen.has(n.node_id)) {
             // make unique
-            let i=2;
-            let base=n.node_id;
+            let i = 2;
+            let base = n.node_id;
             let cand = `${base}-${i}`;
-            while(seen.has(cand)){ i++; cand = `${base}-${i}`; }
+            while (seen.has(cand)) { i++; cand = `${base}-${i}`; }
             n.node_id = cand;
           }
           seen.add(n.node_id);
@@ -1184,7 +1249,7 @@ ${includeJs ? JS_BLOCK : ""}
           n.tech_flags = Array.isArray(n.tech_flags) ? n.tech_flags : [];
           n.outcomes = Array.isArray(n.outcomes) ? n.outcomes : [];
           n.options = Array.isArray(n.options) ? n.options : [];
-          n.options = n.options.map(o=>({
+          n.options = n.options.map(o => ({
             label: (o?.label ?? ""),
             target: sanitizeId(o?.target ?? "top")
           }));
@@ -1208,7 +1273,7 @@ ${includeJs ? JS_BLOCK : ""}
         refreshNodeList();
         loadNodeToUi(currentNodeIndex);
         setDirty(false);
-      }catch(e){
+      } catch (e) {
         alert("Konnte Projekt nicht laden: " + (e?.message || e));
       }
     });
@@ -1216,14 +1281,14 @@ ${includeJs ? JS_BLOCK : ""}
     /***********************
      * HTML export & preview
      ***********************/
-    function exportHtml(){
+    function exportHtml() {
       applyMetaFromUi();
-      applyCurrentNode({silent:true});
+      applyCurrentNode({ silent: true });
 
       // sanity: unique ids
-      const ids = project.nodes.map(n=>n.node_id);
+      const ids = project.nodes.map(n => n.node_id);
       const set = new Set(ids);
-      if(ids.length !== set.size){
+      if (ids.length !== set.size) {
         alert("Es gibt doppelte Knoten-IDs. Bitte korrigieren.");
         return;
       }
@@ -1234,13 +1299,13 @@ ${includeJs ? JS_BLOCK : ""}
       setDirty(false);
     }
 
-    function previewHtml(){
+    function previewHtml() {
       applyMetaFromUi();
-      applyCurrentNode({silent:true});
+      applyCurrentNode({ silent: true });
       const html = renderHtml(project, true);
 
       const w = window.open("", "_blank");
-      if(!w){
+      if (!w) {
         alert("Popup blockiert. Erlaube Popups für die Vorschau – oder exportiere direkt HTML.");
         return;
       }
@@ -1252,29 +1317,29 @@ ${includeJs ? JS_BLOCK : ""}
     /***********************
      * ID helpers
      ***********************/
-    function idFromTitle(){
+    function idFromTitle() {
       const t = (els.node_title.value || "").trim();
-      if(!t) return;
+      if (!t) return;
       const cand = sanitizeId(t);
-      const existing = new Set(project.nodes.map(n=>n.node_id));
+      const existing = new Set(project.nodes.map(n => n.node_id));
       const cur = project.nodes[currentNodeIndex].node_id;
 
-      if(cand !== cur && existing.has(cand)){
+      if (cand !== cur && existing.has(cand)) {
         showIdCollisionHint(`⚠️ '${cand}' existiert bereits – bitte manuell anpassen.`);
-      }else{
+      } else {
         els.node_id.value = cand;
         showIdCollisionHint("");
         setDirty(true);
       }
     }
 
-    els.node_id.addEventListener("input", ()=>{
+    els.node_id.addEventListener("input", () => {
       const cand = sanitizeId(els.node_id.value);
-      const existing = new Set(project.nodes.map(n=>n.node_id));
+      const existing = new Set(project.nodes.map(n => n.node_id));
       const cur = project.nodes[currentNodeIndex].node_id;
-      if(cand !== cur && existing.has(cand)){
+      if (cand !== cur && existing.has(cand)) {
         showIdCollisionHint(`⚠️ '${cand}' existiert bereits.`);
-      }else{
+      } else {
         showIdCollisionHint("");
       }
     });
@@ -1282,7 +1347,7 @@ ${includeJs ? JS_BLOCK : ""}
     /***********************
      * Init + Events
      ***********************/
-    function init(){
+    function init() {
       loadMetaToUi();
       refreshNodeList();
       loadNodeToUi(currentNodeIndex);
@@ -1292,9 +1357,9 @@ ${includeJs ? JS_BLOCK : ""}
       // buttons
       els.btn_add_node.addEventListener("click", addNode);
       els.btn_del_node.addEventListener("click", deleteNode);
-      els.btn_move_up.addEventListener("click", ()=> moveNode(-1));
-      els.btn_move_down.addEventListener("click", ()=> moveNode(1));
-      els.btn_apply_node.addEventListener("click", ()=> applyCurrentNode({silent:false}));
+      els.btn_move_up.addEventListener("click", () => moveNode(-1));
+      els.btn_move_down.addEventListener("click", () => moveNode(1));
+      els.btn_apply_node.addEventListener("click", () => applyCurrentNode({ silent: false }));
       els.btn_id_from_title.addEventListener("click", idFromTitle);
 
       els.btn_add_opt.addEventListener("click", addOption);
@@ -1306,8 +1371,8 @@ ${includeJs ? JS_BLOCK : ""}
       els.btn_preview_html.addEventListener("click", previewHtml);
 
       // warn on close if dirty
-      window.addEventListener("beforeunload", (e)=>{
-        if(!dirty) return;
+      window.addEventListener("beforeunload", (e) => {
+        if (!dirty) return;
         e.preventDefault();
         e.returnValue = "";
       });
@@ -1316,4 +1381,5 @@ ${includeJs ? JS_BLOCK : ""}
     init();
   </script>
 </body>
+
 </html>

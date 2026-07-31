@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -21,9 +22,12 @@
       --font: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
-    html, body {
+    html,
+    body {
       margin: 0;
       padding: 0;
       background:
@@ -48,7 +52,7 @@
 
     .hero,
     .panel {
-      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.015));
       border: 1px solid rgba(148, 163, 184, 0.16);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
@@ -162,8 +166,13 @@
       transition: transform 0.15s ease, opacity 0.15s ease, background 0.2s ease;
     }
 
-    button:hover { transform: translateY(-1px); }
-    button:active { transform: translateY(0); }
+    button:hover {
+      transform: translateY(-1px);
+    }
+
+    button:active {
+      transform: translateY(0);
+    }
 
     .btn-primary {
       background: linear-gradient(135deg, var(--accent), var(--accent-2));
@@ -222,12 +231,21 @@
     }
 
     @media (max-width: 860px) {
-      body { padding: 16px; }
-      .grid { grid-template-columns: 1fr; }
-      .input-row { grid-template-columns: 1fr; }
+      body {
+        padding: 16px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .input-row {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
+
 <body>
   <main class="wrap">
     <section class="hero">
@@ -246,7 +264,8 @@
 
         <div class="field full">
           <label for="kontext">KONTEXT / STICHPUNKTE / BEOBACHTUNGEN</label>
-          <textarea id="kontext" placeholder="Hier deine Notizen, Beobachtungen, Rohpunkte, technische Eckdaten, Erkenntnisse, Probleme, nächste Schritte ..."></textarea>
+          <textarea id="kontext"
+            placeholder="Hier deine Notizen, Beobachtungen, Rohpunkte, technische Eckdaten, Erkenntnisse, Probleme, nächste Schritte ..."></textarea>
         </div>
 
         <div class="field">
@@ -286,7 +305,8 @@
     <section class="panel output-wrap">
       <div class="field full">
         <label for="output">GENERIERTER PROMPT</label>
-        <textarea id="output" readonly placeholder="Hier erscheint nach dem Klick auf Generate der fertige Prompt."></textarea>
+        <textarea id="output" readonly
+          placeholder="Hier erscheint nach dem Klick auf Generate der fertige Prompt."></textarea>
         <div class="copy-note">Klick ins Feld kopiert den gesamten Prompt automatisch in die Zwischenablage.</div>
       </div>
     </section>
@@ -645,4 +665,5 @@ Gib am Ende **nur ein einziges vollständiges JSON-Objekt** aus, als Markdown-Co
     fillSubtopicSelect("");
   </script>
 </body>
+
 </html>

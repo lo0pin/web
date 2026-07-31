@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -27,650 +28,650 @@
     <section class="card">
       <h2 class="card-title">On this Page</h2>
       <ul>
-        <li><a href="/web/cheatsheets.html#linux" >Cheatsheet</a></li>
-        <li><a href="#news" >Letzte News</a></li>
-        <li><a href="#ssh" >SSH</a></li>
-        <li><a href="#raspi_services" >Raspberry Services</a></li>
+        <li><a href="/web/cheatsheets.html#linux">Cheatsheet</a></li>
+        <li><a href="#news">Letzte News</a></li>
+        <li><a href="#ssh">SSH</a></li>
+        <li><a href="#raspi_services">Raspberry Services</a></li>
 
-        
+
       </ul>
-    </section>   
+    </section>
     <hr class="divider" />
 
     <!--NEWS SECTION-->
     <section class="card" id="news">
       <h2 class="card-title">Latest News</h2>
-    </section>  
+    </section>
     <div data-news-topic="code" data-news-subtopic="linux" data-news-mode="all"></div>
     <script type="module" src="../assets/js/news.js"></script>
 
     <hr class="divider" />
 
-<!--Schauen, ob der Code hier so in Ordnung ist
+    <!--Schauen, ob der Code hier so in Ordnung ist
 class eyebrow und lead brauch ich eig nicht
 auch ssh-article ist fragwürdig-->
-<article class="card ssh-article" id="ssh">
-  <header>
-    <p class="eyebrow">Linux · Raspberry Pi · SSH</p>
-    <h1>SSH-Key auf Windows, Tablet und Raspberry Pi einrichten</h1>
-    <p class="lead">
-      SSH-Schlüssel wirken am Anfang wie dunkle Konsolenmagie. Tatsächlich ist das Prinzip einfach:
-      Der private Schlüssel bleibt auf dem eigenen Gerät, der öffentliche Schlüssel kommt auf jene
-      Geräte, auf die man sich anmelden möchte.
-    </p>
-  </header>
-  <details>
-  <section>
-    
-      <h2 class="card-title">Inhalte</h2>
-      <ul>
-        <li><a href="#ssh_1" >Grundprinzip</a></li>
-        <li><a href="#ssh_2" >Schlüssel</a></li>
-        <li><a href="#ssh_3" >Prüfung, ob Schlüssel vorhanden</a></li>
-        <li><a href="#ssh_4" >Verbindung testen</a></li>
-        <li><a href="#ssh_5" >Öffentlichen Schlüssel eintragen</a></li>
-        <li><a href="#ssh_6" >Typischer Fehler: falsche Rechte</a></li>
-        <li><a href="#ssh_7" >Typischer Fehler: weiterhin Passwortabfrage</a></li>
-        <li><a href="#ssh_8" >Debug-Ausgabe</a></li>
-        <li><a href="#ssh_9" >Zweitgerät: SSH-Key einrichten</a></li>
-        <li><a href="#ssh_10" >SSH-Konfiguration</a></li>
-        <li><a href="#ssh_11" >Passwortlogin deaktivieren</a></li>
-        <li><a href="#ssh_12" >Kurzfassung</a></li>
-      </ul>
-  </section>
+    <article class="card ssh-article" id="ssh">
+      <header>
+        <p class="eyebrow">Linux · Raspberry Pi · SSH</p>
+        <h1>SSH-Key auf Windows, Tablet und Raspberry Pi einrichten</h1>
+        <p class="lead">
+          SSH-Schlüssel wirken am Anfang wie dunkle Konsolenmagie. Tatsächlich ist das Prinzip einfach:
+          Der private Schlüssel bleibt auf dem eigenen Gerät, der öffentliche Schlüssel kommt auf jene
+          Geräte, auf die man sich anmelden möchte.
+        </p>
+      </header>
+      <details>
+        <section>
 
-  <section id="ssh_1">
-    <h2>1. Grundprinzip: privater und öffentlicher Schlüssel</h2>
+          <h2 class="card-title">Inhalte</h2>
+          <ul>
+            <li><a href="#ssh_1">Grundprinzip</a></li>
+            <li><a href="#ssh_2">Schlüssel</a></li>
+            <li><a href="#ssh_3">Prüfung, ob Schlüssel vorhanden</a></li>
+            <li><a href="#ssh_4">Verbindung testen</a></li>
+            <li><a href="#ssh_5">Öffentlichen Schlüssel eintragen</a></li>
+            <li><a href="#ssh_6">Typischer Fehler: falsche Rechte</a></li>
+            <li><a href="#ssh_7">Typischer Fehler: weiterhin Passwortabfrage</a></li>
+            <li><a href="#ssh_8">Debug-Ausgabe</a></li>
+            <li><a href="#ssh_9">Zweitgerät: SSH-Key einrichten</a></li>
+            <li><a href="#ssh_10">SSH-Konfiguration</a></li>
+            <li><a href="#ssh_11">Passwortlogin deaktivieren</a></li>
+            <li><a href="#ssh_12">Kurzfassung</a></li>
+          </ul>
+        </section>
 
-    <p>
-      Ein SSH-Key besteht immer aus zwei Teilen: einem <strong>privaten Schlüssel</strong> und einem
-      <strong>öffentlichen Schlüssel</strong>.
-    </p>
+        <section id="ssh_1">
+          <h2>1. Grundprinzip: privater und öffentlicher Schlüssel</h2>
 
-    <h3>Privater Schlüssel</h3>
+          <p>
+            Ein SSH-Key besteht immer aus zwei Teilen: einem <strong>privaten Schlüssel</strong> und einem
+            <strong>öffentlichen Schlüssel</strong>.
+          </p>
 
-    <p>
-      Der private Schlüssel bleibt ausschließlich auf dem eigenen Gerät, also zum Beispiel auf dem
-      Stand-PC, Laptop oder Tablet. Er ist der eigentliche Haustürschlüssel und darf nicht weitergegeben
-      oder auf fremde Geräte kopiert werden.
-    </p>
+          <h3>Privater Schlüssel</h3>
 
-    <pre><code>~/.ssh/id_ed25519</code></pre>
+          <p>
+            Der private Schlüssel bleibt ausschließlich auf dem eigenen Gerät, also zum Beispiel auf dem
+            Stand-PC, Laptop oder Tablet. Er ist der eigentliche Haustürschlüssel und darf nicht weitergegeben
+            oder auf fremde Geräte kopiert werden.
+          </p>
 
-    <h3>Öffentlicher Schlüssel</h3>
+          <pre><code>~/.ssh/id_ed25519</code></pre>
 
-    <p>
-      Der öffentliche Schlüssel darf auf Zielgeräte kopiert werden, etwa auf einen Raspberry Pi,
-      einen Server oder ein anderes Linux-System mit SSH-Zugang.
-    </p>
+          <h3>Öffentlicher Schlüssel</h3>
 
-    <pre><code>~/.ssh/id_ed25519.pub</code></pre>
+          <p>
+            Der öffentliche Schlüssel darf auf Zielgeräte kopiert werden, etwa auf einen Raspberry Pi,
+            einen Server oder ein anderes Linux-System mit SSH-Zugang.
+          </p>
 
-    <p>
-      Auf dem Zielgerät wird dieser öffentliche Schlüssel in die Datei
-      <code>authorized_keys</code> eingetragen:
-    </p>
+          <pre><code>~/.ssh/id_ed25519.pub</code></pre>
 
-    <pre><code>~/.ssh/authorized_keys</code></pre>
+          <p>
+            Auf dem Zielgerät wird dieser öffentliche Schlüssel in die Datei
+            <code>authorized_keys</code> eingetragen:
+          </p>
 
-    <p>
-      Diese Datei ist gewissermaßen die Gästeliste des Zielsystems. Jeder dort eingetragene öffentliche
-      Schlüssel darf sich anmelden, sofern der passende private Schlüssel auf dem Client vorhanden ist.
-    </p>
+          <pre><code>~/.ssh/authorized_keys</code></pre>
 
-  </section>
+          <p>
+            Diese Datei ist gewissermaßen die Gästeliste des Zielsystems. Jeder dort eingetragene öffentliche
+            Schlüssel darf sich anmelden, sofern der passende private Schlüssel auf dem Client vorhanden ist.
+          </p>
 
-  <section  id="ssh_2">
+        </section>
 
-    <h2>2. Braucht jedes Remote-Gerät einen eigenen Schlüssel?</h2>
+        <section id="ssh_2">
 
-    <p>
-      Nicht zwingend. Sinnvoll ist meist folgende Regel:
-    </p>
+          <h2>2. Braucht jedes Remote-Gerät einen eigenen Schlüssel?</h2>
 
-    <pre><code>Ein Client-Gerät = ein eigenes Schlüsselpaar.
+          <p>
+            Nicht zwingend. Sinnvoll ist meist folgende Regel:
+          </p>
+
+          <pre><code>Ein Client-Gerät = ein eigenes Schlüsselpaar.
     Ein Remote-Gerät = enthält die erlaubten öffentlichen Schlüssel.</code></pre>
 
-    <p>
-      Beispiel:
-    </p>
+          <p>
+            Beispiel:
+          </p>
 
-    <ul>
-      <li>Der Stand-PC hat seinen eigenen privaten und öffentlichen Schlüssel.</li>
-      <li>Das Tablet hat ebenfalls seinen eigenen privaten und öffentlichen Schlüssel.</li>
-      <li>Der Raspberry Pi enthält in <code>authorized_keys</code> beide öffentlichen Schlüssel.</li>
-    </ul>
+          <ul>
+            <li>Der Stand-PC hat seinen eigenen privaten und öffentlichen Schlüssel.</li>
+            <li>Das Tablet hat ebenfalls seinen eigenen privaten und öffentlichen Schlüssel.</li>
+            <li>Der Raspberry Pi enthält in <code>authorized_keys</code> beide öffentlichen Schlüssel.</li>
+          </ul>
 
-    <p>
-      Dadurch können sich sowohl Stand-PC als auch Tablet am Raspberry Pi anmelden, ohne dass private
-      Schlüssel zwischen Geräten herumkopiert werden müssen.
-    </p>
+          <p>
+            Dadurch können sich sowohl Stand-PC als auch Tablet am Raspberry Pi anmelden, ohne dass private
+            Schlüssel zwischen Geräten herumkopiert werden müssen.
+          </p>
 
-  </section>
+        </section>
 
-  <section id="ssh_3">
-    <h2>3. Prüfen, ob auf Windows bereits ein SSH-Key vorhanden ist</h2>
+        <section id="ssh_3">
+          <h2>3. Prüfen, ob auf Windows bereits ein SSH-Key vorhanden ist</h2>
 
-    <p>
-      Unter Windows funktioniert der Linux-Befehl <code>ls -la</code> in der klassischen PowerShell
-      nicht wie erwartet. PowerShell kennt zwar <code>ls</code> als Alias, aber nicht die Linux-Option
-      <code>-la</code>.
-    </p>
+          <p>
+            Unter Windows funktioniert der Linux-Befehl <code>ls -la</code> in der klassischen PowerShell
+            nicht wie erwartet. PowerShell kennt zwar <code>ls</code> als Alias, aber nicht die Linux-Option
+            <code>-la</code>.
+          </p>
 
-    <p>Der Versuch führt daher zu einer Fehlermeldung wie:</p>
+          <p>Der Versuch führt daher zu einer Fehlermeldung wie:</p>
 
-    <pre><code>Get-ChildItem : Es wurde kein Parameter gefunden,
+          <pre><code>Get-ChildItem : Es wurde kein Parameter gefunden,
 der dem Parameternamen "la" entspricht.</code></pre>
 
-    <p>
-      Stattdessen verwendet man unter Windows PowerShell:
-    </p>
+          <p>
+            Stattdessen verwendet man unter Windows PowerShell:
+          </p>
 
-    <pre><code>dir $env:USERPROFILE\.ssh</code></pre>
+          <pre><code>dir $env:USERPROFILE\.ssh</code></pre>
 
-    <p>
-      Oder gezielt für ED25519-Schlüssel:
-    </p>
+          <p>
+            Oder gezielt für ED25519-Schlüssel:
+          </p>
 
-    <pre><code>dir $env:USERPROFILE\.ssh\id_ed25519*</code></pre>
+          <pre><code>dir $env:USERPROFILE\.ssh\id_ed25519*</code></pre>
 
-    <p>
-      Wenn Dateien wie diese vorhanden sind, existiert bereits ein SSH-Key:
-    </p>
+          <p>
+            Wenn Dateien wie diese vorhanden sind, existiert bereits ein SSH-Key:
+          </p>
 
-    <pre><code>id_ed25519
+          <pre><code>id_ed25519
 id_ed25519.pub</code></pre>
 
-    <p>
-      Der öffentliche Schlüssel kann mit folgendem Befehl angezeigt werden:
-    </p>
+          <p>
+            Der öffentliche Schlüssel kann mit folgendem Befehl angezeigt werden:
+          </p>
 
-    <pre><code>cat ~/.ssh/id_ed25519.pub</code></pre>
+          <pre><code>cat ~/.ssh/id_ed25519.pub</code></pre>
 
-    <p>
-      Die Ausgabe sieht ungefähr so aus:
-    </p>
+          <p>
+            Die Ausgabe sieht ungefähr so aus:
+          </p>
 
-    <pre><code>ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAA... benutzer@example.com</code></pre>
+          <pre><code>ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAA... benutzer@example.com</code></pre>
 
-    <p>
-      Diese Zeile darf auf das Zielgerät kopiert werden. Der private Schlüssel
-      <code>id_ed25519</code> bleibt dagegen auf dem Windows-PC.
-    </p>
+          <p>
+            Diese Zeile darf auf das Zielgerät kopiert werden. Der private Schlüssel
+            <code>id_ed25519</code> bleibt dagegen auf dem Windows-PC.
+          </p>
 
-  </section>
+        </section>
 
-  <section id="ssh_4">
-    <h2>4. Verbindung zum Raspberry Pi testen</h2>
+        <section id="ssh_4">
+          <h2>4. Verbindung zum Raspberry Pi testen</h2>
 
-    <p>
-      Wenn der Raspberry Pi im Netzwerk unter dem Hostnamen <code>sailsense.local</code> erreichbar ist
-      und der Benutzer <code>user</code> heißt, lautet der SSH-Befehl:
-    </p>
+          <p>
+            Wenn der Raspberry Pi im Netzwerk unter dem Hostnamen <code>sailsense.local</code> erreichbar ist
+            und der Benutzer <code>user</code> heißt, lautet der SSH-Befehl:
+          </p>
 
-    <pre><code>ssh user@sailsense.local</code></pre>
+          <pre><code>ssh user@sailsense.local</code></pre>
 
-    <p>
-      Beim ersten Verbindungsaufbau erscheint normalerweise eine Meldung wie:
-    </p>
+          <p>
+            Beim ersten Verbindungsaufbau erscheint normalerweise eine Meldung wie:
+          </p>
 
-    <pre><code>The authenticity of host 'sailsense.local' can't be established.
+          <pre><code>The authenticity of host 'sailsense.local' can't be established.
 Are you sure you want to continue connecting (yes/no/[fingerprint])?</code></pre>
 
-    <p>
-      Diese Meldung bedeutet: Der Computer kennt dieses Zielgerät noch nicht. Wenn man sicher ist, dass
-      es sich um den eigenen Raspberry Pi handelt, bestätigt man mit:
-    </p>
+          <p>
+            Diese Meldung bedeutet: Der Computer kennt dieses Zielgerät noch nicht. Wenn man sicher ist, dass
+            es sich um den eigenen Raspberry Pi handelt, bestätigt man mit:
+          </p>
 
-    <pre><code>yes</code></pre>
+          <pre><code>yes</code></pre>
 
-    <p>
-      Danach wird der Raspberry Pi in die Datei <code>known_hosts</code> eingetragen.
-    </p>
+          <p>
+            Danach wird der Raspberry Pi in die Datei <code>known_hosts</code> eingetragen.
+          </p>
 
-    <p>
-      Wenn anschließend noch nach dem Passwort gefragt wird, ist der SSH-Key noch nicht richtig
-      eingerichtet oder wird vom Raspberry Pi noch nicht akzeptiert.
-    </p>
+          <p>
+            Wenn anschließend noch nach dem Passwort gefragt wird, ist der SSH-Key noch nicht richtig
+            eingerichtet oder wird vom Raspberry Pi noch nicht akzeptiert.
+          </p>
 
-  </section>
+        </section>
 
-  <section id="ssh_5">
-    <h2>5. Öffentlichen Schlüssel auf dem Raspberry Pi eintragen</h2>
+        <section id="ssh_5">
+          <h2>5. Öffentlichen Schlüssel auf dem Raspberry Pi eintragen</h2>
 
-    <p>
-      Auf dem Raspberry Pi muss der öffentliche Schlüssel des Windows-PCs oder Tablets in die Datei
-      <code>authorized_keys</code> eingetragen werden.
-    </p>
+          <p>
+            Auf dem Raspberry Pi muss der öffentliche Schlüssel des Windows-PCs oder Tablets in die Datei
+            <code>authorized_keys</code> eingetragen werden.
+          </p>
 
-    <p>Zuerst am Raspberry Pi einloggen:</p>
+          <p>Zuerst am Raspberry Pi einloggen:</p>
 
-    <pre><code>ssh user@sailsense.local</code></pre>
+          <pre><code>ssh user@sailsense.local</code></pre>
 
-    <p>Dann das SSH-Verzeichnis anlegen beziehungsweise absichern:</p>
+          <p>Dann das SSH-Verzeichnis anlegen beziehungsweise absichern:</p>
 
-    <pre><code>mkdir -p ~/.ssh
+          <pre><code>mkdir -p ~/.ssh
 chmod 700 ~/.ssh</code></pre>
 
-    <p>Nun die Datei <code>authorized_keys</code> öffnen:</p>
+          <p>Nun die Datei <code>authorized_keys</code> öffnen:</p>
 
-    <pre><code>nano ~/.ssh/authorized_keys</code></pre>
+          <pre><code>nano ~/.ssh/authorized_keys</code></pre>
 
-    <p>
-      Dort wird der öffentliche Schlüssel eingefügt. Eine solche Datei kann zum Beispiel so aussehen:
-    </p>
+          <p>
+            Dort wird der öffentliche Schlüssel eingefügt. Eine solche Datei kann zum Beispiel so aussehen:
+          </p>
 
-    <pre><code>ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAA... standpc@example.com
+          <pre><code>ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAA... standpc@example.com
 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAA... [tablet@example.com](mailto:tablet@example.com)</code></pre>
 
-    <p>
-      Wichtig: Jeder öffentliche Schlüssel steht in einer eigenen Zeile.
-    </p>
+          <p>
+            Wichtig: Jeder öffentliche Schlüssel steht in einer eigenen Zeile.
+          </p>
 
-    <p>Danach werden die Dateirechte gesetzt:</p>
+          <p>Danach werden die Dateirechte gesetzt:</p>
 
-    <pre><code>chmod 600 ~/.ssh/authorized_keys</code></pre>
-  </section>
+          <pre><code>chmod 600 ~/.ssh/authorized_keys</code></pre>
+        </section>
 
-  <section id="ssh_6"
-    <h2>6. Der typische Fehler: falsche Rechte auf <code>~/.ssh</code></h2>
+        <section id="ssh_6" <h2>6. Der typische Fehler: falsche Rechte auf <code>~/.ssh</code></h2>
 
-    <p>
-      Ein häufiger Fehler ist dieser Befehl:
-    </p>
+          <p>
+            Ein häufiger Fehler ist dieser Befehl:
+          </p>
 
-    <pre><code>chmod 600 ~/.ssh</code></pre>
+          <pre><code>chmod 600 ~/.ssh</code></pre>
 
-    <p>
-      Das sieht harmlos aus, ist aber falsch. <code>~/.ssh</code> ist ein Ordner. Ein Ordner braucht
-      Ausführungsrechte, damit er betreten werden kann. Ohne dieses Recht kann SSH die Datei
-      <code>authorized_keys</code> nicht zuverlässig lesen.
-    </p>
+          <p>
+            Das sieht harmlos aus, ist aber falsch. <code>~/.ssh</code> ist ein Ordner. Ein Ordner braucht
+            Ausführungsrechte, damit er betreten werden kann. Ohne dieses Recht kann SSH die Datei
+            <code>authorized_keys</code> nicht zuverlässig lesen.
+          </p>
 
-    <p>
-      Die Folge kann eine merkwürdige Ausgabe sein:
-    </p>
+          <p>
+            Die Folge kann eine merkwürdige Ausgabe sein:
+          </p>
 
-    <pre><code>ls: cannot access '/home/user/.ssh/authorized_keys': Permission denied
+          <pre><code>ls: cannot access '/home/user/.ssh/authorized_keys': Permission denied
 d????????? ? ? ? ? ? .
 -????????? ? ? ? ? ? authorized_keys</code></pre>
 
-    <p>
-      Das bedeutet sinngemäß: Das System sieht, dass dort etwas liegt, darf aber nicht sauber darauf
-      zugreifen. SSH fällt dann auf die Passwortabfrage zurück.
-    </p>
+          <p>
+            Das bedeutet sinngemäß: Das System sieht, dass dort etwas liegt, darf aber nicht sauber darauf
+            zugreifen. SSH fällt dann auf die Passwortabfrage zurück.
+          </p>
 
-    <p>
-      Die korrekten Rechte lauten:
-    </p>
+          <p>
+            Die korrekten Rechte lauten:
+          </p>
 
-    <pre><code>chmod 700 ~/.ssh
+          <pre><code>chmod 700 ~/.ssh
 chmod 600 ~/.ssh/authorized_keys</code></pre>
 
-    <p>
-      Zusätzlich kann man sicherstellen, dass der Benutzer auch wirklich Eigentümer der Dateien ist:
-    </p>
+          <p>
+            Zusätzlich kann man sicherstellen, dass der Benutzer auch wirklich Eigentümer der Dateien ist:
+          </p>
 
-    <pre><code>chown -R user:user ~/.ssh</code></pre>
+          <pre><code>chown -R user:user ~/.ssh</code></pre>
 
-    <p>
-      Danach sollte die Kontrolle so aussehen:
-    </p>
+          <p>
+            Danach sollte die Kontrolle so aussehen:
+          </p>
 
-    <pre><code>ls -la ~/.ssh</code></pre>
+          <pre><code>ls -la ~/.ssh</code></pre>
 
-    <p>Erwartete Ausgabe:</p>
+          <p>Erwartete Ausgabe:</p>
 
-    <pre><code>drwx------ 2 user user 4096 ... .
+          <pre><code>drwx------ 2 user user 4096 ... .
 drwx------ 7 user user 4096 ... ..
 -rw------- 1 user user  211 ... authorized_keys</code></pre>
-    <p>
-      Merksatz:
-    </p>
+          <p>
+            Merksatz:
+          </p>
 
-    <pre><code>.ssh              → 700
+          <pre><code>.ssh              → 700
 authorized_keys   → 600</code></pre>
 
-  </section>
+        </section>
 
-  <section id="ssh_7">
-    <h2>7. Warum fragt SSH trotz eingetragenem Schlüssel noch nach dem Passwort?</h2>
+        <section id="ssh_7">
+          <h2>7. Warum fragt SSH trotz eingetragenem Schlüssel noch nach dem Passwort?</h2>
 
-    <p>
-      Wenn SSH weiterhin nach dem Passwort fragt, obwohl der öffentliche Schlüssel eingetragen wurde,
-      kommen meist diese Ursachen infrage:
-    </p>
+          <p>
+            Wenn SSH weiterhin nach dem Passwort fragt, obwohl der öffentliche Schlüssel eingetragen wurde,
+            kommen meist diese Ursachen infrage:
+          </p>
 
-    <ul>
-      <li>Die Rechte von <code>~/.ssh</code> oder <code>authorized_keys</code> sind falsch.</li>
-      <li>Der öffentliche Schlüssel wurde in die falsche Benutzerkennung eingetragen.</li>
-      <li>Der eingetragene öffentliche Schlüssel passt nicht zum privaten Schlüssel des Client-Geräts.</li>
-      <li>Der SSH-Client verwendet einen anderen Schlüssel als erwartet.</li>
-      <li>Der Inhalt von <code>authorized_keys</code> wurde beschädigt, etwa durch Zeilenumbrüche mitten im Schlüssel.</li>
-    </ul>
+          <ul>
+            <li>Die Rechte von <code>~/.ssh</code> oder <code>authorized_keys</code> sind falsch.</li>
+            <li>Der öffentliche Schlüssel wurde in die falsche Benutzerkennung eingetragen.</li>
+            <li>Der eingetragene öffentliche Schlüssel passt nicht zum privaten Schlüssel des Client-Geräts.</li>
+            <li>Der SSH-Client verwendet einen anderen Schlüssel als erwartet.</li>
+            <li>Der Inhalt von <code>authorized_keys</code> wurde beschädigt, etwa durch Zeilenumbrüche mitten im
+              Schlüssel.</li>
+          </ul>
 
-    <p>
-      Wichtig ist besonders der Benutzername. Wer sich so verbindet:
-    </p>
+          <p>
+            Wichtig ist besonders der Benutzername. Wer sich so verbindet:
+          </p>
 
-    <pre><code>ssh user@sailsense.local</code></pre>
+          <pre><code>ssh user@sailsense.local</code></pre>
 
-    <p>
-      muss den Schlüssel hier eintragen:
-    </p>
+          <p>
+            muss den Schlüssel hier eintragen:
+          </p>
 
-    <pre><code>/home/user/.ssh/authorized_keys</code></pre>
+          <pre><code>/home/user/.ssh/authorized_keys</code></pre>
 
-    <p>
-      Würde man sich als <code>pi</code> anmelden, müsste der Schlüssel stattdessen in:
-    </p>
+          <p>
+            Würde man sich als <code>pi</code> anmelden, müsste der Schlüssel stattdessen in:
+          </p>
 
-    <pre><code>/home/pi/.ssh/authorized_keys</code></pre>
+          <pre><code>/home/pi/.ssh/authorized_keys</code></pre>
 
-    <p>
-      SSH ist hier pedantisch. Verschiedene Benutzer sind verschiedene Türen.
-    </p>
+          <p>
+            SSH ist hier pedantisch. Verschiedene Benutzer sind verschiedene Türen.
+          </p>
 
-  </section>
+        </section>
 
-  <section id="ssh_8">
-    <h2>8. Verbindung mit Debug-Ausgabe prüfen</h2>
+        <section id="ssh_8">
+          <h2>8. Verbindung mit Debug-Ausgabe prüfen</h2>
 
-    <p>
-      Wenn unklar ist, welcher Schlüssel verwendet wird, hilft die Debug-Ausgabe:
-    </p>
+          <p>
+            Wenn unklar ist, welcher Schlüssel verwendet wird, hilft die Debug-Ausgabe:
+          </p>
 
-    <pre><code>ssh -v user@sailsense.local</code></pre>
+          <pre><code>ssh -v user@sailsense.local</code></pre>
 
-    <p>
-      Interessant sind Zeilen wie:
-    </p>
+          <p>
+            Interessant sind Zeilen wie:
+          </p>
 
-    <pre><code>Offering public key: C:\Users\julka\.ssh\id_ed25519</code></pre>
+          <pre><code>Offering public key: C:\Users\julka\.ssh\id_ed25519</code></pre>
 
-    <p>
-      Das bedeutet: Der Client bietet diesen Schlüssel an.
-    </p>
+          <p>
+            Das bedeutet: Der Client bietet diesen Schlüssel an.
+          </p>
 
-    <p>
-      Ideal wäre danach eine Meldung wie:
-    </p>
+          <p>
+            Ideal wäre danach eine Meldung wie:
+          </p>
 
-    <pre><code>Server accepts key</code></pre>
+          <pre><code>Server accepts key</code></pre>
 
-    <p>
-      Wenn der Schlüssel angeboten, aber nicht akzeptiert wird, liegt das Problem fast immer auf dem
-      Zielgerät: falscher Eintrag, falscher Benutzer, falsche Rechte oder falscher Besitzer.
-    </p>
+          <p>
+            Wenn der Schlüssel angeboten, aber nicht akzeptiert wird, liegt das Problem fast immer auf dem
+            Zielgerät: falscher Eintrag, falscher Benutzer, falsche Rechte oder falscher Besitzer.
+          </p>
 
-    <p>
-      Man kann einen bestimmten Schlüssel auch ausdrücklich angeben:
-    </p>
+          <p>
+            Man kann einen bestimmten Schlüssel auch ausdrücklich angeben:
+          </p>
 
-    <pre><code>ssh -i $env:USERPROFILE\.ssh\id_ed25519 user@sailsense.local</code></pre>
+          <pre><code>ssh -i $env:USERPROFILE\.ssh\id_ed25519 user@sailsense.local</code></pre>
 
-  </section>
+        </section>
 
-  <section id="ssh_9">
-    <h2>9. SSH-Key vom Tablet auf den Raspberry Pi einrichten</h2>
+        <section id="ssh_9">
+          <h2>9. SSH-Key vom Tablet auf den Raspberry Pi einrichten</h2>
 
-    <p>
-      Auf einem Tablet hängt die genaue Vorgehensweise vom System ab. Unter Android wird häufig
-      Termux verwendet. Dort kann man wie unter Linux arbeiten.
-    </p>
+          <p>
+            Auf einem Tablet hängt die genaue Vorgehensweise vom System ab. Unter Android wird häufig
+            Termux verwendet. Dort kann man wie unter Linux arbeiten.
+          </p>
 
-    <p>Zuerst prüfen, ob schon ein Schlüssel vorhanden ist:</p>
+          <p>Zuerst prüfen, ob schon ein Schlüssel vorhanden ist:</p>
 
-    <pre><code>ls -la ~/.ssh</code></pre>
+          <pre><code>ls -la ~/.ssh</code></pre>
 
-    <p>Falls noch kein Schlüssel vorhanden ist, erzeugt man einen neuen:</p>
+          <p>Falls noch kein Schlüssel vorhanden ist, erzeugt man einen neuen:</p>
 
-    <pre><code>ssh-keygen -t ed25519 -C "tablet"</code></pre>
+          <pre><code>ssh-keygen -t ed25519 -C "tablet"</code></pre>
 
-    <p>
-      Der Standardpfad kann in der Regel mit Enter übernommen werden:
-    </p>
+          <p>
+            Der Standardpfad kann in der Regel mit Enter übernommen werden:
+          </p>
 
-    <pre><code>~/.ssh/id_ed25519</code></pre>
+          <pre><code>~/.ssh/id_ed25519</code></pre>
 
-    <p>
-      Danach wird der öffentliche Schlüssel angezeigt:
-    </p>
+          <p>
+            Danach wird der öffentliche Schlüssel angezeigt:
+          </p>
 
-    <pre><code>cat ~/.ssh/id_ed25519.pub</code></pre>
+          <pre><code>cat ~/.ssh/id_ed25519.pub</code></pre>
 
-    <p>
-      Diese komplette Zeile wird anschließend auf dem Raspberry Pi in
-      <code>~/.ssh/authorized_keys</code> eingefügt.
-    </p>
+          <p>
+            Diese komplette Zeile wird anschließend auf dem Raspberry Pi in
+            <code>~/.ssh/authorized_keys</code> eingefügt.
+          </p>
 
-    <p>
-      Auf dem Raspberry Pi:
-    </p>
+          <p>
+            Auf dem Raspberry Pi:
+          </p>
 
-    <pre><code>mkdir -p ~/.ssh
+          <pre><code>mkdir -p ~/.ssh
 chmod 700 ~/.ssh
 nano ~/.ssh/authorized_keys
 chmod 600 ~/.ssh/authorized_keys</code></pre>
 
-    <p>
-      Danach kann vom Tablet getestet werden:
-    </p>
+          <p>
+            Danach kann vom Tablet getestet werden:
+          </p>
 
-    <pre><code>ssh user@sailsense.local</code></pre>
+          <pre><code>ssh user@sailsense.local</code></pre>
 
-  </section>
+        </section>
 
-  <section id="ssh_10">
-    <h2>10. Praktische SSH-Konfiguration</h2>
+        <section id="ssh_10">
+          <h2>10. Praktische SSH-Konfiguration</h2>
 
-    <p>
-      Damit man nicht jedes Mal den vollständigen Hostnamen und Benutzernamen eintippen muss,
-      kann man auf dem Client eine SSH-Konfiguration anlegen.
-    </p>
+          <p>
+            Damit man nicht jedes Mal den vollständigen Hostnamen und Benutzernamen eintippen muss,
+            kann man auf dem Client eine SSH-Konfiguration anlegen.
+          </p>
 
-    <p>Unter Linux, macOS oder Termux:</p>
+          <p>Unter Linux, macOS oder Termux:</p>
 
-    <pre><code>nano ~/.ssh/config</code></pre>
+          <pre><code>nano ~/.ssh/config</code></pre>
 
-    <p>Unter Windows liegt die Datei hier:</p>
+          <p>Unter Windows liegt die Datei hier:</p>
 
-    <pre><code>C:\Users\BENUTZERNAME\.ssh\config</code></pre>
+          <pre><code>C:\Users\BENUTZERNAME\.ssh\config</code></pre>
 
-    <p>Beispielinhalt:</p>
+          <p>Beispielinhalt:</p>
 
-    <pre><code>Host sailsense
+          <pre><code>Host sailsense
 HostName sailsense.local
 User user
 IdentityFile ~/.ssh/id_ed25519</code></pre>
 
-    <p>
-      Danach genügt:
-    </p>
+          <p>
+            Danach genügt:
+          </p>
 
-    <pre><code>ssh sailsense</code></pre>
+          <pre><code>ssh sailsense</code></pre>
 
-    <p>
-      Falls <code>sailsense.local</code> im Netzwerk nicht zuverlässig aufgelöst wird, kann statt des
-      Hostnamens auch die IP-Adresse eingetragen werden:
-    </p>
+          <p>
+            Falls <code>sailsense.local</code> im Netzwerk nicht zuverlässig aufgelöst wird, kann statt des
+            Hostnamens auch die IP-Adresse eingetragen werden:
+          </p>
 
-    <pre><code>Host sailsense
+          <pre><code>Host sailsense
 HostName 192.168.1.123
 User user
 IdentityFile ~/.ssh/id_ed25519</code></pre>
 
-  </section>
+        </section>
 
-  <section id="ssh_11">
-    <h2>11. Passwortlogin erst später deaktivieren</h2>
+        <section id="ssh_11">
+          <h2>11. Passwortlogin erst später deaktivieren</h2>
 
-    <p>
-      Der Passwortlogin sollte erst deaktiviert werden, wenn die Anmeldung per SSH-Key sicher funktioniert.
-      Sonst sperrt man sich schlimmstenfalls selbst aus. Das ist kein Sicherheitskonzept, sondern ein
-      digitaler Tritt auf die eigene Harke.
-    </p>
+          <p>
+            Der Passwortlogin sollte erst deaktiviert werden, wenn die Anmeldung per SSH-Key sicher funktioniert.
+            Sonst sperrt man sich schlimmstenfalls selbst aus. Das ist kein Sicherheitskonzept, sondern ein
+            digitaler Tritt auf die eigene Harke.
+          </p>
 
-    <p>
-      Erst wenn der Login ohne Raspberry-Passwort funktioniert, kann man die SSH-Konfiguration bearbeiten:
-    </p>
+          <p>
+            Erst wenn der Login ohne Raspberry-Passwort funktioniert, kann man die SSH-Konfiguration bearbeiten:
+          </p>
 
-    <pre><code>sudo nano /etc/ssh/sshd_config</code></pre>
+          <pre><code>sudo nano /etc/ssh/sshd_config</code></pre>
 
-    <p>
-      Dort setzt man:
-    </p>
+          <p>
+            Dort setzt man:
+          </p>
 
-    <pre><code>PasswordAuthentication no</code></pre>
+          <pre><code>PasswordAuthentication no</code></pre>
 
-    <p>
-      Danach wird SSH neu gestartet:
-    </p>
+          <p>
+            Danach wird SSH neu gestartet:
+          </p>
 
-    <pre><code>sudo systemctl restart ssh</code></pre>
+          <pre><code>sudo systemctl restart ssh</code></pre>
 
-    <p>
-      Wichtig: Vorher ein zweites Terminal offen lassen und testen, ob der Key-Login wirklich funktioniert.
-    </p>
+          <p>
+            Wichtig: Vorher ein zweites Terminal offen lassen und testen, ob der Key-Login wirklich funktioniert.
+          </p>
 
-  </section>
+        </section>
 
-  <section id="ssh_12">
-    <h2>12. Kurzfassung</h2>
+        <section id="ssh_12">
+          <h2>12. Kurzfassung</h2>
 
-    <ul>
-      <li>Der private Schlüssel bleibt auf dem eigenen Gerät.</li>
-      <li>Der öffentliche Schlüssel kommt auf das Zielgerät.</li>
-      <li>Auf dem Zielgerät steht der öffentliche Schlüssel in <code>~/.ssh/authorized_keys</code>.</li>
-      <li>Der Ordner <code>~/.ssh</code> braucht die Rechte <code>700</code>.</li>
-      <li>Die Datei <code>authorized_keys</code> braucht die Rechte <code>600</code>.</li>
-      <li>Ein versehentliches <code>chmod 600 ~/.ssh</code> macht den Ordner unbetretbar.</li>
-      <li>Wenn SSH weiter nach dem Passwort fragt, mit <code>ssh -v</code> debuggen.</li>
-    </ul>
+          <ul>
+            <li>Der private Schlüssel bleibt auf dem eigenen Gerät.</li>
+            <li>Der öffentliche Schlüssel kommt auf das Zielgerät.</li>
+            <li>Auf dem Zielgerät steht der öffentliche Schlüssel in <code>~/.ssh/authorized_keys</code>.</li>
+            <li>Der Ordner <code>~/.ssh</code> braucht die Rechte <code>700</code>.</li>
+            <li>Die Datei <code>authorized_keys</code> braucht die Rechte <code>600</code>.</li>
+            <li>Ein versehentliches <code>chmod 600 ~/.ssh</code> macht den Ordner unbetretbar.</li>
+            <li>Wenn SSH weiter nach dem Passwort fragt, mit <code>ssh -v</code> debuggen.</li>
+          </ul>
 
-    <p>
-      Für das konkrete Raspberry-Pi-Setup lautet die wichtigste Reparatur:
-    </p>
+          <p>
+            Für das konkrete Raspberry-Pi-Setup lautet die wichtigste Reparatur:
+          </p>
 
-    <pre><code>chmod 700 ~/.ssh
+          <pre><code>chmod 700 ~/.ssh
 chmod 600 ~/.ssh/authorized_keys
 chown -R user:user ~/.ssh</code></pre>
 
-    <p>
-      Danach sollte der Login vom Windows-PC oder Tablet per SSH-Key funktionieren.
-    </p>
-  
-  </section>
-  </details>
-</article>
+          <p>
+            Danach sollte der Login vom Windows-PC oder Tablet per SSH-Key funktionieren.
+          </p>
 
-<hr class="divider">
+        </section>
+      </details>
+    </article>
 
-<section class="card" id="raspi_services">
-  <h2>Raspberry Pi Services mit systemd: Autostart, Kontrolle und Fehlersuche</h2>
+    <hr class="divider">
 
-  <p>
-    Ein Raspberry Pi läuft oft ohne Bildschirm, Tastatur und Maus. Gerade bei Loggern,
-    Sensorstationen, Heimautomationsprojekten oder kleinen Serverdiensten soll ein Programm
-    automatisch starten, sobald der Pi hochfährt. Genau dafür verwendet man unter Raspberry Pi OS
-    in der Regel <strong>systemd-Services</strong>.
-  </p>
+    <section class="card" id="raspi_services">
+      <h2>Raspberry Pi Services mit systemd: Autostart, Kontrolle und Fehlersuche</h2>
 
-  <details>
+      <p>
+        Ein Raspberry Pi läuft oft ohne Bildschirm, Tastatur und Maus. Gerade bei Loggern,
+        Sensorstationen, Heimautomationsprojekten oder kleinen Serverdiensten soll ein Programm
+        automatisch starten, sobald der Pi hochfährt. Genau dafür verwendet man unter Raspberry Pi OS
+        in der Regel <strong>systemd-Services</strong>.
+      </p>
 
-  
+      <details>
 
-  <p>
-    Ein Service ist ein Hintergrunddienst: ein Programm, das vom Betriebssystem gestartet,
-    überwacht, gestoppt und bei Bedarf automatisch neu gestartet werden kann. Statt ein Python-Skript
-    nach jedem Neustart händisch per SSH zu starten, übernimmt systemd diese Aufgabe zuverlässig.
-  </p>
 
-  <h3>Was ist systemd?</h3>
 
-  <p>
-    <strong>systemd</strong> ist das Start- und Diensteverwaltungssystem vieler moderner
-    Linux-Distributionen, darunter auch Raspberry Pi OS. Es kümmert sich darum, welche Prozesse
-    beim Booten gestartet werden, in welcher Reihenfolge sie starten und wie sie überwacht werden.
-  </p>
+        <p>
+          Ein Service ist ein Hintergrunddienst: ein Programm, das vom Betriebssystem gestartet,
+          überwacht, gestoppt und bei Bedarf automatisch neu gestartet werden kann. Statt ein Python-Skript
+          nach jedem Neustart händisch per SSH zu starten, übernimmt systemd diese Aufgabe zuverlässig.
+        </p>
 
-  <p>
-    Für eigene Projekte bedeutet das: Man schreibt eine kleine Service-Datei, legt darin fest,
-    welches Programm gestartet werden soll, unter welchem Benutzer es laufen soll und was passieren
-    soll, wenn es abstürzt.
-  </p>
+        <h3>Was ist systemd?</h3>
 
-  <h3>Typische Einsatzfälle</h3>
+        <p>
+          <strong>systemd</strong> ist das Start- und Diensteverwaltungssystem vieler moderner
+          Linux-Distributionen, darunter auch Raspberry Pi OS. Es kümmert sich darum, welche Prozesse
+          beim Booten gestartet werden, in welcher Reihenfolge sie starten und wie sie überwacht werden.
+        </p>
 
-  <ul>
-    <li>Ein Python-Logger soll beim Booten automatisch starten.</li>
-    <li>Ein Webserver soll dauerhaft im Hintergrund laufen.</li>
-    <li>Ein Sensorprogramm soll nach einem Absturz neu gestartet werden.</li>
-    <li>Ein OLED-Display, GPS-Modul oder Wetterlogger soll ohne manuelles Eingreifen laufen.</li>
-    <li>Ein Raspberry Pi soll als headless Bordcomputer, Server oder Messgerät arbeiten.</li>
-  </ul>
+        <p>
+          Für eigene Projekte bedeutet das: Man schreibt eine kleine Service-Datei, legt darin fest,
+          welches Programm gestartet werden soll, unter welchem Benutzer es laufen soll und was passieren
+          soll, wenn es abstürzt.
+        </p>
 
-  <h3>Wichtige Begriffe</h3>
+        <h3>Typische Einsatzfälle</h3>
 
-  <ul>
-    <li><strong>Unit:</strong> Allgemeine systemd-Konfigurationsdatei, z. B. Service, Timer oder Mount.</li>
-    <li><strong>Service:</strong> Eine Unit, die ein Programm oder Skript startet.</li>
-    <li><strong>Enable:</strong> Service wird beim Booten automatisch gestartet.</li>
-    <li><strong>Start:</strong> Service wird jetzt sofort gestartet.</li>
-    <li><strong>Stop:</strong> Service wird jetzt gestoppt.</li>
-    <li><strong>Restart:</strong> Service wird neu gestartet.</li>
-    <li><strong>Status:</strong> Aktueller Zustand des Services.</li>
-    <li><strong>Journal:</strong> systemd-Logausgabe, abrufbar über <code>journalctl</code>.</li>
-  </ul>
+        <ul>
+          <li>Ein Python-Logger soll beim Booten automatisch starten.</li>
+          <li>Ein Webserver soll dauerhaft im Hintergrund laufen.</li>
+          <li>Ein Sensorprogramm soll nach einem Absturz neu gestartet werden.</li>
+          <li>Ein OLED-Display, GPS-Modul oder Wetterlogger soll ohne manuelles Eingreifen laufen.</li>
+          <li>Ein Raspberry Pi soll als headless Bordcomputer, Server oder Messgerät arbeiten.</li>
+        </ul>
 
-  <h3>Wo liegen eigene Service-Dateien?</h3>
+        <h3>Wichtige Begriffe</h3>
 
-  <p>
-    Eigene systemd-Service-Dateien legt man üblicherweise hier ab:
-  </p>
+        <ul>
+          <li><strong>Unit:</strong> Allgemeine systemd-Konfigurationsdatei, z. B. Service, Timer oder Mount.</li>
+          <li><strong>Service:</strong> Eine Unit, die ein Programm oder Skript startet.</li>
+          <li><strong>Enable:</strong> Service wird beim Booten automatisch gestartet.</li>
+          <li><strong>Start:</strong> Service wird jetzt sofort gestartet.</li>
+          <li><strong>Stop:</strong> Service wird jetzt gestoppt.</li>
+          <li><strong>Restart:</strong> Service wird neu gestartet.</li>
+          <li><strong>Status:</strong> Aktueller Zustand des Services.</li>
+          <li><strong>Journal:</strong> systemd-Logausgabe, abrufbar über <code>journalctl</code>.</li>
+        </ul>
 
-  <pre><code>/etc/systemd/system/</code></pre>
+        <h3>Wo liegen eigene Service-Dateien?</h3>
 
-  <p>
-    Beispiel:
-  </p>
+        <p>
+          Eigene systemd-Service-Dateien legt man üblicherweise hier ab:
+        </p>
 
-  <pre><code>/etc/systemd/system/sailsense.service</code></pre>
+        <pre><code>/etc/systemd/system/</code></pre>
 
-  <p>
-    Der Dateiname ist gleichzeitig der Servicename. Aus <code>sailsense.service</code>
-    wird also:
-  </p>
+        <p>
+          Beispiel:
+        </p>
 
-  <pre><code>systemctl status sailsense.service</code></pre>
+        <pre><code>/etc/systemd/system/sailsense.service</code></pre>
 
-  <h3>Beispiel: Python-App als Service starten</h3>
+        <p>
+          Der Dateiname ist gleichzeitig der Servicename. Aus <code>sailsense.service</code>
+          wird also:
+        </p>
 
-  <p>
-    Angenommen, das Projekt liegt unter:
-  </p>
+        <pre><code>systemctl status sailsense.service</code></pre>
 
-  <pre><code>/home/user/sailsense</code></pre>
+        <h3>Beispiel: Python-App als Service starten</h3>
 
-  <p>
-    Die virtuelle Python-Umgebung liegt unter:
-  </p>
+        <p>
+          Angenommen, das Projekt liegt unter:
+        </p>
 
-  <pre><code>/home/user/sailsense/.venv</code></pre>
+        <pre><code>/home/user/sailsense</code></pre>
 
-  <p>
-    Und die App wird manuell so gestartet:
-  </p>
+        <p>
+          Die virtuelle Python-Umgebung liegt unter:
+        </p>
 
-  <pre><code>cd /home/user/sailsense
+        <pre><code>/home/user/sailsense/.venv</code></pre>
+
+        <p>
+          Und die App wird manuell so gestartet:
+        </p>
+
+        <pre><code>cd /home/user/sailsense
 source .venv/bin/activate
 PYTHONPATH=src python -m sailsense.app</code></pre>
 
-  <p>
-    Dann kann die passende Service-Datei so aussehen:
-  </p>
+        <p>
+          Dann kann die passende Service-Datei so aussehen:
+        </p>
 
-  <pre><code>[Unit]
+        <pre><code>[Unit]
 Description=SailSense GPS Weather Logger
 After=multi-user.target
 
@@ -688,42 +689,42 @@ RestartSec=5
 [Install]
 WantedBy=multi-user.target</code></pre>
 
-  <h3>Service-Datei anlegen</h3>
+        <h3>Service-Datei anlegen</h3>
 
-  <p>
-    Eine neue Service-Datei erstellt man zum Beispiel mit:
-  </p>
+        <p>
+          Eine neue Service-Datei erstellt man zum Beispiel mit:
+        </p>
 
-  <pre><code>sudo nano /etc/systemd/system/sailsense.service</code></pre>
+        <pre><code>sudo nano /etc/systemd/system/sailsense.service</code></pre>
 
-  <p>
-    Danach den Inhalt einfügen, speichern und schließen.
-  </p>
+        <p>
+          Danach den Inhalt einfügen, speichern und schließen.
+        </p>
 
-  <h3>Aufbau einer Service-Datei</h3>
+        <h3>Aufbau einer Service-Datei</h3>
 
-  <h4>[Unit]</h4>
+        <h4>[Unit]</h4>
 
-  <p>
-    Der Abschnitt <code>[Unit]</code> beschreibt den Dienst und seine Abhängigkeiten.
-  </p>
+        <p>
+          Der Abschnitt <code>[Unit]</code> beschreibt den Dienst und seine Abhängigkeiten.
+        </p>
 
-  <pre><code>[Unit]
+        <pre><code>[Unit]
 Description=SailSense GPS Weather Logger
 After=multi-user.target</code></pre>
 
-  <ul>
-    <li><code>Description</code>: Kurzbeschreibung des Dienstes.</li>
-    <li><code>After</code>: Gibt an, nach welchem Ziel oder Dienst dieser Service gestartet werden soll.</li>
-  </ul>
+        <ul>
+          <li><code>Description</code>: Kurzbeschreibung des Dienstes.</li>
+          <li><code>After</code>: Gibt an, nach welchem Ziel oder Dienst dieser Service gestartet werden soll.</li>
+        </ul>
 
-  <h4>[Service]</h4>
+        <h4>[Service]</h4>
 
-  <p>
-    Der Abschnitt <code>[Service]</code> legt fest, was genau gestartet wird.
-  </p>
+        <p>
+          Der Abschnitt <code>[Service]</code> legt fest, was genau gestartet wird.
+        </p>
 
-  <pre><code>[Service]
+        <pre><code>[Service]
 Type=simple
 User=user
 Group=user
@@ -734,338 +735,341 @@ ExecStart=/home/user/sailsense/.venv/bin/python -m sailsense.app
 Restart=on-failure
 RestartSec=5</code></pre>
 
-  <ul>
-    <li><code>Type=simple</code>: Der gestartete Prozess bleibt im Vordergrund und ist der Service.</li>
-    <li><code>User</code>: Benutzer, unter dem das Programm läuft.</li>
-    <li><code>Group</code>: Hauptgruppe des Prozesses.</li>
-    <li><code>SupplementaryGroups</code>: Zusätzliche Gruppen, etwa für GPIO, I²C oder serielle Schnittstellen.</li>
-    <li><code>WorkingDirectory</code>: Arbeitsverzeichnis des Programms.</li>
-    <li><code>Environment</code>: Umgebungsvariable, hier z. B. <code>PYTHONPATH</code>.</li>
-    <li><code>ExecStart</code>: Der eigentliche Startbefehl.</li>
-    <li><code>Restart=on-failure</code>: Bei Fehler automatisch neu starten.</li>
-    <li><code>RestartSec=5</code>: Fünf Sekunden warten, bevor neu gestartet wird.</li>
-  </ul>
+        <ul>
+          <li><code>Type=simple</code>: Der gestartete Prozess bleibt im Vordergrund und ist der Service.</li>
+          <li><code>User</code>: Benutzer, unter dem das Programm läuft.</li>
+          <li><code>Group</code>: Hauptgruppe des Prozesses.</li>
+          <li><code>SupplementaryGroups</code>: Zusätzliche Gruppen, etwa für GPIO, I²C oder serielle Schnittstellen.
+          </li>
+          <li><code>WorkingDirectory</code>: Arbeitsverzeichnis des Programms.</li>
+          <li><code>Environment</code>: Umgebungsvariable, hier z. B. <code>PYTHONPATH</code>.</li>
+          <li><code>ExecStart</code>: Der eigentliche Startbefehl.</li>
+          <li><code>Restart=on-failure</code>: Bei Fehler automatisch neu starten.</li>
+          <li><code>RestartSec=5</code>: Fünf Sekunden warten, bevor neu gestartet wird.</li>
+        </ul>
 
-  <h4>[Install]</h4>
+        <h4>[Install]</h4>
 
-  <p>
-    Der Abschnitt <code>[Install]</code> legt fest, wann der Dienst beim Booten aktiviert wird.
-  </p>
+        <p>
+          Der Abschnitt <code>[Install]</code> legt fest, wann der Dienst beim Booten aktiviert wird.
+        </p>
 
-  <pre><code>[Install]
+        <pre><code>[Install]
 WantedBy=multi-user.target</code></pre>
 
-  <p>
-    <code>multi-user.target</code> entspricht grob einem normalen Mehrbenutzerbetrieb ohne grafische Oberfläche.
-    Für headless Raspberry-Pi-Projekte ist das meistens passend.
-  </p>
+        <p>
+          <code>multi-user.target</code> entspricht grob einem normalen Mehrbenutzerbetrieb ohne grafische Oberfläche.
+          Für headless Raspberry-Pi-Projekte ist das meistens passend.
+        </p>
 
-  <h3>systemd nach Änderungen neu laden</h3>
+        <h3>systemd nach Änderungen neu laden</h3>
 
-  <p>
-    Nach jeder Änderung an einer Service-Datei muss systemd seine Konfiguration neu einlesen:
-  </p>
+        <p>
+          Nach jeder Änderung an einer Service-Datei muss systemd seine Konfiguration neu einlesen:
+        </p>
 
-  <pre><code>sudo systemctl daemon-reload</code></pre>
+        <pre><code>sudo systemctl daemon-reload</code></pre>
 
-  <p>
-    Wenn man das vergisst, arbeitet systemd eventuell noch mit der alten Version der Datei.
-    Das ist einer dieser kleinen Linux-Stolperdrähte, über die jeder einmal mit Würde fällt.
-  </p>
+        <p>
+          Wenn man das vergisst, arbeitet systemd eventuell noch mit der alten Version der Datei.
+          Das ist einer dieser kleinen Linux-Stolperdrähte, über die jeder einmal mit Würde fällt.
+        </p>
 
-  <h3>Service sofort starten</h3>
+        <h3>Service sofort starten</h3>
 
-  <pre><code>sudo systemctl start sailsense.service</code></pre>
+        <pre><code>sudo systemctl start sailsense.service</code></pre>
 
-  <p>
-    Das startet den Service sofort, aber noch nicht automatisch beim nächsten Boot.
-  </p>
+        <p>
+          Das startet den Service sofort, aber noch nicht automatisch beim nächsten Boot.
+        </p>
 
-  <h3>Service stoppen</h3>
+        <h3>Service stoppen</h3>
 
-  <pre><code>sudo systemctl stop sailsense.service</code></pre>
+        <pre><code>sudo systemctl stop sailsense.service</code></pre>
 
-  <p>
-    Das stoppt den laufenden Dienst. Praktisch, wenn man am Code arbeiten möchte.
-  </p>
+        <p>
+          Das stoppt den laufenden Dienst. Praktisch, wenn man am Code arbeiten möchte.
+        </p>
 
-  <h3>Service neu starten</h3>
+        <h3>Service neu starten</h3>
 
-  <pre><code>sudo systemctl restart sailsense.service</code></pre>
+        <pre><code>sudo systemctl restart sailsense.service</code></pre>
 
-  <p>
-    Das ist nützlich nach Codeänderungen oder Konfigurationsänderungen.
-  </p>
+        <p>
+          Das ist nützlich nach Codeänderungen oder Konfigurationsänderungen.
+        </p>
 
-  <h3>Status abfragen</h3>
+        <h3>Status abfragen</h3>
 
-  <pre><code>systemctl status sailsense.service</code></pre>
+        <pre><code>systemctl status sailsense.service</code></pre>
 
-  <p>
-    Typische Ausgabe:
-  </p>
+        <p>
+          Typische Ausgabe:
+        </p>
 
-  <pre><code>● sailsense.service - SailSense GPS Weather Logger
+        <pre><code>● sailsense.service - SailSense GPS Weather Logger
      Loaded: loaded (/etc/systemd/system/sailsense.service; enabled)
      Active: active (running)
    Main PID: 1234 (python)
       Tasks: 5
      Memory: 42.0M</code></pre>
 
-  <p>
-    Wichtig ist vor allem die Zeile:
-  </p>
+        <p>
+          Wichtig ist vor allem die Zeile:
+        </p>
 
-  <pre><code>Active: active (running)</code></pre>
+        <pre><code>Active: active (running)</code></pre>
 
-  <p>
-    Das bedeutet: Der Service läuft.
-  </p>
+        <p>
+          Das bedeutet: Der Service läuft.
+        </p>
 
-  <h3>Kurz prüfen, ob ein Service läuft</h3>
+        <h3>Kurz prüfen, ob ein Service läuft</h3>
 
-  <pre><code>systemctl is-active sailsense.service</code></pre>
+        <pre><code>systemctl is-active sailsense.service</code></pre>
 
-  <p>
-    Mögliche Ausgaben:
-  </p>
+        <p>
+          Mögliche Ausgaben:
+        </p>
 
-  <ul>
-    <li><code>active</code>: läuft.</li>
-    <li><code>inactive</code>: läuft nicht.</li>
-    <li><code>failed</code>: ist fehlgeschlagen.</li>
-  </ul>
+        <ul>
+          <li><code>active</code>: läuft.</li>
+          <li><code>inactive</code>: läuft nicht.</li>
+          <li><code>failed</code>: ist fehlgeschlagen.</li>
+        </ul>
 
-  <h3>Autostart aktivieren</h3>
+        <h3>Autostart aktivieren</h3>
 
-  <pre><code>sudo systemctl enable sailsense.service</code></pre>
+        <pre><code>sudo systemctl enable sailsense.service</code></pre>
 
-  <p>
-    Damit wird der Dienst beim nächsten Boot automatisch gestartet.
-  </p>
+        <p>
+          Damit wird der Dienst beim nächsten Boot automatisch gestartet.
+        </p>
 
-  <h3>Autostart deaktivieren</h3>
+        <h3>Autostart deaktivieren</h3>
 
-  <pre><code>sudo systemctl disable sailsense.service</code></pre>
+        <pre><code>sudo systemctl disable sailsense.service</code></pre>
 
-  <p>
-    Der Dienst bleibt installierbar und kann manuell gestartet werden, startet aber nicht mehr automatisch beim Booten.
-  </p>
+        <p>
+          Der Dienst bleibt installierbar und kann manuell gestartet werden, startet aber nicht mehr automatisch beim
+          Booten.
+        </p>
 
-  <h3>Prüfen, ob Autostart aktiv ist</h3>
+        <h3>Prüfen, ob Autostart aktiv ist</h3>
 
-  <pre><code>systemctl is-enabled sailsense.service</code></pre>
+        <pre><code>systemctl is-enabled sailsense.service</code></pre>
 
-  <p>
-    Mögliche Ausgaben:
-  </p>
+        <p>
+          Mögliche Ausgaben:
+        </p>
 
-  <ul>
-    <li><code>enabled</code>: startet automatisch.</li>
-    <li><code>disabled</code>: startet nicht automatisch.</li>
-    <li><code>static</code>: kann nicht direkt aktiviert werden, wird aber möglicherweise von anderen Units verwendet.</li>
-  </ul>
+        <ul>
+          <li><code>enabled</code>: startet automatisch.</li>
+          <li><code>disabled</code>: startet nicht automatisch.</li>
+          <li><code>static</code>: kann nicht direkt aktiviert werden, wird aber möglicherweise von anderen Units
+            verwendet.</li>
+        </ul>
 
-  <h3>Logs ansehen</h3>
+        <h3>Logs ansehen</h3>
 
-  <p>
-    systemd sammelt die Ausgaben eines Services im Journal. Alles, was das Programm mit
-    <code>print()</code> ausgibt, kann dort erscheinen.
-  </p>
+        <p>
+          systemd sammelt die Ausgaben eines Services im Journal. Alles, was das Programm mit
+          <code>print()</code> ausgibt, kann dort erscheinen.
+        </p>
 
-  <h4>Live-Log</h4>
+        <h4>Live-Log</h4>
 
-  <pre><code>journalctl -u sailsense.service -f</code></pre>
+        <pre><code>journalctl -u sailsense.service -f</code></pre>
 
-  <p>
-    <code>-f</code> bedeutet: neue Ausgaben live verfolgen. Beenden mit <code>Strg+C</code>.
-  </p>
+        <p>
+          <code>-f</code> bedeutet: neue Ausgaben live verfolgen. Beenden mit <code>Strg+C</code>.
+        </p>
 
-  <h4>Letzte 80 Zeilen</h4>
+        <h4>Letzte 80 Zeilen</h4>
 
-  <pre><code>journalctl -u sailsense.service -n 80 --no-pager</code></pre>
+        <pre><code>journalctl -u sailsense.service -n 80 --no-pager</code></pre>
 
-  <h4>Logs seit dem letzten Boot</h4>
+        <h4>Logs seit dem letzten Boot</h4>
 
-  <pre><code>journalctl -u sailsense.service -b --no-pager</code></pre>
+        <pre><code>journalctl -u sailsense.service -b --no-pager</code></pre>
 
-  <h4>Logs mit Zeitstempel</h4>
+        <h4>Logs mit Zeitstempel</h4>
 
-  <pre><code>journalctl -u sailsense.service -n 100 --no-pager -o short-iso</code></pre>
+        <pre><code>journalctl -u sailsense.service -n 100 --no-pager -o short-iso</code></pre>
 
-  <h3>Fehlerzustand zurücksetzen</h3>
+        <h3>Fehlerzustand zurücksetzen</h3>
 
-  <p>
-    Wenn ein Service fehlgeschlagen ist, kann systemd ihn als <code>failed</code> markieren.
-    Nach der Fehlerbehebung kann man diesen Zustand zurücksetzen:
-  </p>
+        <p>
+          Wenn ein Service fehlgeschlagen ist, kann systemd ihn als <code>failed</code> markieren.
+          Nach der Fehlerbehebung kann man diesen Zustand zurücksetzen:
+        </p>
 
-  <pre><code>sudo systemctl reset-failed sailsense.service</code></pre>
+        <pre><code>sudo systemctl reset-failed sailsense.service</code></pre>
 
-  <h3>Service-Datei überprüfen</h3>
+        <h3>Service-Datei überprüfen</h3>
 
-  <p>
-    Vor dem Start kann man die Service-Datei formal prüfen:
-  </p>
+        <p>
+          Vor dem Start kann man die Service-Datei formal prüfen:
+        </p>
 
-  <pre><code>sudo systemd-analyze verify /etc/systemd/system/sailsense.service</code></pre>
+        <pre><code>sudo systemd-analyze verify /etc/systemd/system/sailsense.service</code></pre>
 
-  <p>
-    Keine Ausgabe ist hier meist eine gute Nachricht.
-  </p>
+        <p>
+          Keine Ausgabe ist hier meist eine gute Nachricht.
+        </p>
 
-  <h3>Typischer Ablauf nach Änderung einer Service-Datei</h3>
+        <h3>Typischer Ablauf nach Änderung einer Service-Datei</h3>
 
-  <pre><code>sudo nano /etc/systemd/system/sailsense.service
+        <pre><code>sudo nano /etc/systemd/system/sailsense.service
 sudo systemctl daemon-reload
 sudo systemd-analyze verify /etc/systemd/system/sailsense.service
 sudo systemctl restart sailsense.service
 systemctl status sailsense.service</code></pre>
 
-  <h3>Typischer Ablauf nach Änderung des Python-Codes</h3>
+        <h3>Typischer Ablauf nach Änderung des Python-Codes</h3>
 
-  <p>
-    Wenn nur der Python-Code geändert wurde, nicht die Service-Datei:
-  </p>
+        <p>
+          Wenn nur der Python-Code geändert wurde, nicht die Service-Datei:
+        </p>
 
-  <pre><code>sudo systemctl restart sailsense.service
+        <pre><code>sudo systemctl restart sailsense.service
 journalctl -u sailsense.service -n 80 --no-pager</code></pre>
 
-  <h3>Service beim Entwickeln deaktivieren</h3>
+        <h3>Service beim Entwickeln deaktivieren</h3>
 
-  <p>
-    Wenn man an der App arbeitet, ist es oft sinnvoll, den Service vorübergehend zu stoppen:
-  </p>
+        <p>
+          Wenn man an der App arbeitet, ist es oft sinnvoll, den Service vorübergehend zu stoppen:
+        </p>
 
-  <pre><code>sudo systemctl stop sailsense.service</code></pre>
+        <pre><code>sudo systemctl stop sailsense.service</code></pre>
 
-  <p>
-    Wenn man verhindern will, dass er beim nächsten Boot automatisch startet:
-  </p>
+        <p>
+          Wenn man verhindern will, dass er beim nächsten Boot automatisch startet:
+        </p>
 
-  <pre><code>sudo systemctl disable sailsense.service</code></pre>
+        <pre><code>sudo systemctl disable sailsense.service</code></pre>
 
-  <p>
-    Danach kann man die App manuell starten:
-  </p>
+        <p>
+          Danach kann man die App manuell starten:
+        </p>
 
-  <pre><code>cd /home/user/sailsense
+        <pre><code>cd /home/user/sailsense
 source .venv/bin/activate
 PYTHONPATH=src python -m sailsense.app</code></pre>
 
-  <h3>Service wieder aktivieren</h3>
+        <h3>Service wieder aktivieren</h3>
 
-  <pre><code>sudo systemctl enable sailsense.service
+        <pre><code>sudo systemctl enable sailsense.service
 sudo systemctl start sailsense.service</code></pre>
 
-  <h3>Häufige Fehler</h3>
+        <h3>Häufige Fehler</h3>
 
-  <h4>1. Service-Datei hat falsche Abschnitte</h4>
+        <h4>1. Service-Datei hat falsche Abschnitte</h4>
 
-  <p>
-    Fehlerbild:
-  </p>
+        <p>
+          Fehlerbild:
+        </p>
 
-  <pre><code>Assignment outside of section</code></pre>
+        <pre><code>Assignment outside of section</code></pre>
 
-  <p>
-    Ursache: In der Service-Datei fehlt wahrscheinlich ein Abschnitt wie <code>[Unit]</code>,
-    <code>[Service]</code> oder <code>[Install]</code>.
-  </p>
+        <p>
+          Ursache: In der Service-Datei fehlt wahrscheinlich ein Abschnitt wie <code>[Unit]</code>,
+          <code>[Service]</code> oder <code>[Install]</code>.
+        </p>
 
-  <h4>2. ExecStart fehlt</h4>
+        <h4>2. ExecStart fehlt</h4>
 
-  <p>
-    Fehlerbild:
-  </p>
+        <p>
+          Fehlerbild:
+        </p>
 
-  <pre><code>Service has no ExecStart=</code></pre>
+        <pre><code>Service has no ExecStart=</code></pre>
 
-  <p>
-    Ursache: Im Abschnitt <code>[Service]</code> fehlt der Startbefehl.
-  </p>
+        <p>
+          Ursache: Im Abschnitt <code>[Service]</code> fehlt der Startbefehl.
+        </p>
 
-  <h4>3. Falscher Python-Pfad</h4>
+        <h4>3. Falscher Python-Pfad</h4>
 
-  <p>
-    Fehlerbild:
-  </p>
+        <p>
+          Fehlerbild:
+        </p>
 
-  <pre><code>No such file or directory</code></pre>
+        <pre><code>No such file or directory</code></pre>
 
-  <p>
-    Prüfen:
-  </p>
+        <p>
+          Prüfen:
+        </p>
 
-  <pre><code>ls -l /home/user/sailsense/.venv/bin/python</code></pre>
+        <pre><code>ls -l /home/user/sailsense/.venv/bin/python</code></pre>
 
-  <h4>4. Modul wird nicht gefunden</h4>
+        <h4>4. Modul wird nicht gefunden</h4>
 
-  <p>
-    Fehlerbild:
-  </p>
+        <p>
+          Fehlerbild:
+        </p>
 
-  <pre><code>ModuleNotFoundError</code></pre>
+        <pre><code>ModuleNotFoundError</code></pre>
 
-  <p>
-    Ursache: Häufig fehlt <code>PYTHONPATH</code>.
-  </p>
+        <p>
+          Ursache: Häufig fehlt <code>PYTHONPATH</code>.
+        </p>
 
-  <p>
-    In der Service-Datei:
-  </p>
+        <p>
+          In der Service-Datei:
+        </p>
 
-  <pre><code>Environment=PYTHONPATH=/home/user/sailsense/src</code></pre>
+        <pre><code>Environment=PYTHONPATH=/home/user/sailsense/src</code></pre>
 
-  <h4>5. Zugriff auf GPIO, I²C oder serielle Schnittstelle fehlt</h4>
+        <h4>5. Zugriff auf GPIO, I²C oder serielle Schnittstelle fehlt</h4>
 
-  <p>
-    Fehlerbild:
-  </p>
+        <p>
+          Fehlerbild:
+        </p>
 
-  <pre><code>Permission denied</code></pre>
+        <pre><code>Permission denied</code></pre>
 
-  <p>
-    Lösung: Benutzer in die nötigen Gruppen aufnehmen oder im Service zusätzliche Gruppen setzen.
-  </p>
+        <p>
+          Lösung: Benutzer in die nötigen Gruppen aufnehmen oder im Service zusätzliche Gruppen setzen.
+        </p>
 
-  <pre><code>SupplementaryGroups=dialout i2c gpio</code></pre>
+        <pre><code>SupplementaryGroups=dialout i2c gpio</code></pre>
 
-  <p>
-    Danach:
-  </p>
+        <p>
+          Danach:
+        </p>
 
-  <pre><code>sudo systemctl daemon-reload
+        <pre><code>sudo systemctl daemon-reload
 sudo systemctl restart sailsense.service</code></pre>
 
-  <h4>6. Service startet zu früh</h4>
+        <h4>6. Service startet zu früh</h4>
 
-  <p>
-    Manchmal startet ein Dienst, bevor Hardware oder Netzwerk bereit ist.
-  </p>
+        <p>
+          Manchmal startet ein Dienst, bevor Hardware oder Netzwerk bereit ist.
+        </p>
 
-  <p>
-    Beispiele:
-  </p>
+        <p>
+          Beispiele:
+        </p>
 
-  <pre><code>After=network-online.target
+        <pre><code>After=network-online.target
 Wants=network-online.target</code></pre>
 
-  <p>
-    Für Hardwareuhren oder spezielle Geräte können eigene Abhängigkeiten sinnvoll sein, zum Beispiel:
-  </p>
+        <p>
+          Für Hardwareuhren oder spezielle Geräte können eigene Abhängigkeiten sinnvoll sein, zum Beispiel:
+        </p>
 
-  <pre><code>Wants=rtc-hwclock.service
+        <pre><code>Wants=rtc-hwclock.service
 After=rtc-hwclock.service multi-user.target</code></pre>
 
-  <h3>Beispiel: Service mit RTC-Abhängigkeit</h3>
+        <h3>Beispiel: Service mit RTC-Abhängigkeit</h3>
 
-  <p>
-    Wenn ein Projekt eine RTC verwendet, kann man sicherstellen, dass zuerst die Systemzeit aus der
-    Hardware-Uhr gelesen wird.
-  </p>
+        <p>
+          Wenn ein Projekt eine RTC verwendet, kann man sicherstellen, dass zuerst die Systemzeit aus der
+          Hardware-Uhr gelesen wird.
+        </p>
 
-  <pre><code>[Unit]
+        <pre><code>[Unit]
 Description=SailSense GPS Weather Logger
 Wants=rtc-hwclock.service
 After=rtc-hwclock.service multi-user.target
@@ -1084,95 +1088,93 @@ RestartSec=5
 [Install]
 WantedBy=multi-user.target</code></pre>
 
-  <h3>Cheat Sheet: wichtigste Befehle</h3>
+        <h3>Cheat Sheet: wichtigste Befehle</h3>
 
-  <table>
-    <thead>
-      <tr>
-        <th>Aufgabe</th>
-        <th>Befehl</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Status anzeigen</td>
-        <td><code>systemctl status sailsense.service</code></td>
-      </tr>
-      <tr>
-        <td>Starten</td>
-        <td><code>sudo systemctl start sailsense.service</code></td>
-      </tr>
-      <tr>
-        <td>Stoppen</td>
-        <td><code>sudo systemctl stop sailsense.service</code></td>
-      </tr>
-      <tr>
-        <td>Neu starten</td>
-        <td><code>sudo systemctl restart sailsense.service</code></td>
-      </tr>
-      <tr>
-        <td>Autostart aktivieren</td>
-        <td><code>sudo systemctl enable sailsense.service</code></td>
-      </tr>
-      <tr>
-        <td>Autostart deaktivieren</td>
-        <td><code>sudo systemctl disable sailsense.service</code></td>
-      </tr>
-      <tr>
-        <td>Prüfen, ob aktiv</td>
-        <td><code>systemctl is-active sailsense.service</code></td>
-      </tr>
-      <tr>
-        <td>Prüfen, ob Autostart aktiv</td>
-        <td><code>systemctl is-enabled sailsense.service</code></td>
-      </tr>
-      <tr>
-        <td>Live-Log anzeigen</td>
-        <td><code>journalctl -u sailsense.service -f</code></td>
-      </tr>
-      <tr>
-        <td>Letzte Logs anzeigen</td>
-        <td><code>journalctl -u sailsense.service -n 80 --no-pager</code></td>
-      </tr>
-      <tr>
-        <td>systemd neu laden</td>
-        <td><code>sudo systemctl daemon-reload</code></td>
-      </tr>
-      <tr>
-        <td>Service-Datei prüfen</td>
-        <td><code>sudo systemd-analyze verify /etc/systemd/system/sailsense.service</code></td>
-      </tr>
-      <tr>
-        <td>Fehlerzustand zurücksetzen</td>
-        <td><code>sudo systemctl reset-failed sailsense.service</code></td>
-      </tr>
-    </tbody>
-  </table>
+        <table>
+          <thead>
+            <tr>
+              <th>Aufgabe</th>
+              <th>Befehl</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Status anzeigen</td>
+              <td><code>systemctl status sailsense.service</code></td>
+            </tr>
+            <tr>
+              <td>Starten</td>
+              <td><code>sudo systemctl start sailsense.service</code></td>
+            </tr>
+            <tr>
+              <td>Stoppen</td>
+              <td><code>sudo systemctl stop sailsense.service</code></td>
+            </tr>
+            <tr>
+              <td>Neu starten</td>
+              <td><code>sudo systemctl restart sailsense.service</code></td>
+            </tr>
+            <tr>
+              <td>Autostart aktivieren</td>
+              <td><code>sudo systemctl enable sailsense.service</code></td>
+            </tr>
+            <tr>
+              <td>Autostart deaktivieren</td>
+              <td><code>sudo systemctl disable sailsense.service</code></td>
+            </tr>
+            <tr>
+              <td>Prüfen, ob aktiv</td>
+              <td><code>systemctl is-active sailsense.service</code></td>
+            </tr>
+            <tr>
+              <td>Prüfen, ob Autostart aktiv</td>
+              <td><code>systemctl is-enabled sailsense.service</code></td>
+            </tr>
+            <tr>
+              <td>Live-Log anzeigen</td>
+              <td><code>journalctl -u sailsense.service -f</code></td>
+            </tr>
+            <tr>
+              <td>Letzte Logs anzeigen</td>
+              <td><code>journalctl -u sailsense.service -n 80 --no-pager</code></td>
+            </tr>
+            <tr>
+              <td>systemd neu laden</td>
+              <td><code>sudo systemctl daemon-reload</code></td>
+            </tr>
+            <tr>
+              <td>Service-Datei prüfen</td>
+              <td><code>sudo systemd-analyze verify /etc/systemd/system/sailsense.service</code></td>
+            </tr>
+            <tr>
+              <td>Fehlerzustand zurücksetzen</td>
+              <td><code>sudo systemctl reset-failed sailsense.service</code></td>
+            </tr>
+          </tbody>
+        </table>
 
-  <h3>Minimaler Wartungsablauf für eigene Raspberry-Pi-Projekte</h3>
+        <h3>Minimaler Wartungsablauf für eigene Raspberry-Pi-Projekte</h3>
 
-  <ol>
-    <li>Service stoppen: <code>sudo systemctl stop sailsense.service</code></li>
-    <li>Code bearbeiten.</li>
-    <li>App manuell testen.</li>
-    <li>Service neu starten: <code>sudo systemctl restart sailsense.service</code></li>
-    <li>Status prüfen: <code>systemctl status sailsense.service</code></li>
-    <li>Logs prüfen: <code>journalctl -u sailsense.service -n 80 --no-pager</code></li>
-  </ol>
+        <ol>
+          <li>Service stoppen: <code>sudo systemctl stop sailsense.service</code></li>
+          <li>Code bearbeiten.</li>
+          <li>App manuell testen.</li>
+          <li>Service neu starten: <code>sudo systemctl restart sailsense.service</code></li>
+          <li>Status prüfen: <code>systemctl status sailsense.service</code></li>
+          <li>Logs prüfen: <code>journalctl -u sailsense.service -n 80 --no-pager</code></li>
+        </ol>
 
-  <h3>Merksatz</h3>
+        <h3>Merksatz</h3>
 
-  <p>
-    <strong>Start</strong> startet jetzt. <strong>Enable</strong> startet künftig beim Booten.
-    <strong>Status</strong> sagt, ob es lebt. <strong>Journalctl</strong> sagt, warum es gestorben ist.
-  </p>
-  </details>
-</section>
-
-
-<hr class="divider" />
+        <p>
+          <strong>Start</strong> startet jetzt. <strong>Enable</strong> startet künftig beim Booten.
+          <strong>Status</strong> sagt, ob es lebt. <strong>Journalctl</strong> sagt, warum es gestorben ist.
+        </p>
+      </details>
+    </section>
 
 
+    <hr class="divider" />
 
 
 
@@ -1181,15 +1183,19 @@ WantedBy=multi-user.target</code></pre>
 
 
 
-    
-    <p class="hint"><a href="#top">↑ top</a>&emsp;<a href="../index.html">⌂ home</a>&emsp;<a href="home.html">← back</a></p>
+
+
+
+    <p class="hint"><a href="#top">↑ top</a>&emsp;<a href="../index.html">⌂ home</a>&emsp;<a href="home.html">← back</a>
+    </p>
   </main>
 
-  
+
   <footer class="site-footer">
     <p>© 2026 Julian</p>
   </footer>
 
   <script src="../assets/js/main.js" defer></script>
 </body>
+
 </html>

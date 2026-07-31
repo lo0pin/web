@@ -1,707 +1,870 @@
-f<!doctype html>
+f
+<!doctype html>
 <html lang="de">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Website JSON Beitrag Generator</title>
   <style>
-    :root{
-      --bg:#0f1115; --panel:#141824; --surface:#161b2a;
-      --text:#e9eef7; --muted:#aab4c5; --border:#2a3244;
-      --ok:#34d399; --bad:#f87171; --focus:#7dd3fc;
-      --radius:14px;
+    :root {
+      --bg: #0f1115;
+      --panel: #141824;
+      --surface: #161b2a;
+      --text: #e9eef7;
+      --muted: #aab4c5;
+      --border: #2a3244;
+      --ok: #34d399;
+      --bad: #f87171;
+      --focus: #7dd3fc;
+      --radius: 14px;
       --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
     }
-    *{box-sizing:border-box}
-    body{
-      margin:0; background:var(--bg); color:var(--text); font-family:var(--sans);
-      line-height:1.35;
+
+    * {
+      box-sizing: border-box
     }
-    .wrap{
-      max-width:1200px; margin:0 auto; padding:18px;
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      line-height: 1.35;
     }
-    h1{font-size:1.15rem; margin:0 0 14px; color:var(--text); font-weight:700}
-    .grid{
-      display:grid; gap:14px;
+
+    .wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 18px;
+    }
+
+    h1 {
+      font-size: 1.15rem;
+      margin: 0 0 14px;
+      color: var(--text);
+      font-weight: 700
+    }
+
+    .grid {
+      display: grid;
+      gap: 14px;
       grid-template-columns: 1.3fr 0.9fr;
     }
-    @media (max-width: 980px){
-      .grid{grid-template-columns:1fr}
-    }
-    .card{
-      background:linear-gradient(180deg, var(--panel), var(--surface));
-      border:1px solid var(--border);
-      border-radius:var(--radius);
-      padding:14px;
-      box-shadow: 0 8px 28px rgba(0,0,0,.25);
-    }
-    .row{
-      display:grid; grid-template-columns: 170px 1fr; gap:10px;
-      align-items:start;
-      margin:10px 0;
-    }
-    label{color:var(--muted); font-size:.92rem; padding-top:7px}
-    input, select, textarea{
-      width:100%;
-      background:#0f1320;
-      border:1px solid var(--border);
-      color:var(--text);
-      border-radius:12px;
-      padding:10px 12px;
-      outline:none;
-      font-size:.98rem;
-    }
-    textarea{min-height:220px; resize:vertical; font-family:var(--sans)}
-    #teaser{min-height:120px}
-    #contentEn,#contentDe{min-height:240px}
 
-    input[readonly]{opacity:.9}
-    input:focus, select:focus, textarea:focus{
-      border-color:var(--focus);
-      box-shadow:0 0 0 3px rgba(125,211,252,.15);
+    @media (max-width: 980px) {
+      .grid {
+        grid-template-columns: 1fr
+      }
     }
-    .inline{
-      display:flex; gap:10px; align-items:center;
+
+    .card {
+      background: linear-gradient(180deg, var(--panel), var(--surface));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px;
+      box-shadow: 0 8px 28px rgba(0, 0, 0, .25);
     }
-    .btn{
-      appearance:none;
-      border:1px solid var(--border);
-      background:#0e1220;
-      color:var(--text);
-      padding:9px 12px;
-      border-radius:12px;
-      cursor:pointer;
-      font-weight:600;
-      font-size:.92rem;
-      user-select:none;
+
+    .row {
+      display: grid;
+      grid-template-columns: 170px 1fr;
+      gap: 10px;
+      align-items: start;
+      margin: 10px 0;
     }
-    .btn:hover{border-color:#3b4762}
-    .btn:active{transform:translateY(1px)}
-    .btn.primary{
-      background:#101a2a;
-      border-color:#415070;
+
+    label {
+      color: var(--muted);
+      font-size: .92rem;
+      padding-top: 7px
     }
-    .btn.small{padding:7px 10px; font-weight:600; font-size:.9rem}
-    .hint{color:var(--muted); font-size:.9rem; margin-top:4px}
-    .toolbar{display:flex; flex-wrap:wrap; gap:8px}
-    .images{
-      border:1px dashed #36405a;
-      border-radius:12px;
-      padding:10px;
-      background:#0f1320;
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      background: #0f1320;
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: 12px;
+      padding: 10px 12px;
+      outline: none;
+      font-size: .98rem;
     }
-    .imglist{
-      margin:10px 0 0;
-      list-style:none; padding:0; margin-left:0;
-      max-height:140px; overflow:auto;
-      border:1px solid var(--border);
-      border-radius:12px;
+
+    textarea {
+      min-height: 220px;
+      resize: vertical;
+      font-family: var(--sans)
     }
-    .imglist li{
-      display:flex; justify-content:space-between; gap:10px;
-      padding:8px 10px; border-bottom:1px solid rgba(42,50,68,.7);
-      font-family:var(--mono); font-size:.9rem;
+
+    #teaser {
+      min-height: 120px
     }
-    .imglist li:last-child{border-bottom:none}
-    .imglist button{
-      border:1px solid var(--border);
-      background:transparent;
-      color:var(--muted);
-      border-radius:10px;
-      padding:4px 8px;
-      cursor:pointer;
+
+    #contentEn,
+    #contentDe {
+      min-height: 240px
     }
-    .imglist button:hover{color:var(--text); border-color:#3b4762}
-    pre, .mono{font-family:var(--mono)}
-    #output{
-      min-height:520px;
-      font-family:var(--mono);
-      white-space:pre;
+
+    input[readonly] {
+      opacity: .9
     }
-    .status{
-      margin-left:10px;
-      font-size:.92rem;
-      color:var(--muted);
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--focus);
+      box-shadow: 0 0 0 3px rgba(125, 211, 252, .15);
     }
-    .status.ok{color:var(--ok)}
-    .status.bad{color:var(--bad)}
+
+    .inline {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .btn {
+      appearance: none;
+      border: 1px solid var(--border);
+      background: #0e1220;
+      color: var(--text);
+      padding: 9px 12px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: .92rem;
+      user-select: none;
+    }
+
+    .btn:hover {
+      border-color: #3b4762
+    }
+
+    .btn:active {
+      transform: translateY(1px)
+    }
+
+    .btn.primary {
+      background: #101a2a;
+      border-color: #415070;
+    }
+
+    .btn.small {
+      padding: 7px 10px;
+      font-weight: 600;
+      font-size: .9rem
+    }
+
+    .hint {
+      color: var(--muted);
+      font-size: .9rem;
+      margin-top: 4px
+    }
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px
+    }
+
+    .images {
+      border: 1px dashed #36405a;
+      border-radius: 12px;
+      padding: 10px;
+      background: #0f1320;
+    }
+
+    .imglist {
+      margin: 10px 0 0;
+      list-style: none;
+      padding: 0;
+      margin-left: 0;
+      max-height: 140px;
+      overflow: auto;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+
+    .imglist li {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 8px 10px;
+      border-bottom: 1px solid rgba(42, 50, 68, .7);
+      font-family: var(--mono);
+      font-size: .9rem;
+    }
+
+    .imglist li:last-child {
+      border-bottom: none
+    }
+
+    .imglist button {
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--muted);
+      border-radius: 10px;
+      padding: 4px 8px;
+      cursor: pointer;
+    }
+
+    .imglist button:hover {
+      color: var(--text);
+      border-color: #3b4762
+    }
+
+    pre,
+    .mono {
+      font-family: var(--mono)
+    }
+
+    #output {
+      min-height: 520px;
+      font-family: var(--mono);
+      white-space: pre;
+    }
+
+    .status {
+      margin-left: 10px;
+      font-size: .92rem;
+      color: var(--muted);
+    }
+
+    .status.ok {
+      color: var(--ok)
+    }
+
+    .status.bad {
+      color: var(--bad)
+    }
 
     /* --- NEW: right column stack + preview styling ----------------------- */
-    .rightcol{
-      display:grid;
-      gap:14px;
-      align-content:start;
+    .rightcol {
+      display: grid;
+      gap: 14px;
+      align-content: start;
     }
-    #preview{
-      min-height:520px;
-    }
-    /* Minimal „Homepage-Look“ fürs Preview */
-    .news-item{padding:14px}
-    .card-title{margin:0 0 6px; font-size:1.05rem; font-weight:750}
-    .card-meta{margin:0 0 10px; color:var(--muted); font-size:.92rem}
-    .news-body p{margin:10px 0}
-    .news-body ul{margin:10px 0 10px 18px}
-    .news-body li{margin:6px 0}
-    .news-body a{color:var(--focus); text-decoration:none}
-    .news-body a:hover{text-decoration:underline}
-    .news-body .hint{
-      border:1px dashed #36405a;
-      padding:10px 12px;
-      border-radius:12px;
-      background:#0f1320;
-      margin:10px 0;
-    }
-    .lang-divider{
-      border:0;
-      border-top:1px solid rgba(42,50,68,.55);
-      margin:12px 0;
-    }
-    details.news-details{
-      border:1px solid rgba(42,50,68,.55);
-      border-radius:12px;
-      padding:8px 10px;
-      background:rgba(15,19,32,.55);
-      margin:10px 0;
-    }
-    details.news-details > summary{
-      cursor:pointer;
-      color:var(--muted);
-      font-weight:700;
-      list-style:none;
-      outline:none;
-    }
-    details.news-details > summary::-webkit-details-marker{display:none}
-    details.news-details[open] > summary{color:var(--text)}
 
-    .media-row{
-      display:grid;
+    #preview {
+      min-height: 520px;
+    }
+
+    /* Minimal „Homepage-Look“ fürs Preview */
+    .news-item {
+      padding: 14px
+    }
+
+    .card-title {
+      margin: 0 0 6px;
+      font-size: 1.05rem;
+      font-weight: 750
+    }
+
+    .card-meta {
+      margin: 0 0 10px;
+      color: var(--muted);
+      font-size: .92rem
+    }
+
+    .news-body p {
+      margin: 10px 0
+    }
+
+    .news-body ul {
+      margin: 10px 0 10px 18px
+    }
+
+    .news-body li {
+      margin: 6px 0
+    }
+
+    .news-body a {
+      color: var(--focus);
+      text-decoration: none
+    }
+
+    .news-body a:hover {
+      text-decoration: underline
+    }
+
+    .news-body .hint {
+      border: 1px dashed #36405a;
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: #0f1320;
+      margin: 10px 0;
+    }
+
+    .lang-divider {
+      border: 0;
+      border-top: 1px solid rgba(42, 50, 68, .55);
+      margin: 12px 0;
+    }
+
+    details.news-details {
+      border: 1px solid rgba(42, 50, 68, .55);
+      border-radius: 12px;
+      padding: 8px 10px;
+      background: rgba(15, 19, 32, .55);
+      margin: 10px 0;
+    }
+
+    details.news-details>summary {
+      cursor: pointer;
+      color: var(--muted);
+      font-weight: 700;
+      list-style: none;
+      outline: none;
+    }
+
+    details.news-details>summary::-webkit-details-marker {
+      display: none
+    }
+
+    details.news-details[open]>summary {
+      color: var(--text)
+    }
+
+    .media-row {
+      display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap:10px;
-      margin:10px 0 12px;
+      gap: 10px;
+      margin: 10px 0 12px;
     }
-    @media (max-width: 980px){
-      .media-row{grid-template-columns:1fr}
+
+    @media (max-width: 980px) {
+      .media-row {
+        grid-template-columns: 1fr
+      }
     }
-    figure.media{margin:0}
-    figure.media img{
-      width:100%;
-      height:auto;
-      display:block;
-      border-radius:12px;
-      border:1px solid rgba(42,50,68,9);
-      background:#0f1320;
+
+    figure.media {
+      margin: 0
     }
-    figure.media figcaption{
-      margin-top:6px;
-      color:var(--muted);
-      font-size:.9rem;
+
+    figure.media img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 12px;
+      border: 1px solid rgba(42, 50, 68, 9);
+      background: #0f1320;
+    }
+
+    figure.media figcaption {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: .9rem;
     }
   </style>
 </head>
 
 <body>
-<div class="wrap">
-  <h1>Website JSON Beitrag Generator (Browser)</h1>
+  <div class="wrap">
+    <h1>Website JSON Beitrag Generator (Browser)</h1>
 
-  <div class="grid">
-    <!-- LEFT -->
-    <section class="card">
-      <div class="row">
-        <label for="id">id (auto)</label>
-        <input id="id" type="text" readonly />
-      </div>
-
-      <div class="row">
-        <label for="topic">topic</label>
-        <select id="topic"></select>
-      </div>
-
-      <div class="row">
-        <label for="subtopic">subtopic</label>
-        <select id="subtopic"></select>
-      </div>
-
-      <div class="row">
-        <label for="date">date</label>
-        <div class="inline">
-          <input id="date" type="text" placeholder="YYYY-MM-DD" />
-          <button class="btn small" id="today">heute</button>
-        </div>
-      </div>
-
-      <div class="row">
-        <label for="title">title</label>
-        <input id="title" type="text" />
-      </div>
-
-      <div class="row">
-        <label for="format">format</label>
-        <select id="format">
-          <option value="markdown" selected>markdown</option>
-          <option value="html">html</option>
-          <option value="text">text</option>
-        </select>
-      </div>
-
-      <div class="row">
-        <label for="teaser">teaser (EN)</label>
-        <div>
-          <div class="toolbar" style="margin-bottom:8px">
-            <button class="btn small" data-wrap="**">**fett**</button>
-            <button class="btn small" data-wrap="*">*kursiv*</button>
-            <button class="btn small" data-wrap="~">~Zitat~</button>
-            <button class="btn small" id="mklist">Liste (-)</button>
-            <button class="btn small" id="blank">Leerzeile</button>
-          </div>
-          <textarea id="teaser" spellcheck="false" placeholder="Short English abstract (recommended < 100 words)"></textarea>
-          <div class="hint">Word count: <span class="mono" id="teaserCount">0</span> (target: &lt; 100)</div>
-        </div>
-      </div>
-
-      <div class="row">
-        <label for="contentEn">content (EN)</label>
-        <textarea id="contentEn" spellcheck="false"></textarea>
-      </div>
-
-      <div class="row">
-        <label for="contentDe">content (DE)</label>
-        <textarea id="contentDe" spellcheck="false"></textarea>
-      </div>
-
-      <div class="row">
-        <label>images</label>
-        <div class="images">
-          <div class="hint">Pfad-Prefix ist fix: <span class="mono">/web/assets/img/</span>…</div>
-
-          <div class="row" style="grid-template-columns: 110px 1fr; margin:10px 0 0">
-            <label for="imgFile" style="padding-top:6px">Dateiname</label>
-            <input id="imgFile" type="text" placeholder="example.jpg" />
-          </div>
-
-          <div class="row" style="grid-template-columns: 110px 1fr; margin:10px 0 0">
-            <label for="imgAlt" style="padding-top:6px">alt</label>
-            <input id="imgAlt" type="text" placeholder="image" />
-          </div>
-
-          <div style="display:flex; gap:10px; align-items:center; margin-top:10px">
-            <button class="btn small" id="addImg">Add</button>
-            <div class="hint" style="margin:0">Einträge erscheinen unten; einzeln entfernbar.</div>
-          </div>
-
-          <ul class="imglist" id="imgList"></ul>
-        </div>
-      </div>
-
-      <div style="display:flex; align-items:center; gap:10px; margin-top:14px">
-        <button class="btn primary" id="generate">Generate</button>
-        <button class="btn" id="reset" type="button">Reset</button>
-        <span id="status" class="status"></span>
-      </div>
-    </section>
-
-    <!-- RIGHT -->
-    <section class="rightcol">
+    <div class="grid">
+      <!-- LEFT -->
       <section class="card">
-        <div class="hint" style="margin:0 0 8px">
-          Output (click to copy). JSON escapt sauber: <span class="mono">\n</span>, <span class="mono">\"</span> usw.
+        <div class="row">
+          <label for="id">id (auto)</label>
+          <input id="id" type="text" readonly />
         </div>
-        <textarea id="output" readonly></textarea>
-        <div class="hint" style="margin-top:10px">
-          Kleine Gemeinheit der Physik: die Zeit in der ID wird beim <span class="mono">Generate</span> aktualisiert.
+
+        <div class="row">
+          <label for="topic">topic</label>
+          <select id="topic"></select>
+        </div>
+
+        <div class="row">
+          <label for="subtopic">subtopic</label>
+          <select id="subtopic"></select>
+        </div>
+
+        <div class="row">
+          <label for="date">date</label>
+          <div class="inline">
+            <input id="date" type="text" placeholder="YYYY-MM-DD" />
+            <button class="btn small" id="today">heute</button>
+          </div>
+        </div>
+
+        <div class="row">
+          <label for="title">title</label>
+          <input id="title" type="text" />
+        </div>
+
+        <div class="row">
+          <label for="format">format</label>
+          <select id="format">
+            <option value="markdown" selected>markdown</option>
+            <option value="html">html</option>
+            <option value="text">text</option>
+          </select>
+        </div>
+
+        <div class="row">
+          <label for="teaser">teaser (EN)</label>
+          <div>
+            <div class="toolbar" style="margin-bottom:8px">
+              <button class="btn small" data-wrap="**">**fett**</button>
+              <button class="btn small" data-wrap="*">*kursiv*</button>
+              <button class="btn small" data-wrap="~">~Zitat~</button>
+              <button class="btn small" id="mklist">Liste (-)</button>
+              <button class="btn small" id="blank">Leerzeile</button>
+            </div>
+            <textarea id="teaser" spellcheck="false"
+              placeholder="Short English abstract (recommended < 100 words)"></textarea>
+            <div class="hint">Word count: <span class="mono" id="teaserCount">0</span> (target: &lt; 100)</div>
+          </div>
+        </div>
+
+        <div class="row">
+          <label for="contentEn">content (EN)</label>
+          <textarea id="contentEn" spellcheck="false"></textarea>
+        </div>
+
+        <div class="row">
+          <label for="contentDe">content (DE)</label>
+          <textarea id="contentDe" spellcheck="false"></textarea>
+        </div>
+
+        <div class="row">
+          <label>images</label>
+          <div class="images">
+            <div class="hint">Pfad-Prefix ist fix: <span class="mono">/web/assets/img/</span>…</div>
+
+            <div class="row" style="grid-template-columns: 110px 1fr; margin:10px 0 0">
+              <label for="imgFile" style="padding-top:6px">Dateiname</label>
+              <input id="imgFile" type="text" placeholder="example.jpg" />
+            </div>
+
+            <div class="row" style="grid-template-columns: 110px 1fr; margin:10px 0 0">
+              <label for="imgAlt" style="padding-top:6px">alt</label>
+              <input id="imgAlt" type="text" placeholder="image" />
+            </div>
+
+            <div style="display:flex; gap:10px; align-items:center; margin-top:10px">
+              <button class="btn small" id="addImg">Add</button>
+              <div class="hint" style="margin:0">Einträge erscheinen unten; einzeln entfernbar.</div>
+            </div>
+
+            <ul class="imglist" id="imgList"></ul>
+          </div>
+        </div>
+
+        <div style="display:flex; align-items:center; gap:10px; margin-top:14px">
+          <button class="btn primary" id="generate">Generate</button>
+          <button class="btn" id="reset" type="button">Reset</button>
+          <span id="status" class="status"></span>
         </div>
       </section>
 
-      <section class="card">
-        <div class="hint" style="margin:0 0 8px">
-          Live Rendering (wie auf der Website)
-        </div>
-        <div id="preview"></div>
+      <!-- RIGHT -->
+      <section class="rightcol">
+        <section class="card">
+          <div class="hint" style="margin:0 0 8px">
+            Output (click to copy). JSON escapt sauber: <span class="mono">\n</span>, <span class="mono">\"</span> usw.
+          </div>
+          <textarea id="output" readonly></textarea>
+          <div class="hint" style="margin-top:10px">
+            Kleine Gemeinheit der Physik: die Zeit in der ID wird beim <span class="mono">Generate</span> aktualisiert.
+          </div>
+        </section>
+
+        <section class="card">
+          <div class="hint" style="margin:0 0 8px">
+            Live Rendering (wie auf der Website)
+          </div>
+          <div id="preview"></div>
+        </section>
       </section>
-    </section>
+    </div>
   </div>
-</div>
 
-<script>
-  const ASSET_PREFIX = "/web/assets/img/";
+  <script>
+    const ASSET_PREFIX = "/web/assets/img/";
 
-  const TOPICS = {
-    "": [""],
-    "botanik": ["", "raspberry", "ribisl", "fig"],
-    "making": ["", "3dprint"],
-    "code": ["", "html", "python", "cpp"],
-    "words": ["", "communication", "history", "linguistics", "literature", "philosophy", "poetry"],
-    "electronics": ["", "mesh"],
-    "nerdism": ["", "gothic_mod", "lotr", "games"]
-  };
+    const TOPICS = {
+      "": [""],
+      "botanik": ["", "raspberry", "ribisl", "fig"],
+      "making": ["", "3dprint"],
+      "code": ["", "html", "python", "cpp"],
+      "words": ["", "communication", "history", "linguistics", "literature", "philosophy", "poetry"],
+      "electronics": ["", "mesh"],
+      "nerdism": ["", "gothic_mod", "lotr", "games"]
+    };
 
-  const el = (id) => document.getElementById(id);
+    const el = (id) => document.getElementById(id);
 
-  const state = {
-    images: [] // {src, alt}
-  };
+    const state = {
+      images: [] // {src, alt}
+    };
 
-  // Toolbar should operate on the textarea the user last focused.
-  let activeTA = null;
-  const getTA = () => activeTA || el("contentEn");
+    // Toolbar should operate on the textarea the user last focused.
+    let activeTA = null;
+    const getTA = () => activeTA || el("contentEn");
 
-  function wordCount(s){
-    const words = String(s || "").trim().split(/\s+/).filter(Boolean);
-    return words.length;
-  }
-
-  function updateTeaserCount(){
-    const n = wordCount(el("teaser").value);
-    el("teaserCount").textContent = String(n);
-    // gentle nudge: show a short warning if it grows too long
-    if (n > 100) setStatus("Teaser ist > 100 Wörter (nur Empfehlung).", "bad");
-  }
-
-  function sanitizeToken(s){
-    s = (s ?? "").trim().replaceAll(" ", "_");
-    while (s.includes("__")) s = s.replaceAll("__","_");
-    return s.replace(/^_+|_+$/g, "");
-  }
-
-  function hhmm(){
-    const d = new Date();
-    const hh = String(d.getHours()).padStart(2,"0");
-    const mm = String(d.getMinutes()).padStart(2,"0");
-    return `${hh}_${mm}`;
-  }
-
-  function updateId(){
-    const d = sanitizeToken(el("date").value);
-    const t = sanitizeToken(el("topic").value);
-    const s = sanitizeToken(el("subtopic").value);
-    const time = hhmm();
-
-    const parts = [d,t,s,time].filter(p => p && p.length);
-    el("id").value = parts.length ? parts.join("_") : time;
-  }
-
-  function setStatus(msg, kind="ok"){
-    const st = el("status");
-    st.textContent = msg || "";
-    st.classList.remove("ok","bad");
-    if (msg){
-      st.classList.add(kind === "bad" ? "bad" : "ok");
-      window.clearTimeout(setStatus._t);
-      setStatus._t = window.setTimeout(() => setStatus("", "ok"), 1600);
+    function wordCount(s) {
+      const words = String(s || "").trim().split(/\s+/).filter(Boolean);
+      return words.length;
     }
-  }
 
-  function populateTopics(){
-    const t = el("topic");
-    t.innerHTML = "";
-    Object.keys(TOPICS).forEach(k=>{
-      const opt = document.createElement("option");
-      opt.value = k;
-      opt.textContent = k === "" ? "(leer)" : k;
-      t.appendChild(opt);
-    });
-  }
+    function updateTeaserCount() {
+      const n = wordCount(el("teaser").value);
+      el("teaserCount").textContent = String(n);
+      // gentle nudge: show a short warning if it grows too long
+      if (n > 100) setStatus("Teaser ist > 100 Wörter (nur Empfehlung).", "bad");
+    }
 
-  function populateSubtopics(topic){
-    const s = el("subtopic");
-    const allowed = TOPICS[topic] ?? [""];
-    const current = s.value;
+    function sanitizeToken(s) {
+      s = (s ?? "").trim().replaceAll(" ", "_");
+      while (s.includes("__")) s = s.replaceAll("__", "_");
+      return s.replace(/^_+|_+$/g, "");
+    }
 
-    s.innerHTML = "";
-    allowed.forEach(k=>{
-      const opt = document.createElement("option");
-      opt.value = k;
-      opt.textContent = k === "" ? "(leer)" : k;
-      s.appendChild(opt);
-    });
+    function hhmm() {
+      const d = new Date();
+      const hh = String(d.getHours()).padStart(2, "0");
+      const mm = String(d.getMinutes()).padStart(2, "0");
+      return `${hh}_${mm}`;
+    }
 
-    // keep selection if still allowed, else reset to ""
-    if (allowed.includes(current)) s.value = current;
-    else s.value = "";
+    function updateId() {
+      const d = sanitizeToken(el("date").value);
+      const t = sanitizeToken(el("topic").value);
+      const s = sanitizeToken(el("subtopic").value);
+      const time = hhmm();
 
-    updateId();
-  }
+      const parts = [d, t, s, time].filter(p => p && p.length);
+      el("id").value = parts.length ? parts.join("_") : time;
+    }
 
-  function wrapSelection(textarea, wrap){
-    const start = textarea.selectionStart;
-    const end = textarea.selectionEnd;
+    function setStatus(msg, kind = "ok") {
+      const st = el("status");
+      st.textContent = msg || "";
+      st.classList.remove("ok", "bad");
+      if (msg) {
+        st.classList.add(kind === "bad" ? "bad" : "ok");
+        window.clearTimeout(setStatus._t);
+        setStatus._t = window.setTimeout(() => setStatus("", "ok"), 1600);
+      }
+    }
 
-    if (start === end){
-      // no selection: insert wrapwrap and place cursor inside
-      const insert = wrap + wrap;
-      textarea.setRangeText(insert, start, end, "end");
-      const pos = start + wrap.length;
-      textarea.setSelectionRange(pos, pos);
+    function populateTopics() {
+      const t = el("topic");
+      t.innerHTML = "";
+      Object.keys(TOPICS).forEach(k => {
+        const opt = document.createElement("option");
+        opt.value = k;
+        opt.textContent = k === "" ? "(leer)" : k;
+        t.appendChild(opt);
+      });
+    }
+
+    function populateSubtopics(topic) {
+      const s = el("subtopic");
+      const allowed = TOPICS[topic] ?? [""];
+      const current = s.value;
+
+      s.innerHTML = "";
+      allowed.forEach(k => {
+        const opt = document.createElement("option");
+        opt.value = k;
+        opt.textContent = k === "" ? "(leer)" : k;
+        s.appendChild(opt);
+      });
+
+      // keep selection if still allowed, else reset to ""
+      if (allowed.includes(current)) s.value = current;
+      else s.value = "";
+
+      updateId();
+    }
+
+    function wrapSelection(textarea, wrap) {
+      const start = textarea.selectionStart;
+      const end = textarea.selectionEnd;
+
+      if (start === end) {
+        // no selection: insert wrapwrap and place cursor inside
+        const insert = wrap + wrap;
+        textarea.setRangeText(insert, start, end, "end");
+        const pos = start + wrap.length;
+        textarea.setSelectionRange(pos, pos);
+        textarea.focus();
+        return;
+      }
+
+      const selected = textarea.value.slice(start, end);
+      textarea.setRangeText(wrap + selected + wrap, start, end, "end");
       textarea.focus();
-      return;
     }
 
-    const selected = textarea.value.slice(start, end);
-    textarea.setRangeText(wrap + selected + wrap, start, end, "end");
-    textarea.focus();
-  }
+    function makeList(textarea) {
+      const start = textarea.selectionStart;
+      const end = textarea.selectionEnd;
 
-  function makeList(textarea){
-    const start = textarea.selectionStart;
-    const end = textarea.selectionEnd;
+      if (start === end) {
+        textarea.setRangeText("- ", start, end, "end");
+        textarea.focus();
+        return;
+      }
 
-    if (start === end){
-      textarea.setRangeText("- ", start, end, "end");
+      // Expand to full lines
+      const v = textarea.value;
+      const lineStart = v.lastIndexOf("\n", start - 1) + 1;
+      const lineEnd = v.indexOf("\n", end);
+      const realEnd = lineEnd === -1 ? v.length : lineEnd;
+
+      const block = v.slice(lineStart, realEnd);
+      const lines = block.split("\n").map(line => {
+        if (line.trim() === "") return line;
+        return line.startsWith("- ") ? line : "- " + line;
+      }).join("\n");
+
+      textarea.setRangeText(lines, lineStart, realEnd, "end");
       textarea.focus();
-      return;
     }
 
-    // Expand to full lines
-    const v = textarea.value;
-    const lineStart = v.lastIndexOf("\n", start - 1) + 1;
-    const lineEnd = v.indexOf("\n", end);
-    const realEnd = lineEnd === -1 ? v.length : lineEnd;
+    function addImage() {
+      const file = el("imgFile").value.trim();
+      const alt = (el("imgAlt").value.trim() || "image");
 
-    const block = v.slice(lineStart, realEnd);
-    const lines = block.split("\n").map(line=>{
-      if (line.trim() === "") return line;
-      return line.startsWith("- ") ? line : "- " + line;
-    }).join("\n");
-
-    textarea.setRangeText(lines, lineStart, realEnd, "end");
-    textarea.focus();
-  }
-
-  function addImage(){
-    const file = el("imgFile").value.trim();
-    const alt = (el("imgAlt").value.trim() || "image");
-
-    if (!file){
-      setStatus("Kein Dateiname.", "bad");
-      return;
-    }
-    state.images.push({ src: ASSET_PREFIX + file, alt });
-    el("imgFile").value = "";
-    el("imgAlt").value = "";
-    renderImages();
-    schedulePreview();
-  }
-
-  function removeImage(idx){
-    state.images.splice(idx, 1);
-    renderImages();
-    schedulePreview();
-  }
-
-  function renderImages(){
-    const ul = el("imgList");
-    ul.innerHTML = "";
-    state.images.forEach((img, idx)=>{
-      const li = document.createElement("li");
-      const left = document.createElement("span");
-      left.textContent = `${img.src} | ${img.alt}`;
-      const btn = document.createElement("button");
-      btn.type = "button";
-      btn.textContent = "Remove";
-      btn.addEventListener("click", ()=>removeImage(idx));
-      li.appendChild(left);
-      li.appendChild(btn);
-      ul.appendChild(li);
-    });
-  }
-
-  function generate(){
-    updateId(); // refresh time-part
-
-    const post = {
-      id: el("id").value,
-      topic: el("topic").value,
-      subtopic: el("subtopic").value,
-      date: el("date").value.trim(),
-      title: el("title").value.trim(),
-      format: el("format").value.trim(),
-      teaser: el("teaser").value,
-      content_en: el("contentEn").value,
-      content_de: el("contentDe").value,
-      images: state.images.slice()
-    };
-
-    el("output").value = JSON.stringify(post, null, 2);
-    setStatus("Generiert. Klick ins Output-Feld kopiert.", "ok");
-    schedulePreview();
-  }
-
-  function resetAll(){
-    // fields
-    el("topic").value = "";
-    populateSubtopics(el("topic").value);
-
-    el("date").value = "";
-    el("title").value = "";
-    el("format").value = "markdown";
-    el("teaser").value = "";
-    el("contentEn").value = "";
-    el("contentDe").value = "";
-
-    // images
-    state.images = [];
-    el("imgFile").value = "";
-    el("imgAlt").value = "";
-    renderImages();
-
-    // output + status
-    el("output").value = "";
-    setStatus("", "ok");
-
-    // id refresh
-    updateId();
-    updateTeaserCount();
-    schedulePreview();
-  }
-
-  async function copyOutput(){
-    const text = el("output").value.trim();
-    if (!text) return;
-    try{
-      await navigator.clipboard.writeText(text);
-      setStatus("In Zwischenablage kopiert.", "ok");
-    }catch(err){
-      // Fallback for stricter browsers
-      el("output").focus();
-      el("output").select();
-      document.execCommand("copy");
-      setStatus("In Zwischenablage kopiert.", "ok");
-    }
-  }
-
-  // -------------------------------------------------------------------------
-  // Live Preview (Renderer-Logik wie auf der Website)
-  // -------------------------------------------------------------------------
-  const escapeHtml = (s) =>
-    String(s).replace(/[&<>"']/g, (c) => ({
-      "&": "&amp;",
-      "<": "&lt;",
-      ">": "&gt;",
-      '"': "&quot;",
-      "'": "&#39;",
-    }[c]));
-
-  // Inline-Markdown: **bold**, *em*, [text](url), nackte http(s)-URLs
-  // Wichtig: Diese Funktion erwartet "already escaped" Text.
-  function formatInline(escapedText) {
-    let t = String(escapedText);
-
-    // bold / italic
-    t = t
-      .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
-      .replace(/\*(?!\*)(.+?)\*/g, "<em>$1</em>");
-
-    // Externe Links
-    t = t.replace(
-      /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g,
-      `<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>`
-    );
-
-    // Anchor-Links
-    t = t.replace(
-      /\[([^\]]+)\]\((#[a-zA-Z0-9_-]+)\)/g,
-      `<a href="$2">$1</a>`
-    );
-
-    // Relative Links
-    t = t.replace(
-      /\[([^\]]+)\]\(((?:\/|\.\.?\/)[^\s)]+)\)/g,
-      `<a href="$2">$1</a>`
-    );
-
-    // Nackte URLs
-    t = t.replace(/(https?:\/\/[^\s<]+)(?![^<]*>)/g, (m) => {
-      const match = m.match(/^(.*?)([).,;:!?]+)?$/);
-      const url = match ? match[1] : m;
-      const trail = match && match[2] ? match[2] : "";
-      return `<a href="${url}" target="_blank" rel="noopener noreferrer">${url}</a>${trail}`;
-    });
-
-    return t;
-  }
-
-  function mdToHtml(md) {
-    const lines = String(md).split("\n");
-    let html = "";
-    let inList = false;
-    let pBuf = [];
-
-    const flushP = () => {
-      if (!pBuf.length) return "";
-      const escaped = escapeHtml(pBuf.join(" ").trim());
-      const txt = formatInline(escaped);
-      pBuf = [];
-      return `<p>${txt}</p>`;
-    };
-
-    for (const raw of lines) {
-      const line = raw.trimEnd();
-
-      if (line.trim() === "") {
-        if (inList) {
-          html += "</ul>";
-          inList = false;
-        }
-        html += flushP();
-        continue;
+      if (!file) {
+        setStatus("Kein Dateiname.", "bad");
+        return;
       }
+      state.images.push({ src: ASSET_PREFIX + file, alt });
+      el("imgFile").value = "";
+      el("imgAlt").value = "";
+      renderImages();
+      schedulePreview();
+    }
 
-      // ~hint~ block (whole line)
-      if (line.trim().startsWith("~") && line.trim().endsWith("~")) {
-        if (inList) {
-          html += "</ul>";
-          inList = false;
-        }
-        html += flushP();
+    function removeImage(idx) {
+      state.images.splice(idx, 1);
+      renderImages();
+      schedulePreview();
+    }
 
-        const hintEscaped = escapeHtml(line.trim().slice(1, -1));
-        const hintText = formatInline(hintEscaped);
-        html += `<p class="hint">${hintText}</p>`;
-        continue;
-      }
+    function renderImages() {
+      const ul = el("imgList");
+      ul.innerHTML = "";
+      state.images.forEach((img, idx) => {
+        const li = document.createElement("li");
+        const left = document.createElement("span");
+        left.textContent = `${img.src} | ${img.alt}`;
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.textContent = "Remove";
+        btn.addEventListener("click", () => removeImage(idx));
+        li.appendChild(left);
+        li.appendChild(btn);
+        ul.appendChild(li);
+      });
+    }
 
-      if (line.startsWith("- ")) {
-        html += flushP();
-        if (!inList) {
-          html += "<ul>";
-          inList = true;
-        }
+    function generate() {
+      updateId(); // refresh time-part
 
-        const itemEscaped = escapeHtml(line.slice(2));
-        const item = formatInline(itemEscaped);
-        html += `<li>${item}</li>`;
-      } else {
-        if (inList) {
-          html += "</ul>";
-          inList = false;
-        }
-        pBuf.push(line);
+      const post = {
+        id: el("id").value,
+        topic: el("topic").value,
+        subtopic: el("subtopic").value,
+        date: el("date").value.trim(),
+        title: el("title").value.trim(),
+        format: el("format").value.trim(),
+        teaser: el("teaser").value,
+        content_en: el("contentEn").value,
+        content_de: el("contentDe").value,
+        images: state.images.slice()
+      };
+
+      el("output").value = JSON.stringify(post, null, 2);
+      setStatus("Generiert. Klick ins Output-Feld kopiert.", "ok");
+      schedulePreview();
+    }
+
+    function resetAll() {
+      // fields
+      el("topic").value = "";
+      populateSubtopics(el("topic").value);
+
+      el("date").value = "";
+      el("title").value = "";
+      el("format").value = "markdown";
+      el("teaser").value = "";
+      el("contentEn").value = "";
+      el("contentDe").value = "";
+
+      // images
+      state.images = [];
+      el("imgFile").value = "";
+      el("imgAlt").value = "";
+      renderImages();
+
+      // output + status
+      el("output").value = "";
+      setStatus("", "ok");
+
+      // id refresh
+      updateId();
+      updateTeaserCount();
+      schedulePreview();
+    }
+
+    async function copyOutput() {
+      const text = el("output").value.trim();
+      if (!text) return;
+      try {
+        await navigator.clipboard.writeText(text);
+        setStatus("In Zwischenablage kopiert.", "ok");
+      } catch (err) {
+        // Fallback for stricter browsers
+        el("output").focus();
+        el("output").select();
+        document.execCommand("copy");
+        setStatus("In Zwischenablage kopiert.", "ok");
       }
     }
 
-    if (inList) html += "</ul>";
-    html += flushP();
-    return html;
-  }
+    // -------------------------------------------------------------------------
+    // Live Preview (Renderer-Logik wie auf der Website)
+    // -------------------------------------------------------------------------
+    const escapeHtml = (s) =>
+      String(s).replace(/[&<>"']/g, (c) => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;",
+      }[c]));
 
-  function renderPost(post) {
-    const isBilingual =
-      ("teaser" in post) || ("content_en" in post) || ("content_de" in post);
+    // Inline-Markdown: **bold**, *em*, [text](url), nackte http(s)-URLs
+    // Wichtig: Diese Funktion erwartet "already escaped" Text.
+    function formatInline(escapedText) {
+      let t = String(escapedText);
 
-    const renderAny = (val) => {
-      if (post.format === "html") return String(val || "");
-      if (post.format === "markdown") return mdToHtml(val || "");
-      return `<p>${escapeHtml(val || "")}</p>`;
-    };
+      // bold / italic
+      t = t
+        .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
+        .replace(/\*(?!\*)(.+?)\*/g, "<em>$1</em>");
 
-    const teaserHtml = isBilingual ? renderAny(post.teaser || "") : "";
-    const enHtml = isBilingual ? renderAny(post.content_en || "") : "";
-    const deHtml = isBilingual ? renderAny(post.content_de || "") : "";
+      // Externe Links
+      t = t.replace(
+        /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g,
+        `<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>`
+      );
 
-    const legacyBody = renderAny(post.content || "");
+      // Anchor-Links
+      t = t.replace(
+        /\[([^\]]+)\]\((#[a-zA-Z0-9_-]+)\)/g,
+        `<a href="$2">$1</a>`
+      );
 
-    const body = isBilingual
-      ? `
+      // Relative Links
+      t = t.replace(
+        /\[([^\]]+)\]\(((?:\/|\.\.?\/)[^\s)]+)\)/g,
+        `<a href="$2">$1</a>`
+      );
+
+      // Nackte URLs
+      t = t.replace(/(https?:\/\/[^\s<]+)(?![^<]*>)/g, (m) => {
+        const match = m.match(/^(.*?)([).,;:!?]+)?$/);
+        const url = match ? match[1] : m;
+        const trail = match && match[2] ? match[2] : "";
+        return `<a href="${url}" target="_blank" rel="noopener noreferrer">${url}</a>${trail}`;
+      });
+
+      return t;
+    }
+
+    function mdToHtml(md) {
+      const lines = String(md).split("\n");
+      let html = "";
+      let inList = false;
+      let pBuf = [];
+
+      const flushP = () => {
+        if (!pBuf.length) return "";
+        const escaped = escapeHtml(pBuf.join(" ").trim());
+        const txt = formatInline(escaped);
+        pBuf = [];
+        return `<p>${txt}</p>`;
+      };
+
+      for (const raw of lines) {
+        const line = raw.trimEnd();
+
+        if (line.trim() === "") {
+          if (inList) {
+            html += "</ul>";
+            inList = false;
+          }
+          html += flushP();
+          continue;
+        }
+
+        // ~hint~ block (whole line)
+        if (line.trim().startsWith("~") && line.trim().endsWith("~")) {
+          if (inList) {
+            html += "</ul>";
+            inList = false;
+          }
+          html += flushP();
+
+          const hintEscaped = escapeHtml(line.trim().slice(1, -1));
+          const hintText = formatInline(hintEscaped);
+          html += `<p class="hint">${hintText}</p>`;
+          continue;
+        }
+
+        if (line.startsWith("- ")) {
+          html += flushP();
+          if (!inList) {
+            html += "<ul>";
+            inList = true;
+          }
+
+          const itemEscaped = escapeHtml(line.slice(2));
+          const item = formatInline(itemEscaped);
+          html += `<li>${item}</li>`;
+        } else {
+          if (inList) {
+            html += "</ul>";
+            inList = false;
+          }
+          pBuf.push(line);
+        }
+      }
+
+      if (inList) html += "</ul>";
+      html += flushP();
+      return html;
+    }
+
+    function renderPost(post) {
+      const isBilingual =
+        ("teaser" in post) || ("content_en" in post) || ("content_de" in post);
+
+      const renderAny = (val) => {
+        if (post.format === "html") return String(val || "");
+        if (post.format === "markdown") return mdToHtml(val || "");
+        return `<p>${escapeHtml(val || "")}</p>`;
+      };
+
+      const teaserHtml = isBilingual ? renderAny(post.teaser || "") : "";
+      const enHtml = isBilingual ? renderAny(post.content_en || "") : "";
+      const deHtml = isBilingual ? renderAny(post.content_de || "") : "";
+
+      const legacyBody = renderAny(post.content || "");
+
+      const body = isBilingual
+        ? `
         <div class="news-teaser">${teaserHtml}</div>
         <details class="news-details">
           <summary>read more</summary>
@@ -713,12 +876,12 @@ f<!doctype html>
           <div class="news-body">${deHtml}</div>
         </details>
       `
-      : `<div class="news-body">${legacyBody}</div>`;
+        : `<div class="news-body">${legacyBody}</div>`;
 
-    const imgs = Array.isArray(post.images) ? post.images.slice(0, 2) : [];
+      const imgs = Array.isArray(post.images) ? post.images.slice(0, 2) : [];
 
-    const media = imgs.length
-      ? `
+      const media = imgs.length
+        ? `
       <div class="media-row media-row--compact">
         ${imgs.map((img) => `
           <figure class="media">
@@ -733,124 +896,125 @@ f<!doctype html>
         `).join("")}
       </div>
     `
-      : "";
+        : "";
 
-    return `
+      return `
       <article class="card news-item">
         <h3 class="card-title">${escapeHtml(post.title || "(ohne Titel)")}</h3>
         <p class="card-meta">${escapeHtml(post.date || "(ohne Datum)")}</p>
         ${media}
         ${body}
       </article>`;
-  }
+    }
 
-  function buildPostFromInputs(){
-    return {
-      id: el("id").value,
-      topic: el("topic").value,
-      subtopic: el("subtopic").value,
-      date: el("date").value.trim(),
-      title: el("title").value.trim(),
-      format: el("format").value.trim(),
-      teaser: el("teaser").value,
-      content_en: el("contentEn").value,
-      content_de: el("contentDe").value,
-      images: state.images.slice()
-    };
-  }
+    function buildPostFromInputs() {
+      return {
+        id: el("id").value,
+        topic: el("topic").value,
+        subtopic: el("subtopic").value,
+        date: el("date").value.trim(),
+        title: el("title").value.trim(),
+        format: el("format").value.trim(),
+        teaser: el("teaser").value,
+        content_en: el("contentEn").value,
+        content_de: el("contentDe").value,
+        images: state.images.slice()
+      };
+    }
 
-  function renderPreviewNow(){
-    const post = buildPostFromInputs();
-    el("preview").innerHTML = renderPost(post);
-  }
+    function renderPreviewNow() {
+      const post = buildPostFromInputs();
+      el("preview").innerHTML = renderPost(post);
+    }
 
-  function schedulePreview(){
-    window.clearTimeout(schedulePreview._t);
-    schedulePreview._t = window.setTimeout(renderPreviewNow, 80);
-  }
+    function schedulePreview() {
+      window.clearTimeout(schedulePreview._t);
+      schedulePreview._t = window.setTimeout(renderPreviewNow, 80);
+    }
 
-  // ----- init -----
-  populateTopics();
-  populateSubtopics(el("topic").value);
-  updateId();
-  activeTA = el("contentEn");
-  updateTeaserCount();
-  renderPreviewNow();
-
-  // topic/subtopic changes
-  el("topic").addEventListener("change", (e)=>{
-    populateSubtopics(e.target.value);
-    schedulePreview();
-  });
-  el("subtopic").addEventListener("change", ()=>{
+    // ----- init -----
+    populateTopics();
+    populateSubtopics(el("topic").value);
     updateId();
-    schedulePreview();
-  });
+    activeTA = el("contentEn");
+    updateTeaserCount();
+    renderPreviewNow();
 
-  // date changes
-  el("date").addEventListener("input", ()=>{
-    updateId();
-    schedulePreview();
-  });
-
-  // title/format live
-  el("title").addEventListener("input", schedulePreview);
-  el("format").addEventListener("change", schedulePreview);
-
-  // text fields live
-  ["teaser","contentEn","contentDe"].forEach((id)=>{
-    el(id).addEventListener("focus", ()=>{ activeTA = el(id); });
-    el(id).addEventListener("input", ()=>{
-      if (id === "teaser") updateTeaserCount();
+    // topic/subtopic changes
+    el("topic").addEventListener("change", (e) => {
+      populateSubtopics(e.target.value);
       schedulePreview();
     });
-  });
-
-  // today button
-  el("today").addEventListener("click", ()=>{
-    const d = new Date();
-    const iso = d.toISOString().slice(0,10); // YYYY-MM-DD
-    el("date").value = iso;
-    updateId();
-    schedulePreview();
-  });
-
-  // content toolbar (operates on active textarea)
-  document.querySelectorAll("[data-wrap]").forEach(btn=>{
-    btn.addEventListener("click", ()=>{
-      wrapSelection(getTA(), btn.getAttribute("data-wrap"));
+    el("subtopic").addEventListener("change", () => {
+      updateId();
       schedulePreview();
     });
-  });
-  el("mklist").addEventListener("click", ()=>{
-    makeList(getTA());
-    schedulePreview();
-  });
-  el("blank").addEventListener("click", ()=>{
-    const ta = getTA();
-    const pos = ta.selectionStart;
-    ta.setRangeText("\n\n", pos, ta.selectionEnd, "end");
-    ta.focus();
-    schedulePreview();
-  });
 
-  // images
-  el("addImg").addEventListener("click", addImage);
+    // date changes
+    el("date").addEventListener("input", () => {
+      updateId();
+      schedulePreview();
+    });
 
-  // imgFile blur -> copy into imgAlt
-  el("imgFile").addEventListener("blur", ()=>{
-    el("imgAlt").value = el("imgFile").value;
-  });
+    // title/format live
+    el("title").addEventListener("input", schedulePreview);
+    el("format").addEventListener("change", schedulePreview);
 
-  // generate
-  el("generate").addEventListener("click", generate);
+    // text fields live
+    ["teaser", "contentEn", "contentDe"].forEach((id) => {
+      el(id).addEventListener("focus", () => { activeTA = el(id); });
+      el(id).addEventListener("input", () => {
+        if (id === "teaser") updateTeaserCount();
+        schedulePreview();
+      });
+    });
 
-  // reset
-  el("reset").addEventListener("click", resetAll);
+    // today button
+    el("today").addEventListener("click", () => {
+      const d = new Date();
+      const iso = d.toISOString().slice(0, 10); // YYYY-MM-DD
+      el("date").value = iso;
+      updateId();
+      schedulePreview();
+    });
 
-  // click output copies
-  el("output").addEventListener("click", copyOutput);
-  el("output").addEventListener("focus", copyOutput);
-</script>
+    // content toolbar (operates on active textarea)
+    document.querySelectorAll("[data-wrap]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        wrapSelection(getTA(), btn.getAttribute("data-wrap"));
+        schedulePreview();
+      });
+    });
+    el("mklist").addEventListener("click", () => {
+      makeList(getTA());
+      schedulePreview();
+    });
+    el("blank").addEventListener("click", () => {
+      const ta = getTA();
+      const pos = ta.selectionStart;
+      ta.setRangeText("\n\n", pos, ta.selectionEnd, "end");
+      ta.focus();
+      schedulePreview();
+    });
+
+    // images
+    el("addImg").addEventListener("click", addImage);
+
+    // imgFile blur -> copy into imgAlt
+    el("imgFile").addEventListener("blur", () => {
+      el("imgAlt").value = el("imgFile").value;
+    });
+
+    // generate
+    el("generate").addEventListener("click", generate);
+
+    // reset
+    el("reset").addEventListener("click", resetAll);
+
+    // click output copies
+    el("output").addEventListener("click", copyOutput);
+    el("output").addEventListener("focus", copyOutput);
+  </script>
 </body>
+
 </html>
