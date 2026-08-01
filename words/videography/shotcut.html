@@ -1879,6 +1879,235 @@ Heute geht es um den Videoschnitt mit Shotcut.</code></pre>
 
   </section>
 
+  <section id="shotcut-markierungen">
+    <h2>23. Marker, Kapitel und Arbeitsorganisation</h2>
+
+
+<h3>23.1 Timeline-Marker</h3>
+
+<p>
+  Marker kennzeichnen wichtige Zeitpunkte oder Bereiche in der Timeline.
+</p>
+
+<p>Typische Verwendungen:</p>
+
+<ul>
+  <li>Beginn eines Kapitels</li>
+  <li>Stelle für Sprechertext</li>
+  <li>noch zu korrigierender Fehler</li>
+  <li>passender Takt in der Musik</li>
+  <li>Beginn eines Exportbereichs</li>
+  <li>Position einer Texteinblendung</li>
+</ul>
+
+<h3>23.2 Marker benennen</h3>
+
+<p>
+  Aussagekräftige Namen sind besser als bloße Nummern.
+</p>
+
+<pre><code>00:00 – Intro
+
+
+00:42 – Ablegen
+02:15 – Erste Bucht
+04:30 – Hafenmanöver
+06:10 – Abspann</code></pre>
+
+
+<h3>23.3 YouTube-Kapitel</h3>
+
+<p>
+  Marker können als Grundlage für YouTube-Kapitel dienen. Je nach Version kann
+  Shotcut Markierungen in einem passenden Textformat ausgeben.
+</p>
+
+<p>Eine YouTube-Beschreibung kann beispielsweise enthalten:</p>
+
+<pre><code>00:00 Einleitung
+
+
+00:42 Start der Reise
+02:15 Unterwegs
+04:30 Ankunft
+06:10 Fazit</code></pre>
+
+
+<h3>23.4 Markerbereiche</h3>
+
+<p>
+  Bereiche können verwendet werden, um nur einen Teil des Projekts zu testen
+  oder separat auszugeben.
+</p>
+
+<aside class="tip-box">
+  <h3>Easy Win: Offene Aufgaben markieren</h3>
+  <p>
+    Statt jeden Fehler sofort zu beheben, kann er markiert und später gesammelt
+    bearbeitet werden. Das verhindert, dass der Rohschnitt ständig durch
+    Detailarbeit unterbrochen wird.
+  </p>
+</aside>
+
+
+  </section>
+
+  <section id="shotcut-export">
+    <h2>24. Das fertige Video exportieren</h2>
+
+
+<p>
+  Beim Export berechnet Shotcut ein neues Video aus der Timeline. Die Projektdatei
+  selbst ist kein abspielbares fertiges Video.
+</p>
+
+<h3>24.1 Vor dem Export</h3>
+
+<ol>
+  <li>Projekt speichern.</li>
+  <li>gesamtes Video einmal ansehen.</li>
+  <li>schwarze Lücken kontrollieren.</li>
+  <li>Tonpegel kontrollieren.</li>
+  <li>Texte auf Rechtschreibung prüfen.</li>
+  <li>Output-Filter kontrollieren.</li>
+  <li>Videomodus kontrollieren.</li>
+  <li>genügend freien Speicherplatz sicherstellen.</li>
+</ol>
+
+<h3>24.2 Exportquelle</h3>
+
+<p>
+  Im Exportbereich muss geprüft werden, was exportiert werden soll:
+</p>
+
+<ul>
+  <li>Timeline</li>
+  <li>Playlist</li>
+  <li>aktuelle Quelldatei</li>
+  <li>gegebenenfalls ein festgelegter Bereich</li>
+</ul>
+
+<p>
+  Für den vollständigen fertigen Film ist normalerweise die Timeline die richtige
+  Quelle.
+</p>
+
+<h3>24.3 Export-Presets</h3>
+
+<p>
+  Shotcut bietet Presets für verbreitete Formate und Anwendungszwecke.
+  Für einen normalen kompatiblen MP4-Export ist ein H.264-Preset meist ein guter
+  Ausgangspunkt.
+</p>
+
+<h3>24.4 Container und Codec</h3>
+
+<dl>
+  <dt>Container</dt>
+  <dd>
+    Das Dateiformat, beispielsweise MP4, MOV, MKV oder WebM.
+  </dd>
+
+  <dt>Videocodec</dt>
+  <dd>
+    Das Verfahren zur Kompression des Bildes, beispielsweise H.264 oder H.265.
+  </dd>
+
+  <dt>Audiocodec</dt>
+  <dd>
+    Das Verfahren zur Kompression des Tons, beispielsweise AAC oder Opus.
+  </dd>
+</dl>
+
+<h3>24.5 H.264</h3>
+
+<p>
+  H.264 in einem MP4-Container bietet eine sehr breite Kompatibilität und eignet
+  sich gut für YouTube, Fernseher, Computer und viele mobile Geräte.
+</p>
+
+<h3>24.6 H.265 beziehungsweise HEVC</h3>
+
+<p>
+  H.265 kann bei ähnlicher Qualität kleinere Dateien erzeugen. Die Bearbeitung,
+  Wiedergabe und der Export benötigen jedoch häufig mehr Rechenleistung.
+</p>
+
+<h3>24.7 Hardware-Encoding</h3>
+
+<p>
+  Hardware-Encoder können den Export beschleunigen, liefern aber nicht auf jedem
+  System bei gleicher Dateigröße dieselbe Qualität wie ein guter Software-Encoder.
+</p>
+
+<p>
+  Das Ergebnis sollte mit einem kurzen Testabschnitt verglichen werden.
+</p>
+
+<h3>24.8 Auflösung und Bildrate</h3>
+
+<p>
+  Die Exportauflösung und Bildrate sollten normalerweise dem Projekt entsprechen.
+</p>
+
+<p>
+  Eine nachträgliche Hochskalierung von 1080p auf 4K erzeugt keine echten neuen
+  Details. Sie vergrößert zunächst vor allem die Datei.
+</p>
+
+<h3>24.9 Audioeinstellungen</h3>
+
+<p>Für ein typisches Webvideo eignen sich:</p>
+
+<ul>
+  <li>AAC-Audio</li>
+  <li>48 kHz Abtastrate</li>
+  <li>Stereo</li>
+  <li>ausreichend hohe Audiobitrate</li>
+</ul>
+
+<h3>24.10 Qualität statt blinder Maximalwerte</h3>
+
+<p>
+  Die höchste einstellbare Qualität führt häufig zu sehr großen Dateien und
+  langen Exportzeiten, ohne dass der Unterschied im normalen Gebrauch sichtbar ist.
+</p>
+
+<p>
+  Ein passendes Preset sollte zunächst unverändert getestet werden. Erweiterte
+  Einstellungen sind erst sinnvoll, wenn ein konkretes Problem gelöst werden soll.
+</p>
+
+<h3>24.11 Aufträge kontrollieren</h3>
+
+<p>
+  Der Export erscheint als Auftrag im Jobs-Bereich. Dort sind Fortschritt,
+  Erfolg oder Fehlermeldungen sichtbar.
+</p>
+
+<h3>24.12 Exportiertes Video kontrollieren</h3>
+
+<p>
+  Das fertige Video sollte in einem externen Player vollständig angesehen werden.
+</p>
+
+<p>Besonders zu prüfen sind:</p>
+
+<ul>
+  <li>Bild und Ton synchron</li>
+  <li>keine schwarzen Einzelbilder</li>
+  <li>keine fehlenden Medien</li>
+  <li>Texte vollständig sichtbar</li>
+  <li>keine Übersteuerung</li>
+  <li>richtige Auflösung</li>
+  <li>richtige Bildrate</li>
+  <li>korrektes Ende</li>
+</ul>
+
+
+  </section>
+
+
 
 
 
