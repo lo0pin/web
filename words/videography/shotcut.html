@@ -1688,6 +1688,99 @@ Heute geht es um den Videoschnitt mit Shotcut.</code></pre>
 
   </section>
 
+  <section id="shotcut-proxy">
+    <h2>21. Proxy, Vorschau-Skalierung und flüssiger Schnitt</h2>
+
+
+<p>
+  Hochauflösende oder stark komprimierte Videos können die Vorschau überfordern.
+  Das gilt besonders für 4K-, 8K-, HEVC-, 10-Bit- und 360°-Material.
+</p>
+
+<h3>21.1 Proxy-Dateien</h3>
+
+<p>
+  Proxy-Dateien sind niedrig aufgelöste Arbeitskopien der Originaldateien.
+  Shotcut verwendet sie während der Bearbeitung, greift beim normalen Export
+  aber wieder auf das hochwertige Originalmaterial zurück.
+</p>
+
+<h3>Proxy aktivieren</h3>
+
+<ol>
+  <li>Im Menü „Einstellungen“ den Bereich „Proxy“ öffnen.</li>
+  <li>„Proxy verwenden“ aktivieren.</li>
+  <li>Gewünschte Proxy-Auflösung beziehungsweise Qualität auswählen.</li>
+  <li>Erstellung der Proxy-Dateien abwarten.</li>
+  <li>Status im Bereich „Aufträge“ kontrollieren.</li>
+</ol>
+
+<p>
+  Die Vorschau kann durch Proxys deutlich unschärfer aussehen. Das ist beabsichtigt
+  und beeinflusst den hochwertigen Export nicht.
+</p>
+
+<h3>21.2 Vorschau-Skalierung</h3>
+
+<p>
+  Die Vorschau-Skalierung berechnet den Projektmonitor während des Schnitts
+  in geringerer Auflösung.
+</p>
+
+<p>
+  Im Unterschied zu Proxys betrifft sie nicht nur die Quelldatei, sondern auch
+  Filter, Überlagerungen und das zusammengesetzte Vorschaubild.
+</p>
+
+<h3>21.3 Proxy und Vorschau-Skalierung kombinieren</h3>
+
+<p>
+  Bei anspruchsvollem Material ist die Kombination besonders wirkungsvoll:
+</p>
+
+<ul>
+  <li>Proxy reduziert die Belastung durch die Quelldateien.</li>
+  <li>Vorschau-Skalierung reduziert die Belastung durch die gesamte Bildberechnung.</li>
+</ul>
+
+<h3>21.4 Hardware-Decodierung</h3>
+
+<p>
+  Aktuelle Versionen können beim skalierenden Vorschaubetrieb unterstützte
+  Videoformate teilweise über die Grafikhardware decodieren.
+</p>
+
+<p>
+  Das kann die CPU-Auslastung senken, führt aber nicht auf jedem System zu einer
+  schnelleren Bearbeitung. Proxy-Dateien bleiben insbesondere beim Suchen und
+  schnellen Bewegen durch hochauflösendes Material meist wirkungsvoller.
+</p>
+
+<h3>21.5 Weitere Maßnahmen bei ruckelnder Vorschau</h3>
+
+<ul>
+  <li>Material auf eine interne oder schnelle externe SSD kopieren</li>
+  <li>andere rechenintensive Programme schließen</li>
+  <li>Vorschauauflösung reduzieren</li>
+  <li>Audio-Wellenformen nur bei Bedarf berechnen</li>
+  <li>aufwendige Filter vorübergehend deaktivieren</li>
+  <li>Proxy-Modus verwenden</li>
+  <li>schwierige Dateien in ein schnittfreundliches Format umwandeln</li>
+</ul>
+
+<aside class="tip-box">
+  <h3>Easy Win: Vorschauqualität ist nicht Exportqualität</h3>
+  <p>
+    Ein verschwommenes Proxybild ist kein Grund zur Sorge. Für den Schnitt muss
+    die Vorschau flüssig und inhaltlich beurteilbar sein; Pixelzählerei findet
+    beim Kontrollieren des fertigen Exports statt.
+  </p>
+</aside>
+
+
+  </section>
+
+
 
 
     <hr class="divider" />
