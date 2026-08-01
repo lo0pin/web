@@ -1,232 +1,233 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Shotcut</title>
+    <title>Shotcut</title>
 
-  <link rel="stylesheet" href="../../assets/css/main.css" />
+    <link rel="stylesheet" href="../../assets/css/main.css" />
 </head>
 
 <body class="has-bg bg-words" id="top">
-  <header class="site-header">
-    <div class="header-inner">
+    <header class="site-header">
+        <div class="header-inner">
 
-      <h1 class="site-title">Shotcut</h1>
-      <nav class="top-nav" aria-label="Top navigation">
-        <a href="/web/index.html">⌂ home</a>
-        <a href="../videography.html">← back</a>
-      </nav>
-    </div>
-  </header>
-
-  <main class="content">
-    <header class="guide-header">
-        <p class="card-meta">Videoschnitt · Open Source · Shotcut · YouTube</p>
-
-        <h1>Shotcut: Ausführlicher Beginner-Guide für Videoschnitt, Ton, Effekte und Export</h1>
-
-        <p class="lead">
-        Shotcut ist ein kostenloses, quelloffenes und plattformübergreifendes
-        Videoschnittprogramm für Windows, macOS und Linux. Es eignet sich für einfache
-        Urlaubsvideos ebenso wie für umfangreichere Projekte mit mehreren Video- und
-        Audiospuren, Texteinblendungen, Farbkorrekturen, Untertiteln, Animationen und
-        unterschiedlichen Exportformaten.
-        </p>
-
-        <p>
-        Dieser Guide erklärt nicht nur einzelne Schaltflächen, sondern einen sinnvollen
-        vollständigen Arbeitsablauf: von der Vorbereitung der Dateien über Rohschnitt,
-        Feinschnitt, Tonbearbeitung und Bildkorrektur bis zum fertigen Video für YouTube
-        oder andere Plattformen.
-        </p>
-
-        <aside class="info-box">
-            <h2>Das Wichtigste vorweg</h2>
-            <p>
-                Shotcut speichert im Projekt nicht die eigentlichen Videos, Bilder und
-                Audiodateien. Die Projektdatei enthält lediglich Verweise auf deren Speicherorte
-                sowie alle Schnittentscheidungen, Filter und Einstellungen. Werden die
-                Quelldateien später verschoben, umbenannt oder gelöscht, kann Shotcut sie nicht
-                mehr automatisch finden.
-            </p>
-        </aside>
-
+            <h1 class="site-title">Shotcut</h1>
+            <nav class="top-nav" aria-label="Top navigation">
+                <a href="/web/index.html">⌂ home</a>
+                <a href="../videography.html">← back</a>
+            </nav>
+        </div>
     </header>
 
-    <nav class="table-of-contents" aria-labelledby="shotcut-toc-title">
-        <h2 id="shotcut-toc-title">Inhaltsverzeichnis</h2>
+    <main class="content">
+        <header class="guide-header">
+            <p class="card-meta">Videoschnitt · Open Source · Shotcut · YouTube</p>
 
-        <ol>
-        <li><a href="#shotcut-grundlagen">Was Shotcut ist und wofür es sich eignet</a></li>
-        <li><a href="#shotcut-installation">Installation und erste Einstellungen</a></li>
-        <li><a href="#shotcut-projektstruktur">Projektordner und Dateiverwaltung</a></li>
-        <li><a href="#shotcut-projekt-anlegen">Ein neues Projekt richtig anlegen</a></li>
-        <li><a href="#shotcut-oberflaeche">Die Benutzeroberfläche verstehen</a></li>
-        <li><a href="#shotcut-playlist-timeline">Playlist, Quellmonitor und Timeline</a></li>
-        <li><a href="#shotcut-spuren">Video- und Audiospuren verstehen</a></li>
-        <li><a href="#shotcut-erster-film">Das erste Video Schritt für Schritt</a></li>
-        <li><a href="#shotcut-schnittwerkzeuge">Die wichtigsten Schnittwerkzeuge</a></li>
-        <li><a href="#shotcut-ripple">Ripple, Snapping und Lücken</a></li>
-        <li><a href="#shotcut-uebergaenge">Übergänge und Blenden</a></li>
-        <li><a href="#shotcut-filter">Filter richtig verwenden</a></li>
-        <li><a href="#shotcut-keyframes">Keyframes und Animationen</a></li>
-        <li><a href="#shotcut-bildgestaltung">Bildgröße, Position und Bild-in-Bild</a></li>
-        <li><a href="#shotcut-farbkorrektur">Farbkorrektur und Videoscopes</a></li>
-        <li><a href="#shotcut-audio">Audiobearbeitung und Sprachaufnahmen</a></li>
-        <li><a href="#shotcut-text">Titel, Texte und Bauchbinden</a></li>
-        <li><a href="#shotcut-untertitel">Untertitel und automatische Transkription</a></li>
-        <li><a href="#shotcut-geschwindigkeit">Geschwindigkeit, Zeitlupe und Standbilder</a></li>
-        <li><a href="#shotcut-stabilisierung">Stabilisierung und Bewegungsverfolgung</a></li>
-        <li><a href="#shotcut-proxy">Proxy, Vorschau-Skalierung und flüssiger Schnitt</a></li>
-        <li><a href="#shotcut-edit-friendly">„Convert to Edit-friendly“ richtig verstehen</a></li>
-        <li><a href="#shotcut-markierungen">Marker, Kapitel und Arbeitsorganisation</a></li>
-        <li><a href="#shotcut-export">Das fertige Video exportieren</a></li>
-        <li><a href="#shotcut-youtube">Empfehlungen für YouTube</a></li>
-        <li><a href="#shotcut-360">360°-Material in Shotcut</a></li>
-        <li><a href="#shotcut-easy-wins">Easy Wins für bessere Videos</a></li>
-        <li><a href="#shotcut-fehler">Häufige Fehler und Lösungen</a></li>
-        <li><a href="#shotcut-shortcuts">Wichtige Tastenkürzel</a></li>
-        <li><a href="#shotcut-checkliste">Workflow-Checkliste</a></li>
-        <li><a href="#shotcut-faq">Häufig gestellte Fragen</a></li>
-        </ol>
+            <h1>Shotcut: Ausführlicher Beginner-Guide für Videoschnitt, Ton, Effekte und Export</h1>
 
-    </nav>
+            <p class="lead">
+                Shotcut ist ein kostenloses, quelloffenes und plattformübergreifendes
+                Videoschnittprogramm für Windows, macOS und Linux. Es eignet sich für einfache
+                Urlaubsvideos ebenso wie für umfangreichere Projekte mit mehreren Video- und
+                Audiospuren, Texteinblendungen, Farbkorrekturen, Untertiteln, Animationen und
+                unterschiedlichen Exportformaten.
+            </p>
 
-    <section id="shotcut-grundlagen">
-      <h2>1. Was Shotcut ist und wofür es sich eignet</h2>
+            <p>
+                Dieser Guide erklärt nicht nur einzelne Schaltflächen, sondern einen sinnvollen
+                vollständigen Arbeitsablauf: von der Vorbereitung der Dateien über Rohschnitt,
+                Feinschnitt, Tonbearbeitung und Bildkorrektur bis zum fertigen Video für YouTube
+                oder andere Plattformen.
+            </p>
 
-      <p>
-        Shotcut ist ein nichtlinearer Videoeditor. „Nichtlinear“ bedeutet, dass Clips
-        unabhängig von ihrer ursprünglichen Reihenfolge angeordnet, gekürzt, geteilt,
-        übereinandergelegt und mit Filtern versehen werden können. Das Originalmaterial
-        wird dabei nicht verändert.
-      </p>
+            <aside class="info-box">
+                <h2>Das Wichtigste vorweg</h2>
+                <p>
+                    Shotcut speichert im Projekt nicht die eigentlichen Videos, Bilder und
+                    Audiodateien. Die Projektdatei enthält lediglich Verweise auf deren Speicherorte
+                    sowie alle Schnittentscheidungen, Filter und Einstellungen. Werden die
+                    Quelldateien später verschoben, umbenannt oder gelöscht, kann Shotcut sie nicht
+                    mehr automatisch finden.
+                </p>
+            </aside>
 
-      <p>
-        Alle Bearbeitungsschritte werden lediglich in einer Projektdatei gespeichert.
-        Erst beim Export berechnet Shotcut aus den Quelldateien, Schnitten, Filtern,
-        Tonspuren und Einstellungen ein neues fertiges Video.
-      </p>
+        </header>
 
-      <h3>Shotcut eignet sich unter anderem für:</h3>
+        <nav class="table-of-contents" aria-labelledby="shotcut-toc-title">
+            <h2 id="shotcut-toc-title">Inhaltsverzeichnis</h2>
 
-      <ul>
-        <li>Urlaubs- und Reisevideos</li>
-        <li>Segel-, Sport- und Actionvideos</li>
-        <li>YouTube-Videos</li>
-        <li>Erklärvideos und Tutorials</li>
-        <li>Bildschirmaufnahmen</li>
-        <li>Interviews und Gespräche</li>
-        <li>Diashows mit Musik</li>
-        <li>Videos mit mehreren Kameraperspektiven</li>
-        <li>Hochkantvideos für soziale Netzwerke</li>
-        <li>einfache 360°-Projekte</li>
-      </ul>
+            <ol>
+                <li><a href="#shotcut-grundlagen">Was Shotcut ist und wofür es sich eignet</a></li>
+                <li><a href="#shotcut-installation">Installation und erste Einstellungen</a></li>
+                <li><a href="#shotcut-projektstruktur">Projektordner und Dateiverwaltung</a></li>
+                <li><a href="#shotcut-projekt-anlegen">Ein neues Projekt richtig anlegen</a></li>
+                <li><a href="#shotcut-oberflaeche">Die Benutzeroberfläche verstehen</a></li>
+                <li><a href="#shotcut-playlist-timeline">Playlist, Quellmonitor und Timeline</a></li>
+                <li><a href="#shotcut-spuren">Video- und Audiospuren verstehen</a></li>
+                <li><a href="#shotcut-erster-film">Das erste Video Schritt für Schritt</a></li>
+                <li><a href="#shotcut-schnittwerkzeuge">Die wichtigsten Schnittwerkzeuge</a></li>
+                <li><a href="#shotcut-ripple">Ripple, Snapping und Lücken</a></li>
+                <li><a href="#shotcut-uebergaenge">Übergänge und Blenden</a></li>
+                <li><a href="#shotcut-filter">Filter richtig verwenden</a></li>
+                <li><a href="#shotcut-keyframes">Keyframes und Animationen</a></li>
+                <li><a href="#shotcut-bildgestaltung">Bildgröße, Position und Bild-in-Bild</a></li>
+                <li><a href="#shotcut-farbkorrektur">Farbkorrektur und Videoscopes</a></li>
+                <li><a href="#shotcut-audio">Audiobearbeitung und Sprachaufnahmen</a></li>
+                <li><a href="#shotcut-text">Titel, Texte und Bauchbinden</a></li>
+                <li><a href="#shotcut-untertitel">Untertitel und automatische Transkription</a></li>
+                <li><a href="#shotcut-geschwindigkeit">Geschwindigkeit, Zeitlupe und Standbilder</a></li>
+                <li><a href="#shotcut-stabilisierung">Stabilisierung und Bewegungsverfolgung</a></li>
+                <li><a href="#shotcut-proxy">Proxy, Vorschau-Skalierung und flüssiger Schnitt</a></li>
+                <li><a href="#shotcut-edit-friendly">„Convert to Edit-friendly“ richtig verstehen</a></li>
+                <li><a href="#shotcut-markierungen">Marker, Kapitel und Arbeitsorganisation</a></li>
+                <li><a href="#shotcut-export">Das fertige Video exportieren</a></li>
+                <li><a href="#shotcut-youtube">Empfehlungen für YouTube</a></li>
+                <li><a href="#shotcut-360">360°-Material in Shotcut</a></li>
+                <li><a href="#shotcut-easy-wins">Easy Wins für bessere Videos</a></li>
+                <li><a href="#shotcut-fehler">Häufige Fehler und Lösungen</a></li>
+                <li><a href="#shotcut-shortcuts">Wichtige Tastenkürzel</a></li>
+                <li><a href="#shotcut-checkliste">Workflow-Checkliste</a></li>
+                <li><a href="#shotcut-faq">Häufig gestellte Fragen</a></li>
+            </ol>
 
-      <h3>Stärken von Shotcut</h3>
+        </nav>
 
-      <ul>
-        <li>kostenlos und quelloffen</li>
-        <li>keine Wasserzeichen</li>
-        <li>keine verpflichtende Registrierung</li>
-        <li>Unterstützung zahlreicher Formate durch FFmpeg</li>
-        <li>mehrspurige Timeline</li>
-        <li>Video- und Audiofilter</li>
-        <li>Keyframes und Animationen</li>
-        <li>Proxy-Schnitt für hochauflösendes Material</li>
-        <li>Untertitel und Sprach-zu-Text-Funktionen</li>
-        <li>Export in zahlreichen Codecs und Containern</li>
-      </ul>
+        <section id="shotcut-grundlagen">
+            <h2>1. Was Shotcut ist und wofür es sich eignet</h2>
 
-      <h3>Grenzen von Shotcut</h3>
+            <p>
+                Shotcut ist ein nichtlinearer Videoeditor. „Nichtlinear“ bedeutet, dass Clips
+                unabhängig von ihrer ursprünglichen Reihenfolge angeordnet, gekürzt, geteilt,
+                übereinandergelegt und mit Filtern versehen werden können. Das Originalmaterial
+                wird dabei nicht verändert.
+            </p>
 
-      <p>
-        Shotcut ist leistungsfähig, besitzt aber nicht in jedem Bereich denselben
-        Automatisierungsgrad wie große kommerzielle Schnittsysteme. Einige Arbeitsabläufe
-        erfordern mehr manuelle Vorbereitung. Auch die Medienverwaltung ist vergleichsweise
-        schlicht.
-      </p>
+            <p>
+                Alle Bearbeitungsschritte werden lediglich in einer Projektdatei gespeichert.
+                Erst beim Export berechnet Shotcut aus den Quelldateien, Schnitten, Filtern,
+                Tonspuren und Einstellungen ein neues fertiges Video.
+            </p>
 
-      <p>
-        Für viele private, schulische, dokumentarische und semiprofessionelle Projekte
-        bietet Shotcut dennoch mehr als genug Möglichkeiten. Entscheidend ist weniger
-        die Zahl spektakulärer Effekte als ein sauberer Arbeitsablauf.
-      </p>
+            <h3>Shotcut eignet sich unter anderem für:</h3>
 
-    </section>    
+            <ul>
+                <li>Urlaubs- und Reisevideos</li>
+                <li>Segel-, Sport- und Actionvideos</li>
+                <li>YouTube-Videos</li>
+                <li>Erklärvideos und Tutorials</li>
+                <li>Bildschirmaufnahmen</li>
+                <li>Interviews und Gespräche</li>
+                <li>Diashows mit Musik</li>
+                <li>Videos mit mehreren Kameraperspektiven</li>
+                <li>Hochkantvideos für soziale Netzwerke</li>
+                <li>einfache 360°-Projekte</li>
+            </ul>
 
-    <section id="shotcut-installation">
-      <h2>2. Installation und erste Einstellungen</h2>
+            <h3>Stärken von Shotcut</h3>
+
+            <ul>
+                <li>kostenlos und quelloffen</li>
+                <li>keine Wasserzeichen</li>
+                <li>keine verpflichtende Registrierung</li>
+                <li>Unterstützung zahlreicher Formate durch FFmpeg</li>
+                <li>mehrspurige Timeline</li>
+                <li>Video- und Audiofilter</li>
+                <li>Keyframes und Animationen</li>
+                <li>Proxy-Schnitt für hochauflösendes Material</li>
+                <li>Untertitel und Sprach-zu-Text-Funktionen</li>
+                <li>Export in zahlreichen Codecs und Containern</li>
+            </ul>
+
+            <h3>Grenzen von Shotcut</h3>
+
+            <p>
+                Shotcut ist leistungsfähig, besitzt aber nicht in jedem Bereich denselben
+                Automatisierungsgrad wie große kommerzielle Schnittsysteme. Einige Arbeitsabläufe
+                erfordern mehr manuelle Vorbereitung. Auch die Medienverwaltung ist vergleichsweise
+                schlicht.
+            </p>
+
+            <p>
+                Für viele private, schulische, dokumentarische und semiprofessionelle Projekte
+                bietet Shotcut dennoch mehr als genug Möglichkeiten. Entscheidend ist weniger
+                die Zahl spektakulärer Effekte als ein sauberer Arbeitsablauf.
+            </p>
+
+        </section>
+
+        <section id="shotcut-installation">
+            <h2>2. Installation und erste Einstellungen</h2>
 
 
-      <h3>2.1 Shotcut installieren</h3>
+            <h3>2.1 Shotcut installieren</h3>
 
-      <ol>
-        <li>Shotcut ausschließlich von der offiziellen Projektseite beziehen.</li>
-        <li>Die passende Version für Windows, macOS oder Linux auswählen.</li>
-        <li>Die Installationsdatei herunterladen.</li>
-        <li>Das Programm installieren oder eine portable Version entpacken.</li>
-        <li>Shotcut starten.</li>
-      </ol>
+            <ol>
+                <li>Shotcut ausschließlich von der offiziellen Projektseite beziehen.</li>
+                <li>Die passende Version für Windows, macOS oder Linux auswählen.</li>
+                <li>Die Installationsdatei herunterladen.</li>
+                <li>Das Programm installieren oder eine portable Version entpacken.</li>
+                <li>Shotcut starten.</li>
+            </ol>
 
-      <p>
-        Beim Download sollte darauf geachtet werden, nicht versehentlich eine ähnlich
-        benannte Smartphone-App oder eine inoffizielle Downloadseite zu verwenden.
-      </p>
+            <p>
+                Beim Download sollte darauf geachtet werden, nicht versehentlich eine ähnlich
+                benannte Smartphone-App oder eine inoffizielle Downloadseite zu verwenden.
+            </p>
 
-      <h3>2.2 Sprache einstellen</h3>
+            <h3>2.2 Sprache einstellen</h3>
 
-      <p>
-        Die Sprache kann über das Menü
-        <strong>Einstellungen beziehungsweise Settings</strong> geändert werden.
-        Nach einer Änderung kann ein Neustart erforderlich sein.
-      </p>
+            <p>
+                Die Sprache kann über das Menü
+                <strong>Einstellungen beziehungsweise Settings</strong> geändert werden.
+                Nach einer Änderung kann ein Neustart erforderlich sein.
+            </p>
 
-      <h3>2.3 Layout zurücksetzen</h3>
+            <h3>2.3 Layout zurücksetzen</h3>
 
-      <p>
-        Die einzelnen Bedienfelder können verschoben, geschlossen oder frei angeordnet
-        werden. Ist die Oberfläche später kaum wiederzuerkennen, kann über das Menü
-        <strong>Ansicht</strong> das Standardlayout wiederhergestellt werden.
-      </p>
+            <p>
+                Die einzelnen Bedienfelder können verschoben, geschlossen oder frei angeordnet
+                werden. Ist die Oberfläche später kaum wiederzuerkennen, kann über das Menü
+                <strong>Ansicht</strong> das Standardlayout wiederhergestellt werden.
+            </p>
 
-      <h3>2.4 Automatisches Speichern</h3>
+            <h3>2.4 Automatisches Speichern</h3>
 
-      <p>
-        Shotcut verfügt über automatische Sicherungsmechanismen. Trotzdem sollte ein
-        Projekt regelmäßig manuell gespeichert werden. Besonders vor größeren
-        Änderungen empfiehlt sich eine neue Projektversion.
-      </p>
+            <p>
+                Shotcut verfügt über automatische Sicherungsmechanismen. Trotzdem sollte ein
+                Projekt regelmäßig manuell gespeichert werden. Besonders vor größeren
+                Änderungen empfiehlt sich eine neue Projektversion.
+            </p>
 
-      <pre><code>mein_video_v01.mlt
+            <pre><code>mein_video_v01.mlt
 
 
   mein_video_v02_rohschnitt.mlt
   mein_video_v03_audio.mlt
   mein_video_v04_final.mlt</code></pre>
 
-      <aside class="tip-box">
-        <h3>Easy Win: Versionen statt Überschreiben</h3>
-        <p>
-          Eine neue Projektversion benötigt nur wenig Speicherplatz, kann aber Stunden
-          retten. Die MLT-Projektdatei ist klein, weil sie das Videomaterial nicht enthält.
-        </p>
-      </aside>
+            <aside class="tip-box">
+                <h3>Easy Win: Versionen statt Überschreiben</h3>
+                <p>
+                    Eine neue Projektversion benötigt nur wenig Speicherplatz, kann aber Stunden
+                    retten. Die MLT-Projektdatei ist klein, weil sie das Videomaterial nicht enthält.
+                </p>
+            </aside>
 
 
-    </section>
+        </section>
 
-    <section id="shotcut-projektstruktur">
-      <h2>3. Projektordner und Dateiverwaltung</h2>
+        <section id="shotcut-projektstruktur">
+            <h2>3. Projektordner und Dateiverwaltung</h2>
 
-      <p>
-        Eine saubere Dateistruktur sollte angelegt werden, bevor das erste Medium in
-        Shotcut importiert wird.
-      </p>
+            <p>
+                Eine saubere Dateistruktur sollte angelegt werden, bevor das erste Medium in
+                Shotcut importiert wird.
+            </p>
 
-      <pre><code>Videoprojekt/
+            <pre><code>Videoprojekt/
 
   ├── 01_VIDEO_RAW/
   ├── 02_AUDIO_RAW/
@@ -241,33 +242,33 @@
   └── 11_THUMBNAILS/</code></pre>
 
 
-      <h3>Warum diese Struktur wichtig ist</h3>
+            <h3>Warum diese Struktur wichtig ist</h3>
 
-      <p>
-        Die Shotcut-Projektdatei besitzt normalerweise die Endung
-        <code>.mlt</code>. Sie enthält keine eingebetteten Video- oder Audiodateien,
-        sondern verweist auf deren Pfade.
-      </p>
+            <p>
+                Die Shotcut-Projektdatei besitzt normalerweise die Endung
+                <code>.mlt</code>. Sie enthält keine eingebetteten Video- oder Audiodateien,
+                sondern verweist auf deren Pfade.
+            </p>
 
-      <p>
-        Wird beispielsweise eine Videodatei nach dem Schnitt in einen anderen Ordner
-        verschoben, kann Shotcut beim nächsten Öffnen eine fehlende Datei melden.
-      </p>
+            <p>
+                Wird beispielsweise eine Videodatei nach dem Schnitt in einen anderen Ordner
+                verschoben, kann Shotcut beim nächsten Öffnen eine fehlende Datei melden.
+            </p>
 
-      <h3>Empfohlene Vorgehensweise</h3>
+            <h3>Empfohlene Vorgehensweise</h3>
 
-      <ol>
-        <li>Alle benötigten Dateien in den Projektordner kopieren.</li>
-        <li>Dateien sinnvoll benennen.</li>
-        <li>Erst danach das Shotcut-Projekt anlegen.</li>
-        <li>Während der Bearbeitung keine Quelldateien verschieben.</li>
-        <li>Originaldateien nicht überschreiben.</li>
-        <li>Projekt und Medien regelmäßig sichern.</li>
-      </ol>
+            <ol>
+                <li>Alle benötigten Dateien in den Projektordner kopieren.</li>
+                <li>Dateien sinnvoll benennen.</li>
+                <li>Erst danach das Shotcut-Projekt anlegen.</li>
+                <li>Während der Bearbeitung keine Quelldateien verschieben.</li>
+                <li>Originaldateien nicht überschreiben.</li>
+                <li>Projekt und Medien regelmäßig sichern.</li>
+            </ol>
 
-      <h3>Sinnvolle Dateinamen</h3>
+            <h3>Sinnvolle Dateinamen</h3>
 
-      <pre><code>2026-07-01_hafen_totale_01.mp4
+            <pre><code>2026-07-01_hafen_totale_01.mp4
 
   2026-07-01_ablegen_detail_02.mp4
   2026-07-01_fahrt_steuerstand_03.mp4
@@ -275,330 +276,330 @@
   musik_ruhig_01.wav</code></pre>
 
 
-      <p>
-        Dateinamen wie <code>VID_0001.mp4</code> sind technisch möglich, aber bei
-        umfangreicheren Projekten wenig hilfreich.
-      </p>
+            <p>
+                Dateinamen wie <code>VID_0001.mp4</code> sind technisch möglich, aber bei
+                umfangreicheren Projekten wenig hilfreich.
+            </p>
 
 
-    </section>
+        </section>
 
-    <section id="shotcut-projekt-anlegen">
-      <h2>4. Ein neues Projekt richtig anlegen</h2>
+        <section id="shotcut-projekt-anlegen">
+            <h2>4. Ein neues Projekt richtig anlegen</h2>
 
 
-      <p>
-        Beim Start zeigt Shotcut üblicherweise einen Bereich für neue Projekte.
-        Hier werden Projektordner, Projektname und Videomodus festgelegt.
-      </p>
+            <p>
+                Beim Start zeigt Shotcut üblicherweise einen Bereich für neue Projekte.
+                Hier werden Projektordner, Projektname und Videomodus festgelegt.
+            </p>
 
-      <h3>4.1 Projektordner</h3>
+            <h3>4.1 Projektordner</h3>
 
-      <p>
-        Als Projektordner sollte der zuvor angelegte Hauptordner oder dessen
-        Unterordner für Projektdateien gewählt werden.
-      </p>
+            <p>
+                Als Projektordner sollte der zuvor angelegte Hauptordner oder dessen
+                Unterordner für Projektdateien gewählt werden.
+            </p>
 
-      <h3>4.2 Projektname</h3>
+            <h3>4.2 Projektname</h3>
 
-      <p>
-        Der Name sollte klar und dauerhaft verständlich sein.
-      </p>
+            <p>
+                Der Name sollte klar und dauerhaft verständlich sein.
+            </p>
 
-      <pre><code>segelreise_kroatien_2026
+            <pre><code>segelreise_kroatien_2026
 
   tutorial_html_grundlagen
   urlaubsvideo_sommer</code></pre>
 
 
-      <h3>4.3 Videomodus</h3>
+            <h3>4.3 Videomodus</h3>
 
-      <p>
-        Der Videomodus bestimmt insbesondere:
-      </p>
-
-      <ul>
-        <li>Auflösung</li>
-        <li>Seitenverhältnis</li>
-        <li>Bildrate</li>
-        <li>gegebenenfalls Farbtiefe und Verarbeitung</li>
-      </ul>
-
-      <h3>Automatischer Videomodus</h3>
-
-      <p>
-        Bei einem neuen leeren Projekt kann Shotcut den Videomodus automatisch anhand
-        der ersten hinzugefügten Videodatei wählen.
-      </p>
-
-      <p>
-        Das ist sinnvoll, wenn das Hauptmaterial weitgehend einheitlich ist.
-      </p>
-
-      <h3>Manueller Videomodus</h3>
-
-      <p>
-        Ein manueller Modus ist sinnvoll, wenn das Ziel bereits feststeht oder
-        unterschiedliche Quellen verwendet werden.
-      </p>
-
-      <div class="comparison-table-wrapper">
-        <table>
-          <caption>Typische Projektformate</caption>
-          <thead>
-            <tr>
-              <th scope="col">Zweck</th>
-              <th scope="col">Auflösung</th>
-              <th scope="col">Seitenverhältnis</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">Full-HD-Video</th>
-              <td>1920 × 1080</td>
-              <td>16:9</td>
-            </tr>
-            <tr>
-              <th scope="row">4K-Video</th>
-              <td>3840 × 2160</td>
-              <td>16:9</td>
-            </tr>
-            <tr>
-              <th scope="row">Hochkantvideo</th>
-              <td>1080 × 1920</td>
-              <td>9:16</td>
-            </tr>
-            <tr>
-              <th scope="row">Quadratisches Video</th>
-              <td>1080 × 1080</td>
-              <td>1:1</td>
-            </tr>
-            <tr>
-              <th scope="row">Echtes 360°-Video</th>
-              <td>beispielsweise 5760 × 2880</td>
-              <td>2:1</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <h3>Bildrate auswählen</h3>
-
-      <p>
-        Die Projektbildrate sollte möglichst der Bildrate des Hauptmaterials entsprechen.
-      </p>
-
-      <ul>
-        <li><strong>25 fps:</strong> in Europa häufig verwendet</li>
-        <li><strong>30 fps:</strong> bei vielen Kameras und Onlinevideos üblich</li>
-        <li><strong>50 fps:</strong> flüssigere Bewegung und mögliche Zeitlupe</li>
-        <li><strong>60 fps:</strong> häufig bei Action- und Sportaufnahmen</li>
-      </ul>
-
-      <aside class="warning-box">
-        <h3>Bildrate nicht nachträglich grundlos ändern</h3>
-        <p>
-          Ein Wechsel des Videomodus während eines fortgeschrittenen Projekts kann
-          Schnittpositionen, Skalierungen oder Animationen beeinflussen. Der Zielmodus
-          sollte daher möglichst früh festgelegt werden.
-        </p>
-      </aside>
-
-
-    </section>
-
-    <section id="shotcut-oberflaeche">
-        <h2>5. Die Benutzeroberfläche verstehen</h2>
-
-        <p>
-        Die Shotcut-Oberfläche besteht aus mehreren verschiebbaren Bedienfeldern.
-        Nicht jedes Feld muss ständig eingeblendet sein.
-        </p>
-
-        <h3>Wichtige Bereiche</h3>
-
-        <dl>
-        <dt>Wiedergabefenster</dt>
-        <dd>
-            Zeigt entweder eine einzelne Quelldatei oder das aktuelle Gesamtprojekt.
-        </dd>
-
-        <dt>Playlist</dt>
-        <dd>
-            Dient als Sammlung und Ablage der im Projekt verwendeten Medien.
-        </dd>
-
-        <dt>Timeline</dt>
-        <dd>
-            Enthält den eigentlichen Schnitt mit allen Video- und Audiospuren.
-        </dd>
-
-        <dt>Filter</dt>
-        <dd>
-            Enthält Bild-, Ton- und Zeitfilter für Clips, Spuren oder das gesamte Projekt.
-        </dd>
-
-        <dt>Eigenschaften</dt>
-        <dd>
-            Zeigt technische und veränderbare Eigenschaften des ausgewählten Mediums.
-        </dd>
-
-        <dt>Keyframes</dt>
-        <dd>
-            Zeigt zeitabhängige Veränderungen eines Filters.
-        </dd>
-
-        <dt>Export</dt>
-        <dd>
-            Enthält Formate, Codecs, Qualitätsoptionen und den Start des Renderprozesses.
-        </dd>
-
-        <dt>Aufträge beziehungsweise Jobs</dt>
-        <dd>
-            Zeigt laufende und abgeschlossene Analyse-, Proxy- und Exportvorgänge.
-        </dd>
-
-        <dt>Untertitel</dt>
-        <dd>
-            Dient zum Erstellen, Importieren, Bearbeiten und Exportieren von Untertiteln.
-        </dd>
-
-        <dt>Scopes</dt>
-        <dd>
-            Zeigt technische Messinstrumente für Helligkeit und Farbe.
-        </dd>
-        </dl>
-
-        <aside class="tip-box">
-            <h3>Easy Win: Nur benötigte Bereiche anzeigen</h3>
             <p>
-                Eine überladene Oberfläche erschwert den Einstieg. Für den normalen Schnitt
-                genügen zunächst Playlist, Timeline, Wiedergabefenster, Eigenschaften und Filter.
+                Der Videomodus bestimmt insbesondere:
             </p>
-        </aside>
 
-    </section>
+            <ul>
+                <li>Auflösung</li>
+                <li>Seitenverhältnis</li>
+                <li>Bildrate</li>
+                <li>gegebenenfalls Farbtiefe und Verarbeitung</li>
+            </ul>
 
-    <section id="shotcut-playlist-timeline">
-        <h2>6. Playlist, Quellmonitor und Timeline</h2>
+            <h3>Automatischer Videomodus</h3>
 
-
-        <p>
-        Diese drei Bereiche werden anfangs häufig verwechselt, erfüllen aber
-        unterschiedliche Aufgaben.
-        </p>
-
-        <h3>6.1 Playlist</h3>
-
-        <p>
-        Die Playlist ist eine Mediensammlung. Dort können Videos, Bilder und Audiodateien
-        abgelegt und organisiert werden.
-        </p>
-
-        <p>
-        Eine Datei in der Playlist ist noch nicht automatisch Teil des fertigen Films.
-        Erst wenn sie in die Timeline eingefügt wird, erscheint sie im eigentlichen Projekt.
-        </p>
-
-        <h3>6.2 Quellmonitor</h3>
-
-        <p>
-        Wird eine Datei aus der Playlist geöffnet, erscheint sie im Quellmonitor.
-        Dort kann sie angesehen und bereits vor dem Einfügen gekürzt werden.
-        </p>
-
-        <p>
-        Im Quellmonitor lassen sich ein Start- und ein Endpunkt definieren. Dadurch wird
-        nur der benötigte Bereich in die Timeline übernommen.
-        </p>
-
-        <h3>6.3 Projektmonitor</h3>
-
-        <p>
-        Der Projektmonitor zeigt das Ergebnis der Timeline an. Hier sind alle Spuren,
-        Übergänge, Filter, Texte und Tonmischungen gemeinsam sichtbar und hörbar.
-        </p>
-
-        <h3>6.4 Timeline</h3>
-
-        <p>
-        Die Timeline ist der Kern des Schnitts. Sie ordnet sämtliche Elemente zeitlich
-        und auf mehreren Ebenen an.
-        </p>
-
-        <aside class="info-box">
-            <h3>Merksatz</h3>
             <p>
-                Die Playlist sammelt das Material. Der Quellmonitor bereitet einzelne Clips vor.
-                Die Timeline baut daraus den Film.
+                Bei einem neuen leeren Projekt kann Shotcut den Videomodus automatisch anhand
+                der ersten hinzugefügten Videodatei wählen.
             </p>
-        </aside>
 
-    </section>
+            <p>
+                Das ist sinnvoll, wenn das Hauptmaterial weitgehend einheitlich ist.
+            </p>
 
-  <section id="shotcut-spuren">
-    <h2>7. Video- und Audiospuren verstehen</h2>
+            <h3>Manueller Videomodus</h3>
+
+            <p>
+                Ein manueller Modus ist sinnvoll, wenn das Ziel bereits feststeht oder
+                unterschiedliche Quellen verwendet werden.
+            </p>
+
+            <div class="comparison-table-wrapper">
+                <table>
+                    <caption>Typische Projektformate</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">Zweck</th>
+                            <th scope="col">Auflösung</th>
+                            <th scope="col">Seitenverhältnis</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">Full-HD-Video</th>
+                            <td>1920 × 1080</td>
+                            <td>16:9</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">4K-Video</th>
+                            <td>3840 × 2160</td>
+                            <td>16:9</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Hochkantvideo</th>
+                            <td>1080 × 1920</td>
+                            <td>9:16</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Quadratisches Video</th>
+                            <td>1080 × 1080</td>
+                            <td>1:1</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Echtes 360°-Video</th>
+                            <td>beispielsweise 5760 × 2880</td>
+                            <td>2:1</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Bildrate auswählen</h3>
+
+            <p>
+                Die Projektbildrate sollte möglichst der Bildrate des Hauptmaterials entsprechen.
+            </p>
+
+            <ul>
+                <li><strong>25 fps:</strong> in Europa häufig verwendet</li>
+                <li><strong>30 fps:</strong> bei vielen Kameras und Onlinevideos üblich</li>
+                <li><strong>50 fps:</strong> flüssigere Bewegung und mögliche Zeitlupe</li>
+                <li><strong>60 fps:</strong> häufig bei Action- und Sportaufnahmen</li>
+            </ul>
+
+            <aside class="warning-box">
+                <h3>Bildrate nicht nachträglich grundlos ändern</h3>
+                <p>
+                    Ein Wechsel des Videomodus während eines fortgeschrittenen Projekts kann
+                    Schnittpositionen, Skalierungen oder Animationen beeinflussen. Der Zielmodus
+                    sollte daher möglichst früh festgelegt werden.
+                </p>
+            </aside>
 
 
-<p>
-  Die Timeline kann mehrere Video- und Audiospuren enthalten.
-</p>
+        </section>
 
-<h3>7.1 Videospuren</h3>
+        <section id="shotcut-oberflaeche">
+            <h2>5. Die Benutzeroberfläche verstehen</h2>
 
-<p>
-  Höhere Videospuren liegen visuell über niedrigeren Spuren.
-</p>
+            <p>
+                Die Shotcut-Oberfläche besteht aus mehreren verschiebbaren Bedienfeldern.
+                Nicht jedes Feld muss ständig eingeblendet sein.
+            </p>
 
-<pre><code>V3  Titel oder Logo
+            <h3>Wichtige Bereiche</h3>
+
+            <dl>
+                <dt>Wiedergabefenster</dt>
+                <dd>
+                    Zeigt entweder eine einzelne Quelldatei oder das aktuelle Gesamtprojekt.
+                </dd>
+
+                <dt>Playlist</dt>
+                <dd>
+                    Dient als Sammlung und Ablage der im Projekt verwendeten Medien.
+                </dd>
+
+                <dt>Timeline</dt>
+                <dd>
+                    Enthält den eigentlichen Schnitt mit allen Video- und Audiospuren.
+                </dd>
+
+                <dt>Filter</dt>
+                <dd>
+                    Enthält Bild-, Ton- und Zeitfilter für Clips, Spuren oder das gesamte Projekt.
+                </dd>
+
+                <dt>Eigenschaften</dt>
+                <dd>
+                    Zeigt technische und veränderbare Eigenschaften des ausgewählten Mediums.
+                </dd>
+
+                <dt>Keyframes</dt>
+                <dd>
+                    Zeigt zeitabhängige Veränderungen eines Filters.
+                </dd>
+
+                <dt>Export</dt>
+                <dd>
+                    Enthält Formate, Codecs, Qualitätsoptionen und den Start des Renderprozesses.
+                </dd>
+
+                <dt>Aufträge beziehungsweise Jobs</dt>
+                <dd>
+                    Zeigt laufende und abgeschlossene Analyse-, Proxy- und Exportvorgänge.
+                </dd>
+
+                <dt>Untertitel</dt>
+                <dd>
+                    Dient zum Erstellen, Importieren, Bearbeiten und Exportieren von Untertiteln.
+                </dd>
+
+                <dt>Scopes</dt>
+                <dd>
+                    Zeigt technische Messinstrumente für Helligkeit und Farbe.
+                </dd>
+            </dl>
+
+            <aside class="tip-box">
+                <h3>Easy Win: Nur benötigte Bereiche anzeigen</h3>
+                <p>
+                    Eine überladene Oberfläche erschwert den Einstieg. Für den normalen Schnitt
+                    genügen zunächst Playlist, Timeline, Wiedergabefenster, Eigenschaften und Filter.
+                </p>
+            </aside>
+
+        </section>
+
+        <section id="shotcut-playlist-timeline">
+            <h2>6. Playlist, Quellmonitor und Timeline</h2>
+
+
+            <p>
+                Diese drei Bereiche werden anfangs häufig verwechselt, erfüllen aber
+                unterschiedliche Aufgaben.
+            </p>
+
+            <h3>6.1 Playlist</h3>
+
+            <p>
+                Die Playlist ist eine Mediensammlung. Dort können Videos, Bilder und Audiodateien
+                abgelegt und organisiert werden.
+            </p>
+
+            <p>
+                Eine Datei in der Playlist ist noch nicht automatisch Teil des fertigen Films.
+                Erst wenn sie in die Timeline eingefügt wird, erscheint sie im eigentlichen Projekt.
+            </p>
+
+            <h3>6.2 Quellmonitor</h3>
+
+            <p>
+                Wird eine Datei aus der Playlist geöffnet, erscheint sie im Quellmonitor.
+                Dort kann sie angesehen und bereits vor dem Einfügen gekürzt werden.
+            </p>
+
+            <p>
+                Im Quellmonitor lassen sich ein Start- und ein Endpunkt definieren. Dadurch wird
+                nur der benötigte Bereich in die Timeline übernommen.
+            </p>
+
+            <h3>6.3 Projektmonitor</h3>
+
+            <p>
+                Der Projektmonitor zeigt das Ergebnis der Timeline an. Hier sind alle Spuren,
+                Übergänge, Filter, Texte und Tonmischungen gemeinsam sichtbar und hörbar.
+            </p>
+
+            <h3>6.4 Timeline</h3>
+
+            <p>
+                Die Timeline ist der Kern des Schnitts. Sie ordnet sämtliche Elemente zeitlich
+                und auf mehreren Ebenen an.
+            </p>
+
+            <aside class="info-box">
+                <h3>Merksatz</h3>
+                <p>
+                    Die Playlist sammelt das Material. Der Quellmonitor bereitet einzelne Clips vor.
+                    Die Timeline baut daraus den Film.
+                </p>
+            </aside>
+
+        </section>
+
+        <section id="shotcut-spuren">
+            <h2>7. Video- und Audiospuren verstehen</h2>
+
+
+            <p>
+                Die Timeline kann mehrere Video- und Audiospuren enthalten.
+            </p>
+
+            <h3>7.1 Videospuren</h3>
+
+            <p>
+                Höhere Videospuren liegen visuell über niedrigeren Spuren.
+            </p>
+
+            <pre><code>V3  Titel oder Logo
 
 
 V2  Bild-in-Bild oder zusätzliche Kamera
 V1  Hauptvideo</code></pre>
 
 
-<p>
-  Ist ein Clip auf einer höheren Spur bildfüllend und vollständig deckend,
-  verdeckt er das darunterliegende Material.
-</p>
+            <p>
+                Ist ein Clip auf einer höheren Spur bildfüllend und vollständig deckend,
+                verdeckt er das darunterliegende Material.
+            </p>
 
-<h3>7.2 Audiospuren</h3>
+            <h3>7.2 Audiospuren</h3>
 
-<p>
-  Mehrere Audiospuren werden grundsätzlich zusammengemischt.
-</p>
+            <p>
+                Mehrere Audiospuren werden grundsätzlich zusammengemischt.
+            </p>
 
-<pre><code>A3  Sprechertext
+            <pre><code>A3  Sprechertext
 
 
 A2  Musik
 A1  Originalton</code></pre>
 
 
-<p>
-  Die Lautstärken müssen so eingestellt werden, dass Sprache verständlich bleibt
-  und die Summe aller Spuren nicht übersteuert.
-</p>
+            <p>
+                Die Lautstärken müssen so eingestellt werden, dass Sprache verständlich bleibt
+                und die Summe aller Spuren nicht übersteuert.
+            </p>
 
-<h3>7.3 Spursteuerungen</h3>
+            <h3>7.3 Spursteuerungen</h3>
 
-<p>Spuren können unter anderem:</p>
+            <p>Spuren können unter anderem:</p>
 
-<ul>
-  <li>stummgeschaltet,</li>
-  <li>ausgeblendet,</li>
-  <li>gesperrt,</li>
-  <li>umbenannt,</li>
-  <li>mit Filtern versehen</li>
-</ul>
+            <ul>
+                <li>stummgeschaltet,</li>
+                <li>ausgeblendet,</li>
+                <li>gesperrt,</li>
+                <li>umbenannt,</li>
+                <li>mit Filtern versehen</li>
+            </ul>
 
-<p>
-  werden.
-</p>
+            <p>
+                werden.
+            </p>
 
-<h3>Spuren sinnvoll benennen</h3>
+            <h3>Spuren sinnvoll benennen</h3>
 
-<pre><code>V3 – TITEL
+            <pre><code>V3 – TITEL
 
 
 V2 – B-ROLL
@@ -608,855 +609,855 @@ A2 – MUSIK
 A1 – ORIGINALTON</code></pre>
 
 
-<p>
-  Eine gute Spurbenennung wirkt banal, verhindert aber bei größeren Projekten
-  erstaunlich viel Chaos.
-</p>
-
-
-  </section>
-
-  <section id="shotcut-erster-film">
-    <h2>8. Das erste Video Schritt für Schritt</h2>
-
+            <p>
+                Eine gute Spurbenennung wirkt banal, verhindert aber bei größeren Projekten
+                erstaunlich viel Chaos.
+            </p>
+
+
+        </section>
+
+        <section id="shotcut-erster-film">
+            <h2>8. Das erste Video Schritt für Schritt</h2>
+
 
-<h3>Schritt 1: Projekt und Dateien vorbereiten</h3>
+            <h3>Schritt 1: Projekt und Dateien vorbereiten</h3>
 
-<ol>
-  <li>Projektordner anlegen.</li>
-  <li>Alle Videos, Bilder und Audiodateien hineinkopieren.</li>
-  <li>Eine Sicherung der Originale erstellen.</li>
-  <li>Shotcut starten.</li>
-  <li>Ein neues Projekt anlegen.</li>
-  <li>Videomodus kontrollieren.</li>
-</ol>
+            <ol>
+                <li>Projektordner anlegen.</li>
+                <li>Alle Videos, Bilder und Audiodateien hineinkopieren.</li>
+                <li>Eine Sicherung der Originale erstellen.</li>
+                <li>Shotcut starten.</li>
+                <li>Ein neues Projekt anlegen.</li>
+                <li>Videomodus kontrollieren.</li>
+            </ol>
 
-<h3>Schritt 2: Medien importieren</h3>
+            <h3>Schritt 2: Medien importieren</h3>
 
-<ol>
-  <li>Dateien über „Datei öffnen“ oder per Drag-and-drop hinzufügen.</li>
-  <li>Die Medien in die Playlist übernehmen.</li>
-  <li>Unbrauchbare Aufnahmen bereits aussortieren.</li>
-  <li>Wichtige Clips gegebenenfalls umbenennen.</li>
-</ol>
+            <ol>
+                <li>Dateien über „Datei öffnen“ oder per Drag-and-drop hinzufügen.</li>
+                <li>Die Medien in die Playlist übernehmen.</li>
+                <li>Unbrauchbare Aufnahmen bereits aussortieren.</li>
+                <li>Wichtige Clips gegebenenfalls umbenennen.</li>
+            </ol>
 
-<h3>Schritt 3: Hauptclip in die Timeline ziehen</h3>
+            <h3>Schritt 3: Hauptclip in die Timeline ziehen</h3>
 
-<ol>
-  <li>Den gewünschten Clip in der Playlist auswählen.</li>
-  <li>Den Clip in den Quellmonitor öffnen.</li>
-  <li>Den benötigten Bereich markieren.</li>
-  <li>Den Clip auf die erste Videospur ziehen.</li>
-</ol>
+            <ol>
+                <li>Den gewünschten Clip in der Playlist auswählen.</li>
+                <li>Den Clip in den Quellmonitor öffnen.</li>
+                <li>Den benötigten Bereich markieren.</li>
+                <li>Den Clip auf die erste Videospur ziehen.</li>
+            </ol>
 
-<h3>Schritt 4: Rohschnitt erstellen</h3>
+            <h3>Schritt 4: Rohschnitt erstellen</h3>
 
-<p>
-  Beim Rohschnitt geht es nur um die inhaltliche Reihenfolge.
-</p>
+            <p>
+                Beim Rohschnitt geht es nur um die inhaltliche Reihenfolge.
+            </p>
 
-<ol>
-  <li>Unbrauchbare Anfänge und Enden entfernen.</li>
-  <li>Lange Pausen kürzen.</li>
-  <li>Wiederholungen entfernen.</li>
-  <li>Die besten Szenen in eine verständliche Reihenfolge bringen.</li>
-  <li>Noch keine aufwendigen Effekte hinzufügen.</li>
-</ol>
+            <ol>
+                <li>Unbrauchbare Anfänge und Enden entfernen.</li>
+                <li>Lange Pausen kürzen.</li>
+                <li>Wiederholungen entfernen.</li>
+                <li>Die besten Szenen in eine verständliche Reihenfolge bringen.</li>
+                <li>Noch keine aufwendigen Effekte hinzufügen.</li>
+            </ol>
 
-<h3>Schritt 5: Feinschnitt</h3>
+            <h3>Schritt 5: Feinschnitt</h3>
 
-<p>Erst danach werden:</p>
+            <p>Erst danach werden:</p>
 
-<ul>
-  <li>Schnittpunkte präzisiert,</li>
-  <li>Übergänge gesetzt,</li>
-  <li>Bilder überlagert,</li>
-  <li>Texte eingefügt,</li>
-  <li>Geschwindigkeiten angepasst,</li>
-  <li>Musik und Sprache gemischt.</li>
-</ul>
+            <ul>
+                <li>Schnittpunkte präzisiert,</li>
+                <li>Übergänge gesetzt,</li>
+                <li>Bilder überlagert,</li>
+                <li>Texte eingefügt,</li>
+                <li>Geschwindigkeiten angepasst,</li>
+                <li>Musik und Sprache gemischt.</li>
+            </ul>
 
-<h3>Schritt 6: Ton bearbeiten</h3>
+            <h3>Schritt 6: Ton bearbeiten</h3>
 
-<ol>
-  <li>Originalton kontrollieren.</li>
-  <li>Störende Lautstärkesprünge korrigieren.</li>
-  <li>Musik auf einer eigenen Spur ergänzen.</li>
-  <li>Musik unter Sprache deutlich absenken.</li>
-  <li>Ein- und Ausblendungen setzen.</li>
-</ol>
+            <ol>
+                <li>Originalton kontrollieren.</li>
+                <li>Störende Lautstärkesprünge korrigieren.</li>
+                <li>Musik auf einer eigenen Spur ergänzen.</li>
+                <li>Musik unter Sprache deutlich absenken.</li>
+                <li>Ein- und Ausblendungen setzen.</li>
+            </ol>
 
-<h3>Schritt 7: Bild korrigieren</h3>
+            <h3>Schritt 7: Bild korrigieren</h3>
 
-<ol>
-  <li>Belichtung prüfen.</li>
-  <li>Weißabgleich kontrollieren.</li>
-  <li>Kontrast und Sättigung behutsam anpassen.</li>
-  <li>Aufnahmen untereinander angleichen.</li>
-</ol>
-
-<h3>Schritt 8: Titel und Untertitel</h3>
-
-<ol>
-  <li>Kurzen Anfangstitel hinzufügen.</li>
-  <li>Orts- oder Kapitelangaben ergänzen.</li>
-  <li>Bei Bedarf Untertitel erstellen.</li>
-  <li>Rechtschreibung und Lesedauer kontrollieren.</li>
-</ol>
+            <ol>
+                <li>Belichtung prüfen.</li>
+                <li>Weißabgleich kontrollieren.</li>
+                <li>Kontrast und Sättigung behutsam anpassen.</li>
+                <li>Aufnahmen untereinander angleichen.</li>
+            </ol>
+
+            <h3>Schritt 8: Titel und Untertitel</h3>
+
+            <ol>
+                <li>Kurzen Anfangstitel hinzufügen.</li>
+                <li>Orts- oder Kapitelangaben ergänzen.</li>
+                <li>Bei Bedarf Untertitel erstellen.</li>
+                <li>Rechtschreibung und Lesedauer kontrollieren.</li>
+            </ol>
 
-<h3>Schritt 9: Testexport</h3>
-
-<ol>
-  <li>Einen kurzen repräsentativen Bereich exportieren.</li>
-  <li>Bild und Ton außerhalb von Shotcut kontrollieren.</li>
-  <li>Bei Bedarf Einstellungen korrigieren.</li>
-  <li>Erst danach das vollständige Projekt exportieren.</li>
-</ol>
+            <h3>Schritt 9: Testexport</h3>
+
+            <ol>
+                <li>Einen kurzen repräsentativen Bereich exportieren.</li>
+                <li>Bild und Ton außerhalb von Shotcut kontrollieren.</li>
+                <li>Bei Bedarf Einstellungen korrigieren.</li>
+                <li>Erst danach das vollständige Projekt exportieren.</li>
+            </ol>
 
 
-  </section>
+        </section>
 
-  <section id="shotcut-schnittwerkzeuge">
-    <h2>9. Die wichtigsten Schnittwerkzeuge</h2>
+        <section id="shotcut-schnittwerkzeuge">
+            <h2>9. Die wichtigsten Schnittwerkzeuge</h2>
 
 
-<h3>9.1 Clip auswählen</h3>
+            <h3>9.1 Clip auswählen</h3>
 
-<p>
-  Ein einfacher Mausklick wählt einen Clip aus. Filter und Eigenschaften beziehen
-  sich anschließend auf dieses ausgewählte Element.
-</p>
+            <p>
+                Ein einfacher Mausklick wählt einen Clip aus. Filter und Eigenschaften beziehen
+                sich anschließend auf dieses ausgewählte Element.
+            </p>
 
-<h3>9.2 Am Abspielkopf teilen</h3>
+            <h3>9.2 Am Abspielkopf teilen</h3>
 
-<p>
-  Mit der Taste <kbd>S</kbd> wird der Clip auf der aktuell ausgewählten Spur am
-  Abspielkopf geteilt.
-</p>
+            <p>
+                Mit der Taste <kbd>S</kbd> wird der Clip auf der aktuell ausgewählten Spur am
+                Abspielkopf geteilt.
+            </p>
 
-<p>Typischer Ablauf:</p>
+            <p>Typischer Ablauf:</p>
 
-<ol>
-  <li>Abspielkopf an den Beginn eines unerwünschten Bereichs setzen.</li>
-  <li><kbd>S</kbd> drücken.</li>
-  <li>Abspielkopf an das Ende des Bereichs setzen.</li>
-  <li>Erneut <kbd>S</kbd> drücken.</li>
-  <li>Das entstandene Teilstück löschen.</li>
-</ol>
+            <ol>
+                <li>Abspielkopf an den Beginn eines unerwünschten Bereichs setzen.</li>
+                <li><kbd>S</kbd> drücken.</li>
+                <li>Abspielkopf an das Ende des Bereichs setzen.</li>
+                <li>Erneut <kbd>S</kbd> drücken.</li>
+                <li>Das entstandene Teilstück löschen.</li>
+            </ol>
 
-<h3>9.3 Clipränder ziehen</h3>
+            <h3>9.3 Clipränder ziehen</h3>
 
-<p>
-  Der Anfang oder das Ende eines Clips kann direkt mit der Maus gekürzt werden.
-  Dabei wird das Original nicht beschnitten. Der verborgene Bereich bleibt
-  grundsätzlich erhalten und kann später wieder herausgezogen werden.
-</p>
+            <p>
+                Der Anfang oder das Ende eines Clips kann direkt mit der Maus gekürzt werden.
+                Dabei wird das Original nicht beschnitten. Der verborgene Bereich bleibt
+                grundsätzlich erhalten und kann später wieder herausgezogen werden.
+            </p>
 
-<h3>9.4 Lift</h3>
+            <h3>9.4 Lift</h3>
 
-<p>
-  „Lift“ entfernt einen Clip, lässt aber die zeitliche Lücke bestehen.
-  Das ist sinnvoll, wenn die Position der nachfolgenden Elemente unverändert
-  bleiben soll.
-</p>
+            <p>
+                „Lift“ entfernt einen Clip, lässt aber die zeitliche Lücke bestehen.
+                Das ist sinnvoll, wenn die Position der nachfolgenden Elemente unverändert
+                bleiben soll.
+            </p>
 
-<h3>9.5 Ripple Delete</h3>
+            <h3>9.5 Ripple Delete</h3>
 
-<p>
-  „Ripple Delete“ entfernt den ausgewählten Clip beziehungsweise Bereich und
-  schließt die entstandene Lücke.
-</p>
+            <p>
+                „Ripple Delete“ entfernt den ausgewählten Clip beziehungsweise Bereich und
+                schließt die entstandene Lücke.
+            </p>
 
-<p>
-  Diese Funktion ist für einen zügigen Rohschnitt besonders nützlich.
-</p>
+            <p>
+                Diese Funktion ist für einen zügigen Rohschnitt besonders nützlich.
+            </p>
 
-<h3>9.6 Einfügen, Überschreiben und Anhängen</h3>
+            <h3>9.6 Einfügen, Überschreiben und Anhängen</h3>
 
-<dl>
-  <dt>Anhängen</dt>
-  <dd>
-    Fügt einen Clip am Ende der Timeline hinzu.
-  </dd>
+            <dl>
+                <dt>Anhängen</dt>
+                <dd>
+                    Fügt einen Clip am Ende der Timeline hinzu.
+                </dd>
 
-  <dt>Einfügen</dt>
-  <dd>
-    Fügt einen Clip an der aktuellen Position ein und verschiebt vorhandenes Material.
-  </dd>
+                <dt>Einfügen</dt>
+                <dd>
+                    Fügt einen Clip an der aktuellen Position ein und verschiebt vorhandenes Material.
+                </dd>
 
-  <dt>Überschreiben</dt>
-  <dd>
-    Legt den neuen Clip über bereits vorhandenes Material und ersetzt den
-    entsprechenden Zeitbereich.
-  </dd>
-</dl>
+                <dt>Überschreiben</dt>
+                <dd>
+                    Legt den neuen Clip über bereits vorhandenes Material und ersetzt den
+                    entsprechenden Zeitbereich.
+                </dd>
+            </dl>
 
-<aside class="tip-box">
-  <h3>Easy Win: Zuerst grob, dann präzise</h3>
-  <p>
-    Ein Rohschnitt sollte schnell entstehen. Wer bereits beim ersten Durchgang
-    jeden Schnitt auf das einzelne Bild perfektioniert, arbeitet langsam und
-    verliert leicht den Blick für die Geschichte.
-  </p>
-</aside>
+            <aside class="tip-box">
+                <h3>Easy Win: Zuerst grob, dann präzise</h3>
+                <p>
+                    Ein Rohschnitt sollte schnell entstehen. Wer bereits beim ersten Durchgang
+                    jeden Schnitt auf das einzelne Bild perfektioniert, arbeitet langsam und
+                    verliert leicht den Blick für die Geschichte.
+                </p>
+            </aside>
 
 
-  </section>
+        </section>
 
-  <section id="shotcut-ripple">
-    <h2>10. Ripple, Snapping und Lücken</h2>
+        <section id="shotcut-ripple">
+            <h2>10. Ripple, Snapping und Lücken</h2>
 
 
-<h3>10.1 Snapping</h3>
+            <h3>10.1 Snapping</h3>
 
-<p>
-  Snapping sorgt dafür, dass Clips beim Verschieben an Schnittpunkten,
-  Markierungen oder am Abspielkopf einrasten.
-</p>
+            <p>
+                Snapping sorgt dafür, dass Clips beim Verschieben an Schnittpunkten,
+                Markierungen oder am Abspielkopf einrasten.
+            </p>
 
-<p>
-  Dadurch entstehen keine winzigen unbeabsichtigten Lücken.
-</p>
+            <p>
+                Dadurch entstehen keine winzigen unbeabsichtigten Lücken.
+            </p>
 
-<p>
-  Für präzise Feinarbeit kann Snapping vorübergehend deaktiviert oder während
-  einer Mausbewegung temporär umgangen werden.
-</p>
+            <p>
+                Für präzise Feinarbeit kann Snapping vorübergehend deaktiviert oder während
+                einer Mausbewegung temporär umgangen werden.
+            </p>
 
-<h3>10.2 Ripple-Modus</h3>
+            <h3>10.2 Ripple-Modus</h3>
 
-<p>
-  Im Ripple-Modus verschieben sich nachfolgende Clips automatisch, wenn ein Clip
-  gekürzt, verlängert oder entfernt wird.
-</p>
+            <p>
+                Im Ripple-Modus verschieben sich nachfolgende Clips automatisch, wenn ein Clip
+                gekürzt, verlängert oder entfernt wird.
+            </p>
 
-<p>
-  Das ist praktisch, aber auch gefährlich: Bei mehreren Spuren können Bild,
-  Musik, Sprechertext und Titel gegeneinander verrutschen.
-</p>
+            <p>
+                Das ist praktisch, aber auch gefährlich: Bei mehreren Spuren können Bild,
+                Musik, Sprechertext und Titel gegeneinander verrutschen.
+            </p>
 
-<h3>10.3 Ripple über alle Spuren</h3>
+            <h3>10.3 Ripple über alle Spuren</h3>
 
-<p>
-  Wird Ripple auf alle Spuren angewendet, verschiebt Shotcut auch Elemente auf
-  anderen Spuren. Das kann die Synchronität erhalten, sofern alle zusammengehörenden
-  Elemente tatsächlich mitverschoben werden sollen.
-</p>
+            <p>
+                Wird Ripple auf alle Spuren angewendet, verschiebt Shotcut auch Elemente auf
+                anderen Spuren. Das kann die Synchronität erhalten, sofern alle zusammengehörenden
+                Elemente tatsächlich mitverschoben werden sollen.
+            </p>
 
-<aside class="warning-box">
-  <h3>Ripple bewusst verwenden</h3>
-  <p>
-    Ripple ist kein harmloser Komfortschalter. Vor größeren Änderungen sollte
-    geprüft werden, welche Spuren betroffen sind. Bei einem fortgeschrittenen
-    Projekt empfiehlt sich vorher eine neue Projektversion.
-  </p>
-</aside>
+            <aside class="warning-box">
+                <h3>Ripple bewusst verwenden</h3>
+                <p>
+                    Ripple ist kein harmloser Komfortschalter. Vor größeren Änderungen sollte
+                    geprüft werden, welche Spuren betroffen sind. Bei einem fortgeschrittenen
+                    Projekt empfiehlt sich vorher eine neue Projektversion.
+                </p>
+            </aside>
 
-<h3>10.4 Lücken finden</h3>
+            <h3>10.4 Lücken finden</h3>
 
-<p>
-  Unbeabsichtigte Lücken können im fertigen Film als schwarze Bilder oder
-  Tonunterbrechungen erscheinen.
-</p>
+            <p>
+                Unbeabsichtigte Lücken können im fertigen Film als schwarze Bilder oder
+                Tonunterbrechungen erscheinen.
+            </p>
 
-<p>
-  Die Timeline sollte deshalb stark vergrößert und an kritischen Schnittpunkten
-  kontrolliert werden.
-</p>
+            <p>
+                Die Timeline sollte deshalb stark vergrößert und an kritischen Schnittpunkten
+                kontrolliert werden.
+            </p>
 
 
-  </section>
+        </section>
 
-  <section id="shotcut-uebergaenge">
-    <h2>11. Übergänge und Blenden</h2>
+        <section id="shotcut-uebergaenge">
+            <h2>11. Übergänge und Blenden</h2>
 
 
-<h3>11.1 Übergang durch Überlappung</h3>
+            <h3>11.1 Übergang durch Überlappung</h3>
 
-<p>
-  Ein Übergang zwischen zwei Clips auf derselben Spur entsteht typischerweise,
-  indem ein Clip über den Rand des anderen gezogen wird.
-</p>
+            <p>
+                Ein Übergang zwischen zwei Clips auf derselben Spur entsteht typischerweise,
+                indem ein Clip über den Rand des anderen gezogen wird.
+            </p>
 
-<p>
-  Der überlappende Bereich wird als Übergang dargestellt. Standardmäßig entsteht
-  meist eine weiche Überblendung von Bild und Ton.
-</p>
+            <p>
+                Der überlappende Bereich wird als Übergang dargestellt. Standardmäßig entsteht
+                meist eine weiche Überblendung von Bild und Ton.
+            </p>
 
-<h3>11.2 Übergangslänge</h3>
+            <h3>11.2 Übergangslänge</h3>
 
-<p>
-  Die Länge der Überlappung bestimmt die Dauer des Übergangs.
-</p>
+            <p>
+                Die Länge der Überlappung bestimmt die Dauer des Übergangs.
+            </p>
 
-<ul>
-  <li>kurze Überlappung: schneller Übergang</li>
-  <li>lange Überlappung: langsame Überblendung</li>
-</ul>
+            <ul>
+                <li>kurze Überlappung: schneller Übergang</li>
+                <li>lange Überlappung: langsame Überblendung</li>
+            </ul>
 
-<h3>11.3 Verschiedene Übergangsarten</h3>
+            <h3>11.3 Verschiedene Übergangsarten</h3>
 
-<p>
-  In den Eigenschaften des Übergangs können je nach Version unterschiedliche
-  Wisch- und Maskeneffekte gewählt werden.
-</p>
+            <p>
+                In den Eigenschaften des Übergangs können je nach Version unterschiedliche
+                Wisch- und Maskeneffekte gewählt werden.
+            </p>
 
-<p>Typische Varianten sind:</p>
+            <p>Typische Varianten sind:</p>
 
-<ul>
-  <li>weiche Überblendung</li>
-  <li>Wischblende</li>
-  <li>kreisförmige Blende</li>
-  <li>horizontale oder vertikale Blende</li>
-  <li>benutzerdefinierte Masken</li>
-</ul>
+            <ul>
+                <li>weiche Überblendung</li>
+                <li>Wischblende</li>
+                <li>kreisförmige Blende</li>
+                <li>horizontale oder vertikale Blende</li>
+                <li>benutzerdefinierte Masken</li>
+            </ul>
 
-<h3>11.4 Wann Übergänge sinnvoll sind</h3>
+            <h3>11.4 Wann Übergänge sinnvoll sind</h3>
 
-<ul>
-  <li>ruhiger Ortswechsel</li>
-  <li>größerer Zeitsprung</li>
-  <li>Übergang zwischen Landschaftsszenen</li>
-  <li>Einleitung oder Abschluss einer Sequenz</li>
-</ul>
+            <ul>
+                <li>ruhiger Ortswechsel</li>
+                <li>größerer Zeitsprung</li>
+                <li>Übergang zwischen Landschaftsszenen</li>
+                <li>Einleitung oder Abschluss einer Sequenz</li>
+            </ul>
 
-<h3>Wann ein harter Schnitt besser ist</h3>
+            <h3>Wann ein harter Schnitt besser ist</h3>
 
-<ul>
-  <li>innerhalb einer Handlung</li>
-  <li>bei dynamischen Szenen</li>
-  <li>bei einem Perspektivwechsel</li>
-  <li>bei Interviews</li>
-  <li>wenn ein Übergang keinen erzählerischen Zweck erfüllt</li>
-</ul>
+            <ul>
+                <li>innerhalb einer Handlung</li>
+                <li>bei dynamischen Szenen</li>
+                <li>bei einem Perspektivwechsel</li>
+                <li>bei Interviews</li>
+                <li>wenn ein Übergang keinen erzählerischen Zweck erfüllt</li>
+            </ul>
 
-<aside class="tip-box">
-  <h3>Easy Win: Effekte entzaubern</h3>
-  <p>
-    Ein professionell wirkender Film besteht überwiegend aus einfachen Schnitten.
-    Auffällige Übergänge sind Gewürz, nicht Grundnahrungsmittel.
-  </p>
-</aside>
+            <aside class="tip-box">
+                <h3>Easy Win: Effekte entzaubern</h3>
+                <p>
+                    Ein professionell wirkender Film besteht überwiegend aus einfachen Schnitten.
+                    Auffällige Übergänge sind Gewürz, nicht Grundnahrungsmittel.
+                </p>
+            </aside>
 
 
-  </section>
+        </section>
 
-  <section id="shotcut-filter">
-    <h2>12. Filter richtig verwenden</h2>
+        <section id="shotcut-filter">
+            <h2>12. Filter richtig verwenden</h2>
 
 
-<p>
-  Filter verändern Bild, Ton oder Zeitverhalten. Entscheidend ist, auf welcher
-  Ebene ein Filter angewendet wird.
-</p>
+            <p>
+                Filter verändern Bild, Ton oder Zeitverhalten. Entscheidend ist, auf welcher
+                Ebene ein Filter angewendet wird.
+            </p>
 
-<h3>12.1 Clipfilter</h3>
+            <h3>12.1 Clipfilter</h3>
 
-<p>
-  Ein Clipfilter wirkt nur auf den ausgewählten Clip.
-</p>
+            <p>
+                Ein Clipfilter wirkt nur auf den ausgewählten Clip.
+            </p>
 
-<p>Beispiele:</p>
+            <p>Beispiele:</p>
 
-<ul>
-  <li>Belichtung eines einzelnen Clips korrigieren</li>
-  <li>Text auf einem bestimmten Clip einblenden</li>
-  <li>einen Clip skalieren</li>
-  <li>eine einzelne Tonaufnahme lauter machen</li>
-</ul>
+            <ul>
+                <li>Belichtung eines einzelnen Clips korrigieren</li>
+                <li>Text auf einem bestimmten Clip einblenden</li>
+                <li>einen Clip skalieren</li>
+                <li>eine einzelne Tonaufnahme lauter machen</li>
+            </ul>
 
-<h3>12.2 Spurfilter</h3>
+            <h3>12.2 Spurfilter</h3>
 
-<p>
-  Ein Spurfilter wirkt auf sämtliche Clips einer Spur.
-</p>
+            <p>
+                Ein Spurfilter wirkt auf sämtliche Clips einer Spur.
+            </p>
 
-<p>Beispiele:</p>
+            <p>Beispiele:</p>
 
-<ul>
-  <li>alle Musikclips einer Spur gemeinsam leiser machen</li>
-  <li>eine Farbkorrektur auf eine gesamte Kameraspur anwenden</li>
-  <li>ein Logo über eine vollständige Spur verarbeiten</li>
-</ul>
+            <ul>
+                <li>alle Musikclips einer Spur gemeinsam leiser machen</li>
+                <li>eine Farbkorrektur auf eine gesamte Kameraspur anwenden</li>
+                <li>ein Logo über eine vollständige Spur verarbeiten</li>
+            </ul>
 
-<h3>12.3 Output-Filter</h3>
+            <h3>12.3 Output-Filter</h3>
 
-<p>
-  Ein Filter auf dem Timeline-Output wirkt auf das gesamte fertige Projekt.
-</p>
+            <p>
+                Ein Filter auf dem Timeline-Output wirkt auf das gesamte fertige Projekt.
+            </p>
 
-<p>Geeignete Anwendungen:</p>
+            <p>Geeignete Anwendungen:</p>
 
-<ul>
-  <li>abschließende Lautheitsanpassung</li>
-  <li>leichte globale Farbkorrektur</li>
-  <li>Untertitel einbrennen</li>
-  <li>abschließende Begrenzung des Audiopegels</li>
-</ul>
+            <ul>
+                <li>abschließende Lautheitsanpassung</li>
+                <li>leichte globale Farbkorrektur</li>
+                <li>Untertitel einbrennen</li>
+                <li>abschließende Begrenzung des Audiopegels</li>
+            </ul>
 
-<aside class="warning-box">
-  <h3>Output-Filter nicht vergessen</h3>
-  <p>
-    Ein versehentlich gesetzter Output-Filter kann das gesamte Video schwarz,
-    verschoben, zu leise oder farblich verändert erscheinen lassen. Bei rätselhaften
-    Fehlern sollte immer geprüft werden, ob Filter auf dem Timeline-Output liegen.
-  </p>
-</aside>
+            <aside class="warning-box">
+                <h3>Output-Filter nicht vergessen</h3>
+                <p>
+                    Ein versehentlich gesetzter Output-Filter kann das gesamte Video schwarz,
+                    verschoben, zu leise oder farblich verändert erscheinen lassen. Bei rätselhaften
+                    Fehlern sollte immer geprüft werden, ob Filter auf dem Timeline-Output liegen.
+                </p>
+            </aside>
 
-<h3>12.4 Filterreihenfolge</h3>
+            <h3>12.4 Filterreihenfolge</h3>
 
-<p>
-  Filter werden in einer bestimmten Reihenfolge verarbeitet. Das Ergebnis kann
-  sich ändern, wenn Filter vertauscht werden.
-</p>
+            <p>
+                Filter werden in einer bestimmten Reihenfolge verarbeitet. Das Ergebnis kann
+                sich ändern, wenn Filter vertauscht werden.
+            </p>
 
-<p>Beispiel:</p>
+            <p>Beispiel:</p>
 
-<ol>
-  <li>Bild zuerst zuschneiden</li>
-  <li>danach skalieren und positionieren</li>
-  <li>anschließend Text oder Maske anwenden</li>
-</ol>
+            <ol>
+                <li>Bild zuerst zuschneiden</li>
+                <li>danach skalieren und positionieren</li>
+                <li>anschließend Text oder Maske anwenden</li>
+            </ol>
 
-<p>
-  Eine andere Reihenfolge kann zu einem sichtbar anderen Ergebnis führen.
-</p>
+            <p>
+                Eine andere Reihenfolge kann zu einem sichtbar anderen Ergebnis führen.
+            </p>
 
-<h3>12.5 Filter kopieren</h3>
+            <h3>12.5 Filter kopieren</h3>
 
-<p>
-  Ein fertig eingestellter Filter kann kopiert und auf andere Clips angewendet
-  werden. Das ist besonders hilfreich, wenn mehrere Aufnahmen dieselbe Korrektur
-  benötigen.
-</p>
+            <p>
+                Ein fertig eingestellter Filter kann kopiert und auf andere Clips angewendet
+                werden. Das ist besonders hilfreich, wenn mehrere Aufnahmen dieselbe Korrektur
+                benötigen.
+            </p>
 
 
-  </section>
+        </section>
 
-  <section id="shotcut-keyframes">
-    <h2>13. Keyframes und Animationen</h2>
+        <section id="shotcut-keyframes">
+            <h2>13. Keyframes und Animationen</h2>
 
 
-<p>
-  Keyframes speichern den Wert eines Filters zu einem bestimmten Zeitpunkt.
-  Zwischen mehreren Keyframes verändert Shotcut die Werte automatisch.
-</p>
+            <p>
+                Keyframes speichern den Wert eines Filters zu einem bestimmten Zeitpunkt.
+                Zwischen mehreren Keyframes verändert Shotcut die Werte automatisch.
+            </p>
 
-<h3>Typische Anwendungen</h3>
+            <h3>Typische Anwendungen</h3>
 
-<ul>
-  <li>Bild langsam vergrößern</li>
-  <li>Text ein- und ausblenden</li>
-  <li>Bild-in-Bild verschieben</li>
-  <li>Ton langsam lauter oder leiser machen</li>
-  <li>eine Maske einem Motiv folgen lassen</li>
-  <li>Farbe oder Unschärfe zeitlich verändern</li>
-</ul>
+            <ul>
+                <li>Bild langsam vergrößern</li>
+                <li>Text ein- und ausblenden</li>
+                <li>Bild-in-Bild verschieben</li>
+                <li>Ton langsam lauter oder leiser machen</li>
+                <li>eine Maske einem Motiv folgen lassen</li>
+                <li>Farbe oder Unschärfe zeitlich verändern</li>
+            </ul>
 
-<h3>Beispiel: Langsames Hineinzoomen</h3>
+            <h3>Beispiel: Langsames Hineinzoomen</h3>
 
-<ol>
-  <li>Clip auswählen.</li>
-  <li>Filter „Größe, Position und Drehen“ hinzufügen.</li>
-  <li>Keyframes aktivieren.</li>
-  <li>Am Anfang eine normale Größe einstellen.</li>
-  <li>Am Ende einen zweiten Keyframe setzen.</li>
-  <li>Beim zweiten Keyframe das Bild leicht vergrößern.</li>
-</ol>
+            <ol>
+                <li>Clip auswählen.</li>
+                <li>Filter „Größe, Position und Drehen“ hinzufügen.</li>
+                <li>Keyframes aktivieren.</li>
+                <li>Am Anfang eine normale Größe einstellen.</li>
+                <li>Am Ende einen zweiten Keyframe setzen.</li>
+                <li>Beim zweiten Keyframe das Bild leicht vergrößern.</li>
+            </ol>
 
-<p>
-  Shotcut berechnet zwischen beiden Punkten eine gleichmäßige Vergrößerung.
-</p>
+            <p>
+                Shotcut berechnet zwischen beiden Punkten eine gleichmäßige Vergrößerung.
+            </p>
 
-<h3>Keyframe-Arten</h3>
+            <h3>Keyframe-Arten</h3>
 
-<p>
-  Je nach Filter können unterschiedliche Interpolationen verfügbar sein:
-</p>
+            <p>
+                Je nach Filter können unterschiedliche Interpolationen verfügbar sein:
+            </p>
 
-<ul>
-  <li><strong>Linear:</strong> gleichmäßige Veränderung</li>
-  <li><strong>Sanft:</strong> langsamere Beschleunigung und Abbremsung</li>
-  <li><strong>Diskret:</strong> abrupter Wechsel ohne Zwischenbewegung</li>
-</ul>
+            <ul>
+                <li><strong>Linear:</strong> gleichmäßige Veränderung</li>
+                <li><strong>Sanft:</strong> langsamere Beschleunigung und Abbremsung</li>
+                <li><strong>Diskret:</strong> abrupter Wechsel ohne Zwischenbewegung</li>
+            </ul>
 
-<aside class="tip-box">
-  <h3>Easy Win: Bewegungen bremsen</h3>
-  <p>
-    Animationen wirken häufig besser, wenn sie etwas langsamer und weniger stark
-    ausfallen als ursprünglich geplant. Ein sanfter Zoom um wenige Prozent wirkt
-    meist hochwertiger als eine dramatische digitale Kamerafahrt.
-  </p>
-</aside>
+            <aside class="tip-box">
+                <h3>Easy Win: Bewegungen bremsen</h3>
+                <p>
+                    Animationen wirken häufig besser, wenn sie etwas langsamer und weniger stark
+                    ausfallen als ursprünglich geplant. Ein sanfter Zoom um wenige Prozent wirkt
+                    meist hochwertiger als eine dramatische digitale Kamerafahrt.
+                </p>
+            </aside>
 
 
-  </section>
+        </section>
 
-  <section id="shotcut-bildgestaltung">
-    <h2>14. Bildgröße, Position und Bild-in-Bild</h2>
+        <section id="shotcut-bildgestaltung">
+            <h2>14. Bildgröße, Position und Bild-in-Bild</h2>
 
 
-<h3>14.1 Größe, Position und Drehen</h3>
+            <h3>14.1 Größe, Position und Drehen</h3>
 
-<p>
-  Der Filter „Größe, Position und Drehen“ gehört zu den wichtigsten Werkzeugen
-  in Shotcut.
-</p>
+            <p>
+                Der Filter „Größe, Position und Drehen“ gehört zu den wichtigsten Werkzeugen
+                in Shotcut.
+            </p>
 
-<p>Damit lassen sich:</p>
+            <p>Damit lassen sich:</p>
 
-<ul>
-  <li>Videos vergrößern und verkleinern,</li>
-  <li>Bilder verschieben,</li>
-  <li>Clips drehen,</li>
-  <li>Hochkantvideos in Querformatprojekten positionieren,</li>
-  <li>Bild-in-Bild-Effekte erstellen.</li>
-</ul>
+            <ul>
+                <li>Videos vergrößern und verkleinern,</li>
+                <li>Bilder verschieben,</li>
+                <li>Clips drehen,</li>
+                <li>Hochkantvideos in Querformatprojekten positionieren,</li>
+                <li>Bild-in-Bild-Effekte erstellen.</li>
+            </ul>
 
-<h3>14.2 Bild-in-Bild</h3>
+            <h3>14.2 Bild-in-Bild</h3>
 
-<ol>
-  <li>Hauptvideo auf die untere Videospur legen.</li>
-  <li>Zweites Video auf eine höhere Spur legen.</li>
-  <li>Zweites Video auswählen.</li>
-  <li>Filter „Größe, Position und Drehen“ hinzufügen.</li>
-  <li>Das Bild verkleinern und in einer Ecke positionieren.</li>
-</ol>
+            <ol>
+                <li>Hauptvideo auf die untere Videospur legen.</li>
+                <li>Zweites Video auf eine höhere Spur legen.</li>
+                <li>Zweites Video auswählen.</li>
+                <li>Filter „Größe, Position und Drehen“ hinzufügen.</li>
+                <li>Das Bild verkleinern und in einer Ecke positionieren.</li>
+            </ol>
 
-<h3>14.3 Split-Screen</h3>
+            <h3>14.3 Split-Screen</h3>
 
-<p>
-  Für einen geteilten Bildschirm werden zwei Videos auf übereinanderliegenden
-  Spuren positioniert und jeweils zugeschnitten oder skaliert.
-</p>
+            <p>
+                Für einen geteilten Bildschirm werden zwei Videos auf übereinanderliegenden
+                Spuren positioniert und jeweils zugeschnitten oder skaliert.
+            </p>
 
-<h3>14.4 Hochkantvideo in einem Querformatprojekt</h3>
+            <h3>14.4 Hochkantvideo in einem Querformatprojekt</h3>
 
-<p>Mögliche Lösungen sind:</p>
+            <p>Mögliche Lösungen sind:</p>
 
-<ul>
-  <li>schwarze Seitenränder beibehalten,</li>
-  <li>unscharfe vergrößerte Hintergrundkopie verwenden,</li>
-  <li>das Bild stärker vergrößern und oben sowie unten beschneiden,</li>
-  <li>das gesamte Projekt im Hochformat anlegen.</li>
-</ul>
+            <ul>
+                <li>schwarze Seitenränder beibehalten,</li>
+                <li>unscharfe vergrößerte Hintergrundkopie verwenden,</li>
+                <li>das Bild stärker vergrößern und oben sowie unten beschneiden,</li>
+                <li>das gesamte Projekt im Hochformat anlegen.</li>
+            </ul>
 
-<h3>14.5 Bilder und Fotos</h3>
+            <h3>14.5 Bilder und Fotos</h3>
 
-<p>
-  Fotos besitzen in Shotcut eine einstellbare Dauer. Mit Keyframes kann ein
-  langsamer Schwenk oder Zoom erzeugt werden.
-</p>
+            <p>
+                Fotos besitzen in Shotcut eine einstellbare Dauer. Mit Keyframes kann ein
+                langsamer Schwenk oder Zoom erzeugt werden.
+            </p>
 
 
-  </section>
+        </section>
 
-  <section id="shotcut-farbkorrektur">
-    <h2>15. Farbkorrektur und Videoscopes</h2>
+        <section id="shotcut-farbkorrektur">
+            <h2>15. Farbkorrektur und Videoscopes</h2>
 
 
-<p>
-  Farbkorrektur verfolgt zunächst ein nüchternes Ziel: Aufnahmen sollen korrekt,
-  zusammengehörig und angenehm aussehen.
-</p>
+            <p>
+                Farbkorrektur verfolgt zunächst ein nüchternes Ziel: Aufnahmen sollen korrekt,
+                zusammengehörig und angenehm aussehen.
+            </p>
 
-<h3>Reihenfolge einer einfachen Farbkorrektur</h3>
+            <h3>Reihenfolge einer einfachen Farbkorrektur</h3>
 
-<ol>
-  <li>Belichtung korrigieren.</li>
-  <li>Weißabgleich korrigieren.</li>
-  <li>Kontrast anpassen.</li>
-  <li>Sättigung behutsam verändern.</li>
-  <li>Aufnahmen untereinander angleichen.</li>
-  <li>Erst danach einen kreativen Look anwenden.</li>
-</ol>
+            <ol>
+                <li>Belichtung korrigieren.</li>
+                <li>Weißabgleich korrigieren.</li>
+                <li>Kontrast anpassen.</li>
+                <li>Sättigung behutsam verändern.</li>
+                <li>Aufnahmen untereinander angleichen.</li>
+                <li>Erst danach einen kreativen Look anwenden.</li>
+            </ol>
 
-<h3>Nützliche Filter</h3>
+            <h3>Nützliche Filter</h3>
 
-<ul>
-  <li>Helligkeit</li>
-  <li>Kontrast</li>
-  <li>Sättigung</li>
-  <li>Weißabgleich</li>
-  <li>Farbbalance</li>
-  <li>Farbkorrektur beziehungsweise Color Grading</li>
-  <li>Kurven</li>
-  <li>Levels beziehungsweise Pegel</li>
-  <li>LUT-Filter</li>
-</ul>
+            <ul>
+                <li>Helligkeit</li>
+                <li>Kontrast</li>
+                <li>Sättigung</li>
+                <li>Weißabgleich</li>
+                <li>Farbbalance</li>
+                <li>Farbkorrektur beziehungsweise Color Grading</li>
+                <li>Kurven</li>
+                <li>Levels beziehungsweise Pegel</li>
+                <li>LUT-Filter</li>
+            </ul>
 
-<h3>Videoscopes</h3>
+            <h3>Videoscopes</h3>
 
-<p>
-  Das Auge gewöhnt sich schnell an falsche Farben und Helligkeiten. Videoscopes
-  zeigen technische Messwerte und helfen bei einer objektiveren Beurteilung.
-</p>
+            <p>
+                Das Auge gewöhnt sich schnell an falsche Farben und Helligkeiten. Videoscopes
+                zeigen technische Messwerte und helfen bei einer objektiveren Beurteilung.
+            </p>
 
-<dl>
-  <dt>Waveform</dt>
-  <dd>
-    Zeigt die Helligkeitsverteilung im Bild.
-  </dd>
+            <dl>
+                <dt>Waveform</dt>
+                <dd>
+                    Zeigt die Helligkeitsverteilung im Bild.
+                </dd>
 
-  <dt>Histogramm</dt>
-  <dd>
-    Zeigt die Verteilung von dunklen, mittleren und hellen Bildwerten.
-  </dd>
+                <dt>Histogramm</dt>
+                <dd>
+                    Zeigt die Verteilung von dunklen, mittleren und hellen Bildwerten.
+                </dd>
 
-  <dt>Vectorscope</dt>
-  <dd>
-    Zeigt Farbton und Farbsättigung.
-  </dd>
-</dl>
+                <dt>Vectorscope</dt>
+                <dd>
+                    Zeigt Farbton und Farbsättigung.
+                </dd>
+            </dl>
 
-<aside class="warning-box">
-  <h3>Mehr Sättigung ist nicht automatisch mehr Qualität</h3>
-  <p>
-    Zu starke Sättigung führt zu künstlichen Hauttönen, grellem Himmel und
-    unnatürlichem Grün. Farbkorrektur soll das Bild verbessern, nicht anbrüllen.
-  </p>
-</aside>
+            <aside class="warning-box">
+                <h3>Mehr Sättigung ist nicht automatisch mehr Qualität</h3>
+                <p>
+                    Zu starke Sättigung führt zu künstlichen Hauttönen, grellem Himmel und
+                    unnatürlichem Grün. Farbkorrektur soll das Bild verbessern, nicht anbrüllen.
+                </p>
+            </aside>
 
-<h3>LUTs</h3>
+            <h3>LUTs</h3>
 
-<p>
-  Eine LUT ist eine vorgegebene Farbtransformation. Sie kann technisch notwendig
-  sein, etwa bei Log- oder bestimmten HDR-Aufnahmen, oder einen kreativen Look
-  erzeugen.
-</p>
+            <p>
+                Eine LUT ist eine vorgegebene Farbtransformation. Sie kann technisch notwendig
+                sein, etwa bei Log- oder bestimmten HDR-Aufnahmen, oder einen kreativen Look
+                erzeugen.
+            </p>
 
-<p>
-  LUTs sollten nicht blind verwendet werden. Belichtung und Weißabgleich müssen
-  trotzdem kontrolliert werden.
-</p>
+            <p>
+                LUTs sollten nicht blind verwendet werden. Belichtung und Weißabgleich müssen
+                trotzdem kontrolliert werden.
+            </p>
 
 
-  </section>
+        </section>
 
-  <section id="shotcut-audio">
-    <h2>16. Audiobearbeitung und Sprachaufnahmen</h2>
+        <section id="shotcut-audio">
+            <h2>16. Audiobearbeitung und Sprachaufnahmen</h2>
 
 
-<p>
-  Schlechter Ton ruiniert ein Video schneller als ein mäßig spektakuläres Bild.
-  Zuschauer akzeptieren kleine Bildfehler, aber keine dauerhaft unverständliche
-  Sprache oder schmerzhaft laute Musik.
-</p>
+            <p>
+                Schlechter Ton ruiniert ein Video schneller als ein mäßig spektakuläres Bild.
+                Zuschauer akzeptieren kleine Bildfehler, aber keine dauerhaft unverständliche
+                Sprache oder schmerzhaft laute Musik.
+            </p>
 
-<h3>16.1 Audio-Wellenformen</h3>
+            <h3>16.1 Audio-Wellenformen</h3>
 
-<p>
-  Die Wellenform zeigt, wo Sprache, Geräusche, Pausen und laute Spitzen liegen.
-  Sie erleichtert das Auffinden von Schnittpunkten.
-</p>
+            <p>
+                Die Wellenform zeigt, wo Sprache, Geräusche, Pausen und laute Spitzen liegen.
+                Sie erleichtert das Auffinden von Schnittpunkten.
+            </p>
 
-<h3>16.2 Lautstärke anpassen</h3>
+            <h3>16.2 Lautstärke anpassen</h3>
 
-<p>
-  Mit einem Lautstärke- beziehungsweise Gain-Filter kann ein Clip lauter oder
-  leiser gemacht werden.
-</p>
+            <p>
+                Mit einem Lautstärke- beziehungsweise Gain-Filter kann ein Clip lauter oder
+                leiser gemacht werden.
+            </p>
 
-<p>
-  Der Pegel sollte nicht dauerhaft bis an die Obergrenze reichen. Übersteuerung
-  klingt hart und lässt sich nachträglich kaum reparieren.
-</p>
+            <p>
+                Der Pegel sollte nicht dauerhaft bis an die Obergrenze reichen. Übersteuerung
+                klingt hart und lässt sich nachträglich kaum reparieren.
+            </p>
 
-<h3>16.3 Peak-Anzeige</h3>
+            <h3>16.3 Peak-Anzeige</h3>
 
-<p>
-  Die Audiopegelanzeige sollte beim Abspielen beobachtet werden. Erreicht das
-  Signal regelmäßig den roten Bereich, ist es zu laut.
-</p>
+            <p>
+                Die Audiopegelanzeige sollte beim Abspielen beobachtet werden. Erreicht das
+                Signal regelmäßig den roten Bereich, ist es zu laut.
+            </p>
 
-<h3>16.4 Sprache und Musik mischen</h3>
+            <h3>16.4 Sprache und Musik mischen</h3>
 
-<p>
-  Für einen typischen Film können drei Audiobenen verwendet werden:
-</p>
+            <p>
+                Für einen typischen Film können drei Audiobenen verwendet werden:
+            </p>
 
-<pre><code>A3 – SPRECHERTEXT
+            <pre><code>A3 – SPRECHERTEXT
 
 
 A2 – MUSIK
 A1 – ORIGINALTON</code></pre>
 
 
-<p>
-  Sprache sollte klar im Vordergrund stehen. Musik wird darunter abgesenkt.
-  Atmosphärische Originalgeräusche können hörbar bleiben.
-</p>
+            <p>
+                Sprache sollte klar im Vordergrund stehen. Musik wird darunter abgesenkt.
+                Atmosphärische Originalgeräusche können hörbar bleiben.
+            </p>
 
-<h3>16.5 Ein- und Ausblenden</h3>
+            <h3>16.5 Ein- und Ausblenden</h3>
 
-<p>
-  Harte Tonanfänge und abrupte Musikenden wirken oft störend. Audio-Fades können
-  über spezielle Filter oder die Fade-Bedienelemente am Clip erstellt werden.
-</p>
+            <p>
+                Harte Tonanfänge und abrupte Musikenden wirken oft störend. Audio-Fades können
+                über spezielle Filter oder die Fade-Bedienelemente am Clip erstellt werden.
+            </p>
 
-<h3>16.6 Lautheit normalisieren</h3>
+            <h3>16.6 Lautheit normalisieren</h3>
 
-<p>
-  Normalisierungsfilter können starke Lautstärkeunterschiede ausgleichen.
-  Je nach Filter wird ein einzelner Clip analysiert oder eine Ziel-Lautheit
-  angestrebt.
-</p>
+            <p>
+                Normalisierungsfilter können starke Lautstärkeunterschiede ausgleichen.
+                Je nach Filter wird ein einzelner Clip analysiert oder eine Ziel-Lautheit
+                angestrebt.
+            </p>
 
-<p>
-  Eine Normalisierung ersetzt jedoch keine saubere Tonmischung. Sprache, Musik
-  und Originalton benötigen weiterhin unterschiedliche Lautstärken.
-</p>
+            <p>
+                Eine Normalisierung ersetzt jedoch keine saubere Tonmischung. Sprache, Musik
+                und Originalton benötigen weiterhin unterschiedliche Lautstärken.
+            </p>
 
-<h3>16.7 Kompressor und Limiter</h3>
+            <h3>16.7 Kompressor und Limiter</h3>
 
-<dl>
-  <dt>Kompressor</dt>
-  <dd>
-    Verringert den Unterschied zwischen leisen und lauten Stellen.
-  </dd>
+            <dl>
+                <dt>Kompressor</dt>
+                <dd>
+                    Verringert den Unterschied zwischen leisen und lauten Stellen.
+                </dd>
 
-  <dt>Limiter</dt>
-  <dd>
-    Verhindert, dass Pegel eine festgelegte Obergrenze überschreiten.
-  </dd>
-</dl>
+                <dt>Limiter</dt>
+                <dd>
+                    Verhindert, dass Pegel eine festgelegte Obergrenze überschreiten.
+                </dd>
+            </dl>
 
-<p>
-  Ein Kompressor kann Sprache gleichmäßiger machen. Zu starke Einstellungen
-  führen allerdings zu einem gepressten, unnatürlichen Klang.
-</p>
+            <p>
+                Ein Kompressor kann Sprache gleichmäßiger machen. Zu starke Einstellungen
+                führen allerdings zu einem gepressten, unnatürlichen Klang.
+            </p>
 
-<h3>16.8 Rauschen und Störgeräusche</h3>
+            <h3>16.8 Rauschen und Störgeräusche</h3>
 
-<p>
-  Shotcut bietet unterschiedliche Audiofilter, etwa Hochpass, Tiefpass,
-  Equalizer und Rauschunterdrückung. Damit können bestimmte Frequenzbereiche
-  abgeschwächt werden.
-</p>
+            <p>
+                Shotcut bietet unterschiedliche Audiofilter, etwa Hochpass, Tiefpass,
+                Equalizer und Rauschunterdrückung. Damit können bestimmte Frequenzbereiche
+                abgeschwächt werden.
+            </p>
 
-<p>
-  Stark verrauschte oder übersteuerte Aufnahmen lassen sich jedoch nicht vollständig
-  retten. Gute Tonaufnahme bleibt die wirkungsvollste Nachbearbeitung.
-</p>
+            <p>
+                Stark verrauschte oder übersteuerte Aufnahmen lassen sich jedoch nicht vollständig
+                retten. Gute Tonaufnahme bleibt die wirkungsvollste Nachbearbeitung.
+            </p>
 
-<h3>16.9 Sprechertext aufnehmen</h3>
+            <h3>16.9 Sprechertext aufnehmen</h3>
 
-<p>
-  Je nach Programmversion kann eine Sprachaufnahme direkt in der Timeline
-  aufgezeichnet werden. Alternativ wird der Sprechertext mit einem externen
-  Audioprogramm aufgenommen und anschließend importiert.
-</p>
+            <p>
+                Je nach Programmversion kann eine Sprachaufnahme direkt in der Timeline
+                aufgezeichnet werden. Alternativ wird der Sprechertext mit einem externen
+                Audioprogramm aufgenommen und anschließend importiert.
+            </p>
 
-<h3>Tipps für verständliche Sprachaufnahmen</h3>
+            <h3>Tipps für verständliche Sprachaufnahmen</h3>
 
-<ul>
-  <li>ruhigen Raum verwenden</li>
-  <li>Mikrofon nicht zu weit entfernt aufstellen</li>
-  <li>gleichmäßigen Abstand halten</li>
-  <li>Text in kurzen Abschnitten aufnehmen</li>
-  <li>einige Sekunden Raumton aufnehmen</li>
-  <li>Musik während der Aufnahme nicht über Lautsprecher abspielen</li>
-</ul>
-
-
-  </section>
-
-  <section id="shotcut-text">
-    <h2>17. Titel, Texte und Bauchbinden</h2>
+            <ul>
+                <li>ruhigen Raum verwenden</li>
+                <li>Mikrofon nicht zu weit entfernt aufstellen</li>
+                <li>gleichmäßigen Abstand halten</li>
+                <li>Text in kurzen Abschnitten aufnehmen</li>
+                <li>einige Sekunden Raumton aufnehmen</li>
+                <li>Musik während der Aufnahme nicht über Lautsprecher abspielen</li>
+            </ul>
 
 
-<h3>17.1 Textfilter</h3>
+        </section>
 
-<p>
-  Text kann als Filter auf einen Clip, einen transparenten Farbclip oder eine
-  eigene Ebene gelegt werden.
-</p>
-
-<p>Typische Textarten sind:</p>
-
-<ul>
-  <li>Videotitel</li>
-  <li>Orts- und Datumsangaben</li>
-  <li>Namen und Funktionen</li>
-  <li>Kapitelüberschriften</li>
-  <li>kurze Erklärungen</li>
-  <li>Abspann</li>
-</ul>
-
-<h3>17.2 Text auf eigener Spur</h3>
-
-<p>
-  Für größere Projekte ist es meist sinnvoll, Texte auf einer eigenen oberen
-  Videospur anzulegen. Dadurch lassen sie sich unabhängig vom Hauptvideo verschieben,
-  verlängern und mit Filtern versehen.
-</p>
-
-<h3>17.3 Lesbarkeit</h3>
-
-<ul>
-  <li>ausreichend große Schrift verwenden</li>
-  <li>hohen Kontrast zum Hintergrund herstellen</li>
-  <li>gegebenenfalls Schatten oder Kontur einsetzen</li>
-  <li>Text nicht zu nahe am Bildrand platzieren</li>
-  <li>Text lange genug stehen lassen</li>
-  <li>nicht mehr Text zeigen, als bequem gelesen werden kann</li>
-</ul>
-
-<h3>17.4 Bauchbinden</h3>
-
-<p>
-  Eine Bauchbinde besteht meist aus einer Form oder Farbfläche und einem darüber
-  liegenden Text. Beide Elemente können auf oberen Videospuren angelegt und mit
-  Keyframes ein- beziehungsweise ausgeblendet werden.
-</p>
-
-<h3>17.5 Titelanimation</h3>
-
-<p>
-  Ein Text kann über Keyframes bewegt, skaliert oder eingeblendet werden.
-  Bewegungen sollten kurz und ruhig bleiben.
-</p>
-
-<aside class="tip-box">
-  <h3>Easy Win: Eine Schriftfamilie genügt</h3>
-  <p>
-    Ein Film benötigt selten fünf Schriftarten, drei Schatten und eine metallische
-    Kontur. Eine gut lesbare Schrift mit klarer Hierarchie wirkt fast immer besser.
-  </p>
-</aside>
+        <section id="shotcut-text">
+            <h2>17. Titel, Texte und Bauchbinden</h2>
 
 
-  </section>
+            <h3>17.1 Textfilter</h3>
 
-  <section id="shotcut-untertitel">
-    <h2>18. Untertitel und automatische Transkription</h2>
+            <p>
+                Text kann als Filter auf einen Clip, einen transparenten Farbclip oder eine
+                eigene Ebene gelegt werden.
+            </p>
+
+            <p>Typische Textarten sind:</p>
+
+            <ul>
+                <li>Videotitel</li>
+                <li>Orts- und Datumsangaben</li>
+                <li>Namen und Funktionen</li>
+                <li>Kapitelüberschriften</li>
+                <li>kurze Erklärungen</li>
+                <li>Abspann</li>
+            </ul>
+
+            <h3>17.2 Text auf eigener Spur</h3>
+
+            <p>
+                Für größere Projekte ist es meist sinnvoll, Texte auf einer eigenen oberen
+                Videospur anzulegen. Dadurch lassen sie sich unabhängig vom Hauptvideo verschieben,
+                verlängern und mit Filtern versehen.
+            </p>
+
+            <h3>17.3 Lesbarkeit</h3>
+
+            <ul>
+                <li>ausreichend große Schrift verwenden</li>
+                <li>hohen Kontrast zum Hintergrund herstellen</li>
+                <li>gegebenenfalls Schatten oder Kontur einsetzen</li>
+                <li>Text nicht zu nahe am Bildrand platzieren</li>
+                <li>Text lange genug stehen lassen</li>
+                <li>nicht mehr Text zeigen, als bequem gelesen werden kann</li>
+            </ul>
+
+            <h3>17.4 Bauchbinden</h3>
+
+            <p>
+                Eine Bauchbinde besteht meist aus einer Form oder Farbfläche und einem darüber
+                liegenden Text. Beide Elemente können auf oberen Videospuren angelegt und mit
+                Keyframes ein- beziehungsweise ausgeblendet werden.
+            </p>
+
+            <h3>17.5 Titelanimation</h3>
+
+            <p>
+                Ein Text kann über Keyframes bewegt, skaliert oder eingeblendet werden.
+                Bewegungen sollten kurz und ruhig bleiben.
+            </p>
+
+            <aside class="tip-box">
+                <h3>Easy Win: Eine Schriftfamilie genügt</h3>
+                <p>
+                    Ein Film benötigt selten fünf Schriftarten, drei Schatten und eine metallische
+                    Kontur. Eine gut lesbare Schrift mit klarer Hierarchie wirkt fast immer besser.
+                </p>
+            </aside>
 
 
-<p>
-  Shotcut besitzt ein eigenes Untertitel-Bedienfeld. Untertitel können je nach
-  Workflow manuell erstellt, importiert, exportiert oder in das Bild eingebrannt
-  werden.
-</p>
+        </section>
 
-<h3>18.1 Untertitel erst nach dem Bildschnitt</h3>
+        <section id="shotcut-untertitel">
+            <h2>18. Untertitel und automatische Transkription</h2>
 
-<p>
-  Untertitel sollten möglichst erst erstellt werden, wenn der Schnitt inhaltlich
-  weitgehend abgeschlossen ist.
-</p>
 
-<p>
-  Werden anschließend längere Videobereiche entfernt oder verschoben, können
-  Untertitel ihre zeitliche Zuordnung verlieren.
-</p>
+            <p>
+                Shotcut besitzt ein eigenes Untertitel-Bedienfeld. Untertitel können je nach
+                Workflow manuell erstellt, importiert, exportiert oder in das Bild eingebrannt
+                werden.
+            </p>
 
-<h3>18.2 SRT-Dateien</h3>
+            <h3>18.1 Untertitel erst nach dem Bildschnitt</h3>
 
-<p>
-  Das verbreitete SRT-Format enthält Zeitangaben und Text.
-</p>
+            <p>
+                Untertitel sollten möglichst erst erstellt werden, wenn der Schnitt inhaltlich
+                weitgehend abgeschlossen ist.
+            </p>
 
-<pre><code>1
+            <p>
+                Werden anschließend längere Videobereiche entfernt oder verschoben, können
+                Untertitel ihre zeitliche Zuordnung verlieren.
+            </p>
+
+            <h3>18.2 SRT-Dateien</h3>
+
+            <p>
+                Das verbreitete SRT-Format enthält Zeitangaben und Text.
+            </p>
+
+            <pre><code>1
 
 
 00:00:02,000 --> 00:00:05,500
@@ -1467,446 +1468,446 @@ Willkommen zu diesem Video.
 Heute geht es um den Videoschnitt mit Shotcut.</code></pre>
 
 
-<h3>18.3 Untertitel exportieren</h3>
-
-<p>
-  Untertitel können als separate Datei ausgegeben werden. Das ermöglicht
-  Zuschauerinnen und Zuschauern, Untertitel ein- und auszuschalten.
-</p>
-
-<h3>18.4 Untertitel einbrennen</h3>
-
-<p>
-  Beim Einbrennen werden die Untertitel direkt in das Videobild gerechnet.
-  Sie sind danach immer sichtbar.
-</p>
-
-<div class="comparison-table-wrapper">
-  <table>
-    <caption>Separate und eingebrannte Untertitel</caption>
-    <thead>
-      <tr>
-        <th scope="col">Merkmal</th>
-        <th scope="col">Separate Untertitel</th>
-        <th scope="col">Eingebrannte Untertitel</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th scope="row">Ein- und ausschaltbar</th>
-        <td>Ja</td>
-        <td>Nein</td>
-      </tr>
-      <tr>
-        <th scope="row">Darstellung</th>
-        <td>Vom Player bestimmt</td>
-        <td>Im Video festgelegt</td>
-      </tr>
-      <tr>
-        <th scope="row">Für mehrere Sprachen</th>
-        <td>Gut geeignet</td>
-        <td>Nur mit mehreren Videoexporten</td>
-      </tr>
-      <tr>
-        <th scope="row">Social Media</th>
-        <td>Nicht überall zuverlässig</td>
-        <td>Sehr zuverlässig sichtbar</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
-<h3>18.5 Sprache-zu-Text</h3>
-
-<p>
-  Aktuelle Shotcut-Versionen können mithilfe lokaler Sprachmodelle einen
-  Untertitelentwurf aus gesprochener Sprache erzeugen.
-</p>
-
-<p>
-  Das Ergebnis muss sorgfältig kontrolliert werden. Eigennamen, Dialekt,
-  Fachbegriffe, Hintergrundgeräusche und mehrere gleichzeitig sprechende Personen
-  führen häufig zu Fehlern.
-</p>
-
-<aside class="warning-box">
-  <h3>Automatische Untertitel sind ein Entwurf</h3>
-  <p>
-    Automatische Transkription spart Tipparbeit, ersetzt aber kein Korrekturlesen.
-    Ein falsch erkannter Name kann aus einer seriösen Aussage binnen Sekunden
-    sprachlichen Slapstick machen.
-  </p>
-</aside>
-
-
-  </section>
-
-  <section id="shotcut-geschwindigkeit">
-    <h2>19. Geschwindigkeit, Zeitlupe und Standbilder</h2>
-
-
-<h3>19.1 Einfache Geschwindigkeitsänderung</h3>
-
-<p>
-  In den Clip-Eigenschaften kann die Wiedergabegeschwindigkeit verändert werden.
-</p>
-
-<ul>
-  <li><strong>0,5:</strong> halbe Geschwindigkeit</li>
-  <li><strong>2,0:</strong> doppelte Geschwindigkeit</li>
-  <li><strong>4,0:</strong> vierfache Geschwindigkeit</li>
-</ul>
-
-<h3>19.2 Zeitlupe</h3>
-
-<p>
-  Gute Zeitlupe setzt genügend aufgenommene Einzelbilder voraus.
-  Material mit 50 oder 60 Bildern pro Sekunde lässt sich in einem 25- oder
-  30-fps-Projekt meist besser verlangsamen als Material mit niedriger Bildrate.
-</p>
-
-<p>
-  Wird Material zu stark verlangsamt, müssen fehlende Zwischenbilder wiederholt
-  oder künstlich berechnet werden. Das kann ruckeln oder Bildfehler verursachen.
-</p>
+            <h3>18.3 Untertitel exportieren</h3>
+
+            <p>
+                Untertitel können als separate Datei ausgegeben werden. Das ermöglicht
+                Zuschauerinnen und Zuschauern, Untertitel ein- und auszuschalten.
+            </p>
+
+            <h3>18.4 Untertitel einbrennen</h3>
+
+            <p>
+                Beim Einbrennen werden die Untertitel direkt in das Videobild gerechnet.
+                Sie sind danach immer sichtbar.
+            </p>
+
+            <div class="comparison-table-wrapper">
+                <table>
+                    <caption>Separate und eingebrannte Untertitel</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">Merkmal</th>
+                            <th scope="col">Separate Untertitel</th>
+                            <th scope="col">Eingebrannte Untertitel</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">Ein- und ausschaltbar</th>
+                            <td>Ja</td>
+                            <td>Nein</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Darstellung</th>
+                            <td>Vom Player bestimmt</td>
+                            <td>Im Video festgelegt</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Für mehrere Sprachen</th>
+                            <td>Gut geeignet</td>
+                            <td>Nur mit mehreren Videoexporten</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Social Media</th>
+                            <td>Nicht überall zuverlässig</td>
+                            <td>Sehr zuverlässig sichtbar</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>18.5 Sprache-zu-Text</h3>
+
+            <p>
+                Aktuelle Shotcut-Versionen können mithilfe lokaler Sprachmodelle einen
+                Untertitelentwurf aus gesprochener Sprache erzeugen.
+            </p>
+
+            <p>
+                Das Ergebnis muss sorgfältig kontrolliert werden. Eigennamen, Dialekt,
+                Fachbegriffe, Hintergrundgeräusche und mehrere gleichzeitig sprechende Personen
+                führen häufig zu Fehlern.
+            </p>
+
+            <aside class="warning-box">
+                <h3>Automatische Untertitel sind ein Entwurf</h3>
+                <p>
+                    Automatische Transkription spart Tipparbeit, ersetzt aber kein Korrekturlesen.
+                    Ein falsch erkannter Name kann aus einer seriösen Aussage binnen Sekunden
+                    sprachlichen Slapstick machen.
+                </p>
+            </aside>
+
+
+        </section>
+
+        <section id="shotcut-geschwindigkeit">
+            <h2>19. Geschwindigkeit, Zeitlupe und Standbilder</h2>
+
+
+            <h3>19.1 Einfache Geschwindigkeitsänderung</h3>
+
+            <p>
+                In den Clip-Eigenschaften kann die Wiedergabegeschwindigkeit verändert werden.
+            </p>
+
+            <ul>
+                <li><strong>0,5:</strong> halbe Geschwindigkeit</li>
+                <li><strong>2,0:</strong> doppelte Geschwindigkeit</li>
+                <li><strong>4,0:</strong> vierfache Geschwindigkeit</li>
+            </ul>
+
+            <h3>19.2 Zeitlupe</h3>
+
+            <p>
+                Gute Zeitlupe setzt genügend aufgenommene Einzelbilder voraus.
+                Material mit 50 oder 60 Bildern pro Sekunde lässt sich in einem 25- oder
+                30-fps-Projekt meist besser verlangsamen als Material mit niedriger Bildrate.
+            </p>
+
+            <p>
+                Wird Material zu stark verlangsamt, müssen fehlende Zwischenbilder wiederholt
+                oder künstlich berechnet werden. Das kann ruckeln oder Bildfehler verursachen.
+            </p>
 
-<h3>19.3 Tonhöhe erhalten</h3>
+            <h3>19.3 Tonhöhe erhalten</h3>
 
-<p>
-  Bei Geschwindigkeitsänderungen kann versucht werden, die ursprüngliche Tonhöhe
-  zu erhalten. Bei starken Änderungen klingt Sprache dennoch oft unnatürlich.
-</p>
+            <p>
+                Bei Geschwindigkeitsänderungen kann versucht werden, die ursprüngliche Tonhöhe
+                zu erhalten. Bei starken Änderungen klingt Sprache dennoch oft unnatürlich.
+            </p>
 
-<h3>19.4 Time Remap</h3>
+            <h3>19.4 Time Remap</h3>
 
-<p>
-  Mit Time Remap kann sich die Geschwindigkeit innerhalb eines Clips verändern.
-  Damit lassen sich sogenannte Speed Ramps erzeugen.
-</p>
-
-<p>
-  Dieser Filter stellt höhere Anforderungen an das Quellformat. Shotcut kann
-  deshalb eine Umwandlung in ein schnittfreundlicheres Format verlangen.
-</p>
+            <p>
+                Mit Time Remap kann sich die Geschwindigkeit innerhalb eines Clips verändern.
+                Damit lassen sich sogenannte Speed Ramps erzeugen.
+            </p>
+
+            <p>
+                Dieser Filter stellt höhere Anforderungen an das Quellformat. Shotcut kann
+                deshalb eine Umwandlung in ein schnittfreundlicheres Format verlangen.
+            </p>
 
-<h3>19.5 Standbild</h3>
+            <h3>19.5 Standbild</h3>
 
-<p>
-  Ein einzelnes Bild kann als Standbild eingefroren werden. Das eignet sich für:
-</p>
+            <p>
+                Ein einzelnes Bild kann als Standbild eingefroren werden. Das eignet sich für:
+            </p>
 
-<ul>
-  <li>Erklärungen</li>
-  <li>Markierungen</li>
-  <li>dramaturgische Pausen</li>
-  <li>Titel oder Bildbeschriftungen</li>
-  <li>humoristische Momente</li>
-</ul>
+            <ul>
+                <li>Erklärungen</li>
+                <li>Markierungen</li>
+                <li>dramaturgische Pausen</li>
+                <li>Titel oder Bildbeschriftungen</li>
+                <li>humoristische Momente</li>
+            </ul>
 
-<h3>19.6 Zeitraffer</h3>
+            <h3>19.6 Zeitraffer</h3>
 
-<p>
-  Durch starke Beschleunigung können längere Vorgänge verkürzt dargestellt werden.
-  Bei sehr langen Aufnahmen kann es sinnvoll sein, bereits beim Filmen einen
-  Zeitraffermodus zu verwenden.
-</p>
+            <p>
+                Durch starke Beschleunigung können längere Vorgänge verkürzt dargestellt werden.
+                Bei sehr langen Aufnahmen kann es sinnvoll sein, bereits beim Filmen einen
+                Zeitraffermodus zu verwenden.
+            </p>
 
 
-  </section>
+        </section>
 
-  <section id="shotcut-stabilisierung">
-    <h2>20. Stabilisierung und Bewegungsverfolgung</h2>
+        <section id="shotcut-stabilisierung">
+            <h2>20. Stabilisierung und Bewegungsverfolgung</h2>
 
 
-<h3>20.1 Stabilisierung</h3>
+            <h3>20.1 Stabilisierung</h3>
 
-<p>
-  Der Stabilisierungsfilter analysiert Kamerabewegungen und versucht,
-  Verwacklungen auszugleichen.
-</p>
+            <p>
+                Der Stabilisierungsfilter analysiert Kamerabewegungen und versucht,
+                Verwacklungen auszugleichen.
+            </p>
 
-<p>Typischer Ablauf:</p>
+            <p>Typischer Ablauf:</p>
 
-<ol>
-  <li>Clip auswählen.</li>
-  <li>Stabilisierungsfilter hinzufügen.</li>
-  <li>Analyse starten.</li>
-  <li>Analyseauftrag abwarten.</li>
-  <li>Ergebnis kontrollieren.</li>
-  <li>Stärke und Glättung anpassen.</li>
-</ol>
+            <ol>
+                <li>Clip auswählen.</li>
+                <li>Stabilisierungsfilter hinzufügen.</li>
+                <li>Analyse starten.</li>
+                <li>Analyseauftrag abwarten.</li>
+                <li>Ergebnis kontrollieren.</li>
+                <li>Stärke und Glättung anpassen.</li>
+            </ol>
 
-<p>
-  Stabilisierung benötigt häufig einen vergrößerten Bildausschnitt, damit an den
-  Rändern keine schwarzen Flächen sichtbar werden.
-</p>
+            <p>
+                Stabilisierung benötigt häufig einen vergrößerten Bildausschnitt, damit an den
+                Rändern keine schwarzen Flächen sichtbar werden.
+            </p>
 
-<p>
-  Sehr starke Erschütterungen, Bewegungsunschärfe oder schnelle Richtungswechsel
-  lassen sich nur begrenzt korrigieren.
-</p>
+            <p>
+                Sehr starke Erschütterungen, Bewegungsunschärfe oder schnelle Richtungswechsel
+                lassen sich nur begrenzt korrigieren.
+            </p>
 
-<h3>20.2 Motion Tracking</h3>
+            <h3>20.2 Motion Tracking</h3>
 
-<p>
-  Die Bewegungsverfolgung analysiert ein ausgewähltes Motiv und erzeugt
-  Bewegungsdaten.
-</p>
+            <p>
+                Die Bewegungsverfolgung analysiert ein ausgewähltes Motiv und erzeugt
+                Bewegungsdaten.
+            </p>
 
-<p>Diese Daten können verwendet werden, um:</p>
+            <p>Diese Daten können verwendet werden, um:</p>
 
-<ul>
-  <li>Text einem Motiv folgen zu lassen,</li>
-  <li>Gesichter oder Kennzeichen zu verdecken,</li>
-  <li>eine Markierung auf einem Objekt zu halten,</li>
-  <li>ein Bild oder eine Grafik mitzubewegen.</li>
-</ul>
+            <ul>
+                <li>Text einem Motiv folgen zu lassen,</li>
+                <li>Gesichter oder Kennzeichen zu verdecken,</li>
+                <li>eine Markierung auf einem Objekt zu halten,</li>
+                <li>ein Bild oder eine Grafik mitzubewegen.</li>
+            </ul>
 
-<h3>20.3 Gesichter und Kennzeichen anonymisieren</h3>
+            <h3>20.3 Gesichter und Kennzeichen anonymisieren</h3>
 
-<p>
-  Eine einfache Methode besteht aus:
-</p>
-
-<ol>
-  <li>Maskenfilter hinzufügen.</li>
-  <li>Maske über dem Motiv positionieren.</li>
-  <li>Unschärfe oder Mosaik anwenden.</li>
-  <li>Position mit Keyframes oder Tracking anpassen.</li>
-  <li>gesamten Clip kontrollieren.</li>
-</ol>
-
-<aside class="warning-box">
-  <h3>Tracking immer vollständig prüfen</h3>
-  <p>
-    Eine Maske kann das Motiv verlieren, wenn es verdeckt wird, den Bildrand
-    verlässt oder seine Form stark verändert. Datenschutz verträgt keine
-    optimistische Stichprobe.
-  </p>
-</aside>
+            <p>
+                Eine einfache Methode besteht aus:
+            </p>
+
+            <ol>
+                <li>Maskenfilter hinzufügen.</li>
+                <li>Maske über dem Motiv positionieren.</li>
+                <li>Unschärfe oder Mosaik anwenden.</li>
+                <li>Position mit Keyframes oder Tracking anpassen.</li>
+                <li>gesamten Clip kontrollieren.</li>
+            </ol>
+
+            <aside class="warning-box">
+                <h3>Tracking immer vollständig prüfen</h3>
+                <p>
+                    Eine Maske kann das Motiv verlieren, wenn es verdeckt wird, den Bildrand
+                    verlässt oder seine Form stark verändert. Datenschutz verträgt keine
+                    optimistische Stichprobe.
+                </p>
+            </aside>
 
 
-  </section>
+        </section>
 
-  <section id="shotcut-proxy">
-    <h2>21. Proxy, Vorschau-Skalierung und flüssiger Schnitt</h2>
+        <section id="shotcut-proxy">
+            <h2>21. Proxy, Vorschau-Skalierung und flüssiger Schnitt</h2>
 
 
-<p>
-  Hochauflösende oder stark komprimierte Videos können die Vorschau überfordern.
-  Das gilt besonders für 4K-, 8K-, HEVC-, 10-Bit- und 360°-Material.
-</p>
+            <p>
+                Hochauflösende oder stark komprimierte Videos können die Vorschau überfordern.
+                Das gilt besonders für 4K-, 8K-, HEVC-, 10-Bit- und 360°-Material.
+            </p>
 
-<h3>21.1 Proxy-Dateien</h3>
+            <h3>21.1 Proxy-Dateien</h3>
 
-<p>
-  Proxy-Dateien sind niedrig aufgelöste Arbeitskopien der Originaldateien.
-  Shotcut verwendet sie während der Bearbeitung, greift beim normalen Export
-  aber wieder auf das hochwertige Originalmaterial zurück.
-</p>
+            <p>
+                Proxy-Dateien sind niedrig aufgelöste Arbeitskopien der Originaldateien.
+                Shotcut verwendet sie während der Bearbeitung, greift beim normalen Export
+                aber wieder auf das hochwertige Originalmaterial zurück.
+            </p>
 
-<h3>Proxy aktivieren</h3>
+            <h3>Proxy aktivieren</h3>
 
-<ol>
-  <li>Im Menü „Einstellungen“ den Bereich „Proxy“ öffnen.</li>
-  <li>„Proxy verwenden“ aktivieren.</li>
-  <li>Gewünschte Proxy-Auflösung beziehungsweise Qualität auswählen.</li>
-  <li>Erstellung der Proxy-Dateien abwarten.</li>
-  <li>Status im Bereich „Aufträge“ kontrollieren.</li>
-</ol>
-
-<p>
-  Die Vorschau kann durch Proxys deutlich unschärfer aussehen. Das ist beabsichtigt
-  und beeinflusst den hochwertigen Export nicht.
-</p>
+            <ol>
+                <li>Im Menü „Einstellungen“ den Bereich „Proxy“ öffnen.</li>
+                <li>„Proxy verwenden“ aktivieren.</li>
+                <li>Gewünschte Proxy-Auflösung beziehungsweise Qualität auswählen.</li>
+                <li>Erstellung der Proxy-Dateien abwarten.</li>
+                <li>Status im Bereich „Aufträge“ kontrollieren.</li>
+            </ol>
+
+            <p>
+                Die Vorschau kann durch Proxys deutlich unschärfer aussehen. Das ist beabsichtigt
+                und beeinflusst den hochwertigen Export nicht.
+            </p>
 
-<h3>21.2 Vorschau-Skalierung</h3>
-
-<p>
-  Die Vorschau-Skalierung berechnet den Projektmonitor während des Schnitts
-  in geringerer Auflösung.
-</p>
-
-<p>
-  Im Unterschied zu Proxys betrifft sie nicht nur die Quelldatei, sondern auch
-  Filter, Überlagerungen und das zusammengesetzte Vorschaubild.
-</p>
-
-<h3>21.3 Proxy und Vorschau-Skalierung kombinieren</h3>
-
-<p>
-  Bei anspruchsvollem Material ist die Kombination besonders wirkungsvoll:
-</p>
-
-<ul>
-  <li>Proxy reduziert die Belastung durch die Quelldateien.</li>
-  <li>Vorschau-Skalierung reduziert die Belastung durch die gesamte Bildberechnung.</li>
-</ul>
-
-<h3>21.4 Hardware-Decodierung</h3>
-
-<p>
-  Aktuelle Versionen können beim skalierenden Vorschaubetrieb unterstützte
-  Videoformate teilweise über die Grafikhardware decodieren.
-</p>
-
-<p>
-  Das kann die CPU-Auslastung senken, führt aber nicht auf jedem System zu einer
-  schnelleren Bearbeitung. Proxy-Dateien bleiben insbesondere beim Suchen und
-  schnellen Bewegen durch hochauflösendes Material meist wirkungsvoller.
-</p>
-
-<h3>21.5 Weitere Maßnahmen bei ruckelnder Vorschau</h3>
-
-<ul>
-  <li>Material auf eine interne oder schnelle externe SSD kopieren</li>
-  <li>andere rechenintensive Programme schließen</li>
-  <li>Vorschauauflösung reduzieren</li>
-  <li>Audio-Wellenformen nur bei Bedarf berechnen</li>
-  <li>aufwendige Filter vorübergehend deaktivieren</li>
-  <li>Proxy-Modus verwenden</li>
-  <li>schwierige Dateien in ein schnittfreundliches Format umwandeln</li>
-</ul>
-
-<aside class="tip-box">
-  <h3>Easy Win: Vorschauqualität ist nicht Exportqualität</h3>
-  <p>
-    Ein verschwommenes Proxybild ist kein Grund zur Sorge. Für den Schnitt muss
-    die Vorschau flüssig und inhaltlich beurteilbar sein; Pixelzählerei findet
-    beim Kontrollieren des fertigen Exports statt.
-  </p>
-</aside>
-
-
-  </section>
-
-  <section id="shotcut-edit-friendly">
-    <h2>22. „Convert to Edit-friendly“ richtig verstehen</h2>
-
-
-<p>
-  Proxy und „Convert to Edit-friendly“ lösen unterschiedliche Probleme.
-</p>
-
-<h3>22.1 Proxy</h3>
-
-<p>
-  Ein Proxy ist eine vorübergehende kleine Arbeitskopie. Beim Export wird
-  normalerweise das Original verwendet.
-</p>
-
-<h3>22.2 Schnittfreundliche Konvertierung</h3>
-
-<p>
-  Bei „Convert to Edit-friendly“ wird eine hochwertige neue Mediendatei erzeugt,
-  die sich technisch besser bearbeiten lässt. Diese Datei ersetzt im Projekt
-  das schwierige Original als Arbeitsquelle.
-</p>
-
-<h3>Wann eine Konvertierung sinnvoll ist</h3>
-
-<ul>
-  <li>variable Bildrate</li>
-  <li>ungenaue Schnittpunkte</li>
-  <li>Audio und Bild laufen auseinander</li>
-  <li>schwierige Smartphone-Aufnahmen</li>
-  <li>bestimmte HDR-Quellen</li>
-  <li>Probleme bei Geschwindigkeitsfiltern</li>
-  <li>Material lässt sich trotz Proxy schlecht bearbeiten</li>
-  <li>Shotcut schlägt die Konvertierung ausdrücklich vor</li>
-</ul>
-
-<h3>Variable Bildrate</h3>
-
-<p>
-  Manche Smartphones und Bildschirmaufnahmeprogramme verändern die Bildrate
-  während der Aufnahme. Für einen Player ist das meist unproblematisch, bei
-  bildgenauem Schnitt kann es jedoch zu Synchronitäts- und Positionsproblemen kommen.
-</p>
-
-<p>
-  Eine Umwandlung in eine konstante Bildrate schafft eine verlässlichere Grundlage.
-</p>
-
-<div class="comparison-table-wrapper">
-  <table>
-    <caption>Proxy und schnittfreundliche Konvertierung</caption>
-    <thead>
-      <tr>
-        <th scope="col">Merkmal</th>
-        <th scope="col">Proxy</th>
-        <th scope="col">Edit-friendly</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th scope="row">Zweck</th>
-        <td>Vorschau beschleunigen</td>
-        <td>Technische Bearbeitbarkeit verbessern</td>
-      </tr>
-      <tr>
-        <th scope="row">Qualität</th>
-        <td>Niedrig</td>
-        <td>Hoch</td>
-      </tr>
-      <tr>
-        <th scope="row">Exportquelle</th>
-        <td>Üblicherweise Original</td>
-        <td>Konvertierte Datei</td>
-      </tr>
-      <tr>
-        <th scope="row">Dateigröße</th>
-        <td>Relativ klein</td>
-        <td>Mitunter sehr groß</td>
-      </tr>
-      <tr>
-        <th scope="row">Variable Bildrate korrigieren</th>
-        <td>Nein</td>
-        <td>Ja</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
-<aside class="info-box">
-  <h3>Merksatz</h3>
-  <p>
-    Proxy macht die Bearbeitung leichter für den Computer. „Edit-friendly“
-    macht die Datei verlässlicher für den Videoschnitt.
-  </p>
-</aside>
-
-
-  </section>
-
-  <section id="shotcut-markierungen">
-    <h2>23. Marker, Kapitel und Arbeitsorganisation</h2>
-
-
-<h3>23.1 Timeline-Marker</h3>
-
-<p>
-  Marker kennzeichnen wichtige Zeitpunkte oder Bereiche in der Timeline.
-</p>
-
-<p>Typische Verwendungen:</p>
-
-<ul>
-  <li>Beginn eines Kapitels</li>
-  <li>Stelle für Sprechertext</li>
-  <li>noch zu korrigierender Fehler</li>
-  <li>passender Takt in der Musik</li>
-  <li>Beginn eines Exportbereichs</li>
-  <li>Position einer Texteinblendung</li>
-</ul>
-
-<h3>23.2 Marker benennen</h3>
-
-<p>
-  Aussagekräftige Namen sind besser als bloße Nummern.
-</p>
-
-<pre><code>00:00 – Intro
+            <h3>21.2 Vorschau-Skalierung</h3>
+
+            <p>
+                Die Vorschau-Skalierung berechnet den Projektmonitor während des Schnitts
+                in geringerer Auflösung.
+            </p>
+
+            <p>
+                Im Unterschied zu Proxys betrifft sie nicht nur die Quelldatei, sondern auch
+                Filter, Überlagerungen und das zusammengesetzte Vorschaubild.
+            </p>
+
+            <h3>21.3 Proxy und Vorschau-Skalierung kombinieren</h3>
+
+            <p>
+                Bei anspruchsvollem Material ist die Kombination besonders wirkungsvoll:
+            </p>
+
+            <ul>
+                <li>Proxy reduziert die Belastung durch die Quelldateien.</li>
+                <li>Vorschau-Skalierung reduziert die Belastung durch die gesamte Bildberechnung.</li>
+            </ul>
+
+            <h3>21.4 Hardware-Decodierung</h3>
+
+            <p>
+                Aktuelle Versionen können beim skalierenden Vorschaubetrieb unterstützte
+                Videoformate teilweise über die Grafikhardware decodieren.
+            </p>
+
+            <p>
+                Das kann die CPU-Auslastung senken, führt aber nicht auf jedem System zu einer
+                schnelleren Bearbeitung. Proxy-Dateien bleiben insbesondere beim Suchen und
+                schnellen Bewegen durch hochauflösendes Material meist wirkungsvoller.
+            </p>
+
+            <h3>21.5 Weitere Maßnahmen bei ruckelnder Vorschau</h3>
+
+            <ul>
+                <li>Material auf eine interne oder schnelle externe SSD kopieren</li>
+                <li>andere rechenintensive Programme schließen</li>
+                <li>Vorschauauflösung reduzieren</li>
+                <li>Audio-Wellenformen nur bei Bedarf berechnen</li>
+                <li>aufwendige Filter vorübergehend deaktivieren</li>
+                <li>Proxy-Modus verwenden</li>
+                <li>schwierige Dateien in ein schnittfreundliches Format umwandeln</li>
+            </ul>
+
+            <aside class="tip-box">
+                <h3>Easy Win: Vorschauqualität ist nicht Exportqualität</h3>
+                <p>
+                    Ein verschwommenes Proxybild ist kein Grund zur Sorge. Für den Schnitt muss
+                    die Vorschau flüssig und inhaltlich beurteilbar sein; Pixelzählerei findet
+                    beim Kontrollieren des fertigen Exports statt.
+                </p>
+            </aside>
+
+
+        </section>
+
+        <section id="shotcut-edit-friendly">
+            <h2>22. „Convert to Edit-friendly“ richtig verstehen</h2>
+
+
+            <p>
+                Proxy und „Convert to Edit-friendly“ lösen unterschiedliche Probleme.
+            </p>
+
+            <h3>22.1 Proxy</h3>
+
+            <p>
+                Ein Proxy ist eine vorübergehende kleine Arbeitskopie. Beim Export wird
+                normalerweise das Original verwendet.
+            </p>
+
+            <h3>22.2 Schnittfreundliche Konvertierung</h3>
+
+            <p>
+                Bei „Convert to Edit-friendly“ wird eine hochwertige neue Mediendatei erzeugt,
+                die sich technisch besser bearbeiten lässt. Diese Datei ersetzt im Projekt
+                das schwierige Original als Arbeitsquelle.
+            </p>
+
+            <h3>Wann eine Konvertierung sinnvoll ist</h3>
+
+            <ul>
+                <li>variable Bildrate</li>
+                <li>ungenaue Schnittpunkte</li>
+                <li>Audio und Bild laufen auseinander</li>
+                <li>schwierige Smartphone-Aufnahmen</li>
+                <li>bestimmte HDR-Quellen</li>
+                <li>Probleme bei Geschwindigkeitsfiltern</li>
+                <li>Material lässt sich trotz Proxy schlecht bearbeiten</li>
+                <li>Shotcut schlägt die Konvertierung ausdrücklich vor</li>
+            </ul>
+
+            <h3>Variable Bildrate</h3>
+
+            <p>
+                Manche Smartphones und Bildschirmaufnahmeprogramme verändern die Bildrate
+                während der Aufnahme. Für einen Player ist das meist unproblematisch, bei
+                bildgenauem Schnitt kann es jedoch zu Synchronitäts- und Positionsproblemen kommen.
+            </p>
+
+            <p>
+                Eine Umwandlung in eine konstante Bildrate schafft eine verlässlichere Grundlage.
+            </p>
+
+            <div class="comparison-table-wrapper">
+                <table>
+                    <caption>Proxy und schnittfreundliche Konvertierung</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">Merkmal</th>
+                            <th scope="col">Proxy</th>
+                            <th scope="col">Edit-friendly</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">Zweck</th>
+                            <td>Vorschau beschleunigen</td>
+                            <td>Technische Bearbeitbarkeit verbessern</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Qualität</th>
+                            <td>Niedrig</td>
+                            <td>Hoch</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Exportquelle</th>
+                            <td>Üblicherweise Original</td>
+                            <td>Konvertierte Datei</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Dateigröße</th>
+                            <td>Relativ klein</td>
+                            <td>Mitunter sehr groß</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Variable Bildrate korrigieren</th>
+                            <td>Nein</td>
+                            <td>Ja</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <aside class="info-box">
+                <h3>Merksatz</h3>
+                <p>
+                    Proxy macht die Bearbeitung leichter für den Computer. „Edit-friendly“
+                    macht die Datei verlässlicher für den Videoschnitt.
+                </p>
+            </aside>
+
+
+        </section>
+
+        <section id="shotcut-markierungen">
+            <h2>23. Marker, Kapitel und Arbeitsorganisation</h2>
+
+
+            <h3>23.1 Timeline-Marker</h3>
+
+            <p>
+                Marker kennzeichnen wichtige Zeitpunkte oder Bereiche in der Timeline.
+            </p>
+
+            <p>Typische Verwendungen:</p>
+
+            <ul>
+                <li>Beginn eines Kapitels</li>
+                <li>Stelle für Sprechertext</li>
+                <li>noch zu korrigierender Fehler</li>
+                <li>passender Takt in der Musik</li>
+                <li>Beginn eines Exportbereichs</li>
+                <li>Position einer Texteinblendung</li>
+            </ul>
+
+            <h3>23.2 Marker benennen</h3>
+
+            <p>
+                Aussagekräftige Namen sind besser als bloße Nummern.
+            </p>
+
+            <pre><code>00:00 – Intro
 
 
 00:42 – Ablegen
@@ -1915,16 +1916,16 @@ Heute geht es um den Videoschnitt mit Shotcut.</code></pre>
 06:10 – Abspann</code></pre>
 
 
-<h3>23.3 YouTube-Kapitel</h3>
+            <h3>23.3 YouTube-Kapitel</h3>
 
-<p>
-  Marker können als Grundlage für YouTube-Kapitel dienen. Je nach Version kann
-  Shotcut Markierungen in einem passenden Textformat ausgeben.
-</p>
+            <p>
+                Marker können als Grundlage für YouTube-Kapitel dienen. Je nach Version kann
+                Shotcut Markierungen in einem passenden Textformat ausgeben.
+            </p>
 
-<p>Eine YouTube-Beschreibung kann beispielsweise enthalten:</p>
+            <p>Eine YouTube-Beschreibung kann beispielsweise enthalten:</p>
 
-<pre><code>00:00 Einleitung
+            <pre><code>00:00 Einleitung
 
 
 00:42 Start der Reise
@@ -1933,963 +1934,963 @@ Heute geht es um den Videoschnitt mit Shotcut.</code></pre>
 06:10 Fazit</code></pre>
 
 
-<h3>23.4 Markerbereiche</h3>
-
-<p>
-  Bereiche können verwendet werden, um nur einen Teil des Projekts zu testen
-  oder separat auszugeben.
-</p>
-
-<aside class="tip-box">
-  <h3>Easy Win: Offene Aufgaben markieren</h3>
-  <p>
-    Statt jeden Fehler sofort zu beheben, kann er markiert und später gesammelt
-    bearbeitet werden. Das verhindert, dass der Rohschnitt ständig durch
-    Detailarbeit unterbrochen wird.
-  </p>
-</aside>
-
-
-  </section>
-
-  <section id="shotcut-export">
-    <h2>24. Das fertige Video exportieren</h2>
-
-
-<p>
-  Beim Export berechnet Shotcut ein neues Video aus der Timeline. Die Projektdatei
-  selbst ist kein abspielbares fertiges Video.
-</p>
+            <h3>23.4 Markerbereiche</h3>
+
+            <p>
+                Bereiche können verwendet werden, um nur einen Teil des Projekts zu testen
+                oder separat auszugeben.
+            </p>
+
+            <aside class="tip-box">
+                <h3>Easy Win: Offene Aufgaben markieren</h3>
+                <p>
+                    Statt jeden Fehler sofort zu beheben, kann er markiert und später gesammelt
+                    bearbeitet werden. Das verhindert, dass der Rohschnitt ständig durch
+                    Detailarbeit unterbrochen wird.
+                </p>
+            </aside>
+
+
+        </section>
+
+        <section id="shotcut-export">
+            <h2>24. Das fertige Video exportieren</h2>
+
+
+            <p>
+                Beim Export berechnet Shotcut ein neues Video aus der Timeline. Die Projektdatei
+                selbst ist kein abspielbares fertiges Video.
+            </p>
 
-<h3>24.1 Vor dem Export</h3>
-
-<ol>
-  <li>Projekt speichern.</li>
-  <li>gesamtes Video einmal ansehen.</li>
-  <li>schwarze Lücken kontrollieren.</li>
-  <li>Tonpegel kontrollieren.</li>
-  <li>Texte auf Rechtschreibung prüfen.</li>
-  <li>Output-Filter kontrollieren.</li>
-  <li>Videomodus kontrollieren.</li>
-  <li>genügend freien Speicherplatz sicherstellen.</li>
-</ol>
+            <h3>24.1 Vor dem Export</h3>
+
+            <ol>
+                <li>Projekt speichern.</li>
+                <li>gesamtes Video einmal ansehen.</li>
+                <li>schwarze Lücken kontrollieren.</li>
+                <li>Tonpegel kontrollieren.</li>
+                <li>Texte auf Rechtschreibung prüfen.</li>
+                <li>Output-Filter kontrollieren.</li>
+                <li>Videomodus kontrollieren.</li>
+                <li>genügend freien Speicherplatz sicherstellen.</li>
+            </ol>
 
-<h3>24.2 Exportquelle</h3>
-
-<p>
-  Im Exportbereich muss geprüft werden, was exportiert werden soll:
-</p>
-
-<ul>
-  <li>Timeline</li>
-  <li>Playlist</li>
-  <li>aktuelle Quelldatei</li>
-  <li>gegebenenfalls ein festgelegter Bereich</li>
-</ul>
-
-<p>
-  Für den vollständigen fertigen Film ist normalerweise die Timeline die richtige
-  Quelle.
-</p>
+            <h3>24.2 Exportquelle</h3>
+
+            <p>
+                Im Exportbereich muss geprüft werden, was exportiert werden soll:
+            </p>
+
+            <ul>
+                <li>Timeline</li>
+                <li>Playlist</li>
+                <li>aktuelle Quelldatei</li>
+                <li>gegebenenfalls ein festgelegter Bereich</li>
+            </ul>
+
+            <p>
+                Für den vollständigen fertigen Film ist normalerweise die Timeline die richtige
+                Quelle.
+            </p>
 
-<h3>24.3 Export-Presets</h3>
+            <h3>24.3 Export-Presets</h3>
 
-<p>
-  Shotcut bietet Presets für verbreitete Formate und Anwendungszwecke.
-  Für einen normalen kompatiblen MP4-Export ist ein H.264-Preset meist ein guter
-  Ausgangspunkt.
-</p>
-
-<h3>24.4 Container und Codec</h3>
-
-<dl>
-  <dt>Container</dt>
-  <dd>
-    Das Dateiformat, beispielsweise MP4, MOV, MKV oder WebM.
-  </dd>
+            <p>
+                Shotcut bietet Presets für verbreitete Formate und Anwendungszwecke.
+                Für einen normalen kompatiblen MP4-Export ist ein H.264-Preset meist ein guter
+                Ausgangspunkt.
+            </p>
+
+            <h3>24.4 Container und Codec</h3>
+
+            <dl>
+                <dt>Container</dt>
+                <dd>
+                    Das Dateiformat, beispielsweise MP4, MOV, MKV oder WebM.
+                </dd>
 
-  <dt>Videocodec</dt>
-  <dd>
-    Das Verfahren zur Kompression des Bildes, beispielsweise H.264 oder H.265.
-  </dd>
+                <dt>Videocodec</dt>
+                <dd>
+                    Das Verfahren zur Kompression des Bildes, beispielsweise H.264 oder H.265.
+                </dd>
 
-  <dt>Audiocodec</dt>
-  <dd>
-    Das Verfahren zur Kompression des Tons, beispielsweise AAC oder Opus.
-  </dd>
-</dl>
+                <dt>Audiocodec</dt>
+                <dd>
+                    Das Verfahren zur Kompression des Tons, beispielsweise AAC oder Opus.
+                </dd>
+            </dl>
 
-<h3>24.5 H.264</h3>
+            <h3>24.5 H.264</h3>
 
-<p>
-  H.264 in einem MP4-Container bietet eine sehr breite Kompatibilität und eignet
-  sich gut für YouTube, Fernseher, Computer und viele mobile Geräte.
-</p>
+            <p>
+                H.264 in einem MP4-Container bietet eine sehr breite Kompatibilität und eignet
+                sich gut für YouTube, Fernseher, Computer und viele mobile Geräte.
+            </p>
 
-<h3>24.6 H.265 beziehungsweise HEVC</h3>
+            <h3>24.6 H.265 beziehungsweise HEVC</h3>
 
-<p>
-  H.265 kann bei ähnlicher Qualität kleinere Dateien erzeugen. Die Bearbeitung,
-  Wiedergabe und der Export benötigen jedoch häufig mehr Rechenleistung.
-</p>
+            <p>
+                H.265 kann bei ähnlicher Qualität kleinere Dateien erzeugen. Die Bearbeitung,
+                Wiedergabe und der Export benötigen jedoch häufig mehr Rechenleistung.
+            </p>
 
-<h3>24.7 Hardware-Encoding</h3>
+            <h3>24.7 Hardware-Encoding</h3>
 
-<p>
-  Hardware-Encoder können den Export beschleunigen, liefern aber nicht auf jedem
-  System bei gleicher Dateigröße dieselbe Qualität wie ein guter Software-Encoder.
-</p>
+            <p>
+                Hardware-Encoder können den Export beschleunigen, liefern aber nicht auf jedem
+                System bei gleicher Dateigröße dieselbe Qualität wie ein guter Software-Encoder.
+            </p>
 
-<p>
-  Das Ergebnis sollte mit einem kurzen Testabschnitt verglichen werden.
-</p>
+            <p>
+                Das Ergebnis sollte mit einem kurzen Testabschnitt verglichen werden.
+            </p>
 
-<h3>24.8 Auflösung und Bildrate</h3>
+            <h3>24.8 Auflösung und Bildrate</h3>
 
-<p>
-  Die Exportauflösung und Bildrate sollten normalerweise dem Projekt entsprechen.
-</p>
+            <p>
+                Die Exportauflösung und Bildrate sollten normalerweise dem Projekt entsprechen.
+            </p>
 
-<p>
-  Eine nachträgliche Hochskalierung von 1080p auf 4K erzeugt keine echten neuen
-  Details. Sie vergrößert zunächst vor allem die Datei.
-</p>
+            <p>
+                Eine nachträgliche Hochskalierung von 1080p auf 4K erzeugt keine echten neuen
+                Details. Sie vergrößert zunächst vor allem die Datei.
+            </p>
 
-<h3>24.9 Audioeinstellungen</h3>
+            <h3>24.9 Audioeinstellungen</h3>
 
-<p>Für ein typisches Webvideo eignen sich:</p>
+            <p>Für ein typisches Webvideo eignen sich:</p>
 
-<ul>
-  <li>AAC-Audio</li>
-  <li>48 kHz Abtastrate</li>
-  <li>Stereo</li>
-  <li>ausreichend hohe Audiobitrate</li>
-</ul>
+            <ul>
+                <li>AAC-Audio</li>
+                <li>48 kHz Abtastrate</li>
+                <li>Stereo</li>
+                <li>ausreichend hohe Audiobitrate</li>
+            </ul>
 
-<h3>24.10 Qualität statt blinder Maximalwerte</h3>
+            <h3>24.10 Qualität statt blinder Maximalwerte</h3>
 
-<p>
-  Die höchste einstellbare Qualität führt häufig zu sehr großen Dateien und
-  langen Exportzeiten, ohne dass der Unterschied im normalen Gebrauch sichtbar ist.
-</p>
+            <p>
+                Die höchste einstellbare Qualität führt häufig zu sehr großen Dateien und
+                langen Exportzeiten, ohne dass der Unterschied im normalen Gebrauch sichtbar ist.
+            </p>
 
-<p>
-  Ein passendes Preset sollte zunächst unverändert getestet werden. Erweiterte
-  Einstellungen sind erst sinnvoll, wenn ein konkretes Problem gelöst werden soll.
-</p>
+            <p>
+                Ein passendes Preset sollte zunächst unverändert getestet werden. Erweiterte
+                Einstellungen sind erst sinnvoll, wenn ein konkretes Problem gelöst werden soll.
+            </p>
 
-<h3>24.11 Aufträge kontrollieren</h3>
+            <h3>24.11 Aufträge kontrollieren</h3>
 
-<p>
-  Der Export erscheint als Auftrag im Jobs-Bereich. Dort sind Fortschritt,
-  Erfolg oder Fehlermeldungen sichtbar.
-</p>
+            <p>
+                Der Export erscheint als Auftrag im Jobs-Bereich. Dort sind Fortschritt,
+                Erfolg oder Fehlermeldungen sichtbar.
+            </p>
 
-<h3>24.12 Exportiertes Video kontrollieren</h3>
+            <h3>24.12 Exportiertes Video kontrollieren</h3>
 
-<p>
-  Das fertige Video sollte in einem externen Player vollständig angesehen werden.
-</p>
+            <p>
+                Das fertige Video sollte in einem externen Player vollständig angesehen werden.
+            </p>
 
-<p>Besonders zu prüfen sind:</p>
+            <p>Besonders zu prüfen sind:</p>
 
-<ul>
-  <li>Bild und Ton synchron</li>
-  <li>keine schwarzen Einzelbilder</li>
-  <li>keine fehlenden Medien</li>
-  <li>Texte vollständig sichtbar</li>
-  <li>keine Übersteuerung</li>
-  <li>richtige Auflösung</li>
-  <li>richtige Bildrate</li>
-  <li>korrektes Ende</li>
-</ul>
+            <ul>
+                <li>Bild und Ton synchron</li>
+                <li>keine schwarzen Einzelbilder</li>
+                <li>keine fehlenden Medien</li>
+                <li>Texte vollständig sichtbar</li>
+                <li>keine Übersteuerung</li>
+                <li>richtige Auflösung</li>
+                <li>richtige Bildrate</li>
+                <li>korrektes Ende</li>
+            </ul>
 
 
-  </section>
+        </section>
 
-  <section id="shotcut-youtube">
-    <h2>25. Empfehlungen für YouTube</h2>
+        <section id="shotcut-youtube">
+            <h2>25. Empfehlungen für YouTube</h2>
 
 
-<h3>Ein typischer Export</h3>
+            <h3>Ein typischer Export</h3>
 
-<ul>
-  <li><strong>Container:</strong> MP4</li>
-  <li><strong>Videocodec:</strong> H.264</li>
-  <li><strong>Auflösung:</strong> 1920 × 1080 oder 3840 × 2160</li>
-  <li><strong>Bildrate:</strong> wie im Projekt</li>
-  <li><strong>Audiocodec:</strong> AAC</li>
-  <li><strong>Abtastrate:</strong> 48 kHz</li>
-  <li><strong>Scan:</strong> progressiv</li>
-</ul>
+            <ul>
+                <li><strong>Container:</strong> MP4</li>
+                <li><strong>Videocodec:</strong> H.264</li>
+                <li><strong>Auflösung:</strong> 1920 × 1080 oder 3840 × 2160</li>
+                <li><strong>Bildrate:</strong> wie im Projekt</li>
+                <li><strong>Audiocodec:</strong> AAC</li>
+                <li><strong>Abtastrate:</strong> 48 kHz</li>
+                <li><strong>Scan:</strong> progressiv</li>
+            </ul>
 
-<h3>Upload zunächst nicht gelistet</h3>
+            <h3>Upload zunächst nicht gelistet</h3>
 
-<p>
-  Ein neues Video sollte zunächst als nicht gelistet hochgeladen werden.
-  Dadurch kann die Plattformverarbeitung abgewartet und das Ergebnis geprüft werden.
-</p>
+            <p>
+                Ein neues Video sollte zunächst als nicht gelistet hochgeladen werden.
+                Dadurch kann die Plattformverarbeitung abgewartet und das Ergebnis geprüft werden.
+            </p>
 
-<h3>Höhere Auflösungen benötigen Zeit</h3>
+            <h3>Höhere Auflösungen benötigen Zeit</h3>
 
-<p>
-  Nach dem Upload ist zunächst häufig nur eine niedrige Auflösung verfügbar.
-  Full HD, 4K und hohe Bildraten werden nachträglich verarbeitet.
-</p>
+            <p>
+                Nach dem Upload ist zunächst häufig nur eine niedrige Auflösung verfügbar.
+                Full HD, 4K und hohe Bildraten werden nachträglich verarbeitet.
+            </p>
 
-<h3>Vorschaubild aus Shotcut exportieren</h3>
+            <h3>Vorschaubild aus Shotcut exportieren</h3>
 
-<p>
-  Mit der Funktion zum Exportieren eines Einzelbildes kann ein geeignetes Bild
-  aus dem Video gespeichert und anschließend als Grundlage für ein Thumbnail
-  verwendet werden.
-</p>
+            <p>
+                Mit der Funktion zum Exportieren eines Einzelbildes kann ein geeignetes Bild
+                aus dem Video gespeichert und anschließend als Grundlage für ein Thumbnail
+                verwendet werden.
+            </p>
 
-<h3>YouTube-Kapitel</h3>
+            <h3>YouTube-Kapitel</h3>
 
-<p>
-  Kapitel können aus Timeline-Markern vorbereitet und als Zeitangaben in die
-  Videobeschreibung übernommen werden.
-</p>
+            <p>
+                Kapitel können aus Timeline-Markern vorbereitet und als Zeitangaben in die
+                Videobeschreibung übernommen werden.
+            </p>
 
-<h3>Musikrechte</h3>
+            <h3>Musikrechte</h3>
 
-<p>
-  Es darf nur Musik verwendet werden, für die entsprechende Rechte oder Lizenzen
-  vorliegen. Auch kurze Ausschnitte bekannter Musik können automatisch erkannt werden.
-</p>
+            <p>
+                Es darf nur Musik verwendet werden, für die entsprechende Rechte oder Lizenzen
+                vorliegen. Auch kurze Ausschnitte bekannter Musik können automatisch erkannt werden.
+            </p>
 
 
-  </section>
+        </section>
 
-  <section id="shotcut-360">
-    <h2>26. 360°-Material in Shotcut</h2>
+        <section id="shotcut-360">
+            <h2>26. 360°-Material in Shotcut</h2>
 
 
-<p>
-  Rohe Dateien einer 360°-Kamera sollten in der Regel zuerst in der Software
-  des Kameraherstellers gestitcht und stabilisiert werden.
-</p>
+            <p>
+                Rohe Dateien einer 360°-Kamera sollten in der Regel zuerst in der Software
+                des Kameraherstellers gestitcht und stabilisiert werden.
+            </p>
 
-<h3>Normales Video aus 360°-Material</h3>
+            <h3>Normales Video aus 360°-Material</h3>
 
-<ol>
-  <li>Rohmaterial in der Kamerasoftware öffnen.</li>
-  <li>Blickrichtungen und Ausschnitte festlegen.</li>
-  <li>Als normales 16:9-, 9:16- oder anderes flaches Video exportieren.</li>
-  <li>Export in Shotcut importieren.</li>
-  <li>Musik, Texte, Schnitte und weitere Clips ergänzen.</li>
-</ol>
+            <ol>
+                <li>Rohmaterial in der Kamerasoftware öffnen.</li>
+                <li>Blickrichtungen und Ausschnitte festlegen.</li>
+                <li>Als normales 16:9-, 9:16- oder anderes flaches Video exportieren.</li>
+                <li>Export in Shotcut importieren.</li>
+                <li>Musik, Texte, Schnitte und weitere Clips ergänzen.</li>
+            </ol>
 
-<h3>Echtes 360°-Video</h3>
+            <h3>Echtes 360°-Video</h3>
 
-<ol>
-  <li>Material in der Kamerasoftware stitchen.</li>
-  <li>Als equirektangulares 2:1-Video exportieren.</li>
-  <li>Das gestitchte Video in Shotcut importieren.</li>
-  <li>Nur für 360° geeignete Filter verwenden.</li>
-  <li>Seitenverhältnis und Auflösung beibehalten.</li>
-  <li>Nach dem Export 360°-Metadaten kontrollieren.</li>
-</ol>
+            <ol>
+                <li>Material in der Kamerasoftware stitchen.</li>
+                <li>Als equirektangulares 2:1-Video exportieren.</li>
+                <li>Das gestitchte Video in Shotcut importieren.</li>
+                <li>Nur für 360° geeignete Filter verwenden.</li>
+                <li>Seitenverhältnis und Auflösung beibehalten.</li>
+                <li>Nach dem Export 360°-Metadaten kontrollieren.</li>
+            </ol>
 
-<aside class="warning-box">
-  <h3>Normale Bildfilter können 360°-Geometrie beschädigen</h3>
-  <p>
-    Gewöhnliches Zuschneiden, Drehen oder perspektivisches Verzerren kann die
-    sphärische Projektion zerstören. Bei echten 360°-Videos sollten nur ausdrücklich
-    dafür vorgesehene Filter verwendet werden.
-  </p>
-</aside>
+            <aside class="warning-box">
+                <h3>Normale Bildfilter können 360°-Geometrie beschädigen</h3>
+                <p>
+                    Gewöhnliches Zuschneiden, Drehen oder perspektivisches Verzerren kann die
+                    sphärische Projektion zerstören. Bei echten 360°-Videos sollten nur ausdrücklich
+                    dafür vorgesehene Filter verwendet werden.
+                </p>
+            </aside>
 
 
-  </section>
+        </section>
 
-  <section id="shotcut-easy-wins">
-    <h2>27. Easy Wins für bessere Videos</h2>
+        <section id="shotcut-easy-wins">
+            <h2>27. Easy Wins für bessere Videos</h2>
 
 
-<h3>27.1 Erst schneiden, dann dekorieren</h3>
+            <h3>27.1 Erst schneiden, dann dekorieren</h3>
 
-<p>
-  Titel, Farblooks und Animationen sollten erst nach einem funktionierenden
-  Rohschnitt ergänzt werden. Ein schlechter Film wird durch einen animierten Titel
-  nicht plötzlich gut; er wird nur feierlich schlecht.
-</p>
+            <p>
+                Titel, Farblooks und Animationen sollten erst nach einem funktionierenden
+                Rohschnitt ergänzt werden. Ein schlechter Film wird durch einen animierten Titel
+                nicht plötzlich gut; er wird nur feierlich schlecht.
+            </p>
 
-<h3>27.2 Jede Szene braucht einen Zweck</h3>
+            <h3>27.2 Jede Szene braucht einen Zweck</h3>
 
-<p>
-  Eine Szene sollte eine Information vermitteln, Atmosphäre schaffen oder die
-  Handlung voranbringen. Tut sie nichts davon, darf sie kürzer werden oder
-  vollständig verschwinden.
-</p>
+            <p>
+                Eine Szene sollte eine Information vermitteln, Atmosphäre schaffen oder die
+                Handlung voranbringen. Tut sie nichts davon, darf sie kürzer werden oder
+                vollständig verschwinden.
+            </p>
 
-<h3>27.3 Schnitte in Bewegung setzen</h3>
+            <h3>27.3 Schnitte in Bewegung setzen</h3>
 
-<p>
-  Ein Schnitt während einer Bewegung kann natürlicher wirken als ein Schnitt
-  unmittelbar vor oder nach der Bewegung.
-</p>
+            <p>
+                Ein Schnitt während einer Bewegung kann natürlicher wirken als ein Schnitt
+                unmittelbar vor oder nach der Bewegung.
+            </p>
 
-<h3>27.4 Blickrichtungen beachten</h3>
+            <h3>27.4 Blickrichtungen beachten</h3>
 
-<p>
-  Bei aufeinanderfolgenden Aufnahmen sollten Bewegungs- und Blickrichtungen
-  zusammenpassen. Springt ein Objekt ohne erkennbaren Grund von links nach rechts,
-  wirkt der Schnitt irritierend.
-</p>
+            <p>
+                Bei aufeinanderfolgenden Aufnahmen sollten Bewegungs- und Blickrichtungen
+                zusammenpassen. Springt ein Objekt ohne erkennbaren Grund von links nach rechts,
+                wirkt der Schnitt irritierend.
+            </p>
 
-<h3>27.5 Originalton verwenden</h3>
+            <h3>27.5 Originalton verwenden</h3>
 
-<p>
-  Wasser, Wind, Schritte, Maschinen, Stimmen und Raumklang schaffen Atmosphäre.
-  Musik sollte nicht jede natürliche Tonspur zubetonieren.
-</p>
+            <p>
+                Wasser, Wind, Schritte, Maschinen, Stimmen und Raumklang schaffen Atmosphäre.
+                Musik sollte nicht jede natürliche Tonspur zubetonieren.
+            </p>
 
-<h3>27.6 Musik auf Schnitte abstimmen</h3>
+            <h3>27.6 Musik auf Schnitte abstimmen</h3>
 
-<p>
-  Marker können auf markante Schläge oder musikalische Übergänge gesetzt werden.
-  Schnitte müssen aber nicht sklavisch auf jeden Beat fallen.
-</p>
+            <p>
+                Marker können auf markante Schläge oder musikalische Übergänge gesetzt werden.
+                Schnitte müssen aber nicht sklavisch auf jeden Beat fallen.
+            </p>
 
-<h3>27.7 B-Roll verwenden</h3>
+            <h3>27.7 B-Roll verwenden</h3>
 
-<p>
-  B-Roll sind ergänzende Bilder, die über eine zusammenhängende Tonspur oder
-  ein Interview gelegt werden.
-</p>
+            <p>
+                B-Roll sind ergänzende Bilder, die über eine zusammenhängende Tonspur oder
+                ein Interview gelegt werden.
+            </p>
 
-<p>Beispiele:</p>
+            <p>Beispiele:</p>
 
-<ul>
-  <li>Detailaufnahmen</li>
-  <li>Landschaft</li>
-  <li>Hände bei einer Tätigkeit</li>
-  <li>Ausrüstung</li>
-  <li>Umgebung</li>
-  <li>Reaktionen anderer Personen</li>
-</ul>
+            <ul>
+                <li>Detailaufnahmen</li>
+                <li>Landschaft</li>
+                <li>Hände bei einer Tätigkeit</li>
+                <li>Ausrüstung</li>
+                <li>Umgebung</li>
+                <li>Reaktionen anderer Personen</li>
+            </ul>
 
-<h3>27.8 J-Cuts und L-Cuts</h3>
+            <h3>27.8 J-Cuts und L-Cuts</h3>
 
-<p>
-  Bei einem J-Cut beginnt der Ton der nächsten Szene bereits vor dem Bildwechsel.
-  Bei einem L-Cut läuft der Ton der vorherigen Szene nach dem Bildwechsel weiter.
-</p>
+            <p>
+                Bei einem J-Cut beginnt der Ton der nächsten Szene bereits vor dem Bildwechsel.
+                Bei einem L-Cut läuft der Ton der vorherigen Szene nach dem Bildwechsel weiter.
+            </p>
 
-<p>
-  Beide Methoden verbinden Szenen oft eleganter als eine einfache vollständige
-  Ton- und Bildtrennung am selben Zeitpunkt.
-</p>
+            <p>
+                Beide Methoden verbinden Szenen oft eleganter als eine einfache vollständige
+                Ton- und Bildtrennung am selben Zeitpunkt.
+            </p>
 
-<h3>27.9 Nicht zu viele Schriftarten</h3>
+            <h3>27.9 Nicht zu viele Schriftarten</h3>
 
-<p>
-  Eine Schriftfamilie mit unterschiedlichen Schnitten und Größen genügt für
-  die meisten Projekte.
-</p>
+            <p>
+                Eine Schriftfamilie mit unterschiedlichen Schnitten und Größen genügt für
+                die meisten Projekte.
+            </p>
 
-<h3>27.10 Proxy früh aktivieren</h3>
+            <h3>27.10 Proxy früh aktivieren</h3>
 
-<p>
-  Bei hochauflösendem Material sollte Proxy nicht erst aktiviert werden, wenn
-  das Projekt kaum noch bedienbar ist.
-</p>
+            <p>
+                Bei hochauflösendem Material sollte Proxy nicht erst aktiviert werden, wenn
+                das Projekt kaum noch bedienbar ist.
+            </p>
 
-<h3>27.11 Testexport statt Hoffnung</h3>
+            <h3>27.11 Testexport statt Hoffnung</h3>
 
-<p>
-  Ein kurzer Testexport zeigt frühzeitig, ob Bildqualität, Ton, Untertitel,
-  Hardware-Encoding und Dateigröße passen.
-</p>
+            <p>
+                Ein kurzer Testexport zeigt frühzeitig, ob Bildqualität, Ton, Untertitel,
+                Hardware-Encoding und Dateigröße passen.
+            </p>
 
-<h3>27.12 Projektversionen speichern</h3>
+            <h3>27.12 Projektversionen speichern</h3>
 
-<p>
-  Vor großen Änderungen, Ripple-Operationen oder einer neuen Farbkorrektur sollte
-  eine neue Projektversion angelegt werden.
-</p>
+            <p>
+                Vor großen Änderungen, Ripple-Operationen oder einer neuen Farbkorrektur sollte
+                eine neue Projektversion angelegt werden.
+            </p>
 
-<h3>27.13 Kopfhörer und Lautsprecher verwenden</h3>
+            <h3>27.13 Kopfhörer und Lautsprecher verwenden</h3>
 
-<p>
-  Ton sollte sowohl mit Kopfhörern als auch über normale Lautsprecher geprüft werden.
-  Fehler, die auf einem System verborgen bleiben, können auf einem anderen
-  unüberhörbar sein.
-</p>
+            <p>
+                Ton sollte sowohl mit Kopfhörern als auch über normale Lautsprecher geprüft werden.
+                Fehler, die auf einem System verborgen bleiben, können auf einem anderen
+                unüberhörbar sein.
+            </p>
 
-<h3>27.14 Video einmal ohne Bedienhandlungen ansehen</h3>
+            <h3>27.14 Video einmal ohne Bedienhandlungen ansehen</h3>
 
-<p>
-  Vor dem Export sollte das Projekt ohne Pausen, Filteränderungen und Timeline-Sprünge
-  vollständig angesehen werden. Erst dann wird der Rhythmus des Films wirklich sichtbar.
-</p>
+            <p>
+                Vor dem Export sollte das Projekt ohne Pausen, Filteränderungen und Timeline-Sprünge
+                vollständig angesehen werden. Erst dann wird der Rhythmus des Films wirklich sichtbar.
+            </p>
 
 
-  </section>
+        </section>
 
-  <section id="shotcut-fehler">
-    <h2>28. Häufige Fehler und Lösungen</h2>
+        <section id="shotcut-fehler">
+            <h2>28. Häufige Fehler und Lösungen</h2>
 
 
-<h3>28.1 Shotcut findet Mediendateien nicht mehr</h3>
+            <h3>28.1 Shotcut findet Mediendateien nicht mehr</h3>
 
-<p>Mögliche Ursache:</p>
+            <p>Mögliche Ursache:</p>
 
-<ul>
-  <li>Dateien wurden verschoben, umbenannt oder gelöscht.</li>
-</ul>
+            <ul>
+                <li>Dateien wurden verschoben, umbenannt oder gelöscht.</li>
+            </ul>
 
-<p>Lösung:</p>
+            <p>Lösung:</p>
 
-<ul>
-  <li>fehlende Dateien über die Reparaturfunktion neu zuordnen,</li>
-  <li>ursprüngliche Ordnerstruktur wiederherstellen,</li>
-  <li>künftig alle Medien vor Projektbeginn sammeln.</li>
-</ul>
+            <ul>
+                <li>fehlende Dateien über die Reparaturfunktion neu zuordnen,</li>
+                <li>ursprüngliche Ordnerstruktur wiederherstellen,</li>
+                <li>künftig alle Medien vor Projektbeginn sammeln.</li>
+            </ul>
 
-<h3>28.2 Vorschau ruckelt</h3>
+            <h3>28.2 Vorschau ruckelt</h3>
 
-<p>Lösungen:</p>
+            <p>Lösungen:</p>
 
-<ul>
-  <li>Proxy aktivieren</li>
-  <li>Vorschau-Skalierung reduzieren</li>
-  <li>Material auf SSD kopieren</li>
-  <li>aufwendige Filter deaktivieren</li>
-  <li>Hardware-Decodierung testen</li>
-  <li>schwieriges Material konvertieren</li>
-</ul>
+            <ul>
+                <li>Proxy aktivieren</li>
+                <li>Vorschau-Skalierung reduzieren</li>
+                <li>Material auf SSD kopieren</li>
+                <li>aufwendige Filter deaktivieren</li>
+                <li>Hardware-Decodierung testen</li>
+                <li>schwieriges Material konvertieren</li>
+            </ul>
 
-<h3>28.3 Ton und Bild laufen auseinander</h3>
+            <h3>28.3 Ton und Bild laufen auseinander</h3>
 
-<p>Mögliche Ursachen:</p>
+            <p>Mögliche Ursachen:</p>
 
-<ul>
-  <li>variable Bildrate</li>
-  <li>beschädigte Quelldatei</li>
-  <li>ungeeigneter Codec</li>
-  <li>fehlerhafte Aufnahme</li>
-</ul>
+            <ul>
+                <li>variable Bildrate</li>
+                <li>beschädigte Quelldatei</li>
+                <li>ungeeigneter Codec</li>
+                <li>fehlerhafte Aufnahme</li>
+            </ul>
 
-<p>
-  Die Datei sollte in ein schnittfreundliches Format mit konstanter Bildrate
-  konvertiert werden.
-</p>
+            <p>
+                Die Datei sollte in ein schnittfreundliches Format mit konstanter Bildrate
+                konvertiert werden.
+            </p>
 
-<h3>28.4 Export ist schwarz</h3>
+            <h3>28.4 Export ist schwarz</h3>
 
-<p>Zu prüfen sind:</p>
+            <p>Zu prüfen sind:</p>
 
-<ul>
-  <li>ausgeblendete Videospuren</li>
-  <li>Filter auf dem Timeline-Output</li>
-  <li>falsche Exportquelle</li>
-  <li>fehlende Mediendateien</li>
-  <li>Hardware-Encoder</li>
-  <li>Transparenz und Spurkomposition</li>
-</ul>
+            <ul>
+                <li>ausgeblendete Videospuren</li>
+                <li>Filter auf dem Timeline-Output</li>
+                <li>falsche Exportquelle</li>
+                <li>fehlende Mediendateien</li>
+                <li>Hardware-Encoder</li>
+                <li>Transparenz und Spurkomposition</li>
+            </ul>
 
-<h3>28.5 Export enthält keinen Ton</h3>
+            <h3>28.5 Export enthält keinen Ton</h3>
 
-<p>Zu prüfen sind:</p>
+            <p>Zu prüfen sind:</p>
 
-<ul>
-  <li>stummgeschaltete Spuren</li>
-  <li>Audio deaktiviert</li>
-  <li>falsche Kanalzuordnung</li>
-  <li>Output-Filter</li>
-  <li>ungeeigneter Audiocodec</li>
-</ul>
+            <ul>
+                <li>stummgeschaltete Spuren</li>
+                <li>Audio deaktiviert</li>
+                <li>falsche Kanalzuordnung</li>
+                <li>Output-Filter</li>
+                <li>ungeeigneter Audiocodec</li>
+            </ul>
 
-<h3>28.6 Export ist unscharf</h3>
+            <h3>28.6 Export ist unscharf</h3>
 
-<p>Zu prüfen sind:</p>
+            <p>Zu prüfen sind:</p>
 
-<ul>
-  <li>Projektauflösung</li>
-  <li>Exportauflösung</li>
-  <li>Bitrate beziehungsweise Qualitätsstufe</li>
-  <li>starke Skalierung einzelner Clips</li>
-  <li>versehentlicher Export mit Vorschau-Skalierung</li>
-  <li>versehentliche Nutzung einer Proxydatei als normales Medium</li>
-</ul>
+            <ul>
+                <li>Projektauflösung</li>
+                <li>Exportauflösung</li>
+                <li>Bitrate beziehungsweise Qualitätsstufe</li>
+                <li>starke Skalierung einzelner Clips</li>
+                <li>versehentlicher Export mit Vorschau-Skalierung</li>
+                <li>versehentliche Nutzung einer Proxydatei als normales Medium</li>
+            </ul>
 
-<h3>28.7 Schwarze Bilder zwischen Clips</h3>
+            <h3>28.7 Schwarze Bilder zwischen Clips</h3>
 
-<p>
-  Häufig befinden sich winzige Lücken in der Timeline. Snapping aktivieren,
-  Timeline vergrößern und Schnittpunkte kontrollieren.
-</p>
+            <p>
+                Häufig befinden sich winzige Lücken in der Timeline. Snapping aktivieren,
+                Timeline vergrößern und Schnittpunkte kontrollieren.
+            </p>
 
-<h3>28.8 Filter wirkt auf das gesamte Video</h3>
+            <h3>28.8 Filter wirkt auf das gesamte Video</h3>
 
-<p>
-  Der Filter wurde möglicherweise auf eine Spur oder den Timeline-Output statt
-  auf einen einzelnen Clip gelegt.
-</p>
+            <p>
+                Der Filter wurde möglicherweise auf eine Spur oder den Timeline-Output statt
+                auf einen einzelnen Clip gelegt.
+            </p>
 
-<h3>28.9 Übergang funktioniert nicht</h3>
+            <h3>28.9 Übergang funktioniert nicht</h3>
 
-<p>
-  Die beiden Clips müssen auf derselben Spur ausreichend überlappt werden.
-  Sind die Clips bereits bis an ihre vollständigen Dateigrenzen ausgereizt,
-  fehlt möglicherweise Material für die Überblendung.
-</p>
-
-<h3>28.10 Text ist abgeschnitten</h3>
-
-<p>Zu prüfen sind:</p>
-
-<ul>
-  <li>Textfeldgröße</li>
-  <li>Position</li>
-  <li>Projektseitenverhältnis</li>
-  <li>Sicherheitsabstand zum Rand</li>
-  <li>Schriftgröße</li>
-</ul>
-
-<h3>28.11 Musik klingt plötzlich verzerrt</h3>
-
-<p>
-  Mehrere Tonspuren können sich summieren und übersteuern. Einzelne Spuren
-  absenken und den Gesamtpegel kontrollieren.
-</p>
-
-<h3>28.12 Shotcut reagiert nach einer Aktion langsam</h3>
-
-<p>
-  Proxy-Erstellung, Wellenformberechnung, Stabilisierung, Tracking und Export
-  laufen als Aufträge. Der Jobs-Bereich zeigt, ob im Hintergrund gerechnet wird.
-</p>
-
-<h3>28.13 Export dauert unerwartet lange</h3>
-
-<p>Mögliche Ursachen:</p>
-
-<ul>
-  <li>hohe Auflösung</li>
-  <li>aufwendige Filter</li>
-  <li>Stabilisierung</li>
-  <li>Rauschreduzierung</li>
-  <li>Software-Encoding</li>
-  <li>mehrere skalierte Videospuren</li>
-  <li>10-Bit- oder lineare Verarbeitung</li>
-  <li>langsamer Datenträger</li>
-</ul>
-
-
-  </section>
-
-  <section id="shotcut-shortcuts">
-    <h2>29. Wichtige Tastenkürzel</h2>
-
-
-<p>
-  Tastenkürzel beschleunigen den Schnitt erheblich. Die genaue Belegung kann
-  je nach Betriebssystem und Version abweichen.
-</p>
-
-<div class="comparison-table-wrapper">
-  <table>
-    <caption>Praktische Tastenkürzel unter Windows und Linux</caption>
-    <thead>
-      <tr>
-        <th scope="col">Funktion</th>
-        <th scope="col">Taste</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th scope="row">Wiedergabe starten oder pausieren</th>
-        <td><kbd>Leertaste</kbd></td>
-      </tr>
-      <tr>
-        <th scope="row">Clip am Abspielkopf teilen</th>
-        <td><kbd>S</kbd></td>
-      </tr>
-      <tr>
-        <th scope="row">Ripple Delete</th>
-        <td><kbd>X</kbd></td>
-      </tr>
-      <tr>
-        <th scope="row">Lift</th>
-        <td><kbd>Z</kbd> oder <kbd>Entf</kbd></td>
-      </tr>
-      <tr>
-        <th scope="row">Rückgängig</th>
-        <td><kbd>Strg</kbd> + <kbd>Z</kbd></td>
-      </tr>
-      <tr>
-        <th scope="row">Wiederholen</th>
-        <td><kbd>Strg</kbd> + <kbd>Y</kbd></td>
-      </tr>
-      <tr>
-        <th scope="row">Speichern</th>
-        <td><kbd>Strg</kbd> + <kbd>S</kbd></td>
-      </tr>
-      <tr>
-        <th scope="row">Kopieren</th>
-        <td><kbd>Strg</kbd> + <kbd>C</kbd></td>
-      </tr>
-      <tr>
-        <th scope="row">Einfügen</th>
-        <td><kbd>Strg</kbd> + <kbd>V</kbd></td>
-      </tr>
-      <tr>
-        <th scope="row">Alles auswählen</th>
-        <td><kbd>Strg</kbd> + <kbd>A</kbd></td>
-      </tr>
-      <tr>
-        <th scope="row">Auswahl aufheben</th>
-        <td><kbd>Strg</kbd> + <kbd>D</kbd></td>
-      </tr>
-      <tr>
-        <th scope="row">Videospur hinzufügen</th>
-        <td><kbd>Strg</kbd> + <kbd>I</kbd></td>
-      </tr>
-      <tr>
-        <th scope="row">Audiospur hinzufügen</th>
-        <td><kbd>Strg</kbd> + <kbd>U</kbd></td>
-      </tr>
-      <tr>
-        <th scope="row">Anhängen</th>
-        <td><kbd>A</kbd></td>
-      </tr>
-      <tr>
-        <th scope="row">Einfügen</th>
-        <td><kbd>V</kbd></td>
-      </tr>
-      <tr>
-        <th scope="row">Überschreiben</th>
-        <td><kbd>B</kbd></td>
-      </tr>
-      <tr>
-        <th scope="row">Timeline vergrößern</th>
-        <td><kbd>+</kbd></td>
-      </tr>
-      <tr>
-        <th scope="row">Timeline verkleinern</th>
-        <td><kbd>-</kbd></td>
-      </tr>
-      <tr>
-        <th scope="row">Timeline vollständig einpassen</th>
-        <td><kbd>0</kbd></td>
-      </tr>
-      <tr>
-        <th scope="row">Proxy umschalten</th>
-        <td><kbd>F4</kbd></td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
-<aside class="tip-box">
-  <h3>Die fünf wichtigsten Kürzel für den Anfang</h3>
-  <p>
-    <kbd>Leertaste</kbd>, <kbd>S</kbd>, <kbd>X</kbd>,
-    <kbd>Strg</kbd> + <kbd>Z</kbd> und <kbd>Strg</kbd> + <kbd>S</kbd>
-    decken bereits einen erheblichen Teil des täglichen Schnitts ab.
-  </p>
-</aside>
-
-
-  </section>
-
-  <section id="shotcut-checkliste">
-    <h2>30. Workflow-Checkliste</h2>
-
-
-<h3>Vor dem Schnitt</h3>
-
-<ol class="checklist">
-  <li>Originaldateien sichern.</li>
-  <li>Projektordner anlegen.</li>
-  <li>Medien sinnvoll sortieren.</li>
-  <li>Dateien nicht mehr verschieben.</li>
-  <li>Projekt mit korrektem Videomodus anlegen.</li>
-  <li>Projekt sofort speichern.</li>
-  <li>Bei hochauflösendem Material Proxy aktivieren.</li>
-</ol>
-
-<h3>Rohschnitt</h3>
-
-<ol class="checklist">
-  <li>Material sichten.</li>
-  <li>unbrauchbare Clips aussortieren.</li>
-  <li>beste Szenen in die Timeline bringen.</li>
-  <li>lange Pausen und Wiederholungen entfernen.</li>
-  <li>inhaltliche Reihenfolge festlegen.</li>
-  <li>noch keine unnötigen Effekte hinzufügen.</li>
-</ol>
-
-<h3>Feinschnitt</h3>
-
-<ol class="checklist">
-  <li>Schnittpunkte präzisieren.</li>
-  <li>Bild- und Blickrichtungen kontrollieren.</li>
-  <li>B-Roll ergänzen.</li>
-  <li>Übergänge sparsam einsetzen.</li>
-  <li>Marker für offene Aufgaben setzen.</li>
-  <li>Projekt als neue Version speichern.</li>
-</ol>
-
-<h3>Ton</h3>
-
-<ol class="checklist">
-  <li>Originalton kontrollieren.</li>
-  <li>Sprachlautstärke angleichen.</li>
-  <li>Musik auf eigener Spur ergänzen.</li>
-  <li>Musik unter Sprache absenken.</li>
-  <li>Ein- und Ausblendungen setzen.</li>
-  <li>Gesamtpegel kontrollieren.</li>
-  <li>mit Kopfhörern und Lautsprechern prüfen.</li>
-</ol>
-
-<h3>Bild</h3>
-
-<ol class="checklist">
-  <li>Belichtung korrigieren.</li>
-  <li>Weißabgleich kontrollieren.</li>
-  <li>Clips farblich angleichen.</li>
-  <li>Scopes verwenden.</li>
-  <li>Effekte und Animationen zurückhaltend einsetzen.</li>
-</ol>
-
-<h3>Text und Untertitel</h3>
-
-<ol class="checklist">
-  <li>Titel kurz halten.</li>
-  <li>Schrift gut lesbar gestalten.</li>
-  <li>Sicherheitsabstand zum Bildrand einhalten.</li>
-  <li>Untertitel nach dem Bildschnitt erstellen.</li>
-  <li>automatische Transkription korrigieren.</li>
-  <li>Rechtschreibung prüfen.</li>
-</ol>
-
-<h3>Export</h3>
-
-<ol class="checklist">
-  <li>gesamten Film ohne Unterbrechung ansehen.</li>
-  <li>schwarze Lücken suchen.</li>
-  <li>Output-Filter kontrollieren.</li>
-  <li>kurzen Testbereich exportieren.</li>
-  <li>Testdatei extern prüfen.</li>
-  <li>vollständiges Video exportieren.</li>
-  <li>fertige Datei vollständig ansehen.</li>
-  <li>Projekt und finale Datei sichern.</li>
-</ol>
-
-
-  </section>
-
-  <section id="shotcut-faq">
-    <h2>31. Häufig gestellte Fragen</h2>
-
-
-<details>
-  <summary>Verändert Shotcut meine Originaldateien?</summary>
-  <p>
-    Nein. Shotcut arbeitet grundsätzlich nicht destruktiv. Schnitte und Filter
-    werden in der Projektdatei gespeichert. Erst der Export erzeugt eine neue Datei.
-  </p>
-</details>
-
-<details>
-  <summary>Warum ist die MLT-Datei so klein?</summary>
-  <p>
-    Die Projektdatei enthält hauptsächlich Verweise, Schnittinformationen,
-    Filter und Einstellungen. Die eigentlichen Video- und Audiodateien sind
-    nicht darin eingebettet.
-  </p>
-</details>
-
-<details>
-  <summary>Kann ich Quelldateien nachträglich verschieben?</summary>
-  <p>
-    Technisch ja, Shotcut muss sie danach jedoch neu finden beziehungsweise
-    zugeordnet bekommen. Sicherer ist es, die endgültige Ordnerstruktur vor
-    Projektbeginn festzulegen.
-  </p>
-</details>
-
-<details>
-  <summary>Kann Shotcut 4K-Videos bearbeiten?</summary>
-  <p>
-    Ja. Für eine flüssige Bearbeitung sind je nach Computer Proxy-Dateien,
-    Vorschau-Skalierung und eine schnelle SSD sinnvoll.
-  </p>
-</details>
-
-<details>
-  <summary>Ist Proxy schlechtere Qualität?</summary>
-  <p>
-    Nur die Arbeitsvorschau ist schlechter. Beim normalen Export verwendet
-    Shotcut wieder das hochwertige Originalmaterial.
-  </p>
-</details>
-
-<details>
-  <summary>Was ist der Unterschied zwischen Proxy und Edit-friendly?</summary>
-  <p>
-    Ein Proxy ist eine kleine temporäre Arbeitskopie. Eine schnittfreundliche
-    Konvertierung erzeugt eine hochwertige neue Quelldatei mit technisch
-    geeigneteren Eigenschaften.
-  </p>
-</details>
-
-<details>
-  <summary>Warum soll ich Untertitel erst am Ende erstellen?</summary>
-  <p>
-    Spätere Schnitte und Verschiebungen können die zeitliche Synchronität der
-    Untertitel zerstören. Deshalb sollte der Bildschnitt vorher weitgehend
-    abgeschlossen sein.
-  </p>
-</details>
-
-<details>
-  <summary>Kann ich Videos verschiedener Auflösungen mischen?</summary>
-  <p>
-    Ja. Shotcut kann unterschiedliche Auflösungen und Bildraten in einer Timeline
-    verarbeiten. Das Projekt besitzt dennoch einen festen Zielmodus, an den das
-    Material angepasst wird.
-  </p>
-</details>
-
-<details>
-  <summary>Warum ist mein Hochkantvideo so klein?</summary>
-  <p>
-    Es wird vermutlich in einem 16:9-Projekt vollständig eingepasst.
-    Das Bild kann skaliert, zugeschnitten oder in einem eigenen 9:16-Projekt
-    verwendet werden.
-  </p>
-</details>
-
-<details>
-  <summary>Wie erzeuge ich eine Überblendung?</summary>
-  <p>
-    Zwei Clips auf derselben Spur werden zeitlich übereinandergeschoben.
-    Der überlappende Bereich wird als Übergang behandelt.
-  </p>
-</details>
-
-<details>
-  <summary>Wie mache ich Musik leiser als Sprache?</summary>
-  <p>
-    Musik und Sprache werden auf getrennten Audiospuren abgelegt.
-    Die Musikspur wird mit einem Lautstärkefilter abgesenkt und bei Bedarf
-    mit Keyframes während gesprochener Passagen weiter reduziert.
-  </p>
-</details>
-
-<details>
-  <summary>Kann Shotcut Untertitel automatisch erstellen?</summary>
-  <p>
-    Aktuelle Versionen bieten eine lokale Sprache-zu-Text-Funktion.
-    Das Ergebnis ist ein Entwurf und muss auf Erkennungs-, Zeit- und
-    Rechtschreibfehler kontrolliert werden.
-  </p>
-</details>
-
-<details>
-  <summary>Welches Exportformat eignet sich für YouTube?</summary>
-  <p>
-    Ein MP4-Video mit H.264, progressivem Bild, projektgleicher Bildrate und
-    AAC-Audio ist ein verbreiteter und kompatibler Ausgangspunkt.
-  </p>
-</details>
-
-<details>
-  <summary>Warum dauert der Export länger als das Video?</summary>
-  <p>
-    Shotcut muss alle Quelldateien decodieren, skalieren, filtern, überlagern,
-    den Ton mischen und anschließend neu komprimieren. Je nach Effekten,
-    Auflösung und Hardware kann das länger als die eigentliche Spieldauer dauern.
-  </p>
-</details>
-
-<details>
-  <summary>Kann ich einen Teil des Videos testweise exportieren?</summary>
-  <p>
-    Ja. Ein Timeline-Bereich beziehungsweise Markerbereich kann für einen
-    Testexport festgelegt werden. Das ist vor einem langen Gesamtexport sehr
-    empfehlenswert.
-  </p>
-</details>
-
-<details>
-  <summary>Kann ich aus Shotcut ein Thumbnail speichern?</summary>
-  <p>
-    Ja. Ein geeignetes Einzelbild kann über die Funktion zum Exportieren eines
-    Frames als Bilddatei gespeichert werden.
-  </p>
-</details>
-
-
-  </section>
-
-  <section class="conclusion">
-    <h2>32. Fazit</h2>
-
-
-<p>
-  Shotcut bietet alle grundlegenden Werkzeuge, die für einen anspruchsvollen
-  Videoschnitt benötigt werden: mehrspurige Bearbeitung, Übergänge, Filter,
-  Keyframes, Tonmischung, Untertitel, Farbkorrektur, Proxy-Schnitt und zahlreiche
-  Exportformate.
-</p>
-
-<p>
-  Der wichtigste Erfolgsfaktor ist kein einzelner Filter, sondern ein geordneter
-  Workflow:
-</p>
-
-<ol>
-  <li>Dateien sichern und organisieren,</li>
-  <li>Projektmodus festlegen,</li>
-  <li>Material sichten,</li>
-  <li>Rohschnitt erstellen,</li>
-  <li>Feinschnitt durchführen,</li>
-  <li>Ton bearbeiten,</li>
-  <li>Bild korrigieren,</li>
-  <li>Texte und Untertitel ergänzen,</li>
-  <li>Testexport kontrollieren,</li>
-  <li>fertiges Video ausgeben und sichern.</li>
-</ol>
-
-<p>
-  Gute Videos entstehen selten durch möglichst viele Effekte. Sie entstehen durch
-  klare Auswahl, guten Rhythmus, verständlichen Ton und den Mut, unnötiges Material
-  wegzulassen. Shotcut stellt dafür das Werkzeug bereit. Schneiden muss am Ende
-  dennoch der Mensch – bislang eine erfreuliche Restzuständigkeit.
-</p>
-
-
-  </section>
-
-
-
-
-
-
-
-
-
-
-    <hr class="divider" />
-    <p class="hint"><a href="#top">↑ top</a>&emsp;<a href="/web/index.html">⌂ home</a>&emsp;<a href="../videography.html">← back</a></p>
-  </main>
+            <p>
+                Die beiden Clips müssen auf derselben Spur ausreichend überlappt werden.
+                Sind die Clips bereits bis an ihre vollständigen Dateigrenzen ausgereizt,
+                fehlt möglicherweise Material für die Überblendung.
+            </p>
+
+            <h3>28.10 Text ist abgeschnitten</h3>
+
+            <p>Zu prüfen sind:</p>
+
+            <ul>
+                <li>Textfeldgröße</li>
+                <li>Position</li>
+                <li>Projektseitenverhältnis</li>
+                <li>Sicherheitsabstand zum Rand</li>
+                <li>Schriftgröße</li>
+            </ul>
+
+            <h3>28.11 Musik klingt plötzlich verzerrt</h3>
+
+            <p>
+                Mehrere Tonspuren können sich summieren und übersteuern. Einzelne Spuren
+                absenken und den Gesamtpegel kontrollieren.
+            </p>
+
+            <h3>28.12 Shotcut reagiert nach einer Aktion langsam</h3>
+
+            <p>
+                Proxy-Erstellung, Wellenformberechnung, Stabilisierung, Tracking und Export
+                laufen als Aufträge. Der Jobs-Bereich zeigt, ob im Hintergrund gerechnet wird.
+            </p>
+
+            <h3>28.13 Export dauert unerwartet lange</h3>
+
+            <p>Mögliche Ursachen:</p>
+
+            <ul>
+                <li>hohe Auflösung</li>
+                <li>aufwendige Filter</li>
+                <li>Stabilisierung</li>
+                <li>Rauschreduzierung</li>
+                <li>Software-Encoding</li>
+                <li>mehrere skalierte Videospuren</li>
+                <li>10-Bit- oder lineare Verarbeitung</li>
+                <li>langsamer Datenträger</li>
+            </ul>
+
+
+        </section>
+
+        <section id="shotcut-shortcuts">
+            <h2>29. Wichtige Tastenkürzel</h2>
+
+
+            <p>
+                Tastenkürzel beschleunigen den Schnitt erheblich. Die genaue Belegung kann
+                je nach Betriebssystem und Version abweichen.
+            </p>
+
+            <div class="comparison-table-wrapper">
+                <table>
+                    <caption>Praktische Tastenkürzel unter Windows und Linux</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">Funktion</th>
+                            <th scope="col">Taste</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">Wiedergabe starten oder pausieren</th>
+                            <td><kbd>Leertaste</kbd></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Clip am Abspielkopf teilen</th>
+                            <td><kbd>S</kbd></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Ripple Delete</th>
+                            <td><kbd>X</kbd></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Lift</th>
+                            <td><kbd>Z</kbd> oder <kbd>Entf</kbd></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Rückgängig</th>
+                            <td><kbd>Strg</kbd> + <kbd>Z</kbd></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Wiederholen</th>
+                            <td><kbd>Strg</kbd> + <kbd>Y</kbd></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Speichern</th>
+                            <td><kbd>Strg</kbd> + <kbd>S</kbd></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Kopieren</th>
+                            <td><kbd>Strg</kbd> + <kbd>C</kbd></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Einfügen</th>
+                            <td><kbd>Strg</kbd> + <kbd>V</kbd></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Alles auswählen</th>
+                            <td><kbd>Strg</kbd> + <kbd>A</kbd></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Auswahl aufheben</th>
+                            <td><kbd>Strg</kbd> + <kbd>D</kbd></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Videospur hinzufügen</th>
+                            <td><kbd>Strg</kbd> + <kbd>I</kbd></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Audiospur hinzufügen</th>
+                            <td><kbd>Strg</kbd> + <kbd>U</kbd></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Anhängen</th>
+                            <td><kbd>A</kbd></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Einfügen</th>
+                            <td><kbd>V</kbd></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Überschreiben</th>
+                            <td><kbd>B</kbd></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Timeline vergrößern</th>
+                            <td><kbd>+</kbd></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Timeline verkleinern</th>
+                            <td><kbd>-</kbd></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Timeline vollständig einpassen</th>
+                            <td><kbd>0</kbd></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Proxy umschalten</th>
+                            <td><kbd>F4</kbd></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <aside class="tip-box">
+                <h3>Die fünf wichtigsten Kürzel für den Anfang</h3>
+                <p>
+                    <kbd>Leertaste</kbd>, <kbd>S</kbd>, <kbd>X</kbd>,
+                    <kbd>Strg</kbd> + <kbd>Z</kbd> und <kbd>Strg</kbd> + <kbd>S</kbd>
+                    decken bereits einen erheblichen Teil des täglichen Schnitts ab.
+                </p>
+            </aside>
+
+
+        </section>
+
+        <section id="shotcut-checkliste">
+            <h2>30. Workflow-Checkliste</h2>
+
+
+            <h3>Vor dem Schnitt</h3>
+
+            <ol class="checklist">
+                <li>Originaldateien sichern.</li>
+                <li>Projektordner anlegen.</li>
+                <li>Medien sinnvoll sortieren.</li>
+                <li>Dateien nicht mehr verschieben.</li>
+                <li>Projekt mit korrektem Videomodus anlegen.</li>
+                <li>Projekt sofort speichern.</li>
+                <li>Bei hochauflösendem Material Proxy aktivieren.</li>
+            </ol>
+
+            <h3>Rohschnitt</h3>
+
+            <ol class="checklist">
+                <li>Material sichten.</li>
+                <li>unbrauchbare Clips aussortieren.</li>
+                <li>beste Szenen in die Timeline bringen.</li>
+                <li>lange Pausen und Wiederholungen entfernen.</li>
+                <li>inhaltliche Reihenfolge festlegen.</li>
+                <li>noch keine unnötigen Effekte hinzufügen.</li>
+            </ol>
+
+            <h3>Feinschnitt</h3>
+
+            <ol class="checklist">
+                <li>Schnittpunkte präzisieren.</li>
+                <li>Bild- und Blickrichtungen kontrollieren.</li>
+                <li>B-Roll ergänzen.</li>
+                <li>Übergänge sparsam einsetzen.</li>
+                <li>Marker für offene Aufgaben setzen.</li>
+                <li>Projekt als neue Version speichern.</li>
+            </ol>
+
+            <h3>Ton</h3>
+
+            <ol class="checklist">
+                <li>Originalton kontrollieren.</li>
+                <li>Sprachlautstärke angleichen.</li>
+                <li>Musik auf eigener Spur ergänzen.</li>
+                <li>Musik unter Sprache absenken.</li>
+                <li>Ein- und Ausblendungen setzen.</li>
+                <li>Gesamtpegel kontrollieren.</li>
+                <li>mit Kopfhörern und Lautsprechern prüfen.</li>
+            </ol>
+
+            <h3>Bild</h3>
+
+            <ol class="checklist">
+                <li>Belichtung korrigieren.</li>
+                <li>Weißabgleich kontrollieren.</li>
+                <li>Clips farblich angleichen.</li>
+                <li>Scopes verwenden.</li>
+                <li>Effekte und Animationen zurückhaltend einsetzen.</li>
+            </ol>
+
+            <h3>Text und Untertitel</h3>
+
+            <ol class="checklist">
+                <li>Titel kurz halten.</li>
+                <li>Schrift gut lesbar gestalten.</li>
+                <li>Sicherheitsabstand zum Bildrand einhalten.</li>
+                <li>Untertitel nach dem Bildschnitt erstellen.</li>
+                <li>automatische Transkription korrigieren.</li>
+                <li>Rechtschreibung prüfen.</li>
+            </ol>
+
+            <h3>Export</h3>
+
+            <ol class="checklist">
+                <li>gesamten Film ohne Unterbrechung ansehen.</li>
+                <li>schwarze Lücken suchen.</li>
+                <li>Output-Filter kontrollieren.</li>
+                <li>kurzen Testbereich exportieren.</li>
+                <li>Testdatei extern prüfen.</li>
+                <li>vollständiges Video exportieren.</li>
+                <li>fertige Datei vollständig ansehen.</li>
+                <li>Projekt und finale Datei sichern.</li>
+            </ol>
+
+
+        </section>
+
+        <section id="shotcut-faq">
+            <h2>31. Häufig gestellte Fragen</h2>
+
+
+            <details>
+                <summary>Verändert Shotcut meine Originaldateien?</summary>
+                <p>
+                    Nein. Shotcut arbeitet grundsätzlich nicht destruktiv. Schnitte und Filter
+                    werden in der Projektdatei gespeichert. Erst der Export erzeugt eine neue Datei.
+                </p>
+            </details>
+
+            <details>
+                <summary>Warum ist die MLT-Datei so klein?</summary>
+                <p>
+                    Die Projektdatei enthält hauptsächlich Verweise, Schnittinformationen,
+                    Filter und Einstellungen. Die eigentlichen Video- und Audiodateien sind
+                    nicht darin eingebettet.
+                </p>
+            </details>
+
+            <details>
+                <summary>Kann ich Quelldateien nachträglich verschieben?</summary>
+                <p>
+                    Technisch ja, Shotcut muss sie danach jedoch neu finden beziehungsweise
+                    zugeordnet bekommen. Sicherer ist es, die endgültige Ordnerstruktur vor
+                    Projektbeginn festzulegen.
+                </p>
+            </details>
+
+            <details>
+                <summary>Kann Shotcut 4K-Videos bearbeiten?</summary>
+                <p>
+                    Ja. Für eine flüssige Bearbeitung sind je nach Computer Proxy-Dateien,
+                    Vorschau-Skalierung und eine schnelle SSD sinnvoll.
+                </p>
+            </details>
+
+            <details>
+                <summary>Ist Proxy schlechtere Qualität?</summary>
+                <p>
+                    Nur die Arbeitsvorschau ist schlechter. Beim normalen Export verwendet
+                    Shotcut wieder das hochwertige Originalmaterial.
+                </p>
+            </details>
+
+            <details>
+                <summary>Was ist der Unterschied zwischen Proxy und Edit-friendly?</summary>
+                <p>
+                    Ein Proxy ist eine kleine temporäre Arbeitskopie. Eine schnittfreundliche
+                    Konvertierung erzeugt eine hochwertige neue Quelldatei mit technisch
+                    geeigneteren Eigenschaften.
+                </p>
+            </details>
+
+            <details>
+                <summary>Warum soll ich Untertitel erst am Ende erstellen?</summary>
+                <p>
+                    Spätere Schnitte und Verschiebungen können die zeitliche Synchronität der
+                    Untertitel zerstören. Deshalb sollte der Bildschnitt vorher weitgehend
+                    abgeschlossen sein.
+                </p>
+            </details>
+
+            <details>
+                <summary>Kann ich Videos verschiedener Auflösungen mischen?</summary>
+                <p>
+                    Ja. Shotcut kann unterschiedliche Auflösungen und Bildraten in einer Timeline
+                    verarbeiten. Das Projekt besitzt dennoch einen festen Zielmodus, an den das
+                    Material angepasst wird.
+                </p>
+            </details>
+
+            <details>
+                <summary>Warum ist mein Hochkantvideo so klein?</summary>
+                <p>
+                    Es wird vermutlich in einem 16:9-Projekt vollständig eingepasst.
+                    Das Bild kann skaliert, zugeschnitten oder in einem eigenen 9:16-Projekt
+                    verwendet werden.
+                </p>
+            </details>
+
+            <details>
+                <summary>Wie erzeuge ich eine Überblendung?</summary>
+                <p>
+                    Zwei Clips auf derselben Spur werden zeitlich übereinandergeschoben.
+                    Der überlappende Bereich wird als Übergang behandelt.
+                </p>
+            </details>
+
+            <details>
+                <summary>Wie mache ich Musik leiser als Sprache?</summary>
+                <p>
+                    Musik und Sprache werden auf getrennten Audiospuren abgelegt.
+                    Die Musikspur wird mit einem Lautstärkefilter abgesenkt und bei Bedarf
+                    mit Keyframes während gesprochener Passagen weiter reduziert.
+                </p>
+            </details>
+
+            <details>
+                <summary>Kann Shotcut Untertitel automatisch erstellen?</summary>
+                <p>
+                    Aktuelle Versionen bieten eine lokale Sprache-zu-Text-Funktion.
+                    Das Ergebnis ist ein Entwurf und muss auf Erkennungs-, Zeit- und
+                    Rechtschreibfehler kontrolliert werden.
+                </p>
+            </details>
+
+            <details>
+                <summary>Welches Exportformat eignet sich für YouTube?</summary>
+                <p>
+                    Ein MP4-Video mit H.264, progressivem Bild, projektgleicher Bildrate und
+                    AAC-Audio ist ein verbreiteter und kompatibler Ausgangspunkt.
+                </p>
+            </details>
+
+            <details>
+                <summary>Warum dauert der Export länger als das Video?</summary>
+                <p>
+                    Shotcut muss alle Quelldateien decodieren, skalieren, filtern, überlagern,
+                    den Ton mischen und anschließend neu komprimieren. Je nach Effekten,
+                    Auflösung und Hardware kann das länger als die eigentliche Spieldauer dauern.
+                </p>
+            </details>
+
+            <details>
+                <summary>Kann ich einen Teil des Videos testweise exportieren?</summary>
+                <p>
+                    Ja. Ein Timeline-Bereich beziehungsweise Markerbereich kann für einen
+                    Testexport festgelegt werden. Das ist vor einem langen Gesamtexport sehr
+                    empfehlenswert.
+                </p>
+            </details>
+
+            <details>
+                <summary>Kann ich aus Shotcut ein Thumbnail speichern?</summary>
+                <p>
+                    Ja. Ein geeignetes Einzelbild kann über die Funktion zum Exportieren eines
+                    Frames als Bilddatei gespeichert werden.
+                </p>
+            </details>
+
+
+        </section>
+
+        <section class="conclusion">
+            <h2>32. Fazit</h2>
+
+
+            <p>
+                Shotcut bietet alle grundlegenden Werkzeuge, die für einen anspruchsvollen
+                Videoschnitt benötigt werden: mehrspurige Bearbeitung, Übergänge, Filter,
+                Keyframes, Tonmischung, Untertitel, Farbkorrektur, Proxy-Schnitt und zahlreiche
+                Exportformate.
+            </p>
+
+            <p>
+                Der wichtigste Erfolgsfaktor ist kein einzelner Filter, sondern ein geordneter
+                Workflow:
+            </p>
+
+            <ol>
+                <li>Dateien sichern und organisieren,</li>
+                <li>Projektmodus festlegen,</li>
+                <li>Material sichten,</li>
+                <li>Rohschnitt erstellen,</li>
+                <li>Feinschnitt durchführen,</li>
+                <li>Ton bearbeiten,</li>
+                <li>Bild korrigieren,</li>
+                <li>Texte und Untertitel ergänzen,</li>
+                <li>Testexport kontrollieren,</li>
+                <li>fertiges Video ausgeben und sichern.</li>
+            </ol>
+
+            <p>
+                Gute Videos entstehen selten durch möglichst viele Effekte. Sie entstehen durch
+                klare Auswahl, guten Rhythmus, verständlichen Ton und den Mut, unnötiges Material
+                wegzulassen. Shotcut stellt dafür das Werkzeug bereit. Schneiden muss am Ende
+                dennoch der Mensch – bislang eine erfreuliche Restzuständigkeit.
+            </p>
+
+
+        </section>
+
+
+
+
+
+
+
+
+
+
+        <hr class="divider" />
+        <p class="hint"><a href="#top">↑ top</a>&emsp;<a href="/web/index.html">⌂ home</a>&emsp;<a
+                href="../videography.html">← back</a></p>
+    </main>
 
     <hr class="divider" />
     <p class="hint"><a href="#top">↑ top</a></p>
-  
-  <footer class="site-footer">
-    <p>© 2026 Julian</p>
-  </footer>
 
-  <script src="../assets/js/main.js" defer></script>
+    <footer class="site-footer">
+        <p>© 2026 Julian</p>
+    </footer>
+
+    <script src="../assets/js/main.js" defer></script>
 </body>
+
 </html>
-
-
