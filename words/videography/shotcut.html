@@ -2684,6 +2684,191 @@ Heute geht es um den Videoschnitt mit Shotcut.</code></pre>
 
   </section>
 
+  <section id="shotcut-faq">
+    <h2>31. Häufig gestellte Fragen</h2>
+
+
+<details>
+  <summary>Verändert Shotcut meine Originaldateien?</summary>
+  <p>
+    Nein. Shotcut arbeitet grundsätzlich nicht destruktiv. Schnitte und Filter
+    werden in der Projektdatei gespeichert. Erst der Export erzeugt eine neue Datei.
+  </p>
+</details>
+
+<details>
+  <summary>Warum ist die MLT-Datei so klein?</summary>
+  <p>
+    Die Projektdatei enthält hauptsächlich Verweise, Schnittinformationen,
+    Filter und Einstellungen. Die eigentlichen Video- und Audiodateien sind
+    nicht darin eingebettet.
+  </p>
+</details>
+
+<details>
+  <summary>Kann ich Quelldateien nachträglich verschieben?</summary>
+  <p>
+    Technisch ja, Shotcut muss sie danach jedoch neu finden beziehungsweise
+    zugeordnet bekommen. Sicherer ist es, die endgültige Ordnerstruktur vor
+    Projektbeginn festzulegen.
+  </p>
+</details>
+
+<details>
+  <summary>Kann Shotcut 4K-Videos bearbeiten?</summary>
+  <p>
+    Ja. Für eine flüssige Bearbeitung sind je nach Computer Proxy-Dateien,
+    Vorschau-Skalierung und eine schnelle SSD sinnvoll.
+  </p>
+</details>
+
+<details>
+  <summary>Ist Proxy schlechtere Qualität?</summary>
+  <p>
+    Nur die Arbeitsvorschau ist schlechter. Beim normalen Export verwendet
+    Shotcut wieder das hochwertige Originalmaterial.
+  </p>
+</details>
+
+<details>
+  <summary>Was ist der Unterschied zwischen Proxy und Edit-friendly?</summary>
+  <p>
+    Ein Proxy ist eine kleine temporäre Arbeitskopie. Eine schnittfreundliche
+    Konvertierung erzeugt eine hochwertige neue Quelldatei mit technisch
+    geeigneteren Eigenschaften.
+  </p>
+</details>
+
+<details>
+  <summary>Warum soll ich Untertitel erst am Ende erstellen?</summary>
+  <p>
+    Spätere Schnitte und Verschiebungen können die zeitliche Synchronität der
+    Untertitel zerstören. Deshalb sollte der Bildschnitt vorher weitgehend
+    abgeschlossen sein.
+  </p>
+</details>
+
+<details>
+  <summary>Kann ich Videos verschiedener Auflösungen mischen?</summary>
+  <p>
+    Ja. Shotcut kann unterschiedliche Auflösungen und Bildraten in einer Timeline
+    verarbeiten. Das Projekt besitzt dennoch einen festen Zielmodus, an den das
+    Material angepasst wird.
+  </p>
+</details>
+
+<details>
+  <summary>Warum ist mein Hochkantvideo so klein?</summary>
+  <p>
+    Es wird vermutlich in einem 16:9-Projekt vollständig eingepasst.
+    Das Bild kann skaliert, zugeschnitten oder in einem eigenen 9:16-Projekt
+    verwendet werden.
+  </p>
+</details>
+
+<details>
+  <summary>Wie erzeuge ich eine Überblendung?</summary>
+  <p>
+    Zwei Clips auf derselben Spur werden zeitlich übereinandergeschoben.
+    Der überlappende Bereich wird als Übergang behandelt.
+  </p>
+</details>
+
+<details>
+  <summary>Wie mache ich Musik leiser als Sprache?</summary>
+  <p>
+    Musik und Sprache werden auf getrennten Audiospuren abgelegt.
+    Die Musikspur wird mit einem Lautstärkefilter abgesenkt und bei Bedarf
+    mit Keyframes während gesprochener Passagen weiter reduziert.
+  </p>
+</details>
+
+<details>
+  <summary>Kann Shotcut Untertitel automatisch erstellen?</summary>
+  <p>
+    Aktuelle Versionen bieten eine lokale Sprache-zu-Text-Funktion.
+    Das Ergebnis ist ein Entwurf und muss auf Erkennungs-, Zeit- und
+    Rechtschreibfehler kontrolliert werden.
+  </p>
+</details>
+
+<details>
+  <summary>Welches Exportformat eignet sich für YouTube?</summary>
+  <p>
+    Ein MP4-Video mit H.264, progressivem Bild, projektgleicher Bildrate und
+    AAC-Audio ist ein verbreiteter und kompatibler Ausgangspunkt.
+  </p>
+</details>
+
+<details>
+  <summary>Warum dauert der Export länger als das Video?</summary>
+  <p>
+    Shotcut muss alle Quelldateien decodieren, skalieren, filtern, überlagern,
+    den Ton mischen und anschließend neu komprimieren. Je nach Effekten,
+    Auflösung und Hardware kann das länger als die eigentliche Spieldauer dauern.
+  </p>
+</details>
+
+<details>
+  <summary>Kann ich einen Teil des Videos testweise exportieren?</summary>
+  <p>
+    Ja. Ein Timeline-Bereich beziehungsweise Markerbereich kann für einen
+    Testexport festgelegt werden. Das ist vor einem langen Gesamtexport sehr
+    empfehlenswert.
+  </p>
+</details>
+
+<details>
+  <summary>Kann ich aus Shotcut ein Thumbnail speichern?</summary>
+  <p>
+    Ja. Ein geeignetes Einzelbild kann über die Funktion zum Exportieren eines
+    Frames als Bilddatei gespeichert werden.
+  </p>
+</details>
+
+
+  </section>
+
+  <section class="conclusion">
+    <h2>32. Fazit</h2>
+
+
+<p>
+  Shotcut bietet alle grundlegenden Werkzeuge, die für einen anspruchsvollen
+  Videoschnitt benötigt werden: mehrspurige Bearbeitung, Übergänge, Filter,
+  Keyframes, Tonmischung, Untertitel, Farbkorrektur, Proxy-Schnitt und zahlreiche
+  Exportformate.
+</p>
+
+<p>
+  Der wichtigste Erfolgsfaktor ist kein einzelner Filter, sondern ein geordneter
+  Workflow:
+</p>
+
+<ol>
+  <li>Dateien sichern und organisieren,</li>
+  <li>Projektmodus festlegen,</li>
+  <li>Material sichten,</li>
+  <li>Rohschnitt erstellen,</li>
+  <li>Feinschnitt durchführen,</li>
+  <li>Ton bearbeiten,</li>
+  <li>Bild korrigieren,</li>
+  <li>Texte und Untertitel ergänzen,</li>
+  <li>Testexport kontrollieren,</li>
+  <li>fertiges Video ausgeben und sichern.</li>
+</ol>
+
+<p>
+  Gute Videos entstehen selten durch möglichst viele Effekte. Sie entstehen durch
+  klare Auswahl, guten Rhythmus, verständlichen Ton und den Mut, unnötiges Material
+  wegzulassen. Shotcut stellt dafür das Werkzeug bereit. Schneiden muss am Ende
+  dennoch der Mensch – bislang eine erfreuliche Restzuständigkeit.
+</p>
+
+
+  </section>
+
+
 
 
 
