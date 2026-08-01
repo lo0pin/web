@@ -23,7 +23,7 @@
     </header>
 
     <main class="content">
-        <header class="guide-header">
+        <header class="card">
             <p class="card-meta">Videoschnitt · Open Source · Shotcut · YouTube</p>
 
             <h1>Shotcut: Ausführlicher Beginner-Guide für Videoschnitt, Ton, Effekte und Export</h1>
@@ -56,10 +56,10 @@
 
         </header>
 
-        <nav class="table-of-contents" aria-labelledby="shotcut-toc-title">
+        <nav class="card" aria-labelledby="shotcut-toc-title">
             <h2 id="shotcut-toc-title">Inhaltsverzeichnis</h2>
 
-            <ol>
+            <ol class="toc_column">
                 <li><a href="#shotcut-grundlagen">Was Shotcut ist und wofür es sich eignet</a></li>
                 <li><a href="#shotcut-installation">Installation und erste Einstellungen</a></li>
                 <li><a href="#shotcut-projektstruktur">Projektordner und Dateiverwaltung</a></li>
@@ -95,7 +95,7 @@
 
         </nav>
 
-        <section id="shotcut-grundlagen">
+        <section class="card"  id="shotcut-grundlagen">
             <h2>1. Was Shotcut ist und wofür es sich eignet</h2>
 
             <p>
@@ -202,11 +202,9 @@
             </p>
 
             <pre><code>mein_video_v01.mlt
-
-
-  mein_video_v02_rohschnitt.mlt
-  mein_video_v03_audio.mlt
-  mein_video_v04_final.mlt</code></pre>
+mein_video_v02_rohschnitt.mlt
+mein_video_v03_audio.mlt
+mein_video_v04_final.mlt</code></pre>
 
             <aside class="tip-box">
                 <h3>Easy Win: Versionen statt Überschreiben</h3>
@@ -228,18 +226,17 @@
             </p>
 
             <pre><code>Videoprojekt/
-
-  ├── 01_VIDEO_RAW/
-  ├── 02_AUDIO_RAW/
-  ├── 03_BILDER/
-  ├── 04_MUSIK/
-  ├── 05_SPRECHERTEXT/
-  ├── 06_GRAFIKEN/
-  ├── 07_PROXYS/
-  ├── 08_PROJEKTDATEIEN/
-  ├── 09_ZWISCHENEXPORTS/
-  ├── 10_FINAL/
-  └── 11_THUMBNAILS/</code></pre>
+├── 01_VIDEO_RAW/
+├── 02_AUDIO_RAW/
+├── 03_BILDER/
+├── 04_MUSIK/
+├── 05_SPRECHERTEXT/
+├── 06_GRAFIKEN/
+├── 07_PROXYS/
+├── 08_PROJEKTDATEIEN/
+├── 09_ZWISCHENEXPORTS/
+├── 10_FINAL/
+└── 11_THUMBNAILS/</code></pre>
 
 
             <h3>Warum diese Struktur wichtig ist</h3>
