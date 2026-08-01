@@ -217,7 +217,72 @@
 
 
     </section>
-    
+
+    <section id="shotcut-projektstruktur">
+      <h2>3. Projektordner und Dateiverwaltung</h2>
+
+      <p>
+        Eine saubere Dateistruktur sollte angelegt werden, bevor das erste Medium in
+        Shotcut importiert wird.
+      </p>
+
+      <pre><code>Videoprojekt/
+
+  ├── 01_VIDEO_RAW/
+  ├── 02_AUDIO_RAW/
+  ├── 03_BILDER/
+  ├── 04_MUSIK/
+  ├── 05_SPRECHERTEXT/
+  ├── 06_GRAFIKEN/
+  ├── 07_PROXYS/
+  ├── 08_PROJEKTDATEIEN/
+  ├── 09_ZWISCHENEXPORTS/
+  ├── 10_FINAL/
+  └── 11_THUMBNAILS/</code></pre>
+
+
+      <h3>Warum diese Struktur wichtig ist</h3>
+
+      <p>
+        Die Shotcut-Projektdatei besitzt normalerweise die Endung
+        <code>.mlt</code>. Sie enthält keine eingebetteten Video- oder Audiodateien,
+        sondern verweist auf deren Pfade.
+      </p>
+
+      <p>
+        Wird beispielsweise eine Videodatei nach dem Schnitt in einen anderen Ordner
+        verschoben, kann Shotcut beim nächsten Öffnen eine fehlende Datei melden.
+      </p>
+
+      <h3>Empfohlene Vorgehensweise</h3>
+
+      <ol>
+        <li>Alle benötigten Dateien in den Projektordner kopieren.</li>
+        <li>Dateien sinnvoll benennen.</li>
+        <li>Erst danach das Shotcut-Projekt anlegen.</li>
+        <li>Während der Bearbeitung keine Quelldateien verschieben.</li>
+        <li>Originaldateien nicht überschreiben.</li>
+        <li>Projekt und Medien regelmäßig sichern.</li>
+      </ol>
+
+      <h3>Sinnvolle Dateinamen</h3>
+
+      <pre><code>2026-07-01_hafen_totale_01.mp4
+
+  2026-07-01_ablegen_detail_02.mp4
+  2026-07-01_fahrt_steuerstand_03.mp4
+  sprechertext_intro_v02.wav
+  musik_ruhig_01.wav</code></pre>
+
+
+      <p>
+        Dateinamen wie <code>VID_0001.mp4</code> sind technisch möglich, aber bei
+        umfangreicheren Projekten wenig hilfreich.
+      </p>
+
+
+    </section>
+
     <hr class="divider" />
     <p class="hint"><a href="#top">↑ top</a>&emsp;<a href="/web/index.html">⌂ home</a>&emsp;<a href="../videography.html">← back</a></p>
   </main>
