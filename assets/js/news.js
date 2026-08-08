@@ -74,6 +74,7 @@
       pc_build: "PC Build",
       arduino: "Arduino",
       nas: "NAS",
+      bme_meteorology: "BME - Meteorolgy"
       
     },
     nerdism: {
