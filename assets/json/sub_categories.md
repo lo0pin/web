@@ -53,6 +53,7 @@
 - "subtopic": "pc_build"
 - "subtopic": "arduino"
 - "subtopic": "nas"
+bme_meteorology
 
 
 ## Topic nerdism
