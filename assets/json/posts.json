@@ -2689,10 +2689,10 @@
       ]
     },
     {
-      "id": "2026-04-07_electronics_oled_bme_sun_error",
+      "id": "2026-08-10_electronics_oled_bme_sun_error",
       "topic": "electronics",
       "subtopic": "oled_bme",
-      "date": "2026-04-07",
+      "date": "2026-08-10",
       "title": "When the BME280 Started Measuring the Sun",
       "format": "markdown",
       "teaser": "The BME280 window-sill setup was finally running — and then the first bright spring day immediately produced absurd temperature readings above 40 °C. The sensor was technically working, but it was clearly measuring the local solar heat trap rather than actual outdoor air.",
