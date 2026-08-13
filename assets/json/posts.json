@@ -2719,19 +2719,20 @@
         },
         {
           "src": "/web/assets/img/news/2026-08-part-eclipse_02.jpg",
+          "alt": "Homemade camera obscura pointed toward the setting Sun above the western horizon in Graz",
+          "caption": "The homemade projector facing west as the Sun approached the Plabutsch — and the local horizon began racing the astronomical maximum."
+        },
+        {
+          "src": "/web/assets/img/news/2026-08-part-eclipse_03.jpg",
           "alt": "Sextant being used during the evening observation of the partial solar eclipse in Graz",
           "caption": "A more traditional instrument joins the improvised setup — centuries of navigational optics beside a camera obscura assembled from household materials."
         },
         {
-          "src": "/web/assets/img/news/2026-08-part-eclipse_03.jpg",
+          "src": "/web/assets/img/news/2026-08-part-eclipse_04.jpg",
           "alt": "Crescent-shaped partially eclipsed Sun photographed from Graz on 12 August 2026",
           "caption": "The partially eclipsed Sun above Graz: the Moon's silhouette had already carved the solar disc into a bright crescent."
-        },
-        {
-          "src": "/web/assets/img/news/2026-08-part-eclipse_04.jpg",
-          "alt": "Homemade camera obscura pointed toward the setting Sun above the western horizon in Graz",
-          "caption": "The homemade projector facing west as the Sun approached the Plabutsch — and the local horizon began racing the astronomical maximum."
         }
+
       ]
     }
   ]
