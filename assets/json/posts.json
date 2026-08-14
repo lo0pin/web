@@ -2658,7 +2658,7 @@
     {
       "id": "2026-08-10_electronics_bme280_smoothing_analysis",
       "topic": "electronics",
-      "subtopic": "sensors",
+      "subtopic": "bme_meteorology",
       "date": "2026-08-10",
       "title": "Smoothing BME280 Data and Learning to Measure Properly",
       "format": "markdown",
@@ -2681,7 +2681,7 @@
     {
       "id": "2026-08-11_electronics_oled_bme_sun_error",
       "topic": "electronics",
-      "subtopic": "oled_bme",
+      "subtopic": "bme_meteorology",
       "date": "2026-08-11",
       "title": "When the BME280 Started Measuring the Sun",
       "format": "markdown",
@@ -2738,7 +2738,7 @@
     {
       "id": "2026-08-14_electronics_oled_bme_radiation_shield",
       "topic": "electronics",
-      "subtopic": "oled_bme",
+      "subtopic": "bme_meteorology",
       "date": "2026-08-14",
       "title": "Building a Small Radiation Shield",
       "format": "markdown",
