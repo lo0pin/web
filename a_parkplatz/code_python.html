@@ -1,0 +1,3656 @@
+<section class="card" id="python">
+
+    <h2 class="card-title">Python – ausführliche Anleitung und Nachschlagewerk</h2>
+
+    <p>
+        Python ist eine universell einsetzbare Programmiersprache, die sich durch eine vergleichsweise
+        klare, gut lesbare Syntax auszeichnet. Sie eignet sich hervorragend für Automatisierung,
+        Datenverarbeitung, Webentwicklung, wissenschaftliche Anwendungen, kleine Hilfsprogramme,
+        Kommandozeilenwerkzeuge, Serveranwendungen, Raspberry-Pi-Projekte, Elektronik,
+        Schnittstellenkommunikation und viele weitere Aufgaben.
+    </p>
+
+    <p>
+        Eine der großen Stärken von Python besteht darin, dass einfache Programme tatsächlich einfach
+        aussehen können. Gleichzeitig wächst die Sprache problemlos mit: Vom fünfzeiligen Skript zum
+        automatischen Zusammenführen von CSV-Dateien bis hin zu umfangreichen Anwendungen mit
+        Datenbanken, Webservern oder Hardwareansteuerung ist vieles mit derselben Sprache möglich.
+    </p>
+
+    <p>
+        Diese Übersicht ist nicht bloß als Cheatsheet gedacht, sondern als kompaktes
+        deutschsprachiges Nachschlagewerk. Die Beispiele konzentrieren sich bewusst auf jene
+        Sprachmittel und Werkzeuge, die man in echten Projekten regelmäßig benötigt.
+    </p>
+
+
+    <ul class="toc">
+        <li><a href="#python-grundlagen">Grundlagen und Syntax</a></li>
+        <li><a href="#python-variablen">Variablen und Zuweisungen</a></li>
+        <li><a href="#python-datentypen">Datentypen</a></li>
+        <li><a href="#python-operatoren">Operatoren</a></li>
+        <li><a href="#python-strings">Zeichenketten</a></li>
+        <li><a href="#python-listen">Listen</a></li>
+        <li><a href="#python-tupel">Tupel</a></li>
+        <li><a href="#python-dictionaries">Dictionaries</a></li>
+        <li><a href="#python-sets">Sets</a></li>
+        <li><a href="#python-slicing">Indexierung und Slicing</a></li>
+        <li><a href="#python-bedingungen">Bedingungen</a></li>
+        <li><a href="#python-schleifen">Schleifen</a></li>
+        <li><a href="#python-comprehensions">Comprehensions</a></li>
+        <li><a href="#python-funktionen">Funktionen</a></li>
+        <li><a href="#python-scope">Gültigkeitsbereiche</a></li>
+        <li><a href="#python-fehler">Fehler und Exceptions</a></li>
+        <li><a href="#python-dateien">Dateien lesen und schreiben</a></li>
+        <li><a href="#python-pathlib">Dateien und Pfade mit pathlib</a></li>
+        <li><a href="#python-csv">CSV-Dateien</a></li>
+        <li><a href="#python-json">JSON-Dateien</a></li>
+        <li><a href="#python-module">Module und Imports</a></li>
+        <li><a href="#python-main">main() und __name__</a></li>
+        <li><a href="#python-oop">Objektorientierung</a></li>
+        <li><a href="#python-dataclasses">Dataclasses</a></li>
+        <li><a href="#python-iteratoren">Iteratoren und Generatoren</a></li>
+        <li><a href="#python-context">Context Manager</a></li>
+        <li><a href="#python-typing">Type Hints</a></li>
+        <li><a href="#python-datetime">Datum und Uhrzeit</a></li>
+        <li><a href="#python-regex">Reguläre Ausdrücke</a></li>
+        <li><a href="#python-venv">Virtuelle Umgebungen</a></li>
+        <li><a href="#python-pip">Pakete mit pip</a></li>
+        <li><a href="#python-argparse">Kommandozeilenprogramme</a></li>
+        <li><a href="#python-logging">Logging</a></li>
+        <li><a href="#python-tests">Tests</a></li>
+        <li><a href="#python-debugging">Debugging</a></li>
+        <li><a href="#python-pyinstaller">Programme als EXE verteilen</a></li>
+        <li><a href="#python-style">Codequalität und Stil</a></li>
+        <li><a href="#python-fallen">Typische Fehler und Fallen</a></li>
+        <li><a href="#python-projektstruktur">Sinnvolle Projektstruktur</a></li>
+        <li><a href="#python-praxis">Praktische Regeln</a></li>
+    </ul>
+
+
+    <hr class="divider" />
+
+
+    <h3 id="python-grundlagen">1. Grundlagen und Syntax</h3>
+
+    <p>
+        Python wird üblicherweise als interpretierte Sprache verwendet. Ein Python-Programm wird
+        in einer Datei mit der Endung <code>.py</code> gespeichert und anschließend vom
+        Python-Interpreter ausgeführt.
+    </p>
+
+    <div class="cheat-grid">
+
+        <article class="cheat-item">
+            <h4>Hello World</h4>
+
+            <pre class="code"><code>print("Hallo, Welt!")</code></pre>
+
+            <p>
+                <code>print()</code> gibt einen Wert im Terminal beziehungsweise in der Konsole aus.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Python-Datei ausführen</h4>
+
+            <pre class="code"><code>python programm.py</code></pre>
+
+            <p>Je nach System wird auch folgender Befehl verwendet:</p>
+
+            <pre class="code"><code>python3 programm.py</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Einrückung ist Syntax</h4>
+
+            <pre class="code"><code>temperatur = 20
+
+if temperatur &gt; 15:
+    print("Es ist mild.")
+
+print("Programmende")</code></pre>
+
+            <p class="hint">
+                Python verwendet keine geschweiften Klammern für Codeblöcke.
+                Die Einrückung bestimmt die Struktur des Programms.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Vier Leerzeichen</h4>
+
+            <p>
+                Als Konvention werden pro Einrückungsebene vier Leerzeichen verwendet.
+            </p>
+
+            <pre class="code"><code>if bedingung:
+    if weitere_bedingung:
+        print("Zwei Ebenen eingerückt")</code></pre>
+
+            <p>
+                Tabs und Leerzeichen wild zu vermischen ist eine zuverlässige Methode,
+                sich selbst unnötige Schwierigkeiten zu bereiten.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Kommentare</h4>
+
+            <pre class="code"><code># Das ist ein Kommentar.
+
+temperatur = 21  # Kommentar am Zeilenende</code></pre>
+
+            <p>
+                Kommentare erklären vor allem das <em>Warum</em>. Offensichtlichen Code noch einmal
+                in Prosa nachzuerzählen bringt wenig.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Docstrings</h4>
+
+            <pre class="code"><code>def berechne_flaeche(breite, hoehe):
+    """
+    Berechnet die Fläche eines Rechtecks.
+
+    Parameter:
+        breite: Breite des Rechtecks
+        hoehe: Höhe des Rechtecks
+    """
+    return breite * hoehe</code></pre>
+
+            <p>
+                Dreifache Anführungszeichen werden häufig für Dokumentationsstrings von Funktionen,
+                Klassen und Modulen verwendet.
+            </p>
+        </article>
+
+    </div>
+
+
+    <hr class="divider" />
+
+
+    <h3 id="python-variablen">2. Variablen und Zuweisungen</h3>
+
+    <p>
+        Variablen speichern Referenzen auf Werte. Anders als etwa in C oder Java muss der Datentyp
+        einer Variablen normalerweise nicht ausdrücklich angegeben werden.
+    </p>
+
+    <div class="cheat-grid">
+
+        <article class="cheat-item">
+            <h4>Einfache Variablen</h4>
+
+            <pre class="code"><code>name = "Julian"
+alter = 28
+temperatur = 21.5
+ist_online = True</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Mehrere Zuweisungen</h4>
+
+            <pre class="code"><code>x, y, z = 10, 20, 30
+
+print(x)
+print(y)
+print(z)</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Werte vertauschen</h4>
+
+            <pre class="code"><code>a = 10
+b = 20
+
+a, b = b, a
+
+print(a)  # 20
+print(b)  # 10</code></pre>
+
+            <p>
+                Eine temporäre Hilfsvariable ist dafür in Python nicht notwendig.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Konstanten</h4>
+
+            <pre class="code"><code>MAXIMALE_TEMPERATUR = 80
+DATEINAME = "daten.csv"</code></pre>
+
+            <p>
+                Python besitzt keine echten Konstanten. Großgeschriebene Namen sind eine Konvention:
+                „Dieser Wert soll nicht verändert werden.“
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Variablennamen</h4>
+
+            <pre class="code"><code>temperatur_celsius = 22.5
+anzahl_messungen = 17
+csv_datei = "daten.csv"</code></pre>
+
+            <p>
+                Für Variablen und Funktionen wird normalerweise
+                <code>snake_case</code> verwendet.
+            </p>
+        </article>
+
+    </div>
+
+
+    <hr class="divider" />
+
+
+    <h3 id="python-datentypen">3. Datentypen</h3>
+
+    <div class="cheat-grid">
+
+        <article class="cheat-item">
+            <h4>Wichtige elementare Datentypen</h4>
+
+            <pre class="code"><code>text = "Hallo"       # str
+zahl = 42            # int
+kommazahl = 3.1415   # float
+aktiv = True         # bool
+nichts = None        # NoneType</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Datentyp prüfen</h4>
+
+            <pre class="code"><code>wert = 42
+
+print(type(wert))</code></pre>
+
+            <p>Ausgabe:</p>
+
+            <pre class="code"><code>&lt;class 'int'&gt;</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Datentypen umwandeln</h4>
+
+            <pre class="code"><code>text = "42"
+
+zahl = int(text)
+kommazahl = float(text)
+neuer_text = str(zahl)
+
+print(zahl + 8)</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Boolean-Werte</h4>
+
+            <pre class="code"><code>aktiv = True
+fehler = False
+
+if aktiv:
+    print("System aktiv")</code></pre>
+
+            <p>
+                Die Python-Werte heißen exakt <code>True</code> und <code>False</code>,
+                jeweils mit großem Anfangsbuchstaben.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>None</h4>
+
+            <pre class="code"><code>ergebnis = None
+
+if ergebnis is None:
+    print("Noch kein Ergebnis vorhanden")</code></pre>
+
+            <p>
+                <code>None</code> repräsentiert das Fehlen eines Wertes.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Mutable und immutable</h4>
+
+            <p>
+                Manche Python-Objekte können nach ihrer Erzeugung verändert werden,
+                andere nicht.
+            </p>
+
+            <ul>
+                <li><strong>Veränderbar:</strong> Listen, Dictionaries, Sets</li>
+                <li><strong>Nicht veränderbar:</strong> Strings, Zahlen, Tupel</li>
+            </ul>
+        </article>
+
+    </div>
+
+
+    <hr class="divider" />
+
+
+    <h3 id="python-operatoren">4. Operatoren</h3>
+
+    <div class="cheat-grid">
+
+        <article class="cheat-item">
+            <h4>Arithmetische Operatoren</h4>
+
+            <pre class="code"><code>a + b    # Addition
+a - b    # Subtraktion
+a * b    # Multiplikation
+a / b    # Division
+a // b   # Ganzzahldivision
+a % b    # Rest / Modulo
+a ** b   # Potenz</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Beispiel</h4>
+
+            <pre class="code"><code>print(10 / 3)   # 3.333...
+print(10 // 3)  # 3
+print(10 % 3)   # 1
+print(2 ** 8)   # 256</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Vergleichsoperatoren</h4>
+
+            <pre class="code"><code>x == 10   # gleich
+x != 10   # ungleich
+x &gt; 10    # größer
+x &lt; 10    # kleiner
+x &gt;= 10   # größer oder gleich
+x &lt;= 10   # kleiner oder gleich</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Logische Operatoren</h4>
+
+            <pre class="code"><code>if alter &gt;= 18 and land == "AT":
+    print("Bedingungen erfüllt")
+
+if ist_admin or ist_editor:
+    print("Bearbeitung erlaubt")
+
+if not aktiv:
+    print("Nicht aktiv")</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Zuweisungsoperatoren</h4>
+
+            <pre class="code"><code>x = 10
+
+x += 2
+x -= 3
+x *= 4
+x /= 2</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>is und == sind nicht dasselbe</h4>
+
+            <pre class="code"><code>a == b   # Haben die Objekte denselben Wert?
+a is b   # Sind es tatsächlich dieselben Objekte?</code></pre>
+
+            <p>
+                Für normale Wertevergleiche verwendet man <code>==</code>.
+                <code>is</code> wird insbesondere bei <code>None</code> verwendet.
+            </p>
+
+            <pre class="code"><code>if wert is None:
+    print("Kein Wert")</code></pre>
+        </article>
+
+    </div>
+
+
+    <hr class="divider" />
+
+
+    <h3 id="python-strings">5. Zeichenketten – Strings</h3>
+
+    <p>
+        Zeichenketten sind Folgen von Zeichen und gehören zu den meistverwendeten Datentypen überhaupt.
+    </p>
+
+    <div class="cheat-grid">
+
+        <article class="cheat-item">
+            <h4>Strings erzeugen</h4>
+
+            <pre class="code"><code>text1 = "Hallo"
+text2 = 'Python'</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>String verketten</h4>
+
+            <pre class="code"><code>vorname = "Max"
+nachname = "Mustermann"
+
+name = vorname + " " + nachname
+
+print(name)</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>f-Strings</h4>
+
+            <pre class="code"><code>name = "Max"
+alter = 28
+
+print(f"{name} ist {alter} Jahre alt.")</code></pre>
+
+            <p class="hint">
+                f-Strings sind meistens die angenehmste Art, Werte in Text einzubauen.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Zahlen formatieren</h4>
+
+            <pre class="code"><code>temperatur = 21.5678
+
+print(f"{temperatur:.1f} °C")
+print(f"{temperatur:.2f} °C")</code></pre>
+
+            <p>Ausgabe:</p>
+
+            <pre class="code"><code>21.6 °C
+21.57 °C</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Nützliche String-Methoden</h4>
+
+            <pre class="code"><code>text = "  Hallo Python  "
+
+print(text.strip())
+print(text.lower())
+print(text.upper())
+print(text.replace("Python", "Welt"))
+print(text.startswith("  Hallo"))
+print(text.endswith("  "))</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>String aufteilen</h4>
+
+            <pre class="code"><code>daten = "Temperatur;Luftdruck;Feuchtigkeit"
+
+teile = daten.split(";")
+
+print(teile)</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Liste zu String verbinden</h4>
+
+            <pre class="code"><code>woerter = ["Python", "ist", "praktisch"]
+
+satz = " ".join(woerter)
+
+print(satz)</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Mehrzeilige Strings</h4>
+
+            <pre class="code"><code>text = """Erste Zeile
+Zweite Zeile
+Dritte Zeile"""
+
+print(text)</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Escape-Sequenzen</h4>
+
+            <pre class="code"><code>print("Zeile 1\nZeile 2")
+print("Name:\tMax")
+print("Er sagte: \"Hallo\"")</code></pre>
+
+            <ul>
+                <li><code>\n</code> – Zeilenumbruch</li>
+                <li><code>\t</code> – Tabulator</li>
+                <li><code>\"</code> – Anführungszeichen</li>
+                <li><code>\\</code> – Backslash</li>
+            </ul>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Raw Strings</h4>
+
+            <pre class="code"><code>pfad = r"C:\Users\Max\Documents"
+
+print(pfad)</code></pre>
+
+            <p>
+                Das Präfix <code>r</code> verhindert, dass Backslashes als Escape-Sequenzen
+                interpretiert werden.
+            </p>
+        </article>
+
+    </div>
+
+
+    <hr class="divider" />
+
+
+    <h3 id="python-listen">6. Listen</h3>
+
+    <p>
+        Listen speichern mehrere Werte in einer geordneten, veränderbaren Sammlung.
+    </p>
+
+    <div class="cheat-grid">
+
+        <article class="cheat-item">
+            <h4>Liste erzeugen</h4>
+
+            <pre class="code"><code>farben = ["rot", "grün", "blau"]
+
+print(farben)</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Element abrufen</h4>
+
+            <pre class="code"><code>farben = ["rot", "grün", "blau"]
+
+print(farben[0])
+print(farben[1])
+print(farben[-1])</code></pre>
+
+            <p>
+                Der erste Index ist <code>0</code>. Negative Indizes zählen vom Ende.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Element hinzufügen</h4>
+
+            <pre class="code"><code>farben = ["rot", "grün"]
+
+farben.append("blau")</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Mehrere Elemente hinzufügen</h4>
+
+            <pre class="code"><code>farben = ["rot"]
+
+farben.extend(["grün", "blau"])</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Element einfügen</h4>
+
+            <pre class="code"><code>farben = ["rot", "blau"]
+
+farben.insert(1, "grün")</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Element entfernen</h4>
+
+            <pre class="code"><code>farben = ["rot", "grün", "blau"]
+
+farben.remove("grün")</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Element mit pop() entfernen</h4>
+
+            <pre class="code"><code>farben = ["rot", "grün", "blau"]
+
+letztes_element = farben.pop()
+
+print(letztes_element)</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Länge bestimmen</h4>
+
+            <pre class="code"><code>farben = ["rot", "grün", "blau"]
+
+print(len(farben))</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Sortieren</h4>
+
+            <pre class="code"><code>zahlen = [5, 2, 8, 1]
+
+zahlen.sort()
+
+print(zahlen)</code></pre>
+
+            <p>Absteigend:</p>
+
+            <pre class="code"><code>zahlen.sort(reverse=True)</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Neue sortierte Liste</h4>
+
+            <pre class="code"><code>zahlen = [5, 2, 8, 1]
+
+sortiert = sorted(zahlen)</code></pre>
+
+            <p>
+                <code>sort()</code> verändert die vorhandene Liste.
+                <code>sorted()</code> liefert eine neue Liste zurück.
+            </p>
+        </article>
+
+    </div>
+
+
+    <hr class="divider" />
+
+
+    <h3 id="python-tupel">7. Tupel</h3>
+
+    <p>
+        Tupel ähneln Listen, können nach ihrer Erstellung jedoch nicht verändert werden.
+    </p>
+
+    <div class="cheat-grid">
+
+        <article class="cheat-item">
+            <h4>Tupel erzeugen</h4>
+
+            <pre class="code"><code>koordinaten = (47.0707, 15.4395)
+
+print(koordinaten[0])</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Tuple Unpacking</h4>
+
+            <pre class="code"><code>koordinaten = (47.0707, 15.4395)
+
+breitengrad, laengengrad = koordinaten
+
+print(breitengrad)
+print(laengengrad)</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Wann sind Tupel sinnvoll?</h4>
+
+            <p>
+                Tupel eignen sich besonders für zusammengehörige Werte, deren Struktur
+                nicht verändert werden soll, beispielsweise Koordinaten oder RGB-Werte.
+            </p>
+        </article>
+
+    </div>
+
+
+    <hr class="divider" />
+
+
+    <h3 id="python-dictionaries">8. Dictionaries</h3>
+
+    <p>
+        Dictionaries speichern Werte als Schlüssel-Wert-Paare. Sie gehören zu den praktischsten
+        Datenstrukturen in Python.
+    </p>
+
+    <div class="cheat-grid">
+
+        <article class="cheat-item">
+            <h4>Dictionary erzeugen</h4>
+
+            <pre class="code"><code>person = {
+    "name": "Max",
+    "alter": 28,
+    "stadt": "Graz"
+}</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Wert auslesen</h4>
+
+            <pre class="code"><code>print(person["name"])</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>get()</h4>
+
+            <pre class="code"><code>print(person.get("alter"))
+
+print(person.get("beruf", "nicht angegeben"))</code></pre>
+
+            <p>
+                <code>get()</code> ist praktisch, wenn ein Schlüssel möglicherweise
+                nicht vorhanden ist.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Wert ändern</h4>
+
+            <pre class="code"><code>person["alter"] = 29</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Neuen Wert hinzufügen</h4>
+
+            <pre class="code"><code>person["beruf"] = "Entwickler"</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Über Dictionary iterieren</h4>
+
+            <pre class="code"><code>for schluessel, wert in person.items():
+    print(schluessel, wert)</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Nur Schlüssel</h4>
+
+            <pre class="code"><code>for schluessel in person:
+    print(schluessel)</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Nur Werte</h4>
+
+            <pre class="code"><code>for wert in person.values():
+    print(wert)</code></pre>
+        </article>
+
+    </div>
+
+
+    <hr class="divider" />
+
+
+    <h3 id="python-sets">9. Sets</h3>
+
+    <p>
+        Sets sind ungeordnete Mengen eindeutiger Werte. Doppelte Elemente werden automatisch entfernt.
+    </p>
+
+    <div class="cheat-grid">
+
+        <article class="cheat-item">
+            <h4>Set erzeugen</h4>
+
+            <pre class="code"><code>zahlen = {1, 2, 3, 3, 4}
+
+print(zahlen)</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Doppelte Werte entfernen</h4>
+
+            <pre class="code"><code>namen = ["Anna", "Max", "Anna", "Peter"]
+
+eindeutig = set(namen)
+
+print(eindeutig)</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Mengenoperationen</h4>
+
+            <pre class="code"><code>a = {1, 2, 3}
+b = {3, 4, 5}
+
+print(a | b)  # Vereinigung
+print(a &amp; b)  # Schnittmenge
+print(a - b)  # Differenz</code></pre>
+        </article>
+
+    </div>
+
+
+    <hr class="divider" />
+
+
+    <h3 id="python-slicing">10. Indexierung und Slicing</h3>
+
+    <p>
+        Mit Slicing lassen sich Ausschnitte aus Listen, Strings und anderen Sequenzen gewinnen.
+    </p>
+
+    <div class="cheat-grid">
+
+        <article class="cheat-item">
+            <h4>Grundprinzip</h4>
+
+            <pre class="code"><code>werte = [10, 20, 30, 40, 50]
+
+print(werte[1:4])</code></pre>
+
+            <p>Ergebnis:</p>
+
+            <pre class="code"><code>[20, 30, 40]</code></pre>
+
+            <p>
+                Der Startindex wird eingeschlossen, der Endindex nicht.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Vom Anfang</h4>
+
+            <pre class="code"><code>werte[:3]</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Bis zum Ende</h4>
+
+            <pre class="code"><code>werte[2:]</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Schrittweite</h4>
+
+            <pre class="code"><code>werte[::2]</code></pre>
+
+            <p>Nimmt jedes zweite Element.</p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Reihenfolge umdrehen</h4>
+
+            <pre class="code"><code>werte[::-1]</code></pre>
+        </article>
+
+    </div>
+
+
+    <hr class="divider" />
+
+
+    <h3 id="python-bedingungen">11. Bedingungen</h3>
+
+    <div class="cheat-grid">
+
+        <article class="cheat-item">
+            <h4>if</h4>
+
+            <pre class="code"><code>temperatur = 25
+
+if temperatur &gt; 20:
+    print("Warm")</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>if / else</h4>
+
+            <pre class="code"><code>alter = 17
+
+if alter &gt;= 18:
+    print("Volljährig")
+else:
+    print("Minderjährig")</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>if / elif / else</h4>
+
+            <pre class="code"><code>temperatur = 18
+
+if temperatur &gt; 25:
+    print("Warm")
+elif temperatur &gt; 15:
+    print("Mild")
+elif temperatur &gt; 5:
+    print("Kühl")
+else:
+    print("Kalt")</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Mehrere Bedingungen</h4>
+
+            <pre class="code"><code>temperatur = 22
+sonnig = True
+
+if temperatur &gt; 20 and sonnig:
+    print("Gutes Wetter")</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Membership-Test mit in</h4>
+
+            <pre class="code"><code>farben = ["rot", "grün", "blau"]
+
+if "grün" in farben:
+    print("Grün ist vorhanden")</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Truthy und Falsy</h4>
+
+            <pre class="code"><code>liste = []
+
+if liste:
+    print("Liste enthält Werte")
+else:
+    print("Liste ist leer")</code></pre>
+
+            <p>Als falsch gelten unter anderem:</p>
+
+            <ul>
+                <li><code>False</code></li>
+                <li><code>None</code></li>
+                <li><code>0</code></li>
+                <li><code>0.0</code></li>
+                <li><code>""</code></li>
+                <li><code>[]</code></li>
+                <li><code>{}</code></li>
+                <li><code>set()</code></li>
+            </ul>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Kurzform einer Bedingung</h4>
+
+            <pre class="code"><code>alter = 20
+
+status = "volljährig" if alter &gt;= 18 else "minderjährig"
+
+print(status)</code></pre>
+
+            <p>
+                Das ist der sogenannte bedingte Ausdruck oder ternäre Ausdruck.
+            </p>
+        </article>
+
+    </div>
+
+
+    <hr class="divider" />
+
+
+    <h3 id="python-schleifen">12. Schleifen</h3>
+
+    <div class="cheat-grid">
+
+        <article class="cheat-item">
+            <h4>for-Schleife</h4>
+
+            <pre class="code"><code>for zahl in range(5):
+    print(zahl)</code></pre>
+
+            <p>Ausgabe: 0 bis 4.</p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>range()</h4>
+
+            <pre class="code"><code>range(5)         # 0, 1, 2, 3, 4
+range(2, 6)      # 2, 3, 4, 5
+range(0, 10, 2)  # 0, 2, 4, 6, 8</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Liste durchlaufen</h4>
+
+            <pre class="code"><code>farben = ["rot", "grün", "blau"]
+
+for farbe in farben:
+    print(farbe)</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>enumerate()</h4>
+
+            <pre class="code"><code>farben = ["rot", "grün", "blau"]
+
+for index, farbe in enumerate(farben):
+    print(index, farbe)</code></pre>
+
+            <p>
+                Damit erhält man gleichzeitig Index und Wert.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>enumerate() ab 1</h4>
+
+            <pre class="code"><code>for nummer, farbe in enumerate(farben, start=1):
+    print(nummer, farbe)</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>zip()</h4>
+
+            <pre class="code"><code>namen = ["Anna", "Max", "Peter"]
+alter = [30, 28, 41]
+
+for name, jahre in zip(namen, alter):
+    print(name, jahre)</code></pre>
+
+            <p>
+                <code>zip()</code> verbindet mehrere Sequenzen elementweise.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>while-Schleife</h4>
+
+            <pre class="code"><code>zaehler = 0
+
+while zaehler &lt; 5:
+    print(zaehler)
+    zaehler += 1</code></pre>
+
+            <p class="hint">
+                Bei <code>while</code> muss sichergestellt sein, dass die Abbruchbedingung
+                irgendwann erreicht wird. Sonst entsteht eine Endlosschleife.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>break</h4>
+
+            <pre class="code"><code>for zahl in range(100):
+    if zahl == 10:
+        break
+
+    print(zahl)</code></pre>
+
+            <p>
+                <code>break</code> beendet die Schleife vollständig.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>continue</h4>
+
+            <pre class="code"><code>for zahl in range(10):
+    if zahl == 5:
+        continue
+
+    print(zahl)</code></pre>
+
+            <p>
+                <code>continue</code> überspringt lediglich den aktuellen Durchlauf.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Schleifen mit else</h4>
+
+            <pre class="code"><code>for zahl in range(5):
+    if zahl == 10:
+        break
+else:
+    print("Die Schleife wurde nicht mit break beendet.")</code></pre>
+
+            <p>
+                Diese Konstruktion ist weniger bekannt, kann bei Suchvorgängen aber elegant sein.
+            </p>
+        </article>
+
+    </div>
+
+
+    <hr class="divider" />
+
+
+    <h3 id="python-comprehensions">13. Comprehensions</h3>
+
+    <p>
+        Comprehensions erzeugen Collections kompakt aus anderen iterierbaren Objekten.
+        Sie sind sehr praktisch, sollten aber lesbar bleiben.
+    </p>
+
+    <div class="cheat-grid">
+
+        <article class="cheat-item">
+            <h4>List Comprehension</h4>
+
+            <pre class="code"><code>quadrate = [zahl ** 2 for zahl in range(10)]
+
+print(quadrate)</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Mit Bedingung</h4>
+
+            <pre class="code"><code>gerade = [
+    zahl
+    for zahl in range(20)
+    if zahl % 2 == 0
+]</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Dictionary Comprehension</h4>
+
+            <pre class="code"><code>quadrate = {
+    zahl: zahl ** 2
+    for zahl in range(5)
+}</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Set Comprehension</h4>
+
+            <pre class="code"><code>reste = {
+    zahl % 3
+    for zahl in range(20)
+}</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Nicht übertreiben</h4>
+
+            <p>
+                Eine einfache Comprehension ist elegant. Eine dreifach verschachtelte Comprehension
+                mit mehreren Bedingungen ist oftmals bloß eine gewöhnliche Schleife im Abendkleid.
+                Lesbarkeit geht vor Kürze.
+            </p>
+        </article>
+
+    </div>
+
+
+    <hr class="divider" />
+
+
+    <h3 id="python-funktionen">14. Funktionen</h3>
+
+    <p>
+        Funktionen zerlegen Programme in kleinere, wiederverwendbare Einheiten. Gut strukturierter
+        Python-Code besteht normalerweise aus mehreren überschaubaren Funktionen statt aus einem
+        gewaltigen linearen Skript.
+    </p>
+
+    <div class="cheat-grid">
+
+        <article class="cheat-item">
+            <h4>Funktion definieren</h4>
+
+            <pre class="code"><code>def begruessung(name):
+    print(f"Hallo, {name}!")
+
+begruessung("Max")</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Wert zurückgeben</h4>
+
+            <pre class="code"><code>def addiere(a, b):
+    return a + b
+
+ergebnis = addiere(5, 7)
+
+print(ergebnis)</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Mehrere Werte zurückgeben</h4>
+
+            <pre class="code"><code>def min_max(werte):
+    return min(werte), max(werte)
+
+minimum, maximum = min_max([4, 8, 1, 9])</code></pre>
+
+            <p>
+                Technisch wird dabei ein Tupel zurückgegeben.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Standardargumente</h4>
+
+            <pre class="code"><code>def begruessung(name="Welt"):
+    print(f"Hallo, {name}!")
+
+begruessung()
+begruessung("Max")</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Keyword-Argumente</h4>
+
+            <pre class="code"><code>def beschreibe(name, alter, stadt):
+    print(name, alter, stadt)
+
+beschreibe(
+    stadt="Graz",
+    name="Max",
+    alter=28
+)</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>*args</h4>
+
+            <pre class="code"><code>def summiere(*zahlen):
+    return sum(zahlen)
+
+print(summiere(1, 2, 3, 4, 5))</code></pre>
+
+            <p>
+                <code>*args</code> nimmt eine beliebige Anzahl positionsbasierter Argumente entgegen.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>**kwargs</h4>
+
+            <pre class="code"><code>def anzeigen(**daten):
+    for schluessel, wert in daten.items():
+        print(schluessel, wert)
+
+anzeigen(
+    name="Max",
+    alter=28,
+    stadt="Graz"
+)</code></pre>
+
+            <p>
+                <code>**kwargs</code> sammelt benannte Argumente in einem Dictionary.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Lambda-Funktionen</h4>
+
+            <pre class="code"><code>verdoppeln = lambda x: x * 2
+
+print(verdoppeln(5))</code></pre>
+
+            <p>
+                Lambdas eignen sich für sehr kleine anonyme Funktionen, beispielsweise als
+                Sortierschlüssel.
+            </p>
+
+            <pre class="code"><code>personen = [
+    {"name": "Anna", "alter": 32},
+    {"name": "Max", "alter": 25}
+]
+
+personen.sort(key=lambda person: person["alter"])</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Docstring einer Funktion</h4>
+
+            <pre class="code"><code>def celsius_zu_fahrenheit(celsius):
+    """Wandelt Celsius in Fahrenheit um."""
+    return celsius * 9 / 5 + 32</code></pre>
+        </article>
+
+    </div>
+
+
+    <hr class="divider" />
+
+
+    <h3 id="python-scope">15. Gültigkeitsbereiche von Variablen</h3>
+
+    <div class="cheat-grid">
+
+        <article class="cheat-item">
+            <h4>Lokale Variable</h4>
+
+            <pre class="code"><code>def funktion():
+    wert = 10
+    print(wert)
+
+funktion()</code></pre>
+
+            <p>
+                <code>wert</code> existiert in diesem Beispiel nur innerhalb der Funktion.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Globale Variable</h4>
+
+            <pre class="code"><code>temperatur = 20
+
+def anzeigen():
+    print(temperatur)
+
+anzeigen()</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>global</h4>
+
+            <pre class="code"><code>zaehler = 0
+
+def erhoehen():
+    global zaehler
+    zaehler += 1</code></pre>
+
+            <p class="hint">
+                Globale Variablen sind gelegentlich nützlich, in größeren Programmen aber häufig
+                ein Zeichen dafür, dass die Struktur verbessert werden könnte.
+            </p>
+        </article>
+
+    </div>
+
+
+    <hr class="divider" />
+
+
+    <h3 id="python-fehler">16. Fehler und Exceptions</h3>
+
+    <p>
+        Fehler gehören zum Programmieren. Entscheidend ist nicht, sie vollständig zu vermeiden,
+        sondern sie kontrolliert zu erkennen und sinnvoll zu behandeln.
+    </p>
+
+    <div class="cheat-grid">
+
+        <article class="cheat-item">
+            <h4>try / except</h4>
+
+            <pre class="code"><code>try:
+    zahl = int("abc")
+except ValueError:
+    print("Keine gültige Ganzzahl.")</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Mehrere Fehlertypen</h4>
+
+            <pre class="code"><code>try:
+    zahl = int(eingabe)
+    ergebnis = 100 / zahl
+
+except ValueError:
+    print("Ungültige Zahl.")
+
+except ZeroDivisionError:
+    print("Division durch null ist nicht möglich.")</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>else</h4>
+
+            <pre class="code"><code>try:
+    zahl = int("42")
+except ValueError:
+    print("Fehler")
+else:
+    print("Erfolgreich:", zahl)</code></pre>
+
+            <p>
+                <code>else</code> wird nur ausgeführt, wenn im <code>try</code>-Block
+                keine Exception auftritt.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>finally</h4>
+
+            <pre class="code"><code>try:
+    print("Versuch")
+finally:
+    print("Dieser Block läuft immer.")</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Eigene Exception auslösen</h4>
+
+            <pre class="code"><code>alter = -5
+
+if alter &lt; 0:
+    raise ValueError("Das Alter darf nicht negativ sein.")</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Nicht alles blind abfangen</h4>
+
+            <pre class="code"><code>try:
+    irgendetwas()
+except Exception as fehler:
+    print(fehler)</code></pre>
+
+            <p>
+                Ein allgemeines <code>except Exception</code> kann sinnvoll sein, sollte aber
+                bewusst eingesetzt werden. Präzise Fehlertypen sind meist besser.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Traceback lesen</h4>
+
+            <p>
+                Bei einem unbehandelten Fehler zeigt Python einen sogenannten Traceback an.
+                Besonders wichtig sind:
+            </p>
+
+            <ul>
+                <li>Dateiname</li>
+                <li>Zeilennummer</li>
+                <li>Fehlertyp</li>
+                <li>Fehlermeldung</li>
+            </ul>
+
+            <p>
+                Der letzte Eintrag des Tracebacks ist meist der beste Ausgangspunkt für die Fehlersuche.
+            </p>
+        </article>
+
+    </div>
+
+
+    <hr class="divider" />
+
+
+    <h3 id="python-dateien">17. Dateien lesen und schreiben</h3>
+
+    <div class="cheat-grid">
+
+        <article class="cheat-item">
+            <h4>Datei vollständig lesen</h4>
+
+            <pre class="code"><code>with open("notizen.txt", "r", encoding="utf-8") as datei:
+    inhalt = datei.read()
+
+print(inhalt)</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Datei zeilenweise lesen</h4>
+
+            <pre class="code"><code>with open("daten.txt", "r", encoding="utf-8") as datei:
+    for zeile in datei:
+        print(zeile.strip())</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Datei schreiben</h4>
+
+            <pre class="code"><code>with open("ausgabe.txt", "w", encoding="utf-8") as datei:
+    datei.write("Hallo Welt!\n")</code></pre>
+
+            <p class="hint">
+                <code>"w"</code> überschreibt eine bereits vorhandene Datei.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>An bestehende Datei anhängen</h4>
+
+            <pre class="code"><code>with open("log.txt", "a", encoding="utf-8") as datei:
+    datei.write("Neuer Eintrag\n")</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Dateimodi</h4>
+
+            <ul>
+                <li><code>r</code> – lesen</li>
+                <li><code>w</code> – schreiben und überschreiben</li>
+                <li><code>a</code> – anhängen</li>
+                <li><code>x</code> – neue Datei erzeugen, Fehler falls vorhanden</li>
+                <li><code>b</code> – Binärmodus</li>
+            </ul>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Warum with?</h4>
+
+            <p>
+                Der <code>with</code>-Block sorgt dafür, dass die Datei zuverlässig geschlossen
+                wird – auch wenn innerhalb des Blocks ein Fehler auftritt.
+            </p>
+        </article>
+
+    </div>
+
+
+    <hr class="divider" />
+
+
+    <h3 id="python-pathlib">18. Dateien und Pfade mit pathlib</h3>
+
+    <p>
+        Für moderne Python-Programme ist <code>pathlib</code> oft angenehmer und lesbarer als
+        das manuelle Zusammensetzen von Dateipfaden.
+    </p>
+
+    <div class="cheat-grid">
+
+        <article class="cheat-item">
+            <h4>Path importieren</h4>
+
+            <pre class="code"><code>from pathlib import Path</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Aktuelles Verzeichnis</h4>
+
+            <pre class="code"><code>from pathlib import Path
+
+ordner = Path.cwd()
+
+print(ordner)</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Verzeichnis der Python-Datei</h4>
+
+            <pre class="code"><code>from pathlib import Path
+
+basisordner = Path(__file__).resolve().parent
+
+print(basisordner)</code></pre>
+
+            <p class="hint">
+                Das ist besonders nützlich, wenn ein Skript Dateien aus demselben Ordner
+                wie die <code>.py</code>-Datei verarbeiten soll.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Pfade zusammensetzen</h4>
+
+            <pre class="code"><code>basisordner = Path(__file__).resolve().parent
+
+datei = basisordner / "daten" / "messwerte.csv"</code></pre>
+
+            <p>
+                Dadurch muss man sich nicht selbst mit Windows- und Linux-Pfadtrennern herumschlagen.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Prüfen, ob Datei existiert</h4>
+
+            <pre class="code"><code>if datei.exists():
+    print("Datei vorhanden")</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Dateien suchen</h4>
+
+            <pre class="code"><code>ordner = Path("daten")
+
+for datei in ordner.glob("*.csv"):
+    print(datei)</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Rekursiv suchen</h4>
+
+            <pre class="code"><code>for datei in ordner.rglob("*.csv"):
+    print(datei)</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Dateiname und Endung</h4>
+
+            <pre class="code"><code>datei = Path("messungen.csv")
+
+print(datei.name)
+print(datei.stem)
+print(datei.suffix)</code></pre>
+        </article>
+
+    </div>
+
+
+    <hr class="divider" />
+
+
+    <h3 id="python-csv">19. CSV-Dateien</h3>
+
+    <p>
+        Python besitzt mit dem Modul <code>csv</code> bereits in der Standardbibliothek
+        Werkzeuge zum Lesen und Schreiben von CSV-Dateien.
+    </p>
+
+    <div class="cheat-grid">
+
+        <article class="cheat-item">
+            <h4>CSV lesen</h4>
+
+            <pre class="code"><code>import csv
+
+with open("daten.csv", "r", encoding="utf-8", newline="") as datei:
+    reader = csv.reader(datei)
+
+    for zeile in reader:
+        print(zeile)</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Semikolon als Trennzeichen</h4>
+
+            <pre class="code"><code>reader = csv.reader(
+    datei,
+    delimiter=";"
+)</code></pre>
+
+            <p>
+                Gerade deutschsprachige Tabellenkalkulationen verwenden häufig Semikolon
+                statt Komma als Feldtrenner.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>CSV schreiben</h4>
+
+            <pre class="code"><code>import csv
+
+daten = [
+    ["Zeit", "Temperatur"],
+    ["12:00", 21.5],
+    ["13:00", 22.1]
+]
+
+with open("ausgabe.csv", "w", encoding="utf-8", newline="") as datei:
+    writer = csv.writer(datei)
+
+    writer.writerows(daten)</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>DictReader</h4>
+
+            <pre class="code"><code>import csv
+
+with open("daten.csv", encoding="utf-8", newline="") as datei:
+    reader = csv.DictReader(datei)
+
+    for zeile in reader:
+        print(zeile["Temperatur"])</code></pre>
+
+            <p>
+                <code>DictReader</code> verwendet die Kopfzeile als Schlüssel.
+                Das macht Code häufig deutlich verständlicher.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Mehrere CSV-Dateien finden</h4>
+
+            <pre class="code"><code>from pathlib import Path
+
+ordner = Path(__file__).resolve().parent
+
+dateien = sorted(ordner.glob("*.csv"))
+
+for datei in dateien:
+    print(datei.name)</code></pre>
+        </article>
+
+    </div>
+
+
+    <hr class="divider" />
+
+
+    <h3 id="python-json">20. JSON</h3>
+
+    <p>
+        JSON ist eines der wichtigsten Austauschformate für strukturierte Daten und wird
+        beispielsweise von Web-APIs, Konfigurationsdateien und vielen Programmen verwendet.
+    </p>
+
+    <div class="cheat-grid">
+
+        <article class="cheat-item">
+            <h4>JSON-Datei lesen</h4>
+
+            <pre class="code"><code>import json
+
+with open("daten.json", "r", encoding="utf-8") as datei:
+    daten = json.load(datei)
+
+print(daten)</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>JSON-Datei schreiben</h4>
+
+            <pre class="code"><code>import json
+
+daten = {
+    "name": "Sensor 1",
+    "temperatur": 21.7
+}
+
+with open("daten.json", "w", encoding="utf-8") as datei:
+    json.dump(
+        daten,
+        datei,
+        indent=4,
+        ensure_ascii=False
+    )</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>JSON-String einlesen</h4>
+
+            <pre class="code"><code>import json
+
+text = '{"name": "Sensor", "wert": 42}'
+
+daten = json.loads(text)</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Python zu JSON-String</h4>
+
+            <pre class="code"><code>text = json.dumps(
+    daten,
+    indent=4,
+    ensure_ascii=False
+)</code></pre>
+        </article>
+
+    </div>
+
+
+    <hr class="divider" />
+
+
+    <h3 id="python-module">21. Module und Imports</h3>
+
+    <p>
+        Python-Programme lassen sich auf mehrere Dateien aufteilen. Eine Python-Datei kann dabei
+        als Modul in eine andere importiert werden.
+    </p>
+
+    <div class="cheat-grid">
+
+        <article class="cheat-item">
+            <h4>Ganzes Modul importieren</h4>
+
+            <pre class="code"><code>import math
+
+wurzel = math.sqrt(16)
+
+print(wurzel)</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Einzelne Funktion importieren</h4>
+
+            <pre class="code"><code>from math import sqrt
+
+print(sqrt(25))</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Alias verwenden</h4>
+
+            <pre class="code"><code>import datetime as dt
+
+jetzt = dt.datetime.now()</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Eigenes Modul</h4>
+
+            <p>Datei <code>berechnungen.py</code>:</p>
+
+            <pre class="code"><code>def addiere(a, b):
+    return a + b</code></pre>
+
+            <p>Andere Datei:</p>
+
+            <pre class="code"><code>from berechnungen import addiere
+
+print(addiere(2, 3))</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Nützliche Standardmodule</h4>
+
+            <pre class="code"><code>import csv
+import json
+import math
+import random
+import statistics
+import datetime
+import logging
+import argparse
+import subprocess
+import shutil
+import re
+
+from pathlib import Path</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Wildcard-Import vermeiden</h4>
+
+            <pre class="code"><code>from modul import *</code></pre>
+
+            <p>
+                Diese Schreibweise sollte gewöhnlich vermieden werden, weil nicht mehr klar
+                erkennbar ist, welche Namen aus welchem Modul stammen.
+            </p>
+        </article>
+
+    </div>
+
+
+    <hr class="divider" />
+
+
+    <h3 id="python-main">22. main() und __name__</h3>
+
+    <p>
+        Für ausführbare Python-Skripte ist es gute Praxis, den eigentlichen Programmeinstieg
+        in eine Funktion namens <code>main()</code> zu legen.
+    </p>
+
+    <div class="cheat-grid">
+
+        <article class="cheat-item">
+            <h4>Typischer Aufbau</h4>
+
+            <pre class="code"><code>def main():
+    print("Programm wird ausgeführt.")
+
+
+if __name__ == "__main__":
+    main()</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Warum?</h4>
+
+            <p>
+                Wird die Datei direkt ausgeführt, besitzt <code>__name__</code> den Wert
+                <code>"__main__"</code>.
+            </p>
+
+            <p>
+                Wird dieselbe Datei hingegen importiert, wird <code>main()</code> nicht automatisch
+                gestartet. Dadurch können Funktionen eines Skripts auch von anderen Programmen
+                verwendet werden.
+            </p>
+        </article>
+
+    </div>
+
+
+    <hr class="divider" />
+
+
+    <h3 id="python-oop">23. Objektorientierte Programmierung</h3>
+
+    <p>
+        Mit Klassen lassen sich Daten und dazugehörige Funktionen zu eigenen Objekttypen
+        zusammenfassen.
+    </p>
+
+    <div class="cheat-grid">
+
+        <article class="cheat-item">
+            <h4>Einfache Klasse</h4>
+
+            <pre class="code"><code>class Sensor:
+    def __init__(self, name, temperatur):
+        self.name = name
+        self.temperatur = temperatur
+
+    def anzeigen(self):
+        print(
+            f"{self.name}: "
+            f"{self.temperatur} °C"
+        )
+
+
+sensor = Sensor("BME280", 21.5)
+
+sensor.anzeigen()</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>__init__()</h4>
+
+            <p>
+                <code>__init__()</code> wird beim Erzeugen eines neuen Objektes ausgeführt
+                und dient typischerweise dazu, dessen Attribute zu initialisieren.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>self</h4>
+
+            <p>
+                <code>self</code> bezeichnet das konkrete Objekt, auf dem eine Methode
+                aufgerufen wird.
+            </p>
+
+            <pre class="code"><code>self.name
+self.temperatur</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Vererbung</h4>
+
+            <pre class="code"><code>class Sensor:
+    def messen(self):
+        print("Messung")
+
+
+class Temperatursensor(Sensor):
+    def temperatur(self):
+        return 21.5</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>__str__()</h4>
+
+            <pre class="code"><code>class Sensor:
+    def __init__(self, name):
+        self.name = name
+
+    def __str__(self):
+        return f"Sensor: {self.name}"
+
+
+sensor = Sensor("BME280")
+
+print(sensor)</code></pre>
+
+            <p>
+                Spezielle Methoden mit doppelten Unterstrichen werden manchmal
+                scherzhaft „dunder methods“ genannt.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Klassen sparsam einsetzen</h4>
+
+            <p>
+                Nicht jedes Programm benötigt Klassen. Bei kleinen Automatisierungsskripten
+                sind einige klare Funktionen häufig die einfachere und bessere Lösung.
+            </p>
+        </article>
+
+    </div>
+
+
+    <hr class="divider" />
+
+
+    <h3 id="python-dataclasses">24. Dataclasses</h3>
+
+    <p>
+        Wenn eine Klasse hauptsächlich Daten speichern soll, reduziert
+        <code>@dataclass</code> unnötigen Standardcode.
+    </p>
+
+    <div class="cheat-grid">
+
+        <article class="cheat-item">
+            <h4>Einfache Dataclass</h4>
+
+            <pre class="code"><code>from dataclasses import dataclass
+
+
+@dataclass
+class Messwert:
+    zeit: str
+    temperatur: float
+    luftdruck: float
+
+
+messung = Messwert(
+    zeit="12:00",
+    temperatur=21.5,
+    luftdruck=1015.2
+)
+
+print(messung)</code></pre>
+        </article>
+
+    </div>
+
+
+    <hr class="divider" />
+
+
+    <h3 id="python-iteratoren">25. Iteratoren und Generatoren</h3>
+
+    <p>
+        Generatoren erzeugen Werte erst dann, wenn sie benötigt werden. Dadurch können große
+        Datenmengen verarbeitet werden, ohne alles gleichzeitig im Speicher zu halten.
+    </p>
+
+    <div class="cheat-grid">
+
+        <article class="cheat-item">
+            <h4>Generator mit yield</h4>
+
+            <pre class="code"><code>def zahlen_bis(maximum):
+    zahl = 1
+
+    while zahl &lt;= maximum:
+        yield zahl
+        zahl += 1
+
+
+for zahl in zahlen_bis(5):
+    print(zahl)</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Generator Expression</h4>
+
+            <pre class="code"><code>quadrate = (
+    x ** 2
+    for x in range(1000000)
+)</code></pre>
+
+            <p>
+                Die runden Klammern erzeugen hier keinen Tupel, sondern einen Generator.
+            </p>
+        </article>
+
+    </div>
+
+
+    <hr class="divider" />
+
+
+    <h3 id="python-context">26. Context Manager</h3>
+
+    <p>
+        Das bekannte <code>with open(...)</code> ist ein Beispiel für einen Context Manager.
+        Context Manager verwalten Ressourcen zuverlässig.
+    </p>
+
+    <div class="cheat-grid">
+
+        <article class="cheat-item">
+            <h4>Typischer Einsatz</h4>
+
+            <pre class="code"><code>with open("daten.txt", encoding="utf-8") as datei:
+    inhalt = datei.read()</code></pre>
+
+            <p>
+                Sobald der Block verlassen wird, räumt der Context Manager die verwendete
+                Ressource automatisch auf.
+            </p>
+        </article>
+
+    </div>
+
+
+    <hr class="divider" />
+
+
+    <h3 id="python-typing">27. Type Hints</h3>
+
+    <p>
+        Python bleibt dynamisch typisiert, kann aber mit Typinformationen versehen werden.
+        Diese erhöhen vor allem bei größeren Projekten die Verständlichkeit.
+    </p>
+
+    <div class="cheat-grid">
+
+        <article class="cheat-item">
+            <h4>Typen für Variablen</h4>
+
+            <pre class="code"><code>name: str = "Max"
+alter: int = 28
+temperatur: float = 21.5
+aktiv: bool = True</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Funktionen typisieren</h4>
+
+            <pre class="code"><code>def addiere(a: int, b: int) -&gt; int:
+    return a + b</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Listen typisieren</h4>
+
+            <pre class="code"><code>temperaturen: list[float] = [
+    20.5,
+    21.2,
+    19.8
+]</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Optionaler Wert</h4>
+
+            <pre class="code"><code>def finde_sensor(name: str) -&gt; str | None:
+    if name == "BME280":
+        return "gefunden"
+
+    return None</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Type Hints erzwingen nichts</h4>
+
+            <p>
+                Python kontrolliert Type Hints beim normalen Programmablauf nicht automatisch.
+                Sie dienen Dokumentation, IDEs und Werkzeugen zur statischen Codeanalyse.
+            </p>
+        </article>
+
+    </div>
+
+
+    <hr class="divider" />
+
+
+    <h3 id="python-datetime">28. Datum und Uhrzeit</h3>
+
+    <div class="cheat-grid">
+
+        <article class="cheat-item">
+            <h4>Aktuelles Datum</h4>
+
+            <pre class="code"><code>from datetime import date
+
+heute = date.today()
+
+print(heute)</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Datum und Uhrzeit</h4>
+
+            <pre class="code"><code>from datetime import datetime
+
+jetzt = datetime.now()
+
+print(jetzt)</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Formatieren</h4>
+
+            <pre class="code"><code>from datetime import datetime
+
+jetzt = datetime.now()
+
+text = jetzt.strftime("%d.%m.%Y %H:%M")
+
+print(text)</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Text in Datum umwandeln</h4>
+
+            <pre class="code"><code>from datetime import datetime
+
+text = "18.08.2026"
+
+datum = datetime.strptime(
+    text,
+    "%d.%m.%Y"
+)</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Zeitdifferenzen</h4>
+
+            <pre class="code"><code>from datetime import date
+
+start = date(2026, 8, 1)
+ende = date(2026, 8, 18)
+
+differenz = ende - start
+
+print(differenz.days)</code></pre>
+        </article>
+
+    </div>
+
+
+    <hr class="divider" />
+
+
+    <h3 id="python-regex">29. Reguläre Ausdrücke</h3>
+
+    <p>
+        Reguläre Ausdrücke dienen dazu, Text nach Mustern zu durchsuchen oder zu zerlegen.
+        Python stellt dafür das Modul <code>re</code> bereit.
+    </p>
+
+    <div class="cheat-grid">
+
+        <article class="cheat-item">
+            <h4>Nach Muster suchen</h4>
+
+            <pre class="code"><code>import re
+
+text = "Temperatur: 21.5 °C"
+
+treffer = re.search(
+    r"\d+\.\d+",
+    text
+)
+
+if treffer:
+    print(treffer.group())</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Alle Treffer finden</h4>
+
+            <pre class="code"><code>import re
+
+text = "Sensor 1, Sensor 2, Sensor 3"
+
+zahlen = re.findall(r"\d+", text)
+
+print(zahlen)</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Typische Muster</h4>
+
+            <pre class="code"><code>\d     # Ziffer
+\w     # Buchstabe/Ziffer/Unterstrich
+\s     # Leerraum
+.      # beliebiges Zeichen
++      # mindestens einmal
+*      # beliebig oft
+?      # optional
+^      # Textanfang
+$      # Textende</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Raw Strings verwenden</h4>
+
+            <pre class="code"><code>muster = r"\d+\.\d+"</code></pre>
+
+            <p>
+                Reguläre Ausdrücke werden in Python fast immer als Raw Strings geschrieben.
+            </p>
+        </article>
+
+    </div>
+
+
+    <hr class="divider" />
+
+
+    <h3 id="python-venv">30. Virtuelle Umgebungen</h3>
+
+    <p>
+        Eine virtuelle Umgebung isoliert die installierten Python-Pakete eines Projekts
+        vom restlichen System. Das verhindert Versionskonflikte und gehört bei ernsthaften
+        Python-Projekten zur normalen Grundhygiene.
+    </p>
+
+    <div class="cheat-grid">
+
+        <article class="cheat-item">
+            <h4>Virtuelle Umgebung erzeugen</h4>
+
+            <pre class="code"><code>python -m venv .venv</code></pre>
+
+            <p>Unter Linux häufig:</p>
+
+            <pre class="code"><code>python3 -m venv .venv</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Windows PowerShell aktivieren</h4>
+
+            <pre class="code"><code>.venv\Scripts\Activate.ps1</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Windows CMD aktivieren</h4>
+
+            <pre class="code"><code>.venv\Scripts\activate.bat</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Linux / Raspberry Pi</h4>
+
+            <pre class="code"><code>source .venv/bin/activate</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Umgebung verlassen</h4>
+
+            <pre class="code"><code>deactivate</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>.venv nicht mit Git speichern</h4>
+
+            <p>In die Datei <code>.gitignore</code> gehört normalerweise:</p>
+
+            <pre class="code"><code>.venv/</code></pre>
+        </article>
+
+    </div>
+
+
+    <hr class="divider" />
+
+
+    <h3 id="python-pip">31. Pakete mit pip verwalten</h3>
+
+    <p>
+        Mit <code>pip</code> können zusätzliche Python-Bibliotheken installiert werden,
+        die nicht Bestandteil der Standardbibliothek sind.
+    </p>
+
+    <div class="cheat-grid">
+
+        <article class="cheat-item">
+            <h4>Paket installieren</h4>
+
+            <pre class="code"><code>pip install requests</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Robustere Schreibweise</h4>
+
+            <pre class="code"><code>python -m pip install requests</code></pre>
+
+            <p>
+                Damit ist eindeutiger, zu welcher Python-Installation der verwendete
+                Paketmanager gehört.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Installierte Pakete anzeigen</h4>
+
+            <pre class="code"><code>pip list</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Abhängigkeiten speichern</h4>
+
+            <pre class="code"><code>pip freeze &gt; requirements.txt</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Abhängigkeiten installieren</h4>
+
+            <pre class="code"><code>pip install -r requirements.txt</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Paket entfernen</h4>
+
+            <pre class="code"><code>pip uninstall paketname</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Paket aktualisieren</h4>
+
+            <pre class="code"><code>python -m pip install --upgrade paketname</code></pre>
+        </article>
+
+    </div>
+
+
+    <hr class="divider" />
+
+
+    <h3 id="python-argparse">32. Kommandozeilenprogramme mit argparse</h3>
+
+    <p>
+        Für Skripte, die Parameter über die Kommandozeile erhalten sollen, bietet Python
+        das Modul <code>argparse</code>.
+    </p>
+
+    <div class="cheat-grid">
+
+        <article class="cheat-item">
+            <h4>Einfaches Beispiel</h4>
+
+            <pre class="code"><code>import argparse
+
+
+parser = argparse.ArgumentParser(
+    description="Verarbeitet eine CSV-Datei."
+)
+
+parser.add_argument(
+    "datei",
+    help="Pfad zur CSV-Datei"
+)
+
+args = parser.parse_args()
+
+print(args.datei)</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Programm aufrufen</h4>
+
+            <pre class="code"><code>python programm.py daten.csv</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Optionales Argument</h4>
+
+            <pre class="code"><code>parser.add_argument(
+    "--ausgabe",
+    default="ergebnis.csv",
+    help="Name der Ausgabedatei"
+)</code></pre>
+
+            <p>Aufruf:</p>
+
+            <pre class="code"><code>python programm.py daten.csv --ausgabe zusammen.csv</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Automatische Hilfe</h4>
+
+            <pre class="code"><code>python programm.py --help</code></pre>
+
+            <p>
+                <code>argparse</code> erzeugt automatisch eine brauchbare Hilfeseite für das Programm.
+            </p>
+        </article>
+
+    </div>
+
+
+    <hr class="divider" />
+
+
+    <h3 id="python-logging">33. Logging statt print()</h3>
+
+    <p>
+        <code>print()</code> eignet sich hervorragend für kleine Tests. Bei größeren Programmen
+        sollte für Status-, Warn- und Fehlermeldungen das Modul <code>logging</code> verwendet werden.
+    </p>
+
+    <div class="cheat-grid">
+
+        <article class="cheat-item">
+            <h4>Logging konfigurieren</h4>
+
+            <pre class="code"><code>import logging
+
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s"
+)
+
+logging.info("Programm gestartet")
+logging.warning("Warnung")
+logging.error("Fehler")</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Log-Level</h4>
+
+            <ul>
+                <li><code>DEBUG</code> – detaillierte Entwicklungsinformationen</li>
+                <li><code>INFO</code> – normale Statusinformationen</li>
+                <li><code>WARNING</code> – ungewöhnliche Situation</li>
+                <li><code>ERROR</code> – Fehler</li>
+                <li><code>CRITICAL</code> – schwerwiegender Fehler</li>
+            </ul>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>In Datei protokollieren</h4>
+
+            <pre class="code"><code>logging.basicConfig(
+    filename="programm.log",
+    level=logging.INFO,
+    encoding="utf-8"
+)</code></pre>
+        </article>
+
+    </div>
+
+
+    <hr class="divider" />
+
+
+    <h3 id="python-tests">34. Automatisierte Tests</h3>
+
+    <p>
+        Tests prüfen automatisch, ob Funktionen die erwarteten Ergebnisse liefern.
+        Schon wenige Tests können verhindern, dass eine spätere Änderung unbemerkt bestehende
+        Funktionen zerstört.
+    </p>
+
+    <div class="cheat-grid">
+
+        <article class="cheat-item">
+            <h4>Einfache Prüfung mit assert</h4>
+
+            <pre class="code"><code>def addiere(a, b):
+    return a + b
+
+
+assert addiere(2, 3) == 5
+assert addiere(-1, 1) == 0</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>unittest</h4>
+
+            <pre class="code"><code>import unittest
+
+
+def addiere(a, b):
+    return a + b
+
+
+class TestBerechnungen(unittest.TestCase):
+
+    def test_addiere(self):
+        self.assertEqual(
+            addiere(2, 3),
+            5
+        )
+
+
+if __name__ == "__main__":
+    unittest.main()</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Was sollte getestet werden?</h4>
+
+            <ul>
+                <li>normale Eingaben</li>
+                <li>Grenzfälle</li>
+                <li>leere Eingaben</li>
+                <li>ungültige Eingaben</li>
+                <li>bekannte Fehlerfälle</li>
+            </ul>
+        </article>
+
+    </div>
+
+
+    <hr class="divider" />
+
+
+    <h3 id="python-debugging">35. Debugging</h3>
+
+    <div class="cheat-grid">
+
+        <article class="cheat-item">
+            <h4>print()-Debugging</h4>
+
+            <pre class="code"><code>print("Variable:", wert)
+print("Typ:", type(wert))</code></pre>
+
+            <p>
+                Für kleine Skripte ist das vollkommen legitim und oft der schnellste Weg.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Debugger verwenden</h4>
+
+            <p>
+                Entwicklungsumgebungen wie Visual Studio Code erlauben Breakpoints.
+                Das Programm hält an einer bestimmten Zeile an und Variablen können
+                während der Ausführung untersucht werden.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>breakpoint()</h4>
+
+            <pre class="code"><code>wert = berechne_etwas()
+
+breakpoint()
+
+print(wert)</code></pre>
+
+            <p>
+                Python besitzt einen eingebauten Einstiegspunkt für interaktives Debugging.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Fehler systematisch eingrenzen</h4>
+
+            <ol>
+                <li>Traceback vollständig lesen.</li>
+                <li>Die tatsächlich fehlerhafte Zeile bestimmen.</li>
+                <li>Eingabewerte kontrollieren.</li>
+                <li>Datentypen prüfen.</li>
+                <li>Problem auf möglichst kleinen Code reduzieren.</li>
+                <li>Erst dann umbauen.</li>
+            </ol>
+        </article>
+
+    </div>
+
+
+    <hr class="divider" />
+
+
+    <h3 id="python-pyinstaller">36. Python-Programme als EXE verteilen</h3>
+
+    <p>
+        Python-Skripte können beispielsweise mit PyInstaller in eine unter Windows
+        ausführbare Datei verpackt werden. Dabei wird nicht der Python-Code in klassischen
+        Maschinencode übersetzt; vielmehr werden Interpreter, Programm und benötigte
+        Bestandteile zu einem Paket gebündelt.
+    </p>
+
+    <div class="cheat-grid">
+
+        <article class="cheat-item">
+            <h4>PyInstaller installieren</h4>
+
+            <pre class="code"><code>python -m pip install pyinstaller</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Programm erstellen</h4>
+
+            <pre class="code"><code>pyinstaller programm.py</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Eine einzelne EXE</h4>
+
+            <pre class="code"><code>pyinstaller --onefile programm.py</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Ohne Konsolenfenster</h4>
+
+            <pre class="code"><code>pyinstaller --onefile --windowed programm.py</code></pre>
+
+            <p class="hint">
+                <code>--windowed</code> sollte nur verwendet werden, wenn das Programm
+                tatsächlich keine Konsole benötigt. Andernfalls verschwinden Fehlermeldungen
+                scheinbar im Nirwana.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Typische Falle beim Doppelklick</h4>
+
+            <p>
+                Wird eine EXE per Doppelklick gestartet, kann ihr Arbeitsverzeichnis anders sein,
+                als man beim Start aus Visual Studio Code erwartet.
+            </p>
+
+            <p>
+                Statt blind mit relativen Pfaden zu arbeiten, ist es oft sinnvoll, den gewünschten
+                Basisordner ausdrücklich festzulegen.
+            </p>
+
+            <pre class="code"><code>from pathlib import Path
+
+basisordner = Path(__file__).resolve().parent</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Konsole offenhalten</h4>
+
+            <p>
+                Während der Fehlersuche kann am Ende eines kleinen Werkzeugs vorübergehend stehen:
+            </p>
+
+            <pre class="code"><code>input("Enter drücken zum Beenden...")</code></pre>
+
+            <p>
+                Das ist keine elegante Fehlerbehandlung, verhindert beim Testen per Doppelklick
+                aber, dass das Konsolenfenster sofort wieder verschwindet.
+            </p>
+        </article>
+
+    </div>
+
+
+    <hr class="divider" />
+
+
+    <h3 id="python-style">37. Codequalität und Stil</h3>
+
+    <div class="cheat-grid">
+
+        <article class="cheat-item">
+            <h4>Sprechende Namen</h4>
+
+            <pre class="code"><code># Schlecht:
+x = 21.5
+d = "messung.csv"
+
+# Besser:
+temperatur_celsius = 21.5
+eingabedatei = "messung.csv"</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Funktionen klein halten</h4>
+
+            <p>
+                Eine Funktion sollte möglichst eine klar umrissene Aufgabe erfüllen.
+                Kann ihre Tätigkeit nicht in einem kurzen Satz beschrieben werden,
+                übernimmt sie möglicherweise zu viele Aufgaben.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Wiederholungen vermeiden</h4>
+
+            <p>
+                Wenn derselbe Code mehrfach kopiert wird, sollte geprüft werden,
+                ob daraus eine Funktion entstehen kann.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Magic Numbers vermeiden</h4>
+
+            <pre class="code"><code># Weniger gut:
+if temperatur &gt; 80:
+    alarm()
+
+# Verständlicher:
+MAXIMALE_TEMPERATUR = 80
+
+if temperatur &gt; MAXIMALE_TEMPERATUR:
+    alarm()</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>PEP 8</h4>
+
+            <p>
+                PEP 8 ist der verbreitete Stil-Leitfaden für Python-Code. Zu den bekannten
+                Konventionen gehören:
+            </p>
+
+            <ul>
+                <li>vier Leerzeichen pro Einrückung</li>
+                <li><code>snake_case</code> für Funktionen und Variablen</li>
+                <li><code>PascalCase</code> für Klassen</li>
+                <li>Leerzeichen rund um Operatoren</li>
+                <li>überschaubare Zeilenlängen</li>
+                <li>Imports am Anfang einer Datei</li>
+            </ul>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Lesbarkeit schlägt Cleverness</h4>
+
+            <p>
+                Drei zusätzliche verständliche Zeilen sind fast immer besser als ein
+                brillanter Einzeiler, dessen Bedeutung am nächsten Dienstag niemand mehr
+                rekonstruieren möchte.
+            </p>
+        </article>
+
+    </div>
+
+
+    <hr class="divider" />
+
+
+    <h3 id="python-fallen">38. Typische Fehler und Fallen</h3>
+
+    <div class="cheat-grid">
+
+        <article class="cheat-item">
+            <h4>= und == verwechseln</h4>
+
+            <pre class="code"><code>x = 5       # Zuweisung
+x == 5      # Vergleich</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Index beginnt bei 0</h4>
+
+            <pre class="code"><code>farben = ["rot", "grün", "blau"]
+
+print(farben[0])  # rot</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Off-by-one bei range()</h4>
+
+            <pre class="code"><code>for zahl in range(1, 5):
+    print(zahl)</code></pre>
+
+            <p>Ergebnis:</p>
+
+            <pre class="code"><code>1
+2
+3
+4</code></pre>
+
+            <p>
+                Der Endwert <code>5</code> gehört nicht mehr zum Bereich.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>String und Zahl vermischen</h4>
+
+            <pre class="code"><code>alter = 28
+
+# Fehler:
+# print("Alter: " + alter)
+
+# Richtig:
+print("Alter: " + str(alter))
+
+# Noch besser:
+print(f"Alter: {alter}")</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>input() liefert immer einen String</h4>
+
+            <pre class="code"><code>alter = input("Alter: ")
+
+print(type(alter))</code></pre>
+
+            <p>Für Berechnungen daher beispielsweise:</p>
+
+            <pre class="code"><code>alter = int(input("Alter: "))</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Listen nicht unbeabsichtigt teilen</h4>
+
+            <pre class="code"><code>a = [1, 2, 3]
+b = a
+
+b.append(4)
+
+print(a)</code></pre>
+
+            <p>
+                <code>a</code> und <code>b</code> verweisen hier auf dieselbe Liste.
+            </p>
+
+            <p>Für eine flache Kopie:</p>
+
+            <pre class="code"><code>b = a.copy()</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Veränderbare Standardargumente vermeiden</h4>
+
+            <pre class="code"><code># Problematisch:
+def hinzufuegen(wert, liste=[]):
+    liste.append(wert)
+    return liste</code></pre>
+
+            <p>Besser:</p>
+
+            <pre class="code"><code>def hinzufuegen(wert, liste=None):
+    if liste is None:
+        liste = []
+
+    liste.append(wert)
+
+    return liste</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Dateipfade nicht blind zusammenbauen</h4>
+
+            <pre class="code"><code># Eher vermeiden:
+pfad = "daten/" + dateiname
+
+# Besser:
+from pathlib import Path
+
+pfad = Path("daten") / dateiname</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Exceptions nicht verschlucken</h4>
+
+            <pre class="code"><code># Schlecht:
+try:
+    etwas()
+except:
+    pass</code></pre>
+
+            <p>
+                Damit verschwinden unter Umständen echte Programmfehler völlig lautlos.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Keine eingebauten Namen überschreiben</h4>
+
+            <pre class="code"><code># Ungünstig:
+list = [1, 2, 3]
+str = "Hallo"
+file = "daten.txt"</code></pre>
+
+            <p>
+                Dadurch überschreibt man Namen eingebauter Python-Funktionen oder etabliert
+                unnötig verwirrende Bezeichnungen.
+            </p>
+        </article>
+
+    </div>
+
+
+    <hr class="divider" />
+
+
+    <h3 id="python-projektstruktur">39. Sinnvolle Projektstruktur</h3>
+
+    <p>
+        Sobald ein Python-Projekt über ein einzelnes Skript hinauswächst, sollte der Quellcode
+        sinnvoll aufgeteilt werden.
+    </p>
+
+    <div class="cheat-grid">
+
+        <article class="cheat-item">
+            <h4>Kleines Projekt</h4>
+
+            <pre class="code"><code>mein_projekt/
+│
+├── main.py
+├── daten.py
+├── utils.py
+├── requirements.txt
+├── README.md
+├── .gitignore
+│
+├── daten/
+│   └── messungen.csv
+│
+└── tests/
+    └── test_daten.py</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Aufgaben trennen</h4>
+
+            <p>Beispielsweise:</p>
+
+            <ul>
+                <li><code>main.py</code> – Programmeinstieg</li>
+                <li><code>daten.py</code> – Einlesen und Speichern</li>
+                <li><code>sensor.py</code> – Sensorlogik</li>
+                <li><code>utils.py</code> – Hilfsfunktionen</li>
+                <li><code>tests/</code> – automatisierte Tests</li>
+            </ul>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>.gitignore</h4>
+
+            <p>Typische Einträge:</p>
+
+            <pre class="code"><code>.venv/
+__pycache__/
+*.pyc
+dist/
+build/
+*.spec</code></pre>
+        </article>
+
+    </div>
+
+
+    <hr class="divider" />
+
+
+    <h3 id="python-praxis">40. Praktische Regeln für Python-Projekte</h3>
+
+    <ul>
+        <li>
+            <strong>Beginne mit der einfachsten funktionierenden Lösung.</strong>
+            Eine verständliche Lösung ist fast immer wertvoller als eine theoretisch besonders
+            elegante Konstruktion, die niemand mehr versteht.
+        </li>
+
+        <li>
+            <strong>Verwende sprechende Variablennamen.</strong>
+            <code>temperatur_celsius</code> ist wesentlich aussagekräftiger als <code>x</code>.
+        </li>
+
+        <li>
+            <strong>Zerlege große Programme in Funktionen.</strong>
+            Das erleichtert Fehlersuche, Tests und spätere Änderungen.
+        </li>
+
+        <li>
+            <strong>Verwende <code>pathlib</code> für Dateipfade.</strong>
+            Das erspart zahlreiche Probleme zwischen Windows, Linux und Raspberry Pi.
+        </li>
+
+        <li>
+            <strong>Verwende <code>with open(...)</code> beim Dateizugriff.</strong>
+            Dateien werden dadurch zuverlässig geschlossen.
+        </li>
+
+        <li>
+            <strong>Gib bei Textdateien möglichst <code>encoding="utf-8"</code> an.</strong>
+            Umlaute sollen schließlich kein Abenteuer sein.
+        </li>
+
+        <li>
+            <strong>Verwende virtuelle Umgebungen.</strong>
+            Projektabhängigkeiten gehören zum Projekt und nicht chaotisch in irgendeine
+            globale Python-Installation.
+        </li>
+
+        <li>
+            <strong>Speichere Abhängigkeiten nachvollziehbar.</strong>
+            Eine <code>requirements.txt</code> oder eine moderne Projektkonfiguration
+            macht ein Projekt reproduzierbar.
+        </li>
+
+        <li>
+            <strong>Lies Fehlermeldungen vollständig.</strong>
+            Der Traceback ist kein dekoratives Rot im Terminal, sondern normalerweise
+            die präziseste Information darüber, was schiefgegangen ist.
+        </li>
+
+        <li>
+            <strong>Fange nur Fehler ab, die du sinnvoll behandeln kannst.</strong>
+            Ein allumfassendes <code>except:</code> löst Fehler nicht – es versteckt sie.
+        </li>
+
+        <li>
+            <strong>Nutze <code>print()</code> für schnelle Experimente.</strong>
+            Bei dauerhaften Anwendungen ist <code>logging</code> jedoch die robustere Lösung.
+        </li>
+
+        <li>
+            <strong>Trenne Programmlogik und Benutzerausgabe.</strong>
+            Eine Berechnungsfunktion sollte möglichst Werte zurückgeben, statt überall direkt
+            Text auf die Konsole zu schreiben.
+        </li>
+
+        <li>
+            <strong>Vermeide unnötige globale Variablen.</strong>
+            Sie erzeugen versteckte Abhängigkeiten zwischen Programmteilen.
+        </li>
+
+        <li>
+            <strong>Verwende Listen für geordnete Sammlungen.</strong>
+            Dictionaries sind besser, wenn Werte über aussagekräftige Schlüssel angesprochen
+            werden sollen.
+        </li>
+
+        <li>
+            <strong>Nutze Sets für Eindeutigkeit.</strong>
+            Wer doppelte Werte entfernen möchte, muss dafür keine kleine Privatbürokratie
+            aus Schleifen errichten.
+        </li>
+
+        <li>
+            <strong>Nutze <code>enumerate()</code>, wenn du Index und Element benötigst.</strong>
+            Manuelles Hochzählen eines Index ist meist unnötig.
+        </li>
+
+        <li>
+            <strong>Nutze <code>zip()</code>, wenn mehrere Sequenzen gemeinsam verarbeitet werden.</strong>
+        </li>
+
+        <li>
+            <strong>Comprehensions sollen Code vereinfachen, nicht verschlüsseln.</strong>
+            Wenn eine Zeile erst entschlüsselt werden muss, war sie vermutlich zu clever.
+        </li>
+
+        <li>
+            <strong>Verwende Type Hints bei größeren Projekten.</strong>
+            Sie verbessern Dokumentation, Autovervollständigung und Wartbarkeit.
+        </li>
+
+        <li>
+            <strong>Schreibe Docstrings für öffentliche Funktionen und Klassen.</strong>
+            Besonders wichtig sind Zweck, Parameter, Rückgabewert und ungewöhnliches Verhalten.
+        </li>
+
+        <li>
+            <strong>Teste Grenzfälle.</strong>
+            Ein Programm, das mit normalen Daten funktioniert, ist erst die halbe Miete.
+            Interessant wird es bei leeren Dateien, fehlenden Werten und unerwarteten Eingaben.
+        </li>
+
+        <li>
+            <strong>Automatisiere wiederkehrende Arbeit.</strong>
+            Wenn du eine stupide Aufgabe zum dritten Mal manuell erledigst, ist das häufig
+            ein ziemlich deutlicher Wink mit dem Python-Zaunpfahl.
+        </li>
+
+        <li>
+            <strong>Erst korrekt, dann schnell.</strong>
+            Frühzeitige Mikrooptimierung erzeugt oft komplizierten Code ohne messbaren Nutzen.
+        </li>
+
+        <li>
+            <strong>Arbeite mit Versionsverwaltung.</strong>
+            Git erlaubt Experimente, ohne dass jede Änderung zur existenziellen Entscheidung wird.
+        </li>
+
+        <li>
+            <strong>Dokumentiere Voraussetzungen.</strong>
+            Python-Version, benötigte Pakete, Dateiformate und Startbefehle gehören in eine
+            brauchbare Projektbeschreibung.
+        </li>
+
+        <li>
+            <strong>Trenne Eingabe, Verarbeitung und Ausgabe.</strong>
+            Diese Dreiteilung führt selbst bei kleinen Skripten häufig zu wesentlich saubererem Code.
+        </li>
+
+        <li>
+            <strong>Behandle Dateien defensiv.</strong>
+            Prüfe, ob Dateien existieren, ob ihre Struktur stimmt und ob Ausgabedateien
+            unbeabsichtigt überschrieben werden könnten.
+        </li>
+
+        <li>
+            <strong>Verlasse dich nicht blind auf das aktuelle Arbeitsverzeichnis.</strong>
+            Besonders Programme, die später als EXE oder per Cronjob gestartet werden,
+            sollten Pfade bewusst behandeln.
+        </li>
+
+        <li>
+            <strong>Nutze die Standardbibliothek.</strong>
+            Python bringt bereits erstaunlich viele Werkzeuge für Dateien, CSV, JSON,
+            Mathematik, Datum, Logging, Kommandozeilenargumente und Betriebssystemfunktionen mit.
+        </li>
+
+        <li>
+            <strong>Installiere nicht für jedes triviale Problem eine externe Bibliothek.</strong>
+            Jede zusätzliche Abhängigkeit muss irgendwann aktualisiert, verstanden und
+            gegebenenfalls ersetzt werden.
+        </li>
+
+        <li>
+            <strong>Schreibe Code für dein zukünftiges Ich.</strong>
+            Dieses zukünftige Ich hat keine Erinnerung daran, warum du vor sechs Monaten
+            <code>x2_temp_final_new</code> für einen brillanten Variablennamen gehalten hast.
+        </li>
+    </ul>
+
+
+    <hr class="divider" />
+
+
+    <h3>41. Ein vollständiges kleines Beispiel</h3>
+
+    <p>
+        Das folgende Beispiel verbindet mehrere der zuvor behandelten Konzepte:
+        Funktionen, <code>pathlib</code>, CSV-Verarbeitung, Fehlerbehandlung,
+        Logging und einen sauberen Programmeinstieg.
+    </p>
+
+    <pre class="code"><code>import csv
+import logging
+from pathlib import Path
+
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(levelname)s: %(message)s"
+)
+
+
+def finde_csv_dateien(ordner: Path) -&gt; list[Path]:
+    """Findet alle CSV-Dateien im angegebenen Verzeichnis."""
+
+    return sorted(ordner.glob("*.csv"))
+
+
+def zeige_dateien(dateien: list[Path]) -&gt; None:
+    """Gibt die gefundenen Dateien aus."""
+
+    for nummer, datei in enumerate(dateien, start=1):
+        print(f"{nummer}: {datei.name}")
+
+
+def zaehle_zeilen(datei: Path) -&gt; int:
+    """Zählt die Datenzeilen einer CSV-Datei."""
+
+    with datei.open(
+        "r",
+        encoding="utf-8",
+        newline=""
+    ) as csv_datei:
+
+        reader = csv.reader(csv_datei)
+
+        # Kopfzeile überspringen
+        next(reader, None)
+
+        return sum(1 for _ in reader)
+
+
+def main() -&gt; None:
+
+    ordner = Path(__file__).resolve().parent
+
+    logging.info(
+        "Suche CSV-Dateien in %s",
+        ordner
+    )
+
+    dateien = finde_csv_dateien(ordner)
+
+    if not dateien:
+        logging.warning(
+            "Keine CSV-Dateien gefunden."
+        )
+        return
+
+    zeige_dateien(dateien)
+
+    for datei in dateien:
+
+        try:
+            anzahl = zaehle_zeilen(datei)
+
+        except (OSError, UnicodeError) as fehler:
+            logging.error(
+                "Fehler bei %s: %s",
+                datei.name,
+                fehler
+            )
+            continue
+
+        print(
+            f"{datei.name}: "
+            f"{anzahl} Datenzeilen"
+        )
+
+
+if __name__ == "__main__":
+    main()</code></pre>
+
+    <p>
+        Bereits dieses kleine Beispiel zeigt einen wichtigen Unterschied zwischen bloß
+        „funktionierendem Code“ und brauchbarem Programmcode: Die einzelnen Aufgaben sind getrennt,
+        Fehler werden kontrolliert behandelt, Pfade werden sauber bestimmt und der Programmablauf
+        bleibt nachvollziehbar.
+    </p>
+
+
+    <hr class="divider" />
+
+
+    <h3>42. Was man als Nächstes lernen sollte</h3>
+
+    <p>
+        Wer die Inhalte dieser Seite beherrscht, besitzt bereits ein solides Fundament.
+        Ab diesem Punkt hängt der weitere Lernweg vor allem davon ab, wofür Python eingesetzt
+        werden soll.
+    </p>
+
+    <div class="cheat-grid">
+
+        <article class="cheat-item">
+            <h4>Automatisierung</h4>
+
+            <ul>
+                <li><code>pathlib</code></li>
+                <li><code>shutil</code></li>
+                <li><code>subprocess</code></li>
+                <li>CSV und JSON</li>
+                <li>Excel-Dateien</li>
+                <li>Datei- und Ordnerverarbeitung</li>
+            </ul>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Raspberry Pi und Elektronik</h4>
+
+            <ul>
+                <li>GPIO</li>
+                <li>I²C</li>
+                <li>SPI</li>
+                <li>UART</li>
+                <li>Sensorbibliotheken</li>
+                <li>serielle Kommunikation</li>
+                <li>MQTT</li>
+            </ul>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Datenanalyse</h4>
+
+            <ul>
+                <li>NumPy</li>
+                <li>pandas</li>
+                <li>Matplotlib</li>
+                <li>Jupyter</li>
+                <li>Statistik</li>
+            </ul>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Webentwicklung</h4>
+
+            <ul>
+                <li>HTTP-Grundlagen</li>
+                <li>REST-APIs</li>
+                <li>Flask</li>
+                <li>FastAPI</li>
+                <li>Django</li>
+                <li>SQL</li>
+            </ul>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Professionellere Softwareentwicklung</h4>
+
+            <ul>
+                <li>Git</li>
+                <li>Tests</li>
+                <li>Type Checking</li>
+                <li>Linting</li>
+                <li>Packaging</li>
+                <li>Design Patterns</li>
+                <li>Continuous Integration</li>
+            </ul>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Netzwerk und Schnittstellen</h4>
+
+            <ul>
+                <li>Sockets</li>
+                <li>HTTP</li>
+                <li>APIs</li>
+                <li>SSH-Automatisierung</li>
+                <li>MQTT</li>
+                <li>WebSockets</li>
+            </ul>
+        </article>
+
+    </div>
+
+
+    <hr class="divider" />
+
+
+    <h3>43. Die wichtigsten Python-Muster auf einen Blick</h3>
+
+    <pre class="code"><code># Ausgabe
+print("Hallo")
+
+
+# Variable
+name = "Max"
+
+
+# Bedingung
+if name == "Max":
+    print("Gefunden")
+
+
+# Liste
+werte = [1, 2, 3]
+
+
+# Schleife
+for wert in werte:
+    print(wert)
+
+
+# Funktion
+def verdoppeln(wert):
+    return wert * 2
+
+
+# Dictionary
+person = {
+    "name": "Max",
+    "alter": 28
+}
+
+
+# Fehlerbehandlung
+try:
+    zahl = int("42")
+except ValueError:
+    print("Fehler")
+
+
+# Datei lesen
+with open(
+    "daten.txt",
+    encoding="utf-8"
+) as datei:
+    text = datei.read()
+
+
+# Pfade
+from pathlib import Path
+
+ordner = Path(__file__).resolve().parent
+
+
+# Dateien suchen
+dateien = sorted(
+    ordner.glob("*.csv")
+)
+
+
+# sauberer Programmeinstieg
+def main():
+    print("Start")
+
+
+if __name__ == "__main__":
+    main()</code></pre>
+
+
+    <p class="hint">
+        Python lernt man nicht dadurch, dass man jede Methode auswendig kennt.
+        Entscheidend ist, die grundlegenden Konzepte zu verstehen und zu wissen,
+        welche Werkzeuge existieren. Den exakten Funktionsnamen kann man nachschlagen;
+        ein sauberes gedankliches Modell des Programms hingegen nicht.
+    </p>
+
+    <p class="hint">
+        <a href="#top">↑ nach oben</a>
+    </p>
+
+</section>
+
+<hr class="divider" />
