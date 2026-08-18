@@ -1,0 +1,4654 @@
+<section class="card" id="css">
+
+  <h2 class="card-title">CSS – Cascading Style Sheets</h2>
+
+  <p>
+    CSS steht für <strong>Cascading Style Sheets</strong> und ist die Sprache, mit der das
+    Aussehen, die Anordnung und teilweise auch das Verhalten von HTML-Elementen beschrieben wird.
+    HTML legt fest, <em>was</em> ein Element ist – beispielsweise eine Überschrift, ein Absatz,
+    ein Bild, eine Navigation oder ein Formularfeld. CSS bestimmt anschließend, wie dieses Element
+    dargestellt wird.
+  </p>
+
+  <p>
+    Dazu gehören weit mehr als Farben und Schriftgrößen. CSS kontrolliert unter anderem Abstände,
+    Größen, Rahmen, Hintergründe, Positionen, responsive Layouts, Spalten, Raster, Animationen,
+    Hover-Effekte und die Darstellung auf unterschiedlichen Bildschirmgrößen.
+  </p>
+
+  <p>
+    Modernes CSS ist damit keine bloße „Dekorationssprache“. Es ist ein umfangreiches Layoutsystem.
+    Flexbox und Grid können komplexe Seitenstrukturen erzeugen, Media Queries passen Layouts an
+    Bildschirmgrößen an, CSS-Variablen zentralisieren Designentscheidungen und Funktionen wie
+    <code>calc()</code>, <code>min()</code>, <code>max()</code> oder <code>clamp()</code>
+    ermöglichen dynamische Größenberechnungen.
+  </p>
+
+  <p class="hint">
+    Eine hilfreiche Denkweise lautet:
+    <strong>HTML beschreibt die Bedeutung und Struktur – CSS beschreibt die Darstellung.</strong>
+    Wenn du für ein rein optisches Problem plötzlich zusätzliche bedeutungslose
+    <code>&lt;div&gt;</code>-Elemente brauchst, lohnt es sich oft, zuerst zu prüfen,
+    ob CSS das Problem nicht eleganter lösen kann.
+  </p>
+
+
+  <h3>Inhaltsverzeichnis</h3>
+
+  <ul class="toc toc_column">
+    <li><a href="#css-einbindung">CSS einbinden</a></li>
+    <li><a href="#css-syntax">Grundsyntax</a></li>
+    <li><a href="#css-selektoren">Selektoren</a></li>
+    <li><a href="#css-kombinatoren">Kombinatoren</a></li>
+    <li><a href="#css-attribute">Attributselektoren</a></li>
+    <li><a href="#css-pseudoklassen">Pseudoklassen</a></li>
+    <li><a href="#css-pseudoelemente">Pseudoelemente</a></li>
+    <li><a href="#css-kaskade">Kaskade</a></li>
+    <li><a href="#css-spezifitaet">Spezifität</a></li>
+    <li><a href="#css-vererbung">Vererbung</a></li>
+    <li><a href="#css-boxmodell">Boxmodell</a></li>
+    <li><a href="#css-abstaende">Abstände</a></li>
+    <li><a href="#css-groessen">Größen</a></li>
+    <li><a href="#css-einheiten">Einheiten</a></li>
+    <li><a href="#css-funktionen">CSS-Funktionen</a></li>
+    <li><a href="#css-typografie">Typografie</a></li>
+    <li><a href="#css-farben">Farben</a></li>
+    <li><a href="#css-hintergruende">Hintergründe</a></li>
+    <li><a href="#css-rahmen">Rahmen und Schatten</a></li>
+    <li><a href="#css-display">display</a></li>
+    <li><a href="#css-overflow">Overflow</a></li>
+    <li><a href="#css-position">Positionierung</a></li>
+    <li><a href="#css-zindex">z-index</a></li>
+    <li><a href="#css-flexbox">Flexbox</a></li>
+    <li><a href="#css-grid">Grid</a></li>
+    <li><a href="#css-responsive">Responsive Design</a></li>
+    <li><a href="#css-images">Bilder und Medien</a></li>
+    <li><a href="#css-links">Links und Zustände</a></li>
+    <li><a href="#css-transform">Transformationen</a></li>
+    <li><a href="#css-transition">Transitions</a></li>
+    <li><a href="#css-animation">Animationen</a></li>
+    <li><a href="#css-variablen">CSS-Variablen</a></li>
+    <li><a href="#css-formulare">Formulare</a></li>
+    <li><a href="#css-tabellen">Tabellen</a></li>
+    <li><a href="#css-accessibility">Accessibility</a></li>
+    <li><a href="#css-debugging">Fehlersuche</a></li>
+    <li><a href="#css-organisation">Stylesheets organisieren</a></li>
+    <li><a href="#css-praxis">Praktische Grundregeln</a></li>
+  </ul>
+
+
+  <hr class="divider" />
+
+
+  <!-- ======================================================
+       CSS EINBINDEN
+       ====================================================== -->
+
+  <h3 id="css-einbindung">CSS einbinden</h3>
+
+  <p>
+    Bevor CSS etwas gestalten kann, muss der Browser wissen, welches Stylesheet zu einer
+    HTML-Seite gehört. Dafür gibt es drei grundlegende Möglichkeiten.
+  </p>
+
+  <div class="cheat-grid">
+
+    <article class="cheat-item">
+      <h4>Externes Stylesheet</h4>
+
+      <p>
+        Für echte Webseiten ist dies normalerweise die beste Variante.
+        Das CSS befindet sich in einer eigenen Datei.
+      </p>
+
+      <pre class="code code-html"><code>&lt;link rel="stylesheet" href="assets/css/main.css"&gt;</code></pre>
+
+      <p>
+        Diese Zeile gehört normalerweise in den
+        <code>&lt;head&gt;</code> der HTML-Datei.
+      </p>
+
+      <p class="hint">
+        Vorteil: Ein einziges Stylesheet kann von vielen HTML-Seiten gemeinsam verwendet werden.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>CSS direkt im HTML-Dokument</h4>
+
+      <pre class="code code-html"><code>&lt;style&gt;
+  body {
+    background: #f7f7f7;
+  }
+&lt;/style&gt;</code></pre>
+
+      <p>
+        Das funktioniert, eignet sich aber eher für kleine Experimente,
+        einzelne Spezialseiten oder Prototypen.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Inline-CSS</h4>
+
+      <pre class="code code-html"><code>&lt;p style="color: red;"&gt;
+  Dieser Text ist rot.
+&lt;/p&gt;</code></pre>
+
+      <p>
+        Inline-CSS hat eine hohe Priorität und verteilt Gestaltung direkt über das HTML.
+        Das wird bei größeren Seiten sehr schnell unübersichtlich.
+      </p>
+
+      <p class="hint">
+        Für normale Webseiten: möglichst vermeiden.
+      </p>
+    </article>
+
+  </div>
+
+
+  <hr class="divider" />
+
+
+  <!-- ======================================================
+       SYNTAX
+       ====================================================== -->
+
+  <h3 id="css-syntax">Grundsyntax</h3>
+
+  <div class="cheat-grid">
+
+    <article class="cheat-item">
+      <h4>Eine CSS-Regel</h4>
+
+      <pre class="code"><code>.card {
+  background: white;
+  border: 1px solid #ddd;
+  padding: 1rem;
+}</code></pre>
+
+      <p>
+        Eine CSS-Regel besteht grundsätzlich aus:
+      </p>
+
+      <ul>
+        <li><strong>Selektor:</strong> Welches Element soll angesprochen werden?</li>
+        <li><strong>Eigenschaft:</strong> Was soll verändert werden?</li>
+        <li><strong>Wert:</strong> Welchen Wert erhält die Eigenschaft?</li>
+      </ul>
+
+      <p>
+        Im Beispiel ist <code>.card</code> der Selektor,
+        <code>background</code> eine Eigenschaft und
+        <code>white</code> ihr Wert.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Mehrere Deklarationen</h4>
+
+      <pre class="code"><code>.card {
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 16px;
+  background: #ffffff;
+}</code></pre>
+
+      <p>
+        Jede Deklaration wird normalerweise mit einem Semikolon beendet.
+        Beim letzten Eintrag ist das Semikolon technisch oft optional,
+        sollte aber trotzdem gesetzt werden.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Kommentare</h4>
+
+      <pre class="code"><code>/* Navigation */
+
+.top-nav {
+  display: flex;
+}
+
+/*
+  Kommentare können
+  auch mehrere Zeilen
+  umfassen.
+*/</code></pre>
+
+      <p>
+        Kommentare helfen dabei, große Stylesheets zu gliedern.
+      </p>
+
+      <p class="hint">
+        Kommentare sollen erklären, warum etwas ungewöhnlich gelöst wurde.
+        Jede offensichtliche Zeile mit einem kleinen Roman zu versehen,
+        verschiebt das Problem nur von CSS zu Literaturkritik.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Leerraum ist weitgehend bedeutungslos</h4>
+
+      <pre class="code"><code>.card{padding:1rem;background:white;}</code></pre>
+
+      <p>
+        Funktioniert genauso wie:
+      </p>
+
+      <pre class="code"><code>.card {
+  padding: 1rem;
+  background: white;
+}</code></pre>
+
+      <p>
+        Die zweite Variante ist für Menschen allerdings wesentlich angenehmer.
+      </p>
+    </article>
+
+  </div>
+
+
+  <hr class="divider" />
+
+
+  <!-- ======================================================
+       SELEKTOREN
+       ====================================================== -->
+
+  <h3 id="css-selektoren">Selektoren</h3>
+
+  <p>
+    Selektoren bestimmen, welche HTML-Elemente eine CSS-Regel erhalten.
+    Wer Selektoren versteht, versteht einen erheblichen Teil von CSS.
+  </p>
+
+  <div class="cheat-grid">
+
+    <article class="cheat-item">
+      <h4>Elementselektor</h4>
+
+      <pre class="code"><code>p {
+  line-height: 1.6;
+}</code></pre>
+
+      <p>
+        Wählt alle <code>&lt;p&gt;</code>-Elemente aus.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Klassenselektor</h4>
+
+      <pre class="code"><code>.card {
+  background: white;
+}</code></pre>
+
+      <p>
+        Wählt alle Elemente mit:
+      </p>
+
+      <pre class="code code-html"><code>class="card"</code></pre>
+
+      <p>
+        Klassen sind der wichtigste allgemeine Mechanismus für CSS-Styling.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>ID-Selektor</h4>
+
+      <pre class="code"><code>#top {
+  scroll-margin-top: 2rem;
+}</code></pre>
+
+      <p>
+        Wählt das Element mit:
+      </p>
+
+      <pre class="code code-html"><code>id="top"</code></pre>
+
+      <p>
+        IDs sollen innerhalb einer Seite eindeutig sein.
+      </p>
+
+      <p class="hint">
+        Für normales Styling sind Klassen meist angenehmer.
+        IDs erzeugen relativ hohe Spezifität.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Universalselektor</h4>
+
+      <pre class="code"><code>* {
+  box-sizing: border-box;
+}</code></pre>
+
+      <p>
+        <code>*</code> bedeutet: alle Elemente.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Mehrere Selektoren zusammenfassen</h4>
+
+      <pre class="code"><code>h1,
+h2,
+h3 {
+  line-height: 1.25;
+}</code></pre>
+
+      <p>
+        Alle aufgelisteten Selektoren erhalten dieselben Regeln.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Mehrere Klassen gleichzeitig</h4>
+
+      <pre class="code"><code>.card.warning {
+  border-color: orange;
+}</code></pre>
+
+      <p>
+        Das trifft nur Elemente, die <strong>beide</strong> Klassen besitzen:
+      </p>
+
+      <pre class="code code-html"><code>&lt;div class="card warning"&gt;...&lt;/div&gt;</code></pre>
+
+      <p>
+        Zwischen den Klassen steht dabei kein Leerzeichen.
+      </p>
+    </article>
+
+  </div>
+
+
+  <hr class="divider" />
+
+
+  <!-- ======================================================
+       KOMBINATOREN
+       ====================================================== -->
+
+  <h3 id="css-kombinatoren">Kombinatoren – Beziehungen zwischen Elementen</h3>
+
+  <p>
+    Selektoren können nicht nur einzelne Elemente ansprechen,
+    sondern auch Beziehungen innerhalb der HTML-Struktur.
+  </p>
+
+  <div class="cheat-grid">
+
+    <article class="cheat-item">
+      <h4>Nachfahrenselektor – Leerzeichen</h4>
+
+      <pre class="code"><code>.card p {
+  margin-bottom: 1rem;
+}</code></pre>
+
+      <p>
+        Wählt alle Absätze, die sich irgendwo innerhalb eines
+        Elements mit <code>class="card"</code> befinden.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Direktes Kind – <code>&gt;</code></h4>
+
+      <pre class="code"><code>.card &gt; p {
+  margin-bottom: 1rem;
+}</code></pre>
+
+      <p>
+        Wählt nur Absätze, die unmittelbare Kinder von
+        <code>.card</code> sind.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Direkter Nachbar – <code>+</code></h4>
+
+      <pre class="code"><code>h2 + p {
+  margin-top: 0;
+}</code></pre>
+
+      <p>
+        Wählt einen Absatz nur dann, wenn er unmittelbar auf
+        ein <code>&lt;h2&gt;</code> folgt.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Spätere Geschwister – <code>~</code></h4>
+
+      <pre class="code"><code>h2 ~ p {
+  color: var(--muted);
+}</code></pre>
+
+      <p>
+        Wählt alle später folgenden Geschwister-Absätze desselben Elternelements.
+      </p>
+    </article>
+
+  </div>
+
+
+  <hr class="divider" />
+
+
+  <!-- ======================================================
+       ATTRIBUTSELEKTOREN
+       ====================================================== -->
+
+  <h3 id="css-attribute">Attributselektoren</h3>
+
+  <p>
+    HTML-Attribute können ebenfalls zur Auswahl von Elementen verwendet werden.
+    Das ist besonders bei Formularen, Datenattributen und dynamisch gerenderten
+    Elementen nützlich.
+  </p>
+
+  <div class="cheat-grid">
+
+    <article class="cheat-item">
+      <h4>Attribut vorhanden</h4>
+
+      <pre class="code"><code>[disabled] {
+  opacity: 0.5;
+}</code></pre>
+
+      <p>
+        Wählt alle Elemente mit einem <code>disabled</code>-Attribut.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Exakter Attributwert</h4>
+
+      <pre class="code"><code>input[type="email"] {
+  border-color: steelblue;
+}</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Eigene data-Attribute</h4>
+
+      <pre class="code"><code>[data-news-mode="latest"] {
+  margin-top: 1rem;
+}</code></pre>
+
+      <p>
+        Damit können auch Elemente angesprochen werden, die JavaScript über
+        <code>data-*</code>-Attribute konfiguriert.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Weitere Attributvergleiche</h4>
+
+      <pre class="code"><code>[href^="https://"] { }
+[href$=".pdf"] { }
+[class*="news"] { }</code></pre>
+
+      <ul>
+        <li><code>^=</code> → beginnt mit</li>
+        <li><code>$=</code> → endet mit</li>
+        <li><code>*=</code> → enthält</li>
+      </ul>
+    </article>
+
+  </div>
+
+
+  <hr class="divider" />
+
+
+  <!-- ======================================================
+       PSEUDOKLASSEN
+       ====================================================== -->
+
+  <h3 id="css-pseudoklassen">Pseudoklassen</h3>
+
+  <p>
+    Pseudoklassen beschreiben einen bestimmten Zustand oder eine strukturelle
+    Eigenschaft eines Elements. Sie werden mit einem einzelnen Doppelpunkt geschrieben.
+  </p>
+
+  <div class="cheat-grid">
+
+    <article class="cheat-item">
+      <h4><code>:hover</code></h4>
+
+      <pre class="code"><code>a:hover {
+  color: #000;
+}</code></pre>
+
+      <p>
+        Wird aktiv, wenn sich der Mauszeiger über dem Element befindet.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>:focus</code> und <code>:focus-visible</code></h4>
+
+      <pre class="code"><code>a:focus-visible {
+  outline: 2px solid #0b5fff;
+  outline-offset: 3px;
+}</code></pre>
+
+      <p>
+        <code>:focus-visible</code> eignet sich besonders für Tastaturnavigation,
+        weil der Fokusrahmen dort erscheint, wo er tatsächlich benötigt wird.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>:active</code></h4>
+
+      <pre class="code"><code>button:active {
+  transform: translateY(1px);
+}</code></pre>
+
+      <p>
+        Gilt während eines aktiven Klicks beziehungsweise einer Aktivierung.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>:first-child</code> und <code>:last-child</code></h4>
+
+      <pre class="code"><code>.card p:first-child {
+  margin-top: 0;
+}
+
+.card p:last-child {
+  margin-bottom: 0;
+}</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>:nth-child()</code></h4>
+
+      <pre class="code"><code>li:nth-child(2) {
+  font-weight: bold;
+}
+
+tr:nth-child(even) {
+  background: rgba(0, 0, 0, 0.03);
+}</code></pre>
+
+      <p>
+        Ermöglicht die Auswahl anhand der Position eines Elements.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>:not()</code></h4>
+
+      <pre class="code"><code>.media-row:not(.compact) {
+  gap: 2rem;
+}</code></pre>
+
+      <p>
+        Wählt Elemente aus, die den angegebenen Selektor
+        <strong>nicht</strong> erfüllen.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>:is()</code></h4>
+
+      <pre class="code"><code>.news-body :is(h2, h3, h4) {
+  line-height: 1.3;
+}</code></pre>
+
+      <p>
+        Fasst mehrere mögliche Selektoren kompakt zusammen.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>:where()</code></h4>
+
+      <pre class="code"><code>:where(.news-body, .news-teaser) p {
+  line-height: 1.7;
+}</code></pre>
+
+      <p>
+        Ähnelt <code>:is()</code>, besitzt aber selbst keine zusätzliche
+        Spezifität. Das kann bei großen Stylesheets ausgesprochen praktisch sein.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>:has()</code></h4>
+
+      <pre class="code"><code>.media-row:has(&gt; .media:only-child) {
+  grid-template-columns: 1fr;
+}</code></pre>
+
+      <p>
+        Mit <code>:has()</code> kann ein Element abhängig von seinen
+        Kindern oder Nachfahren ausgewählt werden.
+      </p>
+
+      <p class="hint">
+        Das ist bemerkenswert mächtig: CSS kann damit gewissermaßen
+        „nach unten schauen und daraus eine Entscheidung nach oben ableiten“.
+      </p>
+    </article>
+
+  </div>
+
+
+  <hr class="divider" />
+
+
+  <!-- ======================================================
+       PSEUDOELEMENTE
+       ====================================================== -->
+
+  <h3 id="css-pseudoelemente">Pseudoelemente</h3>
+
+  <p>
+    Pseudoelemente erzeugen keine echten HTML-Elemente, erlauben aber das Styling
+    bestimmter Teile eines Elements oder zusätzlicher visueller Ebenen.
+    Sie werden üblicherweise mit zwei Doppelpunkten geschrieben.
+  </p>
+
+  <div class="cheat-grid">
+
+    <article class="cheat-item">
+      <h4><code>::before</code> und <code>::after</code></h4>
+
+      <pre class="code"><code>.tile::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+}</code></pre>
+
+      <p>
+        Sehr nützlich für Overlays, Dekorationen oder zusätzliche Ebenen,
+        ohne dafür bedeutungslose HTML-Elemente einzubauen.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>content</code></h4>
+
+      <pre class="code"><code>.external-link::after {
+  content: " ↗";
+}</code></pre>
+
+      <p>
+        <code>content</code> wird hauptsächlich zusammen mit
+        <code>::before</code> und <code>::after</code> verwendet.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>::selection</code></h4>
+
+      <pre class="code"><code>::selection {
+  background: #dbeafe;
+}</code></pre>
+
+      <p>
+        Kontrolliert die Darstellung markierten Textes.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>::placeholder</code></h4>
+
+      <pre class="code"><code>input::placeholder {
+  color: var(--muted);
+}</code></pre>
+    </article>
+
+  </div>
+
+
+  <hr class="divider" />
+
+
+  <!-- ======================================================
+       KASKADE
+       ====================================================== -->
+
+  <h3 id="css-kaskade">Die Kaskade – warum CSS „Cascading“ heißt</h3>
+
+  <p>
+    Mehrere CSS-Regeln können gleichzeitig auf dasselbe Element wirken.
+    Der Browser muss deshalb entscheiden, welche Deklaration tatsächlich gewinnt.
+    Genau dieser Entscheidungsprozess ist die <strong>Kaskade</strong>.
+  </p>
+
+  <div class="cheat-grid">
+
+    <article class="cheat-item">
+      <h4>Spätere Regel gewinnt</h4>
+
+      <pre class="code"><code>p {
+  color: blue;
+}
+
+p {
+  color: red;
+}</code></pre>
+
+      <p>
+        Bei gleicher Spezifität ist der Absatz rot,
+        weil die zweite Regel später definiert wurde.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Aber nicht immer</h4>
+
+      <pre class="code"><code>.intro {
+  color: blue;
+}
+
+p {
+  color: red;
+}</code></pre>
+
+      <p>
+        Ein <code>&lt;p class="intro"&gt;</code> bleibt blau,
+        weil der Klassenselektor spezifischer ist als der Elementselektor.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>!important</code></h4>
+
+      <pre class="code"><code>.card {
+  color: red !important;
+}</code></pre>
+
+      <p>
+        <code>!important</code> kann die normale Kaskade überstimmen.
+      </p>
+
+      <p class="hint">
+        Nicht als Standardwaffe verwenden. Ein Stylesheet voller
+        <code>!important</code> ist häufig ein Zeichen dafür, dass die
+        Spezifität außer Kontrolle geraten ist.
+      </p>
+    </article>
+
+  </div>
+
+
+  <hr class="divider" />
+
+
+  <!-- ======================================================
+       SPEZIFITÄT
+       ====================================================== -->
+
+  <h3 id="css-spezifitaet">Spezifität</h3>
+
+  <p>
+    Die Spezifität beschreibt grob gesagt, wie präzise ein Selektor ein Element auswählt.
+    Ein spezifischerer Selektor kann einen allgemeineren überschreiben,
+    selbst wenn der allgemeinere später im Stylesheet steht.
+  </p>
+
+  <div class="cheat-grid">
+
+    <article class="cheat-item">
+      <h4>Grobe Rangfolge</h4>
+
+      <ol>
+        <li>Inline-Styles</li>
+        <li>ID-Selektoren</li>
+        <li>Klassen, Attribute und Pseudoklassen</li>
+        <li>Elemente und Pseudoelemente</li>
+      </ol>
+
+      <pre class="code"><code>p { }                 /* gering */
+.card { }             /* höher */
+.card p { }           /* noch höher */
+#content p { }        /* deutlich höher */</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Spezifitätskrieg vermeiden</h4>
+
+      <pre class="code"><code>/* unnötig kompliziert */
+main .content article.card p.hint {
+  color: gray;
+}
+
+/* meistens ausreichend */
+.hint {
+  color: gray;
+}</code></pre>
+
+      <p>
+        Je länger und spezifischer Selektoren werden, desto schwieriger
+        lassen sie sich später überschreiben.
+      </p>
+    </article>
+
+  </div>
+
+
+  <hr class="divider" />
+
+
+  <!-- ======================================================
+       VERERBUNG
+       ====================================================== -->
+
+  <h3 id="css-vererbung">Vererbung</h3>
+
+  <p>
+    Manche CSS-Eigenschaften werden von Elternelementen automatisch an ihre
+    Kinder weitergegeben. Andere nicht.
+  </p>
+
+  <div class="cheat-grid">
+
+    <article class="cheat-item">
+      <h4>Typisch vererbte Eigenschaften</h4>
+
+      <pre class="code"><code>body {
+  color: #1f2328;
+  font-family: system-ui, sans-serif;
+  line-height: 1.6;
+}</code></pre>
+
+      <p>
+        Textfarbe und Schrift werden normalerweise an untergeordnete
+        Elemente weitergegeben.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Typisch nicht vererbte Eigenschaften</h4>
+
+      <ul>
+        <li><code>margin</code></li>
+        <li><code>padding</code></li>
+        <li><code>border</code></li>
+        <li><code>width</code></li>
+        <li><code>height</code></li>
+        <li><code>background</code></li>
+      </ul>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Vererbung erzwingen</h4>
+
+      <pre class="code"><code>button {
+  font: inherit;
+  color: inherit;
+}</code></pre>
+
+      <p>
+        <code>inherit</code> übernimmt ausdrücklich den Wert des Elternelements.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Weitere globale Werte</h4>
+
+      <pre class="code"><code>color: initial;
+color: inherit;
+color: unset;
+color: revert;</code></pre>
+
+      <ul>
+        <li><code>initial</code> → ursprünglicher CSS-Standardwert</li>
+        <li><code>inherit</code> → Wert des Elternobjekts</li>
+        <li><code>unset</code> → je nach Eigenschaft initial oder inherit</li>
+        <li><code>revert</code> → zurück zur vorherigen Ebene der Kaskade</li>
+      </ul>
+    </article>
+
+  </div>
+
+
+  <hr class="divider" />
+
+
+  <!-- ======================================================
+       BOX MODELL
+       ====================================================== -->
+
+  <h3 id="css-boxmodell">Das Boxmodell</h3>
+
+  <p>
+    Fast jedes HTML-Element lässt sich gedanklich als rechteckige Box betrachten.
+    Diese Box besitzt mehrere Schichten.
+  </p>
+
+  <div class="cheat-grid">
+
+    <article class="cheat-item">
+      <h4>Die vier Ebenen</h4>
+
+      <ol>
+        <li><strong>Content</strong> – eigentlicher Inhalt</li>
+        <li><strong>Padding</strong> – Innenabstand</li>
+        <li><strong>Border</strong> – Rahmen</li>
+        <li><strong>Margin</strong> – Außenabstand</li>
+      </ol>
+
+      <pre class="code"><code>.box {
+  width: 300px;
+  padding: 20px;
+  border: 2px solid #ccc;
+  margin: 20px;
+}</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Das klassische Problem</h4>
+
+      <p>
+        Ohne <code>border-box</code> bedeutet:
+      </p>
+
+      <pre class="code"><code>width: 300px;
+padding: 20px;
+border: 2px solid;</code></pre>
+
+      <p>
+        tatsächliche Breite:
+      </p>
+
+      <pre class="code"><code>300 + 40 + 4 = 344px</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>box-sizing: border-box</code></h4>
+
+      <pre class="code"><code>*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}</code></pre>
+
+      <p>
+        Mit <code>border-box</code> sind Padding und Border bereits
+        in der angegebenen Breite enthalten.
+      </p>
+
+      <p class="hint">
+        Eine der unspektakulärsten und zugleich nützlichsten
+        Grundregeln eines Stylesheets.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Outline ist nicht Border</h4>
+
+      <pre class="code"><code>.button:focus-visible {
+  outline: 3px solid blue;
+}</code></pre>
+
+      <p>
+        Eine <code>outline</code> verändert die Größe des Elements nicht.
+        Deshalb eignet sie sich hervorragend für Fokusmarkierungen.
+      </p>
+    </article>
+
+  </div>
+
+
+  <hr class="divider" />
+
+
+  <!-- ======================================================
+       ABSTÄNDE
+       ====================================================== -->
+
+  <h3 id="css-abstaende">Margin, Padding und Gap</h3>
+
+  <div class="cheat-grid">
+
+    <article class="cheat-item">
+      <h4>Padding – Innenabstand</h4>
+
+      <pre class="code"><code>.card {
+  padding: 1.25rem;
+}</code></pre>
+
+      <p>
+        Padding erzeugt Abstand zwischen Inhalt und Rahmen beziehungsweise
+        Hintergrund des Elements.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Margin – Außenabstand</h4>
+
+      <pre class="code"><code>.card {
+  margin: 1rem 0;
+}</code></pre>
+
+      <p>
+        Margin erzeugt Abstand zwischen einem Element und seiner Umgebung.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Shorthand-Schreibweise</h4>
+
+      <pre class="code"><code>margin: 1rem;
+
+/* oben/unten | links/rechts */
+margin: 1rem 2rem;
+
+/* oben | links/rechts | unten */
+margin: 1rem 2rem 3rem;
+
+/* oben | rechts | unten | links */
+margin: 1rem 2rem 3rem 4rem;</code></pre>
+
+      <p class="hint">
+        Bei vier Werten hilft die Uhr:
+        oben → rechts → unten → links.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Einzelne Seiten</h4>
+
+      <pre class="code"><code>margin-top: 1rem;
+margin-right: 2rem;
+margin-bottom: 1rem;
+margin-left: 2rem;</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>gap</code></h4>
+
+      <pre class="code"><code>.tile-grid {
+  display: grid;
+  gap: 1rem;
+}</code></pre>
+
+      <p>
+        Für Flexbox und Grid ist <code>gap</code> meist eleganter als
+        Margins auf jedem einzelnen Kind.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Margin Collapsing</h4>
+
+      <p>
+        Vertikale Margins normaler Blockelemente können miteinander
+        kollabieren. Zwei Margins von jeweils <code>20px</code>
+        ergeben daher nicht zwingend <code>40px</code>.
+      </p>
+
+      <pre class="code"><code>h2 {
+  margin-bottom: 20px;
+}
+
+p {
+  margin-top: 20px;
+}</code></pre>
+
+      <p>
+        Zwischen den Elementen können effektiv nur
+        <code>20px</code> liegen.
+      </p>
+
+      <p class="hint">
+        Wenn Abstände scheinbar mathematische Gesetze missachten,
+        hat CSS häufig gerade Margin Collapsing entdeckt.
+      </p>
+    </article>
+
+  </div>
+
+
+  <hr class="divider" />
+
+
+  <!-- ======================================================
+       GRÖSSEN
+       ====================================================== -->
+
+  <h3 id="css-groessen">Breite und Höhe</h3>
+
+  <div class="cheat-grid">
+
+    <article class="cheat-item">
+      <h4><code>width</code> und <code>height</code></h4>
+
+      <pre class="code"><code>.box {
+  width: 300px;
+  height: 200px;
+}</code></pre>
+
+      <p>
+        Feste Größen sind manchmal sinnvoll, bei responsiven Layouts
+        aber häufig zu starr.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>max-width</code></h4>
+
+      <pre class="code"><code>.content {
+  width: 100%;
+  max-width: 980px;
+  margin: 0 auto;
+}</code></pre>
+
+      <p>
+        Sehr typisches Muster:
+        Der Inhalt darf kleiner werden, aber nicht über
+        <code>980px</code> hinauswachsen.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>min-width</code> und <code>min-height</code></h4>
+
+      <pre class="code"><code>.hero {
+  min-height: 160px;
+}</code></pre>
+
+      <p>
+        Das Element darf größer werden, unterschreitet aber nicht
+        die Mindestgröße.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>auto</code></h4>
+
+      <pre class="code"><code>img {
+  width: 100%;
+  height: auto;
+}</code></pre>
+
+      <p>
+        <code>auto</code> überlässt die passende Größe dem Browser beziehungsweise
+        dem intrinsischen Seitenverhältnis des Inhalts.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>aspect-ratio</code></h4>
+
+      <pre class="code"><code>.tile {
+  aspect-ratio: 16 / 10;
+}</code></pre>
+
+      <p>
+        Hält ein bestimmtes Seitenverhältnis aufrecht.
+      </p>
+    </article>
+
+  </div>
+
+
+  <hr class="divider" />
+
+
+  <!-- ======================================================
+       EINHEITEN
+       ====================================================== -->
+
+  <h3 id="css-einheiten">CSS-Einheiten</h3>
+
+  <div class="cheat-grid">
+
+    <article class="cheat-item">
+      <h4><code>px</code></h4>
+
+      <pre class="code"><code>border: 1px solid #ddd;</code></pre>
+
+      <p>
+        Pixel eignen sich gut für sehr kleine, präzise Werte wie Rahmen.
+        Sie sind jedoch nicht immer die beste Wahl für ganze Layoutsysteme.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>rem</code></h4>
+
+      <pre class="code"><code>.card {
+  padding: 1.25rem;
+}</code></pre>
+
+      <p>
+        <code>rem</code> bezieht sich auf die Schriftgröße des
+        Root-Elements <code>&lt;html&gt;</code>.
+      </p>
+
+      <p>
+        Bei der üblichen Standardschriftgröße gilt ungefähr:
+      </p>
+
+      <pre class="code"><code>1rem = 16px
+2rem = 32px
+0.5rem = 8px</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>em</code></h4>
+
+      <pre class="code"><code>.button {
+  padding: 0.6em 1em;
+}</code></pre>
+
+      <p>
+        <code>em</code> orientiert sich stärker am jeweiligen
+        lokalen Schriftgrößenkontext.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Prozentwerte</h4>
+
+      <pre class="code"><code>.child {
+  width: 50%;
+}</code></pre>
+
+      <p>
+        Prozentwerte beziehen sich je nach Eigenschaft auf einen
+        übergeordneten Kontext.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>vw</code> und <code>vh</code></h4>
+
+      <pre class="code"><code>.hero {
+  min-height: 60vh;
+}</code></pre>
+
+      <ul>
+        <li><code>1vw</code> = 1 % der Viewportbreite</li>
+        <li><code>1vh</code> = 1 % der Viewporthöhe</li>
+      </ul>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Moderne Viewport-Einheiten</h4>
+
+      <pre class="code"><code>.fullscreen {
+  min-height: 100dvh;
+}</code></pre>
+
+      <ul>
+        <li><code>dvh</code> → dynamische Viewporthöhe</li>
+        <li><code>svh</code> → kleine Viewporthöhe</li>
+        <li><code>lvh</code> → große Viewporthöhe</li>
+      </ul>
+
+      <p>
+        Diese Einheiten sind insbesondere auf Mobilgeräten relevant,
+        deren Browserleisten die sichtbare Höhe verändern können.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>ch</code></h4>
+
+      <pre class="code"><code>.article-text {
+  max-width: 70ch;
+}</code></pre>
+
+      <p>
+        <code>ch</code> basiert ungefähr auf der Breite eines Zeichens.
+        Dadurch eignet sich die Einheit hervorragend zur Begrenzung
+        langer Textzeilen.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>fr</code></h4>
+
+      <pre class="code"><code>.grid {
+  grid-template-columns: 1fr 2fr;
+}</code></pre>
+
+      <p>
+        <code>fr</code> bezeichnet einen Anteil des verfügbaren
+        Platzes in CSS Grid.
+      </p>
+    </article>
+
+  </div>
+
+
+  <hr class="divider" />
+
+
+  <!-- ======================================================
+       FUNKTIONEN
+       ====================================================== -->
+
+  <h3 id="css-funktionen">Nützliche CSS-Funktionen</h3>
+
+  <div class="cheat-grid">
+
+    <article class="cheat-item">
+      <h4><code>calc()</code></h4>
+
+      <pre class="code"><code>.page {
+  width: calc(100% - 40px);
+}</code></pre>
+
+      <p>
+        Ermöglicht Berechnungen mit unterschiedlichen Einheiten.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>min()</code></h4>
+
+      <pre class="code"><code>.page {
+  width: min(100% - 40px, 920px);
+}</code></pre>
+
+      <p>
+        Verwendet den kleineren der angegebenen Werte.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>max()</code></h4>
+
+      <pre class="code"><code>.box {
+  width: max(300px, 50%);
+}</code></pre>
+
+      <p>
+        Verwendet den größeren Wert.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>clamp()</code></h4>
+
+      <pre class="code"><code>h1 {
+  font-size: clamp(2rem, 5vw, 4rem);
+}</code></pre>
+
+      <p>
+        Bedeutet:
+      </p>
+
+      <ul>
+        <li>mindestens <code>2rem</code></li>
+        <li>idealerweise <code>5vw</code></li>
+        <li>höchstens <code>4rem</code></li>
+      </ul>
+
+      <p>
+        Besonders nützlich für fließend responsive Typografie.
+      </p>
+    </article>
+
+  </div>
+
+
+  <hr class="divider" />
+
+
+  <!-- ======================================================
+       TYPOGRAFIE
+       ====================================================== -->
+
+  <h3 id="css-typografie">Text und Typografie</h3>
+
+  <div class="cheat-grid">
+
+    <article class="cheat-item">
+      <h4>Schriftfamilie</h4>
+
+      <pre class="code"><code>body {
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Arial,
+    sans-serif;
+}</code></pre>
+
+      <p>
+        Mehrere Schriftarten bilden einen sogenannten
+        <strong>Font Stack</strong>. Ist die erste nicht verfügbar,
+        versucht der Browser die nächste.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Schriftgröße</h4>
+
+      <pre class="code"><code>body {
+  font-size: 1rem;
+}
+
+h1 {
+  font-size: 2rem;
+}</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Schriftgewicht</h4>
+
+      <pre class="code"><code>.title {
+  font-weight: 700;
+}</code></pre>
+
+      <p>
+        Übliche Werte:
+      </p>
+
+      <ul>
+        <li><code>400</code> → normal</li>
+        <li><code>500</code> → medium</li>
+        <li><code>600</code> → semi-bold</li>
+        <li><code>700</code> → bold</li>
+      </ul>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Zeilenhöhe</h4>
+
+      <pre class="code"><code>body {
+  line-height: 1.6;
+}</code></pre>
+
+      <p>
+        Ein einheitenloser Wert ist häufig sinnvoll,
+        weil er sich automatisch mit der Schriftgröße skaliert.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Textausrichtung</h4>
+
+      <pre class="code"><code>.center {
+  text-align: center;
+}
+
+.right {
+  text-align: right;
+}</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Buchstabenabstand</h4>
+
+      <pre class="code"><code>.label {
+  letter-spacing: 0.04em;
+}</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Wortabstand</h4>
+
+      <pre class="code"><code>.text {
+  word-spacing: 0.1em;
+}</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Textumwandlung</h4>
+
+      <pre class="code"><code>.label {
+  text-transform: uppercase;
+}</code></pre>
+
+      <p>
+        Weitere Werte:
+        <code>lowercase</code>,
+        <code>capitalize</code>,
+        <code>none</code>.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Unterstreichungen</h4>
+
+      <pre class="code"><code>a {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Textschatten</h4>
+
+      <pre class="code"><code>.tile-label {
+  text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.6);
+}</code></pre>
+
+      <p>
+        Reihenfolge:
+      </p>
+
+      <pre class="code"><code>horizontal | vertikal | unschärfe | farbe</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Lange Wörter umbrechen</h4>
+
+      <pre class="code"><code>.article {
+  overflow-wrap: break-word;
+}</code></pre>
+
+      <p>
+        Hilft bei langen URLs oder Zeichenketten,
+        die sonst das Layout sprengen könnten.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Text nicht umbrechen</h4>
+
+      <pre class="code"><code>.label {
+  white-space: nowrap;
+}</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Text mit … abschneiden</h4>
+
+      <pre class="code"><code>.title {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}</code></pre>
+    </article>
+
+  </div>
+
+
+  <hr class="divider" />
+
+
+  <!-- ======================================================
+       FARBEN
+       ====================================================== -->
+
+  <h3 id="css-farben">Farben</h3>
+
+  <div class="cheat-grid">
+
+    <article class="cheat-item">
+      <h4>Farbnamen</h4>
+
+      <pre class="code"><code>color: red;
+background: white;</code></pre>
+
+      <p>
+        Gut zum Experimentieren, für ein konsistentes Design sind
+        Hex-, RGB- oder CSS-Variablen meist besser.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Hexadezimalfarben</h4>
+
+      <pre class="code"><code>color: #1f2328;
+background: #ffffff;</code></pre>
+
+      <p>
+        Kurzform ist ebenfalls möglich:
+      </p>
+
+      <pre class="code"><code>#fff
+#000
+#abc</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>RGB und Transparenz</h4>
+
+      <pre class="code"><code>background: rgb(255, 255, 255);
+
+background: rgba(0, 0, 0, 0.35);</code></pre>
+
+      <p>
+        Beim klassischen <code>rgba()</code> bestimmt der letzte Wert
+        die Deckkraft:
+      </p>
+
+      <ul>
+        <li><code>0</code> → unsichtbar</li>
+        <li><code>0.5</code> → halbtransparent</li>
+        <li><code>1</code> → vollständig deckend</li>
+      </ul>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>currentColor</code></h4>
+
+      <pre class="code"><code>a {
+  color: #24556b;
+  text-decoration-color: currentColor;
+}</code></pre>
+
+      <p>
+        <code>currentColor</code> entspricht automatisch dem aktuellen
+        Wert der Eigenschaft <code>color</code>.
+      </p>
+    </article>
+
+  </div>
+
+
+  <hr class="divider" />
+
+
+  <!-- ======================================================
+       HINTERGRÜNDE
+       ====================================================== -->
+
+  <h3 id="css-hintergruende">Hintergründe</h3>
+
+  <div class="cheat-grid">
+
+    <article class="cheat-item">
+      <h4>Hintergrundfarbe</h4>
+
+      <pre class="code"><code>.card {
+  background-color: #ffffff;
+}</code></pre>
+
+      <p>
+        Die Kurzform lautet schlicht:
+      </p>
+
+      <pre class="code"><code>background: #ffffff;</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Hintergrundbild</h4>
+
+      <pre class="code"><code>.hero {
+  background-image: url("../img/photo.jpg");
+}</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Bildposition</h4>
+
+      <pre class="code"><code>.hero {
+  background-position: center;
+}</code></pre>
+
+      <p>
+        Möglich sind beispielsweise:
+        <code>center</code>,
+        <code>top</code>,
+        <code>bottom</code>,
+        <code>left</code>,
+        <code>right</code>.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Hintergrundgröße</h4>
+
+      <pre class="code"><code>.hero {
+  background-size: cover;
+}</code></pre>
+
+      <ul>
+        <li><code>cover</code> → Fläche vollständig ausfüllen, Beschneidung möglich</li>
+        <li><code>contain</code> → gesamtes Bild sichtbar, freie Flächen möglich</li>
+      </ul>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Hintergrundwiederholung</h4>
+
+      <pre class="code"><code>.hero {
+  background-repeat: no-repeat;
+}</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Kurzschreibweise</h4>
+
+      <pre class="code"><code>.hero {
+  background:
+    url("../img/photo.jpg")
+    center / cover
+    no-repeat;
+}</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Linearer Verlauf</h4>
+
+      <pre class="code"><code>.hero {
+  background:
+    linear-gradient(
+      135deg,
+      #ffffff,
+      #e5e7eb
+    );
+}</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Bild mit Overlay</h4>
+
+      <pre class="code"><code>.hero {
+  background:
+    linear-gradient(
+      rgba(0, 0, 0, 0.35),
+      rgba(0, 0, 0, 0.35)
+    ),
+    url("../img/photo.jpg")
+    center / cover no-repeat;
+}</code></pre>
+
+      <p>
+        Damit kann ein Bild direkt abgedunkelt werden,
+        ohne zusätzliches HTML.
+      </p>
+    </article>
+
+  </div>
+
+
+  <hr class="divider" />
+
+
+  <!-- ======================================================
+       RAHMEN UND SCHATTEN
+       ====================================================== -->
+
+  <h3 id="css-rahmen">Rahmen, Rundungen und Schatten</h3>
+
+  <div class="cheat-grid">
+
+    <article class="cheat-item">
+      <h4>Border</h4>
+
+      <pre class="code"><code>.card {
+  border: 1px solid #e5e7eb;
+}</code></pre>
+
+      <p>
+        Reihenfolge:
+      </p>
+
+      <pre class="code"><code>dicke | linienart | farbe</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Einzelne Rahmen</h4>
+
+      <pre class="code"><code>.header {
+  border-bottom: 1px solid #ddd;
+}</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Border Radius</h4>
+
+      <pre class="code"><code>.card {
+  border-radius: 16px;
+}</code></pre>
+
+      <p>
+        Vollständig runde Elemente:
+      </p>
+
+      <pre class="code"><code>.avatar {
+  border-radius: 50%;
+}</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Box Shadow</h4>
+
+      <pre class="code"><code>.card {
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.08);
+}</code></pre>
+
+      <p>
+        Reihenfolge:
+      </p>
+
+      <pre class="code"><code>x | y | unschärfe | ausbreitung | farbe</code></pre>
+
+      <p class="hint">
+        Schatten sehen meist besser aus, wenn man sie beinahe übersieht.
+        Wenn die Card über der Seite schwebt wie ein außer Kontrolle
+        geratenes UFO, war es vermutlich etwas zu viel.
+      </p>
+    </article>
+
+  </div>
+
+
+  <hr class="divider" />
+
+
+  <!-- ======================================================
+       DISPLAY
+       ====================================================== -->
+
+  <h3 id="css-display">Die Eigenschaft <code>display</code></h3>
+
+  <div class="cheat-grid">
+
+    <article class="cheat-item">
+      <h4><code>display: block</code></h4>
+
+      <pre class="code"><code>.box {
+  display: block;
+}</code></pre>
+
+      <p>
+        Blockelemente beginnen normalerweise in einer neuen Zeile und
+        nehmen standardmäßig die verfügbare Breite ein.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>display: inline</code></h4>
+
+      <pre class="code"><code>.label {
+  display: inline;
+}</code></pre>
+
+      <p>
+        Inline-Elemente befinden sich im normalen Textfluss.
+        Klassisches Beispiel: <code>&lt;span&gt;</code>.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>display: inline-block</code></h4>
+
+      <pre class="code"><code>.badge {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+}</code></pre>
+
+      <p>
+        Bleibt im Inline-Fluss, kann aber wie eine Box dimensioniert werden.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>display: none</code></h4>
+
+      <pre class="code"><code>.hidden {
+  display: none;
+}</code></pre>
+
+      <p>
+        Das Element wird vollständig aus dem Layout entfernt.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>visibility: hidden</code></h4>
+
+      <pre class="code"><code>.hidden {
+  visibility: hidden;
+}</code></pre>
+
+      <p>
+        Das Element wird unsichtbar, behält aber seinen Platz im Layout.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>opacity</code></h4>
+
+      <pre class="code"><code>.faded {
+  opacity: 0.5;
+}</code></pre>
+
+      <p>
+        Das Element bleibt vorhanden, wird aber transparent.
+      </p>
+    </article>
+
+  </div>
+
+
+  <hr class="divider" />
+
+
+  <!-- ======================================================
+       OVERFLOW
+       ====================================================== -->
+
+  <h3 id="css-overflow">Overflow – wenn Inhalt nicht hineinpasst</h3>
+
+  <div class="cheat-grid">
+
+    <article class="cheat-item">
+      <h4><code>overflow: hidden</code></h4>
+
+      <pre class="code"><code>.tile {
+  overflow: hidden;
+}</code></pre>
+
+      <p>
+        Alles außerhalb der Box wird abgeschnitten.
+        Besonders praktisch bei gezoomten Bildern.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>overflow: auto</code></h4>
+
+      <pre class="code"><code>pre {
+  overflow-x: auto;
+}</code></pre>
+
+      <p>
+        Der Browser zeigt nur dann Scrollleisten,
+        wenn sie tatsächlich notwendig sind.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>overflow: scroll</code></h4>
+
+      <pre class="code"><code>.box {
+  overflow: scroll;
+}</code></pre>
+
+      <p>
+        Erzwingt einen scrollbaren Bereich.
+      </p>
+    </article>
+
+  </div>
+
+
+  <hr class="divider" />
+
+
+  <!-- ======================================================
+       POSITION
+       ====================================================== -->
+
+  <h3 id="css-position">Positionierung</h3>
+
+  <div class="cheat-grid">
+
+    <article class="cheat-item">
+      <h4><code>position: static</code></h4>
+
+      <p>
+        Standardwert. Das Element bleibt im normalen Dokumentfluss.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>position: relative</code></h4>
+
+      <pre class="code"><code>.tile {
+  position: relative;
+}</code></pre>
+
+      <p>
+        Das Element bleibt grundsätzlich im normalen Layout,
+        erzeugt aber unter anderem einen Bezugspunkt für absolut
+        positionierte Kinder.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>position: absolute</code></h4>
+
+      <pre class="code"><code>.tile {
+  position: relative;
+}
+
+.tile-label {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}</code></pre>
+
+      <p>
+        Das Label wird relativ zum nächsten geeigneten positionierten
+        Vorfahren platziert.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>position: fixed</code></h4>
+
+      <pre class="code"><code>.background {
+  position: fixed;
+  inset: 0;
+}</code></pre>
+
+      <p>
+        Das Element wird relativ zum Viewport positioniert und bleibt
+        beim Scrollen an derselben Stelle.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>position: sticky</code></h4>
+
+      <pre class="code"><code>.navigation {
+  position: sticky;
+  top: 0;
+}</code></pre>
+
+      <p>
+        Das Element verhält sich zunächst normal und bleibt beim
+        Erreichen der angegebenen Position „kleben“.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>inset</code></h4>
+
+      <pre class="code"><code>.overlay {
+  position: absolute;
+  inset: 0;
+}</code></pre>
+
+      <p>
+        Entspricht:
+      </p>
+
+      <pre class="code"><code>top: 0;
+right: 0;
+bottom: 0;
+left: 0;</code></pre>
+    </article>
+
+  </div>
+
+
+  <hr class="divider" />
+
+
+  <!-- ======================================================
+       Z INDEX
+       ====================================================== -->
+
+  <h3 id="css-zindex">Ebenen und <code>z-index</code></h3>
+
+  <div class="cheat-grid">
+
+    <article class="cheat-item">
+      <h4>Grundprinzip</h4>
+
+      <pre class="code"><code>.background {
+  z-index: -1;
+}
+
+.overlay {
+  z-index: 2;
+}
+
+.dialog {
+  z-index: 10;
+}</code></pre>
+
+      <p>
+        Größere Werte liegen grundsätzlich über kleineren Werten –
+        allerdings nur innerhalb des jeweiligen
+        <strong>Stacking Context</strong>.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Warum <code>z-index: 999999</code> nicht immer hilft</h4>
+
+      <p>
+        Eigenschaften wie unter anderem
+        <code>position</code>,
+        <code>transform</code>,
+        <code>opacity</code> oder bestimmte Layoutsituationen
+        können neue Stacking Contexts erzeugen.
+      </p>
+
+      <p class="hint">
+        Wenn ein <code>z-index</code> scheinbar ignoriert wird,
+        liegt das Problem häufig nicht an einer zu kleinen Zahl,
+        sondern am falschen Stacking Context.
+      </p>
+    </article>
+
+  </div>
+
+
+  <hr class="divider" />
+
+
+  <!-- ======================================================
+       FLEXBOX
+       ====================================================== -->
+
+  <h3 id="css-flexbox">Flexbox</h3>
+
+  <p>
+    Flexbox eignet sich besonders für eindimensionale Layouts:
+    Elemente sollen hauptsächlich in einer Zeile oder einer Spalte
+    angeordnet werden.
+  </p>
+
+  <div class="cheat-grid">
+
+    <article class="cheat-item">
+      <h4>Flexbox aktivieren</h4>
+
+      <pre class="code"><code>.header-inner {
+  display: flex;
+}</code></pre>
+
+      <p>
+        Die direkten Kinder werden dadurch zu Flex-Items.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Hauptrichtung</h4>
+
+      <pre class="code"><code>.container {
+  display: flex;
+  flex-direction: row;
+}</code></pre>
+
+      <p>
+        Mögliche Werte:
+      </p>
+
+      <ul>
+        <li><code>row</code></li>
+        <li><code>row-reverse</code></li>
+        <li><code>column</code></li>
+        <li><code>column-reverse</code></li>
+      </ul>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>justify-content</code></h4>
+
+      <pre class="code"><code>.header {
+  display: flex;
+  justify-content: space-between;
+}</code></pre>
+
+      <p>
+        Kontrolliert die Verteilung entlang der Hauptachse.
+      </p>
+
+      <ul>
+        <li><code>flex-start</code></li>
+        <li><code>center</code></li>
+        <li><code>flex-end</code></li>
+        <li><code>space-between</code></li>
+        <li><code>space-around</code></li>
+        <li><code>space-evenly</code></li>
+      </ul>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>align-items</code></h4>
+
+      <pre class="code"><code>.header {
+  display: flex;
+  align-items: center;
+}</code></pre>
+
+      <p>
+        Kontrolliert die Ausrichtung auf der Querachse.
+      </p>
+
+      <ul>
+        <li><code>stretch</code></li>
+        <li><code>flex-start</code></li>
+        <li><code>center</code></li>
+        <li><code>flex-end</code></li>
+        <li><code>baseline</code></li>
+      </ul>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>gap</code></h4>
+
+      <pre class="code"><code>.nav {
+  display: flex;
+  gap: 1rem;
+}</code></pre>
+
+      <p>
+        Erzeugt gleichmäßige Abstände zwischen Flex-Items.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Umbrechen</h4>
+
+      <pre class="code"><code>.nav {
+  display: flex;
+  flex-wrap: wrap;
+}</code></pre>
+
+      <p>
+        Elemente dürfen in eine neue Zeile springen,
+        wenn der Platz nicht reicht.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>flex-grow</code></h4>
+
+      <pre class="code"><code>.main {
+  flex-grow: 1;
+}</code></pre>
+
+      <p>
+        Bestimmt, wie stark ein Element zusätzlichen freien Platz erhält.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>flex-shrink</code></h4>
+
+      <pre class="code"><code>.sidebar {
+  flex-shrink: 0;
+}</code></pre>
+
+      <p>
+        Verhindert hier, dass die Sidebar bei Platzmangel kleiner wird.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>flex-basis</code></h4>
+
+      <pre class="code"><code>.item {
+  flex-basis: 300px;
+}</code></pre>
+
+      <p>
+        Definiert eine bevorzugte Ausgangsgröße.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Flex-Kurzform</h4>
+
+      <pre class="code"><code>.item {
+  flex: 1 1 300px;
+}</code></pre>
+
+      <p>
+        Entspricht grob:
+      </p>
+
+      <pre class="code"><code>flex-grow: 1;
+flex-shrink: 1;
+flex-basis: 300px;</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Ein einzelnes Element verschieben</h4>
+
+      <pre class="code"><code>.last-item {
+  margin-left: auto;
+}</code></pre>
+
+      <p>
+        Ein erstaunlich praktischer Trick:
+        Das Element nimmt den freien Raum links von sich ein
+        und wandert dadurch nach rechts.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Element individuell ausrichten</h4>
+
+      <pre class="code"><code>.special {
+  align-self: flex-end;
+}</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Typischer Header</h4>
+
+      <pre class="code"><code>.header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+}
+
+.top-nav {
+  display: flex;
+  gap: 0.9rem;
+  flex-wrap: wrap;
+}</code></pre>
+    </article>
+
+  </div>
+
+
+  <hr class="divider" />
+
+
+  <!-- ======================================================
+       GRID
+       ====================================================== -->
+
+  <h3 id="css-grid">CSS Grid</h3>
+
+  <p>
+    CSS Grid eignet sich besonders für zweidimensionale Layouts,
+    bei denen sowohl Spalten als auch Zeilen eine Rolle spielen.
+  </p>
+
+  <div class="cheat-grid">
+
+    <article class="cheat-item">
+      <h4>Grid aktivieren</h4>
+
+      <pre class="code"><code>.grid {
+  display: grid;
+}</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Drei gleiche Spalten</h4>
+
+      <pre class="code"><code>.tile-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(3, 1fr);
+}</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Robustere Variante</h4>
+
+      <pre class="code"><code>.tile-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+}</code></pre>
+
+      <p>
+        <code>minmax(0, 1fr)</code> verhindert einige typische
+        Overflow-Probleme durch zu breite Inhalte.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Unterschiedliche Spaltenbreiten</h4>
+
+      <pre class="code"><code>.layout {
+  display: grid;
+  grid-template-columns:
+    2fr 1fr;
+}</code></pre>
+
+      <p>
+        Die erste Spalte erhält doppelt so viel freien Platz wie die zweite.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Feste und flexible Spalte</h4>
+
+      <pre class="code"><code>.layout {
+  display: grid;
+  grid-template-columns:
+    250px 1fr;
+}</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Abstände</h4>
+
+      <pre class="code"><code>.grid {
+  gap: 1rem;
+}</code></pre>
+
+      <p>
+        Alternativ:
+      </p>
+
+      <pre class="code"><code>row-gap: 1rem;
+column-gap: 2rem;</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Element über mehrere Spalten</h4>
+
+      <pre class="code"><code>.wide {
+  grid-column: span 2;
+}</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Explizite Linien</h4>
+
+      <pre class="code"><code>.wide {
+  grid-column: 1 / 3;
+}</code></pre>
+
+      <p>
+        Das Element beginnt an Grid-Linie 1
+        und endet an Grid-Linie 3.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Automatisch responsive Spalten</h4>
+
+      <pre class="code"><code>.grid {
+  display: grid;
+  grid-template-columns:
+    repeat(
+      auto-fit,
+      minmax(240px, 1fr)
+    );
+  gap: 1rem;
+}</code></pre>
+
+      <p>
+        Der Browser erzeugt automatisch so viele Spalten,
+        wie sinnvoll Platz haben.
+      </p>
+
+      <p class="hint">
+        Dieses Muster kann manche Media Queries vollständig ersetzen.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>auto-fit</code> und <code>auto-fill</code></h4>
+
+      <p>
+        Beide erzeugen automatisch Spalten.
+      </p>
+
+      <ul>
+        <li>
+          <code>auto-fit</code> lässt ungenutzte Spalten
+          kollabieren und vorhandene Inhalte wachsen.
+        </li>
+        <li>
+          <code>auto-fill</code> reserviert mögliche Spaltenplätze eher weiter.
+        </li>
+      </ul>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Zentrieren mit Grid</h4>
+
+      <pre class="code"><code>.hero {
+  display: grid;
+  place-items: center;
+}</code></pre>
+
+      <p>
+        Zentriert den Inhalt horizontal und vertikal.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Grid oder Flexbox?</h4>
+
+      <p>
+        Eine brauchbare Faustregel:
+      </p>
+
+      <ul>
+        <li>
+          <strong>Flexbox:</strong>
+          eine Hauptdimension – Zeile oder Spalte.
+        </li>
+
+        <li>
+          <strong>Grid:</strong>
+          Spalten und Zeilen gemeinsam.
+        </li>
+      </ul>
+
+      <p>
+        Diese Grenze ist nicht absolut, aber ein sehr guter Ausgangspunkt.
+      </p>
+    </article>
+
+  </div>
+
+
+  <hr class="divider" />
+
+
+  <!-- ======================================================
+       RESPONSIVE DESIGN
+       ====================================================== -->
+
+  <h3 id="css-responsive">Responsive Design</h3>
+
+  <p>
+    Responsive Design bedeutet, dass sich eine Webseite sinnvoll an
+    unterschiedliche Bildschirmgrößen anpasst – nicht bloß,
+    dass sie irgendwie auf einem Smartphone dargestellt werden kann.
+  </p>
+
+  <div class="cheat-grid">
+
+    <article class="cheat-item">
+      <h4>Viewport-Meta-Tag</h4>
+
+      <pre class="code code-html"><code>&lt;meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+&gt;</code></pre>
+
+      <p>
+        Ohne diesen Eintrag funktionieren responsive Layouts auf
+        Mobilgeräten häufig nicht wie erwartet.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Media Query</h4>
+
+      <pre class="code"><code>@media (max-width: 900px) {
+  .tile-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+}</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Mobile Ansicht</h4>
+
+      <pre class="code"><code>@media (max-width: 560px) {
+
+  .header-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .tile-grid {
+    grid-template-columns: 1fr;
+  }
+
+}</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Mobile First</h4>
+
+      <p>
+        Eine Alternative besteht darin, zuerst die kleinste
+        Darstellung zu definieren und größere Layouts anschließend
+        mit <code>min-width</code> zu ergänzen.
+      </p>
+
+      <pre class="code"><code>.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 700px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Breakpoints nicht nach Geräten benennen</h4>
+
+      <p>
+        Weniger sinnvoll:
+      </p>
+
+      <pre class="code"><code>/* iPhone */
+@media (max-width: 390px) { }</code></pre>
+
+      <p>
+        Besser:
+        einen Breakpoint dort setzen, wo das Layout tatsächlich
+        nicht mehr funktioniert.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Flüssige Breite</h4>
+
+      <pre class="code"><code>.page {
+  width: min(
+    calc(100% - 40px),
+    920px
+  );
+
+  margin: 0 auto;
+}</code></pre>
+
+      <p>
+        Damit bleibt links und rechts Luft,
+        während die maximale Inhaltsbreite begrenzt wird.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Responsive Schriftgröße</h4>
+
+      <pre class="code"><code>h1 {
+  font-size:
+    clamp(2rem, 5vw, 4rem);
+}</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Container Queries</h4>
+
+      <pre class="code"><code>.card-wrapper {
+  container-type: inline-size;
+}
+
+@container (min-width: 500px) {
+  .card-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}</code></pre>
+
+      <p>
+        Container Queries orientieren sich nicht am gesamten
+        Viewport, sondern an der Größe eines Containers.
+      </p>
+
+      <p class="hint">
+        Besonders interessant für wiederverwendbare Komponenten,
+        die an verschiedenen Stellen unterschiedlich viel Platz bekommen.
+      </p>
+    </article>
+
+  </div>
+
+
+  <hr class="divider" />
+
+
+  <!-- ======================================================
+       BILDER
+       ====================================================== -->
+
+  <h3 id="css-images">Bilder und Medien</h3>
+
+  <div class="cheat-grid">
+
+    <article class="cheat-item">
+      <h4>Responsive Bilder</h4>
+
+      <pre class="code"><code>img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}</code></pre>
+
+      <p>
+        Verhindert, dass Bilder breiter als ihr Container werden.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>object-fit: cover</code></h4>
+
+      <pre class="code"><code>.tile-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}</code></pre>
+
+      <p>
+        Das Bild füllt die gesamte Fläche.
+        Es wird nicht verzerrt, kann aber beschnitten werden.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>object-fit: contain</code></h4>
+
+      <pre class="code"><code>.star-map {
+  width: 100%;
+  height: 380px;
+  object-fit: contain;
+}</code></pre>
+
+      <p>
+        Das vollständige Bild bleibt sichtbar.
+        Dadurch können leere Flächen entstehen.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>object-position</code></h4>
+
+      <pre class="code"><code>.portrait {
+  object-fit: cover;
+  object-position: center top;
+}</code></pre>
+
+      <p>
+        Bestimmt, welcher Bildbereich bei einer Beschneidung bevorzugt sichtbar bleibt.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Seitenverhältnis</h4>
+
+      <pre class="code"><code>.image-box {
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Filter</h4>
+
+      <pre class="code"><code>.background-image {
+  filter:
+    grayscale(0.5)
+    saturate(0.7)
+    blur(3px);
+}</code></pre>
+
+      <p>
+        Weitere Filter sind unter anderem:
+      </p>
+
+      <ul>
+        <li><code>brightness()</code></li>
+        <li><code>contrast()</code></li>
+        <li><code>sepia()</code></li>
+        <li><code>opacity()</code></li>
+      </ul>
+    </article>
+
+  </div>
+
+
+  <hr class="divider" />
+
+
+  <!-- ======================================================
+       LINKS
+       ====================================================== -->
+
+  <h3 id="css-links">Links und interaktive Zustände</h3>
+
+  <div class="cheat-grid">
+
+    <article class="cheat-item">
+      <h4>Grundstil</h4>
+
+      <pre class="code"><code>a {
+  color: var(--text);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Hover</h4>
+
+      <pre class="code"><code>a:hover {
+  text-decoration-color: currentColor;
+}</code></pre>
+
+      <p>
+        Hover-Effekte geben visuelles Feedback,
+        dass ein Element interaktiv ist.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Tastaturfokus</h4>
+
+      <pre class="code"><code>a:focus-visible {
+  outline:
+    2px solid rgba(11, 95, 255, 0.45);
+
+  outline-offset: 3px;
+}</code></pre>
+
+      <p>
+        Fokusmarkierungen niemals ersatzlos entfernen.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Klickbare Fläche vergrößern</h4>
+
+      <pre class="code"><code>.tile {
+  display: block;
+  padding: 1rem;
+}</code></pre>
+
+      <p>
+        Gerade bei Navigation und Touch-Bedienung sollte nicht nur
+        ein winziges Wort anklickbar sein.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Mauszeiger</h4>
+
+      <pre class="code"><code>.zoomable-image {
+  cursor: zoom-in;
+}</code></pre>
+
+      <p>
+        Weitere häufige Werte:
+        <code>pointer</code>,
+        <code>default</code>,
+        <code>grab</code>,
+        <code>not-allowed</code>.
+      </p>
+    </article>
+
+  </div>
+
+
+  <hr class="divider" />
+
+
+  <!-- ======================================================
+       TRANSFORM
+       ====================================================== -->
+
+  <h3 id="css-transform">Transformationen</h3>
+
+  <p>
+    Mit <code>transform</code> können Elemente verschoben,
+    skaliert oder gedreht werden, ohne das normale Layout
+    neu berechnen zu müssen.
+  </p>
+
+  <div class="cheat-grid">
+
+    <article class="cheat-item">
+      <h4>Skalieren</h4>
+
+      <pre class="code"><code>.tile:hover img {
+  transform: scale(1.06);
+}</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Verschieben</h4>
+
+      <pre class="code"><code>.label {
+  transform: translateY(10px);
+}</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Drehen</h4>
+
+      <pre class="code"><code>.icon {
+  transform: rotate(45deg);
+}</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Mehrere Transformationen</h4>
+
+      <pre class="code"><code>.element {
+  transform:
+    translateY(-4px)
+    scale(1.02);
+}</code></pre>
+
+      <p>
+        Die Reihenfolge der Transformationen kann das Ergebnis verändern.
+      </p>
+    </article>
+
+  </div>
+
+
+  <hr class="divider" />
+
+
+  <!-- ======================================================
+       TRANSITIONS
+       ====================================================== -->
+
+  <h3 id="css-transition">Transitions – weiche Zustandswechsel</h3>
+
+  <div class="cheat-grid">
+
+    <article class="cheat-item">
+      <h4>Grundprinzip</h4>
+
+      <pre class="code"><code>.tile-image {
+  transition:
+    transform 180ms ease;
+}
+
+.tile:hover .tile-image {
+  transform: scale(1.06);
+}</code></pre>
+
+      <p>
+        Statt sofort von Zustand A nach Zustand B zu springen,
+        wird der Übergang animiert.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Mehrere Eigenschaften</h4>
+
+      <pre class="code"><code>.button {
+  transition:
+    background 150ms ease,
+    transform 150ms ease,
+    opacity 150ms ease;
+}</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Nicht einfach <code>transition: all</code></h4>
+
+      <pre class="code"><code>/* bequem, aber oft unnötig */
+transition: all 200ms ease;
+
+/* gezielter */
+transition:
+  transform 200ms ease,
+  opacity 200ms ease;</code></pre>
+
+      <p>
+        Es ist meist besser, bewusst festzulegen,
+        welche Eigenschaften animiert werden.
+      </p>
+    </article>
+
+  </div>
+
+
+  <hr class="divider" />
+
+
+  <!-- ======================================================
+       ANIMATION
+       ====================================================== -->
+
+  <h3 id="css-animation">Animationen mit <code>@keyframes</code></h3>
+
+  <div class="cheat-grid">
+
+    <article class="cheat-item">
+      <h4>Einfache Animation</h4>
+
+      <pre class="code"><code>@keyframes fade-in {
+
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+
+}
+
+.card {
+  animation:
+    fade-in 300ms ease;
+}</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Mehrere Zwischenschritte</h4>
+
+      <pre class="code"><code>@keyframes pulse {
+
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.05);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+
+}</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Animation konfigurieren</h4>
+
+      <pre class="code"><code>.element {
+  animation-name: pulse;
+  animation-duration: 1s;
+  animation-timing-function: ease;
+  animation-iteration-count: infinite;
+}</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Animationen sparsam einsetzen</h4>
+
+      <p>
+        Animationen sollten eine Funktion erfüllen:
+      </p>
+
+      <ul>
+        <li>Zustandsänderungen verdeutlichen</li>
+        <li>Orientierung erleichtern</li>
+        <li>Interaktivität bestätigen</li>
+        <li>Hierarchien verständlicher machen</li>
+      </ul>
+
+      <p class="hint">
+        Eine Website muss nicht beweisen, dass der Browser interpolieren kann.
+      </p>
+    </article>
+
+  </div>
+
+
+  <hr class="divider" />
+
+
+  <!-- ======================================================
+       VARIABLEN
+       ====================================================== -->
+
+  <h3 id="css-variablen">CSS-Variablen / Custom Properties</h3>
+
+  <p>
+    CSS-Variablen ermöglichen es, Werte zentral zu definieren und
+    anschließend im gesamten Stylesheet wiederzuverwenden.
+  </p>
+
+  <div class="cheat-grid">
+
+    <article class="cheat-item">
+      <h4>Variablen definieren</h4>
+
+      <pre class="code"><code>:root {
+  --background: #f5f0e1;
+  --surface: #ffffff;
+  --text: #171717;
+  --muted: #666666;
+  --border: #ddddda;
+  --accent: #24556b;
+  --radius: 16px;
+}</code></pre>
+
+      <p>
+        <code>:root</code> entspricht auf einer normalen HTML-Seite
+        im Wesentlichen dem <code>&lt;html&gt;</code>-Element,
+        besitzt aber eine passende Spezifität für globale Variablen.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Variable verwenden</h4>
+
+      <pre class="code"><code>body {
+  color: var(--text);
+  background: var(--background);
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+}</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Fallback-Wert</h4>
+
+      <pre class="code"><code>.box {
+  color:
+    var(--special-color, black);
+}</code></pre>
+
+      <p>
+        Existiert <code>--special-color</code> nicht,
+        wird <code>black</code> verwendet.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Lokale Variable</h4>
+
+      <pre class="code"><code>.warning {
+  --card-color: #8a4b00;
+  color: var(--card-color);
+}</code></pre>
+
+      <p>
+        Variablen können auch nur innerhalb eines bestimmten
+        Bereichs definiert werden.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Variablen berechnen</h4>
+
+      <pre class="code"><code>.media {
+  border-radius:
+    calc(var(--radius) - 4px);
+}</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Designsystem aufbauen</h4>
+
+      <pre class="code"><code>:root {
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 2rem;
+
+  --radius-sm: 8px;
+  --radius-md: 16px;
+
+  --max-width: 920px;
+}</code></pre>
+
+      <p>
+        Dadurch entstehen konsistente Abstände und Größen,
+        statt überall zufällige Einzelwerte zu verteilen.
+      </p>
+    </article>
+
+  </div>
+
+
+  <hr class="divider" />
+
+
+  <!-- ======================================================
+       FORMULARE
+       ====================================================== -->
+
+  <h3 id="css-formulare">Formulare gestalten</h3>
+
+  <div class="cheat-grid">
+
+    <article class="cheat-item">
+      <h4>Grundstil für Eingabefelder</h4>
+
+      <pre class="code"><code>input,
+textarea,
+select {
+  width: 100%;
+  font: inherit;
+  color: inherit;
+
+  padding: 0.7rem 0.8rem;
+
+  border:
+    1px solid var(--border);
+
+  border-radius: 8px;
+
+  background: var(--surface);
+}</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Fokus</h4>
+
+      <pre class="code"><code>input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline:
+    2px solid var(--accent);
+
+  outline-offset: 2px;
+}</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Button</h4>
+
+      <pre class="code"><code>button {
+  font: inherit;
+  cursor: pointer;
+
+  padding: 0.65rem 1rem;
+
+  border:
+    1px solid var(--border);
+
+  border-radius: 8px;
+}</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Deaktivierter Zustand</h4>
+
+      <pre class="code"><code>button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Ungültige Eingabe</h4>
+
+      <pre class="code"><code>input:invalid {
+  border-color: #b42318;
+}</code></pre>
+
+      <p>
+        Browser können Formulare anhand ihrer HTML-Attribute
+        wie <code>required</code>, <code>type</code>,
+        <code>min</code> oder <code>pattern</code> validieren.
+      </p>
+    </article>
+
+  </div>
+
+
+  <hr class="divider" />
+
+
+  <!-- ======================================================
+       TABELLEN
+       ====================================================== -->
+
+  <h3 id="css-tabellen">Tabellen gestalten</h3>
+
+  <div class="cheat-grid">
+
+    <article class="cheat-item">
+      <h4>Grundlayout</h4>
+
+      <pre class="code"><code>table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 0.6rem;
+  border-bottom:
+    1px solid var(--border);
+}</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Textausrichtung</h4>
+
+      <pre class="code"><code>th {
+  text-align: left;
+}
+
+.number {
+  text-align: right;
+}
+
+.center {
+  text-align: center;
+}</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Spaltenbreiten</h4>
+
+      <pre class="code code-html"><code>&lt;colgroup&gt;
+  &lt;col style="width: 30%;"&gt;
+  &lt;col style="width: 50%;"&gt;
+  &lt;col style="width: 20%;"&gt;
+&lt;/colgroup&gt;</code></pre>
+
+      <p>
+        Alternativ können Klassen oder <code>:nth-child()</code>
+        verwendet werden.
+      </p>
+
+      <pre class="code"><code>th:nth-child(1),
+td:nth-child(1) {
+  width: 30%;
+}</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Zebra-Streifen</h4>
+
+      <pre class="code"><code>tbody tr:nth-child(even) {
+  background:
+    rgba(0, 0, 0, 0.03);
+}</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Breite Tabellen mobil</h4>
+
+      <pre class="code code-html"><code>&lt;div class="table-wrapper"&gt;
+  &lt;table&gt;
+    ...
+  &lt;/table&gt;
+&lt;/div&gt;</code></pre>
+
+      <pre class="code"><code>.table-wrapper {
+  overflow-x: auto;
+}</code></pre>
+
+      <p>
+        Die Tabelle bleibt damit lesbar, statt das gesamte Seitenlayout
+        in die Breite zu sprengen.
+      </p>
+    </article>
+
+  </div>
+
+
+  <hr class="divider" />
+
+
+  <!-- ======================================================
+       ACCESSIBILITY
+       ====================================================== -->
+
+  <h3 id="css-accessibility">Accessibility und CSS</h3>
+
+  <div class="cheat-grid">
+
+    <article class="cheat-item">
+      <h4>Fokus sichtbar lassen</h4>
+
+      <pre class="code"><code>a:focus-visible,
+button:focus-visible {
+  outline:
+    2px solid var(--accent);
+
+  outline-offset: 3px;
+}</code></pre>
+
+      <p>
+        Niemals einfach:
+      </p>
+
+      <pre class="code"><code>outline: none;</code></pre>
+
+      <p>
+        setzen, ohne einen brauchbaren Ersatz bereitzustellen.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Bewegung reduzieren</h4>
+
+      <pre class="code"><code>@media
+(prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto;
+    animation-duration: 0.01ms;
+    animation-iteration-count: 1;
+  }
+
+}</code></pre>
+
+      <p>
+        Nutzer können im Betriebssystem angeben,
+        dass sie reduzierte Animationen bevorzugen.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Kontrast beachten</h4>
+
+      <p>
+        Sehr hellgrauer Text auf weißem Hintergrund mag ästhetisch
+        zurückhaltend aussehen, kann aber schlicht unlesbar sein.
+      </p>
+
+      <p class="hint">
+        „Muted“ darf leiser sein. Es sollte aber nicht flüstern,
+        bis niemand mehr versteht, was dort steht.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Nicht nur Farbe verwenden</h4>
+
+      <p>
+        Zustände sollten möglichst nicht ausschließlich durch Farbe
+        kommuniziert werden.
+      </p>
+
+      <p>
+        Ein Fehlerfeld kann beispielsweise zusätzlich einen Rahmen,
+        ein Symbol oder erklärenden Text erhalten.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Lesbare Zeilenlänge</h4>
+
+      <pre class="code"><code>.article {
+  max-width: 70ch;
+}</code></pre>
+
+      <p>
+        Sehr breite Textzeilen erschweren das Zurückfinden
+        an den Beginn der nächsten Zeile.
+      </p>
+    </article>
+
+  </div>
+
+
+  <hr class="divider" />
+
+
+  <!-- ======================================================
+       DEBUGGING
+       ====================================================== -->
+
+  <h3 id="css-debugging">CSS debuggen</h3>
+
+  <p>
+    CSS-Probleme lassen sich meistens systematisch lösen.
+    Blind Werte zu verändern, bis das Ergebnis zufällig richtig aussieht,
+    funktioniert zwar gelegentlich – erzeugt aber gerne den nächsten Fehler
+    drei Bildschirmbreiten weiter.
+  </p>
+
+  <div class="cheat-grid">
+
+    <article class="cheat-item">
+      <h4>DevTools verwenden</h4>
+
+      <p>
+        Mit den Browser-Entwicklertools kannst du:
+      </p>
+
+      <ul>
+        <li>Elemente auswählen</li>
+        <li>aktive CSS-Regeln sehen</li>
+        <li>überschriebene Regeln erkennen</li>
+        <li>Werte live verändern</li>
+        <li>Boxmodell untersuchen</li>
+        <li>Grid und Flexbox visualisieren</li>
+        <li>Responsive Bildschirmgrößen simulieren</li>
+      </ul>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Debug-Rahmen</h4>
+
+      <pre class="code"><code>* {
+  outline:
+    1px solid rgba(255, 0, 0, 0.2);
+}</code></pre>
+
+      <p>
+        Vorübergehend ausgesprochen nützlich, um zu erkennen,
+        welches Element tatsächlich welchen Raum einnimmt.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Regel wird durchgestrichen</h4>
+
+      <p>
+        Wenn eine Eigenschaft in den DevTools durchgestrichen ist,
+        wurde sie normalerweise von einer anderen Regel überschrieben.
+      </p>
+
+      <p>
+        Prüfe:
+      </p>
+
+      <ul>
+        <li>Spezifität</li>
+        <li>Reihenfolge</li>
+        <li>Media Queries</li>
+        <li>Inline-CSS</li>
+        <li><code>!important</code></li>
+      </ul>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Regel erscheint überhaupt nicht</h4>
+
+      <p>
+        Dann liegt häufig eines dieser Probleme vor:
+      </p>
+
+      <ul>
+        <li>Selektor falsch geschrieben</li>
+        <li>Klasse fehlt im HTML</li>
+        <li>CSS-Datei nicht geladen</li>
+        <li>Pfad zum Stylesheet falsch</li>
+        <li>Syntaxfehler weiter oben im CSS</li>
+      </ul>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Element ist zu breit</h4>
+
+      <p>
+        Prüfe insbesondere:
+      </p>
+
+      <ul>
+        <li><code>width</code></li>
+        <li><code>min-width</code></li>
+        <li><code>padding</code></li>
+        <li><code>box-sizing</code></li>
+        <li>lange untrennbare Inhalte</li>
+        <li>Grid-/Flex-Minimumgrößen</li>
+      </ul>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Flex- oder Grid-Element läuft über</h4>
+
+      <pre class="code"><code>.item {
+  min-width: 0;
+}</code></pre>
+
+      <p>
+        Diese kleine Regel behebt überraschend viele Probleme,
+        wenn lange Inhalte innerhalb von Flex- oder Grid-Items
+        nicht schrumpfen wollen.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>z-index</code> funktioniert nicht</h4>
+
+      <p>
+        Prüfe:
+      </p>
+
+      <ul>
+        <li>Ist das Element positioniert?</li>
+        <li>Gibt es einen anderen Stacking Context?</li>
+        <li>Besitzt ein Elternelement <code>transform</code>?</li>
+        <li>Besitzt ein Elternelement <code>opacity</code> kleiner als 1?</li>
+      </ul>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Absolute Positionierung sitzt falsch</h4>
+
+      <p>
+        Meist fehlt beim gewünschten Elternobjekt:
+      </p>
+
+      <pre class="code"><code>position: relative;</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Hintergrundbild fehlt</h4>
+
+      <p>
+        Wichtig:
+        Pfade innerhalb einer CSS-Datei werden relativ zur
+        <strong>CSS-Datei</strong> interpretiert – nicht relativ
+        zur HTML-Datei.
+      </p>
+
+      <pre class="code"><code>background:
+  url("../img/photo.jpg");</code></pre>
+    </article>
+
+  </div>
+
+
+  <hr class="divider" />
+
+
+  <!-- ======================================================
+       ORGANISATION
+       ====================================================== -->
+
+  <h3 id="css-organisation">Ein Stylesheet sinnvoll organisieren</h3>
+
+  <p>
+    Bei kleinen Projekten funktioniert beinahe jede Ordnung.
+    Sobald eine Website wächst, wird die Struktur des CSS selbst
+    jedoch Teil der Wartbarkeit.
+  </p>
+
+  <div class="cheat-grid">
+
+    <article class="cheat-item">
+      <h4>Mögliche Reihenfolge</h4>
+
+      <pre class="code"><code>/* 1. Reset / Basis */
+
+/* 2. Variablen */
+
+/* 3. Grundtypografie */
+
+/* 4. Seitenlayout */
+
+/* 5. Header / Navigation */
+
+/* 6. Komponenten */
+
+/* 7. News / Spezialbereiche */
+
+/* 8. Utilities */
+
+/* 9. Responsive Regeln */</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Komponenten zusammenhalten</h4>
+
+      <p>
+        Statt sämtliche Hover-Regeln am Ende der Datei zu sammeln,
+        kann es übersichtlicher sein, alle Regeln für eine Komponente
+        beieinander zu lassen:
+      </p>
+
+      <pre class="code"><code>.tile { }
+
+.tile img { }
+
+.tile::before { }
+
+.tile:hover img { }
+
+.tile:hover::before { }
+
+.tile:focus-visible { }</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Klassen semantisch benennen</h4>
+
+      <p>
+        Besser:
+      </p>
+
+      <pre class="code"><code>.card-meta
+.news-item
+.tile-label
+.site-header</code></pre>
+
+      <p>
+        Weniger hilfreich:
+      </p>
+
+      <pre class="code"><code>.gray-text
+.left-box
+.big-font
+.margin20</code></pre>
+
+      <p>
+        Klassen sollten möglichst beschreiben,
+        <strong>was etwas ist</strong>, nicht nur,
+        wie es momentan aussieht.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Magic Numbers reduzieren</h4>
+
+      <p>
+        Wenn überall unterschiedliche Werte auftreten:
+      </p>
+
+      <pre class="code"><code>13px
+17px
+22px
+27px
+31px</code></pre>
+
+      <p>
+        entsteht schnell visuelles Rauschen.
+        Ein kleines System aus wiederkehrenden Abständen ist meist besser.
+      </p>
+
+      <pre class="code"><code>:root {
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 2rem;
+}</code></pre>
+    </article>
+
+  </div>
+
+
+  <hr class="divider" />
+
+
+  <!-- ======================================================
+       PRAKTISCHE MUSTER
+       ====================================================== -->
+
+  <h3>Praktische CSS-Muster</h3>
+
+  <div class="cheat-grid">
+
+    <article class="cheat-item">
+      <h4>Zentrierter Seitencontainer</h4>
+
+      <pre class="code"><code>.page {
+  width:
+    min(
+      calc(100% - 40px),
+      920px
+    );
+
+  margin: 0 auto;
+}</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Element horizontal zentrieren</h4>
+
+      <pre class="code"><code>.box {
+  width: 500px;
+  max-width: 100%;
+  margin-inline: auto;
+}</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Horizontal und vertikal zentrieren</h4>
+
+      <pre class="code"><code>.container {
+  display: grid;
+  place-items: center;
+}</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Flex-Zentrierung</h4>
+
+      <pre class="code"><code>.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Automatisches Card-Grid</h4>
+
+      <pre class="code"><code>.cards {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      auto-fit,
+      minmax(250px, 1fr)
+    );
+
+  gap: 1rem;
+}</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Bildkarte mit Zoom</h4>
+
+      <pre class="code"><code>.tile {
+  overflow: hidden;
+}
+
+.tile img {
+  transition:
+    transform 180ms ease;
+}
+
+.tile:hover img {
+  transform: scale(1.06);
+}</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Dunkles Hover-Overlay</h4>
+
+      <pre class="code"><code>.tile {
+  position: relative;
+}
+
+.tile::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  background:
+    rgba(0, 0, 0, 0);
+
+  transition:
+    background 180ms ease;
+}
+
+.tile:hover::before {
+  background:
+    rgba(0, 0, 0, 0.35);
+}</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Label einblenden</h4>
+
+      <pre class="code"><code>.tile-label {
+  opacity: 0;
+  transform: translateY(10px);
+
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease;
+}
+
+.tile:hover .tile-label {
+  opacity: 1;
+  transform: translateY(0);
+}</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Volle Höhe einer Seite</h4>
+
+      <pre class="code"><code>body {
+  min-height: 100dvh;
+
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}</code></pre>
+
+      <p>
+        Damit kann beispielsweise der Footer am unteren Rand bleiben,
+        auch wenn wenig Inhalt vorhanden ist.
+      </p>
+    </article>
+
+  </div>
+
+
+  <hr class="divider" />
+
+
+  <!-- ======================================================
+       LOGISCHE EIGENSCHAFTEN
+       ====================================================== -->
+
+  <h3>Logische CSS-Eigenschaften</h3>
+
+  <p>
+    Modernes CSS besitzt neben <code>left</code>, <code>right</code>,
+    <code>top</code> und <code>bottom</code> auch sogenannte logische
+    Eigenschaften. Sie orientieren sich an Schreibrichtung und Textfluss.
+  </p>
+
+  <div class="cheat-grid">
+
+    <article class="cheat-item">
+      <h4><code>margin-inline</code></h4>
+
+      <pre class="code"><code>.page {
+  margin-inline: auto;
+}</code></pre>
+
+      <p>
+        Entspricht bei links-nach-rechts geschriebenem Text ungefähr:
+      </p>
+
+      <pre class="code"><code>margin-left: auto;
+margin-right: auto;</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>padding-inline</code></h4>
+
+      <pre class="code"><code>.card {
+  padding-inline: 1rem;
+}</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>margin-block</code></h4>
+
+      <pre class="code"><code>.section {
+  margin-block: 2rem;
+}</code></pre>
+
+      <p>
+        Entspricht im üblichen horizontalen Schreibmodus
+        ungefähr oben und unten.
+      </p>
+    </article>
+
+  </div>
+
+
+  <hr class="divider" />
+
+
+  <!-- ======================================================
+       MEDIA FEATURES
+       ====================================================== -->
+
+  <h3>Media Queries jenseits der Bildschirmbreite</h3>
+
+  <div class="cheat-grid">
+
+    <article class="cheat-item">
+      <h4>Dunkles Farbschema</h4>
+
+      <pre class="code"><code>@media
+(prefers-color-scheme: dark) {
+
+  :root {
+    --background: #111;
+    --surface: #1b1b1b;
+    --text: #eee;
+  }
+
+}</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Reduzierte Bewegung</h4>
+
+      <pre class="code"><code>@media
+(prefers-reduced-motion: reduce) {
+
+  html {
+    scroll-behavior: auto;
+  }
+
+}</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Hover-fähige Geräte</h4>
+
+      <pre class="code"><code>@media (hover: hover) {
+
+  .tile:hover img {
+    transform: scale(1.06);
+  }
+
+}</code></pre>
+
+      <p>
+        Damit lassen sich Effekte gezielt nur auf Geräten verwenden,
+        die tatsächlich einen Hover-Zustand besitzen.
+      </p>
+    </article>
+
+  </div>
+
+
+  <hr class="divider" />
+
+
+  <!-- ======================================================
+       CSS RESET
+       ====================================================== -->
+
+  <h3>Eine kleine sinnvolle Basis</h3>
+
+  <p>
+    Ein vollständiges CSS-Framework ist für viele statische Webseiten unnötig.
+    Einige wenige Grundregeln sind jedoch ausgesprochen hilfreich.
+  </p>
+
+  <pre class="code"><code>*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Arial,
+    sans-serif;
+
+  line-height: 1.6;
+}
+
+img,
+picture,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}</code></pre>
+
+
+  <hr class="divider" />
+
+
+  <!-- ======================================================
+       PRAXISREGELN
+       ====================================================== -->
+
+  <h3 id="css-praxis">Praktische Regeln für echtes CSS</h3>
+
+  <ul>
+
+    <li>
+      <strong>HTML beschreibt Struktur, CSS Darstellung.</strong>
+      Versuche nicht, Layoutprobleme mit bedeutungslosen HTML-Konstruktionen
+      zu lösen, wenn CSS dafür zuständig ist.
+    </li>
+
+    <li>
+      <strong>Nutze Klassen als primäres Styling-Werkzeug.</strong>
+      IDs sind hervorragend für eindeutige Anker und JavaScript-Ziele,
+      aber für normales Styling meist unnötig spezifisch.
+    </li>
+
+    <li>
+      <strong>Setze global <code>box-sizing: border-box</code>.</strong>
+      Dadurch werden Größen wesentlich vorhersehbarer.
+    </li>
+
+    <li>
+      <strong>Vermeide feste Breiten für große Inhaltsbereiche.</strong>
+      <code>width: 100%</code> kombiniert mit <code>max-width</code>
+      ist meist wesentlich robuster.
+    </li>
+
+    <li>
+      <strong>Begrenze lange Textzeilen.</strong>
+      Ein <code>max-width</code> von ungefähr
+      <code>60ch</code> bis <code>75ch</code>
+      ist für längeren Lesetext häufig angenehm.
+    </li>
+
+    <li>
+      <strong>Nutze <code>rem</code> großzügig.</strong>
+      Für Typografie und Abstände ist die Einheit meist flexibler
+      als eine Landschaft aus hart verdrahteten Pixelwerten.
+    </li>
+
+    <li>
+      <strong>Pixel sind trotzdem nicht verboten.</strong>
+      Ein <code>1px</code>-Rahmen ist völlig vernünftig.
+      CSS ist kein Glaubenskrieg.
+    </li>
+
+    <li>
+      <strong>Nutze <code>gap</code> für Flex- und Grid-Abstände.</strong>
+      Das ist meist sauberer als komplizierte Margin-Regeln
+      auf den einzelnen Kindern.
+    </li>
+
+    <li>
+      <strong>Flexbox für Gruppen und Reihen, Grid für Raster und Flächen.</strong>
+      Nicht absolut, aber eine ausgezeichnete Ausgangsregel.
+    </li>
+
+    <li>
+      <strong>Nutze den normalen Dokumentfluss, solange er funktioniert.</strong>
+      Absolute Positionierung ist ein Werkzeug – kein Layoutsystem.
+    </li>
+
+    <li>
+      <strong>Verwende <code>position: absolute</code> gezielt.</strong>
+      Overlays, Labels und Icons: ausgezeichnet.
+      Ganze Seitenlayouts: meistens unnötiges Leiden.
+    </li>
+
+    <li>
+      <strong>Definiere beim Elternobjekt <code>position: relative</code>,</strong>
+      wenn ein absolut positioniertes Kind innerhalb dieses Elements
+      verankert werden soll.
+    </li>
+
+    <li>
+      <strong>Nutze CSS-Variablen für wiederkehrende Designwerte.</strong>
+      Farben, Radien, Abstände und maximale Seitenbreiten sollten nicht
+      zwanzigmal unabhängig voneinander festgelegt werden.
+    </li>
+
+    <li>
+      <strong>Vermeide Magic Numbers.</strong>
+      Wenn ein Element nur funktioniert, weil irgendwo
+      <code>margin-left: 137px</code> steht, ist meist noch nicht
+      das eigentliche Layoutproblem gelöst.
+    </li>
+
+    <li>
+      <strong>Vermeide unnötig hohe Spezifität.</strong>
+      Ein Selektor wie
+      <code>main .page .content article.card p.hint</code>
+      mag präzise wirken, macht spätere Änderungen aber unangenehm.
+    </li>
+
+    <li>
+      <strong>Benutze <code>!important</code> nur mit Grund.</strong>
+      Wenn jede zweite Regel wichtig ist, ist offenbar keine mehr wichtig.
+    </li>
+
+    <li>
+      <strong>Gestalte Komponenten unabhängig.</strong>
+      Eine <code>.card</code> sollte möglichst nicht davon abhängen,
+      ob sie gerade das siebte Kind eines bestimmten Containers ist.
+    </li>
+
+    <li>
+      <strong>Teste unterschiedliche Inhaltslängen.</strong>
+      Ein Layout, das nur mit exakt deinem Beispieltitel funktioniert,
+      ist noch kein robustes Layout.
+    </li>
+
+    <li>
+      <strong>Teste schmale Bildschirme früh.</strong>
+      Responsive Design erst am Ende „hineinzupatchen“ führt häufig
+      zu unnötigen Sonderregeln.
+    </li>
+
+    <li>
+      <strong>Teste auch sehr breite Bildschirme.</strong>
+      Nicht nur Mobilgeräte können Layouts entlarven.
+      Ein Fließtext über 1900 Pixel Breite ist keine Großzügigkeit,
+      sondern eine Zumutung.
+    </li>
+
+    <li>
+      <strong>Bilder brauchen meist <code>max-width: 100%</code>.</strong>
+      Sonst können sie ihren Container überschreiten.
+    </li>
+
+    <li>
+      <strong><code>object-fit: cover</code> und <code>contain</code>
+      bewusst unterscheiden.</strong>
+      Cover beschneidet, Contain bewahrt das gesamte Motiv.
+    </li>
+
+    <li>
+      <strong>Hover ist Ergänzung, nicht Voraussetzung.</strong>
+      Touchscreens besitzen keinen klassischen dauerhaften Hover-Zustand.
+    </li>
+
+    <li>
+      <strong>Fokuszustände gehören zum Design.</strong>
+      Tastaturbedienung ist kein exotischer Sonderfall.
+    </li>
+
+    <li>
+      <strong>Animationen sollen erklären, nicht unterhalten.</strong>
+      Kleine Bewegungen können Zustände verständlich machen.
+      Dauernd hüpfende Interface-Elemente dagegen erklären vor allem,
+      dass jemand <code>@keyframes</code> entdeckt hat.
+    </li>
+
+    <li>
+      <strong>Bevorzuge für Animationen <code>transform</code> und
+      <code>opacity</code>.</strong>
+      Sie lassen sich meist effizienter animieren als große
+      Layoutänderungen.
+    </li>
+
+    <li>
+      <strong>Berücksichtige <code>prefers-reduced-motion</code>.</strong>
+      Nicht jeder möchte oder verträgt starke Bewegungseffekte.
+    </li>
+
+    <li>
+      <strong>Verwende DevTools ständig.</strong>
+      CSS lässt sich im Browser hervorragend live untersuchen und verändern.
+      Diese Werkzeuge nicht zu verwenden wäre freiwillige Archäologie.
+    </li>
+
+    <li>
+      <strong>Wenn etwas nicht funktioniert, ändere nicht sofort zehn Werte.</strong>
+      Prüfe zuerst, welches Element tatsächlich betroffen ist und welche
+      Regel gewinnt.
+    </li>
+
+    <li>
+      <strong>Kontrolliere die Kaskade.</strong>
+      Durchgestrichene Eigenschaften in den DevTools verraten dir meist
+      unmittelbar, warum eine Regel nicht sichtbar wird.
+    </li>
+
+    <li>
+      <strong>Schreibe CSS für den Zustand der Website von morgen.</strong>
+      Ein wenig Struktur kostet heute Minuten und spart später Stunden.
+    </li>
+
+  </ul>
+
+
+  <hr class="divider" />
+
+
+  <!-- ======================================================
+       KURZREFERENZ
+       ====================================================== -->
+
+  <h3>Kurzübersicht häufig verwendeter Eigenschaften</h3>
+
+  <div class="cheat-grid">
+
+    <article class="cheat-item">
+      <h4>Layout</h4>
+
+      <pre class="code"><code>display
+position
+top
+right
+bottom
+left
+inset
+z-index
+overflow
+
+flex
+flex-direction
+flex-wrap
+justify-content
+align-items
+gap
+
+grid-template-columns
+grid-template-rows
+grid-column
+grid-row</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Größe und Abstand</h4>
+
+      <pre class="code"><code>width
+height
+
+min-width
+max-width
+min-height
+max-height
+
+margin
+padding
+
+box-sizing
+aspect-ratio</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Typografie</h4>
+
+      <pre class="code"><code>font-family
+font-size
+font-weight
+font-style
+
+line-height
+letter-spacing
+word-spacing
+
+text-align
+text-decoration
+text-transform
+text-shadow
+
+white-space
+overflow-wrap</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Darstellung</h4>
+
+      <pre class="code"><code>color
+background
+opacity
+
+border
+border-radius
+box-shadow
+
+filter
+cursor
+visibility</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Bilder</h4>
+
+      <pre class="code"><code>object-fit
+object-position
+aspect-ratio
+
+background-image
+background-size
+background-position
+background-repeat</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Bewegung</h4>
+
+      <pre class="code"><code>transform
+transition
+animation
+
+translate
+scale
+rotate
+
+@keyframes</code></pre>
+    </article>
+
+  </div>
+
+
+  <hr class="divider" />
+
+
+  <!-- ======================================================
+       MENTALE MODELLE
+       ====================================================== -->
+
+  <h3>Die wichtigsten mentalen Modelle</h3>
+
+  <p>
+    Wenn CSS unverständlich wirkt, hilft es meist mehr,
+    das zugrunde liegende Modell zu verstehen,
+    als eine weitere einzelne Eigenschaft auswendig zu lernen.
+  </p>
+
+  <ol>
+
+    <li>
+      <strong>Alles ist zunächst eine Box.</strong><br>
+      Verstehe Content, Padding, Border und Margin.
+    </li>
+
+    <li>
+      <strong>Elemente besitzen einen normalen Dokumentfluss.</strong><br>
+      Versuche diesen zu nutzen, bevor du Elemente manuell positionierst.
+    </li>
+
+    <li>
+      <strong>Elternelemente kontrollieren häufig das Layout ihrer Kinder.</strong><br>
+      Bei Flexbox und Grid wird die entscheidende Regel meist auf den
+      Container gesetzt, nicht auf jedes Kind.
+    </li>
+
+    <li>
+      <strong>CSS ist eine Kaskade.</strong><br>
+      Wenn zwei Regeln dasselbe verändern wollen,
+      entscheiden Ursprung, Wichtigkeit, Spezifität und Reihenfolge.
+    </li>
+
+    <li>
+      <strong>Größen müssen nicht immer fest sein.</strong><br>
+      <code>max-width</code>, Prozentwerte, <code>fr</code>,
+      <code>minmax()</code> und <code>clamp()</code>
+      erzeugen robustere Layouts.
+    </li>
+
+    <li>
+      <strong>Responsive Design bedeutet Anpassung, nicht Verkleinerung.</strong><br>
+      Manchmal müssen Spalten verschwinden, Navigationen umbrechen,
+      Bilder anders zugeschnitten oder Elemente neu angeordnet werden.
+    </li>
+
+    <li>
+      <strong>Die einfachste funktionierende Regel ist meistens die beste.</strong><br>
+      CSS wird selten besser, indem man auf ein Problem noch drei zusätzliche
+      Ebenen an Selektoren und Positionskorrekturen legt.
+    </li>
+
+  </ol>
+
+
+  <p class="hint">
+    CSS wirkt am Anfang manchmal willkürlich, ist es aber erstaunlich selten.
+    Wenn etwas „unerklärlich“ passiert, steckt fast immer eines von wenigen
+    Grundprinzipien dahinter: Boxmodell, Dokumentfluss, Kaskade, Spezifität,
+    Größenberechnung, Flex/Grid oder Positionierung. Sobald man herausfindet,
+    welches davon gerade die Fäden zieht, wird aus schwarzer Magie wieder Technik.
+  </p>
+
+
+  <p class="hint">
+    <a href="#top">↑ nach oben</a>
+  </p>
+
+</section>
+
+<hr class="divider" />
