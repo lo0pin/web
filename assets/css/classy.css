@@ -269,3 +269,38 @@ h1 {
     font-weight: 750;
     text-decoration: none;
 }
+
+
+.back-to-top {
+    display: inline-block;
+    margin-top: 38px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+@media (max-width: 640px) {
+    .page {
+        width: min(calc(100% - 24px), var(--max-width));
+        padding: 24px 0 48px;
+    }
+
+    .hero {
+        padding: 26px 22px;
+    }
+
+    .contents ul {
+        grid-template-columns: 1fr;
+    }
+
+    .tip-section {
+        margin-top: 48px;
+    }
+
+    .tip-list > li {
+        padding: 22px 18px 22px 58px;
+    }
+
+    .tip-list > li::before {
+        left: 17px;
+    }
+}
