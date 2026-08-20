@@ -1,4 +1,3 @@
-
 :root {
     --background: #f5f0e1;
     --surface: #ffffff;
@@ -12,7 +11,6 @@
     --radius: 14px;
     --shadow: 0 16px 40px rgba(23, 23, 23, 0.07);
 }
-
 
 * {
     box-sizing: border-box;
@@ -31,7 +29,6 @@ body {
     line-height: 1.65;
 }
 
-
 a {
     color: var(--accent);
     text-decoration-thickness: 1px;
@@ -42,7 +39,6 @@ a:hover,
 a:focus-visible {
     color: var(--accent-dark);
 }
-
 
 .skip-link {
     position: fixed;
@@ -61,7 +57,6 @@ a:focus-visible {
     color: #ffffff;
     transform: translateY(0);
 }
-
 
 .page {
     width: min(calc(100% - 40px), var(--max-width));
@@ -88,7 +83,6 @@ a:focus-visible {
     text-transform: uppercase;
 }
 
-
 h1,
 h2,
 h3 {
@@ -111,7 +105,6 @@ h1 {
     font-size: clamp(1.05rem, 2.3vw, 1.2rem);
 }
 
-
 .lead strong {
     color: var(--accent-dark);
 }
@@ -128,7 +121,6 @@ h1 {
     margin: 0 0 16px;
     font-size: 1rem;
 }
-
 
 .contents ul {
     display: grid;
@@ -149,7 +141,6 @@ h1 {
     content: "→ ";
     color: var(--muted);
 }
-
 
 .tip-section {
     scroll-margin-top: 22px;
@@ -176,7 +167,6 @@ h1 {
     font-weight: 800;
 }
 
-
 .section-heading h2 {
     margin: 0;
     font-family: Georgia, "Times New Roman", serif;
@@ -193,7 +183,7 @@ h1 {
     counter-reset: tip var(--counter-start);
 }
 
-.tip-list > li {
+.tip-list>li {
     position: relative;
     padding: 24px 24px 24px 78px;
     border: 1px solid var(--border);
@@ -203,8 +193,7 @@ h1 {
     counter-increment: tip;
 }
 
-
-.tip-list > li::before {
+.tip-list>li::before {
     content: counter(tip, decimal-leading-zero);
     position: absolute;
     top: 24px;
@@ -229,7 +218,6 @@ h1 {
     color: #303030;
 }
 
-
 .core-points {
     margin-top: 64px;
     padding: clamp(28px, 5vw, 44px);
@@ -250,7 +238,6 @@ h1 {
     margin: 0;
 }
 
-
 .core-points ol {
     display: flex;
     flex-wrap: wrap;
@@ -269,7 +256,6 @@ h1 {
     font-weight: 750;
     text-decoration: none;
 }
-
 
 .back-to-top {
     display: inline-block;
@@ -296,11 +282,24 @@ h1 {
         margin-top: 48px;
     }
 
-    .tip-list > li {
+    .tip-list>li {
         padding: 22px 18px 22px 58px;
     }
 
-    .tip-list > li::before {
+    .tip-list>li::before {
         left: 17px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
     }
 }
