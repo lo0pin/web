@@ -30,3 +30,15 @@ body {
     font-size: 1rem;
     line-height: 1.65;
 }
+
+
+a {
+    color: var(--accent);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+}
+
+a:hover,
+a:focus-visible {
+    color: var(--accent-dark);
+}
