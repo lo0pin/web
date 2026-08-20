@@ -149,3 +149,56 @@ h1 {
     content: "→ ";
     color: var(--muted);
 }
+
+
+.tip-section {
+    scroll-margin-top: 22px;
+    margin-top: 64px;
+}
+
+.section-heading {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 24px;
+}
+
+.section-heading span {
+    display: grid;
+    width: 42px;
+    height: 42px;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #ffffff;
+    font-size: 0.8rem;
+    font-weight: 800;
+}
+
+
+.section-heading h2 {
+    margin: 0;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(1.65rem, 4vw, 2.35rem);
+    font-weight: 600;
+}
+
+.tip-list {
+    display: grid;
+    gap: 14px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: tip var(--counter-start);
+}
+
+.tip-list > li {
+    position: relative;
+    padding: 24px 24px 24px 78px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--surface);
+    box-shadow: 0 7px 22px rgba(23, 23, 23, 0.035);
+    counter-increment: tip;
+}
