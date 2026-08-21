@@ -1,0 +1,646 @@
+<section class="card">
+  <h2 class="card-title">Featured Page – Konzept und Umsetzung</h2>
+
+  <p>
+    Auf der Startseite soll künftig täglich eine andere Inhaltsseite der Website
+    als <strong>Featured Page</strong> hervorgehoben werden. Ziel ist es, nicht nur
+    aktuelle News sichtbar zu machen, sondern auch ältere oder tiefer liegende
+    Inhalte regelmäßig wieder an die Oberfläche zu holen.
+  </p>
+
+  <p>
+    Die Auswahl erfolgt vollständig clientseitig mit Vanilla JavaScript.
+    Es sind weder Serverlogik noch Frameworks oder externe Abhängigkeiten nötig.
+    Das Konzept eignet sich daher gut für eine statische GitHub-Pages-Website.
+  </p>
+</section>
+
+<p class="hint"><a href="#top">↑ top</a></p>
+
+
+<section class="card">
+  <h2 class="card-title">Grundprinzip</h2>
+
+  <p>
+    Alle Seiten, die als Featured Page erscheinen dürfen, werden in einer
+    eigenen JSON-Datei gelistet. JavaScript ermittelt anhand des aktuellen
+    Datums einen Index und wählt damit einen Eintrag aus dieser Liste aus.
+  </p>
+
+  <p>
+    Die Auswahl soll sich einmal täglich ändern. Anstatt eine einfache
+    Quersumme des Datums zu verwenden, ist eine fortlaufende Tagesnummer
+    sinnvoller.
+  </p>
+
+  <pre class="cheat-code"><code>const dayNumber = Math.floor(Date.now() / 86_400_000);
+const index = dayNumber % pages.length;</code></pre>
+
+  <p>
+    Dadurch wandert die Auswahl mit jedem Tag um genau eine Position weiter.
+    Bei beispielsweise 40 eingetragenen Seiten wird innerhalb von 40 Tagen
+    jede Seite genau einmal angezeigt, bevor der Zyklus erneut beginnt.
+  </p>
+
+  <p class="hint">
+    Eine einfache Datums-Quersumme wäre zwar möglich, erzeugt aber nur einen
+    relativ kleinen Wertebereich. Dadurch würden sich manche Ergebnisse häufig
+    wiederholen, während andere Seiten eventuell nie ausgewählt würden.
+  </p>
+</section>
+
+<p class="hint"><a href="#top">↑ top</a></p>
+
+
+<section class="card">
+  <h2 class="card-title">Warum Rotation statt Zufall?</h2>
+
+  <p>
+    Eine wirklich zufällige Auswahl klingt zunächst reizvoll, hat aber einen
+    Nachteil: Dieselbe Seite könnte innerhalb weniger Tage mehrfach erscheinen,
+    während andere Inhalte monatelang nicht gezogen werden.
+  </p>
+
+  <p>
+    Eine deterministische Rotation ist deshalb für diesen Zweck besser:
+  </p>
+
+  <ul>
+    <li>jede Seite kommt regelmäßig an die Reihe</li>
+    <li>keine unnötigen Wiederholungen</li>
+    <li>die Auswahl bleibt nachvollziehbar</li>
+    <li>keine Speicherung des bisherigen Verlaufs notwendig</li>
+    <li>keine Cookies und kein LocalStorage erforderlich</li>
+    <li>funktioniert vollständig statisch auf GitHub Pages</li>
+  </ul>
+
+  <p>
+    Die Reihenfolge der Seiten innerhalb der JSON-Datei kann bewusst gemischt
+    werden, damit beispielsweise nicht mehrere Elektronik- oder Botanikseiten
+    unmittelbar hintereinander erscheinen.
+  </p>
+</section>
+
+<p class="hint"><a href="#top">↑ top</a></p>
+
+
+<section class="card">
+  <h2 class="card-title">Empfohlene Dateistruktur</h2>
+
+  <p>
+    Die Featured Pages sollten nicht in <code>posts.json</code> gespeichert
+    werden. Diese Datei besitzt bereits eine klar definierte Aufgabe: Sie enthält
+    die dynamischen Newsbeiträge der Website.
+  </p>
+
+  <p>
+    Für statische Seiten ist deshalb eine eigene Datei sinnvoll:
+  </p>
+
+  <pre class="cheat-code"><code>assets/
+├── js/
+│   ├── news.js
+│   └── featured-page.js
+│
+└── json/
+    ├── posts.json
+    └── featured-pages.json</code></pre>
+
+  <p>
+    Damit bleiben News-System und Featured-Page-System voneinander unabhängig.
+    Beide können verändert werden, ohne die jeweils andere Struktur zu
+    beeinflussen.
+  </p>
+</section>
+
+<p class="hint"><a href="#top">↑ top</a></p>
+
+
+<section class="card">
+  <h2 class="card-title">Struktur von featured-pages.json</h2>
+
+  <p>
+    Jeder Eintrag sollte alle Informationen enthalten, die für die Vorschau
+    benötigt werden. So muss JavaScript nicht versuchen, andere HTML-Seiten
+    auszulesen oder Metadaten daraus zu extrahieren.
+  </p>
+
+  <pre class="cheat-code"><code>{
+  "pages": [
+    {
+      "id": "astronomy-significant-stars",
+      "title": "Significant Stars",
+      "category": "Astronomy",
+      "href": "astronomy/significant_stars.html",
+      "image": "assets/img/news/moon_plabutsch03.jpeg",
+      "alt": "The Moon above Graz",
+      "teaser": "A structured journey through prominent stars, their physical properties, names and cultural histories.",
+      "active": true
+    },
+    {
+      "id": "electronics-meshtastic",
+      "title": "Meshtastic Experiments",
+      "category": "Electronics",
+      "href": "electronics/meshtastic.html",
+      "image": "assets/img/electronics.jpg",
+      "alt": "Meshtastic electronics and antenna hardware",
+      "teaser": "Field tests, antenna geometry and practical experiments with decentralized LoRa communication.",
+      "active": true
+    }
+  ]
+}</code></pre>
+</section>
+
+<p class="hint"><a href="#top">↑ top</a></p>
+
+
+<section class="card">
+  <h2 class="card-title">Empfohlene Felder</h2>
+
+  <dl>
+    <dt><code>id</code></dt>
+    <dd>
+      Eindeutige interne Kennung der Seite. Sie sollte stabil bleiben, selbst
+      wenn sich Titel oder Pfad später ändern.
+    </dd>
+
+    <dt><code>title</code></dt>
+    <dd>
+      Der sichtbare Titel der Featured Page.
+    </dd>
+
+    <dt><code>category</code></dt>
+    <dd>
+      Übergeordneter Bereich wie Astronomy, Electronics, Sailing oder Botanics.
+    </dd>
+
+    <dt><code>href</code></dt>
+    <dd>
+      Relativer Link zur eigentlichen Seite.
+    </dd>
+
+    <dt><code>image</code></dt>
+    <dd>
+      Vorschaubild für die Startseite.
+    </dd>
+
+    <dt><code>alt</code></dt>
+    <dd>
+      Sinnvoller Alternativtext für das Bild.
+    </dd>
+
+    <dt><code>teaser</code></dt>
+    <dd>
+      Kurzer Beschreibungssatz, der erklärt, was auf der Seite zu finden ist.
+    </dd>
+
+    <dt><code>active</code></dt>
+    <dd>
+      Ermöglicht es, eine Seite vorübergehend aus der Rotation zu entfernen,
+      ohne den Datensatz löschen zu müssen.
+    </dd>
+  </dl>
+</section>
+
+<p class="hint"><a href="#top">↑ top</a></p>
+
+
+<section class="card">
+  <h2 class="card-title">Welche Seiten sollten teilnehmen?</h2>
+
+  <p>
+    Die Featured Page sollte vor allem Inhalte zeigen, die einen eigenen
+    Entdeckungswert besitzen. Nicht jede technisch vorhandene HTML-Datei muss
+    deshalb automatisch Teil der Rotation sein.
+  </p>
+
+  <p><strong>Geeignet sind beispielsweise:</strong></p>
+
+  <ul>
+    <li>umfangreiche Themenseiten</li>
+    <li>Projektseiten</li>
+    <li>Dokumentationen</li>
+    <li>Gathered-Knowledge-Seiten</li>
+    <li>astronomische Sammlungen</li>
+    <li>Segel- und Reiseberichte</li>
+    <li>Elektronikprojekte</li>
+    <li>Botanikseiten</li>
+    <li>Code- und Making-Projekte</li>
+    <li>besondere Tools, sofern sie auch für Besucher interessant sind</li>
+  </ul>
+
+  <p><strong>Eher nicht aufnehmen:</strong></p>
+
+  <ul>
+    <li>die Startseite selbst</li>
+    <li>Kontaktseite</li>
+    <li>About-Seite</li>
+    <li>News-Archiv</li>
+    <li>reine Navigationsseiten ohne eigenen Inhalt</li>
+    <li>unfertige Baustellen</li>
+    <li>interne Generatoren oder Hilfswerkzeuge ohne öffentlichen Mehrwert</li>
+  </ul>
+
+  <p class="hint">
+    Das Featured-System sollte Besucher auf Entdeckungsreise schicken – nicht
+    versehentlich in den technischen Heizungskeller der Website.
+  </p>
+</section>
+
+<p class="hint"><a href="#top">↑ top</a></p>
+
+
+<section class="card">
+  <h2 class="card-title">Darstellung auf der Startseite</h2>
+
+  <p>
+    Die Featured Page sollte stärker hervorgehoben werden als eine gewöhnliche
+    Themenkachel. Sinnvoll ist eine breite Vorschaukarte mit einem großen Bild
+    und dauerhaft sichtbaren Textinformationen.
+  </p>
+
+  <p>Empfohlene Inhalte:</p>
+
+  <ul>
+    <li>großes Vorschaubild</li>
+    <li>kleine Kategoriezeile</li>
+    <li>Seitentitel</li>
+    <li>kurzer Teaser</li>
+    <li>Hinweis wie „Today’s Featured Page“</li>
+    <li>vollständig klickbare Karte</li>
+  </ul>
+
+  <pre class="cheat-code"><code>┌──────────────────────────────────────────────┐
+│                                              │
+│              großes Vorschaubild             │
+│                                              │
+│  FEATURED PAGE · ASTRONOMY                   │
+│  Significant Stars                           │
+│  A structured journey through the night sky  │
+└──────────────────────────────────────────────┘</code></pre>
+
+  <p>
+    Der Seitentitel sollte nicht ausschließlich über einen Hover-Effekt
+    erscheinen. Auf Touch-Geräten existiert Hover praktisch nicht. Die
+    wichtigsten Informationen müssen daher permanent sichtbar sein.
+  </p>
+</section>
+
+<p class="hint"><a href="#top">↑ top</a></p>
+
+
+<section class="card">
+  <h2 class="card-title">Position auf der Startseite</h2>
+
+  <p>Eine sinnvolle Reihenfolge wäre:</p>
+
+  <ol>
+    <li>Hero</li>
+    <li><strong>Featured Page</strong></li>
+    <li>Things I Build, Explore &amp; Write About</li>
+    <li>Themenkacheln</li>
+    <li>Recent Discoveries from the Workbench</li>
+  </ol>
+
+  <p>
+    Dadurch erhält die Featured Page genügend visuelles Gewicht, ohne die
+    eigentliche Hauptnavigation zu verdrängen.
+  </p>
+</section>
+
+<p class="hint"><a href="#top">↑ top</a></p>
+
+
+<section class="card">
+  <h2 class="card-title">Datum und Zeitzone</h2>
+
+  <p>
+    Bei einer täglichen Auswahl muss definiert werden, wann ein neuer Tag
+    beginnt.
+  </p>
+
+  <p>
+    Die einfachste technische Variante wäre UTC. Dann sehen alle Besucher
+    weltweit zur selben Zeit dieselbe Featured Page.
+  </p>
+
+  <p>
+    Für diese Website ist jedoch eine Rotation nach
+    <strong>Europe/Vienna</strong> sinnvoller. Die Featured Page würde damit
+    jeweils um Mitternacht österreichischer Zeit wechseln.
+  </p>
+
+  <p>
+    Andernfalls könnte beispielsweise ein Besucher in Österreich bereits die
+    neue Seite sehen, während ein Besucher in Nordamerika noch die Auswahl des
+    Vortages erhält.
+  </p>
+</section>
+
+<p class="hint"><a href="#top">↑ top</a></p>
+
+
+<section class="card">
+  <h2 class="card-title">Umgang mit neuen Seiten</h2>
+
+  <p>
+    Die Reihenfolge der JSON-Einträge bestimmt gemeinsam mit dem Tagesindex,
+    welche Seite an welchem Tag erscheint.
+  </p>
+
+  <p>
+    Wird ein neuer Eintrag mitten in die Liste eingefügt, verändert sich die
+    künftige Rotation. Technisch ist das unproblematisch.
+  </p>
+
+  <p>
+    Wenn eine möglichst stabile Reihenfolge gewünscht ist, sollten neue Seiten
+    immer am Ende der Liste ergänzt werden.
+  </p>
+
+  <p>
+    Eine Seite kann außerdem mit
+    <code>"active": false</code> deaktiviert werden. Das ist beispielsweise für
+    unfertige oder vorübergehend nicht gewünschte Inhalte nützlich.
+  </p>
+</section>
+
+<p class="hint"><a href="#top">↑ top</a></p>
+
+
+<section class="card">
+  <h2 class="card-title">Progressive Enhancement</h2>
+
+  <p>
+    Der Bereich sollte nicht vollständig von JavaScript abhängig sein.
+    Sinnvoll ist ein einfacher statischer Fallback direkt in der
+    <code>index.html</code>.
+  </p>
+
+  <p>
+    Sobald <code>featured-page.js</code> erfolgreich geladen wurde, ersetzt das
+    Script diesen Fallback durch die tatsächlich für den aktuellen Tag
+    ausgewählte Seite.
+  </p>
+
+  <p>
+    Dadurch bleibt zumindest ein sinnvoller Link sichtbar, falls:
+  </p>
+
+  <ul>
+    <li>JavaScript deaktiviert ist</li>
+    <li>die JSON-Datei nicht geladen werden kann</li>
+    <li>ein Netzwerk- oder Pfadfehler vorliegt</li>
+    <li>das Script selbst einen Fehler enthält</li>
+  </ul>
+</section>
+
+<p class="hint"><a href="#top">↑ top</a></p>
+
+
+<section class="card">
+  <h2 class="card-title">Fehlerbehandlung</h2>
+
+  <p>
+    Das JavaScript sollte defensiv aufgebaut werden und insbesondere folgende
+    Fälle berücksichtigen:
+  </p>
+
+  <ul>
+    <li><code>featured-pages.json</code> ist nicht erreichbar</li>
+    <li>das JSON ist syntaktisch ungültig</li>
+    <li>die Liste enthält keine Seiten</li>
+    <li>alle Seiten besitzen <code>"active": false</code></li>
+    <li>ein Eintrag besitzt keinen gültigen Link</li>
+    <li>ein Vorschaubild fehlt</li>
+    <li>ein einzelner Datensatz ist unvollständig</li>
+  </ul>
+
+  <p>
+    Ein defektes Bild sollte möglichst nicht verhindern, dass der Link selbst
+    weiterhin funktioniert.
+  </p>
+
+  <p>
+    Bei einem vollständigen Ladefehler kann entweder der statische Fallback
+    stehen bleiben oder eine dezente Meldung ausgegeben werden.
+  </p>
+</section>
+
+<p class="hint"><a href="#top">↑ top</a></p>
+
+
+<section class="card">
+  <h2 class="card-title">Accessibility und Bedienung</h2>
+
+  <p>
+    Da die gesamte Featured-Karte klickbar sein soll, sollte sie als
+    <code>&lt;a&gt;</code>-Element aufgebaut werden.
+  </p>
+
+  <p>Wichtig sind außerdem:</p>
+
+  <ul>
+    <li>sinnvolle Alternativtexte für Bilder</li>
+    <li>sichtbarer Tastaturfokus über <code>:focus-visible</code></li>
+    <li>ausreichender Kontrast zwischen Bild und Text</li>
+    <li>keine Information ausschließlich über Hover vermitteln</li>
+    <li>responsive Darstellung auf Smartphones</li>
+    <li>keine unnötigen Animationen</li>
+  </ul>
+
+  <p>
+    Bestehende Eigenschaften der normalen Website-Kacheln wie leichter
+    Bild-Zoom, Border-Radius und Fokusdarstellung können als gestalterische
+    Grundlage verwendet werden. Für Featured Pages ist dennoch eine eigene
+    CSS-Klasse sinnvoll.
+  </p>
+</section>
+
+<p class="hint"><a href="#top">↑ top</a></p>
+
+
+<section class="card">
+  <h2 class="card-title">Performance</h2>
+
+  <p>
+    Das Feature bleibt sehr leichtgewichtig. Pro Seitenaufruf werden lediglich
+    eine kleine JSON-Datei und das Featured-JavaScript geladen.
+  </p>
+
+  <p>
+    Es werden keine Bibliotheken, Frameworks, Datenbanken oder externen Dienste
+    benötigt.
+  </p>
+
+  <p>
+    Das System bleibt damit vollständig kompatibel mit:
+  </p>
+
+  <ul>
+    <li>GitHub Pages</li>
+    <li>HTML</li>
+    <li>CSS</li>
+    <li>Vanilla JavaScript</li>
+    <li>der bestehenden statischen Seitenstruktur</li>
+  </ul>
+</section>
+
+<p class="hint"><a href="#top">↑ top</a></p>
+
+
+<section class="card">
+  <h2 class="card-title">Geplanter Ablauf</h2>
+
+  <ol>
+    <li>
+      Alle bestehenden Seiten sammeln, die grundsätzlich als Featured Page
+      geeignet sind.
+    </li>
+
+    <li>
+      Für jede Seite Titel, Kategorie, Link, Vorschaubild, Alt-Text und kurzen
+      Teaser festlegen.
+    </li>
+
+    <li>
+      <code>assets/json/featured-pages.json</code> anlegen.
+    </li>
+
+    <li>
+      Einen Featured-Page-Platzhalter in <code>index.html</code> einfügen.
+    </li>
+
+    <li>
+      <code>assets/js/featured-page.js</code> erstellen.
+    </li>
+
+    <li>
+      Die tägliche Auswahl anhand des Datums implementieren.
+    </li>
+
+    <li>
+      Nur Einträge mit <code>"active": true</code> berücksichtigen.
+    </li>
+
+    <li>
+      Die ausgewählte Seite als klickbare Vorschaukarte rendern.
+    </li>
+
+    <li>
+      Eigenes CSS für Desktop und Mobile ergänzen.
+    </li>
+
+    <li>
+      Fallback- und Fehlerbehandlung implementieren.
+    </li>
+
+    <li>
+      Das Ergebnis lokal über einen HTTP-Server testen.
+    </li>
+
+    <li>
+      Links, Bilder und mobile Darstellung überprüfen.
+    </li>
+  </ol>
+</section>
+
+<p class="hint"><a href="#top">↑ top</a></p>
+
+
+<section class="card">
+  <h2 class="card-title">Lokales Testen</h2>
+
+  <p>
+    Da die Featured Pages über <code>fetch()</code> aus einer JSON-Datei
+    geladen werden, sollte die Website nicht einfach per
+    <code>file://</code> geöffnet werden.
+  </p>
+
+  <p>Stattdessen kann lokal ein einfacher HTTP-Server gestartet werden:</p>
+
+  <pre class="cheat-code"><code>python -m http.server 8000</code></pre>
+
+  <p>Danach kann die Website beispielsweise hier aufgerufen werden:</p>
+
+  <pre class="cheat-code"><code>http://localhost:8000/index.html</code></pre>
+</section>
+
+<p class="hint"><a href="#top">↑ top</a></p>
+
+
+<section class="card">
+  <h2 class="card-title">Noch zu entscheidende Details</h2>
+
+  <p>
+    Vor der endgültigen Implementierung müssen noch einige redaktionelle
+    Entscheidungen getroffen werden:
+  </p>
+
+  <ul>
+    <li>
+      Sollen ausschließlich echte Inhaltsseiten teilnehmen oder auch Tools und
+      Cheatsheets?
+    </li>
+
+    <li>
+      Sollen Kategorie-Homepages ebenfalls in die Rotation aufgenommen werden?
+    </li>
+
+    <li>
+      Soll die Vorschau nur Bild und Titel oder zusätzlich Kategorie und Teaser
+      zeigen?
+    </li>
+
+    <li>
+      Soll die Rotation strikt nach Wiener Datum erfolgen?
+    </li>
+
+    <li>
+      Welche konkreten Seiten werden als erste in
+      <code>featured-pages.json</code> aufgenommen?
+    </li>
+  </ul>
+</section>
+
+<p class="hint"><a href="#top">↑ top</a></p>
+
+
+<section class="card">
+  <h2 class="card-title">Empfohlene Zielarchitektur</h2>
+
+  <p>
+    Die bevorzugte Lösung besteht damit aus drei klar getrennten Komponenten:
+  </p>
+
+  <ol>
+    <li>
+      <strong>featured-pages.json</strong><br>
+      Enthält ausschließlich die kuratierte Liste möglicher Featured Pages.
+    </li>
+
+    <li>
+      <strong>featured-page.js</strong><br>
+      Lädt die Liste, ermittelt das aktuelle Wiener Datum, filtert aktive Seiten,
+      bestimmt den Tagesindex und rendert die Vorschau.
+    </li>
+
+    <li>
+      <strong>index.html + main.css</strong><br>
+      Stellen lediglich den Platzhalter und die visuelle Gestaltung bereit.
+    </li>
+  </ol>
+
+  <p>
+    Damit bleibt das System klein, transparent und unabhängig vom bestehenden
+    News-Renderer.
+  </p>
+
+  <p class="hint">
+    Das eigentliche JavaScript ist dabei der einfache Teil. Der entscheidende
+    Qualitätsfaktor ist die kuratierte Seitenliste: Welche Inhalte verdienen es,
+    regelmäßig wieder aus den Tiefen der Website hervorgeholt zu werden?
+  </p>
+</section>
+
+<p class="hint"><a href="#top">↑ top</a></p>
