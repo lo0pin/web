@@ -26,17 +26,29 @@
   <main class="content">
 
     <section class="card">
-      <p>Goto: <a href="../cheatsheets.html#html">HTML-Cheatsheet</a></p>
-      <p>Goto: <a href="../cheatsheets.html#css">CSS-Cheatsheet</a></p>
+      <ul>
+        <li><a href="../cheatsheets.html#html">HTML-Cheatsheet</a></li>
+        <li><a href="../cheatsheets.html#css">CSS-Cheatsheet</a></li>
+        <li><a href="#news">News</a></li>
+      </ul>
+
     </section>
 
     <hr class="divider" />
 
     <section class="tile-section" aria-label="Sections">
       <div class="tile-grid">
-        <a class="tile" href="routes_places/marinas.html#biograd" aria-label="Place">
-          <img class="tile-image" src="../assets/img/sail_routes_places/marinas/biograd_06.jpeg" alt="" />
-          <span class="tile-label">HTML</span>
+        <a class="tile" href="html/html.html" aria-label="Place">
+          <img class="tile-image" src="" alt="" />
+          <span class="tile-label">🏗️ HTML</span>
+        </a>
+        <a class="tile" href="html/css.html" aria-label="Place">
+          <img class="tile-image" src="" alt="" />
+          <span class="tile-label">🪷 CSS</span>
+        </a>
+        <a class="tile" href="html/js.html" aria-label="Place">
+          <img class="tile-image" src="" alt="" />
+          <span class="tile-label">⚙️ JavaScript</span>
         </a>
       </div>
     </section>
@@ -48,7 +60,7 @@
     </section>
 
     <!--NEWS SECTION-->
-    <div data-news-topic="code" data-news-subtopic="html" data-news-mode="all"></div>
+    <div id="news" data-news-topic="code" data-news-subtopic="html" data-news-mode="all"></div>
     <script type="module" src="../assets/js/news.js"></script>
 
     <hr class="divider" />
