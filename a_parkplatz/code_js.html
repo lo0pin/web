@@ -2475,3 +2475,276 @@ try {
           <pre class="cheat-code"><code class="language-js">window.addEventListener("error", event =&gt; {
   console.error("Unbehandelter Fehler:", event.error);
 });
+
+
+window.addEventListener("unhandledrejection", event =&gt; {
+  console.error("Unbehandeltes Promise:", event.reason);
+});</code></pre>
+          <p class="hint">
+            Diese Listener ersetzen keine lokale Fehlerbehandlung. Sie sind Rauchmelder, keine
+            Feuerwehr.
+          </p>
+        </article>
+      </div>
+      <p><a href="#top">↑ Nach oben</a></p>
+    </section>
+
+    <hr class="divider" />
+
+    <section class="card" id="classes">
+      <h3>26. Klassen, Vererbung und Prototypen</h3>
+
+      <div class="cheat-grid">
+        <article class="cheat-item">
+          <h4>Einfache Klasse</h4>
+          <pre class="cheat-code"><code class="language-js">class Post {
+  constructor({ id, title, topic }) {
+    this.id = id;
+    this.title = title;
+    this.topic = topic;
+  }
+
+  matchesTopic(topic) {
+    return this.topic === topic;
+  }
+}
+
+const post = new Post({
+  id: "js-guide",
+  title: "JavaScript",
+  topic: "code"
+});</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Private Felder und Getter</h4>
+          <pre class="cheat-code"><code class="language-js">class Counter {
+  #count = 0;
+
+  increment() {
+    this.#count += 1;
+  }
+
+  get value() {
+    return this.#count;
+  }
+}</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Setter mit Prüfung</h4>
+          <pre class="cheat-code"><code class="language-js">class Temperature {
+  #celsius = 0;
+
+  set celsius(value) {
+    if (!Number.isFinite(value)) {
+      throw new TypeError("Temperatur muss eine Zahl sein.");
+    }
+    this.#celsius = value;
+  }
+
+  get celsius() {
+    return this.#celsius;
+  }
+}</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Statische Methoden</h4>
+          <pre class="cheat-code"><code class="language-js">class Post {
+  static fromJson(data) {
+    return new Post(data);
+  }
+}
+
+const post = Post.fromJson(rawPost);</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Vererbung</h4>
+          <pre class="cheat-code"><code class="language-js">class FeaturedPost extends Post {
+  constructor(data, featuredDate) {
+    super(data);
+    this.featuredDate = featuredDate;
+  }
+}</code></pre>
+          <p class="hint">
+            Vererbung ist nützlich, aber leicht zu übertreiben. Kleine Funktionen und
+            zusammengesetzte Objekte sind oft flexibler.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Was darunter liegt: Prototypen</h4>
+          <pre class="cheat-code"><code class="language-js">const prototype = {
+  describe() {
+    return this.title;
+  }
+};
+
+const post = Object.create(prototype);
+post.title = "JavaScript";</code></pre>
+          <p class="hint">
+            Klassen sind komfortable Syntax über dem prototypischen Vererbungsmodell von
+            JavaScript.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Prototypkette prüfen</h4>
+          <pre class="cheat-code"><code class="language-js">Object.getPrototypeOf(post);
+post instanceof Post;</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Wann keine Klasse nötig ist</h4>
+          <pre class="cheat-code"><code class="language-js">function createPost(data) {
+  return {
+    ...data,
+    matchesTopic(topic) {
+      return data.topic === topic;
+    }
+  };
+}</code></pre>
+          <p class="hint">
+            Für einfache Daten aus JSON genügen meist normale Objekte plus reine Funktionen.
+          </p>
+        </article>
+      </div>
+      <p><a href="#top">↑ Nach oben</a></p>
+    </section>
+
+    <hr class="divider" />
+
+    <section class="card" id="regex">
+      <h3>27. Reguläre Ausdrücke: Muster in Text erkennen</h3>
+
+      <div class="cheat-grid">
+        <article class="cheat-item">
+          <h4>Grundlagen</h4>
+          <pre class="cheat-code"><code class="language-js">const pattern = /javascript/i;
+
+pattern.test("JavaScript Guide"); // true
+"abc123".match(/\d+/);            // ["123"]
+"a  b".replace(/\s+/g, " ");      // "a b"</code></pre>
+          <p class="hint">
+            Flags: <code>i</code> ignoriert Groß-/Kleinschreibung, <code>g</code> sucht global,
+            <code>m</code> arbeitet mehrzeilig.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Häufige Bausteine</h4>
+          <pre class="cheat-code"><code class="language-js">/\d/       // Ziffer
+/\w/       // Wortzeichen
+/\s/       // Leerraum
+/.+/       // mindestens ein beliebiges Zeichen
+/^start/   // Anfang
+/ende$/    // Ende
+/colou?r/  // u ist optional
+/a{2,4}/   // zwei bis vier a</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Zeichenklassen und Alternativen</h4>
+          <pre class="cheat-code"><code class="language-js">/[abc]/;        // a, b oder c
+/[^0-9]/;      // keine Ziffer
+/(html|css)/i; // html oder css
+/\p{L}+/gu;    // Unicode-Buchstaben</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Benannte Gruppen</h4>
+          <pre class="cheat-code"><code class="language-js">const match = "2026-08-23".match(
+  /^(?&lt;year&gt;\d{4})-(?&lt;month&gt;\d{2})-(?&lt;day&gt;\d{2})$/
+);
+
+console.log(match?.groups?.year);</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Alle Treffer lesen</h4>
+          <pre class="cheat-code"><code class="language-js">const matches = [...text.matchAll(/\b\w{5,}\b/gu)];
+
+for (const match of matches) {
+  console.log(match[0], match.index);
+}</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Dynamische Eingaben escapen</h4>
+          <pre class="cheat-code"><code class="language-js">function escapeRegExp(text) {
+  return text.replace(/[.*+?^&#36;{}()|[\]\\]/g, "\\&#36;&amp;");
+}
+
+const safePattern = new RegExp(
+  escapeRegExp(userSearch),
+  "i"
+);</code></pre>
+          <p class="hint">
+            Nutzertext ungeprüft in <code>new RegExp()</code> zu stecken verändert das Muster und
+            kann sehr teure Ausdrücke erzeugen.
+          </p>
+        </article>
+      </div>
+
+      <details class="news-details">
+        <summary>Wann Regex nicht die richtige Antwort ist</summary>
+        <p>
+          Für HTML gibt es den DOM-Parser, für URLs die Klasse <code>URL</code>, für JSON
+          <code>JSON.parse()</code> und für Datumsformatierung <code>Intl</code>. Reguläre
+          Ausdrücke sind präzise Werkzeuge für Textmuster, kein Universalschlüssel für jede Tür.
+        </p>
+      </details>
+      <p><a href="#top">↑ Nach oben</a></p>
+    </section>
+
+    <hr class="divider" />
+
+    <section class="card" id="iterators">
+      <h3>28. Iteratoren, Generatoren und benutzerdefinierte Abläufe</h3>
+
+      <div class="cheat-grid">
+        <article class="cheat-item">
+          <h4>Iterierbare Werte</h4>
+          <p>
+            Arrays, Strings, Sets, Maps und viele DOM-Sammlungen können mit
+            <code>for...of</code> durchlaufen werden.
+          </p>
+          <pre class="cheat-code"><code class="language-js">for (const character of "JS") {
+  console.log(character);
+}</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Iterator manuell verwenden</h4>
+          <pre class="cheat-code"><code class="language-js">const iterator = ["html", "css"][Symbol.iterator]();
+
+iterator.next(); // { value: "html", done: false }
+iterator.next(); // { value: "css", done: false }
+iterator.next(); // { value: undefined, done: true }</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Generatorfunktion</h4>
+          <pre class="cheat-code"><code class="language-js">function* idGenerator() {
+  let id = 1;
+
+  while (true) {
+    yield id;
+    id += 1;
+  }
+}
+
+const ids = idGenerator();
+ids.next().value; // 1
+ids.next().value; // 2</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Generator praktisch nutzen</h4>
+          <pre class="cheat-code"><code class="language-js">function* chunks(items, size) {
+  for (let index = 0; index &lt; items.length; index += size) {
+    yield items.slice(index, index + size);
+  }
+}
