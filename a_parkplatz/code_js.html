@@ -344,3 +344,70 @@ if (isReady) {
 /*
   Mehrzeiliger Kommentar
 */
+
+
+const retryLimit = 3; // Mehr Versuche würden nur den Server belasten.</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Die Konsole gezielt verwenden</h4>
+          <pre class="cheat-code"><code class="language-js">console.log("Allgemeine Ausgabe");
+console.info("Information");
+console.warn("Auffälliger Zustand");
+console.error("Fehler");
+console.table([
+  { title: "HTML", done: true },
+  { title: "JavaScript", done: false }
+]);</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Strikter Modus</h4>
+          <p>
+            <code>"use strict"</code> verhindert manche stillen Altlasten. ES-Module laufen
+            automatisch im strikten Modus.
+          </p>
+          <pre class="cheat-code"><code class="language-js">"use strict";
+
+// Fehler statt heimlicher globaler Variable:
+accidentalGlobal = 42;</code></pre>
+        </article>
+      </div>
+      <p><a href="#top">↑ Nach oben</a></p>
+    </section>
+
+    <hr class="divider" />
+
+    <section class="card" id="variables">
+      <h3>4. Variablen: <code>const</code>, <code>let</code> und das historische <code>var</code></h3>
+
+      <div class="cheat-grid">
+        <article class="cheat-item">
+          <h4><code>const</code> als Standard</h4>
+          <p>
+            <code>const</code> verhindert, dass der Variable später ein anderer Wert zugewiesen
+            wird. Das macht Absichten klar und Code leichter nachvollziehbar.
+          </p>
+          <pre class="cheat-code"><code class="language-js">const siteTitle = "Julian";
+const maxPosts = 3;
+
+// maxPosts = 5; // TypeError</code></pre>
+          <p class="hint">
+            Verwende <code>const</code>, solange du nicht konkret weißt, dass eine Neuzuweisung
+            nötig ist.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4><code>let</code> für echte Veränderung</h4>
+          <pre class="cheat-code"><code class="language-js">let currentIndex = 0;
+currentIndex += 1;
+
+let status = "loading";
+status = "ready";</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4><code>const</code> macht Objekte nicht unveränderlich</h4>
+          <pre class="cheat-code"><code class="language-js">const settings = { language: "de" };
+settings.language = "en"; // erlaubt
