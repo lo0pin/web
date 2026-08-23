@@ -13,7 +13,6 @@
   <link rel="icon" href="/favicon.ico" type="image/x-icon" />
 </head>
 
-
 <body class="has-bg bg-code">
   <header class="site-header">
     <div class="header-inner">
@@ -30,7 +29,6 @@
     </div>
   </header>
 
-  
   <main class="content" id="top">
     <hr class="divider" />
 
@@ -58,7 +56,6 @@
 
       <h3>So verwendest du diesen Guide als Anfänger</h3>
 
-      
       <div class="cheat-grid">
         <article class="cheat-item">
           <h4>Du musst nicht alles auf einmal verstehen</h4>
@@ -198,7 +195,6 @@ setTimeout(() =&gt; {
   console.log("C");
 }, 0);
 
-
 console.log("B");
 // Ausgabe: A, B, C</code></pre>
           <p class="hint">
@@ -287,7 +283,6 @@ button.addEventListener("click", () =&gt; {
           <pre class="cheat-code"><code class="language-bash"># Im Projektordner:
 python -m http.server 8000
 
-
 # Danach im Browser:
 http://localhost:8000</code></pre>
           <p class="hint">
@@ -344,7 +339,6 @@ if (isReady) {
 /*
   Mehrzeiliger Kommentar
 */
-
 
 const retryLimit = 3; // Mehr Versuche würden nur den Server belasten.</code></pre>
         </article>
@@ -536,7 +530,6 @@ Boolean(0);           // false</code></pre>
           <pre class="cheat-code"><code class="language-js">if ("Hallo") {
   console.log("Nichtleere Strings sind truthy.");
 }
-
 
 if ([]) {
   console.log("Auch leere Arrays sind truthy.");
@@ -2138,7 +2131,6 @@ for (const url of urls) {
   console.log(result.status);
 }
 
-
 // Parallel
 const results = await Promise.all(
   urls.map(url =&gt; fetch(url))
@@ -2476,7 +2468,6 @@ try {
   console.error("Unbehandelter Fehler:", event.error);
 });
 
-
 window.addEventListener("unhandledrejection", event =&gt; {
   console.error("Unbehandeltes Promise:", event.reason);
 });</code></pre>
@@ -2748,7 +2739,6 @@ ids.next().value; // 2</code></pre>
     yield items.slice(index, index + size);
   }
 }
-
 
 for (const page of chunks(posts, 10)) {
   console.log(page);
@@ -3259,7 +3249,6 @@ function createPostCard() {}  // Fabrikfunktion</code></pre>
   language: "de",
   status: "idle"
 };
-
 
 function setTopic(topic) {
   state.topic = topic;
