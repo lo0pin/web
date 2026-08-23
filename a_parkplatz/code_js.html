@@ -3675,3 +3675,175 @@ const normalized = Number(input.replace(",", "."));</code></pre>
           </ul>
           <p><strong>Projekt:</strong> Renderer in Datenzugriff, Filterlogik und DOM-Ausgabe teilen.</p>
         </article>
+
+        <article class="cheat-item">
+          <h4>Stufe 5 — Vertiefung</h4>
+          <ul>
+            <li>Closures, <code>this</code> und Prototypen</li>
+            <li>Event Loop und Performance</li>
+            <li>Sicherheit und Accessibility</li>
+          </ul>
+          <p><strong>Projekt:</strong> Eine robuste, tastaturbedienbare Komponente ohne Framework.</p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Fünf gute Übungsregeln</h4>
+          <ol>
+            <li>Erst selbst vorhersagen, dann ausführen.</li>
+            <li>Fehler nicht sofort löschen, sondern lesen.</li>
+            <li>Beispiele absichtlich verändern und brechen.</li>
+            <li>Code am nächsten Tag ohne Vorlage neu schreiben.</li>
+            <li>Das Gelernte in einem echten Website-Baustein verwenden.</li>
+          </ol>
+        </article>
+      </div>
+
+      <details class="news-details">
+        <summary>Geeignete Mini-Projekte in sinnvoller Reihenfolge</summary>
+        <ol>
+          <li>Zähler mit Plus-, Minus- und Reset-Button</li>
+          <li>Temperatur- oder Einheitenumrechner</li>
+          <li>Zeichen- und Wortzähler</li>
+          <li>Ein-/ausklappbare FAQ</li>
+          <li>Live-Suche in einer statischen Liste</li>
+          <li>Formular mit verständlichen Fehlermeldungen</li>
+          <li>To-do-Liste mit <code>localStorage</code></li>
+          <li>JSON-basierte Projektgalerie</li>
+          <li>Tägliche Featured Page</li>
+          <li>Modularer News-Renderer mit Filterung und Fehlerzuständen</li>
+        </ol>
+      </details>
+      <p><a href="#top">↑ Nach oben</a></p>
+    </section>
+
+    <hr class="divider" />
+
+    <section class="card" id="reference">
+      <h3>37. Kurzreferenz: häufig gebrauchte Muster</h3>
+
+      <div class="cheat-grid">
+        <article class="cheat-item">
+          <h4>Variable und Funktion</h4>
+          <pre class="cheat-code"><code class="language-js">const fixed = 42;
+let changing = 0;
+
+function add(a, b) {
+  return a + b;
+}
+
+const multiply = (a, b) =&gt; a * b;</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Bedingung und Schleife</h4>
+          <pre class="cheat-code"><code class="language-js">if (condition) {
+  // ...
+} else {
+  // ...
+}
+
+for (const item of items) {
+  // ...
+}</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Array transformieren</h4>
+          <pre class="cheat-code"><code class="language-js">const result = items
+  .filter(item =&gt; item.active)
+  .map(item =&gt; item.name)
+  .sort((a, b) =&gt; a.localeCompare(b));</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Objekt lesen und kopieren</h4>
+          <pre class="cheat-code"><code class="language-js">const { title, topic = "other" } = post;
+const updated = { ...post, title: "Neu" };</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>DOM und Event</h4>
+          <pre class="cheat-code"><code class="language-js">const button = document.querySelector("#save");
+
+button?.addEventListener("click", () =&gt; {
+  document.body.classList.toggle("saved");
+});</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Asynchron laden</h4>
+          <pre class="cheat-code"><code class="language-js">async function loadData(url) {
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error(&#96;HTTP &#36;{response.status}&#96;);
+  }
+  return response.json();
+}</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Fehler behandeln</h4>
+          <pre class="cheat-code"><code class="language-js">try {
+  const data = await loadData(url);
+  render(data);
+} catch (error) {
+  console.error(error);
+  renderError(error);
+}</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Sichere Standardwerte</h4>
+          <pre class="cheat-code"><code class="language-js">const title = post?.title ?? "Ohne Titel";
+const images = post.images ?? [];
+const limit = Number(container.dataset.limit ?? 3);</code></pre>
+        </article>
+      </div>
+
+      <p class="hint">
+        Solider JavaScript-Code ist selten der cleverste Code. Er macht Eingaben, Zustände,
+        Nebenwirkungen und Fehlerwege sichtbar — und lässt den nächsten Leser nicht im Nebel
+        stochern. Dieser nächste Leser bist erstaunlich oft du selbst.
+      </p>
+      <p><a href="#top">↑ Nach oben</a></p>
+    </section>
+
+    <hr class="divider" />
+
+    <section class="card" aria-labelledby="further-reading">
+      <h3 id="further-reading">Weiterführende Dokumentation</h3>
+      <ul>
+        <li>
+          <a href="https://developer.mozilla.org/de/docs/Web/JavaScript" target="_blank" rel="noopener noreferrer">
+            MDN: JavaScript
+          </a>
+          — umfassende Referenz zu Sprache und Browser-APIs
+        </li>
+        <li>
+          <a href="https://developer.mozilla.org/de/docs/Learn_web_development/Core/Scripting" target="_blank" rel="noopener noreferrer">
+            MDN Learn: Scripting
+          </a>
+          — strukturierter Einstieg mit Übungen
+        </li>
+        <li>
+          <a href="https://javascript.info/" target="_blank" rel="noopener noreferrer">
+            The Modern JavaScript Tutorial
+          </a>
+          — ausführlicher Kurs vom Sprachkern bis zum Browser
+        </li>
+        <li>
+          <a href="https://tc39.es/ecma262/" target="_blank" rel="noopener noreferrer">
+            ECMAScript Language Specification
+          </a>
+          — die maßgebliche, aber wenig kuschelige Spezifikation
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2026 Julian. Alle Rechte vorbehalten.</p>
+  </footer>
+</body>
+
+</html>
