@@ -1864,3 +1864,614 @@ form.addEventListener("submit", event =&gt; {
           <h4>FormData in ein Objekt umwandeln</h4>
           <pre class="cheat-code"><code class="language-js">const data = new FormData(form);
 const values = Object.fromEntries(data.entries());
+
+console.log(values);</code></pre>
+          <p class="hint">
+            Mehrfachfelder mit gleichem Namen benötigen <code>data.getAll(name)</code>; beim
+            einfachen Objekt ginge sonst Information verloren.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>HTML-Validierung nutzen</h4>
+          <pre class="cheat-code cheat-code-html"><code>&lt;label for="email"&gt;E-Mail&lt;/label&gt;
+&lt;input
+  id="email"
+  name="email"
+  type="email"
+  required
+  maxlength="200"
+/&gt;</code></pre>
+          <p class="hint">
+            Nutze zuerst die eingebauten HTML-Regeln. JavaScript ergänzt sie, ersetzt sie aber
+            nicht zwingend.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Gültigkeit prüfen</h4>
+          <pre class="cheat-code"><code class="language-js">if (!form.checkValidity()) {
+  form.reportValidity();
+  return;
+}</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Eigene Fehlermeldung setzen</h4>
+          <pre class="cheat-code"><code class="language-js">const input = form.elements.email;
+
+input.setCustomValidity(
+  input.value.endsWith(".invalid")
+    ? "Diese Testdomain ist nicht zulässig."
+    : ""
+);</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Checkboxen und Zahlen</h4>
+          <pre class="cheat-code"><code class="language-js">const accepted = form.elements.privacy.checked;
+const amount = form.elements.amount.valueAsNumber;
+
+if (!Number.isFinite(amount)) {
+  console.warn("Keine gültige Zahl.");
+}</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Formular zurücksetzen und Fokus setzen</h4>
+          <pre class="cheat-code"><code class="language-js">form.reset();
+form.elements.name.focus();</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Serverprüfung bleibt notwendig</h4>
+          <p>
+            Browservalidierung verbessert die Bedienung, ist aber keine Sicherheitsgrenze. Bei
+            einem externen Formularservice oder eigenen Backend müssen Daten dort erneut geprüft
+            werden.
+          </p>
+        </article>
+      </div>
+      <p><a href="#top">↑ Nach oben</a></p>
+    </section>
+
+    <hr class="divider" />
+
+    <section class="card" id="json-storage">
+      <h3>21. JSON, <code>localStorage</code> und Sitzungsdaten</h3>
+
+      <div class="cheat-grid">
+        <article class="cheat-item">
+          <h4>JSON lesen und schreiben</h4>
+          <pre class="cheat-code"><code class="language-js">const json = '{"title":"JavaScript","done":false}';
+const data = JSON.parse(json);
+
+const output = JSON.stringify(data);
+const readable = JSON.stringify(data, null, 2);</code></pre>
+          <p class="hint">
+            JSON erlaubt keine Kommentare, keine Funktionen, keine
+            <code>undefined</code>-Werte und keine abschließenden Kommata.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Fehlerhaftes JSON abfangen</h4>
+          <pre class="cheat-code"><code class="language-js">function parseJsonSafely(text, fallback = null) {
+  try {
+    return JSON.parse(text);
+  } catch (error) {
+    console.warn("Ungültiges JSON:", error);
+    return fallback;
+  }
+}</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4><code>localStorage</code></h4>
+          <pre class="cheat-code"><code class="language-js">const settings = { language: "de", theme: "light" };
+
+localStorage.setItem("settings", JSON.stringify(settings));
+
+const saved = JSON.parse(
+  localStorage.getItem("settings") ?? "{}"
+);
+
+localStorage.removeItem("settings");</code></pre>
+          <p class="hint">
+            Storage speichert nur Strings. Verwende Versionsnummern oder tolerante Standardwerte,
+            weil alte Daten noch lange im Browser liegen können.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4><code>sessionStorage</code></h4>
+          <p>
+            Die API ist gleich wie bei <code>localStorage</code>, die Daten gelten aber nur für den
+            aktuellen Tab und dessen Sitzung.
+          </p>
+          <pre class="cheat-code"><code class="language-js">sessionStorage.setItem("activeFilter", "code");
+const filter = sessionStorage.getItem("activeFilter");</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Keine Geheimnisse im Browser speichern</h4>
+          <p>
+            API-Schlüssel, Passwörter und vertrauliche Tokens gehören weder in JavaScript-Dateien
+            noch in Web Storage. Alles, was an den Browser ausgeliefert wird, kann gelesen werden.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Storage kann scheitern</h4>
+          <pre class="cheat-code"><code class="language-js">try {
+  localStorage.setItem("settings", JSON.stringify(settings));
+} catch (error) {
+  console.warn("Einstellungen konnten nicht gespeichert werden.", error);
+}</code></pre>
+          <p class="hint">
+            Private Modi, volle Speicherbereiche oder Browserrichtlinien können Schreibzugriffe
+            verhindern.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Änderungen in anderen Tabs beobachten</h4>
+          <pre class="cheat-code"><code class="language-js">window.addEventListener("storage", event =&gt; {
+  if (event.key === "settings") {
+    applySettings(JSON.parse(event.newValue ?? "{}"));
+  }
+});</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Datenversion mitführen</h4>
+          <pre class="cheat-code"><code class="language-js">const savedState = {
+  version: 1,
+  language: "de",
+  topic: "code"
+};</code></pre>
+          <p class="hint">
+            Wenn sich dein Datenformat später ändert, kannst du alte Versionen gezielt migrieren
+            oder verwerfen.
+          </p>
+        </article>
+      </div>
+      <p><a href="#top">↑ Nach oben</a></p>
+    </section>
+
+    <hr class="divider" />
+
+    <section class="card" id="async">
+      <h3>22. Asynchrones JavaScript: Promises und <code>async/await</code></h3>
+
+      <div class="cheat-grid">
+        <article class="cheat-item">
+          <h4>Promise-Grundidee</h4>
+          <p>
+            Ein Promise repräsentiert einen Wert, der noch nicht vorliegt. Es ist
+            <em>pending</em>, später entweder <em>fulfilled</em> oder <em>rejected</em>.
+          </p>
+          <pre class="cheat-code"><code class="language-js">loadPosts()
+  .then(posts =&gt; {
+    console.log(posts);
+  })
+  .catch(error =&gt; {
+    console.error(error);
+  })
+  .finally(() =&gt; {
+    console.log("Fertig");
+  });</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4><code>async/await</code></h4>
+          <pre class="cheat-code"><code class="language-js">async function initialize() {
+  try {
+    const posts = await loadPosts();
+    renderPosts(posts);
+  } catch (error) {
+    renderError(error);
+  }
+}</code></pre>
+          <p class="hint">
+            Eine <code>async</code>-Funktion liefert immer ein Promise zurück.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Unabhängige Arbeiten parallelisieren</h4>
+          <pre class="cheat-code"><code class="language-js">const [posts, settings] = await Promise.all([
+  loadPosts(),
+  loadSettings()
+]);</code></pre>
+          <p class="hint">
+            Schreibe unabhängige <code>await</code>-Aufrufe nicht unnötig untereinander. Das würde
+            sie seriell ausführen.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Teilerfolge mit <code>allSettled()</code></h4>
+          <pre class="cheat-code"><code class="language-js">const results = await Promise.allSettled([
+  loadWeather(),
+  loadEvents(),
+  loadPosts()
+]);
+
+for (const result of results) {
+  if (result.status === "fulfilled") {
+    console.log(result.value);
+  } else {
+    console.warn(result.reason);
+  }
+}</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Das erste Ergebnis verwenden</h4>
+          <pre class="cheat-code"><code class="language-js">const fastest = await Promise.race([
+  loadFromPrimary(),
+  loadFromMirror()
+]);</code></pre>
+          <p class="hint">
+            <code>race()</code> reagiert auf das erste erfüllte oder abgelehnte Promise.
+            <code>any()</code> wartet dagegen auf die erste erfolgreiche Erfüllung.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Verzögerung als Promise</h4>
+          <pre class="cheat-code"><code class="language-js">function delay(milliseconds) {
+  return new Promise(resolve =&gt; {
+    setTimeout(resolve, milliseconds);
+  });
+}
+
+await delay(500);</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Kein <code>await</code> in <code>forEach()</code></h4>
+          <pre class="cheat-code"><code class="language-js">// Sequenziell
+for (const url of urls) {
+  const result = await fetch(url);
+  console.log(result.status);
+}
+
+
+// Parallel
+const results = await Promise.all(
+  urls.map(url =&gt; fetch(url))
+);</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Top-Level Await im Modul</h4>
+          <pre class="cheat-code"><code class="language-js">// Nur in einem ES-Modul:
+const dataUrl = new URL("../json/posts.json", import.meta.url);
+const response = await fetch(dataUrl);
+const data = await response.json();</code></pre>
+          <p class="hint">
+            Praktisch, aber eine explizite <code>init()</code>-Funktion macht Initialisierung und
+            Fehlerbehandlung oft verständlicher.
+          </p>
+        </article>
+      </div>
+      <p><a href="#top">↑ Nach oben</a></p>
+    </section>
+
+    <hr class="divider" />
+
+    <section class="card" id="fetch">
+      <h3>23. Daten mit <code>fetch()</code> laden</h3>
+
+      <div class="cheat-grid">
+        <article class="cheat-item">
+          <h4>JSON robust laden</h4>
+          <pre class="cheat-code"><code class="language-js">async function loadJson(url) {
+  const response = await fetch(url);
+
+  if (!response.ok) {
+    throw new Error(
+      &#96;HTTP &#36;{response.status}: &#36;{response.statusText}&#96;
+    );
+  }
+
+  return response.json();
+}</code></pre>
+          <p class="hint">
+            <code>fetch()</code> lehnt bei HTTP 404 oder 500 nicht automatisch ab. Prüfe
+            <code>response.ok</code> selbst.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Text statt JSON</h4>
+          <pre class="cheat-code"><code class="language-js">const response = await fetch("notes/example.md");
+if (!response.ok) throw new Error("Datei nicht gefunden");
+
+const markdown = await response.text();</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Relative URL im Modul</h4>
+          <pre class="cheat-code"><code class="language-js">const dataUrl = new URL(
+  "../json/posts.json",
+  import.meta.url
+);
+
+const { posts } = await loadJson(dataUrl);</code></pre>
+          <p class="hint">
+            <code>import.meta.url</code> bezieht den Pfad auf die Moduldatei, nicht auf die aktuell
+            geöffnete HTML-Seite. Das ist für wiederverwendete Skripte Gold wert.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>POST-Anfrage</h4>
+          <pre class="cheat-code"><code class="language-js">const response = await fetch(apiUrl, {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify(payload)
+});</code></pre>
+          <p class="hint">
+            GitHub Pages selbst verarbeitet keine POST-Anfragen. Dafür brauchst du einen externen
+            Dienst oder ein Backend.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Anfrage abbrechen</h4>
+          <pre class="cheat-code"><code class="language-js">const controller = new AbortController();
+const timeoutId = setTimeout(() =&gt; controller.abort(), 5000);
+
+try {
+  const response = await fetch(url, {
+    signal: controller.signal
+  });
+} catch (error) {
+  if (error.name !== "AbortError") throw error;
+} finally {
+  clearTimeout(timeoutId);
+}</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Lade-, Leer- und Fehlerzustand</h4>
+          <pre class="cheat-code"><code class="language-js">container.setAttribute("aria-busy", "true");
+
+try {
+  const posts = await loadPosts();
+
+  if (posts.length === 0) {
+    renderEmptyState(container);
+  } else {
+    renderPosts(container, posts);
+  }
+} catch (error) {
+  renderError(container, error);
+} finally {
+  container.setAttribute("aria-busy", "false");
+}</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Antwortheader prüfen</h4>
+          <pre class="cheat-code"><code class="language-js">const contentType = response.headers.get("content-type") ?? "";
+
+if (!contentType.includes("application/json")) {
+  throw new Error("Unerwarteter Antworttyp.");
+}</code></pre>
+          <p class="hint">
+            Eine HTML-Fehlerseite mit Status 200 wäre sonst beim JSON-Parsing besonders
+            verwirrend.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>CORS verstehen</h4>
+          <p>
+            Browser beschränken Anfragen an andere Ursprünge. Die Zielseite muss Zugriffe durch
+            passende CORS-Header erlauben. Das lässt sich nicht seriös mit einem Trick im Frontend
+            „abschalten“.
+          </p>
+          <p class="hint">
+            Eigene Dateien auf derselben GitHub-Pages-Site sind unkompliziert. Fremde APIs müssen
+            CORS unterstützen und dürfen keinen geheimen Schlüssel im Client verlangen.
+          </p>
+        </article>
+      </div>
+      <p><a href="#top">↑ Nach oben</a></p>
+    </section>
+
+    <hr class="divider" />
+
+    <section class="card" id="modules">
+      <h3>24. Module, Importe und Pfade auf GitHub Pages</h3>
+
+      <div class="cheat-grid">
+        <article class="cheat-item">
+          <h4>Benannte Exporte</h4>
+          <pre class="cheat-code"><code class="language-js">// utils.js
+export function escapeHtml(value) {
+  // ...
+}
+
+export const DEFAULT_LIMIT = 3;
+
+// news.js
+import { escapeHtml, DEFAULT_LIMIT } from "./utils.js";</code></pre>
+          <p class="hint">
+            Im Browser muss die Dateiendung <code>.js</code> im Importpfad normalerweise
+            mitgeschrieben werden.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Default Export</h4>
+          <pre class="cheat-code"><code class="language-js">// renderer.js
+export default function renderPosts(posts) {
+  // ...
+}
+
+// main.js
+import renderPosts from "./renderer.js";</code></pre>
+          <p class="hint">
+            Benannte Exporte erleichtern automatische Umbenennungen und zeigen klar, was importiert
+            wird. Default Exports sparsam verwenden.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Import umbenennen</h4>
+          <pre class="cheat-code"><code class="language-js">import {
+  render as renderPosts,
+  DEFAULT_LIMIT as POST_LIMIT
+} from "./renderer.js";</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Dynamischer Import</h4>
+          <pre class="cheat-code"><code class="language-js">if (document.querySelector("[data-gallery]")) {
+  const { initializeGallery } = await import("./gallery.js");
+  initializeGallery();
+}</code></pre>
+          <p class="hint">
+            So wird optionaler Code nur geladen, wenn die Seite ihn tatsächlich braucht.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Drei unterschiedliche Bezugspunkte</h4>
+          <pre class="cheat-code"><code class="language-js">// In HTML: relativ zur HTML-Datei
+// &lt;script src="../assets/js/page.js"&gt;
+
+// In import: relativ zur importierenden JS-Datei
+import { helper } from "./utils.js";
+
+// In fetch: eine relative URL ist meist relativ zur Dokument-URL
+fetch("../assets/json/posts.json");</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Projektpfad statt Domain-Root</h4>
+          <p>
+            Auf einer GitHub-Project-Page kann die Site unter
+            <code>example.github.io/web/</code> liegen. Ein Pfad wie
+            <code>/assets/data.json</code> zeigt dann zum Domain-Root und nicht zwingend in das
+            Repository.
+          </p>
+          <pre class="cheat-code"><code class="language-js">const url = new URL("../json/posts.json", import.meta.url);</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Zyklische Importe vermeiden</h4>
+          <p>
+            Wenn <code>a.js</code> aus <code>b.js</code> importiert und <code>b.js</code> wiederum
+            aus <code>a.js</code>, entstehen schwer verständliche Initialisierungsprobleme.
+            Gemeinsam benötigte Logik gehört meist in ein drittes Modul.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Module werden nur einmal ausgewertet</h4>
+          <pre class="cheat-code"><code class="language-js">// Mehrere Module dürfen dasselbe Modul importieren.
+// Dessen oberster Code läuft dennoch nur einmal.
+import { settings } from "./settings.js";</code></pre>
+          <p class="hint">
+            Exportierte Objekte bleiben allerdings geteilte Referenzen. Verändere sie nicht
+            heimlich an beliebigen Stellen.
+          </p>
+        </article>
+      </div>
+      <p><a href="#top">↑ Nach oben</a></p>
+    </section>
+
+    <hr class="divider" />
+
+    <section class="card" id="errors">
+      <h3>25. Fehlerbehandlung: Fehler sichtbar, verständlich und beherrschbar machen</h3>
+
+      <div class="cheat-grid">
+        <article class="cheat-item">
+          <h4><code>try</code>, <code>catch</code>, <code>finally</code></h4>
+          <pre class="cheat-code"><code class="language-js">try {
+  const data = JSON.parse(text);
+  render(data);
+} catch (error) {
+  console.error("Daten konnten nicht verarbeitet werden.", error);
+} finally {
+  spinner.hidden = true;
+}</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Eigene Fehler werfen</h4>
+          <pre class="cheat-code"><code class="language-js">function validatePost(post) {
+  if (!post || typeof post !== "object") {
+    throw new TypeError("Post muss ein Objekt sein.");
+  }
+
+  if (!post.id) {
+    throw new Error("Post-ID fehlt.");
+  }
+}</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Fehler mit Ursache weiterreichen</h4>
+          <pre class="cheat-code"><code class="language-js">try {
+  return await response.json();
+} catch (error) {
+  throw new Error("Antwort enthält kein gültiges JSON.", {
+    cause: error
+  });
+}</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Nicht alles verschlucken</h4>
+          <pre class="cheat-code"><code class="language-js">// Schlecht:
+try {
+  riskyOperation();
+} catch {
+  // nichts
+}
+
+// Besser:
+try {
+  riskyOperation();
+} catch (error) {
+  console.error("Operation fehlgeschlagen.", error);
+  showUserMessage("Etwas ist schiefgegangen.");
+}</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Fehlergrenzen sinnvoll setzen</h4>
+          <p>
+            Fange Fehler dort ab, wo du eine sinnvolle Reaktion kennst: erneut versuchen, einen
+            Fallback anzeigen, den Nutzer informieren oder zusätzliche Diagnose liefern.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Fehlertyp unterscheiden</h4>
+          <pre class="cheat-code"><code class="language-js">try {
+  await loadPosts();
+} catch (error) {
+  if (error instanceof SyntaxError) {
+    showUserMessage("Die Datendatei ist ungültig.");
+  } else {
+    throw error;
+  }
+}</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Globale Fehler nur als letztes Netz</h4>
+          <pre class="cheat-code"><code class="language-js">window.addEventListener("error", event =&gt; {
+  console.error("Unbehandelter Fehler:", event.error);
+});
