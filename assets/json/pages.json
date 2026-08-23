@@ -1,0 +1,61 @@
+{
+  "directory": "a_parkplatz",
+  "pages": [
+    {
+      "file": "astro_moon-new.html",
+      "title": "Astro Moon New"
+    },
+    {
+      "file": "astro_significant-stars.html",
+      "title": "Astro Significant Stars"
+    },
+    {
+      "file": "astro_solar_sysi.html",
+      "title": "Astro Solar Sysi"
+    },
+    {
+      "file": "code_arduino_cpp.html",
+      "title": "Code Arduino Cpp"
+    },
+    {
+      "file": "code_css.html",
+      "title": "Code Css"
+    },
+    {
+      "file": "code_html.html",
+      "title": "Code Html"
+    },
+    {
+      "file": "code_js.html",
+      "title": "Julian — JavaScript Guide"
+    },
+    {
+      "file": "code_linux.html",
+      "title": "Code Linux"
+    },
+    {
+      "file": "featured_page.html",
+      "title": "Featured Page"
+    },
+    {
+      "file": "kontaktformular.html",
+      "title": "Kontaktformular"
+    },
+    {
+      "file": "nerdism_rpg_quests_erstellen.html",
+      "title": "Nerdism Rpg Quests Erstellen"
+    },
+    {
+      "file": "outdoor_drony.html",
+      "title": "Outdoor Drony"
+    },
+    {
+      "file": "outdoor_wolken.html",
+      "title": "Outdoor Wolken"
+    },
+    {
+      "file": "words_roman_schreiben.html",
+      "title": "82 Tipps zum Romanschreiben"
+    }
+  ]
+}
