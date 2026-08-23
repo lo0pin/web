@@ -197,3 +197,93 @@ heading.textContent = doubled.join(", ");</code></pre>
 setTimeout(() =&gt; {
   console.log("C");
 }, 0);
+
+
+console.log("B");
+// Ausgabe: A, B, C</code></pre>
+          <p class="hint">
+            Eine Verzögerung von 0 Millisekunden bedeutet nicht „sofort“, sondern „frühestens,
+            wenn der aktuelle Code fertig ist“.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>JavaScript ist dynamisch typisiert</h4>
+          <p>
+            Werte besitzen Typen, Variablen jedoch keine dauerhaft festgelegten. Eine Variable kann
+            später einen Wert eines anderen Typs halten — erlaubt, aber oft ein Eigentor.
+          </p>
+          <pre class="cheat-code"><code class="language-js">let value = 42;
+value = "jetzt ein String"; // erlaubt
+
+// Besser: klare, stabile Bedeutung
+const temperatureCelsius = 24.6;</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Der Browser ist ereignisgetrieben</h4>
+          <p>
+            Viel JavaScript wartet auf Ereignisse: Klicks, Eingaben, geladene Daten, Timer oder
+            Größenänderungen.
+          </p>
+          <pre class="cheat-code"><code class="language-js">const button = document.querySelector("#save");
+
+button.addEventListener("click", () =&gt; {
+  console.log("Speichern wurde angefordert.");
+});</code></pre>
+        </article>
+      </div>
+      <p><a href="#top">↑ Nach oben</a></p>
+    </section>
+
+    <hr class="divider" />
+
+    <section class="card" id="setup">
+      <h3>2. JavaScript einbinden und sinnvoll starten</h3>
+
+      <div class="cheat-grid">
+        <article class="cheat-item">
+          <h4>Externe Datei mit <code>defer</code></h4>
+          <p>
+            Für klassische Skripte ist <code>defer</code> meist die vernünftige Wahl. Die Datei
+            wird parallel geladen und erst ausgeführt, nachdem das HTML geparst wurde.
+          </p>
+          <pre class="cheat-code cheat-code-html"><code>&lt;script src="assets/js/main.js" defer&gt;&lt;/script&gt;</code></pre>
+          <p class="hint">
+            Externe Dateien sind übersichtlicher, wiederverwendbar und leichter zu cachen als lange
+            Inline-Skripte.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>ES-Module mit <code>type="module"</code></h4>
+          <p>
+            Module erlauben <code>import</code> und <code>export</code>. Sie werden automatisch
+            verzögert ausgeführt und verwenden einen eigenen Gültigkeitsbereich.
+          </p>
+          <pre class="cheat-code cheat-code-html"><code>&lt;script type="module" src="assets/js/news.js"&gt;&lt;/script&gt;</code></pre>
+          <p class="hint">
+            Für neuen, auf mehrere Dateien verteilten Code sind Module der sauberste Standard.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Inline-JavaScript nur für Kleinstfälle</h4>
+          <pre class="cheat-code cheat-code-html"><code>&lt;script&gt;
+  console.log("Die Seite läuft.");
+&lt;/script&gt;</code></pre>
+          <p>
+            Ein kleiner Test ist legitim. Dauerhafte Anwendungslogik zwischen HTML-Tags wird aber
+            rasch unübersichtlich.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Nicht über <code>file://</code> testen</h4>
+          <p>
+            Module und <code>fetch()</code> benötigen normalerweise einen Webserver. Öffne die
+            Datei deshalb nicht bloß per Doppelklick.
+          </p>
+          <pre class="cheat-code"><code class="language-bash"># Im Projektordner:
+python -m http.server 8000
+
