@@ -154,3 +154,46 @@ button.addEventListener("click", () =&gt; {
         <li><a href="#reference">Kurzreferenz</a></li>
       </ol>
     </section>
+
+    <hr class="divider" />
+
+    <section class="card" id="mental-model">
+      <h3>1. Das mentale Modell: Was JavaScript eigentlich tut</h3>
+
+      <p>
+        Der Browser lädt HTML, baut daraus den DOM-Baum, verarbeitet CSS und führt JavaScript aus.
+        JavaScript arbeitet dabei in einer Laufzeitumgebung. Im Browser gehören etwa
+        <code>document</code>, <code>window</code>, <code>fetch()</code> und
+        <code>localStorage</code> zur Umgebung; sie sind keine Bestandteile der reinen Sprache.
+      </p>
+
+      <div class="cheat-grid">
+        <article class="cheat-item">
+          <h4>Sprache und Browser-API unterscheiden</h4>
+          <p>
+            Variablen, Funktionen, Arrays und Klassen gehören zu JavaScript.
+            <code>document.querySelector()</code> gehört zum DOM und damit zur Browser-API.
+          </p>
+          <pre class="cheat-code"><code class="language-js">// Reines JavaScript
+const doubled = [1, 2, 3].map(number =&gt; number * 2);
+
+// Browser-API
+const heading = document.querySelector("h1");
+heading.textContent = doubled.join(", ");</code></pre>
+          <p class="hint">
+            Derselbe JavaScript-Code findet in unterschiedlichen Umgebungen unterschiedliche
+            Schnittstellen vor.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Code läuft grundsätzlich von oben nach unten</h4>
+          <p>
+            Synchrone Anweisungen werden der Reihe nach ausgeführt. Asynchrone Arbeit wird
+            angestoßen und später fortgesetzt.
+          </p>
+          <pre class="cheat-code"><code class="language-js">console.log("A");
+
+setTimeout(() =&gt; {
+  console.log("C");
+}, 0);
