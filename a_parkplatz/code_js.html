@@ -1365,3 +1365,502 @@ repeat(3, index =&gt; console.log(index));</code></pre>
             Funktionen sind Werte: Du kannst sie speichern, übergeben und zurückgeben.
           </p>
         </article>
+
+        <article class="cheat-item">
+          <h4>Reine Funktionen</h4>
+          <pre class="cheat-code"><code class="language-js">function filterByTopic(posts, topic) {
+  return posts.filter(post =&gt; post.topic === topic);
+}</code></pre>
+          <p class="hint">
+            Eine reine Funktion verändert keine äußeren Daten und liefert für dieselben Eingaben
+            dasselbe Ergebnis. Das macht sie leicht testbar.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Parameter als Optionsobjekt</h4>
+          <pre class="cheat-code"><code class="language-js">function loadPosts({
+  topic = null,
+  limit = 10,
+  newestFirst = true
+} = {}) {
+  // ...
+}
+
+loadPosts({ topic: "code", limit: 3 });</code></pre>
+          <p class="hint">
+            Bei mehreren optionalen Argumenten ist ein Objekt lesbarer als eine Parade rätselhafter
+            Positionswerte.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Rekursion</h4>
+          <pre class="cheat-code"><code class="language-js">function factorial(number) {
+  if (number &lt;= 1) return 1;
+  return number * factorial(number - 1);
+}</code></pre>
+          <p class="hint">
+            Rekursion eignet sich für rekursive Datenstrukturen. Für gewöhnliche Wiederholungen
+            ist eine Schleife oft einfacher und stackschonender.
+          </p>
+        </article>
+      </div>
+      <p><a href="#top">↑ Nach oben</a></p>
+    </section>
+
+    <hr class="divider" />
+
+    <section class="card" id="scope">
+      <h3>16. Scope, Hoisting und Closures</h3>
+
+      <div class="cheat-grid">
+        <article class="cheat-item">
+          <h4>Globaler, Modul-, Funktions- und Block-Scope</h4>
+          <pre class="cheat-code"><code class="language-js">const moduleValue = "im ganzen Modul";
+
+function example() {
+  const functionValue = "nur in der Funktion";
+
+  if (true) {
+    const blockValue = "nur im Block";
+    console.log(moduleValue, functionValue, blockValue);
+  }
+}</code></pre>
+          <p class="hint">
+            Halte Variablen so lokal wie möglich. Globaler Zustand koppelt entfernte Codestellen
+            und macht Fehler schwer nachvollziehbar.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Hoisting verstehen</h4>
+          <pre class="cheat-code"><code class="language-js">sayHello(); // funktioniert
+
+function sayHello() {
+  console.log("Hallo");
+}
+
+// greet(); // ReferenceError
+const greet = () =&gt; console.log("Servus");</code></pre>
+          <p class="hint">
+            Deklarationen werden intern teilweise vorgezogen. Schreibe Code dennoch in einer
+            Reihenfolge, die Menschen ohne Archäologiestudium lesen können.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Temporal Dead Zone</h4>
+          <pre class="cheat-code"><code class="language-js">// console.log(value); // ReferenceError
+const value = 42;</code></pre>
+          <p>
+            <code>let</code> und <code>const</code> existieren intern bereits ab Blockbeginn, sind
+            vor ihrer Deklaration aber nicht zugänglich.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Closure: Funktion merkt sich ihre Umgebung</h4>
+          <pre class="cheat-code"><code class="language-js">function createCounter() {
+  let count = 0;
+
+  return function () {
+    count += 1;
+    return count;
+  };
+}
+
+const next = createCounter();
+next(); // 1
+next(); // 2</code></pre>
+          <p class="hint">
+            Closures ermöglichen privaten Zustand, Funktionsfabriken und viele Event-Handler-Muster.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Closure als Filterfabrik</h4>
+          <pre class="cheat-code"><code class="language-js">function createTopicFilter(topic) {
+  return post =&gt; post.topic === topic;
+}
+
+const isCodePost = createTopicFilter("code");
+const codePosts = posts.filter(isCodePost);</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Block-Scope in Schleifen</h4>
+          <pre class="cheat-code"><code class="language-js">for (let index = 0; index &lt; 3; index += 1) {
+  setTimeout(() =&gt; console.log(index), 0);
+}
+
+// Ausgabe: 0, 1, 2</code></pre>
+          <p class="hint">
+            <code>let</code> erzeugt pro Schleifendurchlauf eine passende Bindung. Das behebt ein
+            klassisches Problem alter <code>var</code>-Schleifen.
+          </p>
+        </article>
+      </div>
+      <p><a href="#top">↑ Nach oben</a></p>
+    </section>
+
+    <hr class="divider" />
+
+    <section class="card" id="this">
+      <h3>17. <code>this</code>, Methoden und Funktionsbindung</h3>
+
+      <p>
+        <code>this</code> wird nicht danach bestimmt, wo eine normale Funktion geschrieben wurde,
+        sondern wie sie aufgerufen wird. Arrow Functions besitzen kein eigenes <code>this</code>
+        und übernehmen es aus ihrer Umgebung.
+      </p>
+
+      <div class="cheat-grid">
+        <article class="cheat-item">
+          <h4>Methodenaufruf</h4>
+          <pre class="cheat-code"><code class="language-js">const guide = {
+  title: "JavaScript",
+  printTitle() {
+    console.log(this.title);
+  }
+};
+
+guide.printTitle(); // "JavaScript"</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Verlorener Kontext</h4>
+          <pre class="cheat-code"><code class="language-js">const print = guide.printTitle;
+// print(); // this ist nicht mehr guide
+
+const boundPrint = guide.printTitle.bind(guide);
+boundPrint();</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4><code>call()</code> und <code>apply()</code></h4>
+          <pre class="cheat-code"><code class="language-js">function describe(prefix) {
+  return &#96;&#36;{prefix}: &#36;{this.title}&#96;;
+}
+
+describe.call(guide, "Guide");
+describe.apply(guide, ["Guide"]);</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Arrow Function in Callbacks</h4>
+          <pre class="cheat-code"><code class="language-js">class Timer {
+  seconds = 0;
+
+  start() {
+    setInterval(() =&gt; {
+      this.seconds += 1;
+    }, 1000);
+  }
+}</code></pre>
+          <p class="hint">
+            Die Arrow Function übernimmt das <code>this</code> der Methode
+            <code>start()</code>.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Pragmatische Regel</h4>
+          <p>
+            Verwende Arrow Functions für kurze Callbacks und normale Methodensyntax für
+            Objektmethoden. Nutze <code>this</code> nur, wenn objektgebundener Zustand tatsächlich
+            einen Vorteil bringt.
+          </p>
+        </article>
+      </div>
+      <p><a href="#top">↑ Nach oben</a></p>
+    </section>
+
+    <hr class="divider" />
+
+    <section class="card" id="dom">
+      <h3>18. DOM: HTML finden, lesen, erzeugen und verändern</h3>
+
+      <div class="cheat-grid">
+        <article class="cheat-item">
+          <h4>Elemente auswählen</h4>
+          <pre class="cheat-code"><code class="language-js">const title = document.querySelector(".card-title");
+const cards = document.querySelectorAll(".card");
+const byId = document.getElementById("javascript");
+
+for (const card of cards) {
+  console.log(card);
+}</code></pre>
+          <p class="hint">
+            <code>querySelector()</code> liefert das erste Element oder <code>null</code>.
+            <code>querySelectorAll()</code> liefert eine statische NodeList.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Text sicher ändern</h4>
+          <pre class="cheat-code"><code class="language-js">const status = document.querySelector("#status");
+
+if (status) {
+  status.textContent = "Daten geladen";
+}</code></pre>
+          <p class="hint">
+            <code>textContent</code> behandelt den Wert als Text und ist für fremde oder dynamische
+            Inhalte sicherer als <code>innerHTML</code>.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Klassen verändern</h4>
+          <pre class="cheat-code"><code class="language-js">const menu = document.querySelector(".menu");
+
+menu.classList.add("is-open");
+menu.classList.remove("is-hidden");
+menu.classList.toggle("is-open");
+menu.classList.contains("is-open");</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Attribute und <code>data-*</code></h4>
+          <pre class="cheat-code"><code class="language-js">const container = document.querySelector("[data-news-mode]");
+
+const mode = container.dataset.newsMode;
+const limit = Number(container.dataset.newsLimit ?? 3);
+
+container.setAttribute("aria-busy", "true");
+container.removeAttribute("hidden");</code></pre>
+          <p class="hint">
+            Aus <code>data-news-mode</code> wird in <code>dataset</code> der Schlüssel
+            <code>newsMode</code>. Alle Dataset-Werte sind Strings.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Elemente erzeugen</h4>
+          <pre class="cheat-code"><code class="language-js">const article = document.createElement("article");
+article.className = "card";
+
+const heading = document.createElement("h3");
+heading.className = "card-title";
+heading.textContent = post.title;
+
+article.append(heading);
+container.append(article);</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Mehrere Elemente effizient einfügen</h4>
+          <pre class="cheat-code"><code class="language-js">const fragment = document.createDocumentFragment();
+
+for (const post of posts) {
+  const item = document.createElement("li");
+  item.textContent = post.title;
+  fragment.append(item);
+}
+
+list.replaceChildren(fragment);</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Navigation im DOM</h4>
+          <pre class="cheat-code"><code class="language-js">element.parentElement;
+element.children;
+element.firstElementChild;
+element.nextElementSibling;
+element.closest(".card");
+element.matches("[data-topic='code']");</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Elemente entfernen oder ersetzen</h4>
+          <pre class="cheat-code"><code class="language-js">message.remove();
+oldCard.replaceWith(newCard);
+container.replaceChildren(emptyState);</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Styles nur im Ausnahmefall direkt setzen</h4>
+          <pre class="cheat-code"><code class="language-js">// Besser: Zustandsklasse
+element.classList.add("is-active");
+
+// Für dynamische Einzelwerte legitim:
+element.style.setProperty("--progress", "72%");</code></pre>
+          <p class="hint">
+            Zustände gehören als Klassen ins DOM, die visuelle Definition ins CSS. So bleiben die
+            Zuständigkeiten sauber.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Templates klonen</h4>
+          <pre class="cheat-code cheat-code-html"><code>&lt;template id="post-template"&gt;
+  &lt;article class="card"&gt;
+    &lt;h3 class="card-title"&gt;&lt;/h3&gt;
+  &lt;/article&gt;
+&lt;/template&gt;</code></pre>
+          <pre class="cheat-code"><code class="language-js">const template = document.querySelector("#post-template");
+const fragment = template.content.cloneNode(true);
+fragment.querySelector(".card-title").textContent = post.title;
+container.append(fragment);</code></pre>
+        </article>
+      </div>
+
+      <details class="news-details">
+        <summary><code>innerHTML</code> — erlaubt oder verboten?</summary>
+        <p>
+          Es ist nicht grundsätzlich verboten. Es ist sinnvoll für vollständig kontrollierte,
+          statische Templates. Sobald Nutzereingaben, externe Daten oder ungesicherte JSON-Inhalte
+          einfließen, kann daraus Cross-Site-Scripting entstehen. Dann besser DOM-Elemente erzeugen
+          und Text über <code>textContent</code> setzen oder Inhalte zuverlässig bereinigen.
+        </p>
+      </details>
+      <p><a href="#top">↑ Nach oben</a></p>
+    </section>
+
+    <hr class="divider" />
+
+    <section class="card" id="events">
+      <h3>19. Events: auf Interaktionen reagieren</h3>
+
+      <div class="cheat-grid">
+        <article class="cheat-item">
+          <h4>Event Listener registrieren</h4>
+          <pre class="cheat-code"><code class="language-js">const button = document.querySelector("#toggle-theme");
+
+button.addEventListener("click", event =&gt; {
+  document.body.classList.toggle("dark");
+  console.log(event.type);
+});</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Wichtige Events</h4>
+          <pre class="cheat-code"><code class="language-js">input.addEventListener("input", handleInput);
+form.addEventListener("submit", handleSubmit);
+select.addEventListener("change", handleChange);
+window.addEventListener("resize", handleResize);
+document.addEventListener("keydown", handleKeydown);</code></pre>
+          <p class="hint">
+            Bevorzuge semantische Events wie <code>click</code> und <code>submit</code> gegenüber
+            einer Maus-only-Logik. Das hilft Tastatur und Assistenztechnik.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Standardverhalten verhindern</h4>
+          <pre class="cheat-code"><code class="language-js">function handleSubmit(event) {
+  event.preventDefault();
+  console.log("Formular wird per JavaScript verarbeitet.");
+}</code></pre>
+          <p class="hint">
+            <code>preventDefault()</code> stoppt die Browser-Standardaktion, nicht die
+            Event-Ausbreitung.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Bubbling und Event Delegation</h4>
+          <pre class="cheat-code"><code class="language-js">list.addEventListener("click", event =&gt; {
+  const button = event.target.closest("[data-delete-id]");
+  if (!button || !list.contains(button)) return;
+
+  deletePost(button.dataset.deleteId);
+});</code></pre>
+          <p class="hint">
+            Ein Listener am Container kann für viele vorhandene und später hinzugefügte Kinder
+            zuständig sein.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4><code>target</code> und <code>currentTarget</code></h4>
+          <pre class="cheat-code"><code class="language-js">container.addEventListener("click", event =&gt; {
+  console.log(event.target);        // tatsächlich angeklicktes Element
+  console.log(event.currentTarget); // Element mit Listener
+});</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Listener wieder entfernen</h4>
+          <pre class="cheat-code"><code class="language-js">function handleClick() {
+  console.log("Klick");
+}
+
+button.addEventListener("click", handleClick);
+button.removeEventListener("click", handleClick);</code></pre>
+          <p class="hint">
+            Zum Entfernen brauchst du dieselbe Funktionsreferenz. Zwei gleich aussehende Arrow
+            Functions sind zwei verschiedene Funktionen.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Listener gesammelt abbrechen</h4>
+          <pre class="cheat-code"><code class="language-js">const controller = new AbortController();
+
+button.addEventListener("click", handleClick, {
+  signal: controller.signal
+});
+
+controller.abort(); // entfernt den Listener</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Einmaliger Listener</h4>
+          <pre class="cheat-code"><code class="language-js">button.addEventListener("click", initialize, {
+  once: true
+});</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Eigene Events</h4>
+          <pre class="cheat-code"><code class="language-js">const event = new CustomEvent("posts:loaded", {
+  detail: { count: posts.length }
+});
+
+document.dispatchEvent(event);
+
+document.addEventListener("posts:loaded", event =&gt; {
+  console.log(event.detail.count);
+});</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Tastaturinteraktion</h4>
+          <pre class="cheat-code"><code class="language-js">document.addEventListener("keydown", event =&gt; {
+  if (event.key === "Escape") {
+    closeDialog();
+  }
+});</code></pre>
+          <p class="hint">
+            Nutze <code>event.key</code> für die Bedeutung einer Taste und <code>event.code</code>
+            für ihre physische Position.
+          </p>
+        </article>
+      </div>
+      <p><a href="#top">↑ Nach oben</a></p>
+    </section>
+
+    <hr class="divider" />
+
+    <section class="card" id="forms">
+      <h3>20. Formulare, Eingaben und Validierung</h3>
+
+      <div class="cheat-grid">
+        <article class="cheat-item">
+          <h4>Formulardaten lesen</h4>
+          <pre class="cheat-code"><code class="language-js">const form = document.querySelector("#contact-form");
+
+form.addEventListener("submit", event =&gt; {
+  event.preventDefault();
+
+  const data = new FormData(form);
+  const name = String(data.get("name") ?? "").trim();
+  const email = String(data.get("email") ?? "").trim();
+});</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>FormData in ein Objekt umwandeln</h4>
+          <pre class="cheat-code"><code class="language-js">const data = new FormData(form);
+const values = Object.fromEntries(data.entries());
