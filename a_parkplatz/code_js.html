@@ -476,3 +476,892 @@ typeof {};            // "object"
 typeof [];            // "object"
 typeof (() =&gt; {});    // "function"
 typeof null;          // "object" — historischer Sprachfehler
+
+Array.isArray([]);    // true</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4><code>null</code> und <code>undefined</code></h4>
+          <p>
+            <code>undefined</code> bedeutet meist „noch kein Wert vorhanden“.
+            <code>null</code> wird bewusst gesetzt und bedeutet „absichtlich kein Wert“.
+          </p>
+          <pre class="cheat-code"><code class="language-js">let response;              // undefined
+const selectedPost = null; // bewusst nichts gewählt</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Werte und Referenzen</h4>
+          <pre class="cheat-code"><code class="language-js">const a = { count: 1 };
+const b = a;
+
+b.count = 2;
+console.log(a.count); // 2
+
+const c = { count: 2 };
+console.log(a === c); // false</code></pre>
+        </article>
+      </div>
+      <p><a href="#top">↑ Nach oben</a></p>
+    </section>
+
+    <hr class="divider" />
+
+    <section class="card" id="conversion">
+      <h3>6. Typumwandlung, Truthy/Falsy und Gleichheit</h3>
+
+      <div class="cheat-grid">
+        <article class="cheat-item">
+          <h4>Explizit umwandeln</h4>
+          <pre class="cheat-code"><code class="language-js">Number("42");         // 42
+Number("42px");       // NaN
+parseInt("42px", 10); // 42
+parseFloat("3.14");   // 3.14
+String(42);           // "42"
+Boolean(1);           // true
+Boolean(0);           // false</code></pre>
+          <p class="hint">
+            Explizite Umwandlung ist fast immer verständlicher als die automatischen Kunststücke
+            der Sprache.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Falsy-Werte</h4>
+          <p>
+            In Bedingungen gelten nur wenige Werte als falsch:
+            <code>false</code>, <code>0</code>, <code>-0</code>, <code>0n</code>,
+            <code>""</code>, <code>null</code>, <code>undefined</code> und <code>NaN</code>.
+          </p>
+          <pre class="cheat-code"><code class="language-js">if ("Hallo") {
+  console.log("Nichtleere Strings sind truthy.");
+}
+
+
+if ([]) {
+  console.log("Auch leere Arrays sind truthy.");
+}</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Strikte Gleichheit verwenden</h4>
+          <pre class="cheat-code"><code class="language-js">0 === false;  // false
+0 == false;   // true — automatische Typumwandlung
+
+"5" === 5;   // false
+"5" == 5;    // true</code></pre>
+          <p class="hint">
+            Verwende grundsätzlich <code>===</code> und <code>!==</code>. Lose Gleichheit ist ein
+            Spezialwerkzeug, kein bequemer Standard.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4><code>NaN</code> richtig erkennen</h4>
+          <pre class="cheat-code"><code class="language-js">const value = Number("Kartoffel");
+
+value === NaN;          // immer false
+Number.isNaN(value);    // true
+Number.isFinite(value); // false</code></pre>
+          <p class="hint">
+            <code>NaN</code> bedeutet „Not a Number“, besitzt aber paradoxerweise den Typ
+            <code>number</code>. JavaScript hat Sinn für schwarzen Humor.
+          </p>
+        </article>
+      </div>
+      <p><a href="#top">↑ Nach oben</a></p>
+    </section>
+
+    <hr class="divider" />
+
+    <section class="card" id="operators">
+      <h3>7. Operatoren, Kurzschlusslogik und moderne Abkürzungen</h3>
+
+      <div class="cheat-grid">
+        <article class="cheat-item">
+          <h4>Rechnen und Zuweisen</h4>
+          <pre class="cheat-code"><code class="language-js">const sum = 10 + 5;
+const difference = 10 - 5;
+const product = 10 * 5;
+const quotient = 10 / 5;
+const remainder = 10 % 3; // 1
+const power = 2 ** 3;      // 8
+
+let count = 1;
+count += 2; // 3
+count++;    // 4</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Vergleiche</h4>
+          <pre class="cheat-code"><code class="language-js">5 &gt; 3;     // true
+5 &gt;= 5;    // true
+3 &lt; 5;     // true
+3 &lt;= 2;    // false
+5 === 5;   // true
+5 !== "5"; // true</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Logische Operatoren</h4>
+          <pre class="cheat-code"><code class="language-js">const canEdit = isLoggedIn &amp;&amp; hasPermission;
+const displayName = nickname || "Unbekannt";
+const isHidden = !isVisible;</code></pre>
+          <p class="hint">
+            <code>&amp;&amp;</code> und <code>||</code> liefern nicht zwingend Booleans, sondern einen
+            der geprüften Werte.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Nullish Coalescing <code>??</code></h4>
+          <p>
+            <code>??</code> verwendet den Ersatzwert nur bei <code>null</code> oder
+            <code>undefined</code>. Null und leere Strings bleiben gültige Werte.
+          </p>
+          <pre class="cheat-code"><code class="language-js">const savedLimit = 0;
+
+savedLimit || 10; // 10
+savedLimit ?? 10; // 0</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Optional Chaining <code>?.</code></h4>
+          <p>
+            Optional Chaining bricht sicher ab, wenn ein Zwischenschritt
+            <code>null</code> oder <code>undefined</code> ist.
+          </p>
+          <pre class="cheat-code"><code class="language-js">const city = user.address?.city ?? "nicht angegeben";
+const firstImage = post.images?.[0]?.src;
+callback?.();</code></pre>
+          <p class="hint">
+            Verwende es nicht, um eigentlich notwendige Daten still zu verschlucken. Ein echter
+            Datenfehler darf sichtbar werden.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Ternärer Operator</h4>
+          <pre class="cheat-code"><code class="language-js">const label = isOnline ? "Online" : "Offline";</code></pre>
+          <p class="hint">
+            Gut für eine kurze Entscheidung. Verschachtelte Ternaries sind meist ein Hilferuf in
+            Satzzeichenform.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Spread und Rest</h4>
+          <pre class="cheat-code"><code class="language-js">// Spread: Werte ausbreiten
+const allTags = [...baseTags, "javascript"];
+const updatedPost = { ...post, title: "Neuer Titel" };
+
+// Rest: übrige Werte einsammeln
+const [first, ...remaining] = allTags;
+
+function sum(...numbers) {
+  return numbers.reduce((total, number) =&gt; total + number, 0);
+}</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Operatorrangfolge entschärfen</h4>
+          <pre class="cheat-code"><code class="language-js">const result = (price * amount) + shipping;
+const allowed = isAdmin || (isOwner &amp;&amp; isActive);</code></pre>
+          <p class="hint">
+            Klammern kosten fast nichts und ersparen dem Leser das mentale Nachschlagen einer
+            Rangfolgetabelle.
+          </p>
+        </article>
+      </div>
+      <p><a href="#top">↑ Nach oben</a></p>
+    </section>
+
+    <hr class="divider" />
+
+    <section class="card" id="conditions">
+      <h3>8. Bedingungen und Verzweigungen</h3>
+
+      <div class="cheat-grid">
+        <article class="cheat-item">
+          <h4><code>if</code>, <code>else if</code>, <code>else</code></h4>
+          <pre class="cheat-code"><code class="language-js">if (temperature &lt; 0) {
+  status = "Frost";
+} else if (temperature &lt; 20) {
+  status = "Kühl";
+} else {
+  status = "Warm";
+}</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Früh zurückkehren</h4>
+          <p>
+            Guard Clauses halten den Hauptweg einer Funktion flach und lesbar.
+          </p>
+          <pre class="cheat-code"><code class="language-js">function renderPost(post) {
+  if (!post) return;
+  if (!post.title) {
+    throw new Error("Der Beitrag benötigt einen Titel.");
+  }
+
+  // Hauptlogik ohne tiefe Verschachtelung
+}</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4><code>switch</code> für diskrete Fälle</h4>
+          <pre class="cheat-code"><code class="language-js">switch (topic) {
+  case "code":
+    icon = "💻";
+    break;
+  case "sailing":
+    icon = "🌊";
+    break;
+  default:
+    icon = "📝";
+}</code></pre>
+          <p class="hint">
+            Ohne <code>break</code> fällt die Ausführung in den nächsten Fall weiter. Das kann
+            beabsichtigt sein, ist aber häufig schlicht ein Fehler.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Objekt als einfache Zuordnung</h4>
+          <pre class="cheat-code"><code class="language-js">const icons = {
+  code: "💻",
+  sailing: "🌊",
+  electronics: "⚡"
+};
+
+const icon = icons[topic] ?? "📝";</code></pre>
+          <p class="hint">
+            Bei einer reinen Wertzuordnung ist ein Objekt oft kompakter als ein langer
+            <code>switch</code>.
+          </p>
+        </article>
+      </div>
+      <p><a href="#top">↑ Nach oben</a></p>
+    </section>
+
+    <hr class="divider" />
+
+    <section class="card" id="strings">
+      <h3>9. Strings und Textverarbeitung</h3>
+
+      <div class="cheat-grid">
+        <article class="cheat-item">
+          <h4>Strings erzeugen</h4>
+          <pre class="cheat-code"><code class="language-js">const single = 'Einfach';
+const double = "Doppelt";
+const template = &#96;Titel: &#36;{post.title}&#96;;
+
+const multiline = &#96;Erste Zeile
+Zweite Zeile&#96;;</code></pre>
+          <p class="hint">
+            Template Literals verwenden Backticks und erlauben Variablen sowie mehrzeiligen Text.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Nützliche String-Methoden</h4>
+          <pre class="cheat-code"><code class="language-js">const text = "  JavaScript Guide  ";
+
+text.trim();                   // "JavaScript Guide"
+text.toLowerCase();            // "  javascript guide  "
+text.toUpperCase();
+text.includes("Script");       // true
+text.startsWith("  Java");     // true
+text.endsWith("  ");           // true
+text.replace("Guide", "Kurs");
+text.replaceAll("a", "A");
+text.slice(2, 12);             // "JavaScript"
+text.split(" ");               // Array aus Teilen</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Strings sind unveränderlich</h4>
+          <pre class="cheat-code"><code class="language-js">const original = "hallo";
+const changed = original.toUpperCase();
+
+console.log(original); // "hallo"
+console.log(changed);  // "HALLO"</code></pre>
+          <p class="hint">
+            String-Methoden liefern neue Strings. Sie verändern den ursprünglichen Wert nicht.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Zeichen und Unicode</h4>
+          <pre class="cheat-code"><code class="language-js">const word = "JavaScript";
+word.length;
+word[0];
+word.at(-1);
+
+// Emojis können aus mehreren Code Units bestehen:
+[..."🌊"].length; // 1</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Text vergleichen und sortieren</h4>
+          <pre class="cheat-code"><code class="language-js">const collator = new Intl.Collator("de-AT", {
+  sensitivity: "base"
+});
+
+const names = ["Öl", "Apfel", "Zeder"];
+names.sort(collator.compare);</code></pre>
+          <p class="hint">
+            Für sprachlich korrekte Sortierung ist <code>localeCompare()</code> oder
+            <code>Intl.Collator</code> besser als ein Vergleich per <code>&lt;</code>.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Padding für IDs und Anzeigen</h4>
+          <pre class="cheat-code"><code class="language-js">String(7).padStart(2, "0"); // "07"
+"JS".padEnd(5, ".");        // "JS..."</code></pre>
+        </article>
+      </div>
+      <p><a href="#top">↑ Nach oben</a></p>
+    </section>
+
+    <hr class="divider" />
+
+    <section class="card" id="numbers">
+      <h3>10. Zahlen, <code>Math</code>, Datum und internationale Formatierung</h3>
+
+      <div class="cheat-grid">
+        <article class="cheat-item">
+          <h4>Runden und begrenzen</h4>
+          <pre class="cheat-code"><code class="language-js">Math.round(3.6); // 4
+Math.floor(3.9); // 3
+Math.ceil(3.1);  // 4
+Math.trunc(3.9); // 3
+
+const clamped = Math.min(Math.max(value, 0), 100);</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Minimum, Maximum und Potenzen</h4>
+          <pre class="cheat-code"><code class="language-js">Math.min(3, 8, -2); // -2
+Math.max(3, 8, -2); // 8
+Math.abs(-7);       // 7
+Math.sqrt(81);      // 9
+Math.hypot(3, 4);   // 5</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Zufallszahlen</h4>
+          <pre class="cheat-code"><code class="language-js">// Ganzzahl von min bis einschließlich max
+function randomInteger(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}</code></pre>
+          <p class="hint">
+            <code>Math.random()</code> ist nicht kryptografisch sicher. Für Sicherheitstokens gibt
+            es <code>crypto.getRandomValues()</code>.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Gleitkommazahlen</h4>
+          <pre class="cheat-code"><code class="language-js">0.1 + 0.2 === 0.3; // false
+
+const approximatelyEqual =
+  Math.abs((0.1 + 0.2) - 0.3) &lt; Number.EPSILON;</code></pre>
+          <p class="hint">
+            Geldbeträge besser in der kleinsten Einheit rechnen, etwa Cent als ganze Zahl.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Zahlen formatieren</h4>
+          <pre class="cheat-code"><code class="language-js">const formatter = new Intl.NumberFormat("de-AT", {
+  style: "currency",
+  currency: "EUR"
+});
+
+formatter.format(1234.5); // etwa "1.234,50 €"</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Datum erzeugen und formatieren</h4>
+          <pre class="cheat-code"><code class="language-js">const now = new Date();
+const date = new Date("2026-08-23T12:00:00+02:00");
+
+const formatted = new Intl.DateTimeFormat("de-AT", {
+  dateStyle: "long",
+  timeStyle: "short",
+  timeZone: "Europe/Vienna"
+}).format(date);</code></pre>
+          <p class="hint">
+            Ein Datum ohne Zeitzonenangabe ist eine Einladung an subtile Fehler. Speichere
+            Zeitpunkte möglichst als vollständige ISO-Zeitangaben.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Datumskomponenten beachten</h4>
+          <pre class="cheat-code"><code class="language-js">const date = new Date();
+
+date.getFullYear();
+date.getMonth(); // 0 bis 11
+date.getDate();  // Tag des Monats
+date.getDay();   // Wochentag: 0 = Sonntag</code></pre>
+          <p class="hint">
+            <code>getDate()</code> und <code>getDay()</code> klingen zum Verwechseln ähnlich. Die
+            Sprache legt hier eine kleine Bananenschale aus.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Zeit messen</h4>
+          <pre class="cheat-code"><code class="language-js">const start = performance.now();
+doWork();
+const duration = performance.now() - start;
+
+console.log(&#96;&#36;{duration.toFixed(2)} ms&#96;);</code></pre>
+        </article>
+      </div>
+      <p><a href="#top">↑ Nach oben</a></p>
+    </section>
+
+    <hr class="divider" />
+
+    <section class="card" id="arrays">
+      <h3>11. Arrays: Listen speichern, verändern und transformieren</h3>
+
+      <div class="cheat-grid">
+        <article class="cheat-item">
+          <h4>Erzeugen und zugreifen</h4>
+          <pre class="cheat-code"><code class="language-js">const topics = ["html", "css", "javascript"];
+
+topics[0];             // "html"
+topics.at(-1);         // "javascript"
+topics.length;         // 3
+Array.isArray(topics); // true</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Am Anfang und Ende verändern</h4>
+          <pre class="cheat-code"><code class="language-js">const items = ["b"];
+
+items.push("c");     // hinten hinzufügen
+items.pop();         // hinten entfernen
+items.unshift("a"); // vorne hinzufügen
+items.shift();       // vorne entfernen</code></pre>
+          <p class="hint">
+            Diese Methoden verändern das ursprüngliche Array. <code>shift()</code> und
+            <code>unshift()</code> sind bei sehr großen Arrays aufwendiger.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4><code>slice()</code> versus <code>splice()</code></h4>
+          <pre class="cheat-code"><code class="language-js">const values = ["a", "b", "c", "d"];
+
+const copy = values.slice(1, 3); // ["b", "c"]
+// values bleibt unverändert
+
+values.splice(1, 2, "x");
+// values ist nun ["a", "x", "d"]</code></pre>
+          <p class="hint">
+            <code>slice</code> kopiert einen Ausschnitt. <code>splice</code> operiert am offenen
+            Herzen des ursprünglichen Arrays.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Suchen und prüfen</h4>
+          <pre class="cheat-code"><code class="language-js">posts.includes(selectedPost);
+posts.indexOf(selectedPost);
+posts.find(post =&gt; post.id === wantedId);
+posts.findIndex(post =&gt; post.id === wantedId);
+posts.some(post =&gt; post.topic === "code");
+posts.every(post =&gt; Boolean(post.title));</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4><code>map()</code>: jeden Wert umformen</h4>
+          <pre class="cheat-code"><code class="language-js">const titles = posts.map(post =&gt; post.title);
+
+const cards = posts.map(post =&gt; ({
+  id: post.id,
+  label: post.title
+}));</code></pre>
+          <p class="hint">
+            <code>map()</code> sollte für jeden Eingangswert genau einen Ausgangswert liefern.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4><code>filter()</code>: Werte auswählen</h4>
+          <pre class="cheat-code"><code class="language-js">const codePosts = posts.filter(
+  post =&gt; post.topic === "code"
+);</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4><code>reduce()</code>: Werte zusammenfassen</h4>
+          <pre class="cheat-code"><code class="language-js">const topicCounts = posts.reduce((counts, post) =&gt; {
+  counts[post.topic] = (counts[post.topic] ?? 0) + 1;
+  return counts;
+}, {});</code></pre>
+          <p class="hint">
+            <code>reduce()</code> ist mächtig, aber nicht automatisch überlegen. Wenn eine
+            verständliche Schleife klarer ist, nimm die Schleife.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Sortieren ohne ungewollte Mutation</h4>
+          <pre class="cheat-code"><code class="language-js">const newestFirst = [...posts].sort(
+  (a, b) =&gt; b.date.localeCompare(a.date)
+);
+
+const numbers = [10, 2, 30];
+numbers.sort((a, b) =&gt; a - b);</code></pre>
+          <p class="hint">
+            <code>sort()</code> verändert das Array und sortiert ohne Vergleichsfunktion als Text.
+            Beides ist eine häufige Fehlerquelle.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Kopien und Verschachtelung</h4>
+          <pre class="cheat-code"><code class="language-js">const copy = [...posts];
+const objectCopy = { ...post };
+
+// Tiefe Kopie für unterstützte Datentypen:
+const deepCopy = structuredClone(data);</code></pre>
+          <p class="hint">
+            Spread kopiert nur die oberste Ebene. Verschachtelte Objekte bleiben dieselben
+            Referenzen.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Flache und kombinierte Arrays</h4>
+          <pre class="cheat-code"><code class="language-js">const nested = [[1, 2], [3, 4]];
+nested.flat(); // [1, 2, 3, 4]
+
+const words = ["JS", "DOM"];
+words.flatMap(word =&gt; [word, word.toLowerCase()]);
+
+const combined = first.concat(second);</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Methodenketten lesbar halten</h4>
+          <pre class="cheat-code"><code class="language-js">const visibleTitles = posts
+  .filter(post =&gt; post.topic === "code")
+  .sort((a, b) =&gt; b.date.localeCompare(a.date))
+  .slice(0, 3)
+  .map(post =&gt; post.title);</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Array aus iterierbaren Werten</h4>
+          <pre class="cheat-code"><code class="language-js">const nodes = document.querySelectorAll(".card");
+const cards = Array.from(nodes);
+
+const characters = [..."JavaScript"];</code></pre>
+        </article>
+      </div>
+      <p><a href="#top">↑ Nach oben</a></p>
+    </section>
+
+    <hr class="divider" />
+
+    <section class="card" id="objects">
+      <h3>12. Objekte: strukturierte Daten modellieren</h3>
+
+      <div class="cheat-grid">
+        <article class="cheat-item">
+          <h4>Objektliteral und Zugriff</h4>
+          <pre class="cheat-code"><code class="language-js">const post = {
+  id: "2026-08-23-code-javascript",
+  topic: "code",
+  title: "JavaScript Guide",
+  published: true
+};
+
+post.title;
+post["topic"];</code></pre>
+          <p class="hint">
+            Punktnotation ist der lesbare Standard. Klammernotation brauchst du bei dynamischen
+            Schlüsseln oder Sonderzeichen.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Dynamische Schlüssel</h4>
+          <pre class="cheat-code"><code class="language-js">const field = "title";
+console.log(post[field]);
+
+const key = "code";
+const counts = {
+  [key]: 3
+};</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Methoden und Kurzschreibweise</h4>
+          <pre class="cheat-code"><code class="language-js">const title = "JavaScript";
+
+const guide = {
+  title,
+  describe() {
+    return &#96;Guide: &#36;{this.title}&#96;;
+  }
+};</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Destructuring</h4>
+          <pre class="cheat-code"><code class="language-js">const { title, date, images = [] } = post;
+const [first, second] = topics;
+
+function renderCard({ title, teaser = "" }) {
+  // title und teaser direkt verfügbar
+}</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Eigenschaften prüfen und aufzählen</h4>
+          <pre class="cheat-code"><code class="language-js">Object.hasOwn(post, "title"); // true
+Object.keys(post);            // Schlüssel
+Object.values(post);          // Werte
+Object.entries(post);         // [Schlüssel, Wert]-Paare</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Objekte aus Einträgen bauen</h4>
+          <pre class="cheat-code"><code class="language-js">const pairs = [
+  ["language", "de"],
+  ["theme", "light"]
+];
+
+const settings = Object.fromEntries(pairs);</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Zusammenführen und kopieren</h4>
+          <pre class="cheat-code"><code class="language-js">const defaults = { language: "de", limit: 3 };
+const options = { limit: 5 };
+
+const settings = { ...defaults, ...options };
+// spätere Werte gewinnen</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Flach einfrieren</h4>
+          <pre class="cheat-code"><code class="language-js">const config = Object.freeze({
+  dataUrl: "../json/posts.json",
+  display: { limit: 3 }
+});
+
+// config.dataUrl = "..."; // verhindert
+config.display.limit = 5;  // verschachtelt weiterhin möglich</code></pre>
+        </article>
+      </div>
+      <p><a href="#top">↑ Nach oben</a></p>
+    </section>
+
+    <hr class="divider" />
+
+    <section class="card" id="collections">
+      <h3>13. <code>Set</code>, <code>Map</code>, <code>WeakSet</code> und <code>WeakMap</code></h3>
+
+      <div class="cheat-grid">
+        <article class="cheat-item">
+          <h4><code>Set</code>: eindeutige Werte</h4>
+          <pre class="cheat-code"><code class="language-js">const topics = ["code", "code", "sailing"];
+const uniqueTopics = [...new Set(topics)];
+
+const selected = new Set();
+selected.add("html");
+selected.has("html"); // true
+selected.delete("html");</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4><code>Map</code>: flexible Schlüssel</h4>
+          <pre class="cheat-code"><code class="language-js">const postById = new Map();
+
+for (const post of posts) {
+  postById.set(post.id, post);
+}
+
+const found = postById.get(wantedId);
+postById.has(wantedId);</code></pre>
+          <p class="hint">
+            Ein Objekt eignet sich gut für einfache Datensätze. <code>Map</code> ist besser, wenn
+            Schlüssel beliebige Werte sein sollen oder häufig hinzugefügt und entfernt wird.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Über eine <code>Map</code> laufen</h4>
+          <pre class="cheat-code"><code class="language-js">for (const [id, post] of postById) {
+  console.log(id, post.title);
+}
+
+postById.size;
+postById.clear();</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Schwache Sammlungen</h4>
+          <p>
+            <code>WeakMap</code> und <code>WeakSet</code> halten Objekte nicht künstlich am Leben.
+            Sie eignen sich für Metadaten oder Markierungen, die an Objekte gekoppelt sind.
+          </p>
+          <pre class="cheat-code"><code class="language-js">const metadata = new WeakMap();
+const card = document.querySelector(".card");
+
+metadata.set(card, { initialized: true });</code></pre>
+          <p class="hint">
+            Weak Collections sind nicht aufzählbar. Für normalen Anfängercode brauchst du sie
+            selten.
+          </p>
+        </article>
+      </div>
+      <p><a href="#top">↑ Nach oben</a></p>
+    </section>
+
+    <hr class="divider" />
+
+    <section class="card" id="loops">
+      <h3>14. Schleifen und Iteration</h3>
+
+      <div class="cheat-grid">
+        <article class="cheat-item">
+          <h4><code>for...of</code> für Werte</h4>
+          <pre class="cheat-code"><code class="language-js">for (const post of posts) {
+  console.log(post.title);
+}</code></pre>
+          <p class="hint">
+            Für Arrays ist <code>for...of</code> meist die angenehmste klassische Schleife.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Klassische <code>for</code>-Schleife</h4>
+          <pre class="cheat-code"><code class="language-js">for (let index = 0; index &lt; posts.length; index += 1) {
+  console.log(index, posts[index]);
+}</code></pre>
+          <p class="hint">
+            Nützlich, wenn du den Index oder eine besondere Schrittweite benötigst.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4><code>while</code> und <code>do...while</code></h4>
+          <pre class="cheat-code"><code class="language-js">let attempts = 0;
+
+while (attempts &lt; 3) {
+  attempts += 1;
+}
+
+do {
+  console.log("Läuft mindestens einmal.");
+} while (false);</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4><code>break</code> und <code>continue</code></h4>
+          <pre class="cheat-code"><code class="language-js">for (const post of posts) {
+  if (!post.title) continue;
+  if (post.id === wantedId) {
+    console.log(post);
+    break;
+  }
+}</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4><code>for...in</code> ist für Schlüssel</h4>
+          <pre class="cheat-code"><code class="language-js">for (const key in post) {
+  if (Object.hasOwn(post, key)) {
+    console.log(key, post[key]);
+  }
+}</code></pre>
+          <p class="hint">
+            Verwende <code>for...in</code> nicht für Array-Werte. Dafür existiert
+            <code>for...of</code>.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4><code>forEach()</code> und seine Grenze</h4>
+          <pre class="cheat-code"><code class="language-js">posts.forEach((post, index) =&gt; {
+  console.log(index, post.title);
+});</code></pre>
+          <p class="hint">
+            Aus <code>forEach()</code> kannst du nicht mit <code>break</code> aussteigen. Für
+            sequenzielles <code>await</code> ist <code>for...of</code> ebenfalls geeigneter.
+          </p>
+        </article>
+      </div>
+      <p><a href="#top">↑ Nach oben</a></p>
+    </section>
+
+    <hr class="divider" />
+
+    <section class="card" id="functions">
+      <h3>15. Funktionen: wiederverwendbare Logik</h3>
+
+      <div class="cheat-grid">
+        <article class="cheat-item">
+          <h4>Funktionsdeklaration</h4>
+          <pre class="cheat-code"><code class="language-js">function greet(name) {
+  return &#96;Hallo, &#36;{name}!&#96;;
+}
+
+const message = greet("Julian");</code></pre>
+          <p class="hint">
+            Eine Funktion sollte idealerweise eine klar benennbare Aufgabe erfüllen.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Funktionsausdruck</h4>
+          <pre class="cheat-code"><code class="language-js">const greet = function (name) {
+  return &#96;Hallo, &#36;{name}!&#96;;
+};</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Arrow Function</h4>
+          <pre class="cheat-code"><code class="language-js">const double = number =&gt; number * 2;
+
+const createPost = (title, topic) =&gt; ({
+  title,
+  topic
+});</code></pre>
+          <p class="hint">
+            Runde Klammern um ein Objektliteral verhindern, dass die geschweiften Klammern als
+            Funktionsblock gelesen werden.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Standardparameter</h4>
+          <pre class="cheat-code"><code class="language-js">function createLabel(text, icon = "📝") {
+  return &#96;&#36;{icon} &#36;{text}&#96;;
+}</code></pre>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Callbacks und Funktionen höherer Ordnung</h4>
+          <pre class="cheat-code"><code class="language-js">function repeat(times, action) {
+  for (let index = 0; index &lt; times; index += 1) {
+    action(index);
+  }
+}
+
+repeat(3, index =&gt; console.log(index));</code></pre>
+          <p class="hint">
+            Funktionen sind Werte: Du kannst sie speichern, übergeben und zurückgeben.
+          </p>
+        </article>
