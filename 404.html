@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, follow">
+  <meta name="theme-color" content="#f7f7f7">
+
+  <title>404 — Page not found | Julian</title>
+
+  <!--
+    A custom 404 keeps the invalid URL in the address bar. Without a base URL,
+    relative assets would therefore be resolved from that invalid location.
+
+    "web" is the GitHub repository name. Change it here if the repository is
+    ever renamed. On a custom domain or during local development, the site root
+    remains "/" automatically.
+  -->
+  <script>
+    (() => {
+      const repositoryName = "web";
+      const isGitHubPages = window.location.hostname.endsWith(".github.io");
+      const firstPathPart = window.location.pathname.split("/").filter(Boolean)[0];
+      const isProjectSite = isGitHubPages && firstPathPart === repositoryName;
+
+      const base = document.createElement("base");
+      base.href = isProjectSite ? `/${repositoryName}/` : "/";
+      document.head.append(base);
+    })();
+  </script>
+
+  <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+  <!-- Page-specific styles; the shared design remains in main.css. -->
+  <style>
+    body.error-page {
+      min-height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .error-page .content {
+      width: 100%;
+      flex: 1;
+      display: grid;
+      align-content: center;
+      padding-top: clamp(2rem, 7vw, 5rem);
+      padding-bottom: clamp(3rem, 8vw, 6rem);
+    }
+
+    .error-page .site-title a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .error-panel {
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: minmax(210px, 0.8fr) minmax(0, 1.2fr);
+      gap: clamp(1.5rem, 5vw, 4rem);
+      align-items: center;
+      margin: 0;
+      padding: clamp(1.5rem, 5vw, 4rem);
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 20px 70px rgba(31, 35, 40, 0.12);
+      isolation: isolate;
+    }
+
+    .error-panel::after {
+      content: "";
+      position: absolute;
+      width: 19rem;
+      aspect-ratio: 1;
+      right: -8rem;
+      bottom: -11rem;
+      z-index: -1;
+      border: 1px solid rgba(31, 35, 40, 0.12);
+      border-radius: 50%;
+      box-shadow:
+        0 0 0 2.5rem rgba(31, 35, 40, 0.025),
+        0 0 0 5rem rgba(31, 35, 40, 0.02);
+    }
+
+    .error-mark {
+      position: relative;
+      display: grid;
+      place-items: center;
+      min-height: 13rem;
+    }
+
+    .error-mark::before {
+      content: "";
+      position: absolute;
+      width: min(100%, 15rem);
+      aspect-ratio: 1;
+      border: 1px solid rgba(31, 35, 40, 0.15);
+      border-radius: 50%;
+      transform: rotate(-14deg) scaleY(0.42);
+    }
+
+    .error-mark::after {
+      content: "";
+      position: absolute;
+      top: 29%;
+      right: 10%;
+      width: 0.65rem;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: var(--text);
+      box-shadow: 0 0 0 0.38rem rgba(31, 35, 40, 0.09);
+    }
+
+    .error-code {
+      margin: 0;
+      color: var(--text);
+      font-size: clamp(5rem, 14vw, 9rem);
+      font-weight: 750;
+      line-height: 0.9;
+      letter-spacing: -0.08em;
+      transform: translateX(-0.04em);
+    }
+
+    .error-kicker {
+      margin: 0 0 0.5rem;
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .error-title {
+      max-width: 16ch;
+      margin: 0;
+      font-size: clamp(1.9rem, 5vw, 3.2rem);
+      line-height: 1.08;
+      letter-spacing: -0.035em;
+    }
+
+    .error-copy {
+      max-width: 55ch;
+      margin: 1rem 0 0;
+      color: var(--muted);
+      font-size: 1.03rem;
+    }
+
+    .error-path {
+      max-width: 100%;
+      margin: 1.25rem 0 0;
+      padding: 0.6rem 0.75rem;
+      overflow-wrap: anywhere;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: rgba(15, 19, 32, 0.035);
+      color: var(--muted);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+      font-size: 0.85rem;
+    }
+
+    .error-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      margin-top: 1.5rem;
+    }
+
+    .error-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 2.75rem;
+      padding: 0.65rem 1rem;
+      border: 1px solid var(--text);
+      border-radius: 999px;
+      background: var(--text);
+      color: var(--surface);
+      font: inherit;
+      font-weight: 650;
+      line-height: 1;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform 120ms ease, background 120ms ease, color 120ms ease;
+    }
+
+    .error-button:hover {
+      color: var(--surface);
+      text-decoration: none;
+      transform: translateY(-1px);
+    }
+
+    .error-button--secondary {
+      background: transparent;
+      color: var(--text);
+    }
+
+    .error-button--secondary:hover {
+      color: var(--text);
+    }
+
+    .error-button:focus-visible,
+    .error-link:focus-visible {
+      outline: 3px solid rgba(11, 95, 255, 0.45);
+      outline-offset: 3px;
+    }
+
+    .error-shortcuts {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 0.65rem;
+      margin-top: 1rem;
+    }
+
+    .error-link {
+      display: grid;
+      min-height: 4.25rem;
+      place-items: center;
+      padding: 0.75rem 0.55rem;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.78);
+      color: var(--muted);
+      font-size: 0.88rem;
+      font-weight: 600;
+      text-align: center;
+      text-decoration: none;
+      transition: border-color 120ms ease, color 120ms ease, transform 120ms ease;
+    }
+
+    .error-link:hover {
+      border-color: rgba(31, 35, 40, 0.35);
+      color: var(--text);
+      text-decoration: none;
+      transform: translateY(-1px);
+    }
+
+    .error-page .site-footer p {
+      margin: 0;
+    }
+
+    @media (max-width: 720px) {
+      .error-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .error-mark {
+        min-height: 9rem;
+      }
+
+      .error-mark::before {
+        width: 11rem;
+      }
+
+      .error-mark::after {
+        top: 19%;
+        right: calc(50% - 6rem);
+      }
+
+      .error-copy {
+        font-size: 0.98rem;
+      }
+
+      .error-shortcuts {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 420px) {
+      .error-actions {
+        display: grid;
+      }
+
+      .error-button {
+        width: 100%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .error-button,
+      .error-link {
+        transition: none;
+      }
+    }
+  </style>
+</head>
+
+<body class="has-bg bg-index error-page">
+  <header class="site-header">
+    <div class="header-inner">
+      <p class="site-title"><a href="" aria-label="Julian — Home">Julian</a></p>
+
+      <nav class="top-nav" aria-label="Top navigation">
+        <a href="about.html">🧭 About</a>
+        <a href="archive.html">🗂️ News Archive</a>
+        <a href="notes.html">📝 Notes</a>
+        <a href="cheatsheets.html">📚 Cheatsheets</a>
+        <a href="tools.html">🧰 Toolbox</a>
+        <a href="contact.html">✉ Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="content" id="main-content">
+    <section class="card error-panel" aria-labelledby="error-title">
+      <div class="error-mark" aria-hidden="true">
+        <p class="error-code">404</p>
+      </div>
+
+      <div>
+        <p class="error-kicker">Uncharted coordinate</p>
+        <h1 class="error-title" id="error-title">This page has slipped off the map.</h1>
+        <p class="error-copy">
+          The address may be old, incomplete, or simply wrong. Nothing else has
+          broken — this particular route just leads nowhere.
+        </p>
+
+        <p class="error-path" aria-label="Requested address">
+          Requested: <span id="requested-path">unknown</span>
+        </p>
+
+        <div class="error-actions">
+          <a class="error-button" href="">Return home&nbsp; →</a>
+          <button class="error-button error-button--secondary" id="back-button" type="button">
+            ← Go back
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <nav class="error-shortcuts" aria-label="Explore main sections">
+      <a class="error-link" href="sailing/home.html">🌊 Sailing &amp; Travel</a>
+      <a class="error-link" href="code/home.html">💻 Code</a>
+      <a class="error-link" href="electronics/home.html">⚡ Electronics</a>
+      <a class="error-link" href="making/home.html">🛠 Making</a>
+      <a class="error-link" href="astronomy/home.html">✨ Astronomy</a>
+    </nav>
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2026 Julian. All rights reserved</p>
+  </footer>
+
+  <script>
+    (() => {
+      const requestedPath = document.querySelector("#requested-path");
+      const backButton = document.querySelector("#back-button");
+
+      requestedPath.textContent = `${window.location.pathname}${window.location.search}`;
+
+      if (window.history.length > 1) {
+        backButton.addEventListener("click", () => window.history.back());
+      } else {
+        backButton.hidden = true;
+      }
+    })();
+  </script>
+</body>
+</html>
