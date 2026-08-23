@@ -2821,29 +2821,24 @@
       "content_de": "~Die beste Messwertverbesserung ist jene, die den Graphen weniger dramatisch macht.~\n\nNachdem der kleine Sonnenschutz für den BME280 gebaut und montiert war, blieb die entscheidende Frage:\n\nHat es tatsächlich geholfen?\n\nDie kurze Antwort lautet: ja.\n\nDie neuen Messwerte wirken deutlich plausibler. Die extremen Temperaturspitzen über 40 °C verschwanden beziehungsweise wurden stark reduziert, und die Kurven folgen nun wesentlich eher dem erwartbaren Tagesverlauf.\n\nDas heißt nicht, dass das Setup perfekt ist.\n\nEs heißt, dass es aufgehört hat, absurd zu sein.\n\nUnd in der Messtechnik ist das bereits ein recht respektabler Meilenstein.\n\n## Vergleich vorher und nachher\n\nVor dem Sonnenschutz reagierte der Sensor brutal auf direkte Einstrahlung. Die Temperaturkurve zeigte scharfe Spitzen, die nicht zur tatsächlichen Wetterlage passten. An schönen Frühlingstagen tat das System so, als wäre die Außenluft plötzlich sommerlicher Asphalt.\n\nNach dem Sonnenschutz wurden die Werte ruhiger.\n\nDer Sensor reagiert natürlich weiterhin auf seine konkrete Umgebung am Fensterbrett. Aber die Werte liegen näher an dem, was externe Vergleichsdaten erwarten lassen. Die Kurve sieht nun eher nach Außenlufttemperatur aus und weniger nach aufgeheiztem Kunststoff plus Wandreflexion.\n\n## Was sich verbessert hat\n\nIn den neuen Daten zeigen sich mehrere Verbesserungen:\n\n- der Tagesverlauf der Temperatur wurde plausibler\n- extreme Sonnenspitzen wurden reduziert\n- die Übereinstimmung mit nahegelegenen Vergleichsdaten wurde besser\n- die Luftfeuchte lässt sich sinnvoller interpretieren\n- der Luftdruck bleibt ohnehin vergleichsweise stabil und brauchbar\n\nDer Vorher-Nachher-Vergleich ist besonders hilfreich, weil er zeigt: Das Problem lag nicht primär in Software, Logging oder einem defekten Sensor.\n\nEs lag am Messort und an der Strahlung.\n\n~Schlechte Sensorplatzierung ist der stille Schurke privater Wetterdaten.~\n\n## Noch immer keine perfekte Wetterstation\n\nDer Sensor sitzt weiterhin nahe an einem Gebäude.\n\nDas ist relevant.\n\nWände speichern Wärme. Fenster reflektieren Strahlung. Luftbewegung an der Fassade ist nicht dasselbe wie freie Außenluft. Eine professionelle Wetterstation wäre standardisierter montiert, besser belüftet und sauberer abgeschirmt.\n\nDie Werte sind also keine amtlichen meteorologischen Daten.\n\nAber sie sind nun brauchbar für ein privates Wetterprojekt, für Trendbeobachtung und für praktische Experimente.\n\nAus Zahlen wurden Daten, mit denen man arbeiten kann.\n\n## Was die Graphen zeigen\n\nDie späteren Diagramme ergeben ein deutlich stimmigeres Bild. Temperatur, Luftfeuchte und Luftdruck verhalten sich zueinander plausibler und weniger wie drei voneinander beleidigte Excel-Linien.\n\nDer Sonnenschutz entfernt nicht alle lokalen Effekte.\n\nAber er unterdrückt den schlimmsten: direkte solare Aufheizung des Sensors.\n\nUnd genau dafür wurde er gebaut.\n\n## Fazit\n\nDie Lehre ist angenehm konkret:\n\nEin BME280 kann für ein kleines Wetterprojekt ausreichend gute Daten liefern — aber nur, wenn man die Messumgebung ernst nimmt.\n\nDer Sensor allein ist nicht das Messinstrument.\n\nSensor, Gehäuse, Montageort, Luftbewegung, Abschattung und Umgebung bilden gemeinsam das Messinstrument.\n\nVor dem Sonnenschutz hatte ich Messwerte.\n\nNach dem Sonnenschutz hatte ich Messwerte, denen ich langsam zu trauen beginne.",
       "images": [
         {
-        "src": "/web/assets/img/news/bme_sunshield_after_overview.png",
+        "src": "/web/assets/img/news/2026_bme_solarshield_03_01.png",
         "alt": "Excel chart showing temperature, humidity and pressure data after installing a BME280 radiation shield",
         "caption": "After the shield, the curves became less theatrical and much easier to interpret."
         },
         {
-        "src": "/web/assets/img/news/bme_sunshield_after_temperature.png",
+        "src": "/web/assets/img/news/2026_bme_solarshield_03_02.png",
         "alt": "Temperature comparison chart before and after installing a sun shield for the BME280 sensor",
         "caption": "Temperature before and after shielding: the worst radiation spikes are finally tamed."
         },
         {
-        "src": "/web/assets/img/news/bme_sunshield_after_humidity.png",
+        "src": "/web/assets/img/news/2026_bme_solarshield_03_03.png",
         "alt": "Humidity comparison chart before and after installing a sun shield for the BME280 sensor",
         "caption": "Humidity now follows a more plausible daily rhythm instead of being distorted by extreme local heating."
         },
         {
-        "src": "/web/assets/img/news/bme_sunshield_after_pressure.png",
+        "src": "/web/assets/img/news/2026_bme_solarshield_03_04.png",
         "alt": "Pressure comparison chart before and after installing a sun shield for the BME280 sensor",
         "caption": "Pressure remained the calmest variable — useful as a reference while temperature misbehaved."
-        },
-        {
-        "src": "/web/assets/img/news/bme_sunshield_before_after_temp.png",
-        "alt": "Multi-day temperature comparison chart showing BME280 readings before and after radiation shielding",
-        "caption": "The broader comparison makes the improvement visible: still local, but no longer absurd."
         }
       ]
     }
