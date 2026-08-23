@@ -29,3 +29,128 @@
       </nav>
     </div>
   </header>
+
+  
+  <main class="content" id="top">
+    <hr class="divider" />
+
+    <section class="card" id="javascript">
+      <h2 class="card-title">JavaScript — vom ersten Wert bis zur soliden Webanwendung</h2>
+
+      <p>
+        JavaScript macht aus einer statischen Webseite ein Programm. HTML beschreibt, was vorhanden
+        ist, CSS bestimmt, wie es aussieht, und JavaScript entscheidet, was geschieht: Elemente
+        reagieren auf Klicks, Daten werden geladen, Inhalte gefiltert, Formulare geprüft und
+        Zustände gespeichert.
+      </p>
+
+      <p>
+        Dieser Guide beginnt bewusst bei null und führt schrittweise zu Themen, mit denen du bereits
+        robuste, gut strukturierte Anwendungen im Browser bauen kannst. Die Beispiele verwenden
+        modernes JavaScript ohne Frameworks, Build-Tools oder externe Bibliotheken — passend für
+        eine statische GitHub-Pages-Webseite.
+      </p>
+
+      <p class="hint">
+        Merksatz: HTML liefert die Elemente. CSS gestaltet sie. JavaScript liest Zustände, trifft
+        Entscheidungen und verändert die Seite.
+      </p>
+
+      <h3>So verwendest du diesen Guide als Anfänger</h3>
+
+      
+      <div class="cheat-grid">
+        <article class="cheat-item">
+          <h4>Du musst nicht alles auf einmal verstehen</h4>
+          <p>
+            Arbeite zunächst bis zu Arrays, Objekten und Funktionen. Danach baust du etwas Kleines
+            mit DOM und Events. Asynchroner Code, Module, Prototypen und Event Loop werden erst
+            wichtig, wenn die Grundlagen nicht mehr bei jedem Semikolon knirschen.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Die wichtigsten Zeichen lesen</h4>
+          <pre class="cheat-code"><code class="language-js">const name = "Julian"; // = weist einen Wert zu
+greet(name);           // () ruft eine Funktion auf
+user.name;             // . greift auf eine Eigenschaft zu
+items[0];              // [] greift auf einen Index zu
+if (ready) {           // {} bilden einen Codeblock
+  start();
+}</code></pre>
+          <p class="hint">
+            JavaScript unterscheidet Groß- und Kleinschreibung:
+            <code>postTitle</code> und <code>posttitle</code> sind zwei verschiedene Namen.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Dein erstes sichtbares Mini-Programm</h4>
+          <pre class="cheat-code cheat-code-html"><code>&lt;button id="hello" type="button"&gt;Begrüßen&lt;/button&gt;
+&lt;p id="output"&gt;&lt;/p&gt;
+
+&lt;script src="hello.js" defer&gt;&lt;/script&gt;</code></pre>
+          <pre class="cheat-code"><code class="language-js">// hello.js
+const button = document.querySelector("#hello");
+const output = document.querySelector("#output");
+
+button.addEventListener("click", () =&gt; {
+  output.textContent = "Hallo aus JavaScript!";
+});</code></pre>
+          <p class="hint">
+            Ändere danach Text, Selektor oder Event absichtlich. Aus Nachbauen wird Lernen, sobald
+            du an einer Stelle selbst den Kurs bestimmst.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4>Bei Fehlern zuerst in die Konsole</h4>
+          <p>
+            Öffne die Entwicklerwerkzeuge mit <kbd>F12</kbd> und wähle „Konsole“. Die erste rote
+            Meldung ist meist wichtiger als alle Folgefehler. Klicke auf Datei und Zeilennummer,
+            statt den Code auf gut Glück umzurühren.
+          </p>
+        </article>
+      </div>
+
+      <h3>Inhalt und Lernroute</h3>
+      <ol class="toc toc_column">
+        <li><a href="#mental-model">Das mentale Modell</a></li>
+        <li><a href="#setup">JavaScript einbinden</a></li>
+        <li><a href="#syntax">Syntax und Konsole</a></li>
+        <li><a href="#variables">Variablen</a></li>
+        <li><a href="#types">Datentypen</a></li>
+        <li><a href="#conversion">Typumwandlung</a></li>
+        <li><a href="#operators">Operatoren</a></li>
+        <li><a href="#conditions">Bedingungen</a></li>
+        <li><a href="#strings">Strings</a></li>
+        <li><a href="#numbers">Zahlen und Datum</a></li>
+        <li><a href="#arrays">Arrays</a></li>
+        <li><a href="#objects">Objekte</a></li>
+        <li><a href="#collections">Map und Set</a></li>
+        <li><a href="#loops">Schleifen</a></li>
+        <li><a href="#functions">Funktionen</a></li>
+        <li><a href="#scope">Scope und Closures</a></li>
+        <li><a href="#this">this und Bindung</a></li>
+        <li><a href="#dom">DOM lesen und ändern</a></li>
+        <li><a href="#events">Events</a></li>
+        <li><a href="#forms">Formulare</a></li>
+        <li><a href="#json-storage">JSON und Storage</a></li>
+        <li><a href="#async">Asynchroner Code</a></li>
+        <li><a href="#fetch">Fetch und Daten laden</a></li>
+        <li><a href="#modules">Module und Pfade</a></li>
+        <li><a href="#errors">Fehlerbehandlung</a></li>
+        <li><a href="#classes">Klassen und Prototypen</a></li>
+        <li><a href="#regex">Reguläre Ausdrücke</a></li>
+        <li><a href="#iterators">Iteratoren und Generatoren</a></li>
+        <li><a href="#event-loop">Event Loop</a></li>
+        <li><a href="#security">Sicherheit</a></li>
+        <li><a href="#performance">Performance</a></li>
+        <li><a href="#debugging">Debugging und Tests</a></li>
+        <li><a href="#architecture">Code organisieren</a></li>
+        <li><a href="#website-patterns">Website-Muster</a></li>
+        <li><a href="#mistakes">Häufige Fehler</a></li>
+        <li><a href="#roadmap">Übungsroute</a></li>
+        <li><a href="#reference">Kurzreferenz</a></li>
+      </ol>
+    </section>
