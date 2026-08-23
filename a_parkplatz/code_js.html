@@ -411,3 +411,68 @@ status = "ready";</code></pre>
           <h4><code>const</code> macht Objekte nicht unveränderlich</h4>
           <pre class="cheat-code"><code class="language-js">const settings = { language: "de" };
 settings.language = "en"; // erlaubt
+
+const tags = ["code"];
+tags.push("javascript"); // erlaubt</code></pre>
+          <p class="hint">
+            Für eine flache Sperre gibt es <code>Object.freeze()</code>. Verschachtelte Objekte
+            werden dadurch nicht automatisch eingefroren.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4><code>var</code> in neuem Code meiden</h4>
+          <p>
+            <code>var</code> besitzt Funktions- statt Block-Scope und verhält sich beim Hoisting
+            überraschend. Es bleibt für alten Code wichtig, ist aber kein moderner Standard.
+          </p>
+          <pre class="cheat-code"><code class="language-js">if (true) {
+  var oldStyle = "außerhalb sichtbar";
+  let modernStyle = "nur im Block sichtbar";
+}
+
+console.log(oldStyle);
+// console.log(modernStyle); // ReferenceError</code></pre>
+        </article>
+      </div>
+      <p><a href="#top">↑ Nach oben</a></p>
+    </section>
+
+    <hr class="divider" />
+
+    <section class="card" id="types">
+      <h3>5. Datentypen und Werte</h3>
+
+      <p>
+        JavaScript kennt sieben primitive Datentypen: <code>string</code>, <code>number</code>,
+        <code>bigint</code>, <code>boolean</code>, <code>undefined</code>, <code>null</code> und
+        <code>symbol</code>. Alles andere sind Objekte — auch Arrays und Funktionen im weiteren
+        Sinn.
+      </p>
+
+      <div class="cheat-grid">
+        <article class="cheat-item">
+          <h4>Primitive Werte</h4>
+          <pre class="cheat-code"><code class="language-js">const title = "JavaScript";      // string
+const temperature = 24.5;       // number
+const huge = 9007199254740993n; // bigint
+const visible = true;           // boolean
+let result;                     // undefined
+const selected = null;          // null
+const id = Symbol("id");         // symbol</code></pre>
+          <p class="hint">
+            Primitive Werte werden als Werte verglichen. Objekte werden nach ihrer Identität
+            verglichen.
+          </p>
+        </article>
+
+        <article class="cheat-item">
+          <h4><code>typeof</code> und seine Schrullen</h4>
+          <pre class="cheat-code"><code class="language-js">typeof "Hallo";       // "string"
+typeof 42;            // "number"
+typeof true;          // "boolean"
+typeof undefined;     // "undefined"
+typeof {};            // "object"
+typeof [];            // "object"
+typeof (() =&gt; {});    // "function"
+typeof null;          // "object" — historischer Sprachfehler
