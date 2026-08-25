@@ -2789,7 +2789,7 @@
     {
       "id": "2026-08-21_astro_seasonal_sky_13_55",
       "topic": "astro",
-      "subtopic": "",
+      "subtopic": "solar_system",
       "date": "2026-08-21",
       "title": "The Seasonal Sky — Why the Stars Change",
       "format": "markdown",
@@ -2812,7 +2812,7 @@
     {
       "id": "2026-08-23_electronics_oled_bme_after_shield",
       "topic": "electronics",
-      "subtopic": "oled_bme",
+      "subtopic": "bme_meteorology",
       "date": "2026-08-23",
       "title": "After the Shield — Weather Data That Behaves",
       "format": "markdown",
