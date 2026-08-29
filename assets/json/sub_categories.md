@@ -12,6 +12,7 @@
 - "subtopic": "corn"
 - "subtopic": "tobacco"
 - "subtopic": "cucumber"
+- "subtopic": "chili"
 
 ## Making
 - "topic": "making"
