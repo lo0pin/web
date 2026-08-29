@@ -46,6 +46,7 @@
       corn: "Corn",
       kapu: "kapu",
       tobacco: "Tobacco",
+      chili: "Chili",
     },
     making: {
       "3dprint": "3D Printing",
@@ -118,6 +119,7 @@
       corn: "botanics/corn.html",
       kapu: "botanics/kapu.html",
       tobacco: "botanics/tobacco.html",
+      chili: "botanics/chili.html",
     },
     making: {
       "3dprint": "making/3d_printing.html",
