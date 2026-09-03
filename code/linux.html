@@ -1973,6 +1973,117 @@ python3 logger.py &gt;&gt; logger.log 2&gt;&amp;1</code></pre>
 
 
 
+  <!-- =========================================================
+       17. PIPES
+       ========================================================= -->
+
+  <h3>17. Pipes – die eigentliche Superkraft der Shell</h3>
+
+  <p>
+    Der Operator <code>|</code> reicht die Ausgabe eines Programms direkt als Eingabe an das nächste Programm weiter.
+  </p>
+
+  <pre class="cheat-code"><code>ps aux | grep python
+ls -lah | less
+history | grep ssh
+cat log.txt | grep "error"</code></pre>
+
+  <p>
+    Das letzte Beispiel kann kürzer geschrieben werden:
+  </p>
+
+  <pre class="cheat-code"><code>grep "error" log.txt</code></pre>
+
+  <p class="hint">
+    Unix folgt stark dem Prinzip: kleine Programme erledigen eine Sache gut und werden miteinander kombiniert.
+    Eine Shell-Pipeline ist deshalb gewissermaßen Lego für Datenströme.
+  </p>
+
+
+  <!-- =========================================================
+       18. TEXTWERKZEUGE
+       ========================================================= -->
+
+  <h3>18. Nützliche Werkzeuge zur Textverarbeitung</h3>
+
+  <div class="cheat-grid">
+
+    <div class="cheat-item">
+      <h4><code>wc</code></h4>
+
+      <pre class="cheat-code"><code>wc datei.txt
+wc -l datei.txt
+wc -w datei.txt</code></pre>
+
+      <p>
+        Zählt unter anderem Zeilen und Wörter.
+      </p>
+    </div>
+
+    <div class="cheat-item">
+      <h4><code>sort</code></h4>
+
+      <pre class="cheat-code"><code>sort namen.txt
+sort -n zahlen.txt
+sort -r namen.txt</code></pre>
+    </div>
+
+    <div class="cheat-item">
+      <h4><code>uniq</code></h4>
+
+      <pre class="cheat-code"><code>sort namen.txt | uniq
+sort namen.txt | uniq -c</code></pre>
+
+      <p>
+        <code>uniq</code> erkennt nur unmittelbar aufeinanderfolgende Duplikate;
+        deshalb wird häufig vorher sortiert.
+      </p>
+    </div>
+
+    <div class="cheat-item">
+      <h4><code>cut</code></h4>
+
+      <pre class="cheat-code"><code>cut -d "," -f 1 daten.csv</code></pre>
+
+      <p>
+        Gibt hier die erste Spalte einer kommaseparierten Datei aus.
+      </p>
+    </div>
+
+  </div>
+
+
+  <!-- =========================================================
+       19. TEE
+       ========================================================= -->
+
+  <h3>19. Ausgabe gleichzeitig anzeigen und speichern – <code>tee</code></h3>
+
+  <pre class="cheat-code"><code>python3 logger.py | tee logger.log
+python3 logger.py | tee -a logger.log</code></pre>
+
+  <p>
+    <code>-a</code> hängt an eine bestehende Datei an.
+  </p>
+
+  <p>
+    <code>tee</code> ist außerdem nützlich, wenn eine Datei Root-Rechte benötigt:
+  </p>
+
+  <pre class="cheat-code"><code>echo "wert" | sudo tee /etc/beispiel.conf</code></pre>
+
+  <p>
+    Denn bei:
+  </p>
+
+  <pre class="cheat-code"><code>sudo echo "wert" &gt; /etc/beispiel.conf</code></pre>
+
+  <p>
+    läuft zwar <code>echo</code> mit <code>sudo</code>, die Umleitung <code>&gt;</code> wird aber weiterhin von der normalen Shell ausgeführt.
+  </p>
+
+
+
 
 
 
