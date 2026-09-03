@@ -1198,6 +1198,647 @@ WantedBy=multi-user.target</code></pre>
   </p>
 
 
+  <!-- =========================================================
+       1. GRUNDPRINZIP
+       ========================================================= -->
+
+  <h3>1. Wie ein Linux-Befehl aufgebaut ist</h3>
+
+  <div class="cheat-grid">
+
+    <div class="cheat-item">
+      <h4>Grundform</h4>
+
+      <pre class="cheat-code"><code>befehl option argument</code></pre>
+
+      <p>Beispiel:</p>
+
+      <pre class="cheat-code"><code>ls -lah /home</code></pre>
+
+      <ul>
+        <li><code>ls</code> – das auszuführende Programm</li>
+        <li><code>-l</code> – ausführliche Darstellung</li>
+        <li><code>-a</code> – auch versteckte Dateien anzeigen</li>
+        <li><code>-h</code> – Dateigrößen menschenlesbar darstellen</li>
+        <li><code>/home</code> – das Argument bzw. Ziel</li>
+      </ul>
+    </div>
+
+    <div class="cheat-item">
+      <h4>Kurze Optionen kombinieren</h4>
+
+      <p>Statt:</p>
+
+      <pre class="cheat-code"><code>ls -l -a -h</code></pre>
+
+      <p>kann man bei vielen Programmen schreiben:</p>
+
+      <pre class="cheat-code"><code>ls -lah</code></pre>
+
+      <p>
+        Nicht jede Option funktioniert bei jedem Befehl gleich.
+        <code>-r</code> bedeutet beispielsweise häufig „rekursiv“, ist aber keine universelle Regel.
+      </p>
+    </div>
+
+  </div>
+
+
+  <!-- =========================================================
+       2. HILFE
+       ========================================================= -->
+
+  <h3>2. Hilfe bekommen – bevor man Befehle errät</h3>
+
+  <div class="cheat-grid">
+
+    <div class="cheat-item">
+      <h4><code>man</code> – das Handbuch</h4>
+
+      <pre class="cheat-code"><code>man ls
+man cp
+man ssh</code></pre>
+
+      <p>
+        Öffnet die sogenannte <em>man page</em> eines Programms.
+      </p>
+
+      <ul>
+        <li><code>↑</code> / <code>↓</code> – scrollen</li>
+        <li><code>/wort</code> – nach einem Begriff suchen</li>
+        <li><code>n</code> – nächster Treffer</li>
+        <li><code>q</code> – schließen</li>
+      </ul>
+    </div>
+
+    <div class="cheat-item">
+      <h4><code>--help</code> – Kurzfassung</h4>
+
+      <pre class="cheat-code"><code>ls --help
+grep --help
+python3 --help</code></pre>
+
+      <p>
+        Meist schneller als eine vollständige Manual-Seite.
+      </p>
+    </div>
+
+    <div class="cheat-item">
+      <h4>Woher kommt ein Befehl?</h4>
+
+      <pre class="cheat-code"><code>command -v python3
+command -v git
+which python3
+type cd
+type ls</code></pre>
+
+      <p>
+        Besonders <code>type</code> ist nützlich, weil manche „Befehle“ keine eigenständigen Programme,
+        sondern Shell-Builtins oder Aliase sind.
+      </p>
+    </div>
+
+  </div>
+
+
+  <!-- =========================================================
+       3. TERMINAL BEDIENEN
+       ========================================================= -->
+
+  <h3>3. Tastaturkürzel, die man ständig braucht</h3>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Kürzel</th>
+        <th>Funktion</th>
+        <th>Warum nützlich?</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td><code>Ctrl+C</code></td>
+        <td>Laufenden Prozess abbrechen</td>
+        <td>Der wichtigste Notausgang des Terminals.</td>
+      </tr>
+
+      <tr>
+        <td><code>Ctrl+L</code></td>
+        <td>Terminal leeren</td>
+        <td>Entspricht weitgehend <code>clear</code>.</td>
+      </tr>
+
+      <tr>
+        <td><code>Ctrl+D</code></td>
+        <td>EOF / Sitzung beenden</td>
+        <td>Kann beispielsweise eine SSH-Sitzung oder Shell schließen.</td>
+      </tr>
+
+      <tr>
+        <td><code>Ctrl+A</code></td>
+        <td>Zum Zeilenanfang</td>
+        <td>Praktisch bei langen Befehlen.</td>
+      </tr>
+
+      <tr>
+        <td><code>Ctrl+E</code></td>
+        <td>Zum Zeilenende</td>
+        <td>Das Gegenstück zu <code>Ctrl+A</code>.</td>
+      </tr>
+
+      <tr>
+        <td><code>Ctrl+U</code></td>
+        <td>Text vor Cursor löschen</td>
+        <td>Sehr hilfreich beim schnellen Korrigieren.</td>
+      </tr>
+
+      <tr>
+        <td><code>Ctrl+K</code></td>
+        <td>Text nach Cursor löschen</td>
+        <td>Praktisch bei langen Kommandos.</td>
+      </tr>
+
+      <tr>
+        <td><code>TAB</code></td>
+        <td>Autovervollständigung</td>
+        <td>Verhindert Tippfehler bei langen Dateinamen.</td>
+      </tr>
+
+      <tr>
+        <td><code>↑</code> / <code>↓</code></td>
+        <td>Befehlshistorie</td>
+        <td>Frühere Befehle erneut aufrufen und bearbeiten.</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <!-- =========================================================
+       4. DATEISYSTEM
+       ========================================================= -->
+
+  <h3>4. Das Linux-Dateisystem verstehen</h3>
+
+  <p>
+    Anders als unter Windows gibt es nicht für jedes Laufwerk einen eigenen Buchstaben wie
+    <code>C:</code> oder <code>D:</code>. Linux verwendet einen einzigen Verzeichnisbaum,
+    dessen oberster Punkt <code>/</code> heißt.
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Pfad</th>
+        <th>Bedeutung</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td><code>/</code></td>
+        <td>Wurzel des gesamten Dateisystems – „root directory“.</td>
+      </tr>
+
+      <tr>
+        <td><code>/home</code></td>
+        <td>Home-Verzeichnisse normaler Benutzer.</td>
+      </tr>
+
+      <tr>
+        <td><code>/home/julian</code></td>
+        <td>Beispiel für das persönliche Home-Verzeichnis eines Benutzers.</td>
+      </tr>
+
+      <tr>
+        <td><code>/etc</code></td>
+        <td>Systemweite Konfigurationsdateien.</td>
+      </tr>
+
+      <tr>
+        <td><code>/var</code></td>
+        <td>Veränderliche Daten, etwa Logs, Caches und Serverdaten.</td>
+      </tr>
+
+      <tr>
+        <td><code>/var/log</code></td>
+        <td>Viele klassische Systemprotokolle.</td>
+      </tr>
+
+      <tr>
+        <td><code>/tmp</code></td>
+        <td>Temporäre Dateien.</td>
+      </tr>
+
+      <tr>
+        <td><code>/usr</code></td>
+        <td>Programme, Bibliotheken und gemeinsam genutzte Daten.</td>
+      </tr>
+
+      <tr>
+        <td><code>/dev</code></td>
+        <td>Geräte werden unter Linux als Dateien repräsentiert.</td>
+      </tr>
+
+      <tr>
+        <td><code>/mnt</code></td>
+        <td>Traditioneller Ort für manuell eingehängte Dateisysteme.</td>
+      </tr>
+
+      <tr>
+        <td><code>/media</code></td>
+        <td>Häufig automatisch eingehängte USB-Sticks und Datenträger.</td>
+      </tr>
+
+      <tr>
+        <td><code>/proc</code></td>
+        <td>Virtuelles Dateisystem mit Informationen über Prozesse und Kernel.</td>
+      </tr>
+
+      <tr>
+        <td><code>/sys</code></td>
+        <td>Virtuelle Schnittstelle zu Geräten und Kernel-Subsystemen.</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <!-- =========================================================
+       5. PFADE
+       ========================================================= -->
+
+  <h3>5. Absolute und relative Pfade</h3>
+
+  <div class="cheat-grid">
+
+    <div class="cheat-item">
+      <h4>Absoluter Pfad</h4>
+
+      <pre class="cheat-code"><code>/home/julian/projekte/logger.py</code></pre>
+
+      <p>
+        Beginnt mit <code>/</code> und beschreibt den vollständigen Weg vom Root-Verzeichnis aus.
+      </p>
+    </div>
+
+    <div class="cheat-item">
+      <h4>Relativer Pfad</h4>
+
+      <pre class="cheat-code"><code>projekte/logger.py</code></pre>
+
+      <p>
+        Wird relativ zum aktuellen Arbeitsverzeichnis interpretiert.
+      </p>
+    </div>
+
+    <div class="cheat-item">
+      <h4>Wichtige Kurzformen</h4>
+
+      <ul>
+        <li><code>.</code> – aktuelles Verzeichnis</li>
+        <li><code>..</code> – übergeordnetes Verzeichnis</li>
+        <li><code>~</code> – eigenes Home-Verzeichnis</li>
+        <li><code>-</code> – bei <code>cd</code>: vorheriges Verzeichnis</li>
+      </ul>
+
+      <pre class="cheat-code"><code>cd ..
+cd ~
+cd ~/projekte
+cd -</code></pre>
+    </div>
+
+  </div>
+
+
+  <!-- =========================================================
+       6. NAVIGATION
+       ========================================================= -->
+
+  <h3>6. Im Dateisystem navigieren</h3>
+
+  <div class="cheat-grid">
+
+    <div class="cheat-item">
+      <h4><code>pwd</code></h4>
+
+      <pre class="cheat-code"><code>pwd</code></pre>
+
+      <p>
+        Zeigt den absoluten Pfad des aktuellen Arbeitsverzeichnisses.
+      </p>
+    </div>
+
+    <div class="cheat-item">
+      <h4><code>ls</code></h4>
+
+      <pre class="cheat-code"><code>ls
+ls -l
+ls -la
+ls -lah
+ls /var/log</code></pre>
+
+      <p>
+        Zeigt Dateien und Verzeichnisse.
+      </p>
+
+      <ul>
+        <li><code>-l</code> – Details</li>
+        <li><code>-a</code> – inklusive versteckter Dateien</li>
+        <li><code>-h</code> – KB, MB, GB statt Rohbytes</li>
+      </ul>
+    </div>
+
+    <div class="cheat-item">
+      <h4><code>cd</code></h4>
+
+      <pre class="cheat-code"><code>cd ~/projekte
+cd ..
+cd /
+cd ~
+cd -</code></pre>
+
+      <p>
+        Ändert das aktuelle Arbeitsverzeichnis.
+      </p>
+    </div>
+
+  </div>
+
+
+  <!-- =========================================================
+       7. DATEIEN
+       ========================================================= -->
+
+  <h3>7. Dateien und Verzeichnisse erstellen</h3>
+
+  <div class="cheat-grid">
+
+    <div class="cheat-item">
+      <h4><code>mkdir</code> – Verzeichnis erstellen</h4>
+
+      <pre class="cheat-code"><code>mkdir logs
+mkdir projekt
+mkdir -p projekt/data/archive</code></pre>
+
+      <p>
+        Mit <code>-p</code> werden fehlende Zwischenverzeichnisse automatisch mit erstellt.
+      </p>
+    </div>
+
+    <div class="cheat-item">
+      <h4><code>touch</code> – Datei anlegen</h4>
+
+      <pre class="cheat-code"><code>touch notes.txt
+touch logger.py</code></pre>
+
+      <p>
+        Existiert die Datei bereits, wird lediglich ihr Zeitstempel aktualisiert.
+      </p>
+    </div>
+
+  </div>
+
+
+  <!-- =========================================================
+       8. KOPIEREN / VERSCHIEBEN
+       ========================================================= -->
+
+  <h3>8. Dateien kopieren, verschieben und umbenennen</h3>
+
+  <div class="cheat-grid">
+
+    <div class="cheat-item">
+      <h4><code>cp</code> – kopieren</h4>
+
+      <pre class="cheat-code"><code>cp config.txt config_backup.txt
+cp config.txt ~/backup/
+cp -r projekt projekt_backup
+cp -rv projekt ~/backup/</code></pre>
+
+      <ul>
+        <li><code>-r</code> – Verzeichnisse rekursiv kopieren</li>
+        <li><code>-v</code> – anzeigen, was kopiert wird</li>
+        <li><code>-i</code> – vor Überschreiben nachfragen</li>
+      </ul>
+    </div>
+
+    <div class="cheat-item">
+      <h4><code>mv</code> – verschieben oder umbenennen</h4>
+
+      <pre class="cheat-code"><code>mv alt.txt neu.txt
+mv messung.csv data/
+mv projekt ~/archive/</code></pre>
+
+      <p>
+        Linux verwendet denselben Befehl für Verschieben und Umbenennen.
+      </p>
+    </div>
+
+  </div>
+
+  
+  <!-- =========================================================
+       9. LÖSCHEN
+       ========================================================= -->
+
+  <h3>9. Dateien löschen – hier beginnt der gefährliche Teil</h3>
+
+  <div class="cheat-grid">
+
+    <div class="cheat-item">
+      <h4><code>rm</code></h4>
+
+      <pre class="cheat-code"><code>rm datei.txt
+rm -i datei.txt
+rm -r alter_ordner</code></pre>
+
+      <ul>
+        <li><code>-i</code> – vor dem Löschen nachfragen</li>
+        <li><code>-r</code> – Verzeichnisse rekursiv löschen</li>
+        <li><code>-f</code> – ohne Nachfrage erzwingen</li>
+      </ul>
+    </div>
+
+    <div class="cheat-item">
+      <h4><code>rmdir</code></h4>
+
+      <pre class="cheat-code"><code>rmdir leerer_ordner</code></pre>
+
+      <p>
+        Löscht nur leere Verzeichnisse und ist deshalb deutlich weniger gefährlich.
+      </p>
+    </div>
+
+  </div>
+
+  <p class="hint">
+    <strong>Wichtig:</strong> Die Shell besitzt normalerweise keinen Papierkorb.
+    <code>rm</code> bedeutet tatsächlich löschen. Besonders <code>sudo rm -rf ...</code>
+    sollte niemals blind aus irgendeiner Anleitung kopiert werden.
+  </p>
+
+
+  <!-- =========================================================
+       10. DATEIEN LESEN
+       ========================================================= -->
+
+  <h3>10. Dateien ansehen</h3>
+
+  <div class="cheat-grid">
+
+    <div class="cheat-item">
+      <h4><code>cat</code></h4>
+
+      <pre class="cheat-code"><code>cat config.txt</code></pre>
+
+      <p>
+        Gibt die gesamte Datei auf einmal aus. Ideal für kurze Dateien.
+      </p>
+    </div>
+
+    <div class="cheat-item">
+      <h4><code>less</code></h4>
+
+      <pre class="cheat-code"><code>less /var/log/syslog</code></pre>
+
+      <p>
+        Für lange Dateien meist wesentlich angenehmer als <code>cat</code>.
+      </p>
+
+      <ul>
+        <li><code>/wort</code> – suchen</li>
+        <li><code>n</code> – nächster Treffer</li>
+        <li><code>q</code> – beenden</li>
+      </ul>
+    </div>
+
+    <div class="cheat-item">
+      <h4><code>head</code></h4>
+
+      <pre class="cheat-code"><code>head datei.txt
+head -n 20 datei.txt</code></pre>
+
+      <p>Zeigt den Anfang einer Datei.</p>
+    </div>
+
+    <div class="cheat-item">
+      <h4><code>tail</code></h4>
+
+      <pre class="cheat-code"><code>tail datei.txt
+tail -n 50 log.txt
+tail -f log.txt</code></pre>
+
+      <p>
+        <code>tail -f</code> beobachtet eine Datei live und ist deshalb hervorragend für Logs geeignet.
+      </p>
+    </div>
+
+  </div>
+
+
+  <!-- =========================================================
+       11. TEXTEDITOR
+       ========================================================= -->
+
+  <h3>11. Dateien direkt im Terminal bearbeiten</h3>
+
+  <div class="cheat-grid">
+
+    <div class="cheat-item">
+      <h4><code>nano</code></h4>
+
+      <pre class="cheat-code"><code>nano config.txt
+nano logger.py
+sudo nano /etc/hosts</code></pre>
+
+      <ul>
+        <li><code>Ctrl+O</code> – speichern</li>
+        <li><code>Enter</code> – Dateinamen bestätigen</li>
+        <li><code>Ctrl+X</code> – schließen</li>
+        <li><code>Ctrl+W</code> – suchen</li>
+        <li><code>Ctrl+K</code> – Zeile ausschneiden</li>
+        <li><code>Ctrl+U</code> – wieder einfügen</li>
+      </ul>
+    </div>
+
+  </div>
+
+
+  <!-- =========================================================
+       12. DATEIEN FINDEN
+       ========================================================= -->
+
+  <h3>12. Dateien und Verzeichnisse suchen</h3>
+
+  <div class="cheat-grid">
+
+    <div class="cheat-item">
+      <h4><code>find</code></h4>
+
+      <pre class="cheat-code"><code>find . -name "logger.py"
+find . -name "*.py"
+find ~/projekte -type f -name "*.json"
+find . -type d -name "backup"
+find . -type f -size +100M</code></pre>
+
+      <ul>
+        <li><code>.</code> – Suche hier beginnen</li>
+        <li><code>-type f</code> – nur Dateien</li>
+        <li><code>-type d</code> – nur Verzeichnisse</li>
+        <li><code>-name</code> – Name suchen</li>
+        <li><code>-iname</code> – Groß-/Kleinschreibung ignorieren</li>
+      </ul>
+    </div>
+
+    <div class="cheat-item">
+      <h4>Datei nach Änderungszeit suchen</h4>
+
+      <pre class="cheat-code"><code>find . -type f -mtime -1
+find . -type f -mtime -7</code></pre>
+
+      <p>
+        Findet Dateien, die innerhalb des letzten Tages bzw. der letzten sieben Tage geändert wurden.
+      </p>
+    </div>
+
+  </div>
+
+
+  <!-- =========================================================
+       13. GREP
+       ========================================================= -->
+
+  <h3>13. Text durchsuchen mit <code>grep</code></h3>
+
+  <div class="cheat-grid">
+
+    <div class="cheat-item">
+      <h4>Einfache Suche</h4>
+
+      <pre class="cheat-code"><code>grep "error" log.txt
+grep -i "error" log.txt
+grep -n "error" log.txt</code></pre>
+
+      <ul>
+        <li><code>-i</code> – Groß-/Kleinschreibung ignorieren</li>
+        <li><code>-n</code> – Zeilennummer anzeigen</li>
+      </ul>
+    </div>
+
+    <div class="cheat-item">
+      <h4>Rekursiv durchsuchen</h4>
+
+      <pre class="cheat-code"><code>grep -r "BME280" .
+grep -rin "error" ~/projekte</code></pre>
+
+      <p>
+        Ideal, wenn man nicht mehr weiß, in welcher Datei ein bestimmter Begriff vorkommt.
+      </p>
+    </div>
+
+  </div>
+
+
 
 
 
