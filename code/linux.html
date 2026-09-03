@@ -3088,6 +3088,133 @@ file archiv.dat</code></pre>
 
 
 
+  <!-- =========================================================
+       51. PYTHON
+       ========================================================= -->
+
+  <h3>51. Python unter Linux</h3>
+
+  <p>Python-Version prüfen:</p>
+
+  <pre class="cheat-code"><code>python3 --version</code></pre>
+
+  <p>Skript starten:</p>
+
+  <pre class="cheat-code"><code>python3 logger.py</code></pre>
+
+  <p>Interaktiven Interpreter starten:</p>
+
+  <pre class="cheat-code"><code>python3</code></pre>
+
+  <p>Beenden:</p>
+
+  <pre class="cheat-code"><code>exit()</code></pre>
+
+
+  <!-- =========================================================
+       52. VENV
+       ========================================================= -->
+
+  <h3>52. Python-Projekte mit virtuellen Umgebungen sauber halten</h3>
+
+  <p>
+    Python-Pakete sollten für Projekte möglichst nicht wahllos systemweit installiert werden.
+    Eine virtuelle Umgebung isoliert die Abhängigkeiten eines Projekts.
+  </p>
+
+  <p>Falls nötig:</p>
+
+  <pre class="cheat-code"><code>sudo apt install python3-venv</code></pre>
+
+  <p>Projektordner:</p>
+
+  <pre class="cheat-code"><code>mkdir bme280_logger
+cd bme280_logger</code></pre>
+
+  <p>Virtuelle Umgebung erstellen:</p>
+
+  <pre class="cheat-code"><code>python3 -m venv .venv</code></pre>
+
+  <p>Aktivieren:</p>
+
+  <pre class="cheat-code"><code>source .venv/bin/activate</code></pre>
+
+  <p>Danach erkennt man häufig am Prompt:</p>
+
+  <pre class="cheat-code"><code>(.venv) julian@raspberrypi:~/bme280_logger $</code></pre>
+
+  <p>Pakete installieren:</p>
+
+  <pre class="cheat-code"><code>python -m pip install requests
+python -m pip install smbus2</code></pre>
+
+  <p>Installierte Pakete anzeigen:</p>
+
+  <pre class="cheat-code"><code>python -m pip list</code></pre>
+
+  <p>Umgebung verlassen:</p>
+
+  <pre class="cheat-code"><code>deactivate</code></pre>
+
+  <p class="hint">
+    Innerhalb einer aktivierten virtuellen Umgebung ist <code>python</code> in Ordnung.
+    Außerhalb ist auf Debian-/Raspberry-Pi-Systemen <code>python3</code> die eindeutigere Wahl.
+  </p>
+
+
+  <!-- =========================================================
+       53. REQUIREMENTS
+       ========================================================= -->
+
+  <h3>53. Python-Abhängigkeiten dokumentieren</h3>
+
+  <pre class="cheat-code"><code>python -m pip freeze &gt; requirements.txt</code></pre>
+
+  <p>Später auf einem anderen System:</p>
+
+  <pre class="cheat-code"><code>python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt</code></pre>
+
+  <p>
+    Damit lässt sich ein Projekt wesentlich reproduzierbarer auf einen anderen Raspberry Pi oder Rechner übertragen.
+  </p>
+
+
+  <!-- =========================================================
+       54. SHELL SCRIPT
+       ========================================================= -->
+
+  <h3>54. Mehrere Befehle in ein Shell-Skript packen</h3>
+
+  <p>Datei erstellen:</p>
+
+  <pre class="cheat-code"><code>nano backup.sh</code></pre>
+
+  <p>Beispielinhalt:</p>
+
+  <pre class="cheat-code"><code>#!/usr/bin/env bash
+
+echo "Backup startet..."
+date
+
+mkdir -p "$HOME/backups"
+cp "$HOME/projekte/config.json" "$HOME/backups/config.json"
+
+echo "Backup abgeschlossen."</code></pre>
+
+  <p>Ausführbar machen:</p>
+
+  <pre class="cheat-code"><code>chmod +x backup.sh</code></pre>
+
+  <p>Starten:</p>
+
+  <pre class="cheat-code"><code>./backup.sh</code></pre>
+
+  <p>
+    Das führende <code>./</code> bedeutet: „Führe die Datei aus dem aktuellen Verzeichnis aus.“
+  </p>
+
 
 
     <p class="hint"><a href="#top">↑ top</a>&emsp;<a href="../index.html">⌂ home</a>&emsp;<a href="home.html">← back</a>
