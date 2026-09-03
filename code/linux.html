@@ -2085,6 +2085,124 @@ python3 logger.py | tee -a logger.log</code></pre>
 
 
 
+  <!-- =========================================================
+       20. BEFEHLE VERKETTEN
+       ========================================================= -->
+
+  <h3>20. Befehle logisch miteinander verknüpfen</h3>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Operator</th>
+        <th>Bedeutung</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td><code>;</code></td>
+        <td>Nächsten Befehl unabhängig vom Erfolg ausführen.</td>
+      </tr>
+
+      <tr>
+        <td><code>&amp;&amp;</code></td>
+        <td>Nächsten Befehl nur ausführen, wenn der vorherige erfolgreich war.</td>
+      </tr>
+
+      <tr>
+        <td><code>||</code></td>
+        <td>Nächsten Befehl nur ausführen, wenn der vorherige fehlgeschlagen ist.</td>
+      </tr>
+
+      <tr>
+        <td><code>&amp;</code></td>
+        <td>Prozess im Hintergrund starten.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <pre class="cheat-code"><code>sudo apt update &amp;&amp; sudo apt upgrade
+
+mkdir backup &amp;&amp; cp config.txt backup/
+
+python3 logger.py || echo "Logger fehlgeschlagen"
+
+python3 logger.py &amp;</code></pre>
+
+
+  <!-- =========================================================
+       21. EXIT CODE
+       ========================================================= -->
+
+  <h3>21. Hat ein Befehl funktioniert?</h3>
+
+  <pre class="cheat-code"><code>echo $?</code></pre>
+
+  <p>
+    Zeigt den Exit-Code des zuletzt ausgeführten Programms.
+  </p>
+
+  <ul>
+    <li><code>0</code> – erfolgreich</li>
+    <li>ungleich <code>0</code> – Fehler oder besonderer Status</li>
+  </ul>
+
+  <pre class="cheat-code"><code>grep "BME280" config.txt
+echo $?</code></pre>
+
+
+  <!-- =========================================================
+       22. HISTORY
+       ========================================================= -->
+
+  <h3>22. Befehlshistorie</h3>
+
+  <pre class="cheat-code"><code>history
+history | grep ssh
+history | grep apt</code></pre>
+
+  <p>Der letzte Befehl kann mit:</p>
+
+  <pre class="cheat-code"><code>!!</code></pre>
+
+  <p>erneut ausgeführt werden.</p>
+
+  <p>Ein klassischer Anwendungsfall:</p>
+
+  <pre class="cheat-code"><code>apt update
+sudo !!</code></pre>
+
+  <p>
+    Dadurch wird der vorherige Befehl als <code>sudo apt update</code> wiederholt.
+  </p>
+
+
+  <!-- =========================================================
+       23. ROOT / SUDO
+       ========================================================= -->
+
+  <h3>23. Administratorrechte mit <code>sudo</code></h3>
+
+  <pre class="cheat-code"><code>sudo apt update
+sudo nano /etc/hosts
+sudo systemctl restart ssh</code></pre>
+
+  <p>
+    <code>sudo</code> führt einen einzelnen Befehl mit erhöhten Rechten aus.
+  </p>
+
+  <p>
+    Prüfen, welche <code>sudo</code>-Rechte man besitzt:
+  </p>
+
+  <pre class="cheat-code"><code>sudo -l</code></pre>
+
+  <p class="hint">
+    <code>sudo</code> ist kein Ritual, das man vor jeden Befehl schreiben sollte.
+    Wenn ein normaler Benutzer etwas erledigen kann, sollte es auch als normaler Benutzer erledigt werden.
+  </p>
+
 
 
 
