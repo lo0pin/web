@@ -2204,6 +2204,276 @@ sudo systemctl restart ssh</code></pre>
   </p>
 
 
+  <!-- =========================================================
+       24. RECHTE
+       ========================================================= -->
+
+  <h3>24. Dateirechte verstehen</h3>
+
+  <pre class="cheat-code"><code>ls -l</code></pre>
+
+  <p>Eine typische Ausgabe:</p>
+
+  <pre class="cheat-code"><code>-rwxr-xr-- 1 julian julian 1240 Aug 18 12:00 script.sh</code></pre>
+
+  <p>Die Rechte sind in drei Gruppen geteilt:</p>
+
+  <ul>
+    <li>Eigentümer</li>
+    <li>Gruppe</li>
+    <li>alle anderen Benutzer</li>
+  </ul>
+
+  <p>Die Zeichen bedeuten:</p>
+
+  <ul>
+    <li><code>r</code> – read / lesen</li>
+    <li><code>w</code> – write / schreiben</li>
+    <li><code>x</code> – execute / ausführen</li>
+    <li><code>-</code> – Recht nicht vorhanden</li>
+  </ul>
+
+
+  <!-- =========================================================
+       25. CHMOD
+       ========================================================= -->
+
+  <h3>25. Rechte ändern mit <code>chmod</code></h3>
+
+  <div class="cheat-grid">
+
+    <div class="cheat-item">
+      <h4>Symbolische Schreibweise</h4>
+
+      <pre class="cheat-code"><code>chmod u+x script.sh
+chmod g-w datei.txt
+chmod o-r geheim.txt</code></pre>
+
+      <ul>
+        <li><code>u</code> – user</li>
+        <li><code>g</code> – group</li>
+        <li><code>o</code> – others</li>
+        <li><code>a</code> – all</li>
+      </ul>
+    </div>
+
+    <div class="cheat-item">
+      <h4>Numerische Schreibweise</h4>
+
+      <ul>
+        <li><code>4</code> – lesen</li>
+        <li><code>2</code> – schreiben</li>
+        <li><code>1</code> – ausführen</li>
+      </ul>
+
+      <pre class="cheat-code"><code>chmod 644 datei.txt
+chmod 755 script.sh
+chmod 600 geheim.txt</code></pre>
+    </div>
+
+  </div>
+
+  <p>
+    Typische Rechte:
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Modus</th>
+        <th>Bedeutung</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td><code>644</code></td>
+        <td>Eigentümer darf lesen/schreiben; alle anderen nur lesen.</td>
+      </tr>
+
+      <tr>
+        <td><code>755</code></td>
+        <td>Eigentümer darf alles; alle anderen lesen und ausführen.</td>
+      </tr>
+
+      <tr>
+        <td><code>600</code></td>
+        <td>Nur Eigentümer darf lesen und schreiben – typisch für sensible Dateien.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- =========================================================
+       26. BESITZER
+       ========================================================= -->
+
+  <h3>26. Besitzer und Gruppen ändern</h3>
+
+  <pre class="cheat-code"><code>chown julian datei.txt
+chown julian:julian datei.txt
+sudo chown -R julian:julian projekt/</code></pre>
+
+  <p>
+    <code>chown</code> bedeutet <em>change owner</em>.
+    <code>-R</code> wirkt rekursiv auf alle Inhalte eines Verzeichnisses.
+  </p>
+
+
+  <!-- =========================================================
+       27. USER
+       ========================================================= -->
+
+  <h3>27. Benutzer und Gruppen</h3>
+
+  <pre class="cheat-code"><code>whoami
+id
+groups
+who
+w</code></pre>
+
+  <ul>
+    <li><code>whoami</code> – aktueller Benutzer</li>
+    <li><code>id</code> – Benutzer-ID und Gruppen</li>
+    <li><code>groups</code> – Gruppenmitgliedschaften</li>
+    <li><code>who</code> – angemeldete Benutzer</li>
+    <li><code>w</code> – angemeldete Benutzer und deren Aktivitäten</li>
+  </ul>
+
+  <p>Auf Debian-basierten Systemen einen Benutzer anlegen:</p>
+
+  <pre class="cheat-code"><code>sudo adduser neuerbenutzer</code></pre>
+
+  <p>Benutzer zu einer Gruppe hinzufügen:</p>
+
+  <pre class="cheat-code"><code>sudo usermod -aG dialout julian</code></pre>
+
+  <p class="hint">
+    Nach einer Änderung der Gruppenmitgliedschaft ist meist eine neue Anmeldung erforderlich,
+    damit die neue Gruppe für die Sitzung wirksam wird.
+  </p>
+
+
+  <!-- =========================================================
+       28. PROZESSE
+       ========================================================= -->
+
+  <h3>28. Laufende Prozesse untersuchen</h3>
+
+  <div class="cheat-grid">
+
+    <div class="cheat-item">
+      <h4><code>ps</code></h4>
+
+      <pre class="cheat-code"><code>ps
+ps aux
+ps aux | grep python</code></pre>
+    </div>
+
+    <div class="cheat-item">
+      <h4><code>pgrep</code></h4>
+
+      <pre class="cheat-code"><code>pgrep python
+pgrep -a python</code></pre>
+
+      <p>
+        Findet Prozesse direkt anhand ihres Namens.
+      </p>
+    </div>
+
+    <div class="cheat-item">
+      <h4><code>top</code></h4>
+
+      <pre class="cheat-code"><code>top</code></pre>
+
+      <p>
+        Live-Ansicht von CPU, Arbeitsspeicher und Prozessen.
+        Mit <code>q</code> beenden.
+      </p>
+    </div>
+
+    <div class="cheat-item">
+      <h4><code>htop</code></h4>
+
+      <pre class="cheat-code"><code>sudo apt install htop
+htop</code></pre>
+
+      <p>
+        Komfortablere interaktive Alternative zu <code>top</code>.
+      </p>
+    </div>
+
+  </div>
+
+
+  <!-- =========================================================
+       29. PROZESSE STOPPEN
+       ========================================================= -->
+
+  <h3>29. Prozesse beenden</h3>
+
+  <pre class="cheat-code"><code>kill 1234
+kill -TERM 1234
+kill -KILL 1234
+pkill python3
+pkill -f logger.py</code></pre>
+
+  <p>
+    Normalerweise sollte zuerst ein reguläres Beenden versucht werden.
+    <code>SIGKILL</code> bzw. <code>kill -9</code> ist die Brechstange.
+  </p>
+
+  <p class="hint">
+    <code>kill -9</code> gibt einem Programm keine Gelegenheit mehr, Dateien sauber zu schließen,
+    Daten zu speichern oder aufzuräumen. Nur verwenden, wenn ein normaler Abbruch tatsächlich nicht funktioniert.
+  </p>
+
+
+  <!-- =========================================================
+       30. JOB CONTROL
+       ========================================================= -->
+
+  <h3>30. Vordergrund- und Hintergrundprozesse</h3>
+
+  <pre class="cheat-code"><code>python3 logger.py &amp;
+jobs
+fg
+bg</code></pre>
+
+  <p>
+    Ein laufender Vordergrundprozess kann außerdem mit <code>Ctrl+Z</code> angehalten werden.
+  </p>
+
+  <pre class="cheat-code"><code>Ctrl+Z
+bg
+jobs
+fg</code></pre>
+
+  <p>
+    Dabei gilt:
+  </p>
+
+  <ul>
+    <li><code>Ctrl+Z</code> – Prozess pausieren</li>
+    <li><code>bg</code> – pausierten Prozess im Hintergrund fortsetzen</li>
+    <li><code>fg</code> – Hintergrundprozess wieder in den Vordergrund holen</li>
+  </ul>
+
+
+  <!-- =========================================================
+       31. NOHUP
+       ========================================================= -->
+
+  <h3>31. Prozess nach SSH-Abmeldung weiterlaufen lassen</h3>
+
+  <pre class="cheat-code"><code>nohup python3 logger.py &gt; logger.log 2&gt;&amp;1 &amp;</code></pre>
+
+  <p>
+    Dadurch läuft das Programm weiter, wenn die Terminal- oder SSH-Sitzung beendet wird.
+  </p>
+
+  <p>
+    Für dauerhaft laufende Dienste ist allerdings <code>systemd</code> meist die wesentlich sauberere Lösung.
+  </p>
 
 
     <p class="hint"><a href="#top">↑ top</a>&emsp;<a href="../index.html">⌂ home</a>&emsp;<a href="home.html">← back</a>
