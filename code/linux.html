@@ -2476,6 +2476,211 @@ fg</code></pre>
   </p>
 
 
+  <!-- =========================================================
+       32. SYSTEMD
+       ========================================================= -->
+
+  <h3>32. Dienste mit <code>systemctl</code> verwalten</h3>
+
+  <p>
+    Moderne Debian-/Ubuntu-/Raspberry-Pi-Systeme verwenden üblicherweise
+    <strong>systemd</strong> für Hintergrunddienste.
+  </p>
+
+  <pre class="cheat-code"><code>systemctl status ssh
+sudo systemctl start ssh
+sudo systemctl stop ssh
+sudo systemctl restart ssh
+sudo systemctl enable ssh
+sudo systemctl disable ssh</code></pre>
+
+  <ul>
+    <li><code>status</code> – Zustand anzeigen</li>
+    <li><code>start</code> – Dienst starten</li>
+    <li><code>stop</code> – Dienst stoppen</li>
+    <li><code>restart</code> – neu starten</li>
+    <li><code>enable</code> – beim Booten automatisch starten</li>
+    <li><code>disable</code> – Autostart deaktivieren</li>
+  </ul>
+
+  <p>
+    Prüfen, ob ein Dienst beim Booten aktiviert ist:
+  </p>
+
+  <pre class="cheat-code"><code>systemctl is-enabled ssh</code></pre>
+
+  <p>Prüfen, ob er gerade läuft:</p>
+
+  <pre class="cheat-code"><code>systemctl is-active ssh</code></pre>
+
+
+  <!-- =========================================================
+       33. JOURNALCTL
+       ========================================================= -->
+
+  <h3>33. Systemlogs mit <code>journalctl</code></h3>
+
+  <pre class="cheat-code"><code>journalctl
+journalctl -b
+journalctl -p err
+journalctl -u ssh
+journalctl -u ssh -f
+journalctl --since "1 hour ago"</code></pre>
+
+  <ul>
+    <li><code>-b</code> – Meldungen seit aktuellem Boot</li>
+    <li><code>-p err</code> – nur Fehler</li>
+    <li><code>-u</code> – bestimmter systemd-Dienst</li>
+    <li><code>-f</code> – neue Meldungen live verfolgen</li>
+  </ul>
+
+  <p>
+    Für einen eigenen Sensor-Dienst beispielsweise:
+  </p>
+
+  <pre class="cheat-code"><code>journalctl -u bme280-logger.service -f</code></pre>
+
+
+  <!-- =========================================================
+       34. SYSTEM INFO
+       ========================================================= -->
+
+  <h3>34. Informationen über das System</h3>
+
+  <div class="cheat-grid">
+
+    <div class="cheat-item">
+      <h4>Kernel</h4>
+
+      <pre class="cheat-code"><code>uname -a
+uname -r</code></pre>
+    </div>
+
+    <div class="cheat-item">
+      <h4>Distribution</h4>
+
+      <pre class="cheat-code"><code>cat /etc/os-release</code></pre>
+    </div>
+
+    <div class="cheat-item">
+      <h4>Hostname</h4>
+
+      <pre class="cheat-code"><code>hostname
+hostnamectl</code></pre>
+    </div>
+
+    <div class="cheat-item">
+      <h4>Laufzeit</h4>
+
+      <pre class="cheat-code"><code>uptime</code></pre>
+    </div>
+
+    <div class="cheat-item">
+      <h4>Arbeitsspeicher</h4>
+
+      <pre class="cheat-code"><code>free -h</code></pre>
+    </div>
+
+    <div class="cheat-item">
+      <h4>CPU</h4>
+
+      <pre class="cheat-code"><code>lscpu</code></pre>
+    </div>
+
+  </div>
+
+
+  <!-- =========================================================
+       35. SPEICHER
+       ========================================================= -->
+
+  <h3>35. Speicherplatz untersuchen</h3>
+
+  <div class="cheat-grid">
+
+    <div class="cheat-item">
+      <h4><code>df</code> – Dateisysteme</h4>
+
+      <pre class="cheat-code"><code>df -h</code></pre>
+
+      <p>
+        Zeigt belegten und freien Speicher auf eingehängten Dateisystemen.
+      </p>
+    </div>
+
+    <div class="cheat-item">
+      <h4><code>du</code> – Verzeichnisgrößen</h4>
+
+      <pre class="cheat-code"><code>du -sh .
+du -sh *
+du -sh ~/projekte/*</code></pre>
+
+      <p>
+        Ideal, wenn man wissen möchte, welches Verzeichnis den Speicher frisst.
+      </p>
+    </div>
+
+    <div class="cheat-item">
+      <h4>Größte Einträge finden</h4>
+
+      <pre class="cheat-code"><code>du -ah . | sort -h | tail -20</code></pre>
+
+      <p>
+        Gibt die größten Dateien bzw. Verzeichnisse am Ende der sortierten Liste aus.
+      </p>
+    </div>
+
+  </div>
+
+
+  <!-- =========================================================
+       36. DATENTRÄGER
+       ========================================================= -->
+
+  <h3>36. Festplatten, SD-Karten und USB-Sticks</h3>
+
+  <pre class="cheat-code"><code>lsblk
+lsblk -f
+blkid</code></pre>
+
+  <p>
+    <code>lsblk</code> zeigt Blockgeräte und Partitionen.
+    Mit <code>-f</code> werden zusätzlich Dateisystem, UUID und Mountpoint angezeigt.
+  </p>
+
+  <p>Beispiel:</p>
+
+  <pre class="cheat-code"><code>NAME        FSTYPE MOUNTPOINT
+sda
+└─sda1      ext4   /mnt/data
+mmcblk0
+├─mmcblk0p1 vfat   /boot
+└─mmcblk0p2 ext4   /</code></pre>
+
+
+  <!-- =========================================================
+       37. MOUNT
+       ========================================================= -->
+
+  <h3>37. Datenträger ein- und aushängen</h3>
+
+  <pre class="cheat-code"><code>sudo mkdir -p /mnt/usb
+sudo mount /dev/sda1 /mnt/usb</code></pre>
+
+  <p>Danach steht der Inhalt unter:</p>
+
+  <pre class="cheat-code"><code>/mnt/usb</code></pre>
+
+  <p>Vor dem Abziehen:</p>
+
+  <pre class="cheat-code"><code>sudo umount /mnt/usb</code></pre>
+
+  <p class="hint">
+    Nicht einfach einen Datenträger abziehen, während noch geschrieben wird.
+    Ein sauberer <code>umount</code> verhindert Dateisystemschäden.
+  </p>
+
+
     <p class="hint"><a href="#top">↑ top</a>&emsp;<a href="../index.html">⌂ home</a>&emsp;<a href="home.html">← back</a>
     </p>
   </main>
