@@ -3216,6 +3216,128 @@ echo "Backup abgeschlossen."</code></pre>
   </p>
 
 
+  <!-- =========================================================
+       55. VARIABLEN
+       ========================================================= -->
+
+  <h3>55. Shell-Variablen und Umgebungsvariablen</h3>
+
+  <pre class="cheat-code"><code>name="Julian"
+echo "$name"</code></pre>
+
+  <p>Umgebungsvariable setzen:</p>
+
+  <pre class="cheat-code"><code>export SENSOR="BME280"
+echo "$SENSOR"</code></pre>
+
+  <p>Alle Umgebungsvariablen anzeigen:</p>
+
+  <pre class="cheat-code"><code>env</code></pre>
+
+  <p>Wichtige Beispiele:</p>
+
+  <pre class="cheat-code"><code>echo "$HOME"
+echo "$USER"
+echo "$PATH"
+echo "$SHELL"</code></pre>
+
+
+  <!-- =========================================================
+       56. PATH
+       ========================================================= -->
+
+  <h3>56. Was ist <code>PATH</code>?</h3>
+
+  <p>
+    Wenn man:
+  </p>
+
+  <pre class="cheat-code"><code>python3</code></pre>
+
+  <p>
+    eingibt, durchsucht die Shell nicht den gesamten Computer.
+    Sie sucht nur in den Verzeichnissen aus der Umgebungsvariable <code>PATH</code>.
+  </p>
+
+  <pre class="cheat-code"><code>echo "$PATH"</code></pre>
+
+  <p>Beispielsweise:</p>
+
+  <pre class="cheat-code"><code>/usr/local/bin:/usr/bin:/bin</code></pre>
+
+  <p>
+    Deshalb muss ein Programm im aktuellen Verzeichnis häufig explizit so gestartet werden:
+  </p>
+
+  <pre class="cheat-code"><code>./mein_programm</code></pre>
+
+
+  <!-- =========================================================
+       57. ALIASE
+       ========================================================= -->
+
+  <h3>57. Eigene Kurzbefehle mit Aliasen</h3>
+
+  <pre class="cheat-code"><code>alias ll='ls -lah'
+alias update='sudo apt update &amp;&amp; sudo apt upgrade'</code></pre>
+
+  <p>
+    Dauerhafte Aliase können beispielsweise in:
+  </p>
+
+  <pre class="cheat-code"><code>~/.bashrc</code></pre>
+
+  <p>eingetragen werden.</p>
+
+  <p>Danach neu laden:</p>
+
+  <pre class="cheat-code"><code>source ~/.bashrc</code></pre>
+
+
+  <!-- =========================================================
+       58. RASPBERRY PI
+       ========================================================= -->
+
+  <h3>58. Raspberry-Pi-spezifische Befehle</h3>
+
+  <div class="cheat-grid">
+
+    <div class="cheat-item">
+      <h4>Konfiguration</h4>
+
+      <pre class="cheat-code"><code>sudo raspi-config</code></pre>
+
+      <p>
+        Je nach Raspberry Pi OS lassen sich hier unter anderem SSH,
+        I²C, SPI, Hostname und weitere Schnittstellen konfigurieren.
+      </p>
+    </div>
+
+    <div class="cheat-item">
+      <h4>CPU-Temperatur</h4>
+
+      <pre class="cheat-code"><code>vcgencmd measure_temp</code></pre>
+    </div>
+
+    <div class="cheat-item">
+      <h4>Modell anzeigen</h4>
+
+      <pre class="cheat-code"><code>cat /proc/device-tree/model</code></pre>
+    </div>
+
+    <div class="cheat-item">
+      <h4>GPIO-Werkzeuge entdecken</h4>
+
+      <pre class="cheat-code"><code>pinctrl help</code></pre>
+
+      <p>
+        Auf neueren Raspberry-Pi-Systemen steht <code>pinctrl</code> für verschiedene GPIO-Abfragen zur Verfügung.
+      </p>
+    </div>
+
+  </div>
+
+
 
     <p class="hint"><a href="#top">↑ top</a>&emsp;<a href="../index.html">⌂ home</a>&emsp;<a href="home.html">← back</a>
     </p>
