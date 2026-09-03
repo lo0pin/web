@@ -2913,6 +2913,85 @@ ssh pi@192.168.1.50</code></pre>
   </p>
 
 
+  <p>Öffentlichen Schlüssel auf Raspberry Pi übertragen:</p>
+
+  <pre class="cheat-code"><code>ssh-copy-id julian@raspberrypi.local</code></pre>
+
+  <p>Danach genügt normalerweise:</p>
+
+  <pre class="cheat-code"><code>ssh julian@raspberrypi.local</code></pre>
+
+
+  <!-- =========================================================
+       44. SSH CONFIG
+       ========================================================= -->
+
+  <h3>44. Häufig verwendete SSH-Verbindungen abkürzen</h3>
+
+  <p>Datei:</p>
+
+  <pre class="cheat-code"><code>~/.ssh/config</code></pre>
+
+  <p>Beispiel:</p>
+
+  <pre class="cheat-code"><code>Host wetterpi
+    HostName 192.168.1.50
+    User julian
+    IdentityFile ~/.ssh/id_ed25519</code></pre>
+
+  <p>Danach reicht:</p>
+
+  <pre class="cheat-code"><code>ssh wetterpi</code></pre>
+
+
+  <!-- =========================================================
+       45. SCP
+       ========================================================= -->
+
+  <h3>45. Dateien über SSH kopieren – <code>scp</code></h3>
+
+  <p>Lokale Datei auf Raspberry Pi kopieren:</p>
+
+  <pre class="cheat-code"><code>scp logger.py julian@raspberrypi.local:~/</code></pre>
+
+  <p>Datei vom Raspberry Pi herunterladen:</p>
+
+  <pre class="cheat-code"><code>scp julian@raspberrypi.local:~/logger.csv .</code></pre>
+
+  <p>Ganzes Verzeichnis kopieren:</p>
+
+  <pre class="cheat-code"><code>scp -r projekt/ julian@raspberrypi.local:~/</code></pre>
+
+
+  <!-- =========================================================
+       46. RSYNC
+       ========================================================= -->
+
+  <h3>46. Verzeichnisse effizient synchronisieren – <code>rsync</code></h3>
+
+  <pre class="cheat-code"><code>rsync -av projekt/ julian@raspberrypi.local:~/projekt/</code></pre>
+
+  <ul>
+    <li><code>-a</code> – Archivmodus, erhält viele Dateieigenschaften</li>
+    <li><code>-v</code> – ausführliche Ausgabe</li>
+  </ul>
+
+  <p>
+    Bei wiederholten Übertragungen ist <code>rsync</code> häufig besser als <code>scp</code>,
+    weil nur Änderungen übertragen werden.
+  </p>
+
+  <p class="hint">
+    Bei <code>rsync</code> ist der abschließende Slash bedeutsam:
+    <code>projekt/</code> meint den Inhalt des Verzeichnisses;
+    <code>projekt</code> kann das Verzeichnis selbst als zusätzliche Ebene kopieren.
+  </p>
+
+
+
+
+
+  
     <p class="hint"><a href="#top">↑ top</a>&emsp;<a href="../index.html">⌂ home</a>&emsp;<a href="home.html">← back</a>
     </p>
   </main>
