@@ -2989,9 +2989,107 @@ ssh pi@192.168.1.50</code></pre>
 
 
 
+  <!-- =========================================================
+       47. DOWNLOAD
+       ========================================================= -->
+
+  <h3>47. Dateien aus dem Internet laden</h3>
+
+  <div class="cheat-grid">
+
+    <div class="cheat-item">
+      <h4><code>wget</code></h4>
+
+      <pre class="cheat-code"><code>wget https://example.com/datei.zip</code></pre>
+    </div>
+
+    <div class="cheat-item">
+      <h4><code>curl</code></h4>
+
+      <pre class="cheat-code"><code>curl https://example.com
+curl -O https://example.com/datei.zip</code></pre>
+    </div>
+
+  </div>
+
+  <p>
+    Nicht jedes minimale Linux-System installiert beide Werkzeuge standardmäßig.
+  </p>
 
 
-  
+  <!-- =========================================================
+       48. ARCHIVE
+       ========================================================= -->
+
+  <h3>48. Dateien archivieren und komprimieren</h3>
+
+  <p>Verzeichnis als <code>.tar.gz</code> archivieren:</p>
+
+  <pre class="cheat-code"><code>tar -czf backup.tar.gz projekt/</code></pre>
+
+  <p>Archiv entpacken:</p>
+
+  <pre class="cheat-code"><code>tar -xzf backup.tar.gz</code></pre>
+
+  <p>Inhalt ansehen:</p>
+
+  <pre class="cheat-code"><code>tar -tzf backup.tar.gz</code></pre>
+
+  <p>Die klassischen Buchstaben:</p>
+
+  <ul>
+    <li><code>c</code> – create</li>
+    <li><code>x</code> – extract</li>
+    <li><code>t</code> – list</li>
+    <li><code>z</code> – gzip</li>
+    <li><code>f</code> – folgende Angabe ist der Dateiname</li>
+  </ul>
+
+
+  <!-- =========================================================
+       49. LINKS
+       ========================================================= -->
+
+  <h3>49. Symbolische Links</h3>
+
+  <p>
+    Ein symbolischer Link ähnelt einer Verknüpfung unter Windows.
+  </p>
+
+  <pre class="cheat-code"><code>ln -s /home/julian/projekte/logger ~/logger</code></pre>
+
+  <p>Link anzeigen:</p>
+
+  <pre class="cheat-code"><code>ls -l ~/logger</code></pre>
+
+  <p>Ziel eines Links auflösen:</p>
+
+  <pre class="cheat-code"><code>readlink -f ~/logger</code></pre>
+
+
+  <!-- =========================================================
+       50. DATEITYP
+       ========================================================= -->
+
+  <h3>50. Herausfinden, was eine Datei tatsächlich ist</h3>
+
+  <pre class="cheat-code"><code>file bild.jpg
+file programm
+file archiv.dat</code></pre>
+
+  <p>
+    Linux verlässt sich wesentlich weniger auf Dateiendungen als Windows.
+    Eine Datei namens <code>bild.jpg</code> muss deshalb keineswegs tatsächlich ein JPEG sein.
+  </p>
+
+  <p>Weitere Metadaten:</p>
+
+  <pre class="cheat-code"><code>stat datei.txt</code></pre>
+
+
+
+
+
     <p class="hint"><a href="#top">↑ top</a>&emsp;<a href="../index.html">⌂ home</a>&emsp;<a href="home.html">← back</a>
     </p>
   </main>
