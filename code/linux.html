@@ -2681,6 +2681,238 @@ sudo mount /dev/sda1 /mnt/usb</code></pre>
   </p>
 
 
+  
+  <!-- =========================================================
+       38. PAKETMANAGEMENT
+       ========================================================= -->
+
+  <h3>38. Software installieren und aktualisieren – <code>apt</code></h3>
+
+  <div class="cheat-grid">
+
+    <div class="cheat-item">
+      <h4>Paketlisten aktualisieren</h4>
+
+      <pre class="cheat-code"><code>sudo apt update</code></pre>
+
+      <p>
+        Lädt aktuelle Informationen über verfügbare Pakete.
+        Es werden dabei noch keine Programme aktualisiert.
+      </p>
+    </div>
+
+    <div class="cheat-item">
+      <h4>Installierte Pakete aktualisieren</h4>
+
+      <pre class="cheat-code"><code>sudo apt upgrade</code></pre>
+    </div>
+
+    <div class="cheat-item">
+      <h4>Komplettes Upgrade</h4>
+
+      <pre class="cheat-code"><code>sudo apt full-upgrade</code></pre>
+
+      <p>
+        Darf bei Bedarf Abhängigkeiten verändern und Pakete entfernen oder ersetzen.
+      </p>
+    </div>
+
+    <div class="cheat-item">
+      <h4>Programm installieren</h4>
+
+      <pre class="cheat-code"><code>sudo apt install git
+sudo apt install i2c-tools
+sudo apt install htop</code></pre>
+    </div>
+
+    <div class="cheat-item">
+      <h4>Programm entfernen</h4>
+
+      <pre class="cheat-code"><code>sudo apt remove htop
+sudo apt purge htop</code></pre>
+
+      <p>
+        <code>purge</code> entfernt zusätzlich systemweite Konfigurationsdateien des Pakets.
+      </p>
+    </div>
+
+    <div class="cheat-item">
+      <h4>Nicht mehr benötigte Pakete entfernen</h4>
+
+      <pre class="cheat-code"><code>sudo apt autoremove</code></pre>
+    </div>
+
+  </div>
+
+  <p>Pakete suchen:</p>
+
+  <pre class="cheat-code"><code>apt search i2c
+apt search python3</code></pre>
+
+  <p>Informationen anzeigen:</p>
+
+  <pre class="cheat-code"><code>apt show i2c-tools</code></pre>
+
+  <p>Ein typischer Wartungsablauf:</p>
+
+  <pre class="cheat-code"><code>sudo apt update
+sudo apt upgrade
+sudo apt autoremove</code></pre>
+
+
+  <!-- =========================================================
+       39. NETZWERK
+       ========================================================= -->
+
+  <h3>39. Netzwerk – die wichtigsten Befehle</h3>
+
+  <div class="cheat-grid">
+
+    <div class="cheat-item">
+      <h4>IP-Adressen</h4>
+
+      <pre class="cheat-code"><code>ip a</code></pre>
+
+      <p>
+        Zeigt Netzwerkinterfaces und zugewiesene IP-Adressen.
+      </p>
+    </div>
+
+    <div class="cheat-item">
+      <h4>Nur lokale IP-Adressen</h4>
+
+      <pre class="cheat-code"><code>hostname -I</code></pre>
+
+      <p>
+        Besonders auf einem Raspberry Pi praktisch.
+      </p>
+    </div>
+
+    <div class="cheat-item">
+      <h4>Routing</h4>
+
+      <pre class="cheat-code"><code>ip route</code></pre>
+
+      <p>
+        Zeigt unter anderem das Standard-Gateway.
+      </p>
+    </div>
+
+    <div class="cheat-item">
+      <h4>Erreichbarkeit prüfen</h4>
+
+      <pre class="cheat-code"><code>ping raspberrypi.local
+ping 192.168.1.20
+ping -c 4 1.1.1.1</code></pre>
+
+      <p>
+        <code>-c 4</code> beendet den Test nach vier Paketen automatisch.
+      </p>
+    </div>
+
+  </div>
+
+
+  <!-- =========================================================
+       40. PORTS
+       ========================================================= -->
+
+  <h3>40. Offene Ports und Netzwerkverbindungen</h3>
+
+  <pre class="cheat-code"><code>ss -tulpn</code></pre>
+
+  <p>Typische Optionen:</p>
+
+  <ul>
+    <li><code>-t</code> – TCP</li>
+    <li><code>-u</code> – UDP</li>
+    <li><code>-l</code> – nur lauschende Ports</li>
+    <li><code>-p</code> – zugehörige Prozesse</li>
+    <li><code>-n</code> – numerische Adressen statt Namensauflösung</li>
+  </ul>
+
+  <p>
+    Prüfen, ob beispielsweise ein Webserver auf Port 8000 läuft:
+  </p>
+
+  <pre class="cheat-code"><code>ss -tulpn | grep 8000</code></pre>
+
+
+  <!-- =========================================================
+       41. DNS
+       ========================================================= -->
+
+  <h3>41. Namensauflösung prüfen</h3>
+
+  <pre class="cheat-code"><code>getent hosts raspberrypi.local
+getent hosts example.com</code></pre>
+
+  <p>
+    Falls <code>dnsutils</code> installiert ist:
+  </p>
+
+  <pre class="cheat-code"><code>dig example.com
+nslookup example.com</code></pre>
+
+
+  <!-- =========================================================
+       42. SSH
+       ========================================================= -->
+
+  <h3>42. Einen anderen Linux-Rechner per SSH steuern</h3>
+
+  <p>
+    SSH ist eines der wichtigsten Werkzeuge für Raspberry Pi und Linux-Server.
+    Es öffnet eine verschlüsselte Terminal-Sitzung auf einem anderen Rechner.
+  </p>
+
+  <pre class="cheat-code"><code>ssh benutzer@hostname</code></pre>
+
+  <p>Beispiele:</p>
+
+  <pre class="cheat-code"><code>ssh julian@raspberrypi.local
+ssh pi@192.168.1.50</code></pre>
+
+  <p>Anderer SSH-Port:</p>
+
+  <pre class="cheat-code"><code>ssh -p 2222 julian@server.local</code></pre>
+
+  <p>Bestimmten privaten Schlüssel verwenden:</p>
+
+  <pre class="cheat-code"><code>ssh -i ~/.ssh/id_ed25519 julian@server.local</code></pre>
+
+  <p>SSH-Sitzung beenden:</p>
+
+  <pre class="cheat-code"><code>exit</code></pre>
+
+  <p>oder:</p>
+
+  <pre class="cheat-code"><code>Ctrl+D</code></pre>
+
+
+  <!-- =========================================================
+       43. SSH KEYS
+       ========================================================= -->
+
+  <h3>43. SSH-Schlüssel statt Passwort verwenden</h3>
+
+  <p>Neuen Schlüssel erzeugen:</p>
+
+  <pre class="cheat-code"><code>ssh-keygen -t ed25519</code></pre>
+
+  <p>
+    Standardmäßig entstehen beispielsweise:
+  </p>
+
+  <pre class="cheat-code"><code>~/.ssh/id_ed25519
+~/.ssh/id_ed25519.pub</code></pre>
+
+  <p>
+    Der private Schlüssel <strong>darf nicht weitergegeben werden</strong>.
+    Die Datei mit <code>.pub</code> ist der öffentliche Schlüssel.
+  </p>
+
+
     <p class="hint"><a href="#top">↑ top</a>&emsp;<a href="../index.html">⌂ home</a>&emsp;<a href="home.html">← back</a>
     </p>
   </main>
