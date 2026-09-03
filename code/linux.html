@@ -1176,947 +1176,954 @@ WantedBy=multi-user.target</code></pre>
 
     <hr class="divider" />
 
-<section class="card" id="linux">
-  <h2 class="card-title">Linux – Terminal, Dateisystem, Prozesse, Netzwerk &amp; Administration</h2>
+    <section class="card" id="linux">
+      <h2 class="card-title">Linux – Terminal, Dateisystem, Prozesse, Netzwerk &amp; Administration</h2>
 
-  <p>
-    Linux lässt sich vollständig über die grafische Oberfläche bedienen – seine eigentliche Stärke zeigt sich jedoch im Terminal.
-    Dort lassen sich Dateien verwalten, Programme starten, Systeme aktualisieren, Prozesse überwachen, Netzwerke untersuchen,
-    Raspberry Pis fernsteuern und wiederkehrende Aufgaben automatisieren.
-  </p>
+      <p>
+        Linux lässt sich vollständig über die grafische Oberfläche bedienen – seine eigentliche Stärke zeigt sich jedoch
+        im Terminal.
+        Dort lassen sich Dateien verwalten, Programme starten, Systeme aktualisieren, Prozesse überwachen, Netzwerke
+        untersuchen,
+        Raspberry Pis fernsteuern und wiederkehrende Aufgaben automatisieren.
+      </p>
 
-  <p>
-    Die folgenden Beispiele orientieren sich vor allem an <strong>Debian, Ubuntu und Raspberry Pi OS</strong>.
-    Viele grundlegende Befehle funktionieren jedoch auf praktisch jeder Linux-Distribution.
-  </p>
+      <p>
+        Die folgenden Beispiele orientieren sich vor allem an <strong>Debian, Ubuntu und Raspberry Pi OS</strong>.
+        Viele grundlegende Befehle funktionieren jedoch auf praktisch jeder Linux-Distribution.
+      </p>
 
-  <p class="hint">
-    Das Terminal ist keine Sammlung magischer Befehle. Im Grunde führt man immer ein Programm aus und übergibt ihm Argumente:
-    <code>befehl option argument</code>. Wer dieses Prinzip verstanden hat, hat bereits einen erheblichen Teil der Kommandozeile verstanden.
-  </p>
+      <p class="hint">
+        Das Terminal ist keine Sammlung magischer Befehle. Im Grunde führt man immer ein Programm aus und übergibt ihm
+        Argumente:
+        <code>befehl option argument</code>. Wer dieses Prinzip verstanden hat, hat bereits einen erheblichen Teil der
+        Kommandozeile verstanden.
+      </p>
 
 
-  <!-- =========================================================
+      <!-- =========================================================
        1. GRUNDPRINZIP
        ========================================================= -->
 
-  <h3>1. Wie ein Linux-Befehl aufgebaut ist</h3>
+      <h3>1. Wie ein Linux-Befehl aufgebaut ist</h3>
 
-  <div class="cheat-grid">
+      <div class="cheat-grid">
 
-    <div class="cheat-item">
-      <h4>Grundform</h4>
+        <div class="cheat-item">
+          <h4>Grundform</h4>
 
-      <pre class="cheat-code"><code>befehl option argument</code></pre>
+          <pre class="cheat-code"><code>befehl option argument</code></pre>
 
-      <p>Beispiel:</p>
+          <p>Beispiel:</p>
 
-      <pre class="cheat-code"><code>ls -lah /home</code></pre>
+          <pre class="cheat-code"><code>ls -lah /home</code></pre>
 
-      <ul>
-        <li><code>ls</code> – das auszuführende Programm</li>
-        <li><code>-l</code> – ausführliche Darstellung</li>
-        <li><code>-a</code> – auch versteckte Dateien anzeigen</li>
-        <li><code>-h</code> – Dateigrößen menschenlesbar darstellen</li>
-        <li><code>/home</code> – das Argument bzw. Ziel</li>
-      </ul>
-    </div>
+          <ul>
+            <li><code>ls</code> – das auszuführende Programm</li>
+            <li><code>-l</code> – ausführliche Darstellung</li>
+            <li><code>-a</code> – auch versteckte Dateien anzeigen</li>
+            <li><code>-h</code> – Dateigrößen menschenlesbar darstellen</li>
+            <li><code>/home</code> – das Argument bzw. Ziel</li>
+          </ul>
+        </div>
 
-    <div class="cheat-item">
-      <h4>Kurze Optionen kombinieren</h4>
+        <div class="cheat-item">
+          <h4>Kurze Optionen kombinieren</h4>
 
-      <p>Statt:</p>
+          <p>Statt:</p>
 
-      <pre class="cheat-code"><code>ls -l -a -h</code></pre>
+          <pre class="cheat-code"><code>ls -l -a -h</code></pre>
 
-      <p>kann man bei vielen Programmen schreiben:</p>
+          <p>kann man bei vielen Programmen schreiben:</p>
 
-      <pre class="cheat-code"><code>ls -lah</code></pre>
+          <pre class="cheat-code"><code>ls -lah</code></pre>
 
-      <p>
-        Nicht jede Option funktioniert bei jedem Befehl gleich.
-        <code>-r</code> bedeutet beispielsweise häufig „rekursiv“, ist aber keine universelle Regel.
-      </p>
-    </div>
+          <p>
+            Nicht jede Option funktioniert bei jedem Befehl gleich.
+            <code>-r</code> bedeutet beispielsweise häufig „rekursiv“, ist aber keine universelle Regel.
+          </p>
+        </div>
 
-  </div>
+      </div>
 
 
-  <!-- =========================================================
+      <!-- =========================================================
        2. HILFE
        ========================================================= -->
 
-  <h3>2. Hilfe bekommen – bevor man Befehle errät</h3>
+      <h3>2. Hilfe bekommen – bevor man Befehle errät</h3>
 
-  <div class="cheat-grid">
+      <div class="cheat-grid">
 
-    <div class="cheat-item">
-      <h4><code>man</code> – das Handbuch</h4>
+        <div class="cheat-item">
+          <h4><code>man</code> – das Handbuch</h4>
 
-      <pre class="cheat-code"><code>man ls
+          <pre class="cheat-code"><code>man ls
 man cp
 man ssh</code></pre>
 
-      <p>
-        Öffnet die sogenannte <em>man page</em> eines Programms.
-      </p>
+          <p>
+            Öffnet die sogenannte <em>man page</em> eines Programms.
+          </p>
 
-      <ul>
-        <li><code>↑</code> / <code>↓</code> – scrollen</li>
-        <li><code>/wort</code> – nach einem Begriff suchen</li>
-        <li><code>n</code> – nächster Treffer</li>
-        <li><code>q</code> – schließen</li>
-      </ul>
-    </div>
+          <ul>
+            <li><code>↑</code> / <code>↓</code> – scrollen</li>
+            <li><code>/wort</code> – nach einem Begriff suchen</li>
+            <li><code>n</code> – nächster Treffer</li>
+            <li><code>q</code> – schließen</li>
+          </ul>
+        </div>
 
-    <div class="cheat-item">
-      <h4><code>--help</code> – Kurzfassung</h4>
+        <div class="cheat-item">
+          <h4><code>--help</code> – Kurzfassung</h4>
 
-      <pre class="cheat-code"><code>ls --help
+          <pre class="cheat-code"><code>ls --help
 grep --help
 python3 --help</code></pre>
 
-      <p>
-        Meist schneller als eine vollständige Manual-Seite.
-      </p>
-    </div>
+          <p>
+            Meist schneller als eine vollständige Manual-Seite.
+          </p>
+        </div>
 
-    <div class="cheat-item">
-      <h4>Woher kommt ein Befehl?</h4>
+        <div class="cheat-item">
+          <h4>Woher kommt ein Befehl?</h4>
 
-      <pre class="cheat-code"><code>command -v python3
+          <pre class="cheat-code"><code>command -v python3
 command -v git
 which python3
 type cd
 type ls</code></pre>
 
-      <p>
-        Besonders <code>type</code> ist nützlich, weil manche „Befehle“ keine eigenständigen Programme,
-        sondern Shell-Builtins oder Aliase sind.
-      </p>
-    </div>
+          <p>
+            Besonders <code>type</code> ist nützlich, weil manche „Befehle“ keine eigenständigen Programme,
+            sondern Shell-Builtins oder Aliase sind.
+          </p>
+        </div>
 
-  </div>
+      </div>
 
 
-  <!-- =========================================================
+      <!-- =========================================================
        3. TERMINAL BEDIENEN
        ========================================================= -->
 
-  <h3>3. Tastaturkürzel, die man ständig braucht</h3>
+      <h3>3. Tastaturkürzel, die man ständig braucht</h3>
 
-  <table>
-    <thead>
-      <tr>
-        <th>Kürzel</th>
-        <th>Funktion</th>
-        <th>Warum nützlich?</th>
-      </tr>
-    </thead>
+      <table>
+        <thead>
+          <tr>
+            <th>Kürzel</th>
+            <th>Funktion</th>
+            <th>Warum nützlich?</th>
+          </tr>
+        </thead>
 
-    <tbody>
-      <tr>
-        <td><code>Ctrl+C</code></td>
-        <td>Laufenden Prozess abbrechen</td>
-        <td>Der wichtigste Notausgang des Terminals.</td>
-      </tr>
+        <tbody>
+          <tr>
+            <td><code>Ctrl+C</code></td>
+            <td>Laufenden Prozess abbrechen</td>
+            <td>Der wichtigste Notausgang des Terminals.</td>
+          </tr>
 
-      <tr>
-        <td><code>Ctrl+L</code></td>
-        <td>Terminal leeren</td>
-        <td>Entspricht weitgehend <code>clear</code>.</td>
-      </tr>
+          <tr>
+            <td><code>Ctrl+L</code></td>
+            <td>Terminal leeren</td>
+            <td>Entspricht weitgehend <code>clear</code>.</td>
+          </tr>
 
-      <tr>
-        <td><code>Ctrl+D</code></td>
-        <td>EOF / Sitzung beenden</td>
-        <td>Kann beispielsweise eine SSH-Sitzung oder Shell schließen.</td>
-      </tr>
+          <tr>
+            <td><code>Ctrl+D</code></td>
+            <td>EOF / Sitzung beenden</td>
+            <td>Kann beispielsweise eine SSH-Sitzung oder Shell schließen.</td>
+          </tr>
 
-      <tr>
-        <td><code>Ctrl+A</code></td>
-        <td>Zum Zeilenanfang</td>
-        <td>Praktisch bei langen Befehlen.</td>
-      </tr>
+          <tr>
+            <td><code>Ctrl+A</code></td>
+            <td>Zum Zeilenanfang</td>
+            <td>Praktisch bei langen Befehlen.</td>
+          </tr>
 
-      <tr>
-        <td><code>Ctrl+E</code></td>
-        <td>Zum Zeilenende</td>
-        <td>Das Gegenstück zu <code>Ctrl+A</code>.</td>
-      </tr>
+          <tr>
+            <td><code>Ctrl+E</code></td>
+            <td>Zum Zeilenende</td>
+            <td>Das Gegenstück zu <code>Ctrl+A</code>.</td>
+          </tr>
 
-      <tr>
-        <td><code>Ctrl+U</code></td>
-        <td>Text vor Cursor löschen</td>
-        <td>Sehr hilfreich beim schnellen Korrigieren.</td>
-      </tr>
+          <tr>
+            <td><code>Ctrl+U</code></td>
+            <td>Text vor Cursor löschen</td>
+            <td>Sehr hilfreich beim schnellen Korrigieren.</td>
+          </tr>
 
-      <tr>
-        <td><code>Ctrl+K</code></td>
-        <td>Text nach Cursor löschen</td>
-        <td>Praktisch bei langen Kommandos.</td>
-      </tr>
+          <tr>
+            <td><code>Ctrl+K</code></td>
+            <td>Text nach Cursor löschen</td>
+            <td>Praktisch bei langen Kommandos.</td>
+          </tr>
 
-      <tr>
-        <td><code>TAB</code></td>
-        <td>Autovervollständigung</td>
-        <td>Verhindert Tippfehler bei langen Dateinamen.</td>
-      </tr>
+          <tr>
+            <td><code>TAB</code></td>
+            <td>Autovervollständigung</td>
+            <td>Verhindert Tippfehler bei langen Dateinamen.</td>
+          </tr>
 
-      <tr>
-        <td><code>↑</code> / <code>↓</code></td>
-        <td>Befehlshistorie</td>
-        <td>Frühere Befehle erneut aufrufen und bearbeiten.</td>
-      </tr>
-    </tbody>
-  </table>
+          <tr>
+            <td><code>↑</code> / <code>↓</code></td>
+            <td>Befehlshistorie</td>
+            <td>Frühere Befehle erneut aufrufen und bearbeiten.</td>
+          </tr>
+        </tbody>
+      </table>
 
 
-  <!-- =========================================================
+      <!-- =========================================================
        4. DATEISYSTEM
        ========================================================= -->
 
-  <h3>4. Das Linux-Dateisystem verstehen</h3>
+      <h3>4. Das Linux-Dateisystem verstehen</h3>
 
-  <p>
-    Anders als unter Windows gibt es nicht für jedes Laufwerk einen eigenen Buchstaben wie
-    <code>C:</code> oder <code>D:</code>. Linux verwendet einen einzigen Verzeichnisbaum,
-    dessen oberster Punkt <code>/</code> heißt.
-  </p>
+      <p>
+        Anders als unter Windows gibt es nicht für jedes Laufwerk einen eigenen Buchstaben wie
+        <code>C:</code> oder <code>D:</code>. Linux verwendet einen einzigen Verzeichnisbaum,
+        dessen oberster Punkt <code>/</code> heißt.
+      </p>
 
-  <table>
-    <thead>
-      <tr>
-        <th>Pfad</th>
-        <th>Bedeutung</th>
-      </tr>
-    </thead>
+      <table>
+        <thead>
+          <tr>
+            <th>Pfad</th>
+            <th>Bedeutung</th>
+          </tr>
+        </thead>
 
-    <tbody>
-      <tr>
-        <td><code>/</code></td>
-        <td>Wurzel des gesamten Dateisystems – „root directory“.</td>
-      </tr>
+        <tbody>
+          <tr>
+            <td><code>/</code></td>
+            <td>Wurzel des gesamten Dateisystems – „root directory“.</td>
+          </tr>
 
-      <tr>
-        <td><code>/home</code></td>
-        <td>Home-Verzeichnisse normaler Benutzer.</td>
-      </tr>
+          <tr>
+            <td><code>/home</code></td>
+            <td>Home-Verzeichnisse normaler Benutzer.</td>
+          </tr>
 
-      <tr>
-        <td><code>/home/julian</code></td>
-        <td>Beispiel für das persönliche Home-Verzeichnis eines Benutzers.</td>
-      </tr>
+          <tr>
+            <td><code>/home/julian</code></td>
+            <td>Beispiel für das persönliche Home-Verzeichnis eines Benutzers.</td>
+          </tr>
 
-      <tr>
-        <td><code>/etc</code></td>
-        <td>Systemweite Konfigurationsdateien.</td>
-      </tr>
+          <tr>
+            <td><code>/etc</code></td>
+            <td>Systemweite Konfigurationsdateien.</td>
+          </tr>
 
-      <tr>
-        <td><code>/var</code></td>
-        <td>Veränderliche Daten, etwa Logs, Caches und Serverdaten.</td>
-      </tr>
+          <tr>
+            <td><code>/var</code></td>
+            <td>Veränderliche Daten, etwa Logs, Caches und Serverdaten.</td>
+          </tr>
 
-      <tr>
-        <td><code>/var/log</code></td>
-        <td>Viele klassische Systemprotokolle.</td>
-      </tr>
+          <tr>
+            <td><code>/var/log</code></td>
+            <td>Viele klassische Systemprotokolle.</td>
+          </tr>
 
-      <tr>
-        <td><code>/tmp</code></td>
-        <td>Temporäre Dateien.</td>
-      </tr>
+          <tr>
+            <td><code>/tmp</code></td>
+            <td>Temporäre Dateien.</td>
+          </tr>
 
-      <tr>
-        <td><code>/usr</code></td>
-        <td>Programme, Bibliotheken und gemeinsam genutzte Daten.</td>
-      </tr>
+          <tr>
+            <td><code>/usr</code></td>
+            <td>Programme, Bibliotheken und gemeinsam genutzte Daten.</td>
+          </tr>
 
-      <tr>
-        <td><code>/dev</code></td>
-        <td>Geräte werden unter Linux als Dateien repräsentiert.</td>
-      </tr>
+          <tr>
+            <td><code>/dev</code></td>
+            <td>Geräte werden unter Linux als Dateien repräsentiert.</td>
+          </tr>
 
-      <tr>
-        <td><code>/mnt</code></td>
-        <td>Traditioneller Ort für manuell eingehängte Dateisysteme.</td>
-      </tr>
+          <tr>
+            <td><code>/mnt</code></td>
+            <td>Traditioneller Ort für manuell eingehängte Dateisysteme.</td>
+          </tr>
 
-      <tr>
-        <td><code>/media</code></td>
-        <td>Häufig automatisch eingehängte USB-Sticks und Datenträger.</td>
-      </tr>
+          <tr>
+            <td><code>/media</code></td>
+            <td>Häufig automatisch eingehängte USB-Sticks und Datenträger.</td>
+          </tr>
 
-      <tr>
-        <td><code>/proc</code></td>
-        <td>Virtuelles Dateisystem mit Informationen über Prozesse und Kernel.</td>
-      </tr>
+          <tr>
+            <td><code>/proc</code></td>
+            <td>Virtuelles Dateisystem mit Informationen über Prozesse und Kernel.</td>
+          </tr>
 
-      <tr>
-        <td><code>/sys</code></td>
-        <td>Virtuelle Schnittstelle zu Geräten und Kernel-Subsystemen.</td>
-      </tr>
-    </tbody>
-  </table>
+          <tr>
+            <td><code>/sys</code></td>
+            <td>Virtuelle Schnittstelle zu Geräten und Kernel-Subsystemen.</td>
+          </tr>
+        </tbody>
+      </table>
 
 
-  <!-- =========================================================
+      <!-- =========================================================
        5. PFADE
        ========================================================= -->
 
-  <h3>5. Absolute und relative Pfade</h3>
+      <h3>5. Absolute und relative Pfade</h3>
 
-  <div class="cheat-grid">
+      <div class="cheat-grid">
 
-    <div class="cheat-item">
-      <h4>Absoluter Pfad</h4>
+        <div class="cheat-item">
+          <h4>Absoluter Pfad</h4>
 
-      <pre class="cheat-code"><code>/home/julian/projekte/logger.py</code></pre>
+          <pre class="cheat-code"><code>/home/julian/projekte/logger.py</code></pre>
 
-      <p>
-        Beginnt mit <code>/</code> und beschreibt den vollständigen Weg vom Root-Verzeichnis aus.
-      </p>
-    </div>
+          <p>
+            Beginnt mit <code>/</code> und beschreibt den vollständigen Weg vom Root-Verzeichnis aus.
+          </p>
+        </div>
 
-    <div class="cheat-item">
-      <h4>Relativer Pfad</h4>
+        <div class="cheat-item">
+          <h4>Relativer Pfad</h4>
 
-      <pre class="cheat-code"><code>projekte/logger.py</code></pre>
+          <pre class="cheat-code"><code>projekte/logger.py</code></pre>
 
-      <p>
-        Wird relativ zum aktuellen Arbeitsverzeichnis interpretiert.
-      </p>
-    </div>
+          <p>
+            Wird relativ zum aktuellen Arbeitsverzeichnis interpretiert.
+          </p>
+        </div>
 
-    <div class="cheat-item">
-      <h4>Wichtige Kurzformen</h4>
+        <div class="cheat-item">
+          <h4>Wichtige Kurzformen</h4>
 
-      <ul>
-        <li><code>.</code> – aktuelles Verzeichnis</li>
-        <li><code>..</code> – übergeordnetes Verzeichnis</li>
-        <li><code>~</code> – eigenes Home-Verzeichnis</li>
-        <li><code>-</code> – bei <code>cd</code>: vorheriges Verzeichnis</li>
-      </ul>
+          <ul>
+            <li><code>.</code> – aktuelles Verzeichnis</li>
+            <li><code>..</code> – übergeordnetes Verzeichnis</li>
+            <li><code>~</code> – eigenes Home-Verzeichnis</li>
+            <li><code>-</code> – bei <code>cd</code>: vorheriges Verzeichnis</li>
+          </ul>
 
-      <pre class="cheat-code"><code>cd ..
+          <pre class="cheat-code"><code>cd ..
 cd ~
 cd ~/projekte
 cd -</code></pre>
-    </div>
+        </div>
 
-  </div>
+      </div>
 
 
-  <!-- =========================================================
+      <!-- =========================================================
        6. NAVIGATION
        ========================================================= -->
 
-  <h3>6. Im Dateisystem navigieren</h3>
+      <h3>6. Im Dateisystem navigieren</h3>
 
-  <div class="cheat-grid">
+      <div class="cheat-grid">
 
-    <div class="cheat-item">
-      <h4><code>pwd</code></h4>
+        <div class="cheat-item">
+          <h4><code>pwd</code></h4>
 
-      <pre class="cheat-code"><code>pwd</code></pre>
+          <pre class="cheat-code"><code>pwd</code></pre>
 
-      <p>
-        Zeigt den absoluten Pfad des aktuellen Arbeitsverzeichnisses.
-      </p>
-    </div>
+          <p>
+            Zeigt den absoluten Pfad des aktuellen Arbeitsverzeichnisses.
+          </p>
+        </div>
 
-    <div class="cheat-item">
-      <h4><code>ls</code></h4>
+        <div class="cheat-item">
+          <h4><code>ls</code></h4>
 
-      <pre class="cheat-code"><code>ls
+          <pre class="cheat-code"><code>ls
 ls -l
 ls -la
 ls -lah
 ls /var/log</code></pre>
 
-      <p>
-        Zeigt Dateien und Verzeichnisse.
-      </p>
+          <p>
+            Zeigt Dateien und Verzeichnisse.
+          </p>
 
-      <ul>
-        <li><code>-l</code> – Details</li>
-        <li><code>-a</code> – inklusive versteckter Dateien</li>
-        <li><code>-h</code> – KB, MB, GB statt Rohbytes</li>
-      </ul>
-    </div>
+          <ul>
+            <li><code>-l</code> – Details</li>
+            <li><code>-a</code> – inklusive versteckter Dateien</li>
+            <li><code>-h</code> – KB, MB, GB statt Rohbytes</li>
+          </ul>
+        </div>
 
-    <div class="cheat-item">
-      <h4><code>cd</code></h4>
+        <div class="cheat-item">
+          <h4><code>cd</code></h4>
 
-      <pre class="cheat-code"><code>cd ~/projekte
+          <pre class="cheat-code"><code>cd ~/projekte
 cd ..
 cd /
 cd ~
 cd -</code></pre>
 
-      <p>
-        Ändert das aktuelle Arbeitsverzeichnis.
-      </p>
-    </div>
+          <p>
+            Ändert das aktuelle Arbeitsverzeichnis.
+          </p>
+        </div>
 
-  </div>
+      </div>
 
 
-  <!-- =========================================================
+      <!-- =========================================================
        7. DATEIEN
        ========================================================= -->
 
-  <h3>7. Dateien und Verzeichnisse erstellen</h3>
+      <h3>7. Dateien und Verzeichnisse erstellen</h3>
 
-  <div class="cheat-grid">
+      <div class="cheat-grid">
 
-    <div class="cheat-item">
-      <h4><code>mkdir</code> – Verzeichnis erstellen</h4>
+        <div class="cheat-item">
+          <h4><code>mkdir</code> – Verzeichnis erstellen</h4>
 
-      <pre class="cheat-code"><code>mkdir logs
+          <pre class="cheat-code"><code>mkdir logs
 mkdir projekt
 mkdir -p projekt/data/archive</code></pre>
 
-      <p>
-        Mit <code>-p</code> werden fehlende Zwischenverzeichnisse automatisch mit erstellt.
-      </p>
-    </div>
+          <p>
+            Mit <code>-p</code> werden fehlende Zwischenverzeichnisse automatisch mit erstellt.
+          </p>
+        </div>
 
-    <div class="cheat-item">
-      <h4><code>touch</code> – Datei anlegen</h4>
+        <div class="cheat-item">
+          <h4><code>touch</code> – Datei anlegen</h4>
 
-      <pre class="cheat-code"><code>touch notes.txt
+          <pre class="cheat-code"><code>touch notes.txt
 touch logger.py</code></pre>
 
-      <p>
-        Existiert die Datei bereits, wird lediglich ihr Zeitstempel aktualisiert.
-      </p>
-    </div>
+          <p>
+            Existiert die Datei bereits, wird lediglich ihr Zeitstempel aktualisiert.
+          </p>
+        </div>
 
-  </div>
+      </div>
 
 
-  <!-- =========================================================
+      <!-- =========================================================
        8. KOPIEREN / VERSCHIEBEN
        ========================================================= -->
 
-  <h3>8. Dateien kopieren, verschieben und umbenennen</h3>
+      <h3>8. Dateien kopieren, verschieben und umbenennen</h3>
 
-  <div class="cheat-grid">
+      <div class="cheat-grid">
 
-    <div class="cheat-item">
-      <h4><code>cp</code> – kopieren</h4>
+        <div class="cheat-item">
+          <h4><code>cp</code> – kopieren</h4>
 
-      <pre class="cheat-code"><code>cp config.txt config_backup.txt
+          <pre class="cheat-code"><code>cp config.txt config_backup.txt
 cp config.txt ~/backup/
 cp -r projekt projekt_backup
 cp -rv projekt ~/backup/</code></pre>
 
-      <ul>
-        <li><code>-r</code> – Verzeichnisse rekursiv kopieren</li>
-        <li><code>-v</code> – anzeigen, was kopiert wird</li>
-        <li><code>-i</code> – vor Überschreiben nachfragen</li>
-      </ul>
-    </div>
+          <ul>
+            <li><code>-r</code> – Verzeichnisse rekursiv kopieren</li>
+            <li><code>-v</code> – anzeigen, was kopiert wird</li>
+            <li><code>-i</code> – vor Überschreiben nachfragen</li>
+          </ul>
+        </div>
 
-    <div class="cheat-item">
-      <h4><code>mv</code> – verschieben oder umbenennen</h4>
+        <div class="cheat-item">
+          <h4><code>mv</code> – verschieben oder umbenennen</h4>
 
-      <pre class="cheat-code"><code>mv alt.txt neu.txt
+          <pre class="cheat-code"><code>mv alt.txt neu.txt
 mv messung.csv data/
 mv projekt ~/archive/</code></pre>
 
-      <p>
-        Linux verwendet denselben Befehl für Verschieben und Umbenennen.
-      </p>
-    </div>
+          <p>
+            Linux verwendet denselben Befehl für Verschieben und Umbenennen.
+          </p>
+        </div>
 
-  </div>
+      </div>
 
 
-  <!-- =========================================================
+      <!-- =========================================================
        9. LÖSCHEN
        ========================================================= -->
 
-  <h3>9. Dateien löschen – hier beginnt der gefährliche Teil</h3>
+      <h3>9. Dateien löschen – hier beginnt der gefährliche Teil</h3>
 
-  <div class="cheat-grid">
+      <div class="cheat-grid">
 
-    <div class="cheat-item">
-      <h4><code>rm</code></h4>
+        <div class="cheat-item">
+          <h4><code>rm</code></h4>
 
-      <pre class="cheat-code"><code>rm datei.txt
+          <pre class="cheat-code"><code>rm datei.txt
 rm -i datei.txt
 rm -r alter_ordner</code></pre>
 
-      <ul>
-        <li><code>-i</code> – vor dem Löschen nachfragen</li>
-        <li><code>-r</code> – Verzeichnisse rekursiv löschen</li>
-        <li><code>-f</code> – ohne Nachfrage erzwingen</li>
-      </ul>
-    </div>
+          <ul>
+            <li><code>-i</code> – vor dem Löschen nachfragen</li>
+            <li><code>-r</code> – Verzeichnisse rekursiv löschen</li>
+            <li><code>-f</code> – ohne Nachfrage erzwingen</li>
+          </ul>
+        </div>
 
-    <div class="cheat-item">
-      <h4><code>rmdir</code></h4>
+        <div class="cheat-item">
+          <h4><code>rmdir</code></h4>
 
-      <pre class="cheat-code"><code>rmdir leerer_ordner</code></pre>
+          <pre class="cheat-code"><code>rmdir leerer_ordner</code></pre>
 
-      <p>
-        Löscht nur leere Verzeichnisse und ist deshalb deutlich weniger gefährlich.
+          <p>
+            Löscht nur leere Verzeichnisse und ist deshalb deutlich weniger gefährlich.
+          </p>
+        </div>
+
+      </div>
+
+      <p class="hint">
+        <strong>Wichtig:</strong> Die Shell besitzt normalerweise keinen Papierkorb.
+        <code>rm</code> bedeutet tatsächlich löschen. Besonders <code>sudo rm -rf ...</code>
+        sollte niemals blind aus irgendeiner Anleitung kopiert werden.
       </p>
-    </div>
-
-  </div>
-
-  <p class="hint">
-    <strong>Wichtig:</strong> Die Shell besitzt normalerweise keinen Papierkorb.
-    <code>rm</code> bedeutet tatsächlich löschen. Besonders <code>sudo rm -rf ...</code>
-    sollte niemals blind aus irgendeiner Anleitung kopiert werden.
-  </p>
 
 
-  <!-- =========================================================
+      <!-- =========================================================
        10. DATEIEN LESEN
        ========================================================= -->
 
-  <h3>10. Dateien ansehen</h3>
+      <h3>10. Dateien ansehen</h3>
 
-  <div class="cheat-grid">
+      <div class="cheat-grid">
 
-    <div class="cheat-item">
-      <h4><code>cat</code></h4>
+        <div class="cheat-item">
+          <h4><code>cat</code></h4>
 
-      <pre class="cheat-code"><code>cat config.txt</code></pre>
+          <pre class="cheat-code"><code>cat config.txt</code></pre>
 
-      <p>
-        Gibt die gesamte Datei auf einmal aus. Ideal für kurze Dateien.
-      </p>
-    </div>
+          <p>
+            Gibt die gesamte Datei auf einmal aus. Ideal für kurze Dateien.
+          </p>
+        </div>
 
-    <div class="cheat-item">
-      <h4><code>less</code></h4>
+        <div class="cheat-item">
+          <h4><code>less</code></h4>
 
-      <pre class="cheat-code"><code>less /var/log/syslog</code></pre>
+          <pre class="cheat-code"><code>less /var/log/syslog</code></pre>
 
-      <p>
-        Für lange Dateien meist wesentlich angenehmer als <code>cat</code>.
-      </p>
+          <p>
+            Für lange Dateien meist wesentlich angenehmer als <code>cat</code>.
+          </p>
 
-      <ul>
-        <li><code>/wort</code> – suchen</li>
-        <li><code>n</code> – nächster Treffer</li>
-        <li><code>q</code> – beenden</li>
-      </ul>
-    </div>
+          <ul>
+            <li><code>/wort</code> – suchen</li>
+            <li><code>n</code> – nächster Treffer</li>
+            <li><code>q</code> – beenden</li>
+          </ul>
+        </div>
 
-    <div class="cheat-item">
-      <h4><code>head</code></h4>
+        <div class="cheat-item">
+          <h4><code>head</code></h4>
 
-      <pre class="cheat-code"><code>head datei.txt
+          <pre class="cheat-code"><code>head datei.txt
 head -n 20 datei.txt</code></pre>
 
-      <p>Zeigt den Anfang einer Datei.</p>
-    </div>
+          <p>Zeigt den Anfang einer Datei.</p>
+        </div>
 
-    <div class="cheat-item">
-      <h4><code>tail</code></h4>
+        <div class="cheat-item">
+          <h4><code>tail</code></h4>
 
-      <pre class="cheat-code"><code>tail datei.txt
+          <pre class="cheat-code"><code>tail datei.txt
 tail -n 50 log.txt
 tail -f log.txt</code></pre>
 
-      <p>
-        <code>tail -f</code> beobachtet eine Datei live und ist deshalb hervorragend für Logs geeignet.
-      </p>
-    </div>
+          <p>
+            <code>tail -f</code> beobachtet eine Datei live und ist deshalb hervorragend für Logs geeignet.
+          </p>
+        </div>
 
-  </div>
+      </div>
 
 
-  <!-- =========================================================
+      <!-- =========================================================
        11. TEXTEDITOR
        ========================================================= -->
 
-  <h3>11. Dateien direkt im Terminal bearbeiten</h3>
+      <h3>11. Dateien direkt im Terminal bearbeiten</h3>
 
-  <div class="cheat-grid">
+      <div class="cheat-grid">
 
-    <div class="cheat-item">
-      <h4><code>nano</code></h4>
+        <div class="cheat-item">
+          <h4><code>nano</code></h4>
 
-      <pre class="cheat-code"><code>nano config.txt
+          <pre class="cheat-code"><code>nano config.txt
 nano logger.py
 sudo nano /etc/hosts</code></pre>
 
-      <ul>
-        <li><code>Ctrl+O</code> – speichern</li>
-        <li><code>Enter</code> – Dateinamen bestätigen</li>
-        <li><code>Ctrl+X</code> – schließen</li>
-        <li><code>Ctrl+W</code> – suchen</li>
-        <li><code>Ctrl+K</code> – Zeile ausschneiden</li>
-        <li><code>Ctrl+U</code> – wieder einfügen</li>
-      </ul>
-    </div>
+          <ul>
+            <li><code>Ctrl+O</code> – speichern</li>
+            <li><code>Enter</code> – Dateinamen bestätigen</li>
+            <li><code>Ctrl+X</code> – schließen</li>
+            <li><code>Ctrl+W</code> – suchen</li>
+            <li><code>Ctrl+K</code> – Zeile ausschneiden</li>
+            <li><code>Ctrl+U</code> – wieder einfügen</li>
+          </ul>
+        </div>
 
-  </div>
+      </div>
 
 
-  <!-- =========================================================
+      <!-- =========================================================
        12. DATEIEN FINDEN
        ========================================================= -->
 
-  <h3>12. Dateien und Verzeichnisse suchen</h3>
+      <h3>12. Dateien und Verzeichnisse suchen</h3>
 
-  <div class="cheat-grid">
+      <div class="cheat-grid">
 
-    <div class="cheat-item">
-      <h4><code>find</code></h4>
+        <div class="cheat-item">
+          <h4><code>find</code></h4>
 
-      <pre class="cheat-code"><code>find . -name "logger.py"
+          <pre class="cheat-code"><code>find . -name "logger.py"
 find . -name "*.py"
 find ~/projekte -type f -name "*.json"
 find . -type d -name "backup"
 find . -type f -size +100M</code></pre>
 
-      <ul>
-        <li><code>.</code> – Suche hier beginnen</li>
-        <li><code>-type f</code> – nur Dateien</li>
-        <li><code>-type d</code> – nur Verzeichnisse</li>
-        <li><code>-name</code> – Name suchen</li>
-        <li><code>-iname</code> – Groß-/Kleinschreibung ignorieren</li>
-      </ul>
-    </div>
+          <ul>
+            <li><code>.</code> – Suche hier beginnen</li>
+            <li><code>-type f</code> – nur Dateien</li>
+            <li><code>-type d</code> – nur Verzeichnisse</li>
+            <li><code>-name</code> – Name suchen</li>
+            <li><code>-iname</code> – Groß-/Kleinschreibung ignorieren</li>
+          </ul>
+        </div>
 
-    <div class="cheat-item">
-      <h4>Datei nach Änderungszeit suchen</h4>
+        <div class="cheat-item">
+          <h4>Datei nach Änderungszeit suchen</h4>
 
-      <pre class="cheat-code"><code>find . -type f -mtime -1
+          <pre class="cheat-code"><code>find . -type f -mtime -1
 find . -type f -mtime -7</code></pre>
 
-      <p>
-        Findet Dateien, die innerhalb des letzten Tages bzw. der letzten sieben Tage geändert wurden.
-      </p>
-    </div>
+          <p>
+            Findet Dateien, die innerhalb des letzten Tages bzw. der letzten sieben Tage geändert wurden.
+          </p>
+        </div>
 
-  </div>
+      </div>
 
 
-  <!-- =========================================================
+      <!-- =========================================================
        13. GREP
        ========================================================= -->
 
-  <h3>13. Text durchsuchen mit <code>grep</code></h3>
+      <h3>13. Text durchsuchen mit <code>grep</code></h3>
 
-  <div class="cheat-grid">
+      <div class="cheat-grid">
 
-    <div class="cheat-item">
-      <h4>Einfache Suche</h4>
+        <div class="cheat-item">
+          <h4>Einfache Suche</h4>
 
-      <pre class="cheat-code"><code>grep "error" log.txt
+          <pre class="cheat-code"><code>grep "error" log.txt
 grep -i "error" log.txt
 grep -n "error" log.txt</code></pre>
 
-      <ul>
-        <li><code>-i</code> – Groß-/Kleinschreibung ignorieren</li>
-        <li><code>-n</code> – Zeilennummer anzeigen</li>
-      </ul>
-    </div>
+          <ul>
+            <li><code>-i</code> – Groß-/Kleinschreibung ignorieren</li>
+            <li><code>-n</code> – Zeilennummer anzeigen</li>
+          </ul>
+        </div>
 
-    <div class="cheat-item">
-      <h4>Rekursiv durchsuchen</h4>
+        <div class="cheat-item">
+          <h4>Rekursiv durchsuchen</h4>
 
-      <pre class="cheat-code"><code>grep -r "BME280" .
+          <pre class="cheat-code"><code>grep -r "BME280" .
 grep -rin "error" ~/projekte</code></pre>
 
-      <p>
-        Ideal, wenn man nicht mehr weiß, in welcher Datei ein bestimmter Begriff vorkommt.
-      </p>
-    </div>
+          <p>
+            Ideal, wenn man nicht mehr weiß, in welcher Datei ein bestimmter Begriff vorkommt.
+          </p>
+        </div>
 
-  </div>
+      </div>
 
 
-  <!-- =========================================================
+      <!-- =========================================================
        14. WILDCARDS
        ========================================================= -->
 
-  <h3>14. Wildcards – mehrere Dateien gleichzeitig ansprechen</h3>
+      <h3>14. Wildcards – mehrere Dateien gleichzeitig ansprechen</h3>
 
-  <table>
-    <thead>
-      <tr>
-        <th>Muster</th>
-        <th>Bedeutung</th>
-        <th>Beispiel</th>
-      </tr>
-    </thead>
+      <table>
+        <thead>
+          <tr>
+            <th>Muster</th>
+            <th>Bedeutung</th>
+            <th>Beispiel</th>
+          </tr>
+        </thead>
 
-    <tbody>
-      <tr>
-        <td><code>*</code></td>
-        <td>Beliebig viele Zeichen</td>
-        <td><code>ls *.jpg</code></td>
-      </tr>
+        <tbody>
+          <tr>
+            <td><code>*</code></td>
+            <td>Beliebig viele Zeichen</td>
+            <td><code>ls *.jpg</code></td>
+          </tr>
 
-      <tr>
-        <td><code>?</code></td>
-        <td>Genau ein Zeichen</td>
-        <td><code>ls bild?.jpg</code></td>
-      </tr>
+          <tr>
+            <td><code>?</code></td>
+            <td>Genau ein Zeichen</td>
+            <td><code>ls bild?.jpg</code></td>
+          </tr>
 
-      <tr>
-        <td><code>[123]</code></td>
-        <td>Eines der angegebenen Zeichen</td>
-        <td><code>ls bild[123].jpg</code></td>
-      </tr>
-    </tbody>
-  </table>
+          <tr>
+            <td><code>[123]</code></td>
+            <td>Eines der angegebenen Zeichen</td>
+            <td><code>ls bild[123].jpg</code></td>
+          </tr>
+        </tbody>
+      </table>
 
-  <pre class="cheat-code"><code>cp *.jpg bilder/
+      <pre class="cheat-code"><code>cp *.jpg bilder/
 rm *.tmp
 ls sensor_2026-*.csv</code></pre>
 
-  <p class="hint">
-    Vor einem destruktiven Befehl mit Wildcards ist ein Test mit <code>ls</code> klug:
-    erst <code>ls *.tmp</code>, dann gegebenenfalls <code>rm *.tmp</code>.
-  </p>
+      <p class="hint">
+        Vor einem destruktiven Befehl mit Wildcards ist ein Test mit <code>ls</code> klug:
+        erst <code>ls *.tmp</code>, dann gegebenenfalls <code>rm *.tmp</code>.
+      </p>
 
 
-  <!-- =========================================================
+      <!-- =========================================================
        15. DATEINAMEN UND QUOTING
        ========================================================= -->
 
-  <h3>15. Leerzeichen und Sonderzeichen in Dateinamen</h3>
+      <h3>15. Leerzeichen und Sonderzeichen in Dateinamen</h3>
 
-  <p>Ein Leerzeichen trennt normalerweise Argumente:</p>
+      <p>Ein Leerzeichen trennt normalerweise Argumente:</p>
 
-  <pre class="cheat-code"><code>cd Mein Projekt</code></pre>
+      <pre class="cheat-code"><code>cd Mein Projekt</code></pre>
 
-  <p>
-    würde daher als zwei Argumente interpretiert. Richtig:
-  </p>
+      <p>
+        würde daher als zwei Argumente interpretiert. Richtig:
+      </p>
 
-  <pre class="cheat-code"><code>cd "Mein Projekt"
+      <pre class="cheat-code"><code>cd "Mein Projekt"
 cd 'Mein Projekt'
 cd Mein\ Projekt</code></pre>
 
-  <p>
-    In Skripten ist sauberes Quoting besonders wichtig. Variablen sollten häufig in doppelte Anführungszeichen gesetzt werden:
-  </p>
+      <p>
+        In Skripten ist sauberes Quoting besonders wichtig. Variablen sollten häufig in doppelte Anführungszeichen
+        gesetzt werden:
+      </p>
 
-  <pre class="cheat-code"><code>cp "$datei" "$ziel"</code></pre>
+      <pre class="cheat-code"><code>cp "$datei" "$ziel"</code></pre>
 
 
-  <!-- =========================================================
+      <!-- =========================================================
        16. UMleitungen
        ========================================================= -->
 
-  <h3>16. Ein- und Ausgabe umleiten</h3>
+      <h3>16. Ein- und Ausgabe umleiten</h3>
 
-  <p>
-    Linux-Programme besitzen standardmäßig drei Datenströme:
-    <strong>stdin</strong> für Eingaben, <strong>stdout</strong> für normale Ausgaben und
-    <strong>stderr</strong> für Fehlermeldungen.
-  </p>
+      <p>
+        Linux-Programme besitzen standardmäßig drei Datenströme:
+        <strong>stdin</strong> für Eingaben, <strong>stdout</strong> für normale Ausgaben und
+        <strong>stderr</strong> für Fehlermeldungen.
+      </p>
 
-  <table>
-    <thead>
-      <tr>
-        <th>Operator</th>
-        <th>Bedeutung</th>
-        <th>Beispiel</th>
-      </tr>
-    </thead>
+      <table>
+        <thead>
+          <tr>
+            <th>Operator</th>
+            <th>Bedeutung</th>
+            <th>Beispiel</th>
+          </tr>
+        </thead>
 
-    <tbody>
-      <tr>
-        <td><code>&gt;</code></td>
-        <td>Ausgabe in Datei schreiben und vorhandenen Inhalt ersetzen</td>
-        <td><code>ls &gt; files.txt</code></td>
-      </tr>
+        <tbody>
+          <tr>
+            <td><code>&gt;</code></td>
+            <td>Ausgabe in Datei schreiben und vorhandenen Inhalt ersetzen</td>
+            <td><code>ls &gt; files.txt</code></td>
+          </tr>
 
-      <tr>
-        <td><code>&gt;&gt;</code></td>
-        <td>Ausgabe an Datei anhängen</td>
-        <td><code>date &gt;&gt; log.txt</code></td>
-      </tr>
+          <tr>
+            <td><code>&gt;&gt;</code></td>
+            <td>Ausgabe an Datei anhängen</td>
+            <td><code>date &gt;&gt; log.txt</code></td>
+          </tr>
 
-      <tr>
-        <td><code>&lt;</code></td>
-        <td>Datei als Eingabe verwenden</td>
-        <td><code>sort &lt; namen.txt</code></td>
-      </tr>
+          <tr>
+            <td><code>&lt;</code></td>
+            <td>Datei als Eingabe verwenden</td>
+            <td><code>sort &lt; namen.txt</code></td>
+          </tr>
 
-      <tr>
-        <td><code>2&gt;</code></td>
-        <td>Fehlermeldungen umleiten</td>
-        <td><code>befehl 2&gt; errors.txt</code></td>
-      </tr>
+          <tr>
+            <td><code>2&gt;</code></td>
+            <td>Fehlermeldungen umleiten</td>
+            <td><code>befehl 2&gt; errors.txt</code></td>
+          </tr>
 
-      <tr>
-        <td><code>2&gt;&amp;1</code></td>
-        <td>Fehlerausgabe mit Standardausgabe zusammenführen</td>
-        <td><code>befehl &gt; log.txt 2&gt;&amp;1</code></td>
-      </tr>
-    </tbody>
-  </table>
+          <tr>
+            <td><code>2&gt;&amp;1</code></td>
+            <td>Fehlerausgabe mit Standardausgabe zusammenführen</td>
+            <td><code>befehl &gt; log.txt 2&gt;&amp;1</code></td>
+          </tr>
+        </tbody>
+      </table>
 
-  <p>Beispiele:</p>
+      <p>Beispiele:</p>
 
-  <pre class="cheat-code"><code>echo "Messung gestartet" &gt; log.txt
+      <pre class="cheat-code"><code>echo "Messung gestartet" &gt; log.txt
 date &gt;&gt; log.txt
 python3 logger.py &gt;&gt; logger.log 2&gt;&amp;1</code></pre>
 
 
-  <!-- =========================================================
+      <!-- =========================================================
        17. PIPES
        ========================================================= -->
 
-  <h3>17. Pipes – die eigentliche Superkraft der Shell</h3>
+      <h3>17. Pipes – die eigentliche Superkraft der Shell</h3>
 
-  <p>
-    Der Operator <code>|</code> reicht die Ausgabe eines Programms direkt als Eingabe an das nächste Programm weiter.
-  </p>
+      <p>
+        Der Operator <code>|</code> reicht die Ausgabe eines Programms direkt als Eingabe an das nächste Programm
+        weiter.
+      </p>
 
-  <pre class="cheat-code"><code>ps aux | grep python
+      <pre class="cheat-code"><code>ps aux | grep python
 ls -lah | less
 history | grep ssh
 cat log.txt | grep "error"</code></pre>
 
-  <p>
-    Das letzte Beispiel kann kürzer geschrieben werden:
-  </p>
+      <p>
+        Das letzte Beispiel kann kürzer geschrieben werden:
+      </p>
 
-  <pre class="cheat-code"><code>grep "error" log.txt</code></pre>
+      <pre class="cheat-code"><code>grep "error" log.txt</code></pre>
 
-  <p class="hint">
-    Unix folgt stark dem Prinzip: kleine Programme erledigen eine Sache gut und werden miteinander kombiniert.
-    Eine Shell-Pipeline ist deshalb gewissermaßen Lego für Datenströme.
-  </p>
+      <p class="hint">
+        Unix folgt stark dem Prinzip: kleine Programme erledigen eine Sache gut und werden miteinander kombiniert.
+        Eine Shell-Pipeline ist deshalb gewissermaßen Lego für Datenströme.
+      </p>
 
 
-  <!-- =========================================================
+      <!-- =========================================================
        18. TEXTWERKZEUGE
        ========================================================= -->
 
-  <h3>18. Nützliche Werkzeuge zur Textverarbeitung</h3>
+      <h3>18. Nützliche Werkzeuge zur Textverarbeitung</h3>
 
-  <div class="cheat-grid">
+      <div class="cheat-grid">
 
-    <div class="cheat-item">
-      <h4><code>wc</code></h4>
+        <div class="cheat-item">
+          <h4><code>wc</code></h4>
 
-      <pre class="cheat-code"><code>wc datei.txt
+          <pre class="cheat-code"><code>wc datei.txt
 wc -l datei.txt
 wc -w datei.txt</code></pre>
 
-      <p>
-        Zählt unter anderem Zeilen und Wörter.
-      </p>
-    </div>
+          <p>
+            Zählt unter anderem Zeilen und Wörter.
+          </p>
+        </div>
 
-    <div class="cheat-item">
-      <h4><code>sort</code></h4>
+        <div class="cheat-item">
+          <h4><code>sort</code></h4>
 
-      <pre class="cheat-code"><code>sort namen.txt
+          <pre class="cheat-code"><code>sort namen.txt
 sort -n zahlen.txt
 sort -r namen.txt</code></pre>
-    </div>
+        </div>
 
-    <div class="cheat-item">
-      <h4><code>uniq</code></h4>
+        <div class="cheat-item">
+          <h4><code>uniq</code></h4>
 
-      <pre class="cheat-code"><code>sort namen.txt | uniq
+          <pre class="cheat-code"><code>sort namen.txt | uniq
 sort namen.txt | uniq -c</code></pre>
 
-      <p>
-        <code>uniq</code> erkennt nur unmittelbar aufeinanderfolgende Duplikate;
-        deshalb wird häufig vorher sortiert.
-      </p>
-    </div>
+          <p>
+            <code>uniq</code> erkennt nur unmittelbar aufeinanderfolgende Duplikate;
+            deshalb wird häufig vorher sortiert.
+          </p>
+        </div>
 
-    <div class="cheat-item">
-      <h4><code>cut</code></h4>
+        <div class="cheat-item">
+          <h4><code>cut</code></h4>
 
-      <pre class="cheat-code"><code>cut -d "," -f 1 daten.csv</code></pre>
+          <pre class="cheat-code"><code>cut -d "," -f 1 daten.csv</code></pre>
 
-      <p>
-        Gibt hier die erste Spalte einer kommaseparierten Datei aus.
-      </p>
-    </div>
+          <p>
+            Gibt hier die erste Spalte einer kommaseparierten Datei aus.
+          </p>
+        </div>
 
-  </div>
+      </div>
 
 
-  <!-- =========================================================
+      <!-- =========================================================
        19. TEE
        ========================================================= -->
 
-  <h3>19. Ausgabe gleichzeitig anzeigen und speichern – <code>tee</code></h3>
+      <h3>19. Ausgabe gleichzeitig anzeigen und speichern – <code>tee</code></h3>
 
-  <pre class="cheat-code"><code>python3 logger.py | tee logger.log
+      <pre class="cheat-code"><code>python3 logger.py | tee logger.log
 python3 logger.py | tee -a logger.log</code></pre>
 
-  <p>
-    <code>-a</code> hängt an eine bestehende Datei an.
-  </p>
+      <p>
+        <code>-a</code> hängt an eine bestehende Datei an.
+      </p>
 
-  <p>
-    <code>tee</code> ist außerdem nützlich, wenn eine Datei Root-Rechte benötigt:
-  </p>
+      <p>
+        <code>tee</code> ist außerdem nützlich, wenn eine Datei Root-Rechte benötigt:
+      </p>
 
-  <pre class="cheat-code"><code>echo "wert" | sudo tee /etc/beispiel.conf</code></pre>
+      <pre class="cheat-code"><code>echo "wert" | sudo tee /etc/beispiel.conf</code></pre>
 
-  <p>
-    Denn bei:
-  </p>
+      <p>
+        Denn bei:
+      </p>
 
-  <pre class="cheat-code"><code>sudo echo "wert" &gt; /etc/beispiel.conf</code></pre>
+      <pre class="cheat-code"><code>sudo echo "wert" &gt; /etc/beispiel.conf</code></pre>
 
-  <p>
-    läuft zwar <code>echo</code> mit <code>sudo</code>, die Umleitung <code>&gt;</code> wird aber weiterhin von der normalen Shell ausgeführt.
-  </p>
+      <p>
+        läuft zwar <code>echo</code> mit <code>sudo</code>, die Umleitung <code>&gt;</code> wird aber weiterhin von der
+        normalen Shell ausgeführt.
+      </p>
 
 
-  <!-- =========================================================
+      <!-- =========================================================
        20. BEFEHLE VERKETTEN
        ========================================================= -->
 
-  <h3>20. Befehle logisch miteinander verknüpfen</h3>
+      <h3>20. Befehle logisch miteinander verknüpfen</h3>
 
-  <table>
-    <thead>
-      <tr>
-        <th>Operator</th>
-        <th>Bedeutung</th>
-      </tr>
-    </thead>
+      <table>
+        <thead>
+          <tr>
+            <th>Operator</th>
+            <th>Bedeutung</th>
+          </tr>
+        </thead>
 
-    <tbody>
-      <tr>
-        <td><code>;</code></td>
-        <td>Nächsten Befehl unabhängig vom Erfolg ausführen.</td>
-      </tr>
+        <tbody>
+          <tr>
+            <td><code>;</code></td>
+            <td>Nächsten Befehl unabhängig vom Erfolg ausführen.</td>
+          </tr>
 
-      <tr>
-        <td><code>&amp;&amp;</code></td>
-        <td>Nächsten Befehl nur ausführen, wenn der vorherige erfolgreich war.</td>
-      </tr>
+          <tr>
+            <td><code>&amp;&amp;</code></td>
+            <td>Nächsten Befehl nur ausführen, wenn der vorherige erfolgreich war.</td>
+          </tr>
 
-      <tr>
-        <td><code>||</code></td>
-        <td>Nächsten Befehl nur ausführen, wenn der vorherige fehlgeschlagen ist.</td>
-      </tr>
+          <tr>
+            <td><code>||</code></td>
+            <td>Nächsten Befehl nur ausführen, wenn der vorherige fehlgeschlagen ist.</td>
+          </tr>
 
-      <tr>
-        <td><code>&amp;</code></td>
-        <td>Prozess im Hintergrund starten.</td>
-      </tr>
-    </tbody>
-  </table>
+          <tr>
+            <td><code>&amp;</code></td>
+            <td>Prozess im Hintergrund starten.</td>
+          </tr>
+        </tbody>
+      </table>
 
-  <pre class="cheat-code"><code>sudo apt update &amp;&amp; sudo apt upgrade
+      <pre class="cheat-code"><code>sudo apt update &amp;&amp; sudo apt upgrade
 
 mkdir backup &amp;&amp; cp config.txt backup/
 
@@ -2125,527 +2132,527 @@ python3 logger.py || echo "Logger fehlgeschlagen"
 python3 logger.py &amp;</code></pre>
 
 
-  <!-- =========================================================
+      <!-- =========================================================
        21. EXIT CODE
        ========================================================= -->
 
-  <h3>21. Hat ein Befehl funktioniert?</h3>
+      <h3>21. Hat ein Befehl funktioniert?</h3>
 
-  <pre class="cheat-code"><code>echo $?</code></pre>
+      <pre class="cheat-code"><code>echo $?</code></pre>
 
-  <p>
-    Zeigt den Exit-Code des zuletzt ausgeführten Programms.
-  </p>
+      <p>
+        Zeigt den Exit-Code des zuletzt ausgeführten Programms.
+      </p>
 
-  <ul>
-    <li><code>0</code> – erfolgreich</li>
-    <li>ungleich <code>0</code> – Fehler oder besonderer Status</li>
-  </ul>
+      <ul>
+        <li><code>0</code> – erfolgreich</li>
+        <li>ungleich <code>0</code> – Fehler oder besonderer Status</li>
+      </ul>
 
-  <pre class="cheat-code"><code>grep "BME280" config.txt
+      <pre class="cheat-code"><code>grep "BME280" config.txt
 echo $?</code></pre>
 
 
-  <!-- =========================================================
+      <!-- =========================================================
        22. HISTORY
        ========================================================= -->
 
-  <h3>22. Befehlshistorie</h3>
+      <h3>22. Befehlshistorie</h3>
 
-  <pre class="cheat-code"><code>history
+      <pre class="cheat-code"><code>history
 history | grep ssh
 history | grep apt</code></pre>
 
-  <p>Der letzte Befehl kann mit:</p>
+      <p>Der letzte Befehl kann mit:</p>
 
-  <pre class="cheat-code"><code>!!</code></pre>
+      <pre class="cheat-code"><code>!!</code></pre>
 
-  <p>erneut ausgeführt werden.</p>
+      <p>erneut ausgeführt werden.</p>
 
-  <p>Ein klassischer Anwendungsfall:</p>
+      <p>Ein klassischer Anwendungsfall:</p>
 
-  <pre class="cheat-code"><code>apt update
+      <pre class="cheat-code"><code>apt update
 sudo !!</code></pre>
 
-  <p>
-    Dadurch wird der vorherige Befehl als <code>sudo apt update</code> wiederholt.
-  </p>
+      <p>
+        Dadurch wird der vorherige Befehl als <code>sudo apt update</code> wiederholt.
+      </p>
 
 
-  <!-- =========================================================
+      <!-- =========================================================
        23. ROOT / SUDO
        ========================================================= -->
 
-  <h3>23. Administratorrechte mit <code>sudo</code></h3>
+      <h3>23. Administratorrechte mit <code>sudo</code></h3>
 
-  <pre class="cheat-code"><code>sudo apt update
+      <pre class="cheat-code"><code>sudo apt update
 sudo nano /etc/hosts
 sudo systemctl restart ssh</code></pre>
 
-  <p>
-    <code>sudo</code> führt einen einzelnen Befehl mit erhöhten Rechten aus.
-  </p>
+      <p>
+        <code>sudo</code> führt einen einzelnen Befehl mit erhöhten Rechten aus.
+      </p>
 
-  <p>
-    Prüfen, welche <code>sudo</code>-Rechte man besitzt:
-  </p>
+      <p>
+        Prüfen, welche <code>sudo</code>-Rechte man besitzt:
+      </p>
 
-  <pre class="cheat-code"><code>sudo -l</code></pre>
+      <pre class="cheat-code"><code>sudo -l</code></pre>
 
-  <p class="hint">
-    <code>sudo</code> ist kein Ritual, das man vor jeden Befehl schreiben sollte.
-    Wenn ein normaler Benutzer etwas erledigen kann, sollte es auch als normaler Benutzer erledigt werden.
-  </p>
+      <p class="hint">
+        <code>sudo</code> ist kein Ritual, das man vor jeden Befehl schreiben sollte.
+        Wenn ein normaler Benutzer etwas erledigen kann, sollte es auch als normaler Benutzer erledigt werden.
+      </p>
 
 
-  <!-- =========================================================
+      <!-- =========================================================
        24. RECHTE
        ========================================================= -->
 
-  <h3>24. Dateirechte verstehen</h3>
+      <h3>24. Dateirechte verstehen</h3>
 
-  <pre class="cheat-code"><code>ls -l</code></pre>
+      <pre class="cheat-code"><code>ls -l</code></pre>
 
-  <p>Eine typische Ausgabe:</p>
+      <p>Eine typische Ausgabe:</p>
 
-  <pre class="cheat-code"><code>-rwxr-xr-- 1 julian julian 1240 Aug 18 12:00 script.sh</code></pre>
+      <pre class="cheat-code"><code>-rwxr-xr-- 1 julian julian 1240 Aug 18 12:00 script.sh</code></pre>
 
-  <p>Die Rechte sind in drei Gruppen geteilt:</p>
+      <p>Die Rechte sind in drei Gruppen geteilt:</p>
 
-  <ul>
-    <li>Eigentümer</li>
-    <li>Gruppe</li>
-    <li>alle anderen Benutzer</li>
-  </ul>
+      <ul>
+        <li>Eigentümer</li>
+        <li>Gruppe</li>
+        <li>alle anderen Benutzer</li>
+      </ul>
 
-  <p>Die Zeichen bedeuten:</p>
+      <p>Die Zeichen bedeuten:</p>
 
-  <ul>
-    <li><code>r</code> – read / lesen</li>
-    <li><code>w</code> – write / schreiben</li>
-    <li><code>x</code> – execute / ausführen</li>
-    <li><code>-</code> – Recht nicht vorhanden</li>
-  </ul>
+      <ul>
+        <li><code>r</code> – read / lesen</li>
+        <li><code>w</code> – write / schreiben</li>
+        <li><code>x</code> – execute / ausführen</li>
+        <li><code>-</code> – Recht nicht vorhanden</li>
+      </ul>
 
 
-  <!-- =========================================================
+      <!-- =========================================================
        25. CHMOD
        ========================================================= -->
 
-  <h3>25. Rechte ändern mit <code>chmod</code></h3>
+      <h3>25. Rechte ändern mit <code>chmod</code></h3>
 
-  <div class="cheat-grid">
+      <div class="cheat-grid">
 
-    <div class="cheat-item">
-      <h4>Symbolische Schreibweise</h4>
+        <div class="cheat-item">
+          <h4>Symbolische Schreibweise</h4>
 
-      <pre class="cheat-code"><code>chmod u+x script.sh
+          <pre class="cheat-code"><code>chmod u+x script.sh
 chmod g-w datei.txt
 chmod o-r geheim.txt</code></pre>
 
-      <ul>
-        <li><code>u</code> – user</li>
-        <li><code>g</code> – group</li>
-        <li><code>o</code> – others</li>
-        <li><code>a</code> – all</li>
-      </ul>
-    </div>
+          <ul>
+            <li><code>u</code> – user</li>
+            <li><code>g</code> – group</li>
+            <li><code>o</code> – others</li>
+            <li><code>a</code> – all</li>
+          </ul>
+        </div>
 
-    <div class="cheat-item">
-      <h4>Numerische Schreibweise</h4>
+        <div class="cheat-item">
+          <h4>Numerische Schreibweise</h4>
 
-      <ul>
-        <li><code>4</code> – lesen</li>
-        <li><code>2</code> – schreiben</li>
-        <li><code>1</code> – ausführen</li>
-      </ul>
+          <ul>
+            <li><code>4</code> – lesen</li>
+            <li><code>2</code> – schreiben</li>
+            <li><code>1</code> – ausführen</li>
+          </ul>
 
-      <pre class="cheat-code"><code>chmod 644 datei.txt
+          <pre class="cheat-code"><code>chmod 644 datei.txt
 chmod 755 script.sh
 chmod 600 geheim.txt</code></pre>
-    </div>
+        </div>
 
-  </div>
+      </div>
 
-  <p>
-    Typische Rechte:
-  </p>
+      <p>
+        Typische Rechte:
+      </p>
 
-  <table>
-    <thead>
-      <tr>
-        <th>Modus</th>
-        <th>Bedeutung</th>
-      </tr>
-    </thead>
+      <table>
+        <thead>
+          <tr>
+            <th>Modus</th>
+            <th>Bedeutung</th>
+          </tr>
+        </thead>
 
-    <tbody>
-      <tr>
-        <td><code>644</code></td>
-        <td>Eigentümer darf lesen/schreiben; alle anderen nur lesen.</td>
-      </tr>
+        <tbody>
+          <tr>
+            <td><code>644</code></td>
+            <td>Eigentümer darf lesen/schreiben; alle anderen nur lesen.</td>
+          </tr>
 
-      <tr>
-        <td><code>755</code></td>
-        <td>Eigentümer darf alles; alle anderen lesen und ausführen.</td>
-      </tr>
+          <tr>
+            <td><code>755</code></td>
+            <td>Eigentümer darf alles; alle anderen lesen und ausführen.</td>
+          </tr>
 
-      <tr>
-        <td><code>600</code></td>
-        <td>Nur Eigentümer darf lesen und schreiben – typisch für sensible Dateien.</td>
-      </tr>
-    </tbody>
-  </table>
+          <tr>
+            <td><code>600</code></td>
+            <td>Nur Eigentümer darf lesen und schreiben – typisch für sensible Dateien.</td>
+          </tr>
+        </tbody>
+      </table>
 
 
-  <!-- =========================================================
+      <!-- =========================================================
        26. BESITZER
        ========================================================= -->
 
-  <h3>26. Besitzer und Gruppen ändern</h3>
+      <h3>26. Besitzer und Gruppen ändern</h3>
 
-  <pre class="cheat-code"><code>chown julian datei.txt
+      <pre class="cheat-code"><code>chown julian datei.txt
 chown julian:julian datei.txt
 sudo chown -R julian:julian projekt/</code></pre>
 
-  <p>
-    <code>chown</code> bedeutet <em>change owner</em>.
-    <code>-R</code> wirkt rekursiv auf alle Inhalte eines Verzeichnisses.
-  </p>
+      <p>
+        <code>chown</code> bedeutet <em>change owner</em>.
+        <code>-R</code> wirkt rekursiv auf alle Inhalte eines Verzeichnisses.
+      </p>
 
 
-  <!-- =========================================================
+      <!-- =========================================================
        27. USER
        ========================================================= -->
 
-  <h3>27. Benutzer und Gruppen</h3>
+      <h3>27. Benutzer und Gruppen</h3>
 
-  <pre class="cheat-code"><code>whoami
+      <pre class="cheat-code"><code>whoami
 id
 groups
 who
 w</code></pre>
 
-  <ul>
-    <li><code>whoami</code> – aktueller Benutzer</li>
-    <li><code>id</code> – Benutzer-ID und Gruppen</li>
-    <li><code>groups</code> – Gruppenmitgliedschaften</li>
-    <li><code>who</code> – angemeldete Benutzer</li>
-    <li><code>w</code> – angemeldete Benutzer und deren Aktivitäten</li>
-  </ul>
+      <ul>
+        <li><code>whoami</code> – aktueller Benutzer</li>
+        <li><code>id</code> – Benutzer-ID und Gruppen</li>
+        <li><code>groups</code> – Gruppenmitgliedschaften</li>
+        <li><code>who</code> – angemeldete Benutzer</li>
+        <li><code>w</code> – angemeldete Benutzer und deren Aktivitäten</li>
+      </ul>
 
-  <p>Auf Debian-basierten Systemen einen Benutzer anlegen:</p>
+      <p>Auf Debian-basierten Systemen einen Benutzer anlegen:</p>
 
-  <pre class="cheat-code"><code>sudo adduser neuerbenutzer</code></pre>
+      <pre class="cheat-code"><code>sudo adduser neuerbenutzer</code></pre>
 
-  <p>Benutzer zu einer Gruppe hinzufügen:</p>
+      <p>Benutzer zu einer Gruppe hinzufügen:</p>
 
-  <pre class="cheat-code"><code>sudo usermod -aG dialout julian</code></pre>
+      <pre class="cheat-code"><code>sudo usermod -aG dialout julian</code></pre>
 
-  <p class="hint">
-    Nach einer Änderung der Gruppenmitgliedschaft ist meist eine neue Anmeldung erforderlich,
-    damit die neue Gruppe für die Sitzung wirksam wird.
-  </p>
+      <p class="hint">
+        Nach einer Änderung der Gruppenmitgliedschaft ist meist eine neue Anmeldung erforderlich,
+        damit die neue Gruppe für die Sitzung wirksam wird.
+      </p>
 
 
-  <!-- =========================================================
+      <!-- =========================================================
        28. PROZESSE
        ========================================================= -->
 
-  <h3>28. Laufende Prozesse untersuchen</h3>
+      <h3>28. Laufende Prozesse untersuchen</h3>
 
-  <div class="cheat-grid">
+      <div class="cheat-grid">
 
-    <div class="cheat-item">
-      <h4><code>ps</code></h4>
+        <div class="cheat-item">
+          <h4><code>ps</code></h4>
 
-      <pre class="cheat-code"><code>ps
+          <pre class="cheat-code"><code>ps
 ps aux
 ps aux | grep python</code></pre>
-    </div>
+        </div>
 
-    <div class="cheat-item">
-      <h4><code>pgrep</code></h4>
+        <div class="cheat-item">
+          <h4><code>pgrep</code></h4>
 
-      <pre class="cheat-code"><code>pgrep python
+          <pre class="cheat-code"><code>pgrep python
 pgrep -a python</code></pre>
 
-      <p>
-        Findet Prozesse direkt anhand ihres Namens.
-      </p>
-    </div>
+          <p>
+            Findet Prozesse direkt anhand ihres Namens.
+          </p>
+        </div>
 
-    <div class="cheat-item">
-      <h4><code>top</code></h4>
+        <div class="cheat-item">
+          <h4><code>top</code></h4>
 
-      <pre class="cheat-code"><code>top</code></pre>
+          <pre class="cheat-code"><code>top</code></pre>
 
-      <p>
-        Live-Ansicht von CPU, Arbeitsspeicher und Prozessen.
-        Mit <code>q</code> beenden.
-      </p>
-    </div>
+          <p>
+            Live-Ansicht von CPU, Arbeitsspeicher und Prozessen.
+            Mit <code>q</code> beenden.
+          </p>
+        </div>
 
-    <div class="cheat-item">
-      <h4><code>htop</code></h4>
+        <div class="cheat-item">
+          <h4><code>htop</code></h4>
 
-      <pre class="cheat-code"><code>sudo apt install htop
+          <pre class="cheat-code"><code>sudo apt install htop
 htop</code></pre>
 
-      <p>
-        Komfortablere interaktive Alternative zu <code>top</code>.
-      </p>
-    </div>
+          <p>
+            Komfortablere interaktive Alternative zu <code>top</code>.
+          </p>
+        </div>
 
-  </div>
+      </div>
 
 
-  <!-- =========================================================
+      <!-- =========================================================
        29. PROZESSE STOPPEN
        ========================================================= -->
 
-  <h3>29. Prozesse beenden</h3>
+      <h3>29. Prozesse beenden</h3>
 
-  <pre class="cheat-code"><code>kill 1234
+      <pre class="cheat-code"><code>kill 1234
 kill -TERM 1234
 kill -KILL 1234
 pkill python3
 pkill -f logger.py</code></pre>
 
-  <p>
-    Normalerweise sollte zuerst ein reguläres Beenden versucht werden.
-    <code>SIGKILL</code> bzw. <code>kill -9</code> ist die Brechstange.
-  </p>
+      <p>
+        Normalerweise sollte zuerst ein reguläres Beenden versucht werden.
+        <code>SIGKILL</code> bzw. <code>kill -9</code> ist die Brechstange.
+      </p>
 
-  <p class="hint">
-    <code>kill -9</code> gibt einem Programm keine Gelegenheit mehr, Dateien sauber zu schließen,
-    Daten zu speichern oder aufzuräumen. Nur verwenden, wenn ein normaler Abbruch tatsächlich nicht funktioniert.
-  </p>
+      <p class="hint">
+        <code>kill -9</code> gibt einem Programm keine Gelegenheit mehr, Dateien sauber zu schließen,
+        Daten zu speichern oder aufzuräumen. Nur verwenden, wenn ein normaler Abbruch tatsächlich nicht funktioniert.
+      </p>
 
 
-  <!-- =========================================================
+      <!-- =========================================================
        30. JOB CONTROL
        ========================================================= -->
 
-  <h3>30. Vordergrund- und Hintergrundprozesse</h3>
+      <h3>30. Vordergrund- und Hintergrundprozesse</h3>
 
-  <pre class="cheat-code"><code>python3 logger.py &amp;
+      <pre class="cheat-code"><code>python3 logger.py &amp;
 jobs
 fg
 bg</code></pre>
 
-  <p>
-    Ein laufender Vordergrundprozess kann außerdem mit <code>Ctrl+Z</code> angehalten werden.
-  </p>
+      <p>
+        Ein laufender Vordergrundprozess kann außerdem mit <code>Ctrl+Z</code> angehalten werden.
+      </p>
 
-  <pre class="cheat-code"><code>Ctrl+Z
+      <pre class="cheat-code"><code>Ctrl+Z
 bg
 jobs
 fg</code></pre>
 
-  <p>
-    Dabei gilt:
-  </p>
+      <p>
+        Dabei gilt:
+      </p>
 
-  <ul>
-    <li><code>Ctrl+Z</code> – Prozess pausieren</li>
-    <li><code>bg</code> – pausierten Prozess im Hintergrund fortsetzen</li>
-    <li><code>fg</code> – Hintergrundprozess wieder in den Vordergrund holen</li>
-  </ul>
+      <ul>
+        <li><code>Ctrl+Z</code> – Prozess pausieren</li>
+        <li><code>bg</code> – pausierten Prozess im Hintergrund fortsetzen</li>
+        <li><code>fg</code> – Hintergrundprozess wieder in den Vordergrund holen</li>
+      </ul>
 
 
-  <!-- =========================================================
+      <!-- =========================================================
        31. NOHUP
        ========================================================= -->
 
-  <h3>31. Prozess nach SSH-Abmeldung weiterlaufen lassen</h3>
+      <h3>31. Prozess nach SSH-Abmeldung weiterlaufen lassen</h3>
 
-  <pre class="cheat-code"><code>nohup python3 logger.py &gt; logger.log 2&gt;&amp;1 &amp;</code></pre>
+      <pre class="cheat-code"><code>nohup python3 logger.py &gt; logger.log 2&gt;&amp;1 &amp;</code></pre>
 
-  <p>
-    Dadurch läuft das Programm weiter, wenn die Terminal- oder SSH-Sitzung beendet wird.
-  </p>
+      <p>
+        Dadurch läuft das Programm weiter, wenn die Terminal- oder SSH-Sitzung beendet wird.
+      </p>
 
-  <p>
-    Für dauerhaft laufende Dienste ist allerdings <code>systemd</code> meist die wesentlich sauberere Lösung.
-  </p>
+      <p>
+        Für dauerhaft laufende Dienste ist allerdings <code>systemd</code> meist die wesentlich sauberere Lösung.
+      </p>
 
 
-  <!-- =========================================================
+      <!-- =========================================================
        32. SYSTEMD
        ========================================================= -->
 
-  <h3>32. Dienste mit <code>systemctl</code> verwalten</h3>
+      <h3>32. Dienste mit <code>systemctl</code> verwalten</h3>
 
-  <p>
-    Moderne Debian-/Ubuntu-/Raspberry-Pi-Systeme verwenden üblicherweise
-    <strong>systemd</strong> für Hintergrunddienste.
-  </p>
+      <p>
+        Moderne Debian-/Ubuntu-/Raspberry-Pi-Systeme verwenden üblicherweise
+        <strong>systemd</strong> für Hintergrunddienste.
+      </p>
 
-  <pre class="cheat-code"><code>systemctl status ssh
+      <pre class="cheat-code"><code>systemctl status ssh
 sudo systemctl start ssh
 sudo systemctl stop ssh
 sudo systemctl restart ssh
 sudo systemctl enable ssh
 sudo systemctl disable ssh</code></pre>
 
-  <ul>
-    <li><code>status</code> – Zustand anzeigen</li>
-    <li><code>start</code> – Dienst starten</li>
-    <li><code>stop</code> – Dienst stoppen</li>
-    <li><code>restart</code> – neu starten</li>
-    <li><code>enable</code> – beim Booten automatisch starten</li>
-    <li><code>disable</code> – Autostart deaktivieren</li>
-  </ul>
+      <ul>
+        <li><code>status</code> – Zustand anzeigen</li>
+        <li><code>start</code> – Dienst starten</li>
+        <li><code>stop</code> – Dienst stoppen</li>
+        <li><code>restart</code> – neu starten</li>
+        <li><code>enable</code> – beim Booten automatisch starten</li>
+        <li><code>disable</code> – Autostart deaktivieren</li>
+      </ul>
 
-  <p>
-    Prüfen, ob ein Dienst beim Booten aktiviert ist:
-  </p>
+      <p>
+        Prüfen, ob ein Dienst beim Booten aktiviert ist:
+      </p>
 
-  <pre class="cheat-code"><code>systemctl is-enabled ssh</code></pre>
+      <pre class="cheat-code"><code>systemctl is-enabled ssh</code></pre>
 
-  <p>Prüfen, ob er gerade läuft:</p>
+      <p>Prüfen, ob er gerade läuft:</p>
 
-  <pre class="cheat-code"><code>systemctl is-active ssh</code></pre>
+      <pre class="cheat-code"><code>systemctl is-active ssh</code></pre>
 
 
-  <!-- =========================================================
+      <!-- =========================================================
        33. JOURNALCTL
        ========================================================= -->
 
-  <h3>33. Systemlogs mit <code>journalctl</code></h3>
+      <h3>33. Systemlogs mit <code>journalctl</code></h3>
 
-  <pre class="cheat-code"><code>journalctl
+      <pre class="cheat-code"><code>journalctl
 journalctl -b
 journalctl -p err
 journalctl -u ssh
 journalctl -u ssh -f
 journalctl --since "1 hour ago"</code></pre>
 
-  <ul>
-    <li><code>-b</code> – Meldungen seit aktuellem Boot</li>
-    <li><code>-p err</code> – nur Fehler</li>
-    <li><code>-u</code> – bestimmter systemd-Dienst</li>
-    <li><code>-f</code> – neue Meldungen live verfolgen</li>
-  </ul>
+      <ul>
+        <li><code>-b</code> – Meldungen seit aktuellem Boot</li>
+        <li><code>-p err</code> – nur Fehler</li>
+        <li><code>-u</code> – bestimmter systemd-Dienst</li>
+        <li><code>-f</code> – neue Meldungen live verfolgen</li>
+      </ul>
 
-  <p>
-    Für einen eigenen Sensor-Dienst beispielsweise:
-  </p>
+      <p>
+        Für einen eigenen Sensor-Dienst beispielsweise:
+      </p>
 
-  <pre class="cheat-code"><code>journalctl -u bme280-logger.service -f</code></pre>
+      <pre class="cheat-code"><code>journalctl -u bme280-logger.service -f</code></pre>
 
 
-  <!-- =========================================================
+      <!-- =========================================================
        34. SYSTEM INFO
        ========================================================= -->
 
-  <h3>34. Informationen über das System</h3>
+      <h3>34. Informationen über das System</h3>
 
-  <div class="cheat-grid">
+      <div class="cheat-grid">
 
-    <div class="cheat-item">
-      <h4>Kernel</h4>
+        <div class="cheat-item">
+          <h4>Kernel</h4>
 
-      <pre class="cheat-code"><code>uname -a
+          <pre class="cheat-code"><code>uname -a
 uname -r</code></pre>
-    </div>
+        </div>
 
-    <div class="cheat-item">
-      <h4>Distribution</h4>
+        <div class="cheat-item">
+          <h4>Distribution</h4>
 
-      <pre class="cheat-code"><code>cat /etc/os-release</code></pre>
-    </div>
+          <pre class="cheat-code"><code>cat /etc/os-release</code></pre>
+        </div>
 
-    <div class="cheat-item">
-      <h4>Hostname</h4>
+        <div class="cheat-item">
+          <h4>Hostname</h4>
 
-      <pre class="cheat-code"><code>hostname
+          <pre class="cheat-code"><code>hostname
 hostnamectl</code></pre>
-    </div>
+        </div>
 
-    <div class="cheat-item">
-      <h4>Laufzeit</h4>
+        <div class="cheat-item">
+          <h4>Laufzeit</h4>
 
-      <pre class="cheat-code"><code>uptime</code></pre>
-    </div>
+          <pre class="cheat-code"><code>uptime</code></pre>
+        </div>
 
-    <div class="cheat-item">
-      <h4>Arbeitsspeicher</h4>
+        <div class="cheat-item">
+          <h4>Arbeitsspeicher</h4>
 
-      <pre class="cheat-code"><code>free -h</code></pre>
-    </div>
+          <pre class="cheat-code"><code>free -h</code></pre>
+        </div>
 
-    <div class="cheat-item">
-      <h4>CPU</h4>
+        <div class="cheat-item">
+          <h4>CPU</h4>
 
-      <pre class="cheat-code"><code>lscpu</code></pre>
-    </div>
+          <pre class="cheat-code"><code>lscpu</code></pre>
+        </div>
 
-  </div>
+      </div>
 
 
-  <!-- =========================================================
+      <!-- =========================================================
        35. SPEICHER
        ========================================================= -->
 
-  <h3>35. Speicherplatz untersuchen</h3>
+      <h3>35. Speicherplatz untersuchen</h3>
 
-  <div class="cheat-grid">
+      <div class="cheat-grid">
 
-    <div class="cheat-item">
-      <h4><code>df</code> – Dateisysteme</h4>
+        <div class="cheat-item">
+          <h4><code>df</code> – Dateisysteme</h4>
 
-      <pre class="cheat-code"><code>df -h</code></pre>
+          <pre class="cheat-code"><code>df -h</code></pre>
 
-      <p>
-        Zeigt belegten und freien Speicher auf eingehängten Dateisystemen.
-      </p>
-    </div>
+          <p>
+            Zeigt belegten und freien Speicher auf eingehängten Dateisystemen.
+          </p>
+        </div>
 
-    <div class="cheat-item">
-      <h4><code>du</code> – Verzeichnisgrößen</h4>
+        <div class="cheat-item">
+          <h4><code>du</code> – Verzeichnisgrößen</h4>
 
-      <pre class="cheat-code"><code>du -sh .
+          <pre class="cheat-code"><code>du -sh .
 du -sh *
 du -sh ~/projekte/*</code></pre>
 
-      <p>
-        Ideal, wenn man wissen möchte, welches Verzeichnis den Speicher frisst.
-      </p>
-    </div>
+          <p>
+            Ideal, wenn man wissen möchte, welches Verzeichnis den Speicher frisst.
+          </p>
+        </div>
 
-    <div class="cheat-item">
-      <h4>Größte Einträge finden</h4>
+        <div class="cheat-item">
+          <h4>Größte Einträge finden</h4>
 
-      <pre class="cheat-code"><code>du -ah . | sort -h | tail -20</code></pre>
+          <pre class="cheat-code"><code>du -ah . | sort -h | tail -20</code></pre>
 
-      <p>
-        Gibt die größten Dateien bzw. Verzeichnisse am Ende der sortierten Liste aus.
-      </p>
-    </div>
+          <p>
+            Gibt die größten Dateien bzw. Verzeichnisse am Ende der sortierten Liste aus.
+          </p>
+        </div>
 
-  </div>
+      </div>
 
 
-  <!-- =========================================================
+      <!-- =========================================================
        36. DATENTRÄGER
        ========================================================= -->
 
-  <h3>36. Festplatten, SD-Karten und USB-Sticks</h3>
+      <h3>36. Festplatten, SD-Karten und USB-Sticks</h3>
 
-  <pre class="cheat-code"><code>lsblk
+      <pre class="cheat-code"><code>lsblk
 lsblk -f
 blkid</code></pre>
 
-  <p>
-    <code>lsblk</code> zeigt Blockgeräte und Partitionen.
-    Mit <code>-f</code> werden zusätzlich Dateisystem, UUID und Mountpoint angezeigt.
-  </p>
+      <p>
+        <code>lsblk</code> zeigt Blockgeräte und Partitionen.
+        Mit <code>-f</code> werden zusätzlich Dateisystem, UUID und Mountpoint angezeigt.
+      </p>
 
-  <p>Beispiel:</p>
+      <p>Beispiel:</p>
 
-  <pre class="cheat-code"><code>NAME        FSTYPE MOUNTPOINT
+      <pre class="cheat-code"><code>NAME        FSTYPE MOUNTPOINT
 sda
 └─sda1      ext4   /mnt/data
 mmcblk0
@@ -2653,538 +2660,538 @@ mmcblk0
 └─mmcblk0p2 ext4   /</code></pre>
 
 
-  <!-- =========================================================
+      <!-- =========================================================
        37. MOUNT
        ========================================================= -->
 
-  <h3>37. Datenträger ein- und aushängen</h3>
+      <h3>37. Datenträger ein- und aushängen</h3>
 
-  <pre class="cheat-code"><code>sudo mkdir -p /mnt/usb
+      <pre class="cheat-code"><code>sudo mkdir -p /mnt/usb
 sudo mount /dev/sda1 /mnt/usb</code></pre>
 
-  <p>Danach steht der Inhalt unter:</p>
+      <p>Danach steht der Inhalt unter:</p>
 
-  <pre class="cheat-code"><code>/mnt/usb</code></pre>
+      <pre class="cheat-code"><code>/mnt/usb</code></pre>
 
-  <p>Vor dem Abziehen:</p>
+      <p>Vor dem Abziehen:</p>
 
-  <pre class="cheat-code"><code>sudo umount /mnt/usb</code></pre>
+      <pre class="cheat-code"><code>sudo umount /mnt/usb</code></pre>
 
-  <p class="hint">
-    Nicht einfach einen Datenträger abziehen, während noch geschrieben wird.
-    Ein sauberer <code>umount</code> verhindert Dateisystemschäden.
-  </p>
+      <p class="hint">
+        Nicht einfach einen Datenträger abziehen, während noch geschrieben wird.
+        Ein sauberer <code>umount</code> verhindert Dateisystemschäden.
+      </p>
 
 
-  <!-- =========================================================
+      <!-- =========================================================
        38. PAKETMANAGEMENT
        ========================================================= -->
 
-  <h3>38. Software installieren und aktualisieren – <code>apt</code></h3>
+      <h3>38. Software installieren und aktualisieren – <code>apt</code></h3>
 
-  <div class="cheat-grid">
+      <div class="cheat-grid">
 
-    <div class="cheat-item">
-      <h4>Paketlisten aktualisieren</h4>
+        <div class="cheat-item">
+          <h4>Paketlisten aktualisieren</h4>
 
-      <pre class="cheat-code"><code>sudo apt update</code></pre>
+          <pre class="cheat-code"><code>sudo apt update</code></pre>
 
-      <p>
-        Lädt aktuelle Informationen über verfügbare Pakete.
-        Es werden dabei noch keine Programme aktualisiert.
-      </p>
-    </div>
+          <p>
+            Lädt aktuelle Informationen über verfügbare Pakete.
+            Es werden dabei noch keine Programme aktualisiert.
+          </p>
+        </div>
 
-    <div class="cheat-item">
-      <h4>Installierte Pakete aktualisieren</h4>
+        <div class="cheat-item">
+          <h4>Installierte Pakete aktualisieren</h4>
 
-      <pre class="cheat-code"><code>sudo apt upgrade</code></pre>
-    </div>
+          <pre class="cheat-code"><code>sudo apt upgrade</code></pre>
+        </div>
 
-    <div class="cheat-item">
-      <h4>Komplettes Upgrade</h4>
+        <div class="cheat-item">
+          <h4>Komplettes Upgrade</h4>
 
-      <pre class="cheat-code"><code>sudo apt full-upgrade</code></pre>
+          <pre class="cheat-code"><code>sudo apt full-upgrade</code></pre>
 
-      <p>
-        Darf bei Bedarf Abhängigkeiten verändern und Pakete entfernen oder ersetzen.
-      </p>
-    </div>
+          <p>
+            Darf bei Bedarf Abhängigkeiten verändern und Pakete entfernen oder ersetzen.
+          </p>
+        </div>
 
-    <div class="cheat-item">
-      <h4>Programm installieren</h4>
+        <div class="cheat-item">
+          <h4>Programm installieren</h4>
 
-      <pre class="cheat-code"><code>sudo apt install git
+          <pre class="cheat-code"><code>sudo apt install git
 sudo apt install i2c-tools
 sudo apt install htop</code></pre>
-    </div>
+        </div>
 
-    <div class="cheat-item">
-      <h4>Programm entfernen</h4>
+        <div class="cheat-item">
+          <h4>Programm entfernen</h4>
 
-      <pre class="cheat-code"><code>sudo apt remove htop
+          <pre class="cheat-code"><code>sudo apt remove htop
 sudo apt purge htop</code></pre>
 
-      <p>
-        <code>purge</code> entfernt zusätzlich systemweite Konfigurationsdateien des Pakets.
-      </p>
-    </div>
+          <p>
+            <code>purge</code> entfernt zusätzlich systemweite Konfigurationsdateien des Pakets.
+          </p>
+        </div>
 
-    <div class="cheat-item">
-      <h4>Nicht mehr benötigte Pakete entfernen</h4>
+        <div class="cheat-item">
+          <h4>Nicht mehr benötigte Pakete entfernen</h4>
 
-      <pre class="cheat-code"><code>sudo apt autoremove</code></pre>
-    </div>
+          <pre class="cheat-code"><code>sudo apt autoremove</code></pre>
+        </div>
 
-  </div>
+      </div>
 
-  <p>Pakete suchen:</p>
+      <p>Pakete suchen:</p>
 
-  <pre class="cheat-code"><code>apt search i2c
+      <pre class="cheat-code"><code>apt search i2c
 apt search python3</code></pre>
 
-  <p>Informationen anzeigen:</p>
+      <p>Informationen anzeigen:</p>
 
-  <pre class="cheat-code"><code>apt show i2c-tools</code></pre>
+      <pre class="cheat-code"><code>apt show i2c-tools</code></pre>
 
-  <p>Ein typischer Wartungsablauf:</p>
+      <p>Ein typischer Wartungsablauf:</p>
 
-  <pre class="cheat-code"><code>sudo apt update
+      <pre class="cheat-code"><code>sudo apt update
 sudo apt upgrade
 sudo apt autoremove</code></pre>
 
 
-  <!-- =========================================================
+      <!-- =========================================================
        39. NETZWERK
        ========================================================= -->
 
-  <h3>39. Netzwerk – die wichtigsten Befehle</h3>
+      <h3>39. Netzwerk – die wichtigsten Befehle</h3>
 
-  <div class="cheat-grid">
+      <div class="cheat-grid">
 
-    <div class="cheat-item">
-      <h4>IP-Adressen</h4>
+        <div class="cheat-item">
+          <h4>IP-Adressen</h4>
 
-      <pre class="cheat-code"><code>ip a</code></pre>
+          <pre class="cheat-code"><code>ip a</code></pre>
 
-      <p>
-        Zeigt Netzwerkinterfaces und zugewiesene IP-Adressen.
-      </p>
-    </div>
+          <p>
+            Zeigt Netzwerkinterfaces und zugewiesene IP-Adressen.
+          </p>
+        </div>
 
-    <div class="cheat-item">
-      <h4>Nur lokale IP-Adressen</h4>
+        <div class="cheat-item">
+          <h4>Nur lokale IP-Adressen</h4>
 
-      <pre class="cheat-code"><code>hostname -I</code></pre>
+          <pre class="cheat-code"><code>hostname -I</code></pre>
 
-      <p>
-        Besonders auf einem Raspberry Pi praktisch.
-      </p>
-    </div>
+          <p>
+            Besonders auf einem Raspberry Pi praktisch.
+          </p>
+        </div>
 
-    <div class="cheat-item">
-      <h4>Routing</h4>
+        <div class="cheat-item">
+          <h4>Routing</h4>
 
-      <pre class="cheat-code"><code>ip route</code></pre>
+          <pre class="cheat-code"><code>ip route</code></pre>
 
-      <p>
-        Zeigt unter anderem das Standard-Gateway.
-      </p>
-    </div>
+          <p>
+            Zeigt unter anderem das Standard-Gateway.
+          </p>
+        </div>
 
-    <div class="cheat-item">
-      <h4>Erreichbarkeit prüfen</h4>
+        <div class="cheat-item">
+          <h4>Erreichbarkeit prüfen</h4>
 
-      <pre class="cheat-code"><code>ping raspberrypi.local
+          <pre class="cheat-code"><code>ping raspberrypi.local
 ping 192.168.1.20
 ping -c 4 1.1.1.1</code></pre>
 
-      <p>
-        <code>-c 4</code> beendet den Test nach vier Paketen automatisch.
-      </p>
-    </div>
+          <p>
+            <code>-c 4</code> beendet den Test nach vier Paketen automatisch.
+          </p>
+        </div>
 
-  </div>
+      </div>
 
 
-  <!-- =========================================================
+      <!-- =========================================================
        40. PORTS
        ========================================================= -->
 
-  <h3>40. Offene Ports und Netzwerkverbindungen</h3>
+      <h3>40. Offene Ports und Netzwerkverbindungen</h3>
 
-  <pre class="cheat-code"><code>ss -tulpn</code></pre>
+      <pre class="cheat-code"><code>ss -tulpn</code></pre>
 
-  <p>Typische Optionen:</p>
+      <p>Typische Optionen:</p>
 
-  <ul>
-    <li><code>-t</code> – TCP</li>
-    <li><code>-u</code> – UDP</li>
-    <li><code>-l</code> – nur lauschende Ports</li>
-    <li><code>-p</code> – zugehörige Prozesse</li>
-    <li><code>-n</code> – numerische Adressen statt Namensauflösung</li>
-  </ul>
+      <ul>
+        <li><code>-t</code> – TCP</li>
+        <li><code>-u</code> – UDP</li>
+        <li><code>-l</code> – nur lauschende Ports</li>
+        <li><code>-p</code> – zugehörige Prozesse</li>
+        <li><code>-n</code> – numerische Adressen statt Namensauflösung</li>
+      </ul>
 
-  <p>
-    Prüfen, ob beispielsweise ein Webserver auf Port 8000 läuft:
-  </p>
+      <p>
+        Prüfen, ob beispielsweise ein Webserver auf Port 8000 läuft:
+      </p>
 
-  <pre class="cheat-code"><code>ss -tulpn | grep 8000</code></pre>
+      <pre class="cheat-code"><code>ss -tulpn | grep 8000</code></pre>
 
 
-  <!-- =========================================================
+      <!-- =========================================================
        41. DNS
        ========================================================= -->
 
-  <h3>41. Namensauflösung prüfen</h3>
+      <h3>41. Namensauflösung prüfen</h3>
 
-  <pre class="cheat-code"><code>getent hosts raspberrypi.local
+      <pre class="cheat-code"><code>getent hosts raspberrypi.local
 getent hosts example.com</code></pre>
 
-  <p>
-    Falls <code>dnsutils</code> installiert ist:
-  </p>
+      <p>
+        Falls <code>dnsutils</code> installiert ist:
+      </p>
 
-  <pre class="cheat-code"><code>dig example.com
+      <pre class="cheat-code"><code>dig example.com
 nslookup example.com</code></pre>
 
 
-  <!-- =========================================================
+      <!-- =========================================================
        42. SSH
        ========================================================= -->
 
-  <h3>42. Einen anderen Linux-Rechner per SSH steuern</h3>
+      <h3>42. Einen anderen Linux-Rechner per SSH steuern</h3>
 
-  <p>
-    SSH ist eines der wichtigsten Werkzeuge für Raspberry Pi und Linux-Server.
-    Es öffnet eine verschlüsselte Terminal-Sitzung auf einem anderen Rechner.
-  </p>
+      <p>
+        SSH ist eines der wichtigsten Werkzeuge für Raspberry Pi und Linux-Server.
+        Es öffnet eine verschlüsselte Terminal-Sitzung auf einem anderen Rechner.
+      </p>
 
-  <pre class="cheat-code"><code>ssh benutzer@hostname</code></pre>
+      <pre class="cheat-code"><code>ssh benutzer@hostname</code></pre>
 
-  <p>Beispiele:</p>
+      <p>Beispiele:</p>
 
-  <pre class="cheat-code"><code>ssh julian@raspberrypi.local
+      <pre class="cheat-code"><code>ssh julian@raspberrypi.local
 ssh pi@192.168.1.50</code></pre>
 
-  <p>Anderer SSH-Port:</p>
+      <p>Anderer SSH-Port:</p>
 
-  <pre class="cheat-code"><code>ssh -p 2222 julian@server.local</code></pre>
+      <pre class="cheat-code"><code>ssh -p 2222 julian@server.local</code></pre>
 
-  <p>Bestimmten privaten Schlüssel verwenden:</p>
+      <p>Bestimmten privaten Schlüssel verwenden:</p>
 
-  <pre class="cheat-code"><code>ssh -i ~/.ssh/id_ed25519 julian@server.local</code></pre>
+      <pre class="cheat-code"><code>ssh -i ~/.ssh/id_ed25519 julian@server.local</code></pre>
 
-  <p>SSH-Sitzung beenden:</p>
+      <p>SSH-Sitzung beenden:</p>
 
-  <pre class="cheat-code"><code>exit</code></pre>
+      <pre class="cheat-code"><code>exit</code></pre>
 
-  <p>oder:</p>
+      <p>oder:</p>
 
-  <pre class="cheat-code"><code>Ctrl+D</code></pre>
+      <pre class="cheat-code"><code>Ctrl+D</code></pre>
 
 
-  <!-- =========================================================
+      <!-- =========================================================
        43. SSH KEYS
        ========================================================= -->
 
-  <h3>43. SSH-Schlüssel statt Passwort verwenden</h3>
+      <h3>43. SSH-Schlüssel statt Passwort verwenden</h3>
 
-  <p>Neuen Schlüssel erzeugen:</p>
+      <p>Neuen Schlüssel erzeugen:</p>
 
-  <pre class="cheat-code"><code>ssh-keygen -t ed25519</code></pre>
+      <pre class="cheat-code"><code>ssh-keygen -t ed25519</code></pre>
 
-  <p>
-    Standardmäßig entstehen beispielsweise:
-  </p>
+      <p>
+        Standardmäßig entstehen beispielsweise:
+      </p>
 
-  <pre class="cheat-code"><code>~/.ssh/id_ed25519
+      <pre class="cheat-code"><code>~/.ssh/id_ed25519
 ~/.ssh/id_ed25519.pub</code></pre>
 
-  <p>
-    Der private Schlüssel <strong>darf nicht weitergegeben werden</strong>.
-    Die Datei mit <code>.pub</code> ist der öffentliche Schlüssel.
-  </p>
+      <p>
+        Der private Schlüssel <strong>darf nicht weitergegeben werden</strong>.
+        Die Datei mit <code>.pub</code> ist der öffentliche Schlüssel.
+      </p>
 
-  <p>Öffentlichen Schlüssel auf Raspberry Pi übertragen:</p>
+      <p>Öffentlichen Schlüssel auf Raspberry Pi übertragen:</p>
 
-  <pre class="cheat-code"><code>ssh-copy-id julian@raspberrypi.local</code></pre>
+      <pre class="cheat-code"><code>ssh-copy-id julian@raspberrypi.local</code></pre>
 
-  <p>Danach genügt normalerweise:</p>
+      <p>Danach genügt normalerweise:</p>
 
-  <pre class="cheat-code"><code>ssh julian@raspberrypi.local</code></pre>
+      <pre class="cheat-code"><code>ssh julian@raspberrypi.local</code></pre>
 
 
-  <!-- =========================================================
+      <!-- =========================================================
        44. SSH CONFIG
        ========================================================= -->
 
-  <h3>44. Häufig verwendete SSH-Verbindungen abkürzen</h3>
+      <h3>44. Häufig verwendete SSH-Verbindungen abkürzen</h3>
 
-  <p>Datei:</p>
+      <p>Datei:</p>
 
-  <pre class="cheat-code"><code>~/.ssh/config</code></pre>
+      <pre class="cheat-code"><code>~/.ssh/config</code></pre>
 
-  <p>Beispiel:</p>
+      <p>Beispiel:</p>
 
-  <pre class="cheat-code"><code>Host wetterpi
+      <pre class="cheat-code"><code>Host wetterpi
     HostName 192.168.1.50
     User julian
     IdentityFile ~/.ssh/id_ed25519</code></pre>
 
-  <p>Danach reicht:</p>
+      <p>Danach reicht:</p>
 
-  <pre class="cheat-code"><code>ssh wetterpi</code></pre>
+      <pre class="cheat-code"><code>ssh wetterpi</code></pre>
 
 
-  <!-- =========================================================
+      <!-- =========================================================
        45. SCP
        ========================================================= -->
 
-  <h3>45. Dateien über SSH kopieren – <code>scp</code></h3>
+      <h3>45. Dateien über SSH kopieren – <code>scp</code></h3>
 
-  <p>Lokale Datei auf Raspberry Pi kopieren:</p>
+      <p>Lokale Datei auf Raspberry Pi kopieren:</p>
 
-  <pre class="cheat-code"><code>scp logger.py julian@raspberrypi.local:~/</code></pre>
+      <pre class="cheat-code"><code>scp logger.py julian@raspberrypi.local:~/</code></pre>
 
-  <p>Datei vom Raspberry Pi herunterladen:</p>
+      <p>Datei vom Raspberry Pi herunterladen:</p>
 
-  <pre class="cheat-code"><code>scp julian@raspberrypi.local:~/logger.csv .</code></pre>
+      <pre class="cheat-code"><code>scp julian@raspberrypi.local:~/logger.csv .</code></pre>
 
-  <p>Ganzes Verzeichnis kopieren:</p>
+      <p>Ganzes Verzeichnis kopieren:</p>
 
-  <pre class="cheat-code"><code>scp -r projekt/ julian@raspberrypi.local:~/</code></pre>
+      <pre class="cheat-code"><code>scp -r projekt/ julian@raspberrypi.local:~/</code></pre>
 
 
-  <!-- =========================================================
+      <!-- =========================================================
        46. RSYNC
        ========================================================= -->
 
-  <h3>46. Verzeichnisse effizient synchronisieren – <code>rsync</code></h3>
+      <h3>46. Verzeichnisse effizient synchronisieren – <code>rsync</code></h3>
 
-  <pre class="cheat-code"><code>rsync -av projekt/ julian@raspberrypi.local:~/projekt/</code></pre>
+      <pre class="cheat-code"><code>rsync -av projekt/ julian@raspberrypi.local:~/projekt/</code></pre>
 
-  <ul>
-    <li><code>-a</code> – Archivmodus, erhält viele Dateieigenschaften</li>
-    <li><code>-v</code> – ausführliche Ausgabe</li>
-  </ul>
+      <ul>
+        <li><code>-a</code> – Archivmodus, erhält viele Dateieigenschaften</li>
+        <li><code>-v</code> – ausführliche Ausgabe</li>
+      </ul>
 
-  <p>
-    Bei wiederholten Übertragungen ist <code>rsync</code> häufig besser als <code>scp</code>,
-    weil nur Änderungen übertragen werden.
-  </p>
+      <p>
+        Bei wiederholten Übertragungen ist <code>rsync</code> häufig besser als <code>scp</code>,
+        weil nur Änderungen übertragen werden.
+      </p>
 
-  <p class="hint">
-    Bei <code>rsync</code> ist der abschließende Slash bedeutsam:
-    <code>projekt/</code> meint den Inhalt des Verzeichnisses;
-    <code>projekt</code> kann das Verzeichnis selbst als zusätzliche Ebene kopieren.
-  </p>
+      <p class="hint">
+        Bei <code>rsync</code> ist der abschließende Slash bedeutsam:
+        <code>projekt/</code> meint den Inhalt des Verzeichnisses;
+        <code>projekt</code> kann das Verzeichnis selbst als zusätzliche Ebene kopieren.
+      </p>
 
 
-  <!-- =========================================================
+      <!-- =========================================================
        47. DOWNLOAD
        ========================================================= -->
 
-  <h3>47. Dateien aus dem Internet laden</h3>
+      <h3>47. Dateien aus dem Internet laden</h3>
 
-  <div class="cheat-grid">
+      <div class="cheat-grid">
 
-    <div class="cheat-item">
-      <h4><code>wget</code></h4>
+        <div class="cheat-item">
+          <h4><code>wget</code></h4>
 
-      <pre class="cheat-code"><code>wget https://example.com/datei.zip</code></pre>
-    </div>
+          <pre class="cheat-code"><code>wget https://example.com/datei.zip</code></pre>
+        </div>
 
-    <div class="cheat-item">
-      <h4><code>curl</code></h4>
+        <div class="cheat-item">
+          <h4><code>curl</code></h4>
 
-      <pre class="cheat-code"><code>curl https://example.com
+          <pre class="cheat-code"><code>curl https://example.com
 curl -O https://example.com/datei.zip</code></pre>
-    </div>
+        </div>
 
-  </div>
+      </div>
 
-  <p>
-    Nicht jedes minimale Linux-System installiert beide Werkzeuge standardmäßig.
-  </p>
+      <p>
+        Nicht jedes minimale Linux-System installiert beide Werkzeuge standardmäßig.
+      </p>
 
 
-  <!-- =========================================================
+      <!-- =========================================================
        48. ARCHIVE
        ========================================================= -->
 
-  <h3>48. Dateien archivieren und komprimieren</h3>
+      <h3>48. Dateien archivieren und komprimieren</h3>
 
-  <p>Verzeichnis als <code>.tar.gz</code> archivieren:</p>
+      <p>Verzeichnis als <code>.tar.gz</code> archivieren:</p>
 
-  <pre class="cheat-code"><code>tar -czf backup.tar.gz projekt/</code></pre>
+      <pre class="cheat-code"><code>tar -czf backup.tar.gz projekt/</code></pre>
 
-  <p>Archiv entpacken:</p>
+      <p>Archiv entpacken:</p>
 
-  <pre class="cheat-code"><code>tar -xzf backup.tar.gz</code></pre>
+      <pre class="cheat-code"><code>tar -xzf backup.tar.gz</code></pre>
 
-  <p>Inhalt ansehen:</p>
+      <p>Inhalt ansehen:</p>
 
-  <pre class="cheat-code"><code>tar -tzf backup.tar.gz</code></pre>
+      <pre class="cheat-code"><code>tar -tzf backup.tar.gz</code></pre>
 
-  <p>Die klassischen Buchstaben:</p>
+      <p>Die klassischen Buchstaben:</p>
 
-  <ul>
-    <li><code>c</code> – create</li>
-    <li><code>x</code> – extract</li>
-    <li><code>t</code> – list</li>
-    <li><code>z</code> – gzip</li>
-    <li><code>f</code> – folgende Angabe ist der Dateiname</li>
-  </ul>
+      <ul>
+        <li><code>c</code> – create</li>
+        <li><code>x</code> – extract</li>
+        <li><code>t</code> – list</li>
+        <li><code>z</code> – gzip</li>
+        <li><code>f</code> – folgende Angabe ist der Dateiname</li>
+      </ul>
 
 
-  <!-- =========================================================
+      <!-- =========================================================
        49. LINKS
        ========================================================= -->
 
-  <h3>49. Symbolische Links</h3>
+      <h3>49. Symbolische Links</h3>
 
-  <p>
-    Ein symbolischer Link ähnelt einer Verknüpfung unter Windows.
-  </p>
+      <p>
+        Ein symbolischer Link ähnelt einer Verknüpfung unter Windows.
+      </p>
 
-  <pre class="cheat-code"><code>ln -s /home/julian/projekte/logger ~/logger</code></pre>
+      <pre class="cheat-code"><code>ln -s /home/julian/projekte/logger ~/logger</code></pre>
 
-  <p>Link anzeigen:</p>
+      <p>Link anzeigen:</p>
 
-  <pre class="cheat-code"><code>ls -l ~/logger</code></pre>
+      <pre class="cheat-code"><code>ls -l ~/logger</code></pre>
 
-  <p>Ziel eines Links auflösen:</p>
+      <p>Ziel eines Links auflösen:</p>
 
-  <pre class="cheat-code"><code>readlink -f ~/logger</code></pre>
+      <pre class="cheat-code"><code>readlink -f ~/logger</code></pre>
 
 
-  <!-- =========================================================
+      <!-- =========================================================
        50. DATEITYP
        ========================================================= -->
 
-  <h3>50. Herausfinden, was eine Datei tatsächlich ist</h3>
+      <h3>50. Herausfinden, was eine Datei tatsächlich ist</h3>
 
-  <pre class="cheat-code"><code>file bild.jpg
+      <pre class="cheat-code"><code>file bild.jpg
 file programm
 file archiv.dat</code></pre>
 
-  <p>
-    Linux verlässt sich wesentlich weniger auf Dateiendungen als Windows.
-    Eine Datei namens <code>bild.jpg</code> muss deshalb keineswegs tatsächlich ein JPEG sein.
-  </p>
+      <p>
+        Linux verlässt sich wesentlich weniger auf Dateiendungen als Windows.
+        Eine Datei namens <code>bild.jpg</code> muss deshalb keineswegs tatsächlich ein JPEG sein.
+      </p>
 
-  <p>Weitere Metadaten:</p>
+      <p>Weitere Metadaten:</p>
 
-  <pre class="cheat-code"><code>stat datei.txt</code></pre>
+      <pre class="cheat-code"><code>stat datei.txt</code></pre>
 
 
-  <!-- =========================================================
+      <!-- =========================================================
        51. PYTHON
        ========================================================= -->
 
-  <h3>51. Python unter Linux</h3>
+      <h3>51. Python unter Linux</h3>
 
-  <p>Python-Version prüfen:</p>
+      <p>Python-Version prüfen:</p>
 
-  <pre class="cheat-code"><code>python3 --version</code></pre>
+      <pre class="cheat-code"><code>python3 --version</code></pre>
 
-  <p>Skript starten:</p>
+      <p>Skript starten:</p>
 
-  <pre class="cheat-code"><code>python3 logger.py</code></pre>
+      <pre class="cheat-code"><code>python3 logger.py</code></pre>
 
-  <p>Interaktiven Interpreter starten:</p>
+      <p>Interaktiven Interpreter starten:</p>
 
-  <pre class="cheat-code"><code>python3</code></pre>
+      <pre class="cheat-code"><code>python3</code></pre>
 
-  <p>Beenden:</p>
+      <p>Beenden:</p>
 
-  <pre class="cheat-code"><code>exit()</code></pre>
+      <pre class="cheat-code"><code>exit()</code></pre>
 
 
-  <!-- =========================================================
+      <!-- =========================================================
        52. VENV
        ========================================================= -->
 
-  <h3>52. Python-Projekte mit virtuellen Umgebungen sauber halten</h3>
+      <h3>52. Python-Projekte mit virtuellen Umgebungen sauber halten</h3>
 
-  <p>
-    Python-Pakete sollten für Projekte möglichst nicht wahllos systemweit installiert werden.
-    Eine virtuelle Umgebung isoliert die Abhängigkeiten eines Projekts.
-  </p>
+      <p>
+        Python-Pakete sollten für Projekte möglichst nicht wahllos systemweit installiert werden.
+        Eine virtuelle Umgebung isoliert die Abhängigkeiten eines Projekts.
+      </p>
 
-  <p>Falls nötig:</p>
+      <p>Falls nötig:</p>
 
-  <pre class="cheat-code"><code>sudo apt install python3-venv</code></pre>
+      <pre class="cheat-code"><code>sudo apt install python3-venv</code></pre>
 
-  <p>Projektordner:</p>
+      <p>Projektordner:</p>
 
-  <pre class="cheat-code"><code>mkdir bme280_logger
+      <pre class="cheat-code"><code>mkdir bme280_logger
 cd bme280_logger</code></pre>
 
-  <p>Virtuelle Umgebung erstellen:</p>
+      <p>Virtuelle Umgebung erstellen:</p>
 
-  <pre class="cheat-code"><code>python3 -m venv .venv</code></pre>
+      <pre class="cheat-code"><code>python3 -m venv .venv</code></pre>
 
-  <p>Aktivieren:</p>
+      <p>Aktivieren:</p>
 
-  <pre class="cheat-code"><code>source .venv/bin/activate</code></pre>
+      <pre class="cheat-code"><code>source .venv/bin/activate</code></pre>
 
-  <p>Danach erkennt man häufig am Prompt:</p>
+      <p>Danach erkennt man häufig am Prompt:</p>
 
-  <pre class="cheat-code"><code>(.venv) julian@raspberrypi:~/bme280_logger $</code></pre>
+      <pre class="cheat-code"><code>(.venv) julian@raspberrypi:~/bme280_logger $</code></pre>
 
-  <p>Pakete installieren:</p>
+      <p>Pakete installieren:</p>
 
-  <pre class="cheat-code"><code>python -m pip install requests
+      <pre class="cheat-code"><code>python -m pip install requests
 python -m pip install smbus2</code></pre>
 
-  <p>Installierte Pakete anzeigen:</p>
+      <p>Installierte Pakete anzeigen:</p>
 
-  <pre class="cheat-code"><code>python -m pip list</code></pre>
+      <pre class="cheat-code"><code>python -m pip list</code></pre>
 
-  <p>Umgebung verlassen:</p>
+      <p>Umgebung verlassen:</p>
 
-  <pre class="cheat-code"><code>deactivate</code></pre>
+      <pre class="cheat-code"><code>deactivate</code></pre>
 
-  <p class="hint">
-    Innerhalb einer aktivierten virtuellen Umgebung ist <code>python</code> in Ordnung.
-    Außerhalb ist auf Debian-/Raspberry-Pi-Systemen <code>python3</code> die eindeutigere Wahl.
-  </p>
+      <p class="hint">
+        Innerhalb einer aktivierten virtuellen Umgebung ist <code>python</code> in Ordnung.
+        Außerhalb ist auf Debian-/Raspberry-Pi-Systemen <code>python3</code> die eindeutigere Wahl.
+      </p>
 
 
-  <!-- =========================================================
+      <!-- =========================================================
        53. REQUIREMENTS
        ========================================================= -->
 
-  <h3>53. Python-Abhängigkeiten dokumentieren</h3>
+      <h3>53. Python-Abhängigkeiten dokumentieren</h3>
 
-  <pre class="cheat-code"><code>python -m pip freeze &gt; requirements.txt</code></pre>
+      <pre class="cheat-code"><code>python -m pip freeze &gt; requirements.txt</code></pre>
 
-  <p>Später auf einem anderen System:</p>
+      <p>Später auf einem anderen System:</p>
 
-  <pre class="cheat-code"><code>python3 -m venv .venv
+      <pre class="cheat-code"><code>python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install -r requirements.txt</code></pre>
 
-  <p>
-    Damit lässt sich ein Projekt wesentlich reproduzierbarer auf einen anderen Raspberry Pi oder Rechner übertragen.
-  </p>
+      <p>
+        Damit lässt sich ein Projekt wesentlich reproduzierbarer auf einen anderen Raspberry Pi oder Rechner übertragen.
+      </p>
 
 
-  <!-- =========================================================
+      <!-- =========================================================
        54. SHELL SCRIPT
        ========================================================= -->
 
-  <h3>54. Mehrere Befehle in ein Shell-Skript packen</h3>
+      <h3>54. Mehrere Befehle in ein Shell-Skript packen</h3>
 
-  <p>Datei erstellen:</p>
+      <p>Datei erstellen:</p>
 
-  <pre class="cheat-code"><code>nano backup.sh</code></pre>
+      <pre class="cheat-code"><code>nano backup.sh</code></pre>
 
-  <p>Beispielinhalt:</p>
+      <p>Beispielinhalt:</p>
 
-  <pre class="cheat-code"><code>#!/usr/bin/env bash
+      <pre class="cheat-code"><code>#!/usr/bin/env bash
 
 echo "Backup startet..."
 date
@@ -3194,162 +3201,162 @@ cp "$HOME/projekte/config.json" "$HOME/backups/config.json"
 
 echo "Backup abgeschlossen."</code></pre>
 
-  <p>Ausführbar machen:</p>
+      <p>Ausführbar machen:</p>
 
-  <pre class="cheat-code"><code>chmod +x backup.sh</code></pre>
+      <pre class="cheat-code"><code>chmod +x backup.sh</code></pre>
 
-  <p>Starten:</p>
+      <p>Starten:</p>
 
-  <pre class="cheat-code"><code>./backup.sh</code></pre>
+      <pre class="cheat-code"><code>./backup.sh</code></pre>
 
-  <p>
-    Das führende <code>./</code> bedeutet: „Führe die Datei aus dem aktuellen Verzeichnis aus.“
-  </p>
+      <p>
+        Das führende <code>./</code> bedeutet: „Führe die Datei aus dem aktuellen Verzeichnis aus.“
+      </p>
 
 
-  <!-- =========================================================
+      <!-- =========================================================
        55. VARIABLEN
        ========================================================= -->
 
-  <h3>55. Shell-Variablen und Umgebungsvariablen</h3>
+      <h3>55. Shell-Variablen und Umgebungsvariablen</h3>
 
-  <pre class="cheat-code"><code>name="Julian"
+      <pre class="cheat-code"><code>name="Julian"
 echo "$name"</code></pre>
 
-  <p>Umgebungsvariable setzen:</p>
+      <p>Umgebungsvariable setzen:</p>
 
-  <pre class="cheat-code"><code>export SENSOR="BME280"
+      <pre class="cheat-code"><code>export SENSOR="BME280"
 echo "$SENSOR"</code></pre>
 
-  <p>Alle Umgebungsvariablen anzeigen:</p>
+      <p>Alle Umgebungsvariablen anzeigen:</p>
 
-  <pre class="cheat-code"><code>env</code></pre>
+      <pre class="cheat-code"><code>env</code></pre>
 
-  <p>Wichtige Beispiele:</p>
+      <p>Wichtige Beispiele:</p>
 
-  <pre class="cheat-code"><code>echo "$HOME"
+      <pre class="cheat-code"><code>echo "$HOME"
 echo "$USER"
 echo "$PATH"
 echo "$SHELL"</code></pre>
 
 
-  <!-- =========================================================
+      <!-- =========================================================
        56. PATH
        ========================================================= -->
 
-  <h3>56. Was ist <code>PATH</code>?</h3>
+      <h3>56. Was ist <code>PATH</code>?</h3>
 
-  <p>
-    Wenn man:
-  </p>
+      <p>
+        Wenn man:
+      </p>
 
-  <pre class="cheat-code"><code>python3</code></pre>
+      <pre class="cheat-code"><code>python3</code></pre>
 
-  <p>
-    eingibt, durchsucht die Shell nicht den gesamten Computer.
-    Sie sucht nur in den Verzeichnissen aus der Umgebungsvariable <code>PATH</code>.
-  </p>
+      <p>
+        eingibt, durchsucht die Shell nicht den gesamten Computer.
+        Sie sucht nur in den Verzeichnissen aus der Umgebungsvariable <code>PATH</code>.
+      </p>
 
-  <pre class="cheat-code"><code>echo "$PATH"</code></pre>
+      <pre class="cheat-code"><code>echo "$PATH"</code></pre>
 
-  <p>Beispielsweise:</p>
+      <p>Beispielsweise:</p>
 
-  <pre class="cheat-code"><code>/usr/local/bin:/usr/bin:/bin</code></pre>
+      <pre class="cheat-code"><code>/usr/local/bin:/usr/bin:/bin</code></pre>
 
-  <p>
-    Deshalb muss ein Programm im aktuellen Verzeichnis häufig explizit so gestartet werden:
-  </p>
+      <p>
+        Deshalb muss ein Programm im aktuellen Verzeichnis häufig explizit so gestartet werden:
+      </p>
 
-  <pre class="cheat-code"><code>./mein_programm</code></pre>
+      <pre class="cheat-code"><code>./mein_programm</code></pre>
 
 
-  <!-- =========================================================
+      <!-- =========================================================
        57. ALIASE
        ========================================================= -->
 
-  <h3>57. Eigene Kurzbefehle mit Aliasen</h3>
+      <h3>57. Eigene Kurzbefehle mit Aliasen</h3>
 
-  <pre class="cheat-code"><code>alias ll='ls -lah'
+      <pre class="cheat-code"><code>alias ll='ls -lah'
 alias update='sudo apt update &amp;&amp; sudo apt upgrade'</code></pre>
 
-  <p>
-    Dauerhafte Aliase können beispielsweise in:
-  </p>
+      <p>
+        Dauerhafte Aliase können beispielsweise in:
+      </p>
 
-  <pre class="cheat-code"><code>~/.bashrc</code></pre>
+      <pre class="cheat-code"><code>~/.bashrc</code></pre>
 
-  <p>eingetragen werden.</p>
+      <p>eingetragen werden.</p>
 
-  <p>Danach neu laden:</p>
+      <p>Danach neu laden:</p>
 
-  <pre class="cheat-code"><code>source ~/.bashrc</code></pre>
+      <pre class="cheat-code"><code>source ~/.bashrc</code></pre>
 
 
-  <!-- =========================================================
+      <!-- =========================================================
        58. RASPBERRY PI
        ========================================================= -->
 
-  <h3>58. Raspberry-Pi-spezifische Befehle</h3>
+      <h3>58. Raspberry-Pi-spezifische Befehle</h3>
 
-  <div class="cheat-grid">
+      <div class="cheat-grid">
 
-    <div class="cheat-item">
-      <h4>Konfiguration</h4>
+        <div class="cheat-item">
+          <h4>Konfiguration</h4>
 
-      <pre class="cheat-code"><code>sudo raspi-config</code></pre>
+          <pre class="cheat-code"><code>sudo raspi-config</code></pre>
 
-      <p>
-        Je nach Raspberry Pi OS lassen sich hier unter anderem SSH,
-        I²C, SPI, Hostname und weitere Schnittstellen konfigurieren.
-      </p>
-    </div>
+          <p>
+            Je nach Raspberry Pi OS lassen sich hier unter anderem SSH,
+            I²C, SPI, Hostname und weitere Schnittstellen konfigurieren.
+          </p>
+        </div>
 
-    <div class="cheat-item">
-      <h4>CPU-Temperatur</h4>
+        <div class="cheat-item">
+          <h4>CPU-Temperatur</h4>
 
-      <pre class="cheat-code"><code>vcgencmd measure_temp</code></pre>
-    </div>
+          <pre class="cheat-code"><code>vcgencmd measure_temp</code></pre>
+        </div>
 
-    <div class="cheat-item">
-      <h4>Modell anzeigen</h4>
+        <div class="cheat-item">
+          <h4>Modell anzeigen</h4>
 
-      <pre class="cheat-code"><code>cat /proc/device-tree/model</code></pre>
-    </div>
+          <pre class="cheat-code"><code>cat /proc/device-tree/model</code></pre>
+        </div>
 
-    <div class="cheat-item">
-      <h4>GPIO-Werkzeuge entdecken</h4>
+        <div class="cheat-item">
+          <h4>GPIO-Werkzeuge entdecken</h4>
 
-      <pre class="cheat-code"><code>pinctrl help</code></pre>
+          <pre class="cheat-code"><code>pinctrl help</code></pre>
 
-      <p>
-        Auf neueren Raspberry-Pi-Systemen steht <code>pinctrl</code> für verschiedene GPIO-Abfragen zur Verfügung.
-      </p>
-    </div>
+          <p>
+            Auf neueren Raspberry-Pi-Systemen steht <code>pinctrl</code> für verschiedene GPIO-Abfragen zur Verfügung.
+          </p>
+        </div>
 
-  </div>
+      </div>
 
 
-  <!-- =========================================================
+      <!-- =========================================================
        59. I2C
        ========================================================= -->
 
-  <h3>59. I²C-Geräte suchen</h3>
+      <h3>59. I²C-Geräte suchen</h3>
 
-  <p>Werkzeuge installieren:</p>
+      <p>Werkzeuge installieren:</p>
 
-  <pre class="cheat-code"><code>sudo apt install i2c-tools</code></pre>
+      <pre class="cheat-code"><code>sudo apt install i2c-tools</code></pre>
 
-  <p>I²C-Busse anzeigen:</p>
+      <p>I²C-Busse anzeigen:</p>
 
-  <pre class="cheat-code"><code>i2cdetect -l</code></pre>
+      <pre class="cheat-code"><code>i2cdetect -l</code></pre>
 
-  <p>Typischen Raspberry-Pi-I²C-Bus scannen:</p>
+      <p>Typischen Raspberry-Pi-I²C-Bus scannen:</p>
 
-  <pre class="cheat-code"><code>i2cdetect -y 1</code></pre>
+      <pre class="cheat-code"><code>i2cdetect -y 1</code></pre>
 
-  <p>Eine typische Ausgabe könnte enthalten:</p>
+      <p>Eine typische Ausgabe könnte enthalten:</p>
 
-  <pre class="cheat-code"><code>     0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
+      <pre class="cheat-code"><code>     0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
 00:                         -- -- -- -- -- -- -- --
 10: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 20: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -3359,272 +3366,273 @@ alias update='sudo apt update &amp;&amp; sudo apt upgrade'</code></pre>
 60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- 76 --
 70: -- -- -- -- -- -- -- --</code></pre>
 
-  <p>
-    In diesem Beispiel wären Geräte an <code>0x3C</code> und <code>0x76</code> vorhanden –
-    typische Adressen etwa für ein SSD1306-OLED und einen BME280.
-  </p>
+      <p>
+        In diesem Beispiel wären Geräte an <code>0x3C</code> und <code>0x76</code> vorhanden –
+        typische Adressen etwa für ein SSD1306-OLED und einen BME280.
+      </p>
 
 
-  <!-- =========================================================
+      <!-- =========================================================
        60. USB / SERIAL
        ========================================================= -->
 
-  <h3>60. USB- und serielle Geräte finden</h3>
+      <h3>60. USB- und serielle Geräte finden</h3>
 
-  <pre class="cheat-code"><code>lsusb</code></pre>
+      <pre class="cheat-code"><code>lsusb</code></pre>
 
-  <p>Serielle Geräte suchen:</p>
+      <p>Serielle Geräte suchen:</p>
 
-  <pre class="cheat-code"><code>ls /dev/ttyUSB*
+      <pre class="cheat-code"><code>ls /dev/ttyUSB*
 ls /dev/ttyACM*</code></pre>
 
-  <p>Kernelmeldungen nach dem Anstecken ansehen:</p>
+      <p>Kernelmeldungen nach dem Anstecken ansehen:</p>
 
-  <pre class="cheat-code"><code>dmesg | tail -30</code></pre>
+      <pre class="cheat-code"><code>dmesg | tail -30</code></pre>
 
-  <p>Oder live:</p>
+      <p>Oder live:</p>
 
-  <pre class="cheat-code"><code>sudo dmesg -w</code></pre>
+      <pre class="cheat-code"><code>sudo dmesg -w</code></pre>
 
-  <p>
-    Das ist besonders nützlich bei Arduino, ESP32, Meshtastic-Geräten oder USB-Seriell-Adaptern.
-  </p>
+      <p>
+        Das ist besonders nützlich bei Arduino, ESP32, Meshtastic-Geräten oder USB-Seriell-Adaptern.
+      </p>
 
 
-  <!-- =========================================================
+      <!-- =========================================================
        61. REBOOT
        ========================================================= -->
 
-  <h3>61. Raspberry Pi oder Linux-Rechner sauber herunterfahren</h3>
+      <h3>61. Raspberry Pi oder Linux-Rechner sauber herunterfahren</h3>
 
-  <pre class="cheat-code"><code>sudo reboot</code></pre>
+      <pre class="cheat-code"><code>sudo reboot</code></pre>
 
-  <pre class="cheat-code"><code>sudo shutdown -h now</code></pre>
+      <pre class="cheat-code"><code>sudo shutdown -h now</code></pre>
 
-  <p>Alternative:</p>
+      <p>Alternative:</p>
 
-  <pre class="cheat-code"><code>sudo poweroff</code></pre>
+      <pre class="cheat-code"><code>sudo poweroff</code></pre>
 
-  <p class="hint">
-    Besonders beim Raspberry Pi sollte die Stromversorgung nicht einfach während laufender Schreibzugriffe getrennt werden.
-    Die SD-Karte ist ein Dateisystem – kein Lichtschalter.
-  </p>
+      <p class="hint">
+        Besonders beim Raspberry Pi sollte die Stromversorgung nicht einfach während laufender Schreibzugriffe getrennt
+        werden.
+        Die SD-Karte ist ein Dateisystem – kein Lichtschalter.
+      </p>
 
 
-  <!-- =========================================================
+      <!-- =========================================================
        62. ZEIT
        ========================================================= -->
 
-  <h3>62. Datum, Uhrzeit und Zeitzone</h3>
+      <h3>62. Datum, Uhrzeit und Zeitzone</h3>
 
-  <pre class="cheat-code"><code>date
+      <pre class="cheat-code"><code>date
 timedatectl</code></pre>
 
-  <p>Verfügbare Zeitzonen suchen:</p>
+      <p>Verfügbare Zeitzonen suchen:</p>
 
-  <pre class="cheat-code"><code>timedatectl list-timezones | grep Vienna</code></pre>
+      <pre class="cheat-code"><code>timedatectl list-timezones | grep Vienna</code></pre>
 
-  <p>Zeitzone setzen:</p>
+      <p>Zeitzone setzen:</p>
 
-  <pre class="cheat-code"><code>sudo timedatectl set-timezone Europe/Vienna</code></pre>
+      <pre class="cheat-code"><code>sudo timedatectl set-timezone Europe/Vienna</code></pre>
 
 
-  <!-- =========================================================
+      <!-- =========================================================
        63. CRON
        ========================================================= -->
 
-  <h3>63. Befehle automatisch nach Zeitplan starten – <code>cron</code></h3>
+      <h3>63. Befehle automatisch nach Zeitplan starten – <code>cron</code></h3>
 
-  <p>Eigene Cronjobs bearbeiten:</p>
+      <p>Eigene Cronjobs bearbeiten:</p>
 
-  <pre class="cheat-code"><code>crontab -e</code></pre>
+      <pre class="cheat-code"><code>crontab -e</code></pre>
 
-  <p>Format:</p>
+      <p>Format:</p>
 
-  <pre class="cheat-code"><code>Minute Stunde Tag Monat Wochentag Befehl</code></pre>
+      <pre class="cheat-code"><code>Minute Stunde Tag Monat Wochentag Befehl</code></pre>
 
-  <p>Beispiel – jeden Tag um 03:00 Uhr:</p>
+      <p>Beispiel – jeden Tag um 03:00 Uhr:</p>
 
-  <pre class="cheat-code"><code>0 3 * * * /home/julian/backup.sh</code></pre>
+      <pre class="cheat-code"><code>0 3 * * * /home/julian/backup.sh</code></pre>
 
-  <p>Alle fünf Minuten:</p>
+      <p>Alle fünf Minuten:</p>
 
-  <pre class="cheat-code"><code>*/5 * * * * /home/julian/script.sh</code></pre>
+      <pre class="cheat-code"><code>*/5 * * * * /home/julian/script.sh</code></pre>
 
-  <p>Eigene Cronjobs anzeigen:</p>
+      <p>Eigene Cronjobs anzeigen:</p>
 
-  <pre class="cheat-code"><code>crontab -l</code></pre>
+      <pre class="cheat-code"><code>crontab -l</code></pre>
 
-  <p class="hint">
-    Für dauerhaft laufende Programme ist <code>systemd</code> meist geeigneter.
-    <code>cron</code> eignet sich besonders für Aufgaben, die zu bestimmten Zeitpunkten gestartet werden sollen.
-  </p>
+      <p class="hint">
+        Für dauerhaft laufende Programme ist <code>systemd</code> meist geeigneter.
+        <code>cron</code> eignet sich besonders für Aufgaben, die zu bestimmten Zeitpunkten gestartet werden sollen.
+      </p>
 
 
-  <!-- =========================================================
+      <!-- =========================================================
        64. DATE / SLEEP / WATCH
        ========================================================= -->
 
-  <h3>64. Kleine Helfer für Tests und Automatisierung</h3>
+      <h3>64. Kleine Helfer für Tests und Automatisierung</h3>
 
-  <div class="cheat-grid">
+      <div class="cheat-grid">
 
-    <div class="cheat-item">
-      <h4><code>date</code></h4>
+        <div class="cheat-item">
+          <h4><code>date</code></h4>
 
-      <pre class="cheat-code"><code>date
+          <pre class="cheat-code"><code>date
 date "+%Y-%m-%d %H:%M:%S"</code></pre>
-    </div>
+        </div>
 
-    <div class="cheat-item">
-      <h4><code>sleep</code></h4>
+        <div class="cheat-item">
+          <h4><code>sleep</code></h4>
 
-      <pre class="cheat-code"><code>sleep 5
+          <pre class="cheat-code"><code>sleep 5
 sleep 10m
 sleep 1h</code></pre>
 
-      <p>
-        Wartet fünf Sekunden, zehn Minuten bzw. eine Stunde.
-      </p>
-    </div>
+          <p>
+            Wartet fünf Sekunden, zehn Minuten bzw. eine Stunde.
+          </p>
+        </div>
 
-    <div class="cheat-item">
-      <h4><code>watch</code></h4>
+        <div class="cheat-item">
+          <h4><code>watch</code></h4>
 
-      <pre class="cheat-code"><code>watch free -h
+          <pre class="cheat-code"><code>watch free -h
 watch -n 2 vcgencmd measure_temp</code></pre>
 
-      <p>
-        Führt einen Befehl regelmäßig neu aus.
-      </p>
-    </div>
+          <p>
+            Führt einen Befehl regelmäßig neu aus.
+          </p>
+        </div>
 
-  </div>
+      </div>
 
 
-  <!-- =========================================================
+      <!-- =========================================================
        65. WEB SERVER
        ========================================================= -->
 
-  <h3>65. Schnell einen lokalen Webserver starten</h3>
+      <h3>65. Schnell einen lokalen Webserver starten</h3>
 
-  <p>
-    Für statische HTML-/CSS-/JavaScript-Projekte ist Python hervorragend als einfacher Entwicklungsserver geeignet.
-  </p>
+      <p>
+        Für statische HTML-/CSS-/JavaScript-Projekte ist Python hervorragend als einfacher Entwicklungsserver geeignet.
+      </p>
 
-  <pre class="cheat-code"><code>cd ~/web
+      <pre class="cheat-code"><code>cd ~/web
 python3 -m http.server 8000</code></pre>
 
-  <p>Danach lokal öffnen:</p>
+      <p>Danach lokal öffnen:</p>
 
-  <pre class="cheat-code"><code>http://localhost:8000/</code></pre>
+      <pre class="cheat-code"><code>http://localhost:8000/</code></pre>
 
-  <p>Von einem anderen Rechner im lokalen Netzwerk:</p>
+      <p>Von einem anderen Rechner im lokalen Netzwerk:</p>
 
-  <pre class="cheat-code"><code>http://IP-DES-RECHNERS:8000/</code></pre>
+      <pre class="cheat-code"><code>http://IP-DES-RECHNERS:8000/</code></pre>
 
-  <p>IP-Adresse herausfinden:</p>
+      <p>IP-Adresse herausfinden:</p>
 
-  <pre class="cheat-code"><code>hostname -I</code></pre>
+      <pre class="cheat-code"><code>hostname -I</code></pre>
 
-  <p>Server wieder beenden:</p>
+      <p>Server wieder beenden:</p>
 
-  <pre class="cheat-code"><code>Ctrl+C</code></pre>
+      <pre class="cheat-code"><code>Ctrl+C</code></pre>
 
 
-  <!-- =========================================================
+      <!-- =========================================================
        66. TYPISCHE DEBUG WORKFLOWS
        ========================================================= -->
 
-  <h3>66. Typische Debugging-Workflows</h3>
+      <h3>66. Typische Debugging-Workflows</h3>
 
-  <div class="cheat-grid">
+      <div class="cheat-grid">
 
-    <div class="cheat-item">
-      <h4>„Mein Python-Skript läuft nicht.“</h4>
+        <div class="cheat-item">
+          <h4>„Mein Python-Skript läuft nicht.“</h4>
 
-      <pre class="cheat-code"><code>pwd
+          <pre class="cheat-code"><code>pwd
 ls -lah
 python3 --version
 python3 logger.py</code></pre>
 
-      <p>Bei Paketproblemen:</p>
+          <p>Bei Paketproblemen:</p>
 
-      <pre class="cheat-code"><code>source .venv/bin/activate
+          <pre class="cheat-code"><code>source .venv/bin/activate
 python -m pip list</code></pre>
-    </div>
+        </div>
 
-    <div class="cheat-item">
-      <h4>„Mein Raspberry Pi ist im Netzwerk nicht erreichbar.“</h4>
+        <div class="cheat-item">
+          <h4>„Mein Raspberry Pi ist im Netzwerk nicht erreichbar.“</h4>
 
-      <pre class="cheat-code"><code>hostname
+          <pre class="cheat-code"><code>hostname
 hostname -I
 ip a
 ip route
 ping -c 4 1.1.1.1</code></pre>
 
-      <p>SSH prüfen:</p>
+          <p>SSH prüfen:</p>
 
-      <pre class="cheat-code"><code>systemctl status ssh
+          <pre class="cheat-code"><code>systemctl status ssh
 ss -tulpn | grep :22</code></pre>
-    </div>
+        </div>
 
-    <div class="cheat-item">
-      <h4>„Mein Sensor wird nicht erkannt.“</h4>
+        <div class="cheat-item">
+          <h4>„Mein Sensor wird nicht erkannt.“</h4>
 
-      <pre class="cheat-code"><code>i2cdetect -l
+          <pre class="cheat-code"><code>i2cdetect -l
 i2cdetect -y 1</code></pre>
 
-      <p>
-        Wenn nichts erscheint: Verkabelung, Versorgung, SDA/SCL und aktiviertes I²C prüfen.
-      </p>
-    </div>
+          <p>
+            Wenn nichts erscheint: Verkabelung, Versorgung, SDA/SCL und aktiviertes I²C prüfen.
+          </p>
+        </div>
 
-    <div class="cheat-item">
-      <h4>„Mein Dienst startet nicht.“</h4>
+        <div class="cheat-item">
+          <h4>„Mein Dienst startet nicht.“</h4>
 
-      <pre class="cheat-code"><code>systemctl status mein-dienst
+          <pre class="cheat-code"><code>systemctl status mein-dienst
 journalctl -u mein-dienst -n 50
 journalctl -u mein-dienst -f</code></pre>
-    </div>
+        </div>
 
-    <div class="cheat-item">
-      <h4>„Die Festplatte ist voll.“</h4>
+        <div class="cheat-item">
+          <h4>„Die Festplatte ist voll.“</h4>
 
-      <pre class="cheat-code"><code>df -h
+          <pre class="cheat-code"><code>df -h
 du -sh /*
 du -sh ~/.* ~/* 2&gt;/dev/null</code></pre>
-    </div>
+        </div>
 
-    <div class="cheat-item">
-      <h4>„Ein Prozess hängt.“</h4>
+        <div class="cheat-item">
+          <h4>„Ein Prozess hängt.“</h4>
 
-      <pre class="cheat-code"><code>pgrep -a python
+          <pre class="cheat-code"><code>pgrep -a python
 ps aux | grep logger
 kill PID</code></pre>
 
-      <p>Erst wenn das nicht hilft:</p>
+          <p>Erst wenn das nicht hilft:</p>
 
-      <pre class="cheat-code"><code>kill -9 PID</code></pre>
-    </div>
+          <pre class="cheat-code"><code>kill -9 PID</code></pre>
+        </div>
 
-  </div>
+      </div>
 
 
-  <!-- =========================================================
+      <!-- =========================================================
        67. PRAKTISCHE BEFEHLSKETTEN
        ========================================================= -->
 
-  <h3>67. Praktische Befehlsfolgen für den Alltag</h3>
+      <h3>67. Praktische Befehlsfolgen für den Alltag</h3>
 
-  <h4>System aktualisieren</h4>
+      <h4>System aktualisieren</h4>
 
-  <pre class="cheat-code"><code>sudo apt update &amp;&amp; sudo apt upgrade</code></pre>
+      <pre class="cheat-code"><code>sudo apt update &amp;&amp; sudo apt upgrade</code></pre>
 
 
-  <h4>Neues Python-Projekt anlegen</h4>
+      <h4>Neues Python-Projekt anlegen</h4>
 
-  <pre class="cheat-code"><code>mkdir mein_projekt
+      <pre class="cheat-code"><code>mkdir mein_projekt
 cd mein_projekt
 python3 -m venv .venv
 source .venv/bin/activate
@@ -3632,511 +3640,512 @@ touch main.py
 nano main.py</code></pre>
 
 
-  <h4>Projekt auf einen Raspberry Pi übertragen</h4>
+      <h4>Projekt auf einen Raspberry Pi übertragen</h4>
 
-  <pre class="cheat-code"><code>rsync -av mein_projekt/ raspberrypi:~/mein_projekt/</code></pre>
+      <pre class="cheat-code"><code>rsync -av mein_projekt/ raspberrypi:~/mein_projekt/</code></pre>
 
 
-  <h4>Auf den Raspberry Pi verbinden und Projekt starten</h4>
+      <h4>Auf den Raspberry Pi verbinden und Projekt starten</h4>
 
-  <pre class="cheat-code"><code>ssh raspberrypi
+      <pre class="cheat-code"><code>ssh raspberrypi
 cd ~/mein_projekt
 source .venv/bin/activate
 python main.py</code></pre>
 
 
-  <h4>Log live verfolgen</h4>
+      <h4>Log live verfolgen</h4>
 
-  <pre class="cheat-code"><code>tail -f logger.log</code></pre>
-
-
-  <h4>Nach Fehlern im Log suchen</h4>
-
-  <pre class="cheat-code"><code>grep -in "error" logger.log</code></pre>
+      <pre class="cheat-code"><code>tail -f logger.log</code></pre>
 
 
-  <!-- =========================================================
+      <h4>Nach Fehlern im Log suchen</h4>
+
+      <pre class="cheat-code"><code>grep -in "error" logger.log</code></pre>
+
+
+      <!-- =========================================================
        68. COMMAND REFERENCE
        ========================================================= -->
 
-  <h3>68. Kompakte Befehlsreferenz</h3>
+      <h3>68. Kompakte Befehlsreferenz</h3>
 
-  <table>
-    <thead>
-      <tr>
-        <th>Befehl</th>
-        <th>Zweck</th>
-        <th>Beispiel</th>
-      </tr>
-    </thead>
+      <table>
+        <thead>
+          <tr>
+            <th>Befehl</th>
+            <th>Zweck</th>
+            <th>Beispiel</th>
+          </tr>
+        </thead>
 
-    <tbody>
-      <tr>
-        <td><code>pwd</code></td>
-        <td>Aktuelles Verzeichnis anzeigen</td>
-        <td><code>pwd</code></td>
-      </tr>
+        <tbody>
+          <tr>
+            <td><code>pwd</code></td>
+            <td>Aktuelles Verzeichnis anzeigen</td>
+            <td><code>pwd</code></td>
+          </tr>
 
-      <tr>
-        <td><code>ls</code></td>
-        <td>Dateien anzeigen</td>
-        <td><code>ls -lah</code></td>
-      </tr>
+          <tr>
+            <td><code>ls</code></td>
+            <td>Dateien anzeigen</td>
+            <td><code>ls -lah</code></td>
+          </tr>
 
-      <tr>
-        <td><code>cd</code></td>
-        <td>Verzeichnis wechseln</td>
-        <td><code>cd ~/projekte</code></td>
-      </tr>
+          <tr>
+            <td><code>cd</code></td>
+            <td>Verzeichnis wechseln</td>
+            <td><code>cd ~/projekte</code></td>
+          </tr>
 
-      <tr>
-        <td><code>mkdir</code></td>
-        <td>Verzeichnis erstellen</td>
-        <td><code>mkdir -p data/logs</code></td>
-      </tr>
+          <tr>
+            <td><code>mkdir</code></td>
+            <td>Verzeichnis erstellen</td>
+            <td><code>mkdir -p data/logs</code></td>
+          </tr>
 
-      <tr>
-        <td><code>touch</code></td>
-        <td>Datei anlegen</td>
-        <td><code>touch notes.txt</code></td>
-      </tr>
+          <tr>
+            <td><code>touch</code></td>
+            <td>Datei anlegen</td>
+            <td><code>touch notes.txt</code></td>
+          </tr>
 
-      <tr>
-        <td><code>cp</code></td>
-        <td>Kopieren</td>
-        <td><code>cp -r projekt backup</code></td>
-      </tr>
+          <tr>
+            <td><code>cp</code></td>
+            <td>Kopieren</td>
+            <td><code>cp -r projekt backup</code></td>
+          </tr>
 
-      <tr>
-        <td><code>mv</code></td>
-        <td>Verschieben / Umbenennen</td>
-        <td><code>mv alt.txt neu.txt</code></td>
-      </tr>
+          <tr>
+            <td><code>mv</code></td>
+            <td>Verschieben / Umbenennen</td>
+            <td><code>mv alt.txt neu.txt</code></td>
+          </tr>
 
-      <tr>
-        <td><code>rm</code></td>
-        <td>Löschen</td>
-        <td><code>rm -i datei.txt</code></td>
-      </tr>
+          <tr>
+            <td><code>rm</code></td>
+            <td>Löschen</td>
+            <td><code>rm -i datei.txt</code></td>
+          </tr>
 
-      <tr>
-        <td><code>cat</code></td>
-        <td>Datei ausgeben</td>
-        <td><code>cat config.txt</code></td>
-      </tr>
+          <tr>
+            <td><code>cat</code></td>
+            <td>Datei ausgeben</td>
+            <td><code>cat config.txt</code></td>
+          </tr>
 
-      <tr>
-        <td><code>less</code></td>
-        <td>Lange Datei lesen</td>
-        <td><code>less log.txt</code></td>
-      </tr>
+          <tr>
+            <td><code>less</code></td>
+            <td>Lange Datei lesen</td>
+            <td><code>less log.txt</code></td>
+          </tr>
 
-      <tr>
-        <td><code>head</code></td>
-        <td>Dateianfang</td>
-        <td><code>head -n 20 log.txt</code></td>
-      </tr>
+          <tr>
+            <td><code>head</code></td>
+            <td>Dateianfang</td>
+            <td><code>head -n 20 log.txt</code></td>
+          </tr>
 
-      <tr>
-        <td><code>tail</code></td>
-        <td>Dateiende / Logs</td>
-        <td><code>tail -f log.txt</code></td>
-      </tr>
+          <tr>
+            <td><code>tail</code></td>
+            <td>Dateiende / Logs</td>
+            <td><code>tail -f log.txt</code></td>
+          </tr>
 
-      <tr>
-        <td><code>grep</code></td>
-        <td>Text suchen</td>
-        <td><code>grep -rin "error" .</code></td>
-      </tr>
+          <tr>
+            <td><code>grep</code></td>
+            <td>Text suchen</td>
+            <td><code>grep -rin "error" .</code></td>
+          </tr>
 
-      <tr>
-        <td><code>find</code></td>
-        <td>Dateien suchen</td>
-        <td><code>find . -name "*.py"</code></td>
-      </tr>
+          <tr>
+            <td><code>find</code></td>
+            <td>Dateien suchen</td>
+            <td><code>find . -name "*.py"</code></td>
+          </tr>
 
-      <tr>
-        <td><code>nano</code></td>
-        <td>Datei bearbeiten</td>
-        <td><code>nano config.txt</code></td>
-      </tr>
+          <tr>
+            <td><code>nano</code></td>
+            <td>Datei bearbeiten</td>
+            <td><code>nano config.txt</code></td>
+          </tr>
 
-      <tr>
-        <td><code>chmod</code></td>
-        <td>Dateirechte ändern</td>
-        <td><code>chmod +x script.sh</code></td>
-      </tr>
+          <tr>
+            <td><code>chmod</code></td>
+            <td>Dateirechte ändern</td>
+            <td><code>chmod +x script.sh</code></td>
+          </tr>
 
-      <tr>
-        <td><code>chown</code></td>
-        <td>Besitzer ändern</td>
-        <td><code>sudo chown user:user datei</code></td>
-      </tr>
+          <tr>
+            <td><code>chown</code></td>
+            <td>Besitzer ändern</td>
+            <td><code>sudo chown user:user datei</code></td>
+          </tr>
 
-      <tr>
-        <td><code>df</code></td>
-        <td>Freien Speicher anzeigen</td>
-        <td><code>df -h</code></td>
-      </tr>
+          <tr>
+            <td><code>df</code></td>
+            <td>Freien Speicher anzeigen</td>
+            <td><code>df -h</code></td>
+          </tr>
 
-      <tr>
-        <td><code>du</code></td>
-        <td>Verzeichnisgröße</td>
-        <td><code>du -sh *</code></td>
-      </tr>
+          <tr>
+            <td><code>du</code></td>
+            <td>Verzeichnisgröße</td>
+            <td><code>du -sh *</code></td>
+          </tr>
 
-      <tr>
-        <td><code>ps</code></td>
-        <td>Prozesse anzeigen</td>
-        <td><code>ps aux</code></td>
-      </tr>
+          <tr>
+            <td><code>ps</code></td>
+            <td>Prozesse anzeigen</td>
+            <td><code>ps aux</code></td>
+          </tr>
 
-      <tr>
-        <td><code>top</code></td>
-        <td>Systemlast live</td>
-        <td><code>top</code></td>
-      </tr>
+          <tr>
+            <td><code>top</code></td>
+            <td>Systemlast live</td>
+            <td><code>top</code></td>
+          </tr>
 
-      <tr>
-        <td><code>kill</code></td>
-        <td>Prozess beenden</td>
-        <td><code>kill 1234</code></td>
-      </tr>
+          <tr>
+            <td><code>kill</code></td>
+            <td>Prozess beenden</td>
+            <td><code>kill 1234</code></td>
+          </tr>
 
-      <tr>
-        <td><code>systemctl</code></td>
-        <td>Dienste verwalten</td>
-        <td><code>systemctl status ssh</code></td>
-      </tr>
+          <tr>
+            <td><code>systemctl</code></td>
+            <td>Dienste verwalten</td>
+            <td><code>systemctl status ssh</code></td>
+          </tr>
 
-      <tr>
-        <td><code>journalctl</code></td>
-        <td>Systemlogs anzeigen</td>
-        <td><code>journalctl -u ssh -f</code></td>
-      </tr>
+          <tr>
+            <td><code>journalctl</code></td>
+            <td>Systemlogs anzeigen</td>
+            <td><code>journalctl -u ssh -f</code></td>
+          </tr>
 
-      <tr>
-        <td><code>ip</code></td>
-        <td>Netzwerk untersuchen</td>
-        <td><code>ip a</code></td>
-      </tr>
+          <tr>
+            <td><code>ip</code></td>
+            <td>Netzwerk untersuchen</td>
+            <td><code>ip a</code></td>
+          </tr>
 
-      <tr>
-        <td><code>ping</code></td>
-        <td>Erreichbarkeit prüfen</td>
-        <td><code>ping -c 4 server.local</code></td>
-      </tr>
+          <tr>
+            <td><code>ping</code></td>
+            <td>Erreichbarkeit prüfen</td>
+            <td><code>ping -c 4 server.local</code></td>
+          </tr>
 
-      <tr>
-        <td><code>ss</code></td>
-        <td>Ports / Verbindungen anzeigen</td>
-        <td><code>ss -tulpn</code></td>
-      </tr>
+          <tr>
+            <td><code>ss</code></td>
+            <td>Ports / Verbindungen anzeigen</td>
+            <td><code>ss -tulpn</code></td>
+          </tr>
 
-      <tr>
-        <td><code>ssh</code></td>
-        <td>Remote-Terminal</td>
-        <td><code>ssh user@server</code></td>
-      </tr>
+          <tr>
+            <td><code>ssh</code></td>
+            <td>Remote-Terminal</td>
+            <td><code>ssh user@server</code></td>
+          </tr>
 
-      <tr>
-        <td><code>scp</code></td>
-        <td>Dateien über SSH kopieren</td>
-        <td><code>scp file user@server:~/</code></td>
-      </tr>
+          <tr>
+            <td><code>scp</code></td>
+            <td>Dateien über SSH kopieren</td>
+            <td><code>scp file user@server:~/</code></td>
+          </tr>
 
-      <tr>
-        <td><code>rsync</code></td>
-        <td>Dateien synchronisieren</td>
-        <td><code>rsync -av projekt/ server:~/projekt/</code></td>
-      </tr>
+          <tr>
+            <td><code>rsync</code></td>
+            <td>Dateien synchronisieren</td>
+            <td><code>rsync -av projekt/ server:~/projekt/</code></td>
+          </tr>
 
-      <tr>
-        <td><code>apt</code></td>
-        <td>Software verwalten</td>
-        <td><code>sudo apt install htop</code></td>
-      </tr>
+          <tr>
+            <td><code>apt</code></td>
+            <td>Software verwalten</td>
+            <td><code>sudo apt install htop</code></td>
+          </tr>
 
-      <tr>
-        <td><code>tar</code></td>
-        <td>Archive erstellen / entpacken</td>
-        <td><code>tar -czf backup.tar.gz projekt/</code></td>
-      </tr>
+          <tr>
+            <td><code>tar</code></td>
+            <td>Archive erstellen / entpacken</td>
+            <td><code>tar -czf backup.tar.gz projekt/</code></td>
+          </tr>
 
-      <tr>
-        <td><code>python3</code></td>
-        <td>Python starten</td>
-        <td><code>python3 logger.py</code></td>
-      </tr>
+          <tr>
+            <td><code>python3</code></td>
+            <td>Python starten</td>
+            <td><code>python3 logger.py</code></td>
+          </tr>
 
-      <tr>
-        <td><code>history</code></td>
-        <td>Alte Befehle anzeigen</td>
-        <td><code>history | grep ssh</code></td>
-      </tr>
+          <tr>
+            <td><code>history</code></td>
+            <td>Alte Befehle anzeigen</td>
+            <td><code>history | grep ssh</code></td>
+          </tr>
 
-      <tr>
-        <td><code>man</code></td>
-        <td>Handbuch anzeigen</td>
-        <td><code>man grep</code></td>
-      </tr>
-    </tbody>
-  </table>
+          <tr>
+            <td><code>man</code></td>
+            <td>Handbuch anzeigen</td>
+            <td><code>man grep</code></td>
+          </tr>
+        </tbody>
+      </table>
 
 
-  <!-- =========================================================
+      <!-- =========================================================
        69. FLAGS
        ========================================================= -->
 
-  <h3>69. Häufige Optionen – aber nicht blind verallgemeinern</h3>
+      <h3>69. Häufige Optionen – aber nicht blind verallgemeinern</h3>
 
-  <table>
-    <thead>
-      <tr>
-        <th>Option</th>
-        <th>Häufige Bedeutung</th>
-        <th>Beispiel</th>
-      </tr>
-    </thead>
+      <table>
+        <thead>
+          <tr>
+            <th>Option</th>
+            <th>Häufige Bedeutung</th>
+            <th>Beispiel</th>
+          </tr>
+        </thead>
 
-    <tbody>
-      <tr>
-        <td><code>-a</code></td>
-        <td>all / alles</td>
-        <td><code>ls -a</code></td>
-      </tr>
+        <tbody>
+          <tr>
+            <td><code>-a</code></td>
+            <td>all / alles</td>
+            <td><code>ls -a</code></td>
+          </tr>
 
-      <tr>
-        <td><code>-l</code></td>
-        <td>long / ausführliche Darstellung</td>
-        <td><code>ls -l</code></td>
-      </tr>
+          <tr>
+            <td><code>-l</code></td>
+            <td>long / ausführliche Darstellung</td>
+            <td><code>ls -l</code></td>
+          </tr>
 
-      <tr>
-        <td><code>-h</code></td>
-        <td>häufig human-readable</td>
-        <td><code>df -h</code></td>
-      </tr>
+          <tr>
+            <td><code>-h</code></td>
+            <td>häufig human-readable</td>
+            <td><code>df -h</code></td>
+          </tr>
 
-      <tr>
-        <td><code>-r</code></td>
-        <td>häufig recursive</td>
-        <td><code>cp -r ordner backup</code></td>
-      </tr>
+          <tr>
+            <td><code>-r</code></td>
+            <td>häufig recursive</td>
+            <td><code>cp -r ordner backup</code></td>
+          </tr>
 
-      <tr>
-        <td><code>-R</code></td>
-        <td>häufig ebenfalls recursive</td>
-        <td><code>chown -R user:user ordner</code></td>
-      </tr>
+          <tr>
+            <td><code>-R</code></td>
+            <td>häufig ebenfalls recursive</td>
+            <td><code>chown -R user:user ordner</code></td>
+          </tr>
 
-      <tr>
-        <td><code>-f</code></td>
-        <td>häufig force</td>
-        <td><code>rm -f datei</code></td>
-      </tr>
+          <tr>
+            <td><code>-f</code></td>
+            <td>häufig force</td>
+            <td><code>rm -f datei</code></td>
+          </tr>
 
-      <tr>
-        <td><code>-i</code></td>
-        <td>häufig interactive</td>
-        <td><code>rm -i datei</code></td>
-      </tr>
+          <tr>
+            <td><code>-i</code></td>
+            <td>häufig interactive</td>
+            <td><code>rm -i datei</code></td>
+          </tr>
 
-      <tr>
-        <td><code>-v</code></td>
-        <td>häufig verbose</td>
-        <td><code>cp -v a b</code></td>
-      </tr>
+          <tr>
+            <td><code>-v</code></td>
+            <td>häufig verbose</td>
+            <td><code>cp -v a b</code></td>
+          </tr>
 
-      <tr>
-        <td><code>-n</code></td>
-        <td>je nach Programm number, numeric oder Anzahl</td>
-        <td><code>tail -n 20 log.txt</code></td>
-      </tr>
+          <tr>
+            <td><code>-n</code></td>
+            <td>je nach Programm number, numeric oder Anzahl</td>
+            <td><code>tail -n 20 log.txt</code></td>
+          </tr>
 
-      <tr>
-        <td><code>-y</code></td>
-        <td>bei <code>apt</code>: Rückfragen automatisch bestätigen</td>
-        <td><code>sudo apt install -y htop</code></td>
-      </tr>
-    </tbody>
-  </table>
+          <tr>
+            <td><code>-y</code></td>
+            <td>bei <code>apt</code>: Rückfragen automatisch bestätigen</td>
+            <td><code>sudo apt install -y htop</code></td>
+          </tr>
+        </tbody>
+      </table>
 
-  <p class="hint">
-    Optionen sind Eigenschaften des jeweiligen Programms, nicht der Linux-Shell.
-    Deshalb bedeutet beispielsweise <code>-h</code> nicht zwangsläufig immer dasselbe.
-    Im Zweifel: <code>befehl --help</code> oder <code>man befehl</code>.
-  </p>
+      <p class="hint">
+        Optionen sind Eigenschaften des jeweiligen Programms, nicht der Linux-Shell.
+        Deshalb bedeutet beispielsweise <code>-h</code> nicht zwangsläufig immer dasselbe.
+        Im Zweifel: <code>befehl --help</code> oder <code>man befehl</code>.
+      </p>
 
 
-  <!-- =========================================================
+      <!-- =========================================================
        70. SICHERHEIT
        ========================================================= -->
 
-  <h3>70. Befehle, bei denen man zweimal hinschauen sollte</h3>
+      <h3>70. Befehle, bei denen man zweimal hinschauen sollte</h3>
 
-  <div class="cheat-grid">
+      <div class="cheat-grid">
 
-    <div class="cheat-item">
-      <h4><code>rm -rf</code></h4>
+        <div class="cheat-item">
+          <h4><code>rm -rf</code></h4>
 
-      <p>
-        Löscht rekursiv und ohne Rückfrage.
-      </p>
+          <p>
+            Löscht rekursiv und ohne Rückfrage.
+          </p>
 
-      <pre class="cheat-code"><code>rm -rf VERZEICHNIS</code></pre>
+          <pre class="cheat-code"><code>rm -rf VERZEICHNIS</code></pre>
 
-      <p>
-        Vorher besser:
-      </p>
+          <p>
+            Vorher besser:
+          </p>
 
-      <pre class="cheat-code"><code>pwd
+          <pre class="cheat-code"><code>pwd
 ls -lah VERZEICHNIS</code></pre>
-    </div>
+        </div>
 
-    <div class="cheat-item">
-      <h4><code>sudo</code></h4>
+        <div class="cheat-item">
+          <h4><code>sudo</code></h4>
 
-      <p>
-        Hebt viele Schutzmechanismen auf. Nicht automatisch verwenden, nur weil ein Befehl sonst scheitert.
-      </p>
-    </div>
+          <p>
+            Hebt viele Schutzmechanismen auf. Nicht automatisch verwenden, nur weil ein Befehl sonst scheitert.
+          </p>
+        </div>
 
-    <div class="cheat-item">
-      <h4><code>chmod -R</code> / <code>chown -R</code></h4>
+        <div class="cheat-item">
+          <h4><code>chmod -R</code> / <code>chown -R</code></h4>
 
-      <p>
-        Rekursive Rechteänderungen können bei einem falschen Pfad sehr viel mehr verändern als beabsichtigt.
-      </p>
-    </div>
+          <p>
+            Rekursive Rechteänderungen können bei einem falschen Pfad sehr viel mehr verändern als beabsichtigt.
+          </p>
+        </div>
 
-    <div class="cheat-item">
-      <h4>Unbekannte Shell-Kommandos aus dem Internet</h4>
+        <div class="cheat-item">
+          <h4>Unbekannte Shell-Kommandos aus dem Internet</h4>
 
-      <p>
-        Befehle nicht blind kopieren – insbesondere nicht, wenn sie mit <code>sudo</code> ausgeführt werden.
-      </p>
-    </div>
+          <p>
+            Befehle nicht blind kopieren – insbesondere nicht, wenn sie mit <code>sudo</code> ausgeführt werden.
+          </p>
+        </div>
 
-  </div>
+      </div>
 
 
-  <!-- =========================================================
+      <!-- =========================================================
        71. DENKMODELL
        ========================================================= -->
 
-  <h3>71. Ein brauchbares Denkmodell für Linux</h3>
+      <h3>71. Ein brauchbares Denkmodell für Linux</h3>
 
-  <ol>
-    <li>
-      <strong>Wo bin ich?</strong><br>
-      <code>pwd</code>
-    </li>
+      <ol>
+        <li>
+          <strong>Wo bin ich?</strong><br>
+          <code>pwd</code>
+        </li>
 
-    <li>
-      <strong>Was ist hier?</strong><br>
-      <code>ls -lah</code>
-    </li>
+        <li>
+          <strong>Was ist hier?</strong><br>
+          <code>ls -lah</code>
+        </li>
 
-    <li>
-      <strong>Was ist diese Datei?</strong><br>
-      <code>file datei</code> und <code>stat datei</code>
-    </li>
+        <li>
+          <strong>Was ist diese Datei?</strong><br>
+          <code>file datei</code> und <code>stat datei</code>
+        </li>
 
-    <li>
-      <strong>Was enthält sie?</strong><br>
-      <code>less datei</code>
-    </li>
+        <li>
+          <strong>Was enthält sie?</strong><br>
+          <code>less datei</code>
+        </li>
 
-    <li>
-      <strong>Wo befindet sich etwas?</strong><br>
-      <code>find</code> und <code>grep</code>
-    </li>
+        <li>
+          <strong>Wo befindet sich etwas?</strong><br>
+          <code>find</code> und <code>grep</code>
+        </li>
 
-    <li>
-      <strong>Was läuft gerade?</strong><br>
-      <code>ps</code>, <code>top</code>, <code>systemctl</code>
-    </li>
+        <li>
+          <strong>Was läuft gerade?</strong><br>
+          <code>ps</code>, <code>top</code>, <code>systemctl</code>
+        </li>
 
-    <li>
-      <strong>Warum funktioniert etwas nicht?</strong><br>
-      <code>journalctl</code>, Logs, Exit-Code <code>$?</code>
-    </li>
+        <li>
+          <strong>Warum funktioniert etwas nicht?</strong><br>
+          <code>journalctl</code>, Logs, Exit-Code <code>$?</code>
+        </li>
 
-    <li>
-      <strong>Ist das Netzwerk das Problem?</strong><br>
-      <code>ip a</code>, <code>ip route</code>, <code>ping</code>, <code>ss</code>
-    </li>
-  </ol>
+        <li>
+          <strong>Ist das Netzwerk das Problem?</strong><br>
+          <code>ip a</code>, <code>ip route</code>, <code>ping</code>, <code>ss</code>
+        </li>
+      </ol>
 
 
-  <!-- =========================================================
+      <!-- =========================================================
        72. GOLDENE REGELN
        ========================================================= -->
 
-  <h3>72. Goldene Regeln für den Linux-Alltag</h3>
+      <h3>72. Goldene Regeln für den Linux-Alltag</h3>
 
-  <ul>
-    <li>
-      <strong>Vor destruktiven Befehlen zuerst <code>pwd</code> und <code>ls</code>.</strong>
-      Ein falsches Verzeichnis plus <code>rm</code> ist eine erstaunlich effiziente Form von Archäologie.
-    </li>
+      <ul>
+        <li>
+          <strong>Vor destruktiven Befehlen zuerst <code>pwd</code> und <code>ls</code>.</strong>
+          Ein falsches Verzeichnis plus <code>rm</code> ist eine erstaunlich effiziente Form von Archäologie.
+        </li>
 
-    <li>
-      <strong>Nutze die TAB-Vervollständigung.</strong>
-      Sie ist schneller und produziert weniger Tippfehler.
-    </li>
+        <li>
+          <strong>Nutze die TAB-Vervollständigung.</strong>
+          Sie ist schneller und produziert weniger Tippfehler.
+        </li>
 
-    <li>
-      <strong>Benutze die Befehlshistorie.</strong>
-      <code>↑</code>, <code>history</code> und <code>Ctrl+R</code> sparen enorm viel Tipparbeit.
-    </li>
+        <li>
+          <strong>Benutze die Befehlshistorie.</strong>
+          <code>↑</code>, <code>history</code> und <code>Ctrl+R</code> sparen enorm viel Tipparbeit.
+        </li>
 
-    <li>
-      <strong>Logs zuerst lesen, dann spekulieren.</strong>
-      <code>journalctl</code>, <code>tail</code> und <code>grep</code> beantworten viele Fragen nüchterner als Bauchgefühl.
-    </li>
+        <li>
+          <strong>Logs zuerst lesen, dann spekulieren.</strong>
+          <code>journalctl</code>, <code>tail</code> und <code>grep</code> beantworten viele Fragen nüchterner als
+          Bauchgefühl.
+        </li>
 
-    <li>
-      <strong><code>sudo</code> sparsam einsetzen.</strong>
-      Administratorrechte sind Werkzeug, keine Standardbetriebsart.
-    </li>
+        <li>
+          <strong><code>sudo</code> sparsam einsetzen.</strong>
+          Administratorrechte sind Werkzeug, keine Standardbetriebsart.
+        </li>
 
-    <li>
-      <strong>Python-Projekte in virtuelle Umgebungen packen.</strong>
-      Das verhindert ein allmähliches Abgleiten in die Dependency-Anarchie.
-    </li>
+        <li>
+          <strong>Python-Projekte in virtuelle Umgebungen packen.</strong>
+          Das verhindert ein allmähliches Abgleiten in die Dependency-Anarchie.
+        </li>
 
-    <li>
-      <strong>Für dauerhaft laufende Programme <code>systemd</code> verwenden.</strong>
-      Ein Script mit <code>&amp;</code> zu starten ist praktisch für Tests, aber noch kein sauberer Dienst.
-    </li>
+        <li>
+          <strong>Für dauerhaft laufende Programme <code>systemd</code> verwenden.</strong>
+          Ein Script mit <code>&amp;</code> zu starten ist praktisch für Tests, aber noch kein sauberer Dienst.
+        </li>
 
-    <li>
-      <strong>Für Remote-Arbeit SSH-Schlüssel verwenden.</strong>
-      Das ist bequemer und bei vernünftiger Konfiguration sicherer als ständig Passwörter einzutippen.
-    </li>
+        <li>
+          <strong>Für Remote-Arbeit SSH-Schlüssel verwenden.</strong>
+          Das ist bequemer und bei vernünftiger Konfiguration sicherer als ständig Passwörter einzutippen.
+        </li>
 
-    <li>
-      <strong>Vor Änderungen an wichtigen Konfigurationen ein Backup machen.</strong>
-      Zum Beispiel:
-      <code>sudo cp /etc/config /etc/config.bak</code>.
-    </li>
+        <li>
+          <strong>Vor Änderungen an wichtigen Konfigurationen ein Backup machen.</strong>
+          Zum Beispiel:
+          <code>sudo cp /etc/config /etc/config.bak</code>.
+        </li>
 
-    <li>
-      <strong>Wenn du einen Befehl nicht verstehst: nicht ausführen – zerlegen.</strong>
-      Prüfe Programm, Optionen, Argumente und Umleitungen einzeln.
-    </li>
-  </ul>
+        <li>
+          <strong>Wenn du einen Befehl nicht verstehst: nicht ausführen – zerlegen.</strong>
+          Prüfe Programm, Optionen, Argumente und Umleitungen einzeln.
+        </li>
+      </ul>
 
 
-  <!-- =========================================================
+      <!-- =========================================================
        73. MINI-CHEATSHEET
        ========================================================= -->
 
-  <h3>73. Die 20 Befehle, die man zuerst wirklich können sollte</h3>
+      <h3>73. Die 20 Befehle, die man zuerst wirklich können sollte</h3>
 
-  <pre class="cheat-code"><code>pwd                         # Wo bin ich?
+      <pre class="cheat-code"><code>pwd                         # Wo bin ich?
 ls -lah                     # Was ist hier?
 cd VERZEICHNIS              # Verzeichnis wechseln
 mkdir VERZEICHNIS           # Verzeichnis erstellen
@@ -4158,85 +4167,85 @@ sudo apt update             # Paketlisten aktualisieren
 man BEFEHL                  # Hilfe lesen</code></pre>
 
 
-  <!-- =========================================================
+      <!-- =========================================================
        74. RASPBERRY PI WORKFLOW
        ========================================================= -->
 
-  <h3>74. Beispiel: Raspberry Pi vom Einschalten bis zum laufenden Sensorprojekt</h3>
+      <h3>74. Beispiel: Raspberry Pi vom Einschalten bis zum laufenden Sensorprojekt</h3>
 
-  <p><strong>1. Verbindung herstellen</strong></p>
+      <p><strong>1. Verbindung herstellen</strong></p>
 
-  <pre class="cheat-code"><code>ssh julian@raspberrypi.local</code></pre>
+      <pre class="cheat-code"><code>ssh julian@raspberrypi.local</code></pre>
 
-  <p><strong>2. Systemzustand prüfen</strong></p>
+      <p><strong>2. Systemzustand prüfen</strong></p>
 
-  <pre class="cheat-code"><code>hostname
+      <pre class="cheat-code"><code>hostname
 hostname -I
 uptime
 df -h
 free -h</code></pre>
 
-  <p><strong>3. I²C prüfen</strong></p>
+      <p><strong>3. I²C prüfen</strong></p>
 
-  <pre class="cheat-code"><code>i2cdetect -y 1</code></pre>
+      <pre class="cheat-code"><code>i2cdetect -y 1</code></pre>
 
-  <p><strong>4. Projekt öffnen</strong></p>
+      <p><strong>4. Projekt öffnen</strong></p>
 
-  <pre class="cheat-code"><code>cd ~/bme280_logger
+      <pre class="cheat-code"><code>cd ~/bme280_logger
 ls -lah</code></pre>
 
-  <p><strong>5. Python-Umgebung aktivieren</strong></p>
+      <p><strong>5. Python-Umgebung aktivieren</strong></p>
 
-  <pre class="cheat-code"><code>source .venv/bin/activate</code></pre>
+      <pre class="cheat-code"><code>source .venv/bin/activate</code></pre>
 
-  <p><strong>6. Programm testen</strong></p>
+      <p><strong>6. Programm testen</strong></p>
 
-  <pre class="cheat-code"><code>python logger.py</code></pre>
+      <pre class="cheat-code"><code>python logger.py</code></pre>
 
-  <p><strong>7. Bei Problemen Logs bzw. Prozesse prüfen</strong></p>
+      <p><strong>7. Bei Problemen Logs bzw. Prozesse prüfen</strong></p>
 
-  <pre class="cheat-code"><code>ps aux | grep logger
+      <pre class="cheat-code"><code>ps aux | grep logger
 journalctl -b -p err</code></pre>
 
-  <p><strong>8. Falls das Projekt als systemd-Dienst läuft</strong></p>
+      <p><strong>8. Falls das Projekt als systemd-Dienst läuft</strong></p>
 
-  <pre class="cheat-code"><code>systemctl status bme280-logger
+      <pre class="cheat-code"><code>systemctl status bme280-logger
 journalctl -u bme280-logger -f</code></pre>
 
-  <p><strong>9. Raspberry Pi sauber herunterfahren</strong></p>
+      <p><strong>9. Raspberry Pi sauber herunterfahren</strong></p>
 
-  <pre class="cheat-code"><code>sudo shutdown -h now</code></pre>
+      <pre class="cheat-code"><code>sudo shutdown -h now</code></pre>
 
 
-  <!-- =========================================================
+      <!-- =========================================================
        SCHLUSS
        ========================================================= -->
 
-  <h3>75. Was man eigentlich lernen sollte</h3>
+      <h3>75. Was man eigentlich lernen sollte</h3>
 
-  <p>
-    Man muss nicht hunderte Linux-Befehle auswendig kennen. Wichtiger ist zu verstehen,
-    wie das System denkt: Dateien besitzen Pfade und Rechte, Programme sind Prozesse,
-    Prozesse erzeugen Ein- und Ausgaben, Dienste werden vom Init-System verwaltet,
-    Hardware erscheint über Schnittstellen im Dateisystem, und kleine Werkzeuge lassen
-    sich über Pipes miteinander verbinden.
-  </p>
+      <p>
+        Man muss nicht hunderte Linux-Befehle auswendig kennen. Wichtiger ist zu verstehen,
+        wie das System denkt: Dateien besitzen Pfade und Rechte, Programme sind Prozesse,
+        Prozesse erzeugen Ein- und Ausgaben, Dienste werden vom Init-System verwaltet,
+        Hardware erscheint über Schnittstellen im Dateisystem, und kleine Werkzeuge lassen
+        sich über Pipes miteinander verbinden.
+      </p>
 
-  <p>
-    Ab diesem Punkt verändert sich die Kommandozeile. Sie ist nicht länger eine kryptische
-    schwarze Fläche, in die man Befehle aus Stack-Overflow-Grabungen kopiert, sondern eine
-    ziemlich präzise Sprache zur Beschreibung dessen, was der Rechner tun soll.
-  </p>
+      <p>
+        Ab diesem Punkt verändert sich die Kommandozeile. Sie ist nicht länger eine kryptische
+        schwarze Fläche, in die man Befehle aus Stack-Overflow-Grabungen kopiert, sondern eine
+        ziemlich präzise Sprache zur Beschreibung dessen, was der Rechner tun soll.
+      </p>
 
-  <p class="hint">
-    Die drei vielleicht wichtigsten Linux-Kommandos bleiben trotzdem:
-    <code>man</code>, <code>--help</code> und ein kurzer Moment des Nachdenkens vor <code>sudo</code>.
-  </p>
+      <p class="hint">
+        Die drei vielleicht wichtigsten Linux-Kommandos bleiben trotzdem:
+        <code>man</code>, <code>--help</code> und ein kurzer Moment des Nachdenkens vor <code>sudo</code>.
+      </p>
 
-  <p class="hint"><a href="#top">↑ top</a></p>
-</section>
+      <p class="hint"><a href="#top">↑ top</a></p>
+    </section>
 
-<hr class="divider" />
+    <hr class="divider" />
 
 
 
