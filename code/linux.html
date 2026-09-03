@@ -1840,6 +1840,138 @@ grep -rin "error" ~/projekte</code></pre>
 
 
 
+  <!-- =========================================================
+       14. WILDCARDS
+       ========================================================= -->
+
+  <h3>14. Wildcards – mehrere Dateien gleichzeitig ansprechen</h3>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Muster</th>
+        <th>Bedeutung</th>
+        <th>Beispiel</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td><code>*</code></td>
+        <td>Beliebig viele Zeichen</td>
+        <td><code>ls *.jpg</code></td>
+      </tr>
+
+      <tr>
+        <td><code>?</code></td>
+        <td>Genau ein Zeichen</td>
+        <td><code>ls bild?.jpg</code></td>
+      </tr>
+
+      <tr>
+        <td><code>[123]</code></td>
+        <td>Eines der angegebenen Zeichen</td>
+        <td><code>ls bild[123].jpg</code></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <pre class="cheat-code"><code>cp *.jpg bilder/
+rm *.tmp
+ls sensor_2026-*.csv</code></pre>
+
+  <p class="hint">
+    Vor einem destruktiven Befehl mit Wildcards ist ein Test mit <code>ls</code> klug:
+    erst <code>ls *.tmp</code>, dann gegebenenfalls <code>rm *.tmp</code>.
+  </p>
+
+
+  <!-- =========================================================
+       15. DATEINAMEN UND QUOTING
+       ========================================================= -->
+
+  <h3>15. Leerzeichen und Sonderzeichen in Dateinamen</h3>
+
+  <p>Ein Leerzeichen trennt normalerweise Argumente:</p>
+
+  <pre class="cheat-code"><code>cd Mein Projekt</code></pre>
+
+  <p>
+    würde daher als zwei Argumente interpretiert. Richtig:
+  </p>
+
+  <pre class="cheat-code"><code>cd "Mein Projekt"
+cd 'Mein Projekt'
+cd Mein\ Projekt</code></pre>
+
+  <p>
+    In Skripten ist sauberes Quoting besonders wichtig. Variablen sollten häufig in doppelte Anführungszeichen gesetzt werden:
+  </p>
+
+  <pre class="cheat-code"><code>cp "$datei" "$ziel"</code></pre>
+
+
+  <!-- =========================================================
+       16. UMleitungen
+       ========================================================= -->
+
+  <h3>16. Ein- und Ausgabe umleiten</h3>
+
+  <p>
+    Linux-Programme besitzen standardmäßig drei Datenströme:
+    <strong>stdin</strong> für Eingaben, <strong>stdout</strong> für normale Ausgaben und
+    <strong>stderr</strong> für Fehlermeldungen.
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Operator</th>
+        <th>Bedeutung</th>
+        <th>Beispiel</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td><code>&gt;</code></td>
+        <td>Ausgabe in Datei schreiben und vorhandenen Inhalt ersetzen</td>
+        <td><code>ls &gt; files.txt</code></td>
+      </tr>
+
+      <tr>
+        <td><code>&gt;&gt;</code></td>
+        <td>Ausgabe an Datei anhängen</td>
+        <td><code>date &gt;&gt; log.txt</code></td>
+      </tr>
+
+      <tr>
+        <td><code>&lt;</code></td>
+        <td>Datei als Eingabe verwenden</td>
+        <td><code>sort &lt; namen.txt</code></td>
+      </tr>
+
+      <tr>
+        <td><code>2&gt;</code></td>
+        <td>Fehlermeldungen umleiten</td>
+        <td><code>befehl 2&gt; errors.txt</code></td>
+      </tr>
+
+      <tr>
+        <td><code>2&gt;&amp;1</code></td>
+        <td>Fehlerausgabe mit Standardausgabe zusammenführen</td>
+        <td><code>befehl &gt; log.txt 2&gt;&amp;1</code></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>Beispiele:</p>
+
+  <pre class="cheat-code"><code>echo "Messung gestartet" &gt; log.txt
+date &gt;&gt; log.txt
+python3 logger.py &gt;&gt; logger.log 2&gt;&amp;1</code></pre>
+
+
 
 
 
