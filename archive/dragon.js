@@ -13,6 +13,7 @@ function nameanders(){
 	}
 }
 
+
 function nameaanders(){
 	if(button2.innerText === "ok"){
 		button2.innerText = "nope";
