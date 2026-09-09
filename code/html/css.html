@@ -470,6 +470,75 @@ h3 {
 
   </div>
 
+  <!-- ======================================================
+       KOMBINATOREN
+       ====================================================== -->
+
+  <h3 id="css-kombinatoren">Kombinatoren – Beziehungen zwischen Elementen</h3>
+
+  <p>
+    Selektoren können nicht nur einzelne Elemente ansprechen,
+    sondern auch Beziehungen innerhalb der HTML-Struktur.
+  </p>
+
+  <div class="cheat-grid">
+
+    <article class="cheat-item">
+      <h4>Nachfahrenselektor – Leerzeichen</h4>
+
+      <pre class="code"><code>.card p {
+  margin-bottom: 1rem;
+}</code></pre>
+
+      <p>
+        Wählt alle Absätze, die sich irgendwo innerhalb eines
+        Elements mit <code>class="card"</code> befinden.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Direktes Kind – <code>&gt;</code></h4>
+
+      <pre class="code"><code>.card &gt; p {
+  margin-bottom: 1rem;
+}</code></pre>
+
+      <p>
+        Wählt nur Absätze, die unmittelbare Kinder von
+        <code>.card</code> sind.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Direkter Nachbar – <code>+</code></h4>
+
+      <pre class="code"><code>h2 + p {
+  margin-top: 0;
+}</code></pre>
+
+      <p>
+        Wählt einen Absatz nur dann, wenn er unmittelbar auf
+        ein <code>&lt;h2&gt;</code> folgt.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Spätere Geschwister – <code>~</code></h4>
+
+      <pre class="code"><code>h2 ~ p {
+  color: var(--muted);
+}</code></pre>
+
+      <p>
+        Wählt alle später folgenden Geschwister-Absätze desselben Elternelements.
+      </p>
+    </article>
+
+  </div>
+
 
   <hr class="divider" />
 
