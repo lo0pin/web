@@ -281,6 +281,126 @@
   <hr class="divider" />
 
 
+  <!-- ======================================================
+       SELEKTOREN
+       ====================================================== -->
+
+  <h3 id="css-selektoren">Selektoren</h3>
+
+  <p>
+    Selektoren bestimmen, welche HTML-Elemente eine CSS-Regel erhalten.
+    Wer Selektoren versteht, versteht einen erheblichen Teil von CSS.
+  </p>
+
+  <div class="cheat-grid">
+
+    <article class="cheat-item">
+      <h4>Elementselektor</h4>
+
+      <pre class="code"><code>p {
+  line-height: 1.6;
+}</code></pre>
+
+      <p>
+        Wählt alle <code>&lt;p&gt;</code>-Elemente aus.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Klassenselektor</h4>
+
+      <pre class="code"><code>.card {
+  background: white;
+}</code></pre>
+
+      <p>
+        Wählt alle Elemente mit:
+      </p>
+
+      <pre class="code code-html"><code>class="card"</code></pre>
+
+      <p>
+        Klassen sind der wichtigste allgemeine Mechanismus für CSS-Styling.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>ID-Selektor</h4>
+
+      <pre class="code"><code>#top {
+  scroll-margin-top: 2rem;
+}</code></pre>
+
+      <p>
+        Wählt das Element mit:
+      </p>
+
+      <pre class="code code-html"><code>id="top"</code></pre>
+
+      <p>
+        IDs sollen innerhalb einer Seite eindeutig sein.
+      </p>
+
+      <p class="hint">
+        Für normales Styling sind Klassen meist angenehmer.
+        IDs erzeugen relativ hohe Spezifität.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Universalselektor</h4>
+
+      <pre class="code"><code>* {
+  box-sizing: border-box;
+}</code></pre>
+
+      <p>
+        <code>*</code> bedeutet: alle Elemente.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Mehrere Selektoren zusammenfassen</h4>
+
+      <pre class="code"><code>h1,
+h2,
+h3 {
+  line-height: 1.25;
+}</code></pre>
+
+      <p>
+        Alle aufgelisteten Selektoren erhalten dieselben Regeln.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Mehrere Klassen gleichzeitig</h4>
+
+      <pre class="code"><code>.card.warning {
+  border-color: orange;
+}</code></pre>
+
+      <p>
+        Das trifft nur Elemente, die <strong>beide</strong> Klassen besitzen:
+      </p>
+
+      <pre class="code code-html"><code>&lt;div class="card warning"&gt;...&lt;/div&gt;</code></pre>
+
+      <p>
+        Zwischen den Klassen steht dabei kein Leerzeichen.
+      </p>
+    </article>
+
+  </div>
+
+
+  <hr class="divider" />
+
 
   <hr class="divider" />
 
