@@ -539,6 +539,157 @@ h3 {
 
   </div>
 
+  <hr class="divider" />
+
+
+  <!-- ======================================================
+       PSEUDOKLASSEN
+       ====================================================== -->
+
+  <h3 id="css-pseudoklassen">Pseudoklassen</h3>
+
+  <p>
+    Pseudoklassen beschreiben einen bestimmten Zustand oder eine strukturelle
+    Eigenschaft eines Elements. Sie werden mit einem einzelnen Doppelpunkt geschrieben.
+  </p>
+
+  <div class="cheat-grid">
+
+    <article class="cheat-item">
+      <h4><code>:hover</code></h4>
+
+      <pre class="code"><code>a:hover {
+  color: #000;
+}</code></pre>
+
+      <p>
+        Wird aktiv, wenn sich der Mauszeiger über dem Element befindet.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>:focus</code> und <code>:focus-visible</code></h4>
+
+      <pre class="code"><code>a:focus-visible {
+  outline: 2px solid #0b5fff;
+  outline-offset: 3px;
+}</code></pre>
+
+      <p>
+        <code>:focus-visible</code> eignet sich besonders für Tastaturnavigation,
+        weil der Fokusrahmen dort erscheint, wo er tatsächlich benötigt wird.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>:active</code></h4>
+
+      <pre class="code"><code>button:active {
+  transform: translateY(1px);
+}</code></pre>
+
+      <p>
+        Gilt während eines aktiven Klicks beziehungsweise einer Aktivierung.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>:first-child</code> und <code>:last-child</code></h4>
+
+      <pre class="code"><code>.card p:first-child {
+  margin-top: 0;
+}
+
+.card p:last-child {
+  margin-bottom: 0;
+}</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>:nth-child()</code></h4>
+
+      <pre class="code"><code>li:nth-child(2) {
+  font-weight: bold;
+}
+
+tr:nth-child(even) {
+  background: rgba(0, 0, 0, 0.03);
+}</code></pre>
+
+      <p>
+        Ermöglicht die Auswahl anhand der Position eines Elements.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>:not()</code></h4>
+
+      <pre class="code"><code>.media-row:not(.compact) {
+  gap: 2rem;
+}</code></pre>
+
+      <p>
+        Wählt Elemente aus, die den angegebenen Selektor
+        <strong>nicht</strong> erfüllen.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>:is()</code></h4>
+
+      <pre class="code"><code>.news-body :is(h2, h3, h4) {
+  line-height: 1.3;
+}</code></pre>
+
+      <p>
+        Fasst mehrere mögliche Selektoren kompakt zusammen.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>:where()</code></h4>
+
+      <pre class="code"><code>:where(.news-body, .news-teaser) p {
+  line-height: 1.7;
+}</code></pre>
+
+      <p>
+        Ähnelt <code>:is()</code>, besitzt aber selbst keine zusätzliche
+        Spezifität. Das kann bei großen Stylesheets ausgesprochen praktisch sein.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>:has()</code></h4>
+
+      <pre class="code"><code>.media-row:has(&gt; .media:only-child) {
+  grid-template-columns: 1fr;
+}</code></pre>
+
+      <p>
+        Mit <code>:has()</code> kann ein Element abhängig von seinen
+        Kindern oder Nachfahren ausgewählt werden.
+      </p>
+
+      <p class="hint">
+        Das ist bemerkenswert mächtig: CSS kann damit gewissermaßen
+        „nach unten schauen und daraus eine Entscheidung nach oben ableiten“.
+      </p>
+    </article>
+
+  </div>
+
+
+  <hr class="divider" />
+
 
   <hr class="divider" />
 
