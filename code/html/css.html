@@ -110,6 +110,75 @@
        CSS EINBINDEN
        ====================================================== -->
 
+       
+  <h3 id="css-einbindung">CSS einbinden</h3>
+
+  <p>
+    Bevor CSS etwas gestalten kann, muss der Browser wissen, welches Stylesheet zu einer
+    HTML-Seite gehört. Dafür gibt es drei grundlegende Möglichkeiten.
+  </p>
+
+  <div class="cheat-grid">
+
+    <article class="cheat-item">
+      <h4>Externes Stylesheet</h4>
+
+      <p>
+        Für echte Webseiten ist dies normalerweise die beste Variante.
+        Das CSS befindet sich in einer eigenen Datei.
+      </p>
+
+      <pre class="code code-html"><code>&lt;link rel="stylesheet" href="assets/css/main.css"&gt;</code></pre>
+
+      <p>
+        Diese Zeile gehört normalerweise in den
+        <code>&lt;head&gt;</code> der HTML-Datei.
+      </p>
+
+      <p class="hint">
+        Vorteil: Ein einziges Stylesheet kann von vielen HTML-Seiten gemeinsam verwendet werden.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>CSS direkt im HTML-Dokument</h4>
+
+      <pre class="code code-html"><code>&lt;style&gt;
+  body {
+    background: #f7f7f7;
+  }
+&lt;/style&gt;</code></pre>
+
+      <p>
+        Das funktioniert, eignet sich aber eher für kleine Experimente,
+        einzelne Spezialseiten oder Prototypen.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Inline-CSS</h4>
+
+      <pre class="code code-html"><code>&lt;p style="color: red;"&gt;
+  Dieser Text ist rot.
+&lt;/p&gt;</code></pre>
+
+      <p>
+        Inline-CSS hat eine hohe Priorität und verteilt Gestaltung direkt über das HTML.
+        Das wird bei größeren Seiten sehr schnell unübersichtlich.
+      </p>
+
+      <p class="hint">
+        Für normale Webseiten: möglichst vermeiden.
+      </p>
+    </article>
+
+  </div>
+
+
+  <hr class="divider" />
+
 
     <hr class="divider" />
     <p class="hint"><a href="#top">↑ top</a>&emsp;<a href="../index.html">⌂ home</a>&emsp;<a href="home.html">← back</a>
