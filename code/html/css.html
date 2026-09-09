@@ -690,6 +690,77 @@ tr:nth-child(even) {
 
   <hr class="divider" />
 
+  <!-- ======================================================
+       PSEUDOELEMENTE
+       ====================================================== -->
+
+  <h3 id="css-pseudoelemente">Pseudoelemente</h3>
+
+  <p>
+    Pseudoelemente erzeugen keine echten HTML-Elemente, erlauben aber das Styling
+    bestimmter Teile eines Elements oder zusätzlicher visueller Ebenen.
+    Sie werden üblicherweise mit zwei Doppelpunkten geschrieben.
+  </p>
+
+  <div class="cheat-grid">
+
+    <article class="cheat-item">
+      <h4><code>::before</code> und <code>::after</code></h4>
+
+      <pre class="code"><code>.tile::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+}</code></pre>
+
+      <p>
+        Sehr nützlich für Overlays, Dekorationen oder zusätzliche Ebenen,
+        ohne dafür bedeutungslose HTML-Elemente einzubauen.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>content</code></h4>
+
+      <pre class="code"><code>.external-link::after {
+  content: " ↗";
+}</code></pre>
+
+      <p>
+        <code>content</code> wird hauptsächlich zusammen mit
+        <code>::before</code> und <code>::after</code> verwendet.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>::selection</code></h4>
+
+      <pre class="code"><code>::selection {
+  background: #dbeafe;
+}</code></pre>
+
+      <p>
+        Kontrolliert die Darstellung markierten Textes.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>::placeholder</code></h4>
+
+      <pre class="code"><code>input::placeholder {
+  color: var(--muted);
+}</code></pre>
+    </article>
+
+  </div>
+
+
+  <hr class="divider" />
+
 
   <hr class="divider" />
 
