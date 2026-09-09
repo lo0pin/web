@@ -176,6 +176,111 @@
 
   </div>
 
+  <!-- ======================================================
+       SYNTAX
+       ====================================================== -->
+
+  <h3 id="css-syntax">Grundsyntax</h3>
+
+  <div class="cheat-grid">
+
+    <article class="cheat-item">
+      <h4>Eine CSS-Regel</h4>
+
+      <pre class="code"><code>.card {
+  background: white;
+  border: 1px solid #ddd;
+  padding: 1rem;
+}</code></pre>
+
+      <p>
+        Eine CSS-Regel besteht grundsätzlich aus:
+      </p>
+
+      <ul>
+        <li><strong>Selektor:</strong> Welches Element soll angesprochen werden?</li>
+        <li><strong>Eigenschaft:</strong> Was soll verändert werden?</li>
+        <li><strong>Wert:</strong> Welchen Wert erhält die Eigenschaft?</li>
+      </ul>
+
+      <p>
+        Im Beispiel ist <code>.card</code> der Selektor,
+        <code>background</code> eine Eigenschaft und
+        <code>white</code> ihr Wert.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Mehrere Deklarationen</h4>
+
+      <pre class="code"><code>.card {
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 16px;
+  background: #ffffff;
+}</code></pre>
+
+      <p>
+        Jede Deklaration wird normalerweise mit einem Semikolon beendet.
+        Beim letzten Eintrag ist das Semikolon technisch oft optional,
+        sollte aber trotzdem gesetzt werden.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Kommentare</h4>
+
+      <pre class="code"><code>/* Navigation */
+
+.top-nav {
+  display: flex;
+}
+
+/*
+  Kommentare können
+  auch mehrere Zeilen
+  umfassen.
+*/</code></pre>
+
+      <p>
+        Kommentare helfen dabei, große Stylesheets zu gliedern.
+      </p>
+
+      <p class="hint">
+        Kommentare sollen erklären, warum etwas ungewöhnlich gelöst wurde.
+        Jede offensichtliche Zeile mit einem kleinen Roman zu versehen,
+        verschiebt das Problem nur von CSS zu Literaturkritik.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Leerraum ist weitgehend bedeutungslos</h4>
+
+      <pre class="code"><code>.card{padding:1rem;background:white;}</code></pre>
+
+      <p>
+        Funktioniert genauso wie:
+      </p>
+
+      <pre class="code"><code>.card {
+  padding: 1rem;
+  background: white;
+}</code></pre>
+
+      <p>
+        Die zweite Variante ist für Menschen allerdings wesentlich angenehmer.
+      </p>
+    </article>
+
+  </div>
+
+
+  <hr class="divider" />
+
+
 
   <hr class="divider" />
 
