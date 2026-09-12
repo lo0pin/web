@@ -2110,6 +2110,946 @@ console.log(element.dataset.newsLimit);</code></pre>
 &lt;/label&gt;</code></pre>
 
 
+      <p>
+        Radio Buttons mit demselben <code>name</code>
+        bilden gemeinsam eine Auswahlgruppe.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Buttons</h4>
+
+      <pre class="code cheat-code"><code>&lt;button type="button"&gt;
+  Aktion
+&lt;/button&gt;
+
+&lt;button type="submit"&gt;
+  Formular absenden
+&lt;/button&gt;
+
+&lt;button type="reset"&gt;
+  Formular zurücksetzen
+&lt;/button&gt;</code></pre>
+
+      <p class="hint">
+        Gib innerhalb von Formularen den Button-Typ explizit an.
+        Sonst kann ein vermeintlich harmloser Button plötzlich das Formular absenden.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>GitHub Pages und Formulare</h4>
+
+      <p>
+        GitHub Pages liefert nur statische Dateien aus.
+        Ein HTML-Formular kann daher nicht einfach selbst E-Mails versenden
+        oder Daten serverseitig speichern.
+      </p>
+
+      <p>
+        Dafür ist entweder ein externer Formularservice,
+        eine API oder ein eigener Backend-Dienst erforderlich.
+      </p>
+    </article>
+
+  </div>
+
+
+  <!-- ======================================================
+       DETAILS / SUMMARY
+       ====================================================== -->
+
+  <hr class="divider">
+
+  <h3 id="html-details"><code>&lt;details&gt;</code> und <code>&lt;summary&gt;</code></h3>
+
+  <div class="cheat-grid">
+
+    <article class="cheat-item">
+      <h4>Aufklappbarer Bereich</h4>
+
+      <pre class="code cheat-code"><code>&lt;details&gt;
+
+  &lt;summary&gt;
+    Mehr erfahren
+  &lt;/summary&gt;
+
+  &lt;p&gt;
+    Hier steht der ausführliche Inhalt.
+  &lt;/p&gt;
+
+&lt;/details&gt;</code></pre>
+
+      <p>
+        Dafür ist kein JavaScript erforderlich.
+        Der Browser stellt die Auf-/Zuklappfunktion selbst bereit.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Standardmäßig geöffnet</h4>
+
+      <pre class="code cheat-code"><code>&lt;details open&gt;
+
+  &lt;summary&gt;
+    Details
+  &lt;/summary&gt;
+
+  &lt;p&gt;
+    Bereits sichtbar.
+  &lt;/p&gt;
+
+&lt;/details&gt;</code></pre>
+    </article>
+
+  </div>
+
+
+  <!-- ======================================================
+       HEAD
+       ====================================================== -->
+
+  <hr class="divider">
+
+  <h3 id="html-head">Der <code>&lt;head&gt;</code>-Bereich</h3>
+
+  <div class="cheat-grid">
+
+    <article class="cheat-item">
+      <h4>Zeichencodierung</h4>
+
+      <pre class="code cheat-code"><code>&lt;meta charset="UTF-8"&gt;</code></pre>
+
+      <p>
+        UTF-8 unterstützt praktisch alle relevanten Schriftzeichen,
+        Umlaute, Sonderzeichen und Emojis.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Viewport</h4>
+
+      <pre class="code cheat-code"><code>&lt;meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+&gt;</code></pre>
+
+      <p>
+        Das ist für responsive Darstellung auf Mobilgeräten praktisch unverzichtbar.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Seitentitel</h4>
+
+      <pre class="code cheat-code"><code>&lt;title&gt;
+  Astronomie – Julian
+&lt;/title&gt;</code></pre>
+
+      <p>
+        Der Titel erscheint unter anderem im Browser-Tab,
+        in Lesezeichen und oft in Suchergebnissen.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Meta Description</h4>
+
+      <pre class="code cheat-code"><code>&lt;meta
+  name="description"
+  content="Dokumentation zu Astronomie, Elektronik, Code und eigenen Projekten."
+&gt;</code></pre>
+
+      <p>
+        Suchmaschinen können diese Beschreibung als Vorschautext verwenden.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Favicon</h4>
+
+      <pre class="code cheat-code"><code>&lt;link
+  rel="icon"
+  href="assets/img/favicon.ico"
+&gt;</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Canonical URL</h4>
+
+      <pre class="code cheat-code"><code>&lt;link
+  rel="canonical"
+  href="https://example.com/astronomy/moon.html"
+&gt;</code></pre>
+
+      <p>
+        Eine Canonical URL kann Suchmaschinen mitteilen,
+        welche URL als Hauptversion einer Seite gelten soll.
+      </p>
+    </article>
+
+  </div>
+
+
+  <!-- ======================================================
+       CSS + JS
+       ====================================================== -->
+
+  <hr class="divider">
+
+  <h3 id="html-css-js">CSS und JavaScript einbinden</h3>
+
+  <div class="cheat-grid">
+
+    <article class="cheat-item">
+      <h4>Externes CSS</h4>
+
+      <pre class="code cheat-code"><code>&lt;link
+  rel="stylesheet"
+  href="assets/css/main.css"
+&gt;</code></pre>
+
+      <p>
+        Stylesheets werden üblicherweise im
+        <code>&lt;head&gt;</code> eingebunden.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>JavaScript mit <code>defer</code></h4>
+
+      <pre class="code cheat-code"><code>&lt;script
+  src="assets/js/main.js"
+  defer
+&gt;&lt;/script&gt;</code></pre>
+
+      <p>
+        Das Script kann parallel geladen werden,
+        wird aber erst ausgeführt, nachdem das HTML verarbeitet wurde.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>JavaScript-Modul</h4>
+
+      <pre class="code cheat-code"><code>&lt;script
+  type="module"
+  src="assets/js/news.js"
+&gt;&lt;/script&gt;</code></pre>
+
+      <p>
+        JavaScript-Module unterstützen unter anderem
+        <code>import</code> und <code>export</code>.
+      </p>
+
+      <p>
+        Module werden standardmäßig ähnlich wie
+        <code>defer</code> behandelt.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Inline-JavaScript vermeiden</h4>
+
+      <p><strong>Weniger günstig:</strong></p>
+
+      <pre class="code cheat-code"><code>&lt;button onclick="doSomething()"&gt;
+  Klick
+&lt;/button&gt;</code></pre>
+
+      <p><strong>Sauberer:</strong></p>
+
+      <pre class="code cheat-code"><code>&lt;button id="action-button" type="button"&gt;
+  Klick
+&lt;/button&gt;</code></pre>
+
+      <p>
+        Die Ereignislogik kann anschließend separat in JavaScript definiert werden.
+        So bleiben Struktur und Verhalten getrennt.
+      </p>
+    </article>
+
+  </div>
+
+
+  <!-- ======================================================
+       PFADE
+       ====================================================== -->
+
+  <hr class="divider">
+
+  <h3 id="html-paths">Dateipfade und URLs</h3>
+
+  <p>
+    Pfade gehören zu den häufigsten Ursachen für kaputte Bilder,
+    Stylesheets und Links. Entscheidend ist immer:
+    <strong>Von welchem Ausgangspunkt wird der Pfad aufgelöst?</strong>
+  </p>
+
+  <div class="cheat-grid">
+
+    <article class="cheat-item">
+      <h4>Beispiel-Projektstruktur</h4>
+
+      <pre class="code cheat-code"><code>web/
+├── index.html
+├── about.html
+│
+├── astronomy/
+│   ├── home.html
+│   └── moon.html
+│
+└── assets/
+    ├── css/
+    │   └── main.css
+    ├── js/
+    │   └── main.js
+    └── img/
+        └── moon.jpg</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Relativer Pfad</h4>
+
+      <p>
+        Von <code>index.html</code>:
+      </p>
+
+      <pre class="code cheat-code"><code>&lt;img
+  src="assets/img/moon.jpg"
+  alt="Mond"
+&gt;</code></pre>
+
+      <p>
+        Der Browser beginnt im Ordner der aktuellen HTML-Datei.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>./</code> – aktueller Ordner</h4>
+
+      <pre class="code cheat-code"><code>./assets/img/moon.jpg</code></pre>
+
+      <p>entspricht meist:</p>
+
+      <pre class="code cheat-code"><code>assets/img/moon.jpg</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>../</code> – eine Ebene nach oben</h4>
+
+      <p>
+        Von <code>astronomy/moon.html</code>:
+      </p>
+
+      <pre class="code cheat-code"><code>../assets/img/moon.jpg</code></pre>
+
+      <p>
+        <code>../</code> verlässt zunächst den Ordner
+        <code>astronomy</code>.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Mehrere Ebenen nach oben</h4>
+
+      <pre class="code cheat-code"><code>../       eine Ebene
+
+../../     zwei Ebenen
+
+../../../   drei Ebenen</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Root-relativer Pfad</h4>
+
+      <pre class="code cheat-code"><code>/web/assets/img/moon.jpg</code></pre>
+
+      <p>
+        Ein führender Slash beginnt am
+        <strong>Root der Domain</strong>.
+      </p>
+
+      <p>
+        Bei:
+      </p>
+
+      <pre class="code cheat-code"><code>https://username.github.io/web/</code></pre>
+
+      <p>führt:</p>
+
+      <pre class="code cheat-code"><code>/web/assets/img/moon.jpg</code></pre>
+
+      <p>zu:</p>
+
+      <pre class="code cheat-code"><code>https://username.github.io/web/assets/img/moon.jpg</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Wichtige GitHub-Pages-Falle</h4>
+
+      <p>
+        Bei einer Project Page unter:
+      </p>
+
+      <pre class="code cheat-code"><code>https://username.github.io/web/</code></pre>
+
+      <p>würde:</p>
+
+      <pre class="code cheat-code"><code>/assets/img/moon.jpg</code></pre>
+
+      <p>auf:</p>
+
+      <pre class="code cheat-code"><code>https://username.github.io/assets/img/moon.jpg</code></pre>
+
+      <p>
+        zeigen – also <strong>außerhalb</strong> des Repository-Pfades
+        <code>/web/</code>.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Absolute URL</h4>
+
+      <pre class="code cheat-code"><code>https://example.com/assets/img/moon.jpg</code></pre>
+
+      <p>
+        Eine vollständige URL enthält Protokoll,
+        Domain und kompletten Pfad.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Relative Links sind portabler</h4>
+
+      <p>
+        Für eine statische Seite sind relative Pfade häufig sinnvoll,
+        weil sie weniger stark an Repositoryname oder Domain gekoppelt sind.
+      </p>
+
+      <pre class="code cheat-code"><code>assets/img/photo.jpg
+
+../assets/img/photo.jpg</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Pfade in CSS funktionieren anders</h4>
+
+      <p>
+        Relative URLs in einer CSS-Datei beziehen sich auf den Ort
+        der <strong>CSS-Datei</strong>.
+      </p>
+
+      <p>
+        Befindet sich CSS hier:
+      </p>
+
+      <pre class="code cheat-code"><code>assets/css/main.css</code></pre>
+
+      <p>und das Bild hier:</p>
+
+      <pre class="code cheat-code"><code>assets/img/background.jpg</code></pre>
+
+      <p>dann lautet der CSS-Pfad:</p>
+
+      <pre class="code cheat-code"><code>background-image:
+  url("../img/background.jpg");</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Groß- und Kleinschreibung</h4>
+
+      <pre class="code cheat-code"><code>Moon.jpg
+moon.jpg
+moon.JPG</code></pre>
+
+      <p>
+        Diese Dateinamen können auf einem case-sensitiven Server
+        drei unterschiedliche Dateien bezeichnen.
+      </p>
+
+      <p class="hint">
+        Was unter Windows lokal funktioniert, muss deshalb nicht zwingend
+        auf GitHub Pages funktionieren.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Dateinamen</h4>
+
+      <p><strong>Ungünstig:</strong></p>
+
+      <pre class="code cheat-code"><code>Mein tolles Mond Foto (FINAL).jpg</code></pre>
+
+      <p><strong>Besser:</strong></p>
+
+      <pre class="code cheat-code"><code>moon-plabutsch-01.jpg</code></pre>
+
+      <p>
+        Sinnvoll sind:
+      </p>
+
+      <ul>
+        <li>Kleinbuchstaben</li>
+        <li>keine Leerzeichen</li>
+        <li>Bindestriche oder konsistente Unterstriche</li>
+        <li>klare Dateiendungen</li>
+      </ul>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Windows-Pfad ≠ URL</h4>
+
+      <p><strong>Falsch für eine Webseite:</strong></p>
+
+      <pre class="code cheat-code"><code>C:\Users\Julian\Desktop\web\img\moon.jpg</code></pre>
+
+      <p><strong>Webpfad:</strong></p>
+
+      <pre class="code cheat-code"><code>assets/img/moon.jpg</code></pre>
+
+      <p class="hint">
+        URLs verwenden <code>/</code>, nicht <code>\</code>.
+      </p>
+    </article>
+
+  </div>
+
+
+  <!-- ======================================================
+       ESCAPING
+       ====================================================== -->
+
+  <hr class="divider">
+
+  <h3 id="html-escaping">HTML-Zeichen, Entities und Code darstellen</h3>
+
+  <div class="cheat-grid">
+
+    <article class="cheat-item">
+      <h4>Warum Escaping nötig ist</h4>
+
+      <p>
+        Der Browser interpretiert spitze Klammern als HTML.
+        Willst du einen HTML-Tag als Text anzeigen,
+        musst du die Sonderzeichen maskieren.
+      </p>
+
+      <p>Statt:</p>
+
+      <pre class="code cheat-code"><code>&lt;p&gt;Hallo&lt;/p&gt;</code></pre>
+
+      <p>steht im eigentlichen HTML-Code:</p>
+
+      <pre class="code cheat-code"><code>&amp;lt;p&amp;gt;Hallo&amp;lt;/p&amp;gt;</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Wichtige HTML-Entities</h4>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Zeichen</th>
+            <th>Entity</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td><code>&lt;</code></td>
+            <td><code>&amp;lt;</code></td>
+          </tr>
+
+          <tr>
+            <td><code>&gt;</code></td>
+            <td><code>&amp;gt;</code></td>
+          </tr>
+
+          <tr>
+            <td><code>&amp;</code></td>
+            <td><code>&amp;amp;</code></td>
+          </tr>
+
+          <tr>
+            <td><code>"</code></td>
+            <td><code>&amp;quot;</code></td>
+          </tr>
+
+          <tr>
+            <td><code>'</code></td>
+            <td><code>&amp;#39;</code></td>
+          </tr>
+
+          <tr>
+            <td>geschütztes Leerzeichen</td>
+            <td><code>&amp;nbsp;</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Codeblock mit <code>pre</code> und <code>code</code></h4>
+
+      <pre class="code cheat-code"><code>&lt;pre&gt;&lt;code&gt;
+&amp;lt;section class=&amp;quot;card&amp;quot;&amp;gt;
+  &amp;lt;h2&amp;gt;Titel&amp;lt;/h2&amp;gt;
+&amp;lt;/section&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;</code></pre>
+
+      <p>
+        <code>&lt;pre&gt;</code> bewahrt Einrückungen und Zeilenumbrüche,
+        <code>&lt;code&gt;</code> kennzeichnet den Inhalt als Quellcode.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>HTML-Escaping ≠ JSON-Escaping</h4>
+
+      <p>
+        Wird HTML oder Markdown innerhalb von JSON gespeichert,
+        treffen unterschiedliche Escape-Regeln aufeinander.
+      </p>
+
+      <pre class="code cheat-code"><code>{
+  "text": "class=\"card\"\nNeue Zeile"
+}</code></pre>
+
+      <p>
+        In JSON:
+      </p>
+
+      <ul>
+        <li><code>\"</code> maskiert Anführungszeichen.</li>
+        <li><code>\n</code> repräsentiert einen Zeilenumbruch.</li>
+      </ul>
+
+      <p>
+        HTML-Entities wie <code>&amp;lt;</code> lösen dagegen
+        ein anderes Problem.
+      </p>
+    </article>
+
+  </div>
+
+
+  <!-- ======================================================
+       ACCESSIBILITY
+       ====================================================== -->
+
+  <hr class="divider">
+
+  <h3 id="html-accessibility">Barrierefreiheit / Accessibility</h3>
+
+  <p>
+    Zugängliches HTML ist keine exotische Zusatzfunktion.
+    Viele Grundlagen entstehen automatisch,
+    wenn die richtigen HTML-Elemente verwendet werden.
+  </p>
+
+  <div class="cheat-grid">
+
+    <article class="cheat-item">
+      <h4>Semantik zuerst</h4>
+
+      <p><strong>Besser:</strong></p>
+
+      <pre class="code cheat-code"><code>&lt;button type="button"&gt;
+  Menü öffnen
+&lt;/button&gt;</code></pre>
+
+      <p><strong>Statt:</strong></p>
+
+      <pre class="code cheat-code"><code>&lt;div onclick="openMenu()"&gt;
+  Menü öffnen
+&lt;/div&gt;</code></pre>
+
+      <p>
+        Ein echter Button bringt Tastaturverhalten,
+        Fokusierbarkeit und semantische Bedeutung bereits mit.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Alternative Bildtexte</h4>
+
+      <pre class="code cheat-code"><code>&lt;img
+  src="weather-station.jpg"
+  alt="Arduino-Wetterstation mit OLED-Display"
+&gt;</code></pre>
+
+      <p>
+        Informative Bilder benötigen einen sinnvollen Alternativtext.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Sprache angeben</h4>
+
+      <pre class="code cheat-code"><code>&lt;html lang="de"&gt;</code></pre>
+
+      <p>
+        Ändert sich die Sprache innerhalb eines Dokuments,
+        kann sie auch lokal angegeben werden:
+      </p>
+
+      <pre class="code cheat-code"><code>&lt;p lang="en"&gt;
+  This paragraph is English.
+&lt;/p&gt;</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Logische Überschriften</h4>
+
+      <pre class="code cheat-code"><code>&lt;h1&gt;Astronomie&lt;/h1&gt;
+
+&lt;h2&gt;Sonnensystem&lt;/h2&gt;
+
+&lt;h3&gt;Erde&lt;/h3&gt;</code></pre>
+
+      <p>
+        Screenreader können Überschriften als Navigationsstruktur verwenden.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>ARIA sparsam verwenden</h4>
+
+      <pre class="code cheat-code"><code>&lt;nav aria-label="Hauptnavigation"&gt;
+  ...
+&lt;/nav&gt;</code></pre>
+
+      <p>
+        ARIA kann zusätzliche semantische Informationen liefern.
+        Es sollte aber nicht als Ersatz für korrektes HTML verwendet werden.
+      </p>
+
+      <p class="hint">
+        Die erste Regel von ARIA lautet sinngemäß:
+        Wenn natives HTML das Problem bereits löst, verwende natives HTML.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Tastaturbedienbarkeit</h4>
+
+      <p>
+        Interaktive Elemente müssen mit der Tastatur erreichbar sein.
+        Links, Buttons und Formularelemente bringen dies normalerweise bereits mit.
+      </p>
+
+      <p>
+        Deshalb sollte ein klickbares <code>&lt;div&gt;</code>
+        nicht leichtfertig einen echten Button ersetzen.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Focus nicht zerstören</h4>
+
+      <p>
+        Elemente sollten beim Navigieren mit Tab sichtbar fokussiert bleiben.
+      </p>
+
+      <p class="hint">
+        Ein pauschales <code>outline: none</code> ist daher meist eine schlechte Idee.
+        Wenn du den Browser-Fokus entfernst, musst du einen mindestens ebenso
+        deutlichen eigenen Fokusstil bereitstellen.
+      </p>
+    </article>
+
+  </div>
+
+
+  <!-- ======================================================
+       SEO
+       ====================================================== -->
+
+  <hr class="divider">
+
+  <h3 id="html-seo">SEO-Grundlagen im HTML</h3>
+
+  <div class="cheat-grid">
+
+    <article class="cheat-item">
+      <h4>Sinnvoller Seitentitel</h4>
+
+      <pre class="code cheat-code"><code>&lt;title&gt;
+  Der Mond – Astronomie | Julian
+&lt;/title&gt;</code></pre>
+
+      <p>
+        Jede wesentliche Seite sollte einen verständlichen,
+        möglichst individuellen Titel besitzen.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Meta Description</h4>
+
+      <pre class="code cheat-code"><code>&lt;meta
+  name="description"
+  content="Ausführliche Übersicht über Entstehung, Geologie, Bahn und Beobachtung des Mondes."
+&gt;</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Saubere Überschriftenstruktur</h4>
+
+      <p>
+        Überschriften helfen nicht nur Menschen,
+        sondern auch Suchmaschinen dabei,
+        Inhalt und Hierarchie einer Seite zu verstehen.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Aussagekräftige Linktexte</h4>
+
+      <p><strong>Schwach:</strong></p>
+
+      <pre class="code cheat-code"><code>&lt;a href="moon.html"&gt;
+  Hier klicken
+&lt;/a&gt;</code></pre>
+
+      <p><strong>Besser:</strong></p>
+
+      <pre class="code cheat-code"><code>&lt;a href="moon.html"&gt;
+  Mehr über den Mond erfahren
+&lt;/a&gt;</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Semantisches HTML</h4>
+
+      <p>
+        Elemente wie <code>&lt;main&gt;</code>,
+        <code>&lt;article&gt;</code>,
+        <code>&lt;section&gt;</code>,
+        <code>&lt;nav&gt;</code> und Überschriften
+        erzeugen einen deutlich verständlicheren Dokumentaufbau.
+      </p>
+    </article>
+
+  </div>
+
+
+  <!-- ======================================================
+       GITHUB PAGES
+       ====================================================== -->
+
+  <hr class="divider">
+
+  <h3 id="html-github">HTML auf GitHub Pages</h3>
+
+  <div class="cheat-grid">
+
+    <article class="cheat-item">
+      <h4>GitHub Pages liefert statische Dateien</h4>
+
+      <p>
+        HTML, CSS, JavaScript, JSON, Bilder und Downloads können direkt
+        ausgeliefert werden.
+      </p>
+
+      <pre class="code cheat-code"><code>index.html
+about.html
+
+assets/
+├── css/
+├── js/
+├── img/
+└── json/</code></pre>
+
+      <p>
+        Ein serverseitiges PHP-, Python- oder Node.js-Programm wird dagegen
+        nicht einfach durch GitHub Pages ausgeführt.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>index.html</code></h4>
+
+      <p>
+        Liegt in einem Ordner eine Datei namens
+        <code>index.html</code>, kann sie üblicherweise über den Ordnerpfad
+        aufgerufen werden.
+      </p>
+
+      <pre class="code cheat-code"><code>astronomy/index.html</code></pre>
+
+      <p>kann dann beispielsweise über:</p>
+
+      <pre class="code cheat-code"><code>/astronomy/</code></pre>
+
+      <p>erreichbar sein.</p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>home.html</code> ist nicht automatisch die Startdatei</h4>
+
+      <p>
+        Wenn ein Ordner nur:
+      </p>
+
+      <pre class="code cheat-code"><code>astronomy/home.html</code></pre>
+
+      <p>enthält, muss gewöhnlich ausdrücklich dorthin verlinkt werden:</p>
+
+      <pre class="code cheat-code"><code>&lt;a href="astronomy/home.html"&gt;
+  Astronomie
+&lt;/a&gt;</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Lokal über HTTP testen</h4>
+
+      <p>
+        Manche Funktionen – insbesondere <code>fetch()</code>,
+        Module und JSON-Ladevorgänge – funktionieren zuverlässiger über
+        einen lokalen Webserver als direkt über <code>file://</code>.
+      </p>
+
 
 
 
