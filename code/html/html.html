@@ -401,63 +401,63 @@
 
 
 
-    <article class="cheat-item">
-      <h4>Typische Attribute</h4>
+      <article class="cheat-item">
+        <h4>Typische Attribute</h4>
 
-      <table>
-        <thead>
-          <tr>
-            <th>Attribut</th>
-            <th>Bedeutung</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><code>class</code></td>
-            <td>Zuordnung zu einer oder mehreren CSS-/JS-Klassen</td>
-          </tr>
-          <tr>
-            <td><code>id</code></td>
-            <td>Eindeutige Kennung innerhalb der Seite</td>
-          </tr>
-          <tr>
-            <td><code>href</code></td>
-            <td>Ziel eines Links</td>
-          </tr>
-          <tr>
-            <td><code>src</code></td>
-            <td>Quelle einer Ressource</td>
-          </tr>
-          <tr>
-            <td><code>alt</code></td>
-            <td>Alternativtext eines Bildes</td>
-          </tr>
-          <tr>
-            <td><code>title</code></td>
-            <td>Zusätzliche Information</td>
-          </tr>
-          <tr>
-            <td><code>lang</code></td>
-            <td>Sprache des Elements</td>
-          </tr>
-          <tr>
-            <td><code>hidden</code></td>
-            <td>Element ausblenden</td>
-          </tr>
-        </tbody>
-      </table>
-    </article>
+        <table>
+          <thead>
+            <tr>
+              <th>Attribut</th>
+              <th>Bedeutung</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>class</code></td>
+              <td>Zuordnung zu einer oder mehreren CSS-/JS-Klassen</td>
+            </tr>
+            <tr>
+              <td><code>id</code></td>
+              <td>Eindeutige Kennung innerhalb der Seite</td>
+            </tr>
+            <tr>
+              <td><code>href</code></td>
+              <td>Ziel eines Links</td>
+            </tr>
+            <tr>
+              <td><code>src</code></td>
+              <td>Quelle einer Ressource</td>
+            </tr>
+            <tr>
+              <td><code>alt</code></td>
+              <td>Alternativtext eines Bildes</td>
+            </tr>
+            <tr>
+              <td><code>title</code></td>
+              <td>Zusätzliche Information</td>
+            </tr>
+            <tr>
+              <td><code>lang</code></td>
+              <td>Sprache des Elements</td>
+            </tr>
+            <tr>
+              <td><code>hidden</code></td>
+              <td>Element ausblenden</td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
 
 
-    <article class="cheat-item">
-      <h4>Boolean-Attribute</h4>
+      <article class="cheat-item">
+        <h4>Boolean-Attribute</h4>
 
-      <p>
-        Einige Attribute benötigen keinen eigenen Wert.
-        Ihre bloße Anwesenheit bedeutet bereits „aktiv“.
-      </p>
+        <p>
+          Einige Attribute benötigen keinen eigenen Wert.
+          Ihre bloße Anwesenheit bedeutet bereits „aktiv“.
+        </p>
 
-      <pre class="code cheat-code"><code>&lt;input type="checkbox" checked&gt;
+        <pre class="code cheat-code"><code>&lt;input type="checkbox" checked&gt;
 
 &lt;input type="text" required&gt;
 
@@ -466,53 +466,53 @@
 &lt;/button&gt;
 
 &lt;script src="main.js" defer&gt;&lt;/script&gt;</code></pre>
-    </article>
+      </article>
 
-  </div>
+    </div>
 
 
-  <!-- ======================================================
+    <!-- ======================================================
        VERSCHACHTELUNG
        ====================================================== -->
 
-  <hr class="divider">
+    <hr class="divider">
 
-  <h3 id="html-nesting">Verschachtelung</h3>
+    <h3 id="html-nesting">Verschachtelung</h3>
 
-  <div class="cheat-grid">
+    <div class="cheat-grid">
 
-    <article class="cheat-item">
-      <h4>Elemente korrekt verschachteln</h4>
+      <article class="cheat-item">
+        <h4>Elemente korrekt verschachteln</h4>
 
-      <p>
-        HTML-Elemente können andere Elemente enthalten.
-        Dabei sollte die Verschachtelung sauber geschlossen werden.
-      </p>
+        <p>
+          HTML-Elemente können andere Elemente enthalten.
+          Dabei sollte die Verschachtelung sauber geschlossen werden.
+        </p>
 
-      <pre class="code cheat-code"><code>&lt;p&gt;
+        <pre class="code cheat-code"><code>&lt;p&gt;
   Das ist
   &lt;strong&gt;sehr wichtig&lt;/strong&gt;.
 &lt;/p&gt;</code></pre>
 
-      <p><strong>Falsch:</strong></p>
+        <p><strong>Falsch:</strong></p>
 
-      <pre class="code cheat-code"><code>&lt;p&gt;
+        <pre class="code cheat-code"><code>&lt;p&gt;
   Das ist
   &lt;strong&gt;sehr wichtig.
 &lt;/p&gt;
 &lt;/strong&gt;</code></pre>
 
-      <p>
-        Browser versuchen fehlerhaftes HTML oft automatisch zu reparieren.
-        Das ist hilfreich, sollte aber nicht als Programmiertechnik missverstanden werden.
-      </p>
-    </article>
+        <p>
+          Browser versuchen fehlerhaftes HTML oft automatisch zu reparieren.
+          Das ist hilfreich, sollte aber nicht als Programmiertechnik missverstanden werden.
+        </p>
+      </article>
 
 
-    <article class="cheat-item">
-      <h4>Einrückung</h4>
+      <article class="cheat-item">
+        <h4>Einrückung</h4>
 
-      <pre class="code cheat-code"><code>&lt;section&gt;
+        <pre class="code cheat-code"><code>&lt;section&gt;
   &lt;h2&gt;Astronomie&lt;/h2&gt;
 
   &lt;article&gt;
@@ -521,19 +521,19 @@
   &lt;/article&gt;
 &lt;/section&gt;</code></pre>
 
-      <p>
-        Die Einrückung verändert das Ergebnis im Browser normalerweise nicht,
-        macht die Struktur für Menschen aber erheblich verständlicher.
-      </p>
-    </article>
+        <p>
+          Die Einrückung verändert das Ergebnis im Browser normalerweise nicht,
+          macht die Struktur für Menschen aber erheblich verständlicher.
+        </p>
+      </article>
 
-  </div>
+    </div>
 
 
-      <hr class="divider" />
-      <p class="hint"><a href="#top">↑ top</a>&emsp;<a href="../index.html">⌂ home</a>&emsp;<a href="home.html">←
-          back</a>
-      </p>
+    <hr class="divider" />
+    <p class="hint"><a href="#top">↑ top</a>&emsp;<a href="../index.html">⌂ home</a>&emsp;<a href="home.html">←
+        back</a>
+    </p>
   </main>
 
 
