@@ -3050,6 +3050,472 @@ assets/
           einen lokalen Webserver als direkt über <code>file://</code>.
         </p>
 
+      <pre class="code cheat-code"><code>python -m http.server 8000</code></pre>
+
+      <p>Danach:</p>
+
+      <pre class="code cheat-code"><code>http://localhost:8000/</code></pre>
+
+      <p class="hint">
+        Für eine statische Webseite ist dieser kleine Python-Server eines der
+        nützlichsten Werkzeuge überhaupt.
+      </p>
+    </article>
+
+  </div>
+
+
+  <!-- ======================================================
+       VALIDATION / DEBUGGING
+       ====================================================== -->
+
+  <hr class="divider">
+
+  <h3 id="html-validation">Fehlersuche und Validierung</h3>
+
+  <div class="cheat-grid">
+
+    <article class="cheat-item">
+      <h4>Browser Developer Tools</h4>
+
+      <p>
+        Die Entwicklertools des Browsers sind eines der wichtigsten Werkzeuge
+        bei der Webentwicklung.
+      </p>
+
+      <p>Besonders relevant:</p>
+
+      <ul>
+        <li><strong>Elements / Inspector:</strong> DOM und CSS untersuchen</li>
+        <li><strong>Console:</strong> JavaScript-Fehler und Logs</li>
+        <li><strong>Network:</strong> geladene Dateien und HTTP-Fehler</li>
+        <li><strong>Sources:</strong> geladene HTML-, CSS- und JS-Dateien</li>
+      </ul>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>404-Fehler</h4>
+
+      <p>
+        Ein <code>404</code> bedeutet:
+        Die angeforderte Ressource wurde unter dieser URL nicht gefunden.
+      </p>
+
+      <p>
+        Bei kaputten Bildern oder Stylesheets solltest du deshalb im
+        Network-Tab prüfen, <strong>welche URL der Browser tatsächlich angefordert hat</strong>.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Typische Pfadfehler</h4>
+
+      <ul>
+        <li>falscher Ordner</li>
+        <li>falsche Dateiendung</li>
+        <li>Groß-/Kleinschreibung stimmt nicht</li>
+        <li>ein <code>../</code> fehlt</li>
+        <li>führender Slash startet am falschen Root</li>
+      </ul>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>HTML-Fehler können Folgefehler erzeugen</h4>
+
+      <p>
+        Ein vergessenes schließendes Element kann dazu führen,
+        dass große Teile des nachfolgenden Dokuments anders im DOM landen,
+        als der Quellcode zunächst vermuten lässt.
+      </p>
+
+      <pre class="code cheat-code"><code>&lt;article&gt;
+  &lt;p&gt;Text
+
+&lt;article&gt;
+  ...
+&lt;/article&gt;</code></pre>
+
+      <p>
+        Deshalb lohnt es sich, bei mysteriösen Layoutfehlern auch die HTML-Struktur
+        selbst zu prüfen.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Quelltext vs. DOM</h4>
+
+      <p>
+        Der Quelltext ist das HTML, das du geschrieben hast.
+        Das DOM ist die Struktur, die der Browser daraus tatsächlich erzeugt hat.
+      </p>
+
+      <p>
+        Bei fehlerhaftem HTML können diese beiden Dinge voneinander abweichen,
+        weil der Browser versucht, das Dokument zu reparieren.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Element direkt testen</h4>
+
+      <p>
+        Bei einem kaputten Bild kannst du dessen errechnete URL aus den
+        Developer Tools kopieren und direkt in einem neuen Tab öffnen.
+      </p>
+
+      <p class="hint">
+        Nicht fünf Minuten den Pfad anstarren und auf ein Geständnis hoffen.
+        Lass dir vom Browser zeigen, wo er tatsächlich gesucht hat.
+      </p>
+    </article>
+
+  </div>
+
+
+  <!-- ======================================================
+       WEITERE NÜTZLICHE ELEMENTE
+       ====================================================== -->
+
+  <hr class="divider">
+
+  <h3>Weitere nützliche HTML-Elemente</h3>
+
+  <div class="cheat-grid">
+
+    <article class="cheat-item">
+      <h4><code>&lt;address&gt;</code></h4>
+
+      <pre class="code cheat-code"><code>&lt;address&gt;
+  Kontakt:
+  &lt;a href="mailto:info@example.com"&gt;
+    info@example.com
+  &lt;/a&gt;
+&lt;/address&gt;</code></pre>
+
+      <p>
+        Wird für Kontaktinformationen zum Autor oder Eigentümer
+        eines Dokuments bzw. Artikels verwendet.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>&lt;progress&gt;</code></h4>
+
+      <pre class="code cheat-code"><code>&lt;progress value="70" max="100"&gt;
+  70 %
+&lt;/progress&gt;</code></pre>
+
+      <p>
+        Geeignet zur Darstellung eines Fortschritts.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>&lt;meter&gt;</code></h4>
+
+      <pre class="code cheat-code"><code>&lt;meter
+  min="0"
+  max="100"
+  value="72"
+&gt;
+  72
+&lt;/meter&gt;</code></pre>
+
+      <p>
+        <code>&lt;meter&gt;</code> beschreibt einen Messwert innerhalb
+        eines bekannten Bereiches.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>&lt;kbd&gt;</code></h4>
+
+      <pre class="code cheat-code"><code>&lt;p&gt;
+  Drücke
+  &lt;kbd&gt;Ctrl&lt;/kbd&gt; +
+  &lt;kbd&gt;S&lt;/kbd&gt;.
+&lt;/p&gt;</code></pre>
+
+      <p>
+        Kennzeichnet Tastatureingaben.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>&lt;samp&gt;</code></h4>
+
+      <pre class="code cheat-code"><code>&lt;samp&gt;
+  posts.json not available
+&lt;/samp&gt;</code></pre>
+
+      <p>
+        Kennzeichnet eine Ausgabe eines Programms oder Systems.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>&lt;pre&gt;</code></h4>
+
+      <pre class="code cheat-code"><code>&lt;pre&gt;
+Zeile 1
+    eingerückte Zeile
+Zeile 3
+&lt;/pre&gt;</code></pre>
+
+      <p>
+        Leerzeichen und Zeilenumbrüche werden innerhalb von
+        <code>&lt;pre&gt;</code> beibehalten.
+      </p>
+    </article>
+
+  </div>
+
+
+  <!-- ======================================================
+       KOMPLETTES BEISPIEL
+       ====================================================== -->
+
+  <hr class="divider">
+
+  <h3>Komplettes Beispiel einer sauberen Seite</h3>
+
+  <div class="cheat-grid">
+
+    <article class="cheat-item">
+      <h4>Kleine, vollständige HTML-Seite</h4>
+
+      <pre class="code cheat-code"><code>&lt;!DOCTYPE html&gt;
+
+&lt;html lang="de"&gt;
+
+&lt;head&gt;
+
+  &lt;meta charset="UTF-8"&gt;
+
+  &lt;meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  &gt;
+
+  &lt;meta
+    name="description"
+    content="Eine kleine Beispielseite über Astronomie."
+  &gt;
+
+  &lt;title&gt;
+    Astronomie – Beispielseite
+  &lt;/title&gt;
+
+  &lt;link
+    rel="stylesheet"
+    href="../assets/css/main.css"
+  &gt;
+
+&lt;/head&gt;
+
+
+&lt;body&gt;
+
+
+  &lt;header class="site-header"&gt;
+
+    &lt;div class="header-inner"&gt;
+
+      &lt;h1 class="site-title"&gt;
+        Astronomie
+      &lt;/h1&gt;
+
+      &lt;nav
+        class="top-nav"
+        aria-label="Hauptnavigation"
+      &gt;
+
+        &lt;a href="../index.html"&gt;
+          Home
+        &lt;/a&gt;
+
+        &lt;a href="home.html"&gt;
+          Astronomie
+        &lt;/a&gt;
+
+      &lt;/nav&gt;
+
+    &lt;/div&gt;
+
+  &lt;/header&gt;
+
+
+  &lt;main class="content"&gt;
+
+
+    &lt;article class="card"&gt;
+
+      &lt;h2 class="card-title"&gt;
+        Der Mond
+      &lt;/h2&gt;
+
+      &lt;p class="card-meta"&gt;
+
+        Aktualisiert:
+        &lt;time datetime="2026-08-18"&gt;
+          18. August 2026
+        &lt;/time&gt;
+
+      &lt;/p&gt;
+
+
+      &lt;figure class="media"&gt;
+
+        &lt;img
+          src="../assets/img/moon.jpg"
+          alt="Zunehmender Mond über Graz"
+          loading="lazy"
+        &gt;
+
+        &lt;figcaption&gt;
+          Der zunehmende Mond über Graz.
+        &lt;/figcaption&gt;
+
+      &lt;/figure&gt;
+
+
+      &lt;section&gt;
+
+        &lt;h3&gt;
+          Überblick
+        &lt;/h3&gt;
+
+        &lt;p&gt;
+          Der Mond ist der einzige natürliche
+          Satellit der Erde.
+        &lt;/p&gt;
+
+      &lt;/section&gt;
+
+
+      &lt;section&gt;
+
+        &lt;h3&gt;
+          Weitere Informationen
+        &lt;/h3&gt;
+
+        &lt;details&gt;
+
+          &lt;summary&gt;
+            Technische Daten
+          &lt;/summary&gt;
+
+          &lt;ul&gt;
+            &lt;li&gt;Durchmesser: etwa 3.474 km&lt;/li&gt;
+            &lt;li&gt;Mittlere Entfernung: etwa 384.400 km&lt;/li&gt;
+          &lt;/ul&gt;
+
+        &lt;/details&gt;
+
+      &lt;/section&gt;
+
+
+    &lt;/article&gt;
+
+
+  &lt;/main&gt;
+
+
+  &lt;footer class="site-footer"&gt;
+
+    &lt;p&gt;
+      © 2026 Julian
+    &lt;/p&gt;
+
+  &lt;/footer&gt;
+
+
+  &lt;script
+    src="../assets/js/main.js"
+    defer
+  &gt;&lt;/script&gt;
+
+
+&lt;/body&gt;
+
+&lt;/html&gt;</code></pre>
+
+      <p class="hint">
+        Wenn du dieses Beispiel verstehst, verstehst du bereits einen sehr großen Teil
+        dessen, was du beim Aufbau einer klassischen statischen Webseite tatsächlich brauchst.
+      </p>
+    </article>
+
+  </div>
+
+
+  <!-- ======================================================
+       MENTALE MODELLE
+       ====================================================== -->
+
+  <hr class="divider">
+
+  <h3>Die wichtigsten mentalen Modelle</h3>
+
+  <div class="cheat-grid">
+
+    <article class="cheat-item">
+      <h4>1. Erst Bedeutung, dann Aussehen</h4>
+
+      <p>
+        Frage zuerst:
+        <strong>Was ist dieser Inhalt?</strong>
+      </p>
+
+      <p>
+        Erst danach:
+        <strong>Wie soll er aussehen?</strong>
+      </p>
+
+      <p>
+        Wenn etwas eine Navigation ist, verwende <code>&lt;nav&gt;</code>.
+        Wenn etwas ein Artikel ist, verwende <code>&lt;article&gt;</code>.
+        Wenn etwas ein Button ist, verwende <code>&lt;button&gt;</code>.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>2. HTML ist ein Baum</h4>
+
+      <p>
+        Fast jedes Element besitzt einen Elternknoten,
+        Geschwisterelemente und möglicherweise eigene Kindknoten.
+      </p>
+
+      <pre class="code cheat-code"><code>main
+└── article
+    ├── h2
+    ├── p
+    └── figure
+        ├── img
+        └── figcaption</code></pre>
+
+      <p>
+        Dieses Baumdenken ist später für CSS-Selektoren
+        und JavaScript enorm wichtig.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>3. URLs sind Ortsbeschreibungen</h4>
+
 
 
 
