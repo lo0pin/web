@@ -758,6 +758,1356 @@
         </p>
       </article>
 
+    <article class="cheat-item">
+      <h4>Inline-Code mit <code>&lt;code&gt;</code></h4>
+
+      <pre class="code cheat-code"><code>&lt;p&gt;
+  Die Datei heißt
+  &lt;code&gt;posts.json&lt;/code&gt;.
+&lt;/p&gt;</code></pre>
+
+      <p>
+        Für längere Codeblöcke kombiniert man
+        <code>&lt;pre&gt;</code> und <code>&lt;code&gt;</code>.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>&lt;mark&gt;</code></h4>
+
+      <pre class="code cheat-code"><code>&lt;p&gt;
+  Besonders relevant ist
+  &lt;mark&gt;dieser Abschnitt&lt;/mark&gt;.
+&lt;/p&gt;</code></pre>
+
+      <p>
+        <code>&lt;mark&gt;</code> kennzeichnet einen hervorgehobenen
+        Textabschnitt, ähnlich einer Markierung mit Textmarker.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>&lt;small&gt;</code></h4>
+
+      <pre class="code cheat-code"><code>&lt;small&gt;
+  Stand: August 2026
+&lt;/small&gt;</code></pre>
+
+      <p>
+        Geeignet für Nebenbemerkungen, Kleingedrucktes oder sekundäre Hinweise.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>&lt;sub&gt;</code> und <code>&lt;sup&gt;</code></h4>
+
+      <pre class="code cheat-code"><code>H&lt;sub&gt;2&lt;/sub&gt;O
+
+10&lt;sup&gt;6&lt;/sup&gt;
+
+E = mc&lt;sup&gt;2&lt;/sup&gt;</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>&lt;time&gt;</code></h4>
+
+      <pre class="code cheat-code"><code>&lt;time datetime="2026-08-18"&gt;
+  18. August 2026
+&lt;/time&gt;</code></pre>
+
+      <p>
+        Menschen sehen die ausgeschriebene Form,
+        Maschinen erhalten über <code>datetime</code>
+        einen eindeutig interpretierbaren Wert.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Abkürzungen mit <code>&lt;abbr&gt;</code></h4>
+
+      <pre class="code cheat-code"><code>&lt;abbr title="HyperText Markup Language"&gt;
+  HTML
+&lt;/abbr&gt;</code></pre>
+    </article>
+
+  </div>
+
+
+  <!-- ======================================================
+       LINKS
+       ====================================================== -->
+
+  <hr class="divider">
+
+  <h3 id="html-links">Links mit <code>&lt;a&gt;</code></h3>
+
+  <div class="cheat-grid">
+
+    <article class="cheat-item">
+      <h4>Interner Link</h4>
+
+      <pre class="code cheat-code"><code>&lt;a href="about.html"&gt;
+  Über mich
+&lt;/a&gt;</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Link in einen Unterordner</h4>
+
+      <pre class="code cheat-code"><code>&lt;a href="astronomy/moon.html"&gt;
+  Der Mond
+&lt;/a&gt;</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Externer Link</h4>
+
+      <pre class="code cheat-code"><code>&lt;a href="https://example.com"&gt;
+  Example
+&lt;/a&gt;</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Externer Link in neuem Tab</h4>
+
+      <pre class="code cheat-code"><code>&lt;a
+  href="https://example.com"
+  target="_blank"
+  rel="noopener noreferrer"
+&gt;
+  Externe Webseite
+&lt;/a&gt;</code></pre>
+
+      <p>
+        <code>target="_blank"</code> öffnet einen neuen Tab.
+        <code>rel="noopener noreferrer"</code> ist dabei eine sinnvolle
+        Sicherheits- und Datenschutzergänzung.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Sprungmarken innerhalb einer Seite</h4>
+
+      <pre class="code cheat-code"><code>&lt;a href="#kontakt"&gt;
+  Zum Kontakt
+&lt;/a&gt;
+
+...
+
+&lt;section id="kontakt"&gt;
+  &lt;h2&gt;Kontakt&lt;/h2&gt;
+&lt;/section&gt;</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Link auf eine andere Seite + Anker</h4>
+
+      <pre class="code cheat-code"><code>&lt;a href="astronomy/moon.html#geology"&gt;
+  Mondgeologie
+&lt;/a&gt;</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>E-Mail-Link</h4>
+
+      <pre class="code cheat-code"><code>&lt;a href="mailto:name@example.com"&gt;
+  E-Mail senden
+&lt;/a&gt;</code></pre>
+
+      <p class="hint">
+        Eine öffentlich im HTML stehende E-Mail-Adresse kann von Bots ausgelesen werden.
+        Für eine private Adresse ist ein Kontaktformular oder externer Formularservice sinnvoller.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Download-Link</h4>
+
+      <pre class="code cheat-code"><code>&lt;a
+  href="assets/documents/abschlussarbeit.pdf"
+  download
+&gt;
+  Abschlussarbeit herunterladen
+&lt;/a&gt;</code></pre>
+
+      <p>
+        Das <code>download</code>-Attribut signalisiert dem Browser,
+        dass die Ressource heruntergeladen werden soll.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Link oder Button?</h4>
+
+      <p>
+        Eine der nützlichsten Regeln im Frontend:
+      </p>
+
+      <ul>
+        <li><strong>Link:</strong> bringt Benutzer an einen anderen Ort.</li>
+        <li><strong>Button:</strong> löst eine Aktion aus.</li>
+      </ul>
+
+      <pre class="code cheat-code"><code>&lt;a href="archive.html"&gt;
+  Archiv öffnen
+&lt;/a&gt;
+
+&lt;button type="button"&gt;
+  Filter zurücksetzen
+&lt;/button&gt;</code></pre>
+    </article>
+
+  </div>
+
+
+  <!-- ======================================================
+       BILDER
+       ====================================================== -->
+
+  <hr class="divider">
+
+  <h3 id="html-images">Bilder mit <code>&lt;img&gt;</code></h3>
+
+  <div class="cheat-grid">
+
+    <article class="cheat-item">
+      <h4>Grundsyntax</h4>
+
+      <pre class="code cheat-code"><code>&lt;img
+  src="assets/img/moon.jpg"
+  alt="Zunehmender Mond über Graz"
+&gt;</code></pre>
+
+      <p>
+        <code>src</code> enthält die Bildquelle,
+        <code>alt</code> eine textuelle Alternative.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Sinnvoller Alternativtext</h4>
+
+      <p><strong>Schlecht:</strong></p>
+
+      <pre class="code cheat-code"><code>alt="Bild"
+
+alt="Foto"
+
+alt="moon.jpg"</code></pre>
+
+      <p><strong>Besser:</strong></p>
+
+      <pre class="code cheat-code"><code>alt="Zunehmender Mond über dem Grazer Plabutsch"</code></pre>
+
+      <p>
+        Der Alternativtext sollte jene Information vermitteln,
+        die das Bild im jeweiligen Kontext trägt.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Dekorative Bilder</h4>
+
+      <p>
+        Ist ein Bild rein dekorativ und vermittelt keinerlei zusätzliche Information,
+        sollte ein leeres <code>alt</code>-Attribut verwendet werden.
+      </p>
+
+      <pre class="code cheat-code"><code>&lt;img
+  src="background-decoration.jpg"
+  alt=""
+&gt;</code></pre>
+
+      <p>
+        Dadurch können Screenreader das Bild überspringen.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Lazy Loading</h4>
+
+      <pre class="code cheat-code"><code>&lt;img
+  src="photo.jpg"
+  alt="Segelboot in einer Bucht"
+  loading="lazy"
+  decoding="async"
+&gt;</code></pre>
+
+      <p>
+        <code>loading="lazy"</code> erlaubt dem Browser,
+        weiter unten liegende Bilder erst bei Bedarf zu laden.
+      </p>
+
+      <p class="hint">
+        Für Bilder unmittelbar im sichtbaren oberen Seitenbereich ist Lazy Loading
+        nicht unbedingt sinnvoll. Dort soll das Bild möglichst rasch verfügbar sein.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Breite und Höhe angeben</h4>
+
+      <pre class="code cheat-code"><code>&lt;img
+  src="photo.jpg"
+  alt="Berglandschaft"
+  width="1600"
+  height="900"
+&gt;</code></pre>
+
+      <p>
+        Sind die intrinsischen Bilddimensionen bekannt,
+        kann der Browser schon vor dem Laden Platz reservieren.
+        Das reduziert Layoutsprünge.
+      </p>
+    </article>
+
+  </div>
+
+
+  <!-- ======================================================
+       FIGURE
+       ====================================================== -->
+
+  <hr class="divider">
+
+  <h3 id="html-figure">Bilder mit Bildunterschrift</h3>
+
+  <div class="cheat-grid">
+
+    <article class="cheat-item">
+      <h4><code>&lt;figure&gt;</code> und <code>&lt;figcaption&gt;</code></h4>
+
+      <pre class="code cheat-code"><code>&lt;figure class="media"&gt;
+
+  &lt;img
+    src="assets/img/moon.jpg"
+    alt="Zunehmender Mond über dem Plabutsch"
+  &gt;
+
+  &lt;figcaption&gt;
+    Der zunehmende Mond über dem Grazer Plabutsch.
+  &lt;/figcaption&gt;
+
+&lt;/figure&gt;</code></pre>
+
+      <p>
+        <code>&lt;figure&gt;</code> gruppiert ein Medium mit zugehörigem Inhalt,
+        <code>&lt;figcaption&gt;</code> liefert die sichtbare Beschriftung.
+      </p>
+
+      <p class="hint">
+        <code>alt</code> und <code>figcaption</code> erfüllen unterschiedliche Aufgaben.
+        Sie müssen daher nicht identisch sein.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Klickbares Bild</h4>
+
+      <pre class="code cheat-code"><code>&lt;figure class="media"&gt;
+
+  &lt;a
+    href="assets/img/moon-large.jpg"
+    target="_blank"
+    rel="noopener noreferrer"
+  &gt;
+
+    &lt;img
+      src="assets/img/moon-small.jpg"
+      alt="Detailaufnahme des Mondes"
+    &gt;
+
+  &lt;/a&gt;
+
+  &lt;figcaption&gt;
+    Anklicken für die größere Version.
+  &lt;/figcaption&gt;
+
+&lt;/figure&gt;</code></pre>
+    </article>
+
+  </div>
+
+
+  <!-- ======================================================
+       MEDIA
+       ====================================================== -->
+
+  <hr class="divider">
+
+  <h3 id="html-media">Audio und Video</h3>
+
+  <div class="cheat-grid">
+
+    <article class="cheat-item">
+      <h4>Video</h4>
+
+      <pre class="code cheat-code"><code>&lt;video controls&gt;
+
+  &lt;source
+    src="assets/video/sailing.mp4"
+    type="video/mp4"
+  &gt;
+
+  Dein Browser unterstützt dieses Video nicht.
+
+&lt;/video&gt;</code></pre>
+
+      <p>
+        Das Attribut <code>controls</code> zeigt die Browser-Steuerelemente
+        für Wiedergabe, Lautstärke und Vollbild.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Audio</h4>
+
+      <pre class="code cheat-code"><code>&lt;audio controls&gt;
+
+  &lt;source
+    src="assets/audio/example.mp3"
+    type="audio/mpeg"
+  &gt;
+
+  Dein Browser unterstützt dieses Audioformat nicht.
+
+&lt;/audio&gt;</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>autoplay</code> mit Vorsicht</h4>
+
+      <p>
+        Browser beschränken automatische Medienwiedergabe stark.
+        Vor allem Audio sollte nicht ungefragt losplärren,
+        sobald jemand eine Seite öffnet.
+      </p>
+
+      <pre class="code cheat-code"><code>&lt;video
+  autoplay
+  muted
+  loop
+  playsinline
+&gt;
+  ...
+&lt;/video&gt;</code></pre>
+
+      <p>
+        Stummgeschaltete Videos dürfen häufiger automatisch starten.
+      </p>
+    </article>
+
+  </div>
+
+
+  <!-- ======================================================
+       LISTEN
+       ====================================================== -->
+
+  <hr class="divider">
+
+  <h3 id="html-lists">Listen</h3>
+
+  <div class="cheat-grid">
+
+    <article class="cheat-item">
+      <h4>Ungeordnete Liste <code>&lt;ul&gt;</code></h4>
+
+      <pre class="code cheat-code"><code>&lt;ul&gt;
+  &lt;li&gt;HTML&lt;/li&gt;
+  &lt;li&gt;CSS&lt;/li&gt;
+  &lt;li&gt;JavaScript&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+
+      <p>
+        Verwenden, wenn die Reihenfolge nicht wesentlich ist.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Geordnete Liste <code>&lt;ol&gt;</code></h4>
+
+      <pre class="code cheat-code"><code>&lt;ol&gt;
+  &lt;li&gt;Datei erstellen&lt;/li&gt;
+  &lt;li&gt;HTML schreiben&lt;/li&gt;
+  &lt;li&gt;Browser öffnen&lt;/li&gt;
+  &lt;li&gt;Fehler prüfen&lt;/li&gt;
+&lt;/ol&gt;</code></pre>
+
+      <p>
+        Verwenden, wenn Reihenfolge oder Nummerierung eine Bedeutung besitzen.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Verschachtelte Listen</h4>
+
+      <pre class="code cheat-code"><code>&lt;ul&gt;
+
+  &lt;li&gt;
+    Astronomie
+
+    &lt;ul&gt;
+      &lt;li&gt;Mond&lt;/li&gt;
+      &lt;li&gt;Sonnensystem&lt;/li&gt;
+      &lt;li&gt;Sterne&lt;/li&gt;
+    &lt;/ul&gt;
+
+  &lt;/li&gt;
+
+&lt;/ul&gt;</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Definitionsliste</h4>
+
+      <pre class="code cheat-code"><code>&lt;dl&gt;
+
+  &lt;dt&gt;HTML&lt;/dt&gt;
+  &lt;dd&gt;
+    Sprache zur Strukturierung von Webseiten.
+  &lt;/dd&gt;
+
+  &lt;dt&gt;CSS&lt;/dt&gt;
+  &lt;dd&gt;
+    Sprache zur Gestaltung von Webseiten.
+  &lt;/dd&gt;
+
+&lt;/dl&gt;</code></pre>
+
+      <p>
+        <code>&lt;dl&gt;</code> eignet sich für Begriffe mit zugehörigen
+        Definitionen oder Beschreibungen.
+      </p>
+    </article>
+
+  </div>
+
+
+  <!-- ======================================================
+       TABELLEN
+       ====================================================== -->
+
+  <hr class="divider">
+
+  <h3 id="html-tables">Tabellen</h3>
+
+  <div class="cheat-grid">
+
+    <article class="cheat-item">
+      <h4>Grundstruktur einer Tabelle</h4>
+
+      <pre class="code cheat-code"><code>&lt;table&gt;
+
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Planet&lt;/th&gt;
+      &lt;th&gt;Durchmesser&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Erde&lt;/td&gt;
+      &lt;td&gt;12.742 km&lt;/td&gt;
+    &lt;/tr&gt;
+
+    &lt;tr&gt;
+      &lt;td&gt;Mars&lt;/td&gt;
+      &lt;td&gt;6.779 km&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+
+&lt;/table&gt;</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Wichtige Tabellenelemente</h4>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Element</th>
+            <th>Bedeutung</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>&lt;table&gt;</code></td>
+            <td>gesamte Tabelle</td>
+          </tr>
+          <tr>
+            <td><code>&lt;thead&gt;</code></td>
+            <td>Tabellenkopf</td>
+          </tr>
+          <tr>
+            <td><code>&lt;tbody&gt;</code></td>
+            <td>Tabellenkörper</td>
+          </tr>
+          <tr>
+            <td><code>&lt;tfoot&gt;</code></td>
+            <td>Tabellenfuß</td>
+          </tr>
+          <tr>
+            <td><code>&lt;tr&gt;</code></td>
+            <td>Tabellenzeile</td>
+          </tr>
+          <tr>
+            <td><code>&lt;th&gt;</code></td>
+            <td>Kopfzelle</td>
+          </tr>
+          <tr>
+            <td><code>&lt;td&gt;</code></td>
+            <td>Datenzelle</td>
+          </tr>
+        </tbody>
+      </table>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Tabellentitel mit <code>&lt;caption&gt;</code></h4>
+
+      <pre class="code cheat-code"><code>&lt;table&gt;
+
+  &lt;caption&gt;
+    Eigenschaften der inneren Planeten
+  &lt;/caption&gt;
+
+  ...
+&lt;/table&gt;</code></pre>
+
+      <p>
+        Eine <code>&lt;caption&gt;</code> beschreibt den Inhalt der gesamten Tabelle.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Spaltenüberschriften mit <code>scope</code></h4>
+
+      <pre class="code cheat-code"><code>&lt;th scope="col"&gt;Planet&lt;/th&gt;
+&lt;th scope="col"&gt;Masse&lt;/th&gt;
+
+&lt;th scope="row"&gt;Erde&lt;/th&gt;</code></pre>
+
+      <p>
+        Das hilft assistiven Technologien dabei,
+        Tabellenbeziehungen korrekt zu verstehen.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Zellen verbinden</h4>
+
+      <pre class="code cheat-code"><code>&lt;td colspan="2"&gt;
+  Über zwei Spalten
+&lt;/td&gt;
+
+&lt;td rowspan="3"&gt;
+  Über drei Zeilen
+&lt;/td&gt;</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Spalten mit <code>&lt;colgroup&gt;</code></h4>
+
+      <pre class="code cheat-code"><code>&lt;table&gt;
+
+  &lt;colgroup&gt;
+    &lt;col class="col-name"&gt;
+    &lt;col class="col-number"&gt;
+    &lt;col class="col-note"&gt;
+  &lt;/colgroup&gt;
+
+  ...
+
+&lt;/table&gt;</code></pre>
+
+      <p>
+        Das eignet sich gut, wenn bestimmte Spalten über CSS
+        gemeinsam formatiert werden sollen.
+      </p>
+
+      <p class="hint">
+        Ausrichtung und Breite gehören grundsätzlich ins CSS,
+        nicht in veraltete HTML-Attribute wie <code>align</code>.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Keine Tabellen für Seitenlayout</h4>
+
+      <p>
+        Tabellen sind für echte tabellarische Daten gedacht.
+        Für Seitenlayout verwendet man CSS Grid oder Flexbox.
+      </p>
+
+      <p class="hint">
+        Eine Tabelle, die nur deshalb existiert, damit links etwas links und rechts
+        etwas rechts steht, ist ein Relikt aus einer dunkleren Epoche des Webdesigns.
+      </p>
+    </article>
+
+  </div>
+
+
+  <!-- ======================================================
+       SEMANTIC HTML
+       ====================================================== -->
+
+  <hr class="divider">
+
+  <h3 id="html-semantic">Semantisches HTML</h3>
+
+  <p>
+    Semantische Elemente beschreiben die Funktion eines Bereichs.
+    Dadurch wird die Seite für Browser, Screenreader, Suchmaschinen
+    und nicht zuletzt für den eigenen zukünftigen Blick verständlicher.
+  </p>
+
+  <div class="cheat-grid">
+
+    <article class="cheat-item">
+      <h4><code>&lt;header&gt;</code></h4>
+
+      <p>
+        Kopfbereich einer Seite oder eines Abschnitts.
+      </p>
+
+      <pre class="code cheat-code"><code>&lt;header&gt;
+  &lt;h1&gt;Julian&lt;/h1&gt;
+&lt;/header&gt;</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>&lt;nav&gt;</code></h4>
+
+      <p>
+        Bereich mit wesentlichen Navigationslinks.
+      </p>
+
+      <pre class="code cheat-code"><code>&lt;nav aria-label="Hauptnavigation"&gt;
+  &lt;a href="index.html"&gt;Home&lt;/a&gt;
+  &lt;a href="about.html"&gt;About&lt;/a&gt;
+&lt;/nav&gt;</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>&lt;main&gt;</code></h4>
+
+      <p>
+        Enthält den eigentlichen Hauptinhalt einer Seite.
+      </p>
+
+      <pre class="code cheat-code"><code>&lt;main&gt;
+  ...
+&lt;/main&gt;</code></pre>
+
+      <p>
+        Normalerweise gibt es pro Dokument genau einen sichtbaren
+        Hauptbereich.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>&lt;section&gt;</code></h4>
+
+      <p>
+        Thematischer Abschnitt eines Dokuments.
+      </p>
+
+      <pre class="code cheat-code"><code>&lt;section&gt;
+  &lt;h2&gt;Entstehung des Mondes&lt;/h2&gt;
+  ...
+&lt;/section&gt;</code></pre>
+
+      <p>
+        Eine <code>section</code> sollte normalerweise eine Überschrift
+        oder zumindest einen klar erkennbaren thematischen Zweck besitzen.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>&lt;article&gt;</code></h4>
+
+      <p>
+        Eigenständig verständlicher Inhalt, beispielsweise:
+      </p>
+
+      <ul>
+        <li>News-Beitrag</li>
+        <li>Blogartikel</li>
+        <li>Forenbeitrag</li>
+        <li>Dokumentationseintrag</li>
+      </ul>
+
+      <pre class="code cheat-code"><code>&lt;article&gt;
+  &lt;h2&gt;Mein erster Meshtastic-Test&lt;/h2&gt;
+  &lt;p&gt;...&lt;/p&gt;
+&lt;/article&gt;</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>&lt;aside&gt;</code></h4>
+
+      <p>
+        Inhalt, der nur ergänzend zum Hauptinhalt gehört.
+      </p>
+
+      <pre class="code cheat-code"><code>&lt;aside&gt;
+  &lt;h3&gt;Weiterführende Links&lt;/h3&gt;
+  ...
+&lt;/aside&gt;</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>&lt;footer&gt;</code></h4>
+
+      <pre class="code cheat-code"><code>&lt;footer&gt;
+  &lt;p&gt;
+    © 2026 Julian
+  &lt;/p&gt;
+&lt;/footer&gt;</code></pre>
+
+      <p>
+        Ein Footer kann für die gesamte Seite oder auch innerhalb
+        einzelner Artikel verwendet werden.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Typisches semantisches Layout</h4>
+
+      <pre class="code cheat-code"><code>&lt;body&gt;
+
+  &lt;header&gt;
+    &lt;h1&gt;Meine Webseite&lt;/h1&gt;
+
+    &lt;nav&gt;
+      ...
+    &lt;/nav&gt;
+  &lt;/header&gt;
+
+
+  &lt;main&gt;
+
+    &lt;section&gt;
+      &lt;h2&gt;Projekte&lt;/h2&gt;
+
+      &lt;article&gt;
+        ...
+      &lt;/article&gt;
+
+    &lt;/section&gt;
+
+  &lt;/main&gt;
+
+
+  &lt;footer&gt;
+    ...
+  &lt;/footer&gt;
+
+&lt;/body&gt;</code></pre>
+    </article>
+
+  </div>
+
+
+  <!-- ======================================================
+       DIV / SPAN
+       ====================================================== -->
+
+  <hr class="divider">
+
+  <h3 id="html-div-span"><code>&lt;div&gt;</code> und <code>&lt;span&gt;</code></h3>
+
+  <div class="cheat-grid">
+
+    <article class="cheat-item">
+      <h4><code>&lt;div&gt;</code></h4>
+
+      <p>
+        Ein <code>&lt;div&gt;</code> ist ein neutraler Block-Container.
+        Es trägt selbst keine besondere semantische Bedeutung.
+      </p>
+
+      <pre class="code cheat-code"><code>&lt;div class="tile-grid"&gt;
+
+  &lt;div class="tile"&gt;
+    ...
+  &lt;/div&gt;
+
+&lt;/div&gt;</code></pre>
+
+      <p>
+        Es ist ideal für Layout oder Gruppierung,
+        wenn kein passendes semantisches Element existiert.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>&lt;span&gt;</code></h4>
+
+      <p>
+        <code>&lt;span&gt;</code> ist das Inline-Gegenstück zu
+        <code>&lt;div&gt;</code>.
+      </p>
+
+      <pre class="code cheat-code"><code>&lt;p&gt;
+  Temperatur:
+  &lt;span class="temperature"&gt;26 °C&lt;/span&gt;
+&lt;/p&gt;</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Keine <code>div</code>-Suppe</h4>
+
+      <p><strong>Technisch möglich:</strong></p>
+
+      <pre class="code cheat-code"><code>&lt;div class="header"&gt;
+  &lt;div class="navigation"&gt;
+    ...
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+      <p><strong>Semantisch besser:</strong></p>
+
+      <pre class="code cheat-code"><code>&lt;header&gt;
+  &lt;nav&gt;
+    ...
+  &lt;/nav&gt;
+&lt;/header&gt;</code></pre>
+    </article>
+
+  </div>
+
+
+  <!-- ======================================================
+       CLASS / ID
+       ====================================================== -->
+
+  <hr class="divider">
+
+  <h3 id="html-class-id"><code>class</code> und <code>id</code></h3>
+
+  <div class="cheat-grid">
+
+    <article class="cheat-item">
+      <h4><code>class</code></h4>
+
+      <p>
+        Klassen dürfen auf beliebig vielen Elementen verwendet werden.
+      </p>
+
+      <pre class="code cheat-code"><code>&lt;article class="card"&gt;...&lt;/article&gt;
+
+&lt;article class="card"&gt;...&lt;/article&gt;
+
+&lt;article class="card"&gt;...&lt;/article&gt;</code></pre>
+
+      <p>
+        Sie eignen sich deshalb hervorragend für wiederverwendbare CSS-Stile
+        oder JavaScript-Gruppen.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Mehrere Klassen</h4>
+
+      <pre class="code cheat-code"><code>&lt;div class="media-row media-row--compact"&gt;
+  ...
+&lt;/div&gt;</code></pre>
+
+      <p>
+        Mehrere Klassen werden innerhalb des Attributes durch Leerzeichen getrennt.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>id</code></h4>
+
+      <pre class="code cheat-code"><code>&lt;section id="moon"&gt;
+  ...
+&lt;/section&gt;</code></pre>
+
+      <p>
+        Eine ID sollte innerhalb eines Dokuments eindeutig sein.
+      </p>
+
+      <p>Typische Verwendung:</p>
+
+      <ul>
+        <li>Sprungmarken</li>
+        <li>JavaScript-Ziele</li>
+        <li>eindeutige Beziehungen zwischen Elementen</li>
+      </ul>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Faustregel</h4>
+
+      <p>
+        <strong>class</strong> = wiederverwendbar<br>
+        <strong>id</strong> = eindeutig
+      </p>
+
+      <p class="hint">
+        Wenn du zehn Karten hast, bekommen alle zehn
+        <code>class="card"</code>. Sie bekommen nicht alle dieselbe ID.
+      </p>
+    </article>
+
+  </div>
+
+
+  <!-- ======================================================
+       DATA ATTRIBUTES
+       ====================================================== -->
+
+  <hr class="divider">
+
+  <h3 id="html-data">Eigene Daten mit <code>data-*</code></h3>
+
+  <div class="cheat-grid">
+
+    <article class="cheat-item">
+      <h4>Eigene Attribute definieren</h4>
+
+      <p>
+        HTML erlaubt eigene Datenattribute,
+        solange sie mit <code>data-</code> beginnen.
+      </p>
+
+      <pre class="code cheat-code"><code>&lt;div
+  data-news-topic="electronics"
+  data-news-subtopic="mesh"
+  data-news-mode="latest"
+  data-news-limit="3"
+&gt;&lt;/div&gt;</code></pre>
+
+      <p>
+        Diese Attribute eignen sich besonders gut,
+        um HTML-Konfiguration an JavaScript weiterzugeben.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Zugriff mit JavaScript</h4>
+
+      <pre class="code cheat-code"><code>const element =
+  document.querySelector("[data-news-mode]");
+
+console.log(element.dataset.newsMode);
+console.log(element.dataset.newsTopic);
+console.log(element.dataset.newsLimit);</code></pre>
+
+      <p>
+        HTML:
+      </p>
+
+      <pre class="code cheat-code"><code>data-news-mode="latest"</code></pre>
+
+      <p>
+        wird in JavaScript zu:
+      </p>
+
+      <pre class="code cheat-code"><code>element.dataset.newsMode</code></pre>
+
+      <p class="hint">
+        Bindestriche werden bei <code>dataset</code> in CamelCase umgewandelt.
+      </p>
+    </article>
+
+  </div>
+
+
+  <!-- ======================================================
+       FORMULARE
+       ====================================================== -->
+
+  <hr class="divider">
+
+  <h3 id="html-forms">Formulare</h3>
+
+  <div class="cheat-grid">
+
+    <article class="cheat-item">
+      <h4>Einfaches Formular</h4>
+
+      <pre class="code cheat-code"><code>&lt;form action="/send" method="post"&gt;
+
+  &lt;label for="name"&gt;
+    Name
+  &lt;/label&gt;
+
+  &lt;input
+    id="name"
+    name="name"
+    type="text"
+    required
+  &gt;
+
+
+  &lt;label for="message"&gt;
+    Nachricht
+  &lt;/label&gt;
+
+  &lt;textarea
+    id="message"
+    name="message"
+    required
+  &gt;&lt;/textarea&gt;
+
+
+  &lt;button type="submit"&gt;
+    Absenden
+  &lt;/button&gt;
+
+&lt;/form&gt;</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4><code>label</code>, <code>id</code> und <code>for</code></h4>
+
+      <pre class="code cheat-code"><code>&lt;label for="email"&gt;
+  E-Mail-Adresse
+&lt;/label&gt;
+
+&lt;input
+  id="email"
+  name="email"
+  type="email"
+&gt;</code></pre>
+
+      <p>
+        Der Wert von <code>for</code> muss mit der
+        <code>id</code> des Eingabefeldes übereinstimmen.
+      </p>
+
+      <p>
+        Dadurch kann auch ein Klick auf die Beschriftung das Feld aktivieren.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Das <code>name</code>-Attribut</h4>
+
+      <p>
+        Während <code>id</code> für das Dokument wichtig ist,
+        bestimmt <code>name</code> normalerweise den Feldnamen,
+        der beim Absenden übertragen wird.
+      </p>
+
+      <pre class="code cheat-code"><code>&lt;input
+  id="username"
+  name="username"
+  type="text"
+&gt;</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Wichtige Input-Typen</h4>
+
+      <pre class="code cheat-code"><code>&lt;input type="text"&gt;
+
+&lt;input type="email"&gt;
+
+&lt;input type="password"&gt;
+
+&lt;input type="number"&gt;
+
+&lt;input type="date"&gt;
+
+&lt;input type="time"&gt;
+
+&lt;input type="url"&gt;
+
+&lt;input type="search"&gt;
+
+&lt;input type="file"&gt;
+
+&lt;input type="checkbox"&gt;
+
+&lt;input type="radio"&gt;
+
+&lt;input type="range"&gt;</code></pre>
+
+      <p>
+        Der passende Input-Typ verbessert Bedienbarkeit,
+        Browservalidierung und mobile Bildschirmtastaturen.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Placeholder</h4>
+
+      <pre class="code cheat-code"><code>&lt;input
+  type="text"
+  placeholder="Vorname Nachname"
+&gt;</code></pre>
+
+      <p class="hint">
+        Ein Placeholder ersetzt kein <code>&lt;label&gt;</code>.
+        Sobald Text eingegeben wird, verschwindet der Placeholder.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Pflichtfeld</h4>
+
+      <pre class="code cheat-code"><code>&lt;input
+  type="email"
+  required
+&gt;</code></pre>
+
+      <p>
+        Der Browser verhindert normalerweise das Absenden,
+        solange das Pflichtfeld ungültig oder leer ist.
+      </p>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Mindest- und Maximallänge</h4>
+
+      <pre class="code cheat-code"><code>&lt;input
+  type="text"
+  minlength="3"
+  maxlength="50"
+&gt;</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Zahlen begrenzen</h4>
+
+      <pre class="code cheat-code"><code>&lt;input
+  type="number"
+  min="0"
+  max="100"
+  step="1"
+&gt;</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Textarea</h4>
+
+      <pre class="code cheat-code"><code>&lt;textarea
+  id="message"
+  name="message"
+  rows="8"
+  maxlength="2000"
+&gt;&lt;/textarea&gt;</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Select / Dropdown</h4>
+
+      <pre class="code cheat-code"><code>&lt;label for="topic"&gt;
+  Thema
+&lt;/label&gt;
+
+&lt;select id="topic" name="topic"&gt;
+
+  &lt;option value="code"&gt;
+    Code
+  &lt;/option&gt;
+
+  &lt;option value="electronics"&gt;
+    Electronics
+  &lt;/option&gt;
+
+  &lt;option value="astro"&gt;
+    Astronomy
+  &lt;/option&gt;
+
+&lt;/select&gt;</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Checkbox</h4>
+
+      <pre class="code cheat-code"><code>&lt;label&gt;
+  &lt;input
+    type="checkbox"
+    name="privacy"
+    required
+  &gt;
+
+  Datenschutzbestimmungen akzeptieren
+&lt;/label&gt;</code></pre>
+    </article>
+
+
+    <article class="cheat-item">
+      <h4>Radio Buttons</h4>
+
+      <pre class="code cheat-code"><code>&lt;label&gt;
+  &lt;input
+    type="radio"
+    name="language"
+    value="de"
+  &gt;
+  Deutsch
+&lt;/label&gt;
+
+&lt;label&gt;
+  &lt;input
+    type="radio"
+    name="language"
+    value="en"
+  &gt;
+  Englisch
+&lt;/label&gt;</code></pre>
 
 
 
