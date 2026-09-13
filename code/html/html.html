@@ -1316,15 +1316,15 @@ alt="moon.jpg"</code></pre>
        ====================================================== -->
 
     <hr class="divider">
-<div class="card">
-    <h3 id="html-tables">Tabellen</h3>
+    <div class="card">
+      <h3 id="html-tables">Tabellen</h3>
 
-    <div class="cheat-grid">
+      <div class="cheat-grid">
 
-      <article class="cheat-item">
-        <h4>Grundstruktur einer Tabelle</h4>
+        <article class="cheat-item">
+          <h4>Grundstruktur einer Tabelle</h4>
 
-        <pre class="code cheat-code"><code>&lt;table&gt;
+          <pre class="code cheat-code"><code>&lt;table&gt;
 
   &lt;thead&gt;
     &lt;tr&gt;
@@ -1346,57 +1346,57 @@ alt="moon.jpg"</code></pre>
   &lt;/tbody&gt;
 
 &lt;/table&gt;</code></pre>
-      </article>
+        </article>
 
 
-      <article class="cheat-item">
-        <h4>Wichtige Tabellenelemente</h4>
+        <article class="cheat-item">
+          <h4>Wichtige Tabellenelemente</h4>
 
-        <table>
-          <thead>
-            <tr>
-              <th>Element</th>
-              <th>Bedeutung</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><code>&lt;table&gt;</code></td>
-              <td>gesamte Tabelle</td>
-            </tr>
-            <tr>
-              <td><code>&lt;thead&gt;</code></td>
-              <td>Tabellenkopf</td>
-            </tr>
-            <tr>
-              <td><code>&lt;tbody&gt;</code></td>
-              <td>Tabellenkörper</td>
-            </tr>
-            <tr>
-              <td><code>&lt;tfoot&gt;</code></td>
-              <td>Tabellenfuß</td>
-            </tr>
-            <tr>
-              <td><code>&lt;tr&gt;</code></td>
-              <td>Tabellenzeile</td>
-            </tr>
-            <tr>
-              <td><code>&lt;th&gt;</code></td>
-              <td>Kopfzelle</td>
-            </tr>
-            <tr>
-              <td><code>&lt;td&gt;</code></td>
-              <td>Datenzelle</td>
-            </tr>
-          </tbody>
-        </table>
-      </article>
+          <table>
+            <thead>
+              <tr>
+                <th>Element</th>
+                <th>Bedeutung</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>&lt;table&gt;</code></td>
+                <td>gesamte Tabelle</td>
+              </tr>
+              <tr>
+                <td><code>&lt;thead&gt;</code></td>
+                <td>Tabellenkopf</td>
+              </tr>
+              <tr>
+                <td><code>&lt;tbody&gt;</code></td>
+                <td>Tabellenkörper</td>
+              </tr>
+              <tr>
+                <td><code>&lt;tfoot&gt;</code></td>
+                <td>Tabellenfuß</td>
+              </tr>
+              <tr>
+                <td><code>&lt;tr&gt;</code></td>
+                <td>Tabellenzeile</td>
+              </tr>
+              <tr>
+                <td><code>&lt;th&gt;</code></td>
+                <td>Kopfzelle</td>
+              </tr>
+              <tr>
+                <td><code>&lt;td&gt;</code></td>
+                <td>Datenzelle</td>
+              </tr>
+            </tbody>
+          </table>
+        </article>
 
 
-      <article class="cheat-item">
-        <h4>Tabellentitel mit <code>&lt;caption&gt;</code></h4>
+        <article class="cheat-item">
+          <h4>Tabellentitel mit <code>&lt;caption&gt;</code></h4>
 
-        <pre class="code cheat-code"><code>&lt;table&gt;
+          <pre class="code cheat-code"><code>&lt;table&gt;
 
   &lt;caption&gt;
     Eigenschaften der inneren Planeten
@@ -1405,44 +1405,44 @@ alt="moon.jpg"</code></pre>
   ...
 &lt;/table&gt;</code></pre>
 
-        <p>
-          Eine <code>&lt;caption&gt;</code> beschreibt den Inhalt der gesamten Tabelle.
-        </p>
-      </article>
+          <p>
+            Eine <code>&lt;caption&gt;</code> beschreibt den Inhalt der gesamten Tabelle.
+          </p>
+        </article>
 
 
-      <article class="cheat-item">
-        <h4>Spaltenüberschriften mit <code>scope</code></h4>
+        <article class="cheat-item">
+          <h4>Spaltenüberschriften mit <code>scope</code></h4>
 
-        <pre class="code cheat-code"><code>&lt;th scope="col"&gt;Planet&lt;/th&gt;
+          <pre class="code cheat-code"><code>&lt;th scope="col"&gt;Planet&lt;/th&gt;
 &lt;th scope="col"&gt;Masse&lt;/th&gt;
 
 &lt;th scope="row"&gt;Erde&lt;/th&gt;</code></pre>
 
-        <p>
-          Das hilft assistiven Technologien dabei,
-          Tabellenbeziehungen korrekt zu verstehen.
-        </p>
-      </article>
+          <p>
+            Das hilft assistiven Technologien dabei,
+            Tabellenbeziehungen korrekt zu verstehen.
+          </p>
+        </article>
 
 
-      <article class="cheat-item">
-        <h4>Zellen verbinden</h4>
+        <article class="cheat-item">
+          <h4>Zellen verbinden</h4>
 
-        <pre class="code cheat-code"><code>&lt;td colspan="2"&gt;
+          <pre class="code cheat-code"><code>&lt;td colspan="2"&gt;
   Über zwei Spalten
 &lt;/td&gt;
 
 &lt;td rowspan="3"&gt;
   Über drei Zeilen
 &lt;/td&gt;</code></pre>
-      </article>
+        </article>
 
 
-      <article class="cheat-item">
-        <h4>Spalten mit <code>&lt;colgroup&gt;</code></h4>
+        <article class="cheat-item">
+          <h4>Spalten mit <code>&lt;colgroup&gt;</code></h4>
 
-        <pre class="code cheat-code"><code>&lt;table&gt;
+          <pre class="code cheat-code"><code>&lt;table&gt;
 
   &lt;colgroup&gt;
     &lt;col class="col-name"&gt;
@@ -1454,34 +1454,34 @@ alt="moon.jpg"</code></pre>
 
 &lt;/table&gt;</code></pre>
 
-        <p>
-          Das eignet sich gut, wenn bestimmte Spalten über CSS
-          gemeinsam formatiert werden sollen.
-        </p>
+          <p>
+            Das eignet sich gut, wenn bestimmte Spalten über CSS
+            gemeinsam formatiert werden sollen.
+          </p>
 
-        <p class="hint">
-          Ausrichtung und Breite gehören grundsätzlich ins CSS,
-          nicht in veraltete HTML-Attribute wie <code>align</code>.
-        </p>
-      </article>
+          <p class="hint">
+            Ausrichtung und Breite gehören grundsätzlich ins CSS,
+            nicht in veraltete HTML-Attribute wie <code>align</code>.
+          </p>
+        </article>
 
 
-      <article class="cheat-item">
-        <h4>Keine Tabellen für Seitenlayout</h4>
+        <article class="cheat-item">
+          <h4>Keine Tabellen für Seitenlayout</h4>
 
-        <p>
-          Tabellen sind für echte tabellarische Daten gedacht.
-          Für Seitenlayout verwendet man CSS Grid oder Flexbox.
-        </p>
+          <p>
+            Tabellen sind für echte tabellarische Daten gedacht.
+            Für Seitenlayout verwendet man CSS Grid oder Flexbox.
+          </p>
 
-        <p class="hint">
-          Eine Tabelle, die nur deshalb existiert, damit links etwas links und rechts
-          etwas rechts steht, ist ein Relikt aus einer dunkleren Epoche des Webdesigns.
-        </p>
-      </article>
+          <p class="hint">
+            Eine Tabelle, die nur deshalb existiert, damit links etwas links und rechts
+            etwas rechts steht, ist ein Relikt aus einer dunkleren Epoche des Webdesigns.
+          </p>
+        </article>
 
+      </div>
     </div>
-</div>
 
     <!-- ======================================================
        SEMANTIC HTML
