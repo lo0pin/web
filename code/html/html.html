@@ -982,108 +982,108 @@ E = mc&lt;sup&gt;2&lt;/sup&gt;</code></pre>
        ====================================================== -->
 
     <hr class="divider">
-<div class="card">
-    <h3 id="html-images">Bilder mit <code>&lt;img&gt;</code></h3>
+    <div class="card">
+      <h3 id="html-images">Bilder mit <code>&lt;img&gt;</code></h3>
 
-    <div class="cheat-grid">
+      <div class="cheat-grid">
 
-      <article class="cheat-item">
-        <h4>Grundsyntax</h4>
+        <article class="cheat-item">
+          <h4>Grundsyntax</h4>
 
-        <pre class="code cheat-code"><code>&lt;img
+          <pre class="code cheat-code"><code>&lt;img
   src="assets/img/moon.jpg"
   alt="Zunehmender Mond über Graz"
 &gt;</code></pre>
 
-        <p>
-          <code>src</code> enthält die Bildquelle,
-          <code>alt</code> eine textuelle Alternative.
-        </p>
-      </article>
+          <p>
+            <code>src</code> enthält die Bildquelle,
+            <code>alt</code> eine textuelle Alternative.
+          </p>
+        </article>
 
 
-      <article class="cheat-item">
-        <h4>Sinnvoller Alternativtext</h4>
+        <article class="cheat-item">
+          <h4>Sinnvoller Alternativtext</h4>
 
-        <p><strong>Schlecht:</strong></p>
+          <p><strong>Schlecht:</strong></p>
 
-        <pre class="code cheat-code"><code>alt="Bild"
+          <pre class="code cheat-code"><code>alt="Bild"
 
 alt="Foto"
 
 alt="moon.jpg"</code></pre>
 
-        <p><strong>Besser:</strong></p>
+          <p><strong>Besser:</strong></p>
 
-        <pre class="code cheat-code"><code>alt="Zunehmender Mond über dem Grazer Plabutsch"</code></pre>
+          <pre class="code cheat-code"><code>alt="Zunehmender Mond über dem Grazer Plabutsch"</code></pre>
 
-        <p>
-          Der Alternativtext sollte jene Information vermitteln,
-          die das Bild im jeweiligen Kontext trägt.
-        </p>
-      </article>
+          <p>
+            Der Alternativtext sollte jene Information vermitteln,
+            die das Bild im jeweiligen Kontext trägt.
+          </p>
+        </article>
 
 
-      <article class="cheat-item">
-        <h4>Dekorative Bilder</h4>
+        <article class="cheat-item">
+          <h4>Dekorative Bilder</h4>
 
-        <p>
-          Ist ein Bild rein dekorativ und vermittelt keinerlei zusätzliche Information,
-          sollte ein leeres <code>alt</code>-Attribut verwendet werden.
-        </p>
+          <p>
+            Ist ein Bild rein dekorativ und vermittelt keinerlei zusätzliche Information,
+            sollte ein leeres <code>alt</code>-Attribut verwendet werden.
+          </p>
 
-        <pre class="code cheat-code"><code>&lt;img
+          <pre class="code cheat-code"><code>&lt;img
   src="background-decoration.jpg"
   alt=""
 &gt;</code></pre>
 
-        <p>
-          Dadurch können Screenreader das Bild überspringen.
-        </p>
-      </article>
+          <p>
+            Dadurch können Screenreader das Bild überspringen.
+          </p>
+        </article>
 
 
-      <article class="cheat-item">
-        <h4>Lazy Loading</h4>
+        <article class="cheat-item">
+          <h4>Lazy Loading</h4>
 
-        <pre class="code cheat-code"><code>&lt;img
+          <pre class="code cheat-code"><code>&lt;img
   src="photo.jpg"
   alt="Segelboot in einer Bucht"
   loading="lazy"
   decoding="async"
 &gt;</code></pre>
 
-        <p>
-          <code>loading="lazy"</code> erlaubt dem Browser,
-          weiter unten liegende Bilder erst bei Bedarf zu laden.
-        </p>
+          <p>
+            <code>loading="lazy"</code> erlaubt dem Browser,
+            weiter unten liegende Bilder erst bei Bedarf zu laden.
+          </p>
 
-        <p class="hint">
-          Für Bilder unmittelbar im sichtbaren oberen Seitenbereich ist Lazy Loading
-          nicht unbedingt sinnvoll. Dort soll das Bild möglichst rasch verfügbar sein.
-        </p>
-      </article>
+          <p class="hint">
+            Für Bilder unmittelbar im sichtbaren oberen Seitenbereich ist Lazy Loading
+            nicht unbedingt sinnvoll. Dort soll das Bild möglichst rasch verfügbar sein.
+          </p>
+        </article>
 
 
-      <article class="cheat-item">
-        <h4>Breite und Höhe angeben</h4>
+        <article class="cheat-item">
+          <h4>Breite und Höhe angeben</h4>
 
-        <pre class="code cheat-code"><code>&lt;img
+          <pre class="code cheat-code"><code>&lt;img
   src="photo.jpg"
   alt="Berglandschaft"
   width="1600"
   height="900"
 &gt;</code></pre>
 
-        <p>
-          Sind die intrinsischen Bilddimensionen bekannt,
-          kann der Browser schon vor dem Laden Platz reservieren.
-          Das reduziert Layoutsprünge.
-        </p>
-      </article>
+          <p>
+            Sind die intrinsischen Bilddimensionen bekannt,
+            kann der Browser schon vor dem Laden Platz reservieren.
+            Das reduziert Layoutsprünge.
+          </p>
+        </article>
 
+      </div>
     </div>
-</div>
 
     <!-- ======================================================
        FIGURE
