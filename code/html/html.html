@@ -1871,15 +1871,15 @@ console.log(element.dataset.newsLimit);</code></pre>
        ====================================================== -->
 
     <hr class="divider">
-<div class="card">
-    <h3 id="html-forms">Formulare</h3>
+    <div class="card">
+      <h3 id="html-forms">Formulare</h3>
 
-    <div class="cheat-grid">
+      <div class="cheat-grid">
 
-      <article class="cheat-item">
-        <h4>Einfaches Formular</h4>
+        <article class="cheat-item">
+          <h4>Einfaches Formular</h4>
 
-        <pre class="code cheat-code"><code>&lt;form action="/send" method="post"&gt;
+          <pre class="code cheat-code"><code>&lt;form action="/send" method="post"&gt;
 
   &lt;label for="name"&gt;
     Name
@@ -1909,13 +1909,13 @@ console.log(element.dataset.newsLimit);</code></pre>
   &lt;/button&gt;
 
 &lt;/form&gt;</code></pre>
-      </article>
+        </article>
 
 
-      <article class="cheat-item">
-        <h4><code>label</code>, <code>id</code> und <code>for</code></h4>
+        <article class="cheat-item">
+          <h4><code>label</code>, <code>id</code> und <code>for</code></h4>
 
-        <pre class="code cheat-code"><code>&lt;label for="email"&gt;
+          <pre class="code cheat-code"><code>&lt;label for="email"&gt;
   E-Mail-Adresse
 &lt;/label&gt;
 
@@ -1925,38 +1925,38 @@ console.log(element.dataset.newsLimit);</code></pre>
   type="email"
 &gt;</code></pre>
 
-        <p>
-          Der Wert von <code>for</code> muss mit der
-          <code>id</code> des Eingabefeldes übereinstimmen.
-        </p>
+          <p>
+            Der Wert von <code>for</code> muss mit der
+            <code>id</code> des Eingabefeldes übereinstimmen.
+          </p>
 
-        <p>
-          Dadurch kann auch ein Klick auf die Beschriftung das Feld aktivieren.
-        </p>
-      </article>
+          <p>
+            Dadurch kann auch ein Klick auf die Beschriftung das Feld aktivieren.
+          </p>
+        </article>
 
 
-      <article class="cheat-item">
-        <h4>Das <code>name</code>-Attribut</h4>
+        <article class="cheat-item">
+          <h4>Das <code>name</code>-Attribut</h4>
 
-        <p>
-          Während <code>id</code> für das Dokument wichtig ist,
-          bestimmt <code>name</code> normalerweise den Feldnamen,
-          der beim Absenden übertragen wird.
-        </p>
+          <p>
+            Während <code>id</code> für das Dokument wichtig ist,
+            bestimmt <code>name</code> normalerweise den Feldnamen,
+            der beim Absenden übertragen wird.
+          </p>
 
-        <pre class="code cheat-code"><code>&lt;input
+          <pre class="code cheat-code"><code>&lt;input
   id="username"
   name="username"
   type="text"
 &gt;</code></pre>
-      </article>
+        </article>
 
 
-      <article class="cheat-item">
-        <h4>Wichtige Input-Typen</h4>
+        <article class="cheat-item">
+          <h4>Wichtige Input-Typen</h4>
 
-        <pre class="code cheat-code"><code>&lt;input type="text"&gt;
+          <pre class="code cheat-code"><code>&lt;input type="text"&gt;
 
 &lt;input type="email"&gt;
 
@@ -1980,82 +1980,82 @@ console.log(element.dataset.newsLimit);</code></pre>
 
 &lt;input type="range"&gt;</code></pre>
 
-        <p>
-          Der passende Input-Typ verbessert Bedienbarkeit,
-          Browservalidierung und mobile Bildschirmtastaturen.
-        </p>
-      </article>
+          <p>
+            Der passende Input-Typ verbessert Bedienbarkeit,
+            Browservalidierung und mobile Bildschirmtastaturen.
+          </p>
+        </article>
 
 
-      <article class="cheat-item">
-        <h4>Placeholder</h4>
+        <article class="cheat-item">
+          <h4>Placeholder</h4>
 
-        <pre class="code cheat-code"><code>&lt;input
+          <pre class="code cheat-code"><code>&lt;input
   type="text"
   placeholder="Vorname Nachname"
 &gt;</code></pre>
 
-        <p class="hint">
-          Ein Placeholder ersetzt kein <code>&lt;label&gt;</code>.
-          Sobald Text eingegeben wird, verschwindet der Placeholder.
-        </p>
-      </article>
+          <p class="hint">
+            Ein Placeholder ersetzt kein <code>&lt;label&gt;</code>.
+            Sobald Text eingegeben wird, verschwindet der Placeholder.
+          </p>
+        </article>
 
 
-      <article class="cheat-item">
-        <h4>Pflichtfeld</h4>
+        <article class="cheat-item">
+          <h4>Pflichtfeld</h4>
 
-        <pre class="code cheat-code"><code>&lt;input
+          <pre class="code cheat-code"><code>&lt;input
   type="email"
   required
 &gt;</code></pre>
 
-        <p>
-          Der Browser verhindert normalerweise das Absenden,
-          solange das Pflichtfeld ungültig oder leer ist.
-        </p>
-      </article>
+          <p>
+            Der Browser verhindert normalerweise das Absenden,
+            solange das Pflichtfeld ungültig oder leer ist.
+          </p>
+        </article>
 
 
-      <article class="cheat-item">
-        <h4>Mindest- und Maximallänge</h4>
+        <article class="cheat-item">
+          <h4>Mindest- und Maximallänge</h4>
 
-        <pre class="code cheat-code"><code>&lt;input
+          <pre class="code cheat-code"><code>&lt;input
   type="text"
   minlength="3"
   maxlength="50"
 &gt;</code></pre>
-      </article>
+        </article>
 
 
-      <article class="cheat-item">
-        <h4>Zahlen begrenzen</h4>
+        <article class="cheat-item">
+          <h4>Zahlen begrenzen</h4>
 
-        <pre class="code cheat-code"><code>&lt;input
+          <pre class="code cheat-code"><code>&lt;input
   type="number"
   min="0"
   max="100"
   step="1"
 &gt;</code></pre>
-      </article>
+        </article>
 
 
-      <article class="cheat-item">
-        <h4>Textarea</h4>
+        <article class="cheat-item">
+          <h4>Textarea</h4>
 
-        <pre class="code cheat-code"><code>&lt;textarea
+          <pre class="code cheat-code"><code>&lt;textarea
   id="message"
   name="message"
   rows="8"
   maxlength="2000"
 &gt;&lt;/textarea&gt;</code></pre>
-      </article>
+        </article>
 
 
-      <article class="cheat-item">
-        <h4>Select / Dropdown</h4>
+        <article class="cheat-item">
+          <h4>Select / Dropdown</h4>
 
-        <pre class="code cheat-code"><code>&lt;label for="topic"&gt;
+          <pre class="code cheat-code"><code>&lt;label for="topic"&gt;
   Thema
 &lt;/label&gt;
 
@@ -2074,13 +2074,13 @@ console.log(element.dataset.newsLimit);</code></pre>
   &lt;/option&gt;
 
 &lt;/select&gt;</code></pre>
-      </article>
+        </article>
 
 
-      <article class="cheat-item">
-        <h4>Checkbox</h4>
+        <article class="cheat-item">
+          <h4>Checkbox</h4>
 
-        <pre class="code cheat-code"><code>&lt;label&gt;
+          <pre class="code cheat-code"><code>&lt;label&gt;
   &lt;input
     type="checkbox"
     name="privacy"
@@ -2089,13 +2089,13 @@ console.log(element.dataset.newsLimit);</code></pre>
 
   Datenschutzbestimmungen akzeptieren
 &lt;/label&gt;</code></pre>
-      </article>
+        </article>
 
 
-      <article class="cheat-item">
-        <h4>Radio Buttons</h4>
+        <article class="cheat-item">
+          <h4>Radio Buttons</h4>
 
-        <pre class="code cheat-code"><code>&lt;label&gt;
+          <pre class="code cheat-code"><code>&lt;label&gt;
   &lt;input
     type="radio"
     name="language"
@@ -2113,17 +2113,17 @@ console.log(element.dataset.newsLimit);</code></pre>
   Englisch
 &lt;/label&gt;</code></pre>
 
-        <p>
-          Radio Buttons mit demselben <code>name</code>
-          bilden gemeinsam eine Auswahlgruppe.
-        </p>
-      </article>
+          <p>
+            Radio Buttons mit demselben <code>name</code>
+            bilden gemeinsam eine Auswahlgruppe.
+          </p>
+        </article>
 
 
-      <article class="cheat-item">
-        <h4>Buttons</h4>
+        <article class="cheat-item">
+          <h4>Buttons</h4>
 
-        <pre class="code cheat-code"><code>&lt;button type="button"&gt;
+          <pre class="code cheat-code"><code>&lt;button type="button"&gt;
   Aktion
 &lt;/button&gt;
 
@@ -2135,30 +2135,30 @@ console.log(element.dataset.newsLimit);</code></pre>
   Formular zurücksetzen
 &lt;/button&gt;</code></pre>
 
-        <p class="hint">
-          Gib innerhalb von Formularen den Button-Typ explizit an.
-          Sonst kann ein vermeintlich harmloser Button plötzlich das Formular absenden.
-        </p>
-      </article>
+          <p class="hint">
+            Gib innerhalb von Formularen den Button-Typ explizit an.
+            Sonst kann ein vermeintlich harmloser Button plötzlich das Formular absenden.
+          </p>
+        </article>
 
 
-      <article class="cheat-item">
-        <h4>GitHub Pages und Formulare</h4>
+        <article class="cheat-item">
+          <h4>GitHub Pages und Formulare</h4>
 
-        <p>
-          GitHub Pages liefert nur statische Dateien aus.
-          Ein HTML-Formular kann daher nicht einfach selbst E-Mails versenden
-          oder Daten serverseitig speichern.
-        </p>
+          <p>
+            GitHub Pages liefert nur statische Dateien aus.
+            Ein HTML-Formular kann daher nicht einfach selbst E-Mails versenden
+            oder Daten serverseitig speichern.
+          </p>
 
-        <p>
-          Dafür ist entweder ein externer Formularservice,
-          eine API oder ein eigener Backend-Dienst erforderlich.
-        </p>
-      </article>
+          <p>
+            Dafür ist entweder ein externer Formularservice,
+            eine API oder ein eigener Backend-Dienst erforderlich.
+          </p>
+        </article>
 
+      </div>
     </div>
-</div>
 
     <!-- ======================================================
        DETAILS / SUMMARY
