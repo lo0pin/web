@@ -103,6 +103,7 @@
       bays: "Bays",
       regatta: "Regatta",
       video: "Video",
+      seamanship: "Seamanship",
     },
   };
 
@@ -175,6 +176,7 @@
       bays: "sailing/routes_places/bays.html",
       regatta: "sailing/regatta.html",
       video: "sailing/home.html",
+      seamanship: "sailing/seamanship.html",
     },
   };
 
