@@ -3092,22 +3092,22 @@
       "content_de": "Ein RJ45-Stecker wirkt zunächst wie eine rein mechanische Aufgabe.\n\nAbschneiden. Abisolieren. Einführen. Crimpen.\n\nIn Wahrheit ist es eine Übung in Präzision.\n\n---\n\n**Schritt 1 — Vorbereitung**\n\n- Kabel sauber abschneiden\n- Knickschutztülle vorher aufschieben (klassischer Fehler)\n\n---\n\n**Schritt 2 — Abisolieren**\n\nEinige Zentimeter des Mantels entfernen.\n\nZu viel Druck beschädigt die Adern – und der Fehler zeigt sich erst später.\n\n---\n\n**Schritt 3 — Adern ordnen**\n\nStandard in Europa: **T568B**\n\n1. weiß/orange\n2. orange\n3. weiß/grün\n4. blau\n5. weiß/blau\n6. grün\n7. weiß/braun\n8. braun\n\nDie Reihenfolge ist zwingend.\n\n---\n\n**Schritt 4 — Ausrichten und Kürzen**\n\nAlle Adern:\n\n- gerade\n- gleich lang\n- bis zur Steckerspitze reichend\n\nHier entscheidet sich die Qualität.\n\n---\n\n**Schritt 5 — Einführen und Kontrollieren**\n\nDurch den transparenten Stecker sichtbar:\n\n- stimmt die Reihenfolge?\n- sitzen die Adern vorne an?\n\nNur was man sieht, stimmt auch.\n\n---\n\n**Schritt 6 — Crimpen**\n\nDie Crimpzange:\n\n- drückt Kontakte in die Adern\n- fixiert den Mantel\n\nNicht rohe Gewalt – sondern kontrollierter Druck.\n\n---\n\n**Schritt 7 — Testen**\n\nEin einfacher LAN-Tester zeigt sofort:\n\n- richtige Belegung → saubere LED-Folge\n- Fehler → sofort sichtbar\n\nProfessionelle Tester messen zusätzlich:\n\n- Kabellänge\n- Dämpfung\n- Reflexionen\n\n---\n\n**Typische Fehler:**\n\n- falsche Reihenfolge\n- Adern nicht weit genug eingeschoben\n- Zugentlastung greift nicht\n- beschädigte Leiter\n\n---\n\nDie eigentliche Erkenntnis ist simpel:\n\n> Gute Verbindungen entstehen nicht durch Kraft, sondern durch Sorgfalt.\n\nEin gutes Kabel fällt nicht auf.\n\nEin schlechtes schon – nur leider meist zu spät.",
       "images": [
         {
-        "src": "/web/assets/img/news/network_ethernet_20.png",
+        "src": "/web/assets/img/news/network_ethernet_20.jpg",
         "alt": "RJ45 pinout comparison T568A and T568B wiring order",
         "caption": "T568A vs T568B — same components, different order."
         },
         {
-        "src": "/web/assets/img/news/network_ethernet_21.png",
+        "src": "/web/assets/img/news/network_ethernet_21.jpg",
         "alt": "My first self-made Ethernet cable with RJ45 connectors",
         "caption": "My first self-made Ethernet cable with RJ45 connectors."
         },
         {
-        "src": "/web/assets/img/news/network_ethernet_22.png",
+        "src": "/web/assets/img/news/network_ethernet_22.jpg",
         "alt": "close-up of transparent RJ45 connector with visible contacts",
         "caption": "The transparent housing allows a final visual check before crimping."
         },
         {
-        "src": "/web/assets/img/news/network_ethernet_23.png",
+        "src": "/web/assets/img/news/network_ethernet_23.jpg",
         "alt": "simple LAN cable tester showing LED sequence for wire verification",
         "caption": "A simple tester quickly reveals whether the cable is correct."
         }
