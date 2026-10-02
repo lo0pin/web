@@ -3112,7 +3112,31 @@
         "caption": "A simple tester quickly reveals whether the cable is correct."
         }
       ]
-    }
+    },
+  {
+    "id": "2026-03-21_knowledge_pcb_basics",
+    "topic": "electronics",
+    "subtopic": "pcb_basics",
+    "date": "2026-10-02",
+    "title": "From Copper to Circuit — How PCBs Actually Work",
+    "format": "markdown",
+    "teaser": "A printed circuit board is more than green fiberglass. It is structure, constraint, and intention made visible in copper.",
+    "content_en": "A PCB is deceptively simple: copper traces on a substrate.\n\nBut in reality, it is the physical manifestation of a circuit — where every design decision becomes irreversible.\n\n~What matters most is not drawing lines — but understanding constraints.~\n\n**Core principles:**\n\n- Copper traces replace wires\n- Isolation defines function\n- Layers define complexity\n\n**Manufacturing basics:**\n\n1. Copper-clad board\n2. Masking (toner / UV / resist)\n3. Etching → removing unwanted copper\n4. Drilling\n5. Optional: solder mask, silkscreen\n\n**Key constraints:**\n\n- Trace width → current handling\n- Clearance → avoid shorts\n- Drill size → mechanical limits\n\nA PCB is not drawn — it is negotiated between physics, tooling, and intent.\n\nOnce etched, mistakes are no longer conceptual. They are material.",
+    "content_de": "Eine Leiterplatte wirkt zunächst banal: Kupferbahnen auf einem Trägermaterial.\n\nIn Wahrheit ist sie jedoch die physische Manifestation einer Schaltung — jeder Entwurf wird hier unwiderruflich festgeschrieben.\n\n~Entscheidend ist nicht das Zeichnen von Linien — sondern das Verständnis der Randbedingungen.~\n\n**Grundprinzipien:**\n\n- Kupferbahnen ersetzen Drähte\n- Isolation bestimmt die Funktion\n- Lagen bestimmen die Komplexität\n\n**Fertigung im Überblick:**\n\n1. Kupferkaschierte Platine\n2. Maskierung (Toner / UV / Resist)\n3. Ätzen → Entfernen unerwünschten Kupfers\n4. Bohren\n5. Optional: Lötstoppmaske, Bestückungsdruck\n\n**Zentrale Randbedingungen:**\n\n- Leiterbahnbreite → Stromtragfähigkeit\n- Abstand (Clearance) → Vermeidung von Kurzschlüssen\n- Bohrdurchmesser → mechanische Grenzen\n\nEine Leiterplatte wird nicht einfach gezeichnet — sie entsteht im Spannungsfeld von Physik, Fertigung und Intention.\n\nIst sie einmal geätzt, sind Fehler nicht mehr abstrakt. Sie sind materiell.",
+    "images": [
+      {
+        "src": "/web/assets/img/news/pcb_basics_10.jpeg",
+        "alt": "Conceptual stages of PCB manufacturing from copper board to etched circuit",
+        "caption": "From raw copper to functional circuit — every step removes possibilities."
+      },
+      {
+        "src": "/web/assets/img/news/pcb_basics_11.jpeg",
+        "alt": "Conceptual stages of PCB manufacturing from copper board to etched circuit",
+        "caption": "From paper to copper — endless possibilities."
+      }
+    ]
+  }
+
 
 
 
