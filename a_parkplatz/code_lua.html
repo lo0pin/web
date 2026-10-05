@@ -1,0 +1,2993 @@
+<!doctype html>
+<html lang="de">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description"
+        content="Lua lernen direkt in LOTRO: ausführliche Anleitung mit 24 Kapiteln, Codebeispielen und eigenem Timer-Plugin.">
+    <title>Lua für LOTRO-Plugins – Julians Werkstatt</title>
+
+    <style>
+        /* Beigefügtes classy.css */
+        :root {
+            --background: #f5f0e1;
+            --surface: #ffffff;
+            --text: #171717;
+            --muted: #666666;
+            --border: #ddddda;
+            --accent: #24556b;
+            --accent-dark: #183c4d;
+            --accent-soft: #e7eff2;
+            --max-width: 920px;
+            --radius: 14px;
+            --shadow: 0 16px 40px rgba(23, 23, 23, 0.07);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            background: var(--background);
+            color: var(--text);
+            font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-size: 1rem;
+            line-height: 1.65;
+        }
+
+        a {
+            color: var(--accent);
+            text-decoration-thickness: 1px;
+            text-underline-offset: 0.2em;
+        }
+
+        a:hover,
+        a:focus-visible {
+            color: var(--accent-dark);
+        }
+
+        .skip-link {
+            position: fixed;
+            top: 12px;
+            left: 12px;
+            z-index: 10;
+            padding: 10px 14px;
+            border-radius: 6px;
+            background: var(--accent-dark);
+            color: #ffffff;
+            transform: translateY(-150%);
+            transition: transform 160ms ease;
+        }
+
+        .skip-link:focus {
+            color: #ffffff;
+            transform: translateY(0);
+        }
+
+        .page {
+            width: min(calc(100% - 40px), var(--max-width));
+            margin: 0 auto;
+            padding: 56px 0 72px;
+        }
+
+        .hero {
+            padding: clamp(30px, 6vw, 58px);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background:
+                linear-gradient(135deg, rgba(36, 85, 107, 0.08), transparent 58%),
+                var(--surface);
+            box-shadow: var(--shadow);
+        }
+
+        .eyebrow {
+            margin: 0 0 10px;
+            color: var(--accent);
+            font-size: 0.78rem;
+            font-weight: 750;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        h1,
+        h2,
+        h3 {
+            line-height: 1.2;
+        }
+
+        h1 {
+            max-width: 16ch;
+            margin: 0;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(2.35rem, 7vw, 4.7rem);
+            font-weight: 600;
+            letter-spacing: -0.035em;
+        }
+
+        .lead {
+            max-width: 66ch;
+            margin: 24px 0 0;
+            color: #343434;
+            font-size: clamp(1.05rem, 2.3vw, 1.2rem);
+        }
+
+        .lead strong {
+            color: var(--accent-dark);
+        }
+
+        .contents {
+            margin: 32px 0 0;
+            padding: 24px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: rgba(255, 255, 255, 0.72);
+        }
+
+        .contents h2 {
+            margin: 0 0 16px;
+            font-size: 1rem;
+        }
+
+        .contents ul {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 9px 26px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .contents a {
+            display: inline-block;
+            font-weight: 650;
+            text-decoration: none;
+        }
+
+        .contents a::before {
+            content: "→ ";
+            color: var(--muted);
+        }
+
+        .tip-section {
+            scroll-margin-top: 22px;
+            margin-top: 64px;
+        }
+
+        .section-heading {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 24px;
+        }
+
+        .section-heading span {
+            display: grid;
+            width: 42px;
+            height: 42px;
+            place-items: center;
+            border-radius: 50%;
+            background: var(--accent);
+            color: #ffffff;
+            font-size: 0.8rem;
+            font-weight: 800;
+        }
+
+        .section-heading h2 {
+            margin: 0;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(1.65rem, 4vw, 2.35rem);
+            font-weight: 600;
+        }
+
+        .tip-list {
+            display: grid;
+            gap: 14px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            counter-reset: tip var(--counter-start);
+        }
+
+        .tip-list>li {
+            position: relative;
+            padding: 24px 24px 24px 78px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: var(--surface);
+            box-shadow: 0 7px 22px rgba(23, 23, 23, 0.035);
+            counter-increment: tip;
+        }
+
+        .tip-list>li::before {
+            content: counter(tip, decimal-leading-zero);
+            position: absolute;
+            top: 24px;
+            left: 22px;
+            color: var(--accent);
+            font-size: 0.85rem;
+            font-weight: 800;
+            letter-spacing: 0.04em;
+        }
+
+        .tip-list h3 {
+            margin: 0;
+            font-size: 1.04rem;
+        }
+
+        .tip-list p {
+            margin: 8px 0 0;
+            color: #444444;
+        }
+
+        .tip-list em {
+            color: #303030;
+        }
+
+        .core-points {
+            margin-top: 64px;
+            padding: clamp(28px, 5vw, 44px);
+            border-left: 5px solid var(--accent);
+            border-radius: 0 var(--radius) var(--radius) 0;
+            background: var(--accent-soft);
+        }
+
+        .core-points h2 {
+            margin: 0 0 12px;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(1.55rem, 4vw, 2rem);
+            font-weight: 600;
+        }
+
+        .core-points p {
+            max-width: 70ch;
+            margin: 0;
+        }
+
+        .core-points ol {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 22px 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .core-points a {
+            display: inline-block;
+            padding: 7px 11px;
+            border: 1px solid rgba(36, 85, 107, 0.25);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.6);
+            font-weight: 750;
+            text-decoration: none;
+        }
+
+        .back-to-top {
+            display: inline-block;
+            margin-top: 38px;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        @media (max-width: 640px) {
+            .page {
+                width: min(calc(100% - 24px), var(--max-width));
+                padding: 24px 0 48px;
+            }
+
+            .hero {
+                padding: 26px 22px;
+            }
+
+            .contents ul {
+                grid-template-columns: 1fr;
+            }
+
+            .tip-section {
+                margin-top: 48px;
+            }
+
+            .tip-list>li {
+                padding: 22px 18px 22px 58px;
+            }
+
+            .tip-list>li::before {
+                left: 17px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                transition: none !important;
+            }
+        }
+
+        /* Ergänzungen für das Tutorial */
+
+        :root {
+            --max-width: 1000px
+        }
+
+        .hero h1 {
+            max-width: 17ch
+        }
+
+        .hero .meta {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 25px
+        }
+
+        .pill {
+            padding: 5px 11px;
+            border: 1px solid var(--border);
+            border-radius: 30px;
+            background: white;
+            font-size: .8rem;
+            color: var(--accent-dark)
+        }
+
+        .contents ul {
+            gap: 10px 25px
+        }
+
+        .contents a {
+            font-size: .91rem
+        }
+
+        .intro-note {
+            margin: 28px 0;
+            padding: 22px 25px;
+            background: var(--accent-soft);
+            border-radius: 12px
+        }
+
+        .tip-section>p,
+        .tip-section>ul,
+        .tip-section>ol {
+            max-width: 85ch
+        }
+
+        h3 {
+            font-size: 1.17rem;
+            margin-top: 32px;
+            line-height: 1.4
+        }
+
+        p {
+            margin: 15px 0
+        }
+
+        li {
+            margin: 6px 0
+        }
+
+        strong {
+            color: #173d4c
+        }
+
+        code {
+            font-family: Consolas, 'Liberation Mono', Menlo, monospace;
+            font-size: .9em;
+            overflow-wrap: anywhere
+        }
+
+        p code,
+        li code,
+        td code {
+            background: #e9edf0;
+            color: #173d4c;
+            border-radius: 4px;
+            padding: 2px 5px
+        }
+
+        .codebox {
+            margin: 20px 0 25px;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #142e3c;
+            border: 1px solid #223f50;
+            box-shadow: 0 7px 20px #173d4c0d;
+            break-inside: auto
+        }
+
+        .codebar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 15px;
+            background: #203e4f;
+            color: #d0e3eb;
+            font-size: .78rem;
+            letter-spacing: .025em
+        }
+
+        .copy-button,
+        .print-button {
+            font: inherit;
+            border: 1px solid #a3bdc955;
+            border-radius: 6px;
+            padding: 5px 10px;
+            cursor: pointer
+        }
+
+        .copy-button {
+            background: #ffffff10;
+            color: white
+        }
+
+        .copy-button:hover {
+            background: #ffffff25
+        }
+
+        .copy-button:focus-visible,
+        button:focus-visible {
+            outline: 3px solid #eeb770;
+            outline-offset: 2px
+        }
+
+        pre {
+            margin: 0;
+            padding: 20px 23px;
+            overflow-x: auto;
+            color: #edf4f6;
+            font-size: .88rem;
+            line-height: 1.65;
+            tab-size: 4
+        }
+
+        pre code {
+            font-size: inherit;
+            overflow-wrap: normal;
+            white-space: pre
+        }
+
+        .table-scroll {
+            overflow-x: auto;
+            margin: 20px 0;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: white
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: .92rem;
+            min-width: 500px
+        }
+
+        th {
+            text-align: left;
+            background: var(--accent-soft);
+            color: var(--accent-dark);
+            font-weight: 700
+        }
+
+        td,
+        th {
+            padding: 13px 16px;
+            border-bottom: 1px solid #e1e4e4;
+            vertical-align: top
+        }
+
+        tr:last-child td {
+            border-bottom: none
+        }
+
+        tbody tr:nth-child(even) {
+            background: #f9faf9
+        }
+
+        td code {
+            font-size: .87em
+        }
+
+        .callout,
+        .exercise {
+            padding: 20px 24px;
+            margin: 24px 0;
+            border-left: 4px solid var(--accent);
+            background: var(--accent-soft);
+            border-radius: 0 10px 10px 0
+        }
+
+        .warning {
+            border-color: #a75e20;
+            background: #fff2df
+        }
+
+        .exercise {
+            background: #f1f3e7;
+            border-color: #6c7548
+        }
+
+        details {
+            background: #fff;
+            border: 1px solid var(--border);
+            padding: 16px 20px;
+            border-radius: 10px;
+            margin: 15px 0 28px
+        }
+
+        summary {
+            color: var(--accent-dark);
+            font-weight: 700;
+            cursor: pointer
+        }
+
+        details[open] summary {
+            margin-bottom: 15px
+        }
+
+        .tip-list>li {
+            margin: 0
+        }
+
+        .tip-section .tip-list {
+            max-width: none
+        }
+
+        .core-points {
+            margin-top: 35px
+        }
+
+        .footer {
+            margin-top: 55px;
+            padding-top: 25px;
+            border-top: 1px solid var(--border);
+            color: var(--muted);
+            font-size: .85rem
+        }
+
+        .print-button {
+            background: var(--accent-dark);
+            color: white;
+            margin-top: 20px
+        }
+
+        .back-to-top {
+            margin: 15px 0
+        }
+
+        .site-top {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            background: var(--accent-dark);
+            color: white;
+            padding: 8px 13px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: .8rem;
+            box-shadow: var(--shadow)
+        }
+
+        .site-top:hover {
+            color: white
+        }
+
+        .status {
+            min-height: 1.2em;
+            font-size: .85rem;
+            color: var(--muted)
+        }
+
+        @media(max-width:640px) {
+            .section-heading {
+                grid-template-columns: 38px minmax(0, 1fr);
+                gap: 10px
+            }
+
+            .section-heading span {
+                width: 36px;
+                height: 36px
+            }
+
+            .section-heading h2 {
+                font-size: 1.7rem
+            }
+
+            .contents {
+                padding: 20px
+            }
+
+            .codebox {
+                border-radius: 8px
+            }
+
+            pre {
+                padding: 16px;
+                font-size: .77rem
+            }
+
+            .callout,
+            .exercise {
+                padding: 17px
+            }
+
+            .site-top {
+                right: 10px;
+                bottom: 10px
+            }
+
+            .tip-section {
+                overflow-wrap: anywhere
+            }
+
+            table {
+                font-size: .86rem
+            }
+        }
+
+        @media print {
+            html {
+                scroll-behavior: auto
+            }
+
+            body {
+                background: white;
+                font-size: 10.5pt;
+                line-height: 1.45
+            }
+
+            .page {
+                width: 100%;
+                padding: 0
+            }
+
+            .hero {
+                box-shadow: none;
+                padding: 25px;
+                background: white
+            }
+
+            .hero h1 {
+                font-size: 34pt
+            }
+
+            .tip-section {
+                margin-top: 32px
+            }
+
+            .section-heading {
+                break-after: avoid
+            }
+
+            .section-heading h2 {
+                font-size: 21pt
+            }
+
+            h3 {
+                break-after: avoid
+            }
+
+            a {
+                color: #173d4c
+            }
+
+            .codebox {
+                background: #f6f7f7;
+                box-shadow: none;
+                border: 1px solid #aaa;
+                overflow: visible
+            }
+
+            .codebar {
+                background: #e5eaed;
+                color: #173d4c
+            }
+
+            pre {
+                color: #111;
+                white-space: pre-wrap;
+                overflow: visible;
+                font-size: 8pt;
+                padding: 12px
+            }
+
+            pre code {
+                white-space: pre-wrap;
+                overflow-wrap: anywhere
+            }
+
+            .copy-button,
+            .print-button,
+            .site-top,
+            .status,
+            .skip-link {
+                display: none
+            }
+
+            .table-scroll {
+                overflow: visible
+            }
+
+            table {
+                min-width: 0;
+                font-size: 9pt
+            }
+
+            tr {
+                break-inside: avoid
+            }
+
+            details {
+                break-inside: avoid
+            }
+
+            .contents ul {
+                grid-template-columns: repeat(2, 1fr)
+            }
+
+            .callout,
+            .exercise {
+                break-inside: avoid
+            }
+
+            p {
+                orphans: 3;
+                widows: 3
+            }
+
+            @page {
+                margin: 17mm 16mm
+            }
+        }
+    </style>
+
+</head>
+
+<body id="anfang"><a class="skip-link" href="#inhalt">Zum Inhalt</a>
+    <div class="page">
+        <header class="hero">
+            <p class="eyebrow">Die Plugin-Werkstatt · Band 01</p>
+            <h1>Lua lernen.<br>In Mittelerde.</h1>
+            <p class="lead">Ein ausführlicher Einstieg in <strong>Lua für LOTRO-Plugins</strong>: von der ersten
+                Variablen bis zum eigenen Timerfenster. Mit Erklärungen, Übungen und vollständig kopierbarem Code.</p>
+            <div class="meta"><span class="pill">24 Kapitel</span><span class="pill">Lua 5.1</span><span class="pill">50
+                    Lua-Beispiele</span><span class="pill">Stand · 05.10.2026</span></div><button type="button"
+                id="print" class="print-button">Drucken / als PDF sichern</button>
+            <p id="copy-status" class="status" role="status" aria-live="polite"></p>
+        </header>
+        <nav class="contents" aria-label="Inhaltsverzeichnis">
+            <h2>Dein Weg durch die Werkstatt</h2>
+            <ul>
+                <li><a href="#kapitel-01">01 · Was du hier eigentlich programmierst</a></li>
+                <li><a href="#kapitel-02">02 · Die Werkbank: dein erstes Plugin</a></li>
+                <li><a href="#kapitel-03">03 · Variablen, Werte und Gültigkeitsbereiche</a></li>
+                <li><a href="#kapitel-04">04 · Rechnen, vergleichen und Entscheidungen treffen</a></li>
+                <li><a href="#kapitel-05">05 · Texte, Zahlen und die Eigenheiten des Kampfchats</a></li>
+                <li><a href="#kapitel-06">06 · Tabellen: das wichtigste Werkzeug der Sprache</a></li>
+                <li><a href="#kapitel-07">07 · Schleifen, ohne den Client festzunageln</a></li>
+                <li><a href="#kapitel-08">08 · Funktionen, Rückgaben und Closures</a></li>
+                <li><a href="#kapitel-09">09 · Punkt, Doppelpunkt und self</a></li>
+                <li><a href="#kapitel-10">10 · Daten, Zustand und Darstellung auseinanderhalten</a></li>
+                <li><a href="#kapitel-11">11 · Fenster, Labels, Buttons und Balken</a></li>
+                <li><a href="#kapitel-12">12 · Events ordentlich anmelden und wieder entfernen</a></li>
+                <li><a href="#kapitel-13">13 · Echte Spielinformationen: Spieler und eigene Effekte</a></li>
+                <li><a href="#kapitel-14">14 · Kampfchat lesen, ohne sich selbst etwas vorzumachen</a></li>
+                <li><a href="#kapitel-15">15 · Zeitmessung und Update: der eigentliche Countdown</a></li>
+                <li><a href="#kapitel-16">16 · Einstellungen speichern und wieder laden</a></li>
+                <li><a href="#kapitel-17">17 · Eigene Befehle und bewusstes Aufräumen</a></li>
+                <li><a href="#kapitel-18">18 · Alles zusammen: dein vollständiges Timer-Plugin</a></li>
+                <li><a href="#kapitel-19">19 · Mehrere Dateien und einfache Objektorientierung</a></li>
+                <li><a href="#kapitel-20">20 · Fehler lesen und gezielt debuggen</a></li>
+                <li><a href="#kapitel-21">21 · Übungen mit Lösungen</a></li>
+                <li><a href="#kapitel-22">22 · Dein sinnvoller Lernpfad</a></li>
+                <li><a href="#kapitel-23">23 · Spickzettel für den zweiten Bildschirm</a></li>
+                <li><a href="#kapitel-24">24 · Referenzen und Stand der Anleitung</a></li>
+            </ul>
+        </nav>
+        <main id="inhalt">
+            <div class="intro-note"><strong>Dein Ziel:</strong> Plugins verstehen und selbst schreiben – für
+                Buffanzeigen, Hüter-Timer und kleine Werkzeuge im Spiel. Jeder Sprachbaustein bekommt hier eine konkrete
+                Aufgabe in LOTRO. Programmiererfahrung mit C++/Arduino, Python oder JavaScript ist hilfreich;
+                Lua-Kenntnisse werden nicht vorausgesetzt.</div>
+
+            <section class="tip-section" id="kapitel-01">
+                <div class="section-heading"><span>01</span>
+                    <h2>Was du hier eigentlich programmierst</h2>
+                </div>
+                <p>Lua ist die Sprache; <strong>LOTRO ist die Laufzeitumgebung</strong>. Dein Plugin läuft innerhalb des
+                    Spielclients. Der Client lädt deinen Code und ruft später bestimmte Funktionen auf, etwa wenn du
+                    einen Button anklickst oder eine Chatnachricht eintrifft. Über die <strong>Turbine-API</strong>
+                    erhält dein Code Zugang zu freigegebenen Spieldaten und Oberflächenelementen.</p>
+                <p>Das ähnelt einem Mikrocontroller-Projekt: Du schreibst Logik in einer Sprache und verwendest die
+                    Funktionen, die deine Umgebung bereitstellt. Anders als beim Arduino schreibst du hier aber keine
+                    dauernd laufende <code>loop()</code>. LOTRO steuert den Ablauf; dein Plugin reagiert auf Ereignisse.
+                </p>
+                <div class="table-scroll" tabindex="0" role="region" aria-label="Vergleichstabelle">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Ebene</th>
+                                <th>Beispiel</th>
+                                <th>Aufgabe</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Lua</td>
+                                <td><code>local remaining = 12</code></td>
+                                <td>Werte speichern und verarbeiten</td>
+                            </tr>
+                            <tr>
+                                <td>Lua-Standardbibliothek</td>
+                                <td><code>string.format(&quot;%.1f&quot;, remaining)</code></td>
+                                <td>Zahlen und Texte aufbereiten</td>
+                            </tr>
+                            <tr>
+                                <td>LOTRO-API</td>
+                                <td><code>label:SetText(&quot;Bereit&quot;)</code></td>
+                                <td>Etwas im Spiel anzeigen</td>
+                            </tr>
+                            <tr>
+                                <td>Dein eigener Code</td>
+                                <td><code>StartTimer(12)</code></td>
+                                <td>Die Logik deines Plugins organisieren</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <h3>Die Sprachversion ist wichtig</h3>
+                <p>Schreibe für <strong>Lua 5.1</strong>, die klassische Grundlage der LOTRO-Pluginumgebung. Beispiele
+                    aus Lua 5.3/5.4, Roblox/Luau oder WoW lassen sich nicht unbesehen übernehmen. Insbesondere sind
+                    <code>goto</code>, <code>//</code> als Ganzzahldivision, native Bitoperatoren und die eingebaute
+                    <code>utf8</code>-Bibliothek keine Lua-5.1-Grundausstattung. <code>continue</code>, <code>+=</code>
+                    und <code>++</code> gehören ebenfalls nicht zu dieser Sprache. Bei Bedarf kannst du die tatsächliche
+                    Laufzeit mit <code>_VERSION</code> ausgeben. [1][2]</p>
+                <h3>Was ein Plugin leisten kann</h3>
+                <p>Fenster und Anzeigen bauen, verfügbare Spieler- und Effektdaten lesen, auf Chatereignisse reagieren,
+                    eigene Befehle anbieten und Einstellungen speichern: Das sind typische Aufgaben. Die API ist aber
+                    kein vollständiger Blick auf den Spielzustand. Ein Gegner-DoT-Tracker braucht andere Überlegungen
+                    als eine Anzeige deiner eigenen Buffs.</p>
+                <p><strong>Ein Button in deinem Plugin kann Lua-Code ausführen. Daraus folgt nicht, dass Lua beliebig
+                        Kampffertigkeiten auslösen darf.</strong> Quickslots stellen vom Spieler bedienbare
+                    Verknüpfungen bereit; eine selbsttätige Rotation ist etwas anderes. Auch beliebiger Dateizugriff,
+                    Betriebssystembefehle und Netzwerkzugriff sind keine Grundlage für LOTRO-Plugins.</p>
+                <div class="callout"><strong>Die Leitidee dieses Kurses:</strong> Erst einen kontrolliert ausgelösten
+                    Timer bauen. Danach reale Spielereignisse anschließen. So kannst du einen Fehler in der Zeitrechnung
+                    von einem Fehler in der Ereigniserkennung unterscheiden.</div>
+
+                <h3>So verwendest du die Beispiele</h3>
+                <p>Die Kapitel 2 und 18 enthalten <strong>vollständige Dateien</strong>. Kapitel 3–10 enthalten kurze
+                    Lua-Übungen: Führe sie nach den Imports in deiner kleinen <code>Main.lua</code> aus, jeweils
+                    einzeln. Die späteren Ergänzungsbeispiele nennen ihre Voraussetzungen. Nicht alle Codeblöcke
+                    hintereinander in dieselbe Datei kleben – das ergäbe eher einen Ork als ein Plugin.</p>
+                <p>Die Zahlen für Laufzeiten sind <strong>Lernwerte</strong>, keine Behauptungen über aktuelle
+                    Hüter-Gambits. Der Code ist bewusst ohne externe Hilfsbibliotheken geschrieben. Dieses Dokument
+                    funktioniert offline; dein beigefügtes <code>classy.css</code> ist eingebettet und um Code-,
+                    Tabellen- und Druckstile ergänzt.</p>
+            </section>
+            <section class="tip-section" id="kapitel-02">
+                <div class="section-heading"><span>02</span>
+                    <h2>Die Werkbank: dein erstes Plugin</h2>
+                </div>
+                <p>Du benötigst LOTRO und einen Texteditor, etwa deinen VS Code. Ein separat installierter
+                    Lua-Interpreter ist zum Ausführen im Spiel nicht erforderlich. VS Code schreibt die Dateien;
+                    <strong>LOTRO führt sie aus</strong>. Der Startknopf irgendeiner Lua-Erweiterung kennt
+                    <code>Turbine</code> normalerweise nicht.</p>
+                <h3>Den richtigen Ordner finden</h3>
+                <p>Suche im tatsächlichen Windows-Dokumenteordner nach <code>The Lord of the Rings Online</code>. Dort
+                    liegen üblicherweise auch deine Screenshots und <code>UserPreferences.ini</code>. Der
+                    Dokumenteordner kann durch OneDrive umgeleitet sein. Der Installationsordner des Spiels ist hier die
+                    falsche Adresse.</p>
+                <p>Lege diese zwei Dateien an; die Pfade sind relativ zum LOTRO-Dokumenteordner:</p>
+                <div class="table-scroll" tabindex="0" role="region" aria-label="Vergleichstabelle">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Datei</th>
+                                <th>Zweck</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>Plugins/JulianPlugins/LuaWerkstatt.plugin</code></td>
+                                <td>Manifest: Name, Autor, Einstiegspunkt</td>
+                            </tr>
+                            <tr>
+                                <td><code>Plugins/JulianPlugins/LuaWerkstatt/Main.lua</code></td>
+                                <td>Ausführbarer Lua-Code</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p>Achte auf die wirklichen Dateiendungen: <code>Main.lua.txt</code> und
+                    <code>LuaWerkstatt.plugin.txt</code> werden dir nur Kummer bereiten. Lass Windows bekannte
+                    Dateiendungen anzeigen. Für diese Beispiele kannst du UTF-8 ohne BOM verwenden; die Meldungen im
+                    ausführbaren Lernplugin bleiben absichtlich bei ASCII, damit die ersten Schritte nicht an Umlauten
+                    scheitern.</p>
+                <h3>Datei 1: LuaWerkstatt.plugin</h3>
+                <div class="codebox">
+                    <div class="codebar"><span>XML · Manifest</span><button class="copy-button" type="button"
+                            data-target="code-1" aria-label="Codebeispiel 1 kopieren">Kopieren</button></div>
+                    <pre tabindex="0"><code class="language-xml" id="code-1">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;Plugin&gt;
+    &lt;Information&gt;
+        &lt;Name&gt;LuaWerkstatt&lt;/Name&gt;
+        &lt;Author&gt;Julian&lt;/Author&gt;
+        &lt;Version&gt;0.1&lt;/Version&gt;
+        &lt;Description&gt;Lua lernen direkt in LOTRO&lt;/Description&gt;
+    &lt;/Information&gt;
+    &lt;Package&gt;JulianPlugins.LuaWerkstatt.Main&lt;/Package&gt;
+    &lt;Configuration Apartment=&quot;JulianLuaWerkstatt&quot; /&gt;
+&lt;/Plugin&gt;
+</code></pre>
+                </div>
+                <p>Das ist <strong>XML</strong>, nicht Lua. Die Punkte in <code>Package</code> beschreiben den Pfad zum
+                    Lua-Einstiegspunkt. Angehängt wird <code>.lua</code>; du schreibst die Endung hier nicht dazu.</p>
+                <p><code>Apartment</code> bezeichnet den Skriptzustand, in dem das Plugin läuft. Ein eigener Name hilft,
+                    dein Lernplugin getrennt zu entladen. Mehrere Plugins können sich einen Skriptzustand teilen; ein
+                    Apartment ist daher nicht einfach ein dekorativer Zweitname. [3]</p>
+                <h3>Datei 2: Main.lua – die erste, vollständige Fassung</h3>
+                <div class="codebox">
+                    <div class="codebar"><span>Lua 5.1</span><button class="copy-button" type="button"
+                            data-target="code-2" aria-label="Codebeispiel 2 kopieren">Kopieren</button></div>
+                    <pre tabindex="0"><code class="language-lua" id="code-2">import &quot;Turbine&quot;
+import &quot;Turbine.UI&quot;
+import &quot;Turbine.UI.Lotro&quot;
+
+local window = Turbine.UI.Lotro.Window()
+window:SetSize(360, 180)
+window:SetPosition(200, 200)
+window:SetText(&quot;Lua-Werkstatt&quot;)
+
+local label = Turbine.UI.Label()
+label:SetParent(window)
+label:SetPosition(20, 50)
+label:SetSize(320, 50)
+label:SetTextAlignment(Turbine.UI.ContentAlignment.MiddleCenter)
+label:SetText(&quot;Mellon! Dein Plugin laeuft.&quot;)
+
+window:SetVisible(true)
+Turbine.Shell.WriteLine(&quot;LuaWerkstatt geladen: &quot; .. _VERSION)
+</code></pre>
+                </div>
+                <h3>Was jede Gruppe von Zeilen bewirkt</h3>
+                <ul>
+                    <li><code>import</code> lädt LOTRO-Pakete. Es ist eine Erweiterung der Spielumgebung, kein
+                        Lua-Schlüsselwort.</li>
+                    <li><code>Window()</code> erzeugt ein Objekt. <code>local window</code> hält eine Referenz darauf.
+                    </li>
+                    <li><code>SetSize(360, 180)</code> setzt Breite und Höhe. <code>SetPosition(200, 200)</code> setzt
+                        die linke obere Ecke.</li>
+                    <li>Das <code>Label</code> ist ein eigenes Objekt. Durch <code>SetParent(window)</code> wird es dem
+                        Fenster zugeordnet; seine Position ist dann relativ zum Fenster.</li>
+                    <li><code>SetText</code> verändert die Anzeige. <code>SetVisible(true)</code> blendet das Fenster
+                        ein.</li>
+                    <li><code>Turbine.Shell.WriteLine</code> schreibt eine lokale Ausgabe in den Chat. Das ist weder
+                        eine Nachricht an Mitspieler noch ein ausgeführter Slash-Befehl.</li>
+                </ul>
+                <h3>Laden, ändern, neu laden</h3>
+                <p>Gib im LOTRO-Chat nacheinander ein:</p>
+                <div class="codebox">
+                    <div class="codebar"><span>LOTRO · Eingabe</span><button class="copy-button" type="button"
+                            data-target="code-3" aria-label="Codebeispiel 3 kopieren">Kopieren</button></div>
+                    <pre tabindex="0"><code class="language-text" id="code-3">/plugins refresh
+/plugins load LuaWerkstatt
+</code></pre>
+                </div>
+                <p><strong>Erwartetes Ergebnis:</strong> ein Fenster mit Begrüßung und eine Chatmeldung mit der
+                    Lua-Version. Wenn du das Fenster über das X schließt, ist das Plugin weiterhin geladen. Für dieses
+                    erste Beispiel öffnest du es durch Entladen und erneutes Laden wieder.</p>
+                <p>Nach Änderungen an <code>Main.lua</code>:</p>
+                <div class="codebox">
+                    <div class="codebar"><span>LOTRO · Eingabe</span><button class="copy-button" type="button"
+                            data-target="code-4" aria-label="Codebeispiel 4 kopieren">Kopieren</button></div>
+                    <pre tabindex="0"><code class="language-text" id="code-4">/plugins unload JulianLuaWerkstatt
+/plugins load LuaWerkstatt
+</code></pre>
+                </div>
+                <p>Beachte den Unterschied: Beim Laden verwendest du den <strong>Plugin-Namen</strong>, beim Entladen
+                    den <strong>Apartment-Namen</strong>. <code>refresh</code> entdeckt Manifestdateien neu, ersetzt
+                    aber keinen bereits laufenden Code. Bei einer Änderung des Manifests entlädst du zuerst, führst
+                    <code>refresh</code> aus und lädst erneut. Alternativ hilft der eingebaute Pluginmanager:
+                    <code>/plugins manager</code>.</p>
+                <div class="exercise"><strong>Erste Übung:</strong> Ändere Fenstertitel, Größe und Text. Lade neu. Wenn
+                    deine Änderung erscheint, funktioniert die gesamte Kette vom Editor bis zum Client.</div>
+
+            </section>
+            <section class="tip-section" id="kapitel-03">
+                <div class="section-heading"><span>03</span>
+                    <h2>Variablen, Werte und Gültigkeitsbereiche</h2>
+                </div>
+                <p>Eine Variable gibt einem Wert einen Namen. Anders als in C++ legst du keinen festen Variablentyp
+                    fest. Der Wert selbst hat einen Typ.</p>
+                <div class="codebox">
+                    <div class="codebar"><span>Lua 5.1</span><button class="copy-button" type="button"
+                            data-target="code-5" aria-label="Codebeispiel 5 kopieren">Kopieren</button></div>
+                    <pre tabindex="0"><code class="language-lua" id="code-5">local duration = 12          -- number: Sekunden
+local skillName = &quot;Test-DoT&quot; -- string: Text
+local enabled = true        -- boolean: wahr oder falsch
+local target = nil          -- noch kein Ziel gespeichert
+
+Turbine.Shell.WriteLine(type(duration)) -- number
+Turbine.Shell.WriteLine(type(target))   -- nil
+</code></pre>
+                </div>
+                <p><code>nil</code> bedeutet: Hier ist kein Wert vorhanden. Das ist etwas anderes als <code>0</code>,
+                    <code>false</code> oder eine leere Zeichenkette. Später kann eine API-Abfrage <code>nil</code>
+                    zurückliefern, wenn beispielsweise ein erwartetes Objekt gerade nicht vorhanden ist.</p>
+                <h3>local ist dein Standard</h3>
+                <div class="codebox">
+                    <div class="codebar"><span>Lua 5.1</span><button class="copy-button" type="button"
+                            data-target="code-6" aria-label="Codebeispiel 6 kopieren">Kopieren</button></div>
+                    <pre tabindex="0"><code class="language-lua" id="code-6">local count = 0
+count = count + 1
+
+Turbine.Shell.WriteLine(tostring(count)) -- 1
+</code></pre>
+                </div>
+                <p>In der zweiten Zeile fehlt <code>local</code> absichtlich: Du änderst die bereits angelegte Variable.
+                    Wenn kein passendes <code>local</code> existiert, kann eine Zuweisung stattdessen einen globalen
+                    Namen erzeugen. Das macht Tippfehler heimtückisch.</p>
+                <div class="codebox">
+                    <div class="codebar"><span>Lua 5.1</span><button class="copy-button" type="button"
+                            data-target="code-7" aria-label="Codebeispiel 7 kopieren">Kopieren</button></div>
+                    <pre tabindex="0"><code class="language-lua" id="code-7">local duration = 12
+-- FALSCH: Der Tippfehler erzeugt einen anderen Namen.
+duraton = 20
+
+Turbine.Shell.WriteLine(tostring(duration)) -- immer noch 12
+</code></pre>
+                </div>
+                <p>Eine globale Variable ist kein verlässlicher Kommunikationskanal zwischen sämtlichen Plugins. LOTRO
+                    arbeitet mit Skriptzuständen und Paketumgebungen. Für den Einstieg gilt: Zustände lokal halten;
+                    gemeinsame Schnittstellen später ausdrücklich definieren.</p>
+                <h3>Blöcke begrenzen die Sichtbarkeit</h3>
+                <div class="codebox">
+                    <div class="codebar"><span>Lua 5.1</span><button class="copy-button" type="button"
+                            data-target="code-8" aria-label="Codebeispiel 8 kopieren">Kopieren</button></div>
+                    <pre tabindex="0"><code class="language-lua" id="code-8">local remaining = 12
+
+if remaining &gt; 0 then
+    local message = &quot;Timer aktiv&quot;
+    Turbine.Shell.WriteLine(message)
+end
+
+-- message ist hier nicht mehr als lokale Variable sichtbar.
+</code></pre>
+                </div>
+                <p>Die Variable <code>remaining</code> ist innerhalb des <code>if</code> erreichbar. Umgekehrt ist das
+                    dort angelegte <code>message</code> außerhalb nicht erreichbar. Auch Funktionsparameter und
+                    Schleifenvariablen sind lokal.</p>
+                <h3>Vorsicht vor versehentlichem Überschatten</h3>
+                <div class="codebox">
+                    <div class="codebar"><span>Lua 5.1</span><button class="copy-button" type="button"
+                            data-target="code-9" aria-label="Codebeispiel 9 kopieren">Kopieren</button></div>
+                    <pre tabindex="0"><code class="language-lua" id="code-9">local remaining = 12
+
+if true then
+    local remaining = 5 -- neue, innere Variable!
+    Turbine.Shell.WriteLine(tostring(remaining)) -- 5
+end
+
+Turbine.Shell.WriteLine(tostring(remaining)) -- 12
+</code></pre>
+                </div>
+                <p>Willst du den äußeren Wert ändern, schreibst du im Block <code>remaining = 5</code>. Wiederholtes
+                    <code>local</code> bedeutet nicht „besonders lokal“, sondern „lege eine neue Variable an“.</p>
+                <h3>Kommentare und Namen</h3>
+                <p>Einzeilige Kommentare beginnen mit <code>--</code>. Mehrzeilige Kommentare kannst du in
+                    <code>--[[ ... ]]</code> einschließen. Lua unterscheidet Groß- und Kleinschreibung:
+                    <code>Main</code>, <code>main</code>, <code>SetText</code> und <code>setText</code> sind jeweils
+                    verschieden. Verwende in Bezeichnern einfache ASCII-Zeichen, etwa <code>remainingSeconds</code>;
+                    deutsche Erläuterungen gehören gern in Kommentare.</p>
+            </section>
+            <section class="tip-section" id="kapitel-04">
+                <div class="section-heading"><span>04</span>
+                    <h2>Rechnen, vergleichen und Entscheidungen treffen</h2>
+                </div>
+                <p>Ein Timer besteht aus zwei Zeitpunkten: jetzt und Ablauf. Die Differenz ist seine Restzeit.</p>
+                <div class="codebox">
+                    <div class="codebar"><span>Lua 5.1</span><button class="copy-button" type="button"
+                            data-target="code-10" aria-label="Codebeispiel 10 kopieren">Kopieren</button></div>
+                    <pre tabindex="0"><code class="language-lua" id="code-10">local startedAt = 100
+local duration = 12
+local now = 105
+
+local expiresAt = startedAt + duration
+local remaining = math.max(0, expiresAt - now)
+
+Turbine.Shell.WriteLine(tostring(remaining)) -- 7
+</code></pre>
+                </div>
+                <p><code>math.max(0, ...)</code> verhindert negative Anzeigen nach dem Ablauf. Alle Werte sind hier
+                    erfundene Sekundenwerte; später liefert <code>Turbine.Engine.GetGameTime()</code> die aktuelle
+                    Spielzeit.</p>
+                <div class="table-scroll" tabindex="0" role="region" aria-label="Vergleichstabelle">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Aufgabe</th>
+                                <th>Lua</th>
+                                <th>Hinweis für C++/JS-Gewohnheiten</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Zuweisung</td>
+                                <td><code>x = 5</code></td>
+                                <td>Kein Vergleich</td>
+                            </tr>
+                            <tr>
+                                <td>Gleichheit</td>
+                                <td><code>x == 5</code></td>
+                                <td>Wie gewohnt</td>
+                            </tr>
+                            <tr>
+                                <td>Ungleichheit</td>
+                                <td><code>x ~= 5</code></td>
+                                <td>Nicht <code>!=</code></td>
+                            </tr>
+                            <tr>
+                                <td>Logisches UND/ODER/NICHT</td>
+                                <td><code>and</code>, <code>or</code>, <code>not</code></td>
+                                <td>Nicht <code>&amp;&amp;</code>, `</td>
+                            </tr>
+                            <tr>
+                                <td>Text verketten</td>
+                                <td><code>&quot;Rest: &quot; .. value</code></td>
+                                <td>Nicht <code>+</code></td>
+                            </tr>
+                            <tr>
+                                <td>Potenz</td>
+                                <td><code>2 ^ 3</code></td>
+                                <td>Ergibt 8; kein XOR</td>
+                            </tr>
+                            <tr>
+                                <td>Rest einer Division</td>
+                                <td><code>7 % 3</code></td>
+                                <td>Ergibt 1</td>
+                            </tr>
+                            <tr>
+                                <td>Wert erhöhen</td>
+                                <td><code>x = x + 1</code></td>
+                                <td>Kein <code>x++</code>, kein <code>x += 1</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <h3>if, elseif, else</h3>
+                <div class="codebox">
+                    <div class="codebar"><span>Lua 5.1</span><button class="copy-button" type="button"
+                            data-target="code-11" aria-label="Codebeispiel 11 kopieren">Kopieren</button></div>
+                    <pre tabindex="0"><code class="language-lua" id="code-11">local remaining = 2.4
+
+if remaining &lt;= 0 then
+    Turbine.Shell.WriteLine(&quot;Abgelaufen&quot;)
+elseif remaining &lt;= 3 then
+    Turbine.Shell.WriteLine(&quot;Bald erneuern&quot;)
+else
+    Turbine.Shell.WriteLine(&quot;Noch Zeit&quot;)
+end
+</code></pre>
+                </div>
+                <p>Es wird nur der erste passende Zweig ausgeführt. Das <code>end</code> schließt den gesamten
+                    Entscheidungsblock. Klammern um die Bedingung sind optional; <code>then</code> ist erforderlich.</p>
+                <h3>Die berühmte Null-Falle</h3>
+                <p>In Lua sind <strong>nur <code>false</code> und <code>nil</code> falsch</strong>. <code>0</code>,
+                    <code>&quot;&quot;</code> und eine leere Tabelle gelten in Bedingungen als wahr.</p>
+                <div class="codebox">
+                    <div class="codebar"><span>Lua 5.1</span><button class="copy-button" type="button"
+                            data-target="code-12" aria-label="Codebeispiel 12 kopieren">Kopieren</button></div>
+                    <pre tabindex="0"><code class="language-lua" id="code-12">local remaining = 0
+
+if remaining then
+    Turbine.Shell.WriteLine(&quot;Diese Zeile erscheint trotz 0.&quot;)
+end
+
+if remaining &gt; 0 then
+    Turbine.Shell.WriteLine(&quot;Diese Zeile erscheint nicht.&quot;)
+end
+</code></pre>
+                </div>
+                <p>Eine Prüfung wie <code>if remaining then</code> sagt lediglich: Der Wert ist weder <code>nil</code>
+                    noch <code>false</code>. Sie sagt nicht: Der Timer läuft.</p>
+                <h3>Kurzschlussauswertung schützt vor nil</h3>
+                <div class="codebox">
+                    <div class="codebar"><span>Lua 5.1</span><button class="copy-button" type="button"
+                            data-target="code-13" aria-label="Codebeispiel 13 kopieren">Kopieren</button></div>
+                    <pre tabindex="0"><code class="language-lua" id="code-13">local timer = nil
+
+if timer ~= nil and timer.remaining &gt; 0 then
+    Turbine.Shell.WriteLine(&quot;Aktiv&quot;)
+end
+</code></pre>
+                </div>
+                <p>Der rechte Teil von <code>and</code> wird nur ausgewertet, wenn der linke wahr ist. Dadurch wird bei
+                    <code>nil</code> gar nicht erst auf <code>timer.remaining</code> zugegriffen.</p>
+                <p><code>or</code> eignet sich für manche Standardwerte:
+                    <code>local title = suppliedTitle or &quot;Timer&quot;</code>. Aber <code>false</code> wird dadurch
+                    ebenfalls ersetzt. Eine gespeicherte Einstellung „deaktiviert“ darfst du daher nicht mit
+                    <code>settings.enabled or true</code> laden. Prüfe dort gezielt auf <code>nil</code> oder auf den
+                    erwarteten Typ.</p>
+            </section>
+            <section class="tip-section" id="kapitel-05">
+                <div class="section-heading"><span>05</span>
+                    <h2>Texte, Zahlen und die Eigenheiten des Kampfchats</h2>
+                </div>
+                <p>Ein Plugin übersetzt Daten ständig in sichtbare Texte. Lua verwendet dafür Strings.</p>
+                <div class="codebox">
+                    <div class="codebar"><span>Lua 5.1</span><button class="copy-button" type="button"
+                            data-target="code-14" aria-label="Codebeispiel 14 kopieren">Kopieren</button></div>
+                    <pre tabindex="0"><code class="language-lua" id="code-14">local name = &quot;Test-DoT&quot;
+local remaining = 7.236
+
+local text = name .. &quot;: &quot; .. string.format(&quot;%.1f s&quot;, remaining)
+Turbine.Shell.WriteLine(text) -- Test-DoT: 7.2 s
+</code></pre>
+                </div>
+                <p><code>%.1f</code> formatiert eine Zahl mit einer Nachkommastelle. <code>%s</code> steht für Text; für
+                    eine bereits ganzzahlige Zahl kannst du <code>%d</code> verwenden. <code>tostring(...)</code> eignet
+                    sich für Debugausgaben, insbesondere bei <code>nil</code> oder Wahrheitswerten.</p>
+                <h3>Benutzereingaben prüfen</h3>
+                <div class="codebox">
+                    <div class="codebar"><span>Lua 5.1</span><button class="copy-button" type="button"
+                            data-target="code-15" aria-label="Codebeispiel 15 kopieren">Kopieren</button></div>
+                    <pre tabindex="0"><code class="language-lua" id="code-15">local input = &quot;15&quot;
+local duration = tonumber(input)
+
+if duration == nil or duration &lt;= 0 or duration &gt; 120 then
+    Turbine.Shell.WriteLine(&quot;Bitte eine Dauer von 1 bis 120 eingeben.&quot;)
+else
+    Turbine.Shell.WriteLine(&quot;Dauer: &quot; .. tostring(duration))
+end
+</code></pre>
+                </div>
+                <p><code>tonumber(&quot;Unsinn&quot;)</code> ergibt <code>nil</code>. Rechne erst nach der Prüfung mit
+                    dem Wert. Für ein eigenes Eingabeformat ist ein Dezimalpunkt am unkompliziertesten; ein deutsches
+                    Komma solltest du ausdrücklich behandeln, wenn du es zulassen möchtest.</p>
+                <h3>Text finden: zunächst ohne Muster</h3>
+                <div class="codebox">
+                    <div class="codebar"><span>Lua 5.1</span><button class="copy-button" type="button"
+                            data-target="code-16" aria-label="Codebeispiel 16 kopieren">Kopieren</button></div>
+                    <pre tabindex="0"><code class="language-lua" id="code-16">local message = &quot;Test-DoT verursacht Schaden.&quot;
+local skillName = &quot;Test-DoT&quot;
+
+local first, last = string.find(message, skillName, 1, true)
+if first ~= nil then
+    Turbine.Shell.WriteLine(&quot;Name gefunden ab Position &quot; .. first)
+end
+</code></pre>
+                </div>
+                <p>Die letzten beiden Argumente bedeuten: Suche ab Position 1 und behandle den Suchtext
+                    <strong>wörtlich</strong>. Das <code>true</code> ist wichtig, wenn ein Name Zeichen wie
+                    <code>-</code>, <code>(</code> oder <code>.</code> enthält: Ohne Klartextmodus können sie als
+                    Musterzeichen interpretiert werden.</p>
+                <h3>Lua-Patterns sind keine vollständigen regulären Ausdrücke</h3>
+                <div class="codebox">
+                    <div class="codebar"><span>Lua 5.1</span><button class="copy-button" type="button"
+                            data-target="code-17" aria-label="Codebeispiel 17 kopieren">Kopieren</button></div>
+                    <pre tabindex="0"><code class="language-lua" id="code-17">local message = &quot;TEST damage=1234&quot;
+local digits = string.match(message, &quot;^TEST damage=(%d+)$&quot;)
+local damage = tonumber(digits)
+
+if damage ~= nil then
+    Turbine.Shell.WriteLine(&quot;Testschaden: &quot; .. damage)
+end
+</code></pre>
+                </div>
+                <p>Das ist <strong>ein künstliches Testformat</strong>, keine echte LOTRO-Kampfmeldung. <code>^</code>
+                    und <code>$</code> begrenzen Anfang und Ende; <code>%d+</code> bedeutet eine oder mehrere Ziffern;
+                    die Klammern liefern den gefundenen Teil zurück. Lua-Patterns besitzen beispielsweise kein
+                    Regex-Alternativzeichen <code>|</code> im üblichen Sinn.</p>
+                <p>Bei echten Kampfmeldungen musst du Sprache, Satzbau, kritische Treffer und Zahlendarstellung
+                    berücksichtigen. Ein Ausdruck für <code>1234</code> versteht <code>1.234</code> nicht automatisch
+                    richtig. Erst echte Meldungen sammeln, dann Parser schreiben.</p>
+                <h3>Umlaute sind kein nebensächliches Detail</h3>
+                <p>Lua 5.1 behandelt Strings grundsätzlich als Bytefolgen. <code>#text</code> zählt Bytes, und
+                    <code>string.sub</code> kann bei UTF-8 einen mehrbyteigen Buchstaben zerschneiden. Auch
+                    <code>string.lower</code> ist keine allgemeine Unicode-Normalisierung. Für deutsche Fertigkeitsnamen
+                    sind exakt übernommene Texte in passender Kodierung zuverlässiger als selbstgebastelte „alles
+                    kleinschreiben“-Magie. Prüfe zunächst, wie ein Name im tatsächlichen Client ankommt.</p>
+            </section>
+            <section class="tip-section" id="kapitel-06">
+                <div class="section-heading"><span>06</span>
+                    <h2>Tabellen: das wichtigste Werkzeug der Sprache</h2>
+                </div>
+                <p>Mit einer <code>table</code> baust du Listen, Nachschlagewerke und eigene Datenobjekte. Es gibt nicht
+                    für jeden dieser Fälle einen separaten eingebauten Container-Typ.</p>
+                <h3>Eine Liste für eine feste Anzeigereihenfolge</h3>
+                <div class="codebox">
+                    <div class="codebar"><span>Lua 5.1</span><button class="copy-button" type="button"
+                            data-target="code-18" aria-label="Codebeispiel 18 kopieren">Kopieren</button></div>
+                    <pre tabindex="0"><code class="language-lua" id="code-18">local order = { &quot;spear&quot;, &quot;light&quot;, &quot;bleed&quot; }
+
+Turbine.Shell.WriteLine(order[1]) -- spear
+Turbine.Shell.WriteLine(tostring(#order)) -- 3
+
+table.insert(order, &quot;test&quot;)
+table.remove(order, 2) -- entfernt light; folgende Eintraege ruecken nach
+</code></pre>
+                </div>
+                <p>Lua-Listen beginnen <strong>konventionsgemäß bei 1</strong>. Tabellen können auch einen Schlüssel
+                    <code>0</code> haben; die üblichen Listenfunktionen erwarten aber eine lückenlose Folge ab 1.
+                    <code>#</code> ist deshalb keine allgemeine Zählfunktion für beliebige Tabellen.</p>
+                <h3>Ein Nachschlagewerk für Timerdefinitionen</h3>
+                <div class="codebox">
+                    <div class="codebar"><span>Lua 5.1</span><button class="copy-button" type="button"
+                            data-target="code-19" aria-label="Codebeispiel 19 kopieren">Kopieren</button></div>
+                    <pre tabindex="0"><code class="language-lua" id="code-19">local definitions = {
+    spear = { label = &quot;Speer-Test&quot;, duration = 12 },
+    light = { label = &quot;Licht-Test&quot;, duration = 18 },
+    bleed = { label = &quot;Blutungs-Test&quot;, duration = 15 }
+}
+
+local selectedId = &quot;spear&quot;
+local definition = definitions[selectedId]
+
+Turbine.Shell.WriteLine(definition.label)
+Turbine.Shell.WriteLine(tostring(definition.duration))
+</code></pre>
+                </div>
+                <p>Die IDs und Laufzeiten sind frei gewählte Lernwerte. Der Vorteil stabiler interner IDs: Du kannst
+                    später die Anzeige übersetzen, ohne die gesamte Logik von deutschen Fertigkeitsnamen abhängig zu
+                    machen.</p>
+                <p><code>definitions.spear</code> und <code>definitions[&quot;spear&quot;]</code> sind gleichbedeutend.
+                    <code>definitions[selectedId]</code> verwendet den <strong>Wert der Variablen</strong> als
+                    Schlüssel. <code>definitions.selectedId</code> würde dagegen einen Eintrag mit dem wörtlichen Namen
+                    <code>selectedId</code> suchen.</p>
+                <h3>Eintrag löschen und Existenz prüfen</h3>
+                <div class="codebox">
+                    <div class="codebar"><span>Lua 5.1</span><button class="copy-button" type="button"
+                            data-target="code-20" aria-label="Codebeispiel 20 kopieren">Kopieren</button></div>
+                    <pre tabindex="0"><code class="language-lua" id="code-20">local activeTimers = {}
+activeTimers.spear = { expiresAt = 112 }
+
+if activeTimers.spear ~= nil then
+    Turbine.Shell.WriteLine(&quot;Timer existiert&quot;)
+end
+
+activeTimers.spear = nil -- entfernt den Eintrag
+</code></pre>
+                </div>
+                <p>Bei einer Liste erzeugt das Setzen eines mittleren Elements auf <code>nil</code> eine Lücke.
+                    <code>ipairs</code> endet am ersten fehlenden Index; <code>#</code> ist für eine solche löchrige
+                    Liste nicht die erhoffte Anzahl. Verwende bei geordneten Listen <code>table.remove</code> oder baue
+                    die Liste bewusst neu auf.</p>
+                <h3>Tabellen werden nicht automatisch kopiert</h3>
+                <div class="codebox">
+                    <div class="codebar"><span>Lua 5.1</span><button class="copy-button" type="button"
+                            data-target="code-21" aria-label="Codebeispiel 21 kopieren">Kopieren</button></div>
+                    <pre tabindex="0"><code class="language-lua" id="code-21">local original = { duration = 12 }
+local alias = original
+alias.duration = 20
+
+Turbine.Shell.WriteLine(tostring(original.duration)) -- 20
+</code></pre>
+                </div>
+                <p>Beide Variablen verweisen auf <strong>dieselbe Tabelle</strong>. Für eine unabhängige flache Kopie:
+                </p>
+                <div class="codebox">
+                    <div class="codebar"><span>Lua 5.1</span><button class="copy-button" type="button"
+                            data-target="code-22" aria-label="Codebeispiel 22 kopieren">Kopieren</button></div>
+                    <pre tabindex="0"><code class="language-lua" id="code-22">local defaults = { duration = 12, enabled = true }
+local settings = {}
+
+for key, value in pairs(defaults) do
+    settings[key] = value
+end
+
+settings.duration = 20
+</code></pre>
+                </div>
+                <p>Verschachtelte Tabellen würden bei dieser flachen Kopie weiterhin gemeinsam verwendet. Für den Anfang
+                    reichen flache Einstellungen oder bewusst neu angelegte Untertabellen.</p>
+            </section>
+            <section class="tip-section" id="kapitel-07">
+                <div class="section-heading"><span>07</span>
+                    <h2>Schleifen, ohne den Client festzunageln</h2>
+                </div>
+                <p>Eine Schleife arbeitet ihre Wiederholungen unmittelbar ab. Sie wartet nicht automatisch auf den
+                    nächsten Frame.</p>
+                <div class="codebox">
+                    <div class="codebar"><span>Lua 5.1</span><button class="copy-button" type="button"
+                            data-target="code-23" aria-label="Codebeispiel 23 kopieren">Kopieren</button></div>
+                    <pre tabindex="0"><code class="language-lua" id="code-23">for i = 1, 3 do
+    Turbine.Shell.WriteLine(&quot;Zeile &quot; .. i)
+end
+</code></pre>
+                </div>
+                <p>Die Grenzen sind einschließlich: Diese Schleife gibt 1, 2 und 3 aus.</p>
+                <h3>ipairs für Listen, pairs für Schlüssel</h3>
+                <div class="codebox">
+                    <div class="codebar"><span>Lua 5.1</span><button class="copy-button" type="button"
+                            data-target="code-24" aria-label="Codebeispiel 24 kopieren">Kopieren</button></div>
+                    <pre tabindex="0"><code class="language-lua" id="code-24">local order = { &quot;spear&quot;, &quot;light&quot;, &quot;bleed&quot; }
+
+for index, id in ipairs(order) do
+    Turbine.Shell.WriteLine(index .. &quot;: &quot; .. id)
+end
+
+local durations = { spear = 12, light = 18 }
+for id, duration in pairs(durations) do
+    Turbine.Shell.WriteLine(id .. &quot; dauert &quot; .. duration)
+end
+</code></pre>
+                </div>
+                <p><code>ipairs</code> besucht die lückenlose Zahlenfolge. <code>pairs</code> besucht vorhandene
+                    Schlüssel; ihre Reihenfolge ist nicht garantiert. Für eine dauerhaft gleich sortierte Oberfläche
+                    nimmst du eine explizite Reihenfolgeliste.</p>
+                <h3>Beim Entfernen aus einer Liste rückwärts gehen</h3>
+                <div class="codebox">
+                    <div class="codebar"><span>Lua 5.1</span><button class="copy-button" type="button"
+                            data-target="code-25" aria-label="Codebeispiel 25 kopieren">Kopieren</button></div>
+                    <pre tabindex="0"><code class="language-lua" id="code-25">local timers = {
+    { name = &quot;A&quot;, remaining = 0 },
+    { name = &quot;B&quot;, remaining = 4 },
+    { name = &quot;C&quot;, remaining = 0 }
+}
+
+for i = #timers, 1, -1 do
+    if timers[i].remaining &lt;= 0 then
+        table.remove(timers, i)
+    end
+end
+</code></pre>
+                </div>
+                <p>Beim Vorwärtslaufen verschieben sich nach einer Entfernung die Indizes. So kann ein Element
+                    übersprungen werden. Rückwärtslaufen vermeidet dieses Problem.</p>
+                <p><code>while bedingung do ... end</code> und <code>repeat ... until bedingung</code> gibt es
+                    ebenfalls. <code>repeat</code> führt den Rumpf mindestens einmal aus. <code>break</code> verlässt
+                    eine Schleife. Verwende diese Werkzeuge für <strong>begrenzte Arbeit</strong>, etwa das Bearbeiten
+                    einer kleinen Warteschlange.</p>
+                <div class="callout warning"><strong>Keine Warteschleife für Timer.</strong> Ein
+                    <code>while true do ... end</code> oder eine Schleife, die mehrere Sekunden auf eine Uhrzeit wartet,
+                    blockiert die Skriptausführung und kann den Client einfrieren. Ein Countdown reagiert auf
+                    <code>Update</code>-Ereignisse und gibt die Kontrolle dazwischen sofort zurück.</div>
+
+            </section>
+            <section class="tip-section" id="kapitel-08">
+                <div class="section-heading"><span>08</span>
+                    <h2>Funktionen, Rückgaben und Closures</h2>
+                </div>
+                <p>Funktionen bündeln eine Aufgabe. Parameter erhalten beim Aufruf Werte; <code>return</code> liefert
+                    Ergebnisse und beendet den Funktionsaufruf.</p>
+                <div class="codebox">
+                    <div class="codebar"><span>Lua 5.1</span><button class="copy-button" type="button"
+                            data-target="code-26" aria-label="Codebeispiel 26 kopieren">Kopieren</button></div>
+                    <pre tabindex="0"><code class="language-lua" id="code-26">local function Remaining(expiresAt, now)
+    return math.max(0, expiresAt - now)
+end
+
+local seconds = Remaining(112, 105)
+Turbine.Shell.WriteLine(tostring(seconds)) -- 7
+</code></pre>
+                </div>
+                <p>Die Funktion kennt keine Fenster und keine Spielobjekte. Trotzdem ist sie vollständig auf unseren
+                    Pluginzweck zugeschnitten. Solche kleinen Berechnungen lassen sich leichter überprüfen als ein
+                    großer Block aus UI, Parsing und Zeitrechnung.</p>
+                <h3>Mehrere Rückgabewerte</h3>
+                <div class="codebox">
+                    <div class="codebar"><span>Lua 5.1</span><button class="copy-button" type="button"
+                            data-target="code-27" aria-label="Codebeispiel 27 kopieren">Kopieren</button></div>
+                    <pre tabindex="0"><code class="language-lua" id="code-27">local function ParseDuration(text)
+    local value = tonumber(text)
+    if value == nil or value &lt; 1 or value &gt; 120 then
+        return nil, &quot;Erlaubt sind 1 bis 120 Sekunden.&quot;
+    end
+    return value, nil
+end
+
+local duration, errorMessage = ParseDuration(&quot;18&quot;)
+if duration == nil then
+    Turbine.Shell.WriteLine(errorMessage)
+else
+    Turbine.Shell.WriteLine(&quot;OK: &quot; .. duration)
+end
+</code></pre>
+                </div>
+                <p>Hier ist der erste Rückgabewert das Ergebnis und der zweite eine mögliche Fehlermeldung. Fehlende
+                    Argumente erhalten <code>nil</code>. Lua überprüft nicht von selbst, ob der Aufrufer die richtigen
+                    Datentypen liefert.</p>
+                <h3>Eine Funktion ist selbst ein Wert</h3>
+                <div class="codebox">
+                    <div class="codebar"><span>Lua 5.1</span><button class="copy-button" type="button"
+                            data-target="code-28" aria-label="Codebeispiel 28 kopieren">Kopieren</button></div>
+                    <pre tabindex="0"><code class="language-lua" id="code-28">local function SayReady()
+    Turbine.Shell.WriteLine(&quot;Bereit&quot;)
+end
+
+local callback = SayReady -- Funktion merken
+callback()                -- Funktion jetzt ausfuehren
+</code></pre>
+                </div>
+                <p><code>SayReady</code> und <code>SayReady()</code> sind fundamental verschieden: Das erste bezeichnet
+                    die Funktion, das zweite ruft sie auf. Ein Eventhandler braucht üblicherweise die
+                    <strong>Funktion</strong>, nicht deren gerade berechneten Rückgabewert.</p>
+                <h3>Closure: die Funktion behält Zugang zu ihrem Umfeld</h3>
+                <div class="codebox">
+                    <div class="codebar"><span>Lua 5.1</span><button class="copy-button" type="button"
+                            data-target="code-29" aria-label="Codebeispiel 29 kopieren">Kopieren</button></div>
+                    <pre tabindex="0"><code class="language-lua" id="code-29">local function CreateCounter()
+    local count = 0
+
+    return function()
+        count = count + 1
+        return count
+    end
+end
+
+local nextCount = CreateCounter()
+Turbine.Shell.WriteLine(tostring(nextCount())) -- 1
+Turbine.Shell.WriteLine(tostring(nextCount())) -- 2
+</code></pre>
+                </div>
+                <p>Die zurückgegebene Funktion greift auch nach dem Ende von <code>CreateCounter</code> auf dessen
+                    lokale Variable zu. Diese Verbindung heißt <strong>Closure</strong>. Genau deshalb kann ein
+                    Klick-Handler später noch den Timerzustand verändern, den du beim Laden des Plugins angelegt hast.
+                </p>
+                <p>Der gespeicherte Zustand bleibt erhalten, solange entsprechende Referenzen bestehen. „Die Datei ist
+                    fertig durchgelaufen“ bedeutet bei einem Plugin also nicht „alle lokalen Variablen sind
+                    verschwunden“.</p>
+            </section>
+            <section class="tip-section" id="kapitel-09">
+                <div class="section-heading"><span>09</span>
+                    <h2>Punkt, Doppelpunkt und self</h2>
+                </div>
+                <p>Dieses Kapitel erspart dir eine überraschende Menge Fluchen.</p>
+                <div class="codebox">
+                    <div class="codebar"><span>Lua 5.1</span><button class="copy-button" type="button"
+                            data-target="code-30" aria-label="Codebeispiel 30 kopieren">Kopieren</button></div>
+                    <pre tabindex="0"><code class="language-lua" id="code-30">local timer = { remaining = 12 }
+
+function timer:SetRemaining(value)
+    self.remaining = value
+end
+
+timer:SetRemaining(8)
+Turbine.Shell.WriteLine(tostring(timer.remaining)) -- 8
+</code></pre>
+                </div>
+                <p>Der Doppelpunkt fügt beim Definieren und Aufrufen einen versteckten ersten Parameter hinzu:
+                    <code>self</code>. Diese zwei Aufrufe bedeuten dasselbe:</p>
+                <div class="codebox">
+                    <div class="codebar"><span>Lua 5.1</span><button class="copy-button" type="button"
+                            data-target="code-31" aria-label="Codebeispiel 31 kopieren">Kopieren</button></div>
+                    <pre tabindex="0"><code class="language-lua" id="code-31">-- Voraussetzung: timer aus dem vorherigen Beispiel.
+timer:SetRemaining(8)
+timer.SetRemaining(timer, 8)
+</code></pre>
+                </div>
+                <p><code>timer.SetRemaining(8)</code> wäre dagegen falsch: Die 8 würde an der Stelle des Objekts
+                    ankommen. Wenn der Code anschließend auf <code>self.remaining</code> zugreift, passt der Typ nicht
+                    mehr.</p>
+                <h3>Die Zuordnung in LOTRO</h3>
+                <div class="table-scroll" tabindex="0" role="region" aria-label="Vergleichstabelle">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Schreibweise</th>
+                                <th>Bedeutung</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>window:SetText(&quot;Hallo&quot;)</code></td>
+                                <td>Methode auf einem konkreten Fenster</td>
+                            </tr>
+                            <tr>
+                                <td><code>player:GetName()</code></td>
+                                <td>Methode auf deinem Spielerobjekt</td>
+                            </tr>
+                            <tr>
+                                <td><code>Turbine.Shell.WriteLine(&quot;Hallo&quot;)</code></td>
+                                <td>Statische API-Funktion</td>
+                            </tr>
+                            <tr>
+                                <td><code>Turbine.Engine.GetGameTime()</code></td>
+                                <td>Statische API-Funktion</td>
+                            </tr>
+                            <tr>
+                                <td><code>Turbine.Gameplay.LocalPlayer.GetInstance()</code></td>
+                                <td>Zugriff auf das lokale Spielerobjekt</td>
+                            </tr>
+                            <tr>
+                                <td><code>button.Click = function(sender, args) ... end</code></td>
+                                <td>Einem Ereignis eine Funktion zuweisen</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p>Die API-Dokumentation beziehungsweise ein geprüftes Beispiel entscheidet, ob eine Funktion statisch
+                    oder objektbezogen aufgerufen wird. Nicht jedem Namen in einer langen Punktkette wird
+                    vorsichtshalber ein Doppelpunkt verpasst.</p>
+                <p>Bei <code>button.Click = function(sender, args)</code> kommen <code>sender</code> und
+                    <code>args</code> vom Ereignissystem. <code>sender</code> ist meist das auslösende Objekt;
+                    <code>args</code> enthält ereignisspezifische Informationen. Die Parameternamen sind frei gewählt,
+                    ihre Reihenfolge nicht.</p>
+            </section>
+            <section class="tip-section" id="kapitel-10">
+                <div class="section-heading"><span>10</span>
+                    <h2>Daten, Zustand und Darstellung auseinanderhalten</h2>
+                </div>
+                <p>Ein guter Tracker unterscheidet mindestens drei Dinge:</p>
+                <div class="table-scroll" tabindex="0" role="region" aria-label="Vergleichstabelle">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Bereich</th>
+                                <th>Beispiel</th>
+                                <th>Lebensdauer</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Definition</td>
+                                <td>„Test A dauert 12 Sekunden“</td>
+                                <td>Bleibt normalerweise gleich</td>
+                            </tr>
+                            <tr>
+                                <td>Laufender Zustand</td>
+                                <td>„Test A läuft bis Spielzeit 112“</td>
+                                <td>Ändert sich während des Spiels</td>
+                            </tr>
+                            <tr>
+                                <td>Darstellung</td>
+                                <td>Label, Balken, Farbe</td>
+                                <td>Zeigt den Zustand an</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="codebox">
+                    <div class="codebar"><span>Lua 5.1</span><button class="copy-button" type="button"
+                            data-target="code-32" aria-label="Codebeispiel 32 kopieren">Kopieren</button></div>
+                    <pre tabindex="0"><code class="language-lua" id="code-32">local definitions = {
+    test = { label = &quot;Test A&quot;, duration = 12 }
+}
+local active = {}
+
+local function StartTimer(id, now)
+    local definition = definitions[id]
+    if definition == nil then
+        return false
+    end
+
+    active[id] = {
+        expiresAt = now + definition.duration
+    }
+    return true
+end
+
+StartTimer(&quot;test&quot;, 100)
+StartTimer(&quot;test&quot;, 105) -- bewusstes Erneuern: neues Ende bei 117
+</code></pre>
+                </div>
+                <p>Hier überschreibt ein Neustart den Zustand des Timers. Das ist eine <strong>bewusste
+                        Designentscheidung</strong>, keine allgemeine Wahrheit über LOTRO-DoTs. Wenn ein Effekt stapelt,
+                    mehrere Ziele betrifft oder bei Erneuerung Restzeit übernimmt, brauchst du ein anderes Modell.</p>
+                <p>Für mehrere Gegner genügt ein Schlüssel wie <code>active.spear</code> nicht. Dann brauchst du eine
+                    zusätzliche Zielidentität, sofern deine Datenquelle eine belastbare liefert. Zwei gleichnamige Orks
+                    sind nicht automatisch dasselbe Ziel. Ein brauchbares Modell muss die Genauigkeit seiner Datenquelle
+                    respektieren.</p>
+            </section>
+            <section class="tip-section" id="kapitel-11">
+                <div class="section-heading"><span>11</span>
+                    <h2>Fenster, Labels, Buttons und Balken</h2>
+                </div>
+                <p>Du hast bereits ein Fenster und ein Label erzeugt. Ergänze am Ende der ersten <code>Main.lua</code>
+                    aus Kapitel 2 folgenden Block:</p>
+                <div class="codebox">
+                    <div class="codebar"><span>Lua 5.1</span><button class="copy-button" type="button"
+                            data-target="code-33" aria-label="Codebeispiel 33 kopieren">Kopieren</button></div>
+                    <pre tabindex="0"><code class="language-lua" id="code-33">-- Ergaenzung zu Kapitel 2; window und label existieren bereits.
+local button = Turbine.UI.Lotro.Button()
+button:SetParent(window)
+button:SetPosition(100, 115)
+button:SetSize(160, 25)
+button:SetText(&quot;Test ausloesen&quot;)
+
+local clicks = 0
+button.Click = function(sender, args)
+    clicks = clicks + 1
+    label:SetText(&quot;Klicks: &quot; .. clicks)
+end
+</code></pre>
+                </div>
+                <p>Beim Laden wird der Button aufgebaut und sein Handler registriert. <strong>Der Rumpf der Funktion
+                        läuft erst beim Klick.</strong> Dort wird die Variable <code>clicks</code> aus dem umgebenden
+                    Gültigkeitsbereich verändert: eine Closure in freier Wildbahn.</p>
+                <h3>Ein Balken ist oft nur ein Rechteck</h3>
+                <p>Für einen simplen Fortschrittsbalken brauchst du keine komplizierte Spezialklasse. Ein
+                    <code>Control</code> als Hintergrund und ein zweites als farbige Füllung reichen. Die Füllbreite
+                    berechnet sich aus:</p>
+                <div class="codebox">
+                    <div class="codebar"><span>Lua 5.1</span><button class="copy-button" type="button"
+                            data-target="code-34" aria-label="Codebeispiel 34 kopieren">Kopieren</button></div>
+                    <pre tabindex="0"><code class="language-lua" id="code-34">local remaining = 6
+local duration = 12
+local maximumWidth = 280
+local fraction = math.max(0, math.min(1, remaining / duration))
+local width = math.floor(maximumWidth * fraction)
+-- width ist 140. Im echten UI: fill:SetWidth(width)
+</code></pre>
+                </div>
+                <p><code>math.min</code> und <code>math.max</code> begrenzen den Anteil auf 0 bis 1;
+                    <code>math.floor</code> rundet ab. Voraussetzung ist eine positive Dauer. Die vollständige
+                    Oberfläche findest du in Kapitel 18.</p>
+                <h3>Koordinaten und Farben</h3>
+                <p><code>SetPosition(x, y)</code> meint links/oben; x wächst nach rechts, y nach unten. Bei
+                    Kind-Controls sind die Koordinaten relativ zum Elternobjekt. Ein Fenster ist ein Objekt auf oberster
+                    Ebene; für innere Container verwendest du <code>Control</code>, nicht ein zusätzliches Kindfenster.
+                    [4]</p>
+                <p>Bei <code>Turbine.UI.Color(r, g, b)</code> liegen die Farbkanäle zwischen 0 und 1.
+                    <code>Color(0.2, 0.6, 0.8)</code> ergibt ein Blau. Ein weiterer Konstruktor nimmt Alpha vor den
+                    Farbkanälen entgegen. Verwechsle diese Werte nicht mit CSS-RGB-Zahlen von 0 bis 255.</p>
+                <p>Setze Größen ausdrücklich. Ein vorhandenes Label kann trotzdem unsichtbar wirken, weil es außerhalb
+                    seines Containers liegt, keine sinnvolle Größe hat oder Textfarbe und Hintergrund kaum
+                    unterscheidbar sind.</p>
+            </section>
+            <section class="tip-section" id="kapitel-12">
+                <div class="section-heading"><span>12</span>
+                    <h2>Events ordentlich anmelden und wieder entfernen</h2>
+                </div>
+                <p>Dein eigener Button gehört dir. Dort ist <code>button.Click = ...</code> im kleinen Plugin
+                    übersichtlich. Bei gemeinsam verwendeten Ereignisquellen wie <code>Turbine.Chat</code> oder der
+                    Effektliste solltest du vorhandene Handler dagegen <strong>nicht blind ersetzen</strong>.</p>
+                <p>In LOTRO begegnet dir häufig das Muster, in einem Ereignisfeld entweder eine Funktion oder eine Liste
+                    von Funktionen abzulegen. Die Namen <code>AddCallback</code> und <code>RemoveCallback</code> sind
+                    <strong>keine eingebauten Lua-Schlüsselwörter</strong> und nicht automatisch vorhanden. Du musst
+                    solche Hilfsfunktionen selbst definieren oder bewusst aus einer Bibliothek importieren. [5]</p>
+                <h3>Ein überschaubares Hilfspaar</h3>
+                <p>Setze diese beiden lokalen Funktionen nach die Imports, bevor du sie benutzt:</p>
+                <div class="codebox">
+                    <div class="codebar"><span>Lua 5.1</span><button class="copy-button" type="button"
+                            data-target="code-35" aria-label="Codebeispiel 35 kopieren">Kopieren</button></div>
+                    <pre tabindex="0"><code class="language-lua" id="code-35">local function AddCallback(object, eventName, handler)
+    local current = object[eventName]
+
+    if current == nil then
+        object[eventName] = handler
+    elseif type(current) == &quot;function&quot; then
+        if current ~= handler then
+            object[eventName] = { current, handler }
+        end
+    elseif type(current) == &quot;table&quot; then
+        for _, existing in ipairs(current) do
+            if existing == handler then
+                return -- denselben Handler nicht doppelt eintragen
+            end
+        end
+        table.insert(current, handler)
+    else
+        error(&quot;Unerwarteter Eventtyp: &quot; .. type(current))
+    end
+end
+
+local function RemoveCallback(object, eventName, handler)
+    local current = object[eventName]
+
+    if current == handler then
+        object[eventName] = nil
+    elseif type(current) == &quot;table&quot; then
+        for i = #current, 1, -1 do
+            if current[i] == handler then
+                table.remove(current, i)
+            end
+        end
+
+        if #current == 0 then
+            object[eventName] = nil
+        elseif #current == 1 then
+            object[eventName] = current[1]
+        end
+    end
+end
+</code></pre>
+                </div>
+                <p>Das Beispiel behandelt die übliche lückenlose Handlerliste. Es ist kein universeller
+                    Ereignisverteiler für beliebige Fremdbibliotheken. Insbesondere sollten Handlerlisten nicht mitten
+                    in ihrer eigenen Abarbeitung umgebaut werden. Hier melden wir beim Aufbau an und beim Beenden ab.
+                </p>
+                <h3>Du musst dieselbe Funktion wiederfinden</h3>
+                <div class="codebox">
+                    <div class="codebar"><span>Lua 5.1</span><button class="copy-button" type="button"
+                            data-target="code-36" aria-label="Codebeispiel 36 kopieren">Kopieren</button></div>
+                    <pre tabindex="0"><code class="language-lua" id="code-36">-- Voraussetzung: AddCallback und RemoveCallback von oben.
+local function OnChat(sender, args)
+    -- Hier spaeter die eigentliche Verarbeitung.
+end
+
+AddCallback(Turbine.Chat, &quot;Received&quot;, OnChat)
+
+-- Beim Aufraeumen:
+RemoveCallback(Turbine.Chat, &quot;Received&quot;, OnChat)
+</code></pre>
+                </div>
+                <p>Eine neu geschriebene <code>function(sender, args) ... end</code> wäre ein anderes Funktionsobjekt,
+                    selbst wenn ihr Inhalt identisch ist. Deshalb behältst du die ursprüngliche Referenz.</p>
+                <h3>Der Lebenszyklus gehört zum Plugin</h3>
+                <p>Beim Laden steht die temporäre Referenz <code>plugin</code> zur Verfügung. An <strong>diesem
+                        konkreten Pluginobjekt</strong> kannst du den Unload-Handler registrieren: [4]</p>
+                <div class="codebox">
+                    <div class="codebar"><span>Lua 5.1</span><button class="copy-button" type="button"
+                            data-target="code-37" aria-label="Codebeispiel 37 kopieren">Kopieren</button></div>
+                    <pre tabindex="0"><code class="language-lua" id="code-37">-- Voraussetzung: Kapitel-2-Fenster und die Helfer/OnChat von oben.
+local thisPlugin = plugin
+
+thisPlugin.Unload = function(sender, args)
+    RemoveCallback(Turbine.Chat, &quot;Received&quot;, OnChat)
+    window:SetWantsUpdates(false)
+    window:SetVisible(false)
+end
+</code></pre>
+                </div>
+                <p>Wenn bereits ein Unload-Handler existiert, ergänze dessen Rumpf. Definiere nicht einfach einen
+                    zweiten und verliere dabei das erste Aufräumen. <code>Turbine.Plugin.Unload</code> ist nicht der
+                    Platz, um deinen individuellen Plugin-Lebenszyklus zu organisieren.</p>
+            </section>
+            <section class="tip-section" id="kapitel-13">
+                <div class="section-heading"><span>13</span>
+                    <h2>Echte Spielinformationen: Spieler und eigene Effekte</h2>
+                </div>
+                <p>Dieses vollständige kleine Diagnosebeispiel kannst du vorübergehend als <code>Main.lua</code>
+                    verwenden; das Manifest aus Kapitel 2 bleibt gleich:</p>
+                <div class="codebox">
+                    <div class="codebar"><span>Lua 5.1</span><button class="copy-button" type="button"
+                            data-target="code-38" aria-label="Codebeispiel 38 kopieren">Kopieren</button></div>
+                    <pre tabindex="0"><code class="language-lua" id="code-38">import &quot;Turbine&quot;
+import &quot;Turbine.Gameplay&quot;
+
+local player = Turbine.Gameplay.LocalPlayer.GetInstance()
+Turbine.Shell.WriteLine(&quot;Spieler: &quot; .. player:GetName())
+
+local effects = player:GetEffects()
+Turbine.Shell.WriteLine(&quot;Effekte: &quot; .. effects:GetCount())
+
+for index = 1, effects:GetCount() do
+    local effect = effects:Get(index)
+    Turbine.Shell.WriteLine(
+        index .. &quot;: &quot; .. effect:GetName()
+        .. &quot; | Dauer: &quot; .. tostring(effect:GetDuration())
+    )
+end
+</code></pre>
+                </div>
+                <p>Du lernst dabei einen entscheidenden Unterschied: <code>effects</code> ist <strong>keine gewöhnliche
+                        Lua-Liste</strong>, die du einfach mit <code>#effects</code> und <code>effects[i]</code>
+                    verwendest. Es ist ein API-Objekt mit <code>GetCount()</code> und <code>Get(index)</code>. Die
+                    ausgegebene Dauer ist die vom Effekt gemeldete Dauer, nicht automatisch seine verbleibende Restzeit.
+                </p>
+                <h3>Änderungen beobachten</h3>
+                <p>Füge die beiden Helfer aus Kapitel 12 nach den Imports ein. Ergänze dann unter dem obigen Code:</p>
+                <div class="codebox">
+                    <div class="codebar"><span>Lua 5.1</span><button class="copy-button" type="button"
+                            data-target="code-39" aria-label="Codebeispiel 39 kopieren">Kopieren</button></div>
+                    <pre tabindex="0"><code class="language-lua" id="code-39">-- Voraussetzung: effects, AddCallback und RemoveCallback.
+local function OnEffectAdded(sender, args)
+    local effect = args.Effect
+    if effect == nil and args.Index ~= nil then
+        effect = sender:Get(args.Index)
+    end
+
+    if effect ~= nil then
+        Turbine.Shell.WriteLine(&quot;Neu: &quot; .. effect:GetName())
+    end
+end
+
+AddCallback(effects, &quot;EffectAdded&quot;, OnEffectAdded)
+
+plugin.Unload = function(sender, args)
+    RemoveCallback(effects, &quot;EffectAdded&quot;, OnEffectAdded)
+end
+</code></pre>
+                </div>
+                <p>Bei Entfernungen ist ein alter Listenindex kein dauerhaftes Identitätsmerkmal: Nachrückende Einträge
+                    können an seiner Stelle stehen. Für eine größere Anzeige musst du Effektidentität, Entfernen und
+                    gegebenenfalls vollständiges Leeren der Liste berücksichtigen. [6]</p>
+                <h3>Warum beim Start scannen und danach Events verwenden?</h3>
+                <p>Wenn dein Buff schon aktiv war, bevor du das Plugin lädst, entsteht durch das Laden kein neues
+                    <code>EffectAdded</code>-Ereignis. Der Anfangsscan erfasst den vorhandenen Zustand; Events halten
+                    ihn anschließend aktuell. Dieses Muster taucht in Plugins ständig auf.</p>
+                <p>Eigene Buffs sind ein guter nächster Schritt. Für Effekte auf Gegnern darfst du nicht voraussetzen,
+                    dass dieselben Informationen gleichermaßen verfügbar und vollständig sind. Lies die aktuelle
+                    API-Beschreibung des konkreten Objekts und überprüfe Werte im Client.</p>
+            </section>
+            <section class="tip-section" id="kapitel-14">
+                <div class="section-heading"><span>14</span>
+                    <h2>Kampfchat lesen, ohne sich selbst etwas vorzumachen</h2>
+                </div>
+                <p><code>Turbine.Chat.Received</code> meldet Chatereignisse. Über <code>args.ChatType</code> filterst du
+                    den Kanal, über <code>args.Message</code> liest du den Text. [7]</p>
+                <p>Für eine gezielte Untersuchung genügt dieser Handler. <strong>Voraussetzung:</strong> Imports aus
+                    Kapitel 2 und die beiden Callback-Helfer aus Kapitel 12. Dieses Beispiel kommt in eine eigene
+                    Diagnosefassung der <code>Main.lua</code>, nicht ungeprüft zusätzlich zu anderen Unload-Handlern.
+                </p>
+                <div class="codebox">
+                    <div class="codebar"><span>Lua 5.1</span><button class="copy-button" type="button"
+                            data-target="code-40" aria-label="Codebeispiel 40 kopieren">Kopieren</button></div>
+                    <pre tabindex="0"><code class="language-lua" id="code-40">local watchedText = &quot;HIER EXAKTEN FERTIGKEITSNAMEN EINTRAGEN&quot;
+local seen = 0
+
+local function OnCombatChat(sender, args)
+    if args.ChatType ~= Turbine.ChatType.PlayerCombat then
+        return
+    end
+
+    if type(args.Message) ~= &quot;string&quot; then
+        return
+    end
+
+    if string.find(args.Message, watchedText, 1, true) == nil then
+        return
+    end
+
+    if seen &gt;= 10 then
+        return -- Diagnoseausgabe begrenzen
+    end
+
+    seen = seen + 1
+    Turbine.Shell.WriteLine(&quot;[LW Probe] &quot; .. args.Message)
+end
+
+AddCallback(Turbine.Chat, &quot;Received&quot;, OnCombatChat)
+
+plugin.Unload = function(sender, args)
+    RemoveCallback(Turbine.Chat, &quot;Received&quot;, OnCombatChat)
+end
+</code></pre>
+                </div>
+                <p>Das Echo wird als normale lokale Ausgabe geschrieben; der Handler verarbeitet nur
+                    <code>PlayerCombat</code>. So vermeidest du, dass deine eigene Debugausgabe erneut als Treffer
+                    verarbeitet wird. Die Begrenzung verhindert, dass der Chat unter Diagnosemeldungen begraben wird.
+                </p>
+                <h3>Der entscheidende Denkfehler beim DoT-Tracker</h3>
+                <p>Der folgende Gedanke ist verführerisch: „Wenn der Fertigkeitsname in der Nachricht steht, starte ich
+                    ihre Laufzeit neu.“ Das funktioniert nur, wenn dieser Text den relevanten Start tatsächlich
+                    eindeutig bezeichnet.</p>
+                <p>Bei periodischem Schaden kann derselbe Name bei <strong>jedem Tick</strong> auftauchen. Dann würde
+                    ein naiver Tracker seinen Timer fortwährend verlängern. Dazu kommen mehrere Ziele, Widerstehen,
+                    kritische Treffer, Verzögerungen und Meldungen anderer Akteure.</p>
+                <div class="table-scroll" tabindex="0" role="region" aria-label="Vergleichstabelle">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Beobachtung</th>
+                                <th>Was du daraus zunächst ableiten kannst</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Name taucht in einer Nachricht auf</td>
+                                <td>Die Nachricht erwähnt den Namen</td>
+                            </tr>
+                            <tr>
+                                <td>Eigene passende Schadensmeldung</td>
+                                <td>Schaden wurde gemeldet; nicht zwingend ein neuer Einsatz</td>
+                            </tr>
+                            <tr>
+                                <td>Verlässlich beobachteter Effektbeginn</td>
+                                <td>Der beobachtete Effekt ist erschienen</td>
+                            </tr>
+                            <tr>
+                                <td>Manuell ausgelöster Test</td>
+                                <td>Der Spieler hat den Test ausgelöst</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <h3>Ein solider Entwicklungsweg</h3>
+                <ol>
+                    <li>Fertigkeit einmal auf ein einzelnes Ziel anwenden; sämtliche dazugehörigen Meldungen beobachten.
+                    </li>
+                    <li>Direkt danach nichts tun und die periodischen Meldungen sammeln.</li>
+                    <li>Erneut anwenden; untersuchen, ob der neue Einsatz im Text unterscheidbar ist.</li>
+                    <li>Widerstehen, mehrere Ziele und einen Zielwechsel getrennt testen.</li>
+                    <li>Nur die nachgewiesenen Fälle automatisieren; eine Schätzung auch als Schätzung anzeigen.</li>
+                </ol>
+                <p>Ein bloßer „Cooldown gegen doppelte Meldungen“ kann Symptome kaschieren, beweist aber keine korrekte
+                    Erkennung. Für den ersten Kurs bauen wir deshalb einen ehrlichen <strong>manuellen
+                        Testtimer</strong>. Dessen Startsignal ist eindeutig, und du lernst daran dieselbe Anzeige- und
+                    Zeitlogik.</p>
+            </section>
+            <section class="tip-section" id="kapitel-15">
+                <div class="section-heading"><span>15</span>
+                    <h2>Zeitmessung und Update: der eigentliche Countdown</h2>
+                </div>
+                <p>Ein Countdown zählt nicht Frames. Er berechnet bei jeder Aktualisierung, wie viel Zeit bis zum Ende
+                    bleibt.</p>
+                <div class="codebox">
+                    <div class="codebar"><span>Lua 5.1</span><button class="copy-button" type="button"
+                            data-target="code-41" aria-label="Codebeispiel 41 kopieren">Kopieren</button></div>
+                    <pre tabindex="0"><code class="language-lua" id="code-41">-- Kurzes Rechenbeispiel innerhalb eines geladenen Plugins.
+local now = Turbine.Engine.GetGameTime()
+local expiresAt = now + 12
+local remaining = math.max(0, expiresAt - now)
+</code></pre>
+                </div>
+                <p>Wenn du stattdessen „pro Frame 0,016 Sekunden abziehen“ programmierst, läuft der Timer abhängig von
+                    der Bildrate falsch. Ein Zeitstempel verkraftet auch eine unregelmäßige Aktualisierung: Nach einer
+                    Pause zeigt der nächste Frame die dann richtige Restzeit an.</p>
+                <h3>Das Ereignis einschalten</h3>
+                <p>Die folgende Erweiterung setzt das Fenster und Label aus Kapitel 2 voraus:</p>
+                <div class="codebox">
+                    <div class="codebar"><span>Lua 5.1</span><button class="copy-button" type="button"
+                            data-target="code-42" aria-label="Codebeispiel 42 kopieren">Kopieren</button></div>
+                    <pre tabindex="0"><code class="language-lua" id="code-42">local expiresAt = Turbine.Engine.GetGameTime() + 12
+local nextDrawAt = 0
+
+window.Update = function(sender, args)
+    local now = Turbine.Engine.GetGameTime()
+    if now &lt; nextDrawAt then
+        return
+    end
+    nextDrawAt = now + 0.1 -- Anzeige hoechstens etwa zehnmal pro Sekunde
+
+    local remaining = math.max(0, expiresAt - now)
+    label:SetText(string.format(&quot;%.1f s&quot;, remaining))
+
+    if remaining &lt;= 0 then
+        label:SetText(&quot;Abgelaufen&quot;)
+        window:SetWantsUpdates(false)
+    end
+end
+
+window:SetWantsUpdates(true)
+</code></pre>
+                </div>
+                <p><code>Update</code> wird bei aktivierten Updates framebezogen aufgerufen. Der frühe Rücksprung
+                    begrenzt die teurere Arbeit an der Oberfläche, nicht zwingend die Anzahl eingehender Events. Wenn
+                    der Timer vorbei ist, werden die Updates ganz ausgeschaltet. [8]</p>
+                <p>Das sichtbare Ende kann hier bis ungefähr zum nächsten Zeichenintervall verzögert erscheinen. Die
+                    zugrunde liegende Restzeit wird trotzdem aus Zeitpunkten berechnet und driftet nicht durch
+                    fortgesetztes Abziehen.</p>
+                <h3>Zeitbasis nicht vermischen</h3>
+                <p><code>GetGameTime()</code> ist eine relative Spielzeit. Speichere solche Ablaufzeitpunkte nicht als
+                    dauerhaft gültige Kalenderzeit über Logins hinweg. Für unser Lernplugin leben Timer nur während der
+                    aktuellen Sitzung. Wenn du später Zeitangaben aus Effektobjekten verwendest, prüfe ihre
+                    dokumentierte Zeitbasis; eine andere Uhr darfst du nicht ohne Umrechnung davon abziehen.</p>
+            </section>
+            <section class="tip-section" id="kapitel-16">
+                <div class="section-heading"><span>16</span>
+                    <h2>Einstellungen speichern und wieder laden</h2>
+                </div>
+                <p>Für persistente Daten verwendet ein Plugin <code>Turbine.PluginData</code>, nicht beliebige
+                    <code>io.open</code>-Dateizugriffe. Speichere einfache Werte und Datentabellen: Positionen, Farben,
+                    Aktivierung, konfigurierte Dauern. Fensterobjekte, Funktionen, Effektobjekte und laufende Closures
+                    gehören nicht in deine Einstellungsdatei.</p>
+                <p>Dieses Kapitel ist eine <strong>Erweiterung der vollständigen Fassung aus Kapitel 18</strong>. Die
+                    Einfügepositionen sind ausdrücklich angegeben.</p>
+                <h3>A: Beim Laden lesen</h3>
+                <p>Setze diesen Block in Kapitel 18 <strong>direkt nach
+                        <code>window:SetPosition(200, 200)</code></strong>, solange die <code>Main.lua</code> noch
+                    initial geladen wird:</p>
+                <div class="codebox">
+                    <div class="codebar"><span>Lua 5.1</span><button class="copy-button" type="button"
+                            data-target="code-43" aria-label="Codebeispiel 43 kopieren">Kopieren</button></div>
+                    <pre tabindex="0"><code class="language-lua" id="code-43">local settingsKey = &quot;JulianLuaWerkstatt_Settings_v1&quot;
+local loaded = Turbine.PluginData.Load(
+    Turbine.DataScope.Character,
+    settingsKey
+)
+
+if type(loaded) == &quot;table&quot; then
+    local x = tonumber(loaded.x)
+    local y = tonumber(loaded.y)
+
+    if x ~= nil and y ~= nil then
+        local maxX = math.max(0, Turbine.UI.Display:GetWidth() - 380)
+        local maxY = math.max(0, Turbine.UI.Display:GetHeight() - 220)
+        x = math.max(0, math.min(maxX, x))
+        y = math.max(0, math.min(maxY, y))
+        window:SetPosition(x, y)
+    end
+end
+</code></pre>
+                </div>
+                <p>Fehlende Daten sind beim ersten Start normal. Du überprüfst den Typ, wandelst Zahlen kontrolliert um
+                    und begrenzt die Position auf den verfügbaren Bildschirm. So landet ein Fenster nach einem
+                    Monitorwechsel nicht irgendwo jenseits von Mordor.</p>
+                <p><strong>Lebenszyklus beachten:</strong> Die unmittelbare Rückgabe von <code>Load</code> ist für die
+                    Initialisierung beim Pluginladen gedacht. Bei späteren Ladeanforderungen arbeitest du mit einem
+                    Callback. Ein späterer asynchroner Aufruf darf nicht so behandelt werden, als lägen die Daten sofort
+                    vor. Bestehende Turbine-Beispiele zeigen die Verarbeitung im Callback. [9]</p>
+                <h3>B: Eine Speicherfunktion definieren</h3>
+                <p>Setze diesen Block nach die Ladeerweiterung aus A:</p>
+                <div class="codebox">
+                    <div class="codebar"><span>Lua 5.1</span><button class="copy-button" type="button"
+                            data-target="code-44" aria-label="Codebeispiel 44 kopieren">Kopieren</button></div>
+                    <pre tabindex="0"><code class="language-lua" id="code-44">local function SaveSettings()
+    local data = {
+        version = 1,
+        x = window:GetLeft(),
+        y = window:GetTop()
+    }
+
+    Turbine.PluginData.Save(
+        Turbine.DataScope.Character,
+        settingsKey,
+        data
+    )
+end
+</code></pre>
+                </div>
+                <p><code>Character</code> ist für Einstellungen dieses Charakters passend. <code>Account</code> eignet
+                    sich für gemeinsame Einstellungen innerhalb des entsprechenden Kontobereichs. Ein präziser Schlüssel
+                    reduziert Namenskollisionen. Die zusätzliche Versionsnummer hilft später bei Änderungen der
+                    Datenstruktur.</p>
+                <h3>C: Speichern auslösen</h3>
+                <p>Ergänze in Kapitel 18 im vorhandenen Befehls-Handler vor dem <code>else</code> einen weiteren Zweig:
+                </p>
+                <div class="codebox">
+                    <div class="codebar"><span>Lua 5.1</span><button class="copy-button" type="button"
+                            data-target="code-45" aria-label="Codebeispiel 45 kopieren">Kopieren</button></div>
+                    <pre tabindex="0"><code class="language-lua" id="code-45">-- AUSSCHNITT aus der if/elseif-Kette, nicht allein lauffaehig:
+elseif action == &quot;save&quot; then
+    SaveSettings()
+    Turbine.Shell.WriteLine(&quot;Speichern angefordert.&quot;)
+</code></pre>
+                </div>
+                <p>Füge außerdem <strong>im bereits vorhandenen Unload-Handler</strong> <code>SaveSettings()</code>
+                    hinzu, bevor du das Fenster verbirgst. Verwende danach <code>/lw save</code>, entlade und lade
+                    erneut: Die Position sollte wiederhergestellt sein.</p>
+                <p>Die Meldung „Speichern angefordert“ behauptet bewusst keinen bestätigten Erfolg. Für eine belastbare
+                    Erfolgsmeldung nutzt du den Save-Callback und wertest dessen Ergebnis aus. Häufig veränderte
+                    Einstellungen speicherst du gezielt oder verzögert gebündelt; Schreiben pro Frame wäre unnötige
+                    Arbeit.</p>
+            </section>
+            <section class="tip-section" id="kapitel-17">
+                <div class="section-heading"><span>17</span>
+                    <h2>Eigene Befehle und bewusstes Aufräumen</h2>
+                </div>
+                <p>Ein eigener Slash-Befehl ist der bequemste Weg, ein geschlossenes Fenster wieder einzublenden oder
+                    einen Test auszulösen.</p>
+                <div class="codebox">
+                    <div class="codebar"><span>Lua 5.1</span><button class="copy-button" type="button"
+                            data-target="code-46" aria-label="Codebeispiel 46 kopieren">Kopieren</button></div>
+                    <pre tabindex="0"><code class="language-lua" id="code-46">-- Ergaenzung zu Kapitel 2; window existiert bereits.
+local command = Turbine.ShellCommand()
+
+function command:Execute(commandName, arguments)
+    if arguments == &quot;show&quot; then
+        window:SetVisible(true)
+    elseif arguments == &quot;hide&quot; then
+        window:SetVisible(false)
+    else
+        Turbine.Shell.WriteLine(&quot;Benutze /lw show oder /lw hide&quot;)
+    end
+end
+
+function command:GetHelp()
+    return &quot;/lw show | hide&quot;
+end
+
+Turbine.Shell.AddCommand(&quot;lw&quot;, command)
+
+plugin.Unload = function(sender, args)
+    Turbine.Shell.RemoveCommand(command)
+    window:SetWantsUpdates(false)
+    window:SetVisible(false)
+end
+</code></pre>
+                </div>
+                <p>Bei <code>/lw show</code> ist <code>commandName</code> der Befehlsname und <code>arguments</code> der
+                    Text dahinter. Der Doppelpunkt bei <code>Execute</code> ergänzt zusätzlich <code>self</code>; du
+                    musst diesen Parameter nicht noch einmal ausdrücklich aufschreiben. Bei <code>AddCommand</code>
+                    steht der Name <strong>ohne Schrägstrich</strong>. [10]</p>
+                <p>Dieses Beispiel ist eigenständig zu Kapitel 2 gedacht. Es ersetzt die Unload-Zuweisung anderer
+                    Lernfassungen. In der endgültigen Fassung sammelst du alle Aufräumschritte in genau einem Handler.
+                </p>
+                <div class="callout"><strong>Merksatz zum Lebenszyklus:</strong> Was du anmeldest, meldest du ab. Was
+                    Updates bekommt, stellst du ab. Was dauerhaft bleiben soll, speicherst du bewusst. Das ist weniger
+                    spektakulär als ein leuchtender Balken und langfristig sehr viel wertvoller.</div>
+
+            </section>
+            <section class="tip-section" id="kapitel-18">
+                <div class="section-heading"><span>18</span>
+                    <h2>Alles zusammen: dein vollständiges Timer-Plugin</h2>
+                </div>
+                <p>Jetzt wird aus den Einzelteilen ein zusammenhängendes Programm. Es zeigt einen manuell gestarteten
+                    Countdown, färbt ihn kurz vor Ablauf um und lässt sich mit <code>/lw</code> bedienen.</p>
+                <p><strong>Verwende unverändert das Manifest aus Kapitel 2. Ersetze die komplette <code>Main.lua</code>
+                        durch diesen Block.</strong> Du brauchst keine Callback-Helfer und keine zusätzlichen Dateien
+                    für diese Grundfassung. Die Erweiterung zum Speichern aus Kapitel 16 ist optional.</p>
+                <div class="codebox">
+                    <div class="codebar"><span>Lua 5.1</span><button class="copy-button" type="button"
+                            data-target="code-47" aria-label="Codebeispiel 47 kopieren">Kopieren</button></div>
+                    <pre tabindex="0"><code class="language-lua" id="code-47">import &quot;Turbine&quot;
+import &quot;Turbine.UI&quot;
+import &quot;Turbine.UI.Lotro&quot;
+
+-- 1. Reservierten Befehlsnamen pruefen.
+if Turbine.Shell.IsCommand(&quot;lw&quot;) then
+    error(&quot;/lw ist bereits belegt. Plugin oder Befehlsname pruefen.&quot;)
+end
+
+-- 2. Zustand und Konstanten.
+local DEFAULT_DURATION = 12
+local BAR_WIDTH = 340
+local state = {
+    duration = DEFAULT_DURATION,
+    expiresAt = nil,
+    nextDrawAt = 0
+}
+
+local normalColor = Turbine.UI.Color(0.20, 0.60, 0.80)
+local warningColor = Turbine.UI.Color(0.90, 0.35, 0.15)
+
+-- 3. Oberflaeche einmalig aufbauen.
+local window = Turbine.UI.Lotro.Window()
+window:SetSize(380, 220)
+window:SetPosition(200, 200)
+window:SetText(&quot;Lua-Werkstatt: Testtimer&quot;)
+
+local label = Turbine.UI.Label()
+label:SetParent(window)
+label:SetPosition(20, 45)
+label:SetSize(340, 35)
+label:SetTextAlignment(Turbine.UI.ContentAlignment.MiddleCenter)
+label:SetForeColor(Turbine.UI.Color(1, 1, 1))
+label:SetText(&quot;Bereit&quot;)
+
+local track = Turbine.UI.Control()
+track:SetParent(window)
+track:SetPosition(20, 90)
+track:SetSize(BAR_WIDTH, 18)
+track:SetBackColor(Turbine.UI.Color(0.15, 0.15, 0.15))
+
+local fill = Turbine.UI.Control()
+fill:SetParent(track)
+fill:SetPosition(0, 0)
+fill:SetSize(BAR_WIDTH, 18)
+fill:SetBackColor(normalColor)
+fill:SetVisible(false)
+
+local startButton = Turbine.UI.Lotro.Button()
+startButton:SetParent(window)
+startButton:SetPosition(20, 130)
+startButton:SetSize(165, 25)
+startButton:SetText(&quot;12 s starten&quot;)
+
+local stopButton = Turbine.UI.Lotro.Button()
+stopButton:SetParent(window)
+stopButton:SetPosition(195, 130)
+stopButton:SetSize(165, 25)
+stopButton:SetText(&quot;Stoppen&quot;)
+
+-- 4. Logik zuerst definieren, danach mit Ereignissen verbinden.
+local function StopTimer(message)
+    state.expiresAt = nil
+    fill:SetVisible(false)
+    label:SetText(message or &quot;Gestoppt&quot;)
+    window:SetWantsUpdates(false)
+end
+
+local function Render(now)
+    if state.expiresAt == nil then
+        window:SetWantsUpdates(false)
+        return
+    end
+
+    local remaining = math.max(0, state.expiresAt - now)
+    if remaining &lt;= 0 then
+        StopTimer(&quot;Abgelaufen&quot;)
+        return
+    end
+
+    local fraction = math.min(1, remaining / state.duration)
+    fill:SetWidth(math.max(1, math.floor(BAR_WIDTH * fraction)))
+    fill:SetVisible(true)
+    label:SetText(string.format(&quot;Testtimer: %.1f s&quot;, remaining))
+
+    if remaining &lt;= 3 then
+        fill:SetBackColor(warningColor)
+    else
+        fill:SetBackColor(normalColor)
+    end
+end
+
+local function StartTimer(duration)
+    if type(duration) ~= &quot;number&quot; or duration ~= duration
+        or duration &lt; 1 or duration &gt; 120 then
+        Turbine.Shell.WriteLine(&quot;Dauer muss zwischen 1 und 120 liegen.&quot;)
+        return
+    end
+
+    local now = Turbine.Engine.GetGameTime()
+    state.duration = duration
+    state.expiresAt = now + duration
+    state.nextDrawAt = now + 0.1
+    window:SetVisible(true)
+    Render(now)
+    window:SetWantsUpdates(true)
+end
+
+-- 5. Eigene UI-Ereignisse.
+startButton.Click = function(sender, args)
+    StartTimer(DEFAULT_DURATION)
+end
+
+stopButton.Click = function(sender, args)
+    StopTimer(&quot;Gestoppt&quot;)
+end
+
+window.Update = function(sender, args)
+    local now = Turbine.Engine.GetGameTime()
+    if now &lt; state.nextDrawAt then
+        return
+    end
+    state.nextDrawAt = now + 0.1
+    Render(now)
+end
+
+window.VisibleChanged = function(sender, args)
+    if window:IsVisible() then
+        Render(Turbine.Engine.GetGameTime())
+        window:SetWantsUpdates(state.expiresAt ~= nil)
+    else
+        -- Die Zeit laeuft weiter, aber wir zeichnen nichts.
+        window:SetWantsUpdates(false)
+    end
+end
+
+-- 6. Slash-Befehl /lw.
+local command = Turbine.ShellCommand()
+
+function command:GetHelp()
+    return &quot;/lw show | hide | start [1-120] | stop&quot;
+end
+
+function command:Execute(commandName, arguments)
+    local action, value = string.match(
+        arguments or &quot;&quot;, &quot;^%s*(%S*)%s*(.-)%s*$&quot;
+    )
+    action = string.lower(action or &quot;&quot;)
+
+    if action == &quot;&quot; or action == &quot;show&quot; then
+        window:SetVisible(true)
+        Render(Turbine.Engine.GetGameTime())
+    elseif action == &quot;hide&quot; then
+        window:SetVisible(false)
+    elseif action == &quot;start&quot; then
+        local duration = DEFAULT_DURATION
+        if value ~= &quot;&quot; then
+            duration = tonumber(value)
+        end
+        StartTimer(duration)
+    elseif action == &quot;stop&quot; then
+        StopTimer(&quot;Gestoppt&quot;)
+    else
+        Turbine.Shell.WriteLine(self:GetHelp())
+    end
+end
+
+Turbine.Shell.AddCommand(&quot;lw&quot;, command)
+
+-- 7. Beim Entladen eigene Ressourcen aufraeumen.
+plugin.Unload = function(sender, args)
+    window:SetWantsUpdates(false)
+    Turbine.Shell.RemoveCommand(command)
+    window:SetVisible(false)
+    window.Update = nil
+    window.VisibleChanged = nil
+    startButton.Click = nil
+    stopButton.Click = nil
+end
+
+window:SetVisible(true)
+Turbine.Shell.WriteLine(&quot;LuaWerkstatt bereit. /lw start 12&quot;)
+</code></pre>
+                </div>
+                <h3>Was dabei in welcher Reihenfolge geschieht</h3>
+                <ol>
+                    <li><strong>Beim Laden:</strong> Zustand und Oberfläche werden angelegt. Funktionen und Handler
+                        werden definiert; <code>/lw</code> wird registriert.</li>
+                    <li><strong>Beim Starten:</strong> Die Dauer wird geprüft und ein Ablaufzeitpunkt gespeichert. Das
+                        Fenster wird eingeblendet und die erste Anzeige sofort gezeichnet.</li>
+                    <li><strong>Während des Countdowns:</strong> <code>Update</code> ruft gedrosselt <code>Render</code>
+                        auf. Dort entsteht die Restzeit aus Ablaufzeit minus aktueller Zeit.</li>
+                    <li><strong>Beim Ausblenden:</strong> Das Zeichnen wird abgeschaltet. Der Ablaufzeitpunkt bleibt
+                        bestehen; erneutes Einblenden berücksichtigt die vergangene Zeit.</li>
+                    <li><strong>Beim Ablauf oder Stoppen:</strong> Der aktive Zeitstempel wird entfernt, die Füllung
+                        verborgen und das Update abgeschaltet.</li>
+                    <li><strong>Beim Entladen:</strong> Der Slash-Befehl und die eigenen UI-Handler werden entfernt.
+                    </li>
+                </ol>
+                <p>Die Großschreibung von <code>DEFAULT_DURATION</code> ist nur eine Namenskonvention. Lua 5.1 erzwingt
+                    damit keine Unveränderlichkeit. Die etwas ungewöhnliche Prüfung <code>duration ~= duration</code>
+                    fängt einen möglichen NaN-Wert ab; normale Zahlen sind sich selbst gleich.</p>
+                <h3>Ausprobieren</h3>
+                <div class="codebox">
+                    <div class="codebar"><span>LOTRO · Eingabe</span><button class="copy-button" type="button"
+                            data-target="code-48" aria-label="Codebeispiel 48 kopieren">Kopieren</button></div>
+                    <pre tabindex="0"><code class="language-text" id="code-48">/lw start 12
+/lw start 5
+/lw hide
+/lw show
+/lw stop
+/lw start Unsinn
+</code></pre>
+                </div>
+                <div class="table-scroll" tabindex="0" role="region" aria-label="Vergleichstabelle">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Test</th>
+                                <th>Erwartetes Ergebnis</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Startbutton anklicken</td>
+                                <td>12-Sekunden-Countdown beginnt</td>
+                            </tr>
+                            <tr>
+                                <td>Währenddessen erneut starten</td>
+                                <td>Timer beginnt mit der neuen Dauer neu</td>
+                            </tr>
+                            <tr>
+                                <td>Bei höchstens 3 Sekunden</td>
+                                <td>Balken wird orange</td>
+                            </tr>
+                            <tr>
+                                <td>Fenster ausblenden, warten, wieder zeigen</td>
+                                <td>Verstrichene Zeit wird berücksichtigt</td>
+                            </tr>
+                            <tr>
+                                <td><code>/lw start Unsinn</code></td>
+                                <td>Verständliche Meldung; kein neuer Timer</td>
+                            </tr>
+                            <tr>
+                                <td><code>/lw start 0</code> oder <code>/lw start 999</code></td>
+                                <td>Dauer wird zurückgewiesen</td>
+                            </tr>
+                            <tr>
+                                <td>Plugin entladen und erneut laden</td>
+                                <td>Befehl lässt sich erneut registrieren</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p><strong>Was diese Fassung noch nicht tut:</strong> Sie erkennt keine Hüter-Gambits, liest keine
+                    gegnerischen DoTs und speichert ohne die optionale Erweiterung keine Position. Das sind klar
+                    abgegrenzte nächste Ausbauschritte. Die Zeit- und Anzeigelogik kannst du dafür weiterverwenden.</p>
+            </section>
+            <section class="tip-section" id="kapitel-19">
+                <div class="section-heading"><span>19</span>
+                    <h2>Mehrere Dateien und einfache Objektorientierung</h2>
+                </div>
+                <p>Solange dein Plugin klein ist, darf es ruhig in einer einzigen Datei leben. Sobald du mehrere
+                    Timeranzeigen und Einstellungen hast, lohnt sich eine Aufteilung.</p>
+                <div class="table-scroll" tabindex="0" role="region" aria-label="Vergleichstabelle">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Datei</th>
+                                <th>Verantwortlichkeit</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>Main.lua</code></td>
+                                <td>Aufbau, Verbindung der Teile, Aufräumen</td>
+                            </tr>
+                            <tr>
+                                <td><code>TimerModel.lua</code></td>
+                                <td>Zeitrechnung und Timerzustand</td>
+                            </tr>
+                            <tr>
+                                <td><code>TimerView.lua</code></td>
+                                <td>Fenster, Balken, Labels</td>
+                            </tr>
+                            <tr>
+                                <td><code>Settings.lua</code></td>
+                                <td>Laden, Prüfen und Speichern</td>
+                            </tr>
+                            <tr>
+                                <td><code>Locale.lua</code></td>
+                                <td>Anzeigenamen und sprachabhängige Texte</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <h3>import ist nicht einfach require mit anderem Namen</h3>
+                <p>In gewöhnlichen Lua-Projekten siehst du häufig <code>require</code>. LOTRO besitzt sein eigenes
+                    <code>import</code>- und Paketsystem. Ein Import wie
+                    <code>import &quot;JulianPlugins.LuaWerkstatt.TimerModel&quot;</code> sucht die entsprechende
+                    Lua-Datei relativ zu <code>Plugins</code>. Wenn du einen Paketordner statt einer konkreten Datei
+                    importierst, begegnet dir häufig eine <code>__init__.lua</code>, die dessen Inhalte zusammenführt.
+                </p>
+                <p>Ein <code>local</code> in einer importierten Datei wird nicht dadurch automatisch zu einer lokalen
+                    Variable in <code>Main.lua</code>. Plane daher ausdrücklich, was ein Modul nach außen bereitstellt.
+                    Nimm nicht an, dass <code>local model = import &quot;...&quot;</code> dasselbe Modulrückgabemuster
+                    wie Standard-Lua-<code>require</code> liefert.</p>
+                <h3>Klassen ohne Zauberwort</h3>
+                <p>Lua 5.1 besitzt kein eingebautes <code>class</code>-Schlüsselwort. Wenn du <code>class(...)</code> in
+                    einem Plugin liest, ist das eine bereitgestellte Hilfsfunktion. Ein einfaches eigenes Datenobjekt
+                    kannst du bereits mit Tabellen und einer Metatabelle bauen:</p>
+                <div class="codebox">
+                    <div class="codebar"><span>Lua 5.1</span><button class="copy-button" type="button"
+                            data-target="code-49" aria-label="Codebeispiel 49 kopieren">Kopieren</button></div>
+                    <pre tabindex="0"><code class="language-lua" id="code-49">local Timer = {}
+Timer.__index = Timer
+
+function Timer.New(duration)
+    assert(type(duration) == &quot;number&quot; and duration &gt; 0)
+    return setmetatable({
+        duration = duration,
+        expiresAt = nil
+    }, Timer)
+end
+
+function Timer:Start(now)
+    self.expiresAt = now + self.duration
+end
+
+function Timer:Remaining(now)
+    if self.expiresAt == nil then
+        return 0
+    end
+    return math.max(0, self.expiresAt - now)
+end
+
+local first = Timer.New(12)
+local second = Timer.New(18)
+first:Start(100)
+second:Start(100)
+
+Turbine.Shell.WriteLine(tostring(first:Remaining(105))) -- 7
+Turbine.Shell.WriteLine(tostring(second:Remaining(105))) -- 13
+</code></pre>
+                </div>
+                <p><code>setmetatable</code> verbindet die neue Instanz mit Regeln. <code>__index = Timer</code> besagt
+                    vereinfacht: Wenn ein Feld in der Instanz fehlt, suche es in der Tabelle <code>Timer</code>. Dort
+                    liegen die Methoden, während jede Instanz ihre eigenen Zustandswerte besitzt.</p>
+                <p><code>Timer.New(12)</code> ist hier absichtlich eine mit Punkt definierte Funktion.
+                    <code>first:Start(100)</code> ist eine Methode mit <code>self</code>. Diese eigene kleine Klasse
+                    ersetzt keine Turbine-UI-Klasse und versucht nicht, ihre Interna nachzubauen. Sie organisiert
+                    lediglich unsere Timerdaten.</p>
+                <p><strong>Wann lohnt sich das?</strong> Sobald mehrere gleichartige Objekte dieselbe Logik brauchen.
+                    Für genau einen Balken ist eine handvoll lokaler Funktionen völlig anständig. Architektur ist ein
+                    Werkzeug, kein Adelstitel.</p>
+            </section>
+            <section class="tip-section" id="kapitel-20">
+                <div class="section-heading"><span>20</span>
+                    <h2>Fehler lesen und gezielt debuggen</h2>
+                </div>
+                <p>LOTRO meldet Lua-Fehler häufig mit Datei und Zeilennummer. Beginne dort und überprüfe dann die
+                    unmittelbar davor gesetzten Werte. Die erste Fehlermeldung ist meist wichtiger als die Folgefehler.
+                </p>
+                <div class="table-scroll" tabindex="0" role="region" aria-label="Vergleichstabelle">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Meldung oder Symptom</th>
+                                <th>Häufige Ursache</th>
+                                <th>Erste Prüfung</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>attempt to index ... a nil value</code></td>
+                                <td>Objekt fehlt oder Name vertippt</td>
+                                <td>Import, Schreibweise, Erzeugungsreihenfolge</td>
+                            </tr>
+                            <tr>
+                                <td><code>attempt to call ... a nil value</code></td>
+                                <td>Funktion nicht vorhanden</td>
+                                <td><code>class</code>/<code>AddCallback</code> wirklich definiert?</td>
+                            </tr>
+                            <tr>
+                                <td><code>attempt to concatenate ... a nil value</code></td>
+                                <td>Fehlender Wert in Textverkettung</td>
+                                <td>Wert prüfen; für Debug <code>tostring</code> verwenden</td>
+                            </tr>
+                            <tr>
+                                <td><code>unexpected symbol near ...</code></td>
+                                <td>Syntaxfehler</td>
+                                <td>Klammer, Anführungszeichen, falscher Operator</td>
+                            </tr>
+                            <tr>
+                                <td><code>&#39;end&#39; expected</code></td>
+                                <td>Block nicht geschlossen</td>
+                                <td>Einrückung und Beginn der Funktion/des if</td>
+                            </tr>
+                            <tr>
+                                <td>Plugin nicht in der Liste</td>
+                                <td>Manifest/Pfad/Endung falsch</td>
+                                <td>Tatsächlichen Dokumenteordner prüfen</td>
+                            </tr>
+                            <tr>
+                                <td>Änderung erscheint nicht</td>
+                                <td>Alter Code noch geladen</td>
+                                <td>Apartment entladen und Plugin neu laden</td>
+                            </tr>
+                            <tr>
+                                <td>Fenster fehlt, aber keine Fehlermeldung</td>
+                                <td>Sichtbarkeit, Position, Größe</td>
+                                <td>Feste Position und eindeutige Textfarbe setzen</td>
+                            </tr>
+                            <tr>
+                                <td>Ereignis kommt mehrfach</td>
+                                <td>Mehrfach registriert oder Datenquelle mehrdeutig</td>
+                                <td>Handlerregistrierung und Rohereignisse zählen</td>
+                            </tr>
+                            <tr>
+                                <td>Countdown läuft unterschiedlich schnell</td>
+                                <td>Frames statt Zeit verwendet</td>
+                                <td>Ablaufzeitpunkt minus aktuelle Zeit berechnen</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <h3>Kleine, gezielte Debugausgaben</h3>
+                <div class="codebox">
+                    <div class="codebar"><span>Lua 5.1</span><button class="copy-button" type="button"
+                            data-target="code-50" aria-label="Codebeispiel 50 kopieren">Kopieren</button></div>
+                    <pre tabindex="0"><code class="language-lua" id="code-50">local function Debug(label, value)
+    Turbine.Shell.WriteLine(
+        &quot;[LW] &quot; .. label .. &quot; = &quot; .. tostring(value)
+        .. &quot; (&quot; .. type(value) .. &quot;)&quot;
+    )
+end
+
+Debug(&quot;duration&quot;, 12)
+Debug(&quot;missing&quot;, nil)
+</code></pre>
+                </div>
+                <p>Den Datentyp dazuzuschreiben ist besonders bei Zahlen aus Textfeldern nützlich.
+                    <code>&quot;12&quot;</code> und <code>12</code> sehen ähnlich aus, sind aber unterschiedliche Typen.
+                </p>
+                <h3>pcall fängt Laufzeitfehler ab – und ersetzt keine Reparatur</h3>
+                <div class="codebox">
+                    <div class="codebar"><span>Lua 5.1</span><button class="copy-button" type="button"
+                            data-target="code-51" aria-label="Codebeispiel 51 kopieren">Kopieren</button></div>
+                    <pre tabindex="0"><code class="language-lua" id="code-51">local function ReadBrokenSettings()
+    error(&quot;Absichtlicher Testfehler&quot;)
+end
+
+local ok, result = pcall(ReadBrokenSettings)
+if not ok then
+    Turbine.Shell.WriteLine(&quot;Laden fehlgeschlagen: &quot; .. tostring(result))
+end
+</code></pre>
+                </div>
+                <p><code>pcall</code> liefert zuerst den Erfolgsstatus. Bei einem Fehler folgt dessen Meldung. Es hilft
+                    an begrenzten Schnittstellen, etwa beim Verarbeiten fremder gespeicherter Daten. Packst du wahllos
+                    dein ganzes Plugin hinein und verschweigst die Meldungen, hast du den Fehler lediglich unter den
+                    Teppich geschoben.</p>
+                <p>Syntaxfehler in derselben Datei entstehen schon beim Einlesen und werden durch einen späteren
+                    <code>pcall</code> nicht geheilt. Auch eine Endlosschleife verwandelt sich dadurch nicht in einen
+                    harmlosen Fehler.</p>
+                <h3>Reproduzierbare Fehlerberichte</h3>
+                <p>Notiere Pluginfassung, genaue Aktion, erwartetes Verhalten, tatsächliches Verhalten und die erste
+                    Fehlermeldung. Bei einem Chatparser gehören echte Rohmeldungen und die Clientsprache dazu. „Geht
+                    nicht“ ist menschlich verständlich, aber technisch ungefähr so ergiebig wie „Boot nass“.</p>
+            </section>
+            <section class="tip-section" id="kapitel-21">
+                <div class="section-heading"><span>21</span>
+                    <h2>Übungen mit Lösungen</h2>
+                </div>
+                <p>Bearbeite zuerst die Aufgabe und öffne danach die Lösung. Die kleinen Experimente sind wichtiger als
+                    das Auswendiglernen aller API-Namen.</p>
+                <h3>A · Wahr oder falsch?</h3>
+                <p>Was wird ausgegeben?</p>
+                <div class="codebox">
+                    <div class="codebar"><span>Lua 5.1</span><button class="copy-button" type="button"
+                            data-target="code-52" aria-label="Codebeispiel 52 kopieren">Kopieren</button></div>
+                    <pre tabindex="0"><code class="language-lua" id="code-52">local seconds = 0
+local text = &quot;&quot;
+
+if seconds and text then
+    Turbine.Shell.WriteLine(&quot;A&quot;)
+else
+    Turbine.Shell.WriteLine(&quot;B&quot;)
+end
+</code></pre>
+                </div>
+                <details>
+                    <summary>Lösung anzeigen</summary>
+                    <p><strong>A.</strong> Sowohl 0 als auch ein leerer String sind in Lua wahr. Wenn du einen laufenden
+                        Timer prüfen willst, brauchst du etwa <code>seconds &gt; 0</code>; für nichtleeren Text
+                        <code>text ~= ""</code>.</p>
+                </details>
+
+                <h3>B · Eine saubere Restzeitfunktion</h3>
+                <p>Schreibe eine Funktion, die für Ende 112 und Jetzt 115 den Wert 0 statt −3 liefert.</p>
+                <details>
+                    <summary>Lösung anzeigen</summary>
+
+                    <div class="codebox">
+                        <div class="codebar"><span>Lua 5.1</span><button class="copy-button" type="button"
+                                data-target="code-53" aria-label="Codebeispiel 53 kopieren">Kopieren</button></div>
+                        <pre tabindex="0"><code class="language-lua" id="code-53">local function GetRemaining(expiresAt, now)
+    return math.max(0, expiresAt - now)
+end
+
+assert(GetRemaining(112, 105) == 7)
+assert(GetRemaining(112, 115) == 0)
+</code></pre>
+                    </div>
+                    <p><code>assert</code> bleibt bei einer wahren Bedingung still und erzeugt bei einer falschen einen
+                        Fehler. Hier prüfen wir Ergebnisse, nicht die Anzahl geschriebener Codezeilen.</p>
+                </details>
+
+                <h3>C · Einstellungen kopieren</h3>
+                <p>Du setzt <code>local mine = defaults</code> und änderst anschließend <code>mine.duration</code>.
+                    Warum verändert sich <code>defaults.duration</code> mit?</p>
+                <details>
+                    <summary>Lösung anzeigen</summary>
+                    <p>Die Zuweisung kopiert eine Referenz auf dieselbe Tabelle. Erzeuge eine neue Tabelle und kopiere
+                        die gewünschten Felder. Für verschachtelte Tabellen musst du entscheiden, welche Untertabellen
+                        ebenfalls unabhängig sein sollen.</p>
+                </details>
+
+                <h3>D · Warnschwelle verändern</h3>
+                <p>Ändere den vollständigen Timer so, dass er erst bei höchstens 2 Sekunden orange wird. Wo musst du
+                    eingreifen?</p>
+                <details>
+                    <summary>Lösung anzeigen</summary>
+                    <p>In <code>Render</code>: <code>if remaining &lt;= 2 then</code>. Der Ablaufzeitpunkt bleibt
+                        unverändert; du änderst nur eine Darstellungsentscheidung. Als nächsten Schritt könntest du
+                        daraus eine Einstellung machen.</p>
+                </details>
+
+                <h3>E · Drei Buttons, drei Laufzeiten</h3>
+                <p>Erzeuge für 5, 12 und 20 Sekunden jeweils einen Button. Voraussetzung ist die vollständige Fassung
+                    aus Kapitel 18. Setze die Erweiterung <strong>nach der Definition von
+                        <code>StartTimer</code></strong> ein und vergrößere das Fenster.</p>
+                <details>
+                    <summary>Eine mögliche Lösung anzeigen</summary>
+
+                    <div class="codebox">
+                        <div class="codebar"><span>Lua 5.1</span><button class="copy-button" type="button"
+                                data-target="code-54" aria-label="Codebeispiel 54 kopieren">Kopieren</button></div>
+                        <pre tabindex="0"><code class="language-lua" id="code-54">window:SetHeight(270)
+local testDurations = { 5, 12, 20 }
+
+for index, duration in ipairs(testDurations) do
+    local selectedDuration = duration
+    local testButton = Turbine.UI.Lotro.Button()
+    testButton:SetParent(window)
+    testButton:SetPosition(20 + (index - 1) * 115, 190)
+    testButton:SetSize(110, 25)
+    testButton:SetText(selectedDuration .. &quot; s&quot;)
+    testButton.Click = function(sender, args)
+        StartTimer(selectedDuration)
+    end
+end
+</code></pre>
+                    </div>
+                    <p>Die lokale Variable macht ausdrücklich sichtbar, welchen Wert die jeweilige Closure verwendet.
+                        Für die optionale Positionsbegrenzung aus Kapitel 16 musst du die neue Fensterhöhe ebenfalls
+                        berücksichtigen.</p>
+                </details>
+
+                <h3>F · Ein Parser soll nicht jeden Tick als Start zählen</h3>
+                <p>Du beobachtest drei Meldungen mit demselben Fertigkeitsnamen innerhalb von neun Sekunden. Kannst du
+                    daraus drei Anwendungen ableiten?</p>
+                <details>
+                    <summary>Lösung anzeigen</summary>
+                    <p>Nein. Es können unter anderem drei periodische Schadensmeldungen desselben Effekts sein. Du
+                        brauchst weitere verlässliche Merkmale. Fehlen diese, muss die Anzeige ihre Schätzung kenntlich
+                        machen oder auf ein anderes Startsignal zurückgreifen.</p>
+                </details>
+
+            </section>
+            <section class="tip-section" id="kapitel-22">
+                <div class="section-heading"><span>22</span>
+                    <h2>Dein sinnvoller Lernpfad</h2>
+                </div>
+                <p>Du musst dieses Dokument nicht in einem Rutsch durcharbeiten. Für den Anfang sind drei praktische
+                    Etappen ausreichend:</p>
+                <ol class="tip-list" style="--counter-start:0">
+                    <li>
+                        <h3>Eine funktionierende Werkbank</h3>
+                        <p>Kapitel 1–5: Plugin anlegen, laden, Text ändern, Werte ausgeben. Danach verstehst du, welche
+                            Datei LOTRO lädt und wie eine Lua-Anweisung aussieht.</p>
+                    </li>
+                    <li>
+                        <h3>Die Sprache im Griff</h3>
+                        <p>Kapitel 6–10: Tabellen, Schleifen, Funktionen, Closures und Methoden. Baue kleine Timerdaten
+                            auf und rechne Restzeiten aus. Die Oberfläche darf dabei noch ausgesprochen unschön sein.
+                        </p>
+                    </li>
+                    <li>
+                        <h3>Ein eigenes Werkzeug im Spiel</h3>
+                        <p>Kapitel 11–18: Timerfenster starten, Befehle ergänzen, sauber entladen, Position speichern.
+                            Erst danach Buffs oder Kampfmeldungen als Datenquelle anschließen.</p>
+                    </li>
+                </ol>
+
+                <p>Für dein späteres <strong>Hüter-Werkzeug</strong> ist die sinnvolle Reihenfolge: mehrere manuelle
+                    Timer, eine klare Reihenfolge der Balken, konfigurierbare Dauern und anschließend ein separat
+                    überprüfter Ereignisadapter. Für einen <strong>Bufftracker auf deinem Runenbewahrer oder
+                        Beorninger</strong> ist der Anfangsscan deiner eigenen Effekte mit anschließendem
+                    Eventabonnement die naheliegende Fortsetzung.</p>
+                <p>Eine kleine, präzise Anzeige ist das bessere erste Ziel als ein Tracker, der schon beim Start alle
+                    denkbaren Klassen, Sprachen und Raidmechaniken beherrschen soll. Der erste Balken muss nicht ganz
+                    Mittelerde verwalten.</p>
+            </section>
+            <section class="tip-section" id="kapitel-23">
+                <div class="section-heading"><span>23</span>
+                    <h2>Spickzettel für den zweiten Bildschirm</h2>
+                </div>
+                <div class="table-scroll" tabindex="0" role="region" aria-label="Vergleichstabelle">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Wenn du …</th>
+                                <th>… brauchst du</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>einen Wert lokal speichern willst</td>
+                                <td><code>local duration = 12</code></td>
+                            </tr>
+                            <tr>
+                                <td>einen Wert erhöhen willst</td>
+                                <td><code>count = count + 1</code></td>
+                            </tr>
+                            <tr>
+                                <td>ungleich vergleichen willst</td>
+                                <td><code>a ~= b</code></td>
+                            </tr>
+                            <tr>
+                                <td>einen Text zusammensetzen willst</td>
+                                <td><code>name .. &quot;: &quot; .. tostring(value)</code></td>
+                            </tr>
+                            <tr>
+                                <td>eine Zahl mit einer Nachkommastelle anzeigen willst</td>
+                                <td><code>string.format(&quot;%.1f&quot;, value)</code></td>
+                            </tr>
+                            <tr>
+                                <td>einen String als Zahl interpretieren willst</td>
+                                <td><code>tonumber(text)</code> und anschließende Prüfung</td>
+                            </tr>
+                            <tr>
+                                <td>eine Liste bearbeiten willst</td>
+                                <td><code>{...}</code>, <code>ipairs</code>, <code>table.insert</code>,
+                                    <code>table.remove</code></td>
+                            </tr>
+                            <tr>
+                                <td>nach einer ID nachschlagen willst</td>
+                                <td><code>definitions[id]</code></td>
+                            </tr>
+                            <tr>
+                                <td>einen Tabelleneintrag entfernen willst</td>
+                                <td><code>active[id] = nil</code></td>
+                            </tr>
+                            <tr>
+                                <td>eine Funktion speichern willst</td>
+                                <td><code>handler = OnClick</code></td>
+                            </tr>
+                            <tr>
+                                <td>eine Funktion ausführen willst</td>
+                                <td><code>OnClick()</code></td>
+                            </tr>
+                            <tr>
+                                <td>eine Objektmethode aufrufen willst</td>
+                                <td><code>object:Method(value)</code></td>
+                            </tr>
+                            <tr>
+                                <td>die aktuelle relative Spielzeit willst</td>
+                                <td><code>Turbine.Engine.GetGameTime()</code></td>
+                            </tr>
+                            <tr>
+                                <td>framebezogene Aktualisierung willst</td>
+                                <td><code>control.Update</code> und <code>SetWantsUpdates(true)</code></td>
+                            </tr>
+                            <tr>
+                                <td>die Aktualisierung beenden willst</td>
+                                <td><code>SetWantsUpdates(false)</code></td>
+                            </tr>
+                            <tr>
+                                <td>lokale Debugausgabe willst</td>
+                                <td><code>Turbine.Shell.WriteLine(text)</code></td>
+                            </tr>
+                            <tr>
+                                <td>eine API-Liste lesen willst</td>
+                                <td>Ihre dokumentierten Methoden, oft <code>GetCount()</code>/<code>Get(i)</code></td>
+                            </tr>
+                            <tr>
+                                <td>Einstellungen sichern willst</td>
+                                <td><code>Turbine.PluginData.Save(...)</code></td>
+                            </tr>
+                            <tr>
+                                <td>einen Fehler eingrenzen willst</td>
+                                <td>Wert + <code>type(value)</code> + erste Fehlermeldung</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="core-points">
+                    <h2>Die sechs Dinge, die sitzen sollten</h2>
+                    <p><strong>local</strong> schützt vor unbeabsichtigten globalen Zuständen. <strong>nil</strong> ist
+                        kein Objekt. <strong>Tabellen</strong> werden per Referenz geteilt. <strong>:</strong> übergibt
+                        <code>self</code>. <strong>Events</strong> rufen deinen Code später auf. <strong>Timer</strong>
+                        rechnen mit Zeitpunkten.</p>
+                </div>
+
+            </section>
+            <section class="tip-section" id="kapitel-24">
+                <div class="section-heading"><span>24</span>
+                    <h2>Referenzen und Stand der Anleitung</h2>
+                </div>
+                <p><strong>Stand: 5. Oktober 2026.</strong> Die Beispiele wurden für Lua 5.1 geschrieben. Die
+                    Quellenprüfung betrifft die Sprachgrundlagen und die verwendeten API-Muster; ein Ingame-Test auf
+                    deinem Client bleibt erforderlich. Neuere API-Erweiterungen können über diesen bewusst kleinen
+                    Einstieg hinausgehen.</p>
+                <p>Die verfügbare U49-Dokumentation ist als Spiegelung der SSG-Dokumentation gelistet. Ihr
+                    Downloadarchiv ließ sich bei der Recherche nicht auslesen; daher wird hier keine vollständige
+                    Prüfung gegen dieses Archiv behauptet. Für die verwendeten Grundmuster wurden zusätzlich die unten
+                    genannten API-Spiegelungen und Originalbeiträge beziehungsweise Quelltexte von Pluginentwicklern
+                    herangezogen. Community-Dokumentation kann selbst Lücken oder Fehler enthalten.</p>
+                <ol>
+                    <li><a href="https://www.lua.org/manual/5.1/manual.html">Lua 5.1 Reference Manual</a> – maßgebliche
+                        Sprachreferenz: Gültigkeitsbereiche, Tabellen, Ausdrücke, Funktionen und Standardbibliotheken.
+                        Auch <a href="https://www.lua.org/manual/5.1/de/">auf Deutsch</a> verfügbar. Die Erläuterungen
+                        und Lernbeispiele hier sind eigens für dieses Tutorial formuliert.</li>
+                    <li><a href="https://www.lotrointerface.com/portal.php?id=35&amp;pageid=21">Garan: Before you
+                            begin</a> – LOTRO-spezifischer Einstieg mit Verweis auf Lua 5.1. <a
+                            href="https://www.lotrointerface.com/portal.php?id=35&amp;pageid=20">Inhaltsübersicht seines
+                            Tutorials</a>.</li>
+                    <li><a href="https://www.lotrointerface.com/forums/showthread.php?t=1535">Plugin unload itself…</a>
+                        – Entwicklerdiskussion zum Apartment und Entladen von Skriptzuständen.</li>
+                    <li><a href="https://www.lotrointerface.com/forums/showthread.php?t=3620">Lua Beginner has some
+                            questions</a> – insbesondere Garans Erklärungen zu Fensterhierarchie und der temporären
+                        Referenz <code>plugin</code> beim Laden.</li>
+                    <li><a href="https://www.lotrointerface.com/forums/archive/index.php/t-2005.html">Using Add/Remove
+                            callback functions with the localplayer EffectList</a> – Handlerreferenzen und Registrierung
+                        bei Effektlisten.</li>
+                    <li><a href="https://www.lotrointerface.com/forums/archive/index.php/t-1825.html">Read out the
+                            EffectList</a> – Entwicklerbeispiele zum Lesen der Effektliste und zu Ereignisargumenten.
+                    </li>
+                    <li><a href="https://goldbishop.github.io/Lotro_LUA/turbine.chat">Turbine.Chat –
+                            Dokumentationsspiegel</a> und <a
+                            href="https://www.lotrointerface.com/forums/showthread.php?t=3591">Reading Chat in LUA</a> –
+                        API und praktische Verwendung von <code>ChatType</code> und <code>Message</code>.</li>
+                    <li><a href="https://goldbishop.github.io/Lotro_LUA/turbine.ui.control">Turbine.UI.Control –
+                            Dokumentationsspiegel</a> – Control-Methoden und Update-Ereignis. <a
+                            href="https://tksmith151.github.io/lotro-docs/Turbine_Engine_GetGameTime.html">GetGameTime –
+                            API-Spiegel</a>.</li>
+                    <li><a
+                            href="https://github.com/velvierd/lotro-plugins/blob/master/TurbinePlugins/CombatQuickslots/CombatQuickslotsBar.lua">Turbine-Beispielcode:
+                            CombatQuickslotsBar.lua</a> – erhaltene Fassung eines Pluginbeispiels mit
+                        PluginData-Callbacks und UI-Aufbau.</li>
+                    <li><a
+                            href="https://svn.lotrointerface.com/filedetails.php?nojs=1&amp;path=%2Ftags%2F2.01%2FThurallor%2FSequenceBars%2FMain.lua&amp;repname=SequenceBars&amp;rev=125&amp;sc=1">SequenceBars:
+                            Main.lua</a> – Originalquelltext als Referenz für ShellCommand-Registrierung und
+                        Execute-Signatur.</li>
+                    <li><a href="https://www.lotrointerface.com/downloads/fileinfo.php?id=1325">SSG U49 Lua API
+                            Documentation</a> – Downloadlisting der Dokumentationsspiegelung, datiert mit 2. Oktober
+                        2026. Für das Nachschlagen zusätzlicher API-Funktionen.</li>
+                </ol>
+                <div class="callout"><strong>Zur Überprüfung:</strong> Die vollständigen Lua-Dateien und die syntaktisch
+                    vollständigen Lua-Beispiele wurden mit einer Lua-5.1-Laufzeit auf Syntax geprüft. Die
+                    Timer-Grundfassung wurde zusätzlich mit einer vereinfachten API-Nachbildung auf Start, Ablauf,
+                    Ausblenden, ungültige Eingaben und Aufräumen geprüft. Diese Prüfungen ersetzen keine Ausführung der
+                    echten Turbine-API im LOTRO-Client.</div>
+            </section>
+        </main>
+        <footer class="footer">
+            <p>Für Julian · Sprache lernen, Werkzeuge bauen, im Spiel überprüfen.</p><a class="back-to-top"
+                href="#anfang">Zurück zum Anfang ↑</a>
+        </footer>
+    </div><a class="site-top" href="#anfang" aria-label="Zum Anfang der Anleitung">↑ Anfang</a>
+    <script>
+        for (const button of document.querySelectorAll('.copy-button')) { button.addEventListener('click', async () => { const target = document.getElementById(button.dataset.target); const text = target.textContent; try { if (navigator.clipboard && window.isSecureContext && location.protocol !== 'file:') { await navigator.clipboard.writeText(text) } else { const el = document.createElement('textarea'); el.value = text; el.style.position = 'fixed'; el.style.top = '-10000px'; document.body.appendChild(el); el.select(); const ok = document.execCommand('copy'); el.remove(); if (!ok) throw new Error('copy') } button.textContent = 'Kopiert'; document.getElementById('copy-status').textContent = 'Codebeispiel kopiert.'; } catch (e) { const range = document.createRange(); range.selectNodeContents(target); const selection = window.getSelection(); selection.removeAllRanges(); selection.addRange(range); button.textContent = 'Strg+C'; document.getElementById('copy-status').textContent = 'Code markiert. Bitte mit Strg+C kopieren.'; } setTimeout(() => { button.textContent = 'Kopieren' }, 2200); }); }
+        const print = document.getElementById('print'); let opened = []; window.addEventListener('beforeprint', () => { opened = Array.from(document.querySelectorAll('details:not([open])')); opened.forEach(el => el.open = true) }); window.addEventListener('afterprint', () => { opened.forEach(el => el.open = false) }); print.addEventListener('click', () => window.print());
+    </script>
+</body>
+
+</html>
