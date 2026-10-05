@@ -3135,9 +3135,25 @@
         "caption": "From paper to copper — endless possibilities."
       }
     ]
+  },
+  {
+    "id": "2026-03-22_knowledge_eagle_basics",
+    "topic": "electronics",
+    "subtopic": "pcb_basics",
+    "date": "2026-03-22",
+    "title": "EAGLE — Thinking in Schematics, Not Just Lines",
+    "format": "markdown",
+    "teaser": "EAGLE is not a drawing tool. It is a system of rules, connections, and consistency between schematic and board.",
+    "content_en": "Working with EAGLE means accepting one core idea:\n\n~The schematic is truth. The board is consequence.~\n\nAccording to the workflow, a project always starts with a schematic and only then becomes a board :contentReference[oaicite:0]{index=0}.\n\n**Core concepts:**\n\n- ADD → place components\n- NET (not WIRE!) → define electrical connections\n- LABEL → make signals readable instead of messy\n- ERC → find logical mistakes early\n\n**Critical insight:**\n\nTwo wires that look connected are irrelevant.\nTwo nets with the same name *are* connected.\n\n**From schematic to board:**\n\n- BOARD → generates layout\n- Airwires → show required connections\n- ROUTE → turns intent into copper\n\n**My learnings:**\n\n- Use LABEL aggressively → clarity beats spaghetti\n- Think in signals, not geometry\n- Fix errors early (ERC), not after routing\n- Placement is 80% of routing\n\nEAGLE rewards discipline — and punishes improvisation.",
+    "content_de": "Mit EAGLE zu arbeiten heißt, eine zentrale Wahrheit zu akzeptieren:\n\n~Der Schaltplan ist die Wahrheit. Das Board ist die Konsequenz.~\n\nIm vorgesehenen Workflow beginnt jedes Projekt mit einem Schaltplan und wird erst danach zur Leiterplatte.\n\n**Grundkonzepte:**\n\n- ADD → Bauteile platzieren\n- NET (nicht WIRE!) → elektrische Verbindungen definieren\n- LABEL → Signale lesbar machen statt chaotisch zu verbinden\n- ERC → logische Fehler früh erkennen\n\n**Zentrale Erkenntnis:**\n\nZwei Leitungen, die verbunden aussehen, sind bedeutungslos.\nZwei Netze mit demselben Namen *sind* verbunden.\n\n**Vom Schaltplan zum Board:**\n\n- BOARD → erzeugt das Layout\n- Airwires → zeigen notwendige Verbindungen\n- ROUTE → verwandelt Absicht in Kupfer\n\n**Meine Learnings:**\n\n- LABEL konsequent einsetzen → Klarheit schlägt Kabelsalat\n- In Signalen denken, nicht in Geometrie\n- Fehler früh beheben (ERC), nicht erst nach dem Routen\n- Platzierung ist 80 % des Routings\n\nEAGLE belohnt Disziplin — und bestraft Improvisation.",
+    "images": [
+      {
+        "src": "/web/assets/news/img/pcb_basics_20.jpeg",
+        "alt": "Clean schematic with labeled nets instead of chaotic wiring",
+        "caption": "Readable schematics are engineered, not accidental."
+      }
+    ]
   }
-
-
 
 
   ]
