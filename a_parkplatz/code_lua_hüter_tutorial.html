@@ -1,0 +1,2200 @@
+<!doctype html>
+<html lang="de">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description"
+        content="Projekt 01 der LOTRO-Lua-Werkstatt: einen Hüter-DoT-Ticker als ehrliches Single-Target-Lernprojekt bauen – mit Mehrfach-Timern, UI, Slash-Befehlen und Kampfchat-Diagnose.">
+    <title>Projekt 01 · Warden DoT Lab – Lua für LOTRO</title>
+    <style>
+        :root {
+            --background: #f5f0e1;
+            --surface: #ffffff;
+            --text: #171717;
+            --muted: #666666;
+            --border: #ddddda;
+            --accent: #24556b;
+            --accent-dark: #183c4d;
+            --accent-soft: #e7eff2;
+            --max-width: 920px;
+            --radius: 14px;
+            --shadow: 0 16px 40px rgba(23, 23, 23, 0.07);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            background: var(--background);
+            color: var(--text);
+            font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-size: 1rem;
+            line-height: 1.65;
+        }
+
+        a {
+            color: var(--accent);
+            text-decoration-thickness: 1px;
+            text-underline-offset: 0.2em;
+        }
+
+        a:hover,
+        a:focus-visible {
+            color: var(--accent-dark);
+        }
+
+        .skip-link {
+            position: fixed;
+            top: 12px;
+            left: 12px;
+            z-index: 10;
+            padding: 10px 14px;
+            border-radius: 6px;
+            background: var(--accent-dark);
+            color: #ffffff;
+            transform: translateY(-150%);
+            transition: transform 160ms ease;
+        }
+
+        .skip-link:focus {
+            color: #ffffff;
+            transform: translateY(0);
+        }
+
+        .page {
+            width: min(calc(100% - 40px), var(--max-width));
+            margin: 0 auto;
+            padding: 56px 0 72px;
+        }
+
+        .hero {
+            padding: clamp(30px, 6vw, 58px);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background:
+                linear-gradient(135deg, rgba(36, 85, 107, 0.08), transparent 58%),
+                var(--surface);
+            box-shadow: var(--shadow);
+        }
+
+        .eyebrow {
+            margin: 0 0 10px;
+            color: var(--accent);
+            font-size: 0.78rem;
+            font-weight: 750;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        h1,
+        h2,
+        h3 {
+            line-height: 1.2;
+        }
+
+        h1 {
+            max-width: 16ch;
+            margin: 0;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(2.35rem, 7vw, 4.7rem);
+            font-weight: 600;
+            letter-spacing: -0.035em;
+        }
+
+        .lead {
+            max-width: 66ch;
+            margin: 24px 0 0;
+            color: #343434;
+            font-size: clamp(1.05rem, 2.3vw, 1.2rem);
+        }
+
+        .lead strong {
+            color: var(--accent-dark);
+        }
+
+        .contents {
+            margin: 32px 0 0;
+            padding: 24px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: rgba(255, 255, 255, 0.72);
+        }
+
+        .contents h2 {
+            margin: 0 0 16px;
+            font-size: 1rem;
+        }
+
+        .contents ul {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 9px 26px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .contents a {
+            display: inline-block;
+            font-weight: 650;
+            text-decoration: none;
+        }
+
+        .contents a::before {
+            content: "→ ";
+            color: var(--muted);
+        }
+
+        .tip-section {
+            scroll-margin-top: 22px;
+            margin-top: 64px;
+        }
+
+        .section-heading {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 24px;
+        }
+
+        .section-heading span {
+            display: grid;
+            width: 42px;
+            height: 42px;
+            place-items: center;
+            border-radius: 50%;
+            background: var(--accent);
+            color: #ffffff;
+            font-size: 0.8rem;
+            font-weight: 800;
+        }
+
+        .section-heading h2 {
+            margin: 0;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(1.65rem, 4vw, 2.35rem);
+            font-weight: 600;
+        }
+
+        .tip-list {
+            display: grid;
+            gap: 14px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            counter-reset: tip var(--counter-start);
+        }
+
+        .tip-list>li {
+            position: relative;
+            padding: 24px 24px 24px 78px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: var(--surface);
+            box-shadow: 0 7px 22px rgba(23, 23, 23, 0.035);
+            counter-increment: tip;
+        }
+
+        .tip-list>li::before {
+            content: counter(tip, decimal-leading-zero);
+            position: absolute;
+            top: 24px;
+            left: 22px;
+            color: var(--accent);
+            font-size: 0.85rem;
+            font-weight: 800;
+            letter-spacing: 0.04em;
+        }
+
+        .tip-list h3 {
+            margin: 0;
+            font-size: 1.04rem;
+        }
+
+        .tip-list p {
+            margin: 8px 0 0;
+            color: #444444;
+        }
+
+        .tip-list em {
+            color: #303030;
+        }
+
+        .core-points {
+            margin-top: 64px;
+            padding: clamp(28px, 5vw, 44px);
+            border-left: 5px solid var(--accent);
+            border-radius: 0 var(--radius) var(--radius) 0;
+            background: var(--accent-soft);
+        }
+
+        .core-points h2 {
+            margin: 0 0 12px;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(1.55rem, 4vw, 2rem);
+            font-weight: 600;
+        }
+
+        .core-points p {
+            max-width: 70ch;
+            margin: 0;
+        }
+
+        .core-points ol {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 22px 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .core-points a {
+            display: inline-block;
+            padding: 7px 11px;
+            border: 1px solid rgba(36, 85, 107, 0.25);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.6);
+            font-weight: 750;
+            text-decoration: none;
+        }
+
+        .back-to-top {
+            display: inline-block;
+            margin-top: 38px;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        @media (max-width: 640px) {
+            .page {
+                width: min(calc(100% - 24px), var(--max-width));
+                padding: 24px 0 48px;
+            }
+
+            .hero {
+                padding: 26px 22px;
+            }
+
+            .contents ul {
+                grid-template-columns: 1fr;
+            }
+
+            .tip-section {
+                margin-top: 48px;
+            }
+
+            .tip-list>li {
+                padding: 22px 18px 22px 58px;
+            }
+
+            .tip-list>li::before {
+                left: 17px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                transition: none !important;
+            }
+        }
+
+        /* Projekt-Tutorial: Ergänzungen auf Basis von classy.css */
+        :root {
+            --max-width: 1040px;
+        }
+
+        .hero h1 {
+            max-width: 19ch;
+        }
+
+        .hero .meta {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 24px;
+        }
+
+        .pill {
+            padding: 5px 11px;
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            background: #fff;
+            font-size: .8rem;
+            color: var(--accent-dark);
+        }
+
+        .intro-note,
+        .callout,
+        .exercise,
+        .checkpoint {
+            margin: 24px 0;
+            padding: 20px 24px;
+            border-left: 4px solid var(--accent);
+            background: var(--accent-soft);
+            border-radius: 0 10px 10px 0;
+        }
+
+        .warning {
+            border-color: #a75e20;
+            background: #fff2df;
+        }
+
+        .exercise {
+            border-color: #6c7548;
+            background: #f1f3e7;
+        }
+
+        .checkpoint {
+            border-color: #5d4b8a;
+            background: #f1eef8;
+        }
+
+        code {
+            font-family: Consolas, "Liberation Mono", Menlo, monospace;
+            font-size: .92em;
+        }
+
+        p code,
+        li code,
+        td code {
+            background: #e9edf0;
+            color: #173d4c;
+            border-radius: 4px;
+            padding: 2px 5px;
+        }
+
+        .codebox {
+            margin: 20px 0 26px;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #142e3c;
+            border: 1px solid #223f50;
+            box-shadow: 0 7px 20px #173d4c0d;
+        }
+
+        .codebar {
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+            align-items: center;
+            padding: 8px 15px;
+            background: #203e4f;
+            color: #d0e3eb;
+            font-size: .78rem;
+            letter-spacing: .025em;
+        }
+
+        .copy-button,
+        .print-button {
+            font: inherit;
+            border: 1px solid #a3bdc955;
+            border-radius: 6px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        .copy-button {
+            background: #ffffff10;
+            color: #fff;
+        }
+
+        .copy-button:hover {
+            background: #ffffff25;
+        }
+
+        .print-button {
+            background: var(--accent-dark);
+            color: #fff;
+            margin-top: 18px;
+        }
+
+        pre {
+            margin: 0;
+            padding: 20px 23px;
+            overflow-x: auto;
+            color: #edf4f6;
+            font-size: .88rem;
+            line-height: 1.62;
+            tab-size: 4;
+        }
+
+        pre code {
+            font-size: inherit;
+            background: none;
+            padding: 0;
+            color: inherit;
+            white-space: pre;
+            overflow-wrap: normal;
+        }
+
+        .table-scroll {
+            overflow-x: auto;
+            margin: 20px 0;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: #fff;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: .92rem;
+            min-width: 560px;
+        }
+
+        th {
+            text-align: left;
+            background: var(--accent-soft);
+            color: var(--accent-dark);
+            font-weight: 700;
+        }
+
+        td,
+        th {
+            padding: 13px 16px;
+            border-bottom: 1px solid #e1e4e4;
+            vertical-align: top;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tbody tr:nth-child(even) {
+            background: #f9faf9;
+        }
+
+        details {
+            background: #fff;
+            border: 1px solid var(--border);
+            padding: 16px 20px;
+            border-radius: 10px;
+            margin: 15px 0 28px;
+        }
+
+        summary {
+            color: var(--accent-dark);
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        details[open] summary {
+            margin-bottom: 14px;
+        }
+
+        .project-map {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px;
+            margin: 24px 0;
+        }
+
+        .project-card {
+            padding: 18px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: #fff;
+        }
+
+        .project-card strong {
+            display: block;
+            color: var(--accent-dark);
+            margin-bottom: 5px;
+        }
+
+        .file-tree {
+            padding: 18px 22px;
+            border-radius: 10px;
+            background: #f7f8f7;
+            border: 1px solid var(--border);
+            font-family: Consolas, "Liberation Mono", Menlo, monospace;
+            white-space: pre;
+            overflow-x: auto;
+        }
+
+        .muted {
+            color: var(--muted);
+        }
+
+        .kbd {
+            display: inline-block;
+            padding: 1px 6px;
+            border: 1px solid #bbb;
+            border-bottom-width: 2px;
+            border-radius: 4px;
+            background: #fff;
+            font-family: inherit;
+            font-size: .86em;
+        }
+
+        .status {
+            min-height: 1.2em;
+            font-size: .85rem;
+            color: var(--muted);
+        }
+
+        .footer {
+            margin-top: 55px;
+            padding-top: 25px;
+            border-top: 1px solid var(--border);
+            color: var(--muted);
+            font-size: .85rem;
+        }
+
+        .site-top {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            background: var(--accent-dark);
+            color: #fff;
+            padding: 8px 13px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: .8rem;
+            box-shadow: var(--shadow);
+        }
+
+        .site-top:hover {
+            color: #fff;
+        }
+
+        .section-heading h2 {
+            min-width: 0;
+        }
+
+        h3 {
+            margin-top: 32px;
+            font-size: 1.15rem;
+            line-height: 1.35;
+        }
+
+        .tip-section>p,
+        .tip-section>ul,
+        .tip-section>ol {
+            max-width: 86ch;
+        }
+
+        @media(max-width:760px) {
+            .project-map {
+                grid-template-columns: 1fr
+            }
+
+            .site-top {
+                right: 10px;
+                bottom: 10px
+            }
+
+            pre {
+                font-size: .78rem;
+                padding: 16px
+            }
+
+            .codebar {
+                align-items: flex-start
+            }
+        }
+
+        @media print {
+            body {
+                background: #fff;
+                font-size: 10.5pt;
+                line-height: 1.45
+            }
+
+            .page {
+                width: 100%;
+                padding: 0
+            }
+
+            .hero {
+                box-shadow: none;
+                background: #fff
+            }
+
+            .codebox {
+                background: #f6f7f7;
+                box-shadow: none;
+                border: 1px solid #aaa;
+                overflow: visible
+            }
+
+            .codebar {
+                background: #e5eaed;
+                color: #173d4c
+            }
+
+            pre {
+                color: #111;
+                white-space: pre-wrap;
+                overflow: visible;
+                font-size: 8pt
+            }
+
+            pre code {
+                white-space: pre-wrap;
+                overflow-wrap: anywhere
+            }
+
+            .copy-button,
+            .print-button,
+            .site-top,
+            .skip-link,
+            .status {
+                display: none
+            }
+
+            .project-map {
+                grid-template-columns: repeat(3, 1fr)
+            }
+
+            .table-scroll {
+                overflow: visible
+            }
+
+            table {
+                min-width: 0;
+                font-size: 9pt
+            }
+
+            .section-heading {
+                break-after: avoid
+            }
+
+            h3 {
+                break-after: avoid
+            }
+
+            .callout,
+            .exercise,
+            .checkpoint,
+            details {
+                break-inside: avoid
+            }
+
+            @page {
+                margin: 17mm 16mm
+            }
+        }
+    </style>
+</head>
+
+<body id="anfang">
+    <a class="skip-link" href="#inhalt">Zum Inhalt</a>
+    <div class="page">
+        <header class="hero">
+            <p class="eyebrow">Die Plugin-Werkstatt · Projekt 01</p>
+            <h1>Warden DoT Lab.<br>Der erste echte Tracker.</h1>
+            <p class="lead">Wir bauen keinen weiteren abstrakten Testtimer, sondern ein Werkzeug, das bereits nach
+                <strong>Hüter</strong> riecht: mehrere gleichzeitig laufende DoT-Balken, erneuerbare Timer, ein eigener
+                Slash-Befehl und ein Diagnosemodus für den Kampfchat. Die automatische Erkennung kommt erst dann, wenn
+                wir ihre Datenquelle verstanden haben.</p>
+            <div class="meta">
+                <span class="pill">LOTRO · Lua 5.1</span>
+                <span class="pill">Single Target</span>
+                <span class="pill">3 parallele Timer</span>
+                <span class="pill">Kampfchat-Probe</span>
+                <span class="pill">Stand · 05.10.2026</span>
+            </div>
+            <button type="button" id="print" class="print-button">Drucken / als PDF sichern</button>
+            <p id="copy-status" class="status" role="status" aria-live="polite"></p>
+        </header>
+
+        <nav class="contents" aria-label="Inhaltsverzeichnis">
+            <h2>Projektfahrplan</h2>
+            <ul>
+                <li><a href="#kapitel-00">00 · Warum wir gleich den DoT-Ticker bauen</a></li>
+                <li><a href="#kapitel-01">01 · Was Version 0.1 können soll</a></li>
+                <li><a href="#kapitel-02">02 · Dateien und Manifest</a></li>
+                <li><a href="#kapitel-03">03 · Definitionen und Laufzeitzustand</a></li>
+                <li><a href="#kapitel-04">04 · Die Oberfläche als wiederholbare Zeile</a></li>
+                <li><a href="#kapitel-05">05 · Einen Timer starten und erneuern</a></li>
+                <li><a href="#kapitel-06">06 · Alle Timer mit einem Update zeichnen</a></li>
+                <li><a href="#kapitel-07">07 · Buttons, Closures und saubere Zuständigkeiten</a></li>
+                <li><a href="#kapitel-08">08 · Slash-Befehl /wdt</a></li>
+                <li><a href="#kapitel-09">09 · Vollständige Version 0.1</a></li>
+                <li><a href="#kapitel-10">10 · Kampfchat-Probe statt Wunschdenken</a></li>
+                <li><a href="#kapitel-11">11 · So untersuchst du echte Hüter-Meldungen</a></li>
+                <li><a href="#kapitel-12">12 · Der spätere Ereignisadapter</a></li>
+                <li><a href="#kapitel-13">13 · Grenzen: mehrere Ziele, Stacks, Resists</a></li>
+                <li><a href="#kapitel-14">14 · Übungen und Ausbaustufen</a></li>
+                <li><a href="#kapitel-15">15 · Checkliste und nächster Schritt</a></li>
+                <li><a href="#kapitel-16">16 · Quellen und Versionshinweise</a></li>
+            </ul>
+        </nav>
+
+        <main id="inhalt">
+            <div class="intro-note"><strong>Voraussetzung:</strong> Dieses Projekt baut direkt auf deiner Einführung
+                „Lua lernen. In Mittelerde.“ auf. Begriffe wie <code>local</code>, Tabellen, Closures,
+                <code>Turbine.Engine.GetGameTime()</code>, <code>Window.Update</code> und <code>SetWantsUpdates</code>
+                werden hier verwendet, aber nicht noch einmal von Null erklärt. Dafür zerlegen wir das konkrete Plugin
+                wesentlich gründlicher.</div>
+
+            <section class="tip-section" id="kapitel-00">
+                <div class="section-heading"><span>00</span>
+                    <h2>Warum wir gleich den DoT-Ticker bauen</h2>
+                </div>
+                <p><strong>Ja: Wir gehen gleich an den Hüter-DoT-Ticker.</strong> Aber nicht an die maximale Endversion
+                    mit automatischer Gambit-Erkennung, mehreren Gegnern, Trait-Abhängigkeiten, Sprachpaketen und
+                    Raid-tauglichem Parsing. Das wäre als erstes Projekt kein mutiger Einstieg, sondern pädagogischer
+                    Vandalismus.</p>
+                <p>Der richtige Mittelweg ist ein <strong>vertikaler Schnitt</strong>: Das Plugin sieht bereits wie ein
+                    echter DoT-Ticker aus und enthält bereits die Architektur, die wir später behalten. Nur die
+                    unsicherste Schicht – die automatische Erkennung einer konkreten Hüter-Anwendung – ersetzen wir
+                    zunächst durch ein eindeutiges manuelles Startsignal.</p>
+
+                <div class="project-map">
+                    <div class="project-card"><strong>Stufe A · sicher</strong>Mehrere Timer, Restzeit, Balken,
+                        Warnschwelle und Neustart. Alles basiert nur auf unserem eigenen Zustand.</div>
+                    <div class="project-card"><strong>Stufe B · beobachten</strong>Kampfmeldungen aus
+                        <code>PlayerCombat</code> sammeln und unterscheiden: Anwendung, Tick, Resist, Krit, Zielwechsel.
+                    </div>
+                    <div class="project-card"><strong>Stufe C · automatisieren</strong>Erst nach dem Beweis verbinden
+                        wir eine erkannte Nachricht mit <code>StartTimer(id)</code>.</div>
+                </div>
+
+                <div class="callout warning"><strong>Warum diese Vorsicht?</strong> Ein periodischer Schadenseffekt kann
+                    seinen Fertigkeitsnamen bei jedem Tick erneut im Kampfchat tragen. Würden wir bei jeder
+                    Namensnennung den Timer neu starten, würde der Balken genau dann am überzeugendsten lügen, wenn der
+                    DoT korrekt tickt.</div>
+            </section>
+
+            <section class="tip-section" id="kapitel-01">
+                <div class="section-heading"><span>01</span>
+                    <h2>Was Version 0.1 können soll</h2>
+                </div>
+                <p>Wir definieren zuerst das Verhalten, bevor wir Code schreiben. Das klingt bürokratisch, erspart aber
+                    jene Sorte Plugin, bei der nach 400 Zeilen niemand mehr weiß, ob ein Bug oder ein Feature vorliegt.
+                </p>
+                <div class="table-scroll" tabindex="0">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Anforderung</th>
+                                <th>Verhalten in 0.1</th>
+                                <th>Warum</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Drei DoTs parallel</td>
+                                <td>Jeder besitzt eigenen Ablaufzeitpunkt und eigenen Balken.</td>
+                                <td>Wir lernen mehrere gleichartige Zustände statt eines einzigen Testtimers.</td>
+                            </tr>
+                            <tr>
+                                <td>Erneuern</td>
+                                <td>Ein erneuter Start ersetzt den alten Ablaufzeitpunkt.</td>
+                                <td>Das simuliert eine erneute Anwendung.</td>
+                            </tr>
+                            <tr>
+                                <td>Single Target</td>
+                                <td>Pro DoT existiert höchstens ein aktiver Timer.</td>
+                                <td>Zielidentität ist eine separate, deutlich schwierigere Datenfrage.</td>
+                            </tr>
+                            <tr>
+                                <td>Warnschwelle</td>
+                                <td>Kurz vor Ablauf ändert der Balken seine Farbe.</td>
+                                <td>Darstellungslogik bleibt von Zeitrechnung getrennt.</td>
+                            </tr>
+                            <tr>
+                                <td>Reset</td>
+                                <td>Alle Timer lassen sich bewusst löschen.</td>
+                                <td>Nützlich beim Testen und nach Fehlversuchen.</td>
+                            </tr>
+                            <tr>
+                                <td>Slash-Befehl</td>
+                                <td><code>/wdt</code> kann Fenster, Timer und Probe steuern.</td>
+                                <td>Schneller testen als über dauernd neue Buttons.</td>
+                            </tr>
+                            <tr>
+                                <td>Kampfchat-Probe</td>
+                                <td>Maximal 25 <code>PlayerCombat</code>-Meldungen werden ausgegeben.</td>
+                                <td>Wir untersuchen Rohdaten, ohne sie schon zu interpretieren.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="checkpoint"><strong>Wichtige mentale Trennung:</strong> Der Balken ist nicht der DoT. Der
+                    Balken ist nur eine Darstellung unseres Modells. Unser Modell ist wiederum nur so gut wie das
+                    Ereignis, mit dem wir es starten. Diese drei Ebenen – Spielereignis → Zustand → Darstellung – halten
+                    wir im ganzen Projekt getrennt.</div>
+            </section>
+
+            <section class="tip-section" id="kapitel-02">
+                <div class="section-heading"><span>02</span>
+                    <h2>Dateien und Manifest</h2>
+                </div>
+                <p>Für die erste Fassung bleiben wir absichtlich bei <strong>einer Lua-Datei</strong>. Die Einführung
+                    hat bereits gezeigt, wie man später in Model, View und Settings aufteilt. Hier wollen wir zuerst die
+                    Datenflüsse sehen, nicht Architektur um ihrer selbst willen betreiben.</p>
+                <div class="file-tree">The Lord of the Rings Online/
+                    └─ Plugins/
+                    └─ JulianPlugins/
+                    ├─ WardenDotLab.plugin
+                    └─ WardenDotLab/
+                    └─ Main.lua</div>
+                <h3>Das Manifest</h3>
+                <div class="codebox">
+                    <div class="codebar"><span>XML · WardenDotLab.plugin</span><button class="copy-button" type="button"
+                            data-target="code-1">Kopieren</button></div>
+                    <pre tabindex="0"><code id="code-1" class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;Plugin&gt;
+    &lt;Information&gt;
+        &lt;Name&gt;WardenDotLab&lt;/Name&gt;
+        &lt;Author&gt;Julian&lt;/Author&gt;
+        &lt;Version&gt;0.1&lt;/Version&gt;
+        &lt;Description&gt;Lernprojekt: mehrere Hueter-DoT-Timer und Kampfchat-Diagnose&lt;/Description&gt;
+    &lt;/Information&gt;
+    &lt;Package&gt;JulianPlugins.WardenDotLab.Main&lt;/Package&gt;
+    &lt;Configuration Apartment=&quot;JulianWardenDotLab&quot; /&gt;
+&lt;/Plugin&gt;</code></pre>
+                </div>
+                <p>Der <code>Package</code>-Eintrag <code>JulianPlugins.WardenDotLab.Main</code> wird als Pfad unterhalb
+                    von <code>Plugins</code> interpretiert. Das <code>Apartment</code> heißt bewusst anders als das
+                    Plugin selbst; damit kannst du den Skriptzustand gezielt entladen.</p>
+                <p>Zum ersten Laden verwendest du:</p>
+                <div class="codebox">
+                    <div class="codebar"><span>LOTRO · Chat</span><button class="copy-button" type="button"
+                            data-target="code-2">Kopieren</button></div>
+                    <pre tabindex="0"><code id="code-2" class="language-text">/plugins refresh
+/plugins load WardenDotLab</code></pre>
+                </div>
+                <p>Nach Änderungen an <code>Main.lua</code>:</p>
+                <div class="codebox">
+                    <div class="codebar"><span>LOTRO · Neu laden</span><button class="copy-button" type="button"
+                            data-target="code-3">Kopieren</button></div>
+                    <pre tabindex="0"><code id="code-3" class="language-text">/plugins unload JulianWardenDotLab
+/plugins load WardenDotLab</code></pre>
+                </div>
+                <div class="exercise"><strong>Mini-Check:</strong> Lege zunächst nur Manifest und eine
+                    <code>Main.lua</code> mit <code>Turbine.Shell.WriteLine("WDT lebt")</code> an. Wenn das lädt, ist
+                    die Dateistruktur korrekt. Erst dann kommt der Rest.</div>
+            </section>
+
+            <section class="tip-section" id="kapitel-03">
+                <div class="section-heading"><span>03</span>
+                    <h2>Definitionen und Laufzeitzustand auseinanderhalten</h2>
+                </div>
+                <p>Ein Tracker hat Werte, die <strong>beschreiben, was ein DoT ist</strong>, und Werte, die
+                    <strong>beschreiben, was gerade passiert</strong>. Wenn du diese beiden Dinge in dieselbe Tabelle
+                    wirfst, funktioniert der Code anfangs – und wird beim ersten Ausbau klebrig.</p>
+                <h3>Die Definitionen</h3>
+                <div class="codebox">
+                    <div class="codebar"><span>Lua · statische Definitionen</span><button class="copy-button"
+                            type="button" data-target="code-4">Kopieren</button></div>
+                    <pre tabindex="0"><code id="code-4" class="language-lua">local definitions = {
+    spear = {
+        label = &quot;Speer-DoT (Test)&quot;,
+        duration = 12,
+        warningAt = 3
+    },
+    light = {
+        label = &quot;Licht-DoT (Test)&quot;,
+        duration = 18,
+        warningAt = 4
+    },
+    bleed = {
+        label = &quot;Blutung (Test)&quot;,
+        duration = 15,
+        warningAt = 3
+    }
+}
+
+local order = { &quot;spear&quot;, &quot;light&quot;, &quot;bleed&quot; }</code></pre>
+                </div>
+                <p><code>definitions</code> ist ein Nachschlagewerk. Die Schlüssel <code>spear</code>,
+                    <code>light</code> und <code>bleed</code> sind <strong>interne IDs</strong>; die sichtbaren Namen
+                    dürfen sich später ändern. Genau deshalb sollte nicht jede Funktion mit dem deutschen
+                    Fertigkeitsnamen als Schlüssel hantieren.</p>
+                <p>Die Laufzeiten sind in Version 0.1 ausdrücklich <strong>Lernwerte</strong>. Wir vermeiden die
+                    gefährliche Abkürzung „irgendwo gelesen = mechanisch garantiert“. Später ersetzen wir sie durch
+                    tatsächlich überprüfte Werte deiner konkreten Hüter-Konfiguration.</p>
+                <h3>Der laufende Zustand</h3>
+                <div class="codebox">
+                    <div class="codebar"><span>Lua · veränderlicher Zustand</span><button class="copy-button"
+                            type="button" data-target="code-5">Kopieren</button></div>
+                    <pre tabindex="0"><code id="code-5" class="language-lua">local state = {
+    active = {},
+    nextDrawAt = 0,
+    probeEnabled = false,
+    probeCount = 0
+}</code></pre>
+                </div>
+                <p>Wenn der Speer-Timer läuft, entsteht beispielsweise:</p>
+                <div class="codebox">
+                    <div class="codebar"><span>Lua · so sieht ein aktiver Eintrag aus</span><button class="copy-button"
+                            type="button" data-target="code-6">Kopieren</button></div>
+                    <pre tabindex="0"><code id="code-6" class="language-lua">state.active.spear = {
+    startedAt = 1250.4,
+    expiresAt = 1262.4,
+    duration = 12
+}</code></pre>
+                </div>
+                <p>Der entscheidende Wert ist <code>expiresAt</code>. Wir zählen nicht alle 0,1 Sekunden etwas herunter.
+                    Wir merken uns das Ende und berechnen immer wieder <code>expiresAt - now</code>. Dadurch driftet der
+                    Timer nicht, wenn ein Frame ausfällt oder die Anzeige kurz pausiert.</p>
+
+                <div class="callout"><strong>Warum zusätzlich <code>duration</code> im aktiven Eintrag?</strong> Weil
+                    ein Test über <code>/wdt start spear 8</code> die Dauer vorübergehend überschreiben kann. Für die
+                    Balkenbreite muss dann die tatsächliche Laufzeit dieses Starts gelten, nicht der Standardwert aus
+                    der Definition.</div>
+            </section>
+
+            <section class="tip-section" id="kapitel-04">
+                <div class="section-heading"><span>04</span>
+                    <h2>Die Oberfläche als wiederholbare Zeile</h2>
+                </div>
+                <p>Drei DoTs bedeuten nicht dreimal nahezu denselben UI-Code. Stattdessen schreiben wir eine Funktion,
+                    die aus einer Definition eine komplette Zeile baut. Das ist dein erster kleiner Schritt von „Script“
+                    zu „System“.</p>
+                <h3>Vorwärtsdeklarationen</h3>
+                <div class="codebox">
+                    <div class="codebar"><span>Lua · Funktionen, die später zugewiesen werden</span><button
+                            class="copy-button" type="button" data-target="code-7">Kopieren</button></div>
+                    <pre tabindex="0"><code id="code-7" class="language-lua">local StartTimer
+local ResetAll
+local Render</code></pre>
+                </div>
+                <p>Warum nicht sofort <code>local function StartTimer(...)</code>? Weil unsere Zeilenfunktion bereits
+                    Klick-Handler erzeugt, die später <code>StartTimer</code> aufrufen. Der Name muss deshalb im
+                    umgebenden Gültigkeitsbereich schon existieren. Die Funktion selbst darf erst später zugewiesen
+                    werden, weil der Klick erst nach dem vollständigen Laden stattfinden kann.</p>
+                <h3>Eine Zeile erzeugen</h3>
+                <div class="codebox">
+                    <div class="codebar"><span>Lua · CreateRow</span><button class="copy-button" type="button"
+                            data-target="code-8">Kopieren</button></div>
+                    <pre tabindex="0"><code id="code-8" class="language-lua">local rows = {}
+
+local function CreateRow(id, top)
+    local definition = definitions[id]
+    local row = {}
+
+    row.name = Turbine.UI.Label()
+    row.name:SetParent(window)
+    row.name:SetPosition(15, top)
+    row.name:SetSize(170, 22)
+    row.name:SetText(definition.label)
+
+    row.status = Turbine.UI.Label()
+    row.status:SetParent(window)
+    row.status:SetPosition(190, top)
+    row.status:SetSize(115, 22)
+    row.status:SetText(&quot;bereit&quot;)
+
+    row.track = Turbine.UI.Control()
+    row.track:SetParent(window)
+    row.track:SetPosition(15, top + 27)
+    row.track:SetSize(BAR_WIDTH, 14)
+    row.track:SetBackColor(trackColor)
+
+    row.fill = Turbine.UI.Control()
+    row.fill:SetParent(row.track)
+    row.fill:SetPosition(0, 0)
+    row.fill:SetSize(BAR_WIDTH, 14)
+    row.fill:SetBackColor(normalColor)
+    row.fill:SetVisible(false)
+
+    row.button = Turbine.UI.Lotro.Button()
+    row.button:SetParent(window)
+    row.button:SetPosition(320, top + 8)
+    row.button:SetSize(160, 25)
+    row.button:SetText(&quot;Start &quot; .. definition.duration .. &quot; s&quot;)
+
+    local capturedId = id
+    row.button.Click = function(sender, args)
+        StartTimer(capturedId)
+    end
+
+    rows[id] = row
+end</code></pre>
+                </div>
+                <p>Das Objekt <code>row</code> ist keine Turbine-Klasse. Es ist einfach unsere Lua-Tabelle, die die vier
+                    Controls dieser Zeile zusammenhält. Damit können wir später <code>rows.spear.status</code> oder
+                    <code>rows[id].fill</code> ansprechen.</p>
+                <p>Die Zeile <code>local capturedId = id</code> macht die Closure absichtlich sichtbar: Jeder Button
+                    behält die ID seiner eigenen Zeile. Beim Klick wird nicht irgendein „aktueller“ Schleifenwert
+                    gesucht, sondern genau dieser lokale Wert verwendet.</p>
+                <h3>Die drei Zeilen aufbauen</h3>
+                <div class="codebox">
+                    <div class="codebar"><span>Lua · drei Zeilen aus einer Funktion</span><button class="copy-button"
+                            type="button" data-target="code-9">Kopieren</button></div>
+                    <pre tabindex="0"><code id="code-9" class="language-lua">for index, id in ipairs(order) do
+    CreateRow(id, 72 + (index - 1) * 62)
+end</code></pre>
+                </div>
+                <p>Das ist bereits ein kleiner Architekturgewinn: Eine vierte Definition plus ein Eintrag in
+                    <code>order</code> reichen konzeptionell aus. Die Darstellung ist datengetrieben statt dreifach hart
+                    verdrahtet.</p>
+            </section>
+
+            <section class="tip-section" id="kapitel-05">
+                <div class="section-heading"><span>05</span>
+                    <h2>Einen Timer starten und erneuern</h2>
+                </div>
+                <p>Die Startfunktion darf <strong>keine UI-Zeichnung im Detail</strong> erledigen. Sie ändert den
+                    Zustand und bittet anschließend <code>Render</code>, diesen Zustand darzustellen. So bleibt klar,
+                    wer wofür verantwortlich ist.</p>
+                <div class="codebox">
+                    <div class="codebar"><span>Lua · StartTimer</span><button class="copy-button" type="button"
+                            data-target="code-10">Kopieren</button></div>
+                    <pre tabindex="0"><code id="code-10" class="language-lua">StartTimer = function(id, overrideDuration)
+    local definition = definitions[id]
+    if definition == nil then
+        Turbine.Shell.WriteLine(&quot;[WDT] Unbekannte Timer-ID: &quot; .. tostring(id))
+        return
+    end
+
+    local duration = overrideDuration
+    if duration == nil then
+        duration = definition.duration
+    end
+
+    if type(duration) ~= &quot;number&quot;
+        or duration ~= duration
+        or duration &lt;= 0
+        or duration &gt; 120 then
+        Turbine.Shell.WriteLine(&quot;[WDT] Ungueltige Dauer.&quot;)
+        return
+    end
+
+    local now = Turbine.Engine.GetGameTime()
+
+    state.active[id] = {
+        startedAt = now,
+        expiresAt = now + duration,
+        duration = duration
+    }
+
+    window:SetVisible(true)
+    Render(now)
+    window:SetWantsUpdates(true)
+end</code></pre>
+                </div>
+                <h3>Was beim erneuten Start passiert</h3>
+                <p>Existiert <code>state.active[id]</code> bereits, wird der Eintrag schlicht ersetzt. Das ist unser
+                    bewusstes Modell für „erneut angewendet“:</p>
+                <div class="codebox">
+                    <div class="codebar"><span>Lua · semantisch passiert beim Refresh</span><button class="copy-button"
+                            type="button" data-target="code-11">Kopieren</button></div>
+                    <pre tabindex="0"><code id="code-11" class="language-lua">-- vorher:
+state.active.spear.expiresAt = 1262.4
+
+-- erneuter Start bei now = 1256.0 und Dauer = 12:
+state.active.spear.expiresAt = 1268.0</code></pre>
+                </div>
+                <p>Ob ein konkreter LOTRO-DoT wirklich exakt so refresht, stackt, verlängert oder anders reagiert, ist
+                    eine <strong>Spielmechanikfrage</strong>. Die Timer-Engine kann alle diese Modelle tragen; wir
+                    dürfen nur nicht das falsche Modell als Wahrheit ausgeben.</p>
+                <div class="exercise"><strong>Experiment:</strong> Starte einen Timer, warte fünf Sekunden und starte
+                    ihn erneut. Erwartung: Er springt auf die volle Dauer zurück. Genau dieses Verhalten werden wir
+                    später an echten DoTs gegen die Spielmechanik halten.</div>
+            </section>
+
+            <section class="tip-section" id="kapitel-06">
+                <div class="section-heading"><span>06</span>
+                    <h2>Alle Timer mit einem Update zeichnen</h2>
+                </div>
+                <p>Wir brauchen <strong>nicht für jeden Balken einen eigenen Update-Loop</strong>. Ein einziges Fenster
+                    bekommt Updates; darin laufen wir über die drei bekannten IDs.</p>
+                <div class="codebox">
+                    <div class="codebar"><span>Lua · Kern von Render</span><button class="copy-button" type="button"
+                            data-target="code-12">Kopieren</button></div>
+                    <pre tabindex="0"><code id="code-12" class="language-lua">Render = function(now)
+    local anyActive = false
+
+    for _, id in ipairs(order) do
+        local definition = definitions[id]
+        local timer = state.active[id]
+        local row = rows[id]
+
+        if timer == nil then
+            row.status:SetText(&quot;bereit&quot;)
+            row.fill:SetVisible(false)
+        else
+            local remaining = timer.expiresAt - now
+
+            if remaining &lt;= 0 then
+                state.active[id] = nil
+                row.status:SetText(&quot;abgelaufen&quot;)
+                row.fill:SetVisible(false)
+            else
+                anyActive = true
+
+                local fraction = math.max(
+                    0,
+                    math.min(1, remaining / timer.duration)
+                )
+
+                row.fill:SetWidth(
+                    math.max(1, math.floor(BAR_WIDTH * fraction))
+                )
+
+                row.fill:SetVisible(true)
+                row.status:SetText(string.format(&quot;%.1f s&quot;, remaining))
+
+                if remaining &lt;= definition.warningAt then
+                    row.fill:SetBackColor(warningColor)
+                else
+                    row.fill:SetBackColor(normalColor)
+                end
+            end
+        end
+    end
+
+    window:SetWantsUpdates(window:IsVisible() and anyActive)
+end</code></pre>
+                </div>
+                <h3>Warum <code>remaining / timer.duration</code>?</h3>
+                <p>Wenn 6 von 12 Sekunden übrig sind, ist der Anteil 0,5. Bei einem 280 Pixel breiten Balken ergibt das
+                    140 Pixel. Die Anzeige ist also eine reine Funktion aus dem Zustand:</p>
+                <div class="codebox">
+                    <div class="codebar"><span>Lua · die Mathematik hinter dem Balken</span><button class="copy-button"
+                            type="button" data-target="code-13">Kopieren</button></div>
+                    <pre tabindex="0"><code id="code-13" class="language-lua">fraction = remaining / duration
+width = BAR_WIDTH * fraction</code></pre>
+                </div>
+                <h3>Warum Updates drosseln?</h3>
+                <div class="codebox">
+                    <div class="codebar"><span>Lua · Update höchstens etwa zehnmal pro Sekunde</span><button
+                            class="copy-button" type="button" data-target="code-14">Kopieren</button></div>
+                    <pre tabindex="0"><code id="code-14" class="language-lua">window.Update = function(sender, args)
+    local now = Turbine.Engine.GetGameTime()
+
+    if now &lt; state.nextDrawAt then
+        return
+    end
+
+    state.nextDrawAt = now + 0.1
+    Render(now)
+end</code></pre>
+                </div>
+                <p>LOTRO kann <code>Update</code> framebezogen aufrufen. Für eine Anzeige mit einer Nachkommastelle ist
+                    eine Neuberechnung in jedem einzelnen Frame unnötig. Wir lassen die Uhr trotzdem aus absoluten
+                    Zeitpunkten rechnen; die Drosselung beeinflusst also nur, <em>wann wir neu zeichnen</em>, nicht die
+                    zugrunde liegende Zeit.</p>
+                <div class="callout"><strong>Das ist ein Muster, das du wiederverwenden wirst:</strong> hohe
+                    Ereignisfrequenz außen, kleine frühe Prüfung, eigentliche Arbeit seltener. Das gilt später auch für
+                    Chatparser und Buffscanner.</div>
+            </section>
+
+            <section class="tip-section" id="kapitel-07">
+                <div class="section-heading"><span>07</span>
+                    <h2>Buttons, Closures und saubere Zuständigkeiten</h2>
+                </div>
+                <p>Jetzt verbinden wir die Oberfläche mit der Logik. Der Button selbst weiß möglichst wenig: Er kennt
+                    nur seine ID und ruft eine Funktion auf.</p>
+                <div class="codebox">
+                    <div class="codebar"><span>Lua · ein dünner UI-Handler</span><button class="copy-button"
+                            type="button" data-target="code-15">Kopieren</button></div>
+                    <pre tabindex="0"><code id="code-15" class="language-lua">local capturedId = id
+
+row.button.Click = function(sender, args)
+    StartTimer(capturedId)
+end</code></pre>
+                </div>
+                <p>Das ist absichtlich besser als zwanzig Zeilen Timerlogik direkt im Klick-Handler. Wenn später nicht
+                    mehr der Button, sondern ein erkanntes Kampfereignis startet, verwenden beide dieselbe Funktion:</p>
+                <div class="codebox">
+                    <div class="codebar"><span>Lua · zwei Quellen, eine Logik</span><button class="copy-button"
+                            type="button" data-target="code-16">Kopieren</button></div>
+                    <pre tabindex="0"><code id="code-16" class="language-lua">-- heute:
+row.button.Click = function()
+    StartTimer(&quot;spear&quot;)
+end
+
+-- später:
+local recognizedId = TryRecognizeApplication(args.Message)
+if recognizedId ~= nil then
+    StartTimer(recognizedId)
+end</code></pre>
+                </div>
+                <p><strong>Das ist der eigentliche Kern des Projekts.</strong> Wir bauen nicht „einen Button-Timer, den
+                    wir später wegwerfen“, sondern eine Timer-Engine mit austauschbarer Ereignisquelle.</p>
+
+                <h3>Reset</h3>
+                <div class="codebox">
+                    <div class="codebar"><span>Lua · alle laufenden Einträge entfernen</span><button class="copy-button"
+                            type="button" data-target="code-17">Kopieren</button></div>
+                    <pre tabindex="0"><code id="code-17" class="language-lua">ResetAll = function(message)
+    for id, _ in pairs(state.active) do
+        state.active[id] = nil
+    end
+
+    Render(Turbine.Engine.GetGameTime())
+    Turbine.Shell.WriteLine(
+        &quot;[WDT] &quot; .. (message or &quot;Timer zurueckgesetzt.&quot;)
+    )
+end</code></pre>
+                </div>
+                <p>Wir ersetzen <code>state.active</code> hier nicht durch ein neues Objekt, sondern leeren die
+                    vorhandene Tabelle. Beides wäre in dieser Fassung möglich; das explizite Leeren macht jedoch gut
+                    sichtbar, was gerade passiert.</p>
+            </section>
+
+            <section class="tip-section" id="kapitel-08">
+                <div class="section-heading"><span>08</span>
+                    <h2>Slash-Befehl <code>/wdt</code></h2>
+                </div>
+                <p>Ein Plugin wird beim Entwickeln wesentlich angenehmer, wenn du nicht für jeden Test die Maus bemühen
+                    musst. Deshalb bekommt unser Labor einen eigenen Befehl.</p>
+                <div class="codebox">
+                    <div class="codebar"><span>LOTRO · Beispiele</span><button class="copy-button" type="button"
+                            data-target="code-18">Kopieren</button></div>
+                    <pre tabindex="0"><code id="code-18" class="language-text">/wdt
+/wdt list
+/wdt start spear
+/wdt start spear 8
+/wdt reset
+/wdt probe on
+/wdt probe off
+/wdt hide
+/wdt show</code></pre>
+                </div>
+                <p>Die optionale Zahl hinter <code>start</code> ist besonders praktisch für Experimente: Du kannst die
+                    Timerengine mit 3,7 Sekunden testen, ohne die Definition umzuschreiben und das Plugin neu zu laden.
+                </p>
+                <h3>Parsing ohne Magie</h3>
+                <div class="codebox">
+                    <div class="codebar"><span>Lua · Aktion und Rest zerlegen</span><button class="copy-button"
+                            type="button" data-target="code-19">Kopieren</button></div>
+                    <pre tabindex="0"><code id="code-19" class="language-lua">local action, rest = string.match(
+    arguments or &quot;&quot;,
+    &quot;^%s*(%S*)%s*(.-)%s*$&quot;
+)
+
+action = string.lower(action or &quot;&quot;)
+rest = rest or &quot;&quot;</code></pre>
+                </div>
+                <p>Der Ausdruck extrahiert das erste Wort als Aktion und lässt den Rest für die jeweilige Unterfunktion
+                    übrig. Das ist kein vollständiger Kommandozeilenparser – und muss es auch nicht sein. Für ein
+                    kleines Plugin ist eine verständliche Grammatik wertvoller als eine halbe Shell.</p>
+                <div class="checkpoint"><strong>Checkpoint:</strong> Wenn <code>/wdt start spear 5</code> einen
+                    fünfsekündigen Balken startet, <code>/wdt reset</code> alles löscht und ein zweiter Timer parallel
+                    laufen kann, ist die Timerseite des Projekts bereits erfolgreich.</div>
+            </section>
+
+            <section class="tip-section" id="kapitel-09">
+                <div class="section-heading"><span>09</span>
+                    <h2>Vollständige Version 0.1</h2>
+                </div>
+                <p>Jetzt folgt die komplette <code>Main.lua</code>. Sie ist bewusst etwas länger als die
+                    Einzelbeispiele, aber jeder Block entspricht einer Verantwortung, die wir bereits besprochen haben.
+                </p>
+                <p><strong>Ersetze für diesen Meilenstein die komplette <code>Main.lua</code> durch den folgenden
+                        Code.</strong></p>
+                <div class="codebox">
+                    <div class="codebar"><span>Lua 5.1 · vollständige Main.lua</span><button class="copy-button"
+                            type="button" data-target="code-20">Kopieren</button></div>
+                    <pre tabindex="0"><code id="code-20" class="language-lua">import &quot;Turbine&quot;
+import &quot;Turbine.UI&quot;
+import &quot;Turbine.UI.Lotro&quot;
+import &quot;Turbine.Gameplay&quot;
+
+-- WardenDotLab 0.1
+-- Lernprojekt: Single-Target-Timer + Kampfchat-Diagnose.
+-- Die drei Namen und Laufzeiten unten sind absichtlich Lernwerte.
+-- Ersetze sie erst dann durch echte Gambits/Dauern, wenn du sie im Client
+-- gemessen bzw. die relevanten Kampfmeldungen eindeutig identifiziert hast.
+
+local function AddCallback(object, eventName, handler)
+    local current = object[eventName]
+
+    if current == nil then
+        object[eventName] = handler
+    elseif type(current) == &quot;function&quot; then
+        if current ~= handler then
+            object[eventName] = { current, handler }
+        end
+    elseif type(current) == &quot;table&quot; then
+        for _, existing in ipairs(current) do
+            if existing == handler then
+                return
+            end
+        end
+        table.insert(current, handler)
+    else
+        error(&quot;Unerwarteter Eventtyp: &quot; .. type(current))
+    end
+end
+
+local function RemoveCallback(object, eventName, handler)
+    local current = object[eventName]
+
+    if current == handler then
+        object[eventName] = nil
+    elseif type(current) == &quot;table&quot; then
+        for i = #current, 1, -1 do
+            if current[i] == handler then
+                table.remove(current, i)
+            end
+        end
+
+        if #current == 0 then
+            object[eventName] = nil
+        elseif #current == 1 then
+            object[eventName] = current[1]
+        end
+    end
+end
+
+if Turbine.Shell.IsCommand(&quot;wdt&quot;) then
+    error(&quot;/wdt ist bereits belegt. WardenDotLab kann den Befehl nicht registrieren.&quot;)
+end
+
+local BAR_WIDTH = 280
+local PROBE_LIMIT = 25
+
+local definitions = {
+    spear = {
+        label = &quot;Speer-DoT (Test)&quot;,
+        duration = 12,
+        warningAt = 3
+    },
+    light = {
+        label = &quot;Licht-DoT (Test)&quot;,
+        duration = 18,
+        warningAt = 4
+    },
+    bleed = {
+        label = &quot;Blutung (Test)&quot;,
+        duration = 15,
+        warningAt = 3
+    }
+}
+
+local order = { &quot;spear&quot;, &quot;light&quot;, &quot;bleed&quot; }
+
+local state = {
+    active = {},
+    nextDrawAt = 0,
+    probeEnabled = false,
+    probeCount = 0
+}
+
+local normalColor = Turbine.UI.Color(0.20, 0.60, 0.80)
+local warningColor = Turbine.UI.Color(0.90, 0.35, 0.15)
+local trackColor = Turbine.UI.Color(0.15, 0.15, 0.15)
+
+local window = Turbine.UI.Lotro.Window()
+window:SetSize(500, 330)
+window:SetPosition(220, 180)
+window:SetText(&quot;Warden DoT Lab&quot;)
+
+local hint = Turbine.UI.Label()
+hint:SetParent(window)
+hint:SetPosition(15, 38)
+hint:SetSize(465, 25)
+hint:SetText(&quot;Single-Target-Labor: Timer manuell starten, Kampfchat separat untersuchen.&quot;)
+
+local rows = {}
+
+-- Vorwaertsdeklarationen:
+-- CreateRow wird Klick-Handler anlegen, die StartTimer erst spaeter ausfuehren.
+local StartTimer
+local ResetAll
+local Render
+
+local function CreateRow(id, top)
+    local definition = definitions[id]
+    local row = {}
+
+    row.name = Turbine.UI.Label()
+    row.name:SetParent(window)
+    row.name:SetPosition(15, top)
+    row.name:SetSize(170, 22)
+    row.name:SetText(definition.label)
+
+    row.status = Turbine.UI.Label()
+    row.status:SetParent(window)
+    row.status:SetPosition(190, top)
+    row.status:SetSize(115, 22)
+    row.status:SetText(&quot;bereit&quot;)
+
+    row.track = Turbine.UI.Control()
+    row.track:SetParent(window)
+    row.track:SetPosition(15, top + 27)
+    row.track:SetSize(BAR_WIDTH, 14)
+    row.track:SetBackColor(trackColor)
+
+    row.fill = Turbine.UI.Control()
+    row.fill:SetParent(row.track)
+    row.fill:SetPosition(0, 0)
+    row.fill:SetSize(BAR_WIDTH, 14)
+    row.fill:SetBackColor(normalColor)
+    row.fill:SetVisible(false)
+
+    row.button = Turbine.UI.Lotro.Button()
+    row.button:SetParent(window)
+    row.button:SetPosition(320, top + 8)
+    row.button:SetSize(160, 25)
+    row.button:SetText(&quot;Start &quot; .. definition.duration .. &quot; s&quot;)
+
+    local capturedId = id
+    row.button.Click = function(sender, args)
+        StartTimer(capturedId)
+    end
+
+    rows[id] = row
+end
+
+for index, id in ipairs(order) do
+    CreateRow(id, 72 + (index - 1) * 62)
+end
+
+local resetButton = Turbine.UI.Lotro.Button()
+resetButton:SetParent(window)
+resetButton:SetPosition(15, 270)
+resetButton:SetSize(150, 25)
+resetButton:SetText(&quot;Alle zuruecksetzen&quot;)
+
+local probeButton = Turbine.UI.Lotro.Button()
+probeButton:SetParent(window)
+probeButton:SetPosition(175, 270)
+probeButton:SetSize(145, 25)
+probeButton:SetText(&quot;Probe: AUS&quot;)
+
+local closeButton = Turbine.UI.Lotro.Button()
+closeButton:SetParent(window)
+closeButton:SetPosition(330, 270)
+closeButton:SetSize(150, 25)
+closeButton:SetText(&quot;Fenster ausblenden&quot;)
+
+local function HasActiveTimers()
+    for _, timer in pairs(state.active) do
+        if timer ~= nil then
+            return true
+        end
+    end
+    return false
+end
+
+Render = function(now)
+    local anyActive = false
+
+    for _, id in ipairs(order) do
+        local definition = definitions[id]
+        local timer = state.active[id]
+        local row = rows[id]
+
+        if timer == nil then
+            row.status:SetText(&quot;bereit&quot;)
+            row.fill:SetVisible(false)
+            row.button:SetText(&quot;Start &quot; .. definition.duration .. &quot; s&quot;)
+        else
+            local remaining = timer.expiresAt - now
+
+            if remaining &lt;= 0 then
+                state.active[id] = nil
+                row.status:SetText(&quot;abgelaufen&quot;)
+                row.fill:SetVisible(false)
+                row.button:SetText(&quot;Start &quot; .. definition.duration .. &quot; s&quot;)
+            else
+                anyActive = true
+
+                local fraction = math.max(0, math.min(1, remaining / timer.duration))
+                local width = math.max(1, math.floor(BAR_WIDTH * fraction))
+
+                row.fill:SetWidth(width)
+                row.fill:SetVisible(true)
+                row.status:SetText(string.format(&quot;%.1f s&quot;, remaining))
+                row.button:SetText(&quot;Neu starten&quot;)
+
+                if remaining &lt;= definition.warningAt then
+                    row.fill:SetBackColor(warningColor)
+                else
+                    row.fill:SetBackColor(normalColor)
+                end
+            end
+        end
+    end
+
+    window:SetWantsUpdates(window:IsVisible() and anyActive)
+end
+
+StartTimer = function(id, overrideDuration)
+    local definition = definitions[id]
+    if definition == nil then
+        Turbine.Shell.WriteLine(&quot;[WDT] Unbekannte Timer-ID: &quot; .. tostring(id))
+        return
+    end
+
+    local duration = overrideDuration
+    if duration == nil then
+        duration = definition.duration
+    end
+
+    if type(duration) ~= &quot;number&quot;
+        or duration ~= duration
+        or duration &lt;= 0
+        or duration &gt; 120 then
+        Turbine.Shell.WriteLine(&quot;[WDT] Dauer muss groesser 0 und hoechstens 120 Sekunden sein.&quot;)
+        return
+    end
+
+    local now = Turbine.Engine.GetGameTime()
+
+    state.active[id] = {
+        startedAt = now,
+        expiresAt = now + duration,
+        duration = duration
+    }
+
+    window:SetVisible(true)
+    Render(now)
+    window:SetWantsUpdates(true)
+end
+
+ResetAll = function(message)
+    for id, _ in pairs(state.active) do
+        state.active[id] = nil
+    end
+
+    Render(Turbine.Engine.GetGameTime())
+    Turbine.Shell.WriteLine(&quot;[WDT] &quot; .. (message or &quot;Timer zurueckgesetzt.&quot;))
+end
+
+local function SetProbe(enabled)
+    state.probeEnabled = enabled
+    state.probeCount = 0
+
+    if enabled then
+        probeButton:SetText(&quot;Probe: AN&quot;)
+        Turbine.Shell.WriteLine(
+            &quot;[WDT] Kampfchat-Probe aktiv. Die naechsten &quot;
+            .. PROBE_LIMIT
+            .. &quot; PlayerCombat-Meldungen werden ausgegeben.&quot;
+        )
+    else
+        probeButton:SetText(&quot;Probe: AUS&quot;)
+        Turbine.Shell.WriteLine(&quot;[WDT] Kampfchat-Probe aus.&quot;)
+    end
+end
+
+resetButton.Click = function(sender, args)
+    ResetAll()
+end
+
+probeButton.Click = function(sender, args)
+    SetProbe(not state.probeEnabled)
+end
+
+closeButton.Click = function(sender, args)
+    window:SetVisible(false)
+end
+
+window.Update = function(sender, args)
+    local now = Turbine.Engine.GetGameTime()
+
+    if now &lt; state.nextDrawAt then
+        return
+    end
+
+    state.nextDrawAt = now + 0.1
+    Render(now)
+end
+
+window.VisibleChanged = function(sender, args)
+    if window:IsVisible() then
+        Render(Turbine.Engine.GetGameTime())
+    else
+        window:SetWantsUpdates(false)
+    end
+end
+
+local function OnCombatChat(sender, args)
+    if not state.probeEnabled then
+        return
+    end
+
+    if args.ChatType ~= Turbine.ChatType.PlayerCombat then
+        return
+    end
+
+    if type(args.Message) ~= &quot;string&quot; then
+        return
+    end
+
+    state.probeCount = state.probeCount + 1
+    Turbine.Shell.WriteLine(
+        string.format(&quot;[WDT Probe %02d] %s&quot;, state.probeCount, args.Message)
+    )
+
+    if state.probeCount &gt;= PROBE_LIMIT then
+        state.probeEnabled = false
+        probeButton:SetText(&quot;Probe: AUS&quot;)
+        Turbine.Shell.WriteLine(&quot;[WDT] Probe-Limit erreicht.&quot;)
+    end
+end
+
+AddCallback(Turbine.Chat, &quot;Received&quot;, OnCombatChat)
+
+local command = Turbine.ShellCommand()
+
+function command:GetHelp()
+    return &quot;/wdt show | hide | reset | list | start &lt;spear|light|bleed&gt; [sekunden] | probe &lt;on|off&gt;&quot;
+end
+
+function command:Execute(commandName, arguments)
+    local action, rest = string.match(
+        arguments or &quot;&quot;,
+        &quot;^%s*(%S*)%s*(.-)%s*$&quot;
+    )
+
+    action = string.lower(action or &quot;&quot;)
+    rest = rest or &quot;&quot;
+
+    if action == &quot;&quot; or action == &quot;show&quot; then
+        window:SetVisible(true)
+        Render(Turbine.Engine.GetGameTime())
+
+    elseif action == &quot;hide&quot; then
+        window:SetVisible(false)
+
+    elseif action == &quot;reset&quot; then
+        ResetAll()
+
+    elseif action == &quot;list&quot; then
+        for _, id in ipairs(order) do
+            local definition = definitions[id]
+            Turbine.Shell.WriteLine(
+                string.format(
+                    &quot;[WDT] %s = %s, Standard %.1f s&quot;,
+                    id,
+                    definition.label,
+                    definition.duration
+                )
+            )
+        end
+
+    elseif action == &quot;start&quot; then
+        local id, durationText = string.match(
+            rest,
+            &quot;^%s*(%S+)%s*(%S*)%s*$&quot;
+        )
+
+        if id == nil or definitions[id] == nil then
+            Turbine.Shell.WriteLine(&quot;[WDT] &quot; .. self:GetHelp())
+            return
+        end
+
+        local duration = nil
+        if durationText ~= nil and durationText ~= &quot;&quot; then
+            duration = tonumber(durationText)
+            if duration == nil then
+                Turbine.Shell.WriteLine(&quot;[WDT] Ungueltige Dauer: &quot; .. durationText)
+                return
+            end
+        end
+
+        StartTimer(id, duration)
+
+    elseif action == &quot;probe&quot; then
+        local mode = string.lower(rest)
+
+        if mode == &quot;on&quot; then
+            SetProbe(true)
+        elseif mode == &quot;off&quot; then
+            SetProbe(false)
+        else
+            Turbine.Shell.WriteLine(&quot;[WDT] /wdt probe on | off&quot;)
+        end
+
+    else
+        Turbine.Shell.WriteLine(&quot;[WDT] &quot; .. self:GetHelp())
+    end
+end
+
+Turbine.Shell.AddCommand(&quot;wdt&quot;, command)
+
+plugin.Unload = function(sender, args)
+    window:SetWantsUpdates(false)
+    RemoveCallback(Turbine.Chat, &quot;Received&quot;, OnCombatChat)
+    Turbine.Shell.RemoveCommand(command)
+
+    window.Update = nil
+    window.VisibleChanged = nil
+    resetButton.Click = nil
+    probeButton.Click = nil
+    closeButton.Click = nil
+
+    for _, id in ipairs(order) do
+        rows[id].button.Click = nil
+    end
+
+    window:SetVisible(false)
+end
+
+window:SetVisible(true)
+Turbine.Shell.WriteLine(&quot;[WDT] WardenDotLab 0.1 geladen. /wdt fuer Hilfe.&quot;)</code></pre>
+                </div>
+                <h3>Smoke-Test nach dem Laden</h3>
+                <div class="table-scroll" tabindex="0">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Test</th>
+                                <th>Erwartung</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>/wdt list</code></td>
+                                <td>Drei interne IDs und ihre Standarddauer erscheinen.</td>
+                            </tr>
+                            <tr>
+                                <td><code>/wdt start spear</code></td>
+                                <td>Speer-Balken läuft, die anderen bleiben bereit.</td>
+                            </tr>
+                            <tr>
+                                <td>Danach <code>/wdt start light</code></td>
+                                <td>Beide Balken laufen unabhängig.</td>
+                            </tr>
+                            <tr>
+                                <td><code>/wdt start spear 5</code></td>
+                                <td>Speer wird auf fünf Sekunden neu gestartet.</td>
+                            </tr>
+                            <tr>
+                                <td>Fenster ausblenden, warten, wieder zeigen</td>
+                                <td>Restzeit berücksichtigt die verstrichene Zeit.</td>
+                            </tr>
+                            <tr>
+                                <td><code>/wdt reset</code></td>
+                                <td>Alle aktiven Einträge verschwinden.</td>
+                            </tr>
+                            <tr>
+                                <td>Plugin entladen</td>
+                                <td>Slash-Befehl und Chat-Handler werden entfernt.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="callout warning"><strong>Wenn etwas nicht lädt:</strong> Nicht zehn Dinge gleichzeitig
+                    ändern. Nimm die erste Lua-Fehlermeldung, Datei und Zeile. Gerade bei kopierten Blöcken sind ein
+                    fehlendes <code>end</code>, ein vertippter Methodenname oder eine falsch benannte Datei die üblichen
+                    Übeltäter.</div>
+            </section>
+
+            <section class="tip-section" id="kapitel-10">
+                <div class="section-heading"><span>10</span>
+                    <h2>Kampfchat-Probe statt Wunschdenken</h2>
+                </div>
+                <p>Jetzt kommt der Teil, der das Projekt wirklich zum Hüter-Werkzeug macht: Wir beobachten, was LOTRO
+                    beim Kämpfen tatsächlich an Lua liefert.</p>
+                <p>Die Turbine-API stellt das Ereignis <code>Turbine.Chat.Received</code> bereit. Über
+                    <code>args.ChatType</code> lässt sich auf <code>Turbine.ChatType.PlayerCombat</code> filtern; der
+                    Nachrichtentext steht in <code>args.Message</code>. Unser Plugin registriert deshalb einen Handler,
+                    interpretiert aber zunächst <strong>gar nichts</strong>.</p>
+                <div class="codebox">
+                    <div class="codebar"><span>Lua · Diagnosehandler aus Version 0.1</span><button class="copy-button"
+                            type="button" data-target="code-21">Kopieren</button></div>
+                    <pre tabindex="0"><code id="code-21" class="language-lua">local function OnCombatChat(sender, args)
+    if not state.probeEnabled then
+        return
+    end
+
+    if args.ChatType ~= Turbine.ChatType.PlayerCombat then
+        return
+    end
+
+    if type(args.Message) ~= &quot;string&quot; then
+        return
+    end
+
+    state.probeCount = state.probeCount + 1
+
+    Turbine.Shell.WriteLine(
+        string.format(
+            &quot;[WDT Probe %02d] %s&quot;,
+            state.probeCount,
+            args.Message
+        )
+    )
+
+    if state.probeCount &gt;= PROBE_LIMIT then
+        state.probeEnabled = false
+        probeButton:SetText(&quot;Probe: AUS&quot;)
+        Turbine.Shell.WriteLine(&quot;[WDT] Probe-Limit erreicht.&quot;)
+    end
+end</code></pre>
+                </div>
+                <p>Die 25-Meldungen-Grenze ist kein technisches Erfordernis. Sie ist ein Entwicklungswerkzeug: Wir
+                    wollen eine überschaubare Stichprobe, nicht den Chat mit hunderten Debugzeilen fluten.</p>
+                <h3>Warum der Handler immer registriert bleibt</h3>
+                <p>In Version 0.1 melden wir <code>OnCombatChat</code> beim Laden einmal an und beim Entladen einmal ab.
+                    Ist die Probe ausgeschaltet, kehrt er sofort zurück. Das hält den Lebenszyklus einfach und
+                    vermeidet, beim wiederholten Ein-/Ausschalten versehentlich denselben Handler mehrfach zu
+                    registrieren.</p>
+            </section>
+
+            <section class="tip-section" id="kapitel-11">
+                <div class="section-heading"><span>11</span>
+                    <h2>So untersuchst du echte Hüter-Meldungen</h2>
+                </div>
+                <p>Hier beginnt die eigentliche Reverse-Engineering-Arbeit im Kleinen. Nicht „welcher String sieht
+                    plausibel aus?“, sondern: <strong>welche Meldung korreliert zuverlässig mit genau dem Ereignis, das
+                        wir brauchen?</strong></p>
+                <ol>
+                    <li>Suche ein zähes Einzelziel, das lange genug lebt.</li>
+                    <li>Aktiviere <code>/wdt probe on</code>.</li>
+                    <li>Wirke genau <strong>ein</strong> bestimmtes Gambit und tue danach einige Sekunden nichts.</li>
+                    <li>Notiere, welche Meldung beim unmittelbaren Einsatz erscheint und welche Meldungen erst als
+                        periodische Ticks folgen.</li>
+                    <li>Wirke dasselbe Gambit erneut, bevor der Effekt abläuft. Vergleiche die Ausgabe.</li>
+                    <li>Wiederhole den Versuch bei Resist/Block/anderem Ziel, soweit sinnvoll reproduzierbar.</li>
+                </ol>
+
+                <h3>Eine kleine Versuchstabelle</h3>
+                <div class="table-scroll" tabindex="0">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Versuch</th>
+                                <th>Was du festhältst</th>
+                                <th>Frage</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Erstanwendung</td>
+                                <td>erste 1–3 passende Meldungen</td>
+                                <td>Gibt es eine eindeutige Anwendungsmeldung?</td>
+                            </tr>
+                            <tr>
+                                <td>Nur laufen lassen</td>
+                                <td>alle folgenden Meldungen</td>
+                                <td>Taucht derselbe Name bei jedem Tick auf?</td>
+                            </tr>
+                            <tr>
+                                <td>Früher Refresh</td>
+                                <td>Meldungen direkt beim erneuten Gambit</td>
+                                <td>Ist der Refresh textlich unterscheidbar?</td>
+                            </tr>
+                            <tr>
+                                <td>Zielwechsel</td>
+                                <td>Meldungen nach Wechsel</td>
+                                <td>Enthält der Text ein verlässliches Zielmerkmal?</td>
+                            </tr>
+                            <tr>
+                                <td>Fehlschlag/Resist</td>
+                                <td>Meldungen ohne erfolgreichen Effekt</td>
+                                <td>Würde ein naiver Parser fälschlich starten?</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="exercise"><strong>Deine wichtigste Hausübung:</strong> Sammle für genau <em>einen</em> DoT
+                    10–20 relevante Rohmeldungen und markiere sie manuell als „Anwendung“, „Tick“, „Fehlschlag“ oder
+                    „unklar“. Erst danach lohnt es sich, eine Parserregel zu schreiben.</div>
+
+                <p class="muted">Praktischer Tipp: Für diese Untersuchung ist ein Ziel mit viel Moral besser als
+                    Landschaftsmobs, die sterben, bevor der interessante Teil beginnt. Das Pluginproblem ist sonst bloß
+                    ein Trainingspuppenproblem mit schlechter Tarnung.</p>
+            </section>
+
+            <section class="tip-section" id="kapitel-12">
+                <div class="section-heading"><span>12</span>
+                    <h2>Der spätere Ereignisadapter</h2>
+                </div>
+                <p>Angenommen, deine Tests zeigen irgendwann eine <strong>wirklich eindeutige</strong> Meldung für die
+                    Anwendung. Dann soll der Parser nicht die Timerengine umbauen. Er soll nur aus einer Rohmeldung eine
+                    interne ID machen.</p>
+                <h3>Die ideale Schnittstelle</h3>
+                <div class="codebox">
+                    <div class="codebar"><span>Lua · Adapteridee</span><button class="copy-button" type="button"
+                            data-target="code-22">Kopieren</button></div>
+                    <pre tabindex="0"><code id="code-22" class="language-lua">local function TryRecognizeApplication(message)
+    -- Noch KEINE echten Regeln eintragen.
+    -- Rueckgabe:
+    --   &quot;spear&quot; / &quot;light&quot; / &quot;bleed&quot;  -&gt; eindeutig erkannt
+    --   nil                          -&gt; nichts Sicheres erkannt
+
+    return nil
+end</code></pre>
+                </div>
+                <p>Der Chat-Handler wird damit erstaunlich unspektakulär:</p>
+                <div class="codebox">
+                    <div class="codebar"><span>Lua · Verbindung von Parser und Timerengine</span><button
+                            class="copy-button" type="button" data-target="code-23">Kopieren</button></div>
+                    <pre tabindex="0"><code id="code-23" class="language-lua">local id = TryRecognizeApplication(args.Message)
+
+if id ~= nil then
+    StartTimer(id)
+end</code></pre>
+                </div>
+                <p>Genau das wollen wir: Die unzuverlässige Außenwelt ist in einer kleinen Adapterfunktion eingesperrt.
+                    Die getestete Timerlogik bleibt unangetastet.</p>
+
+                <h3>Parser zunächst mit künstlichen Testdaten prüfen</h3>
+                <p>Bevor du echte deutsche Kampfmeldungen fest einbaust, kannst du das Prinzip an einem künstlichen
+                    Format testen:</p>
+                <div class="codebox">
+                    <div class="codebar"><span>Lua · nur ein Lernbeispiel, kein echter LOTRO-Text</span><button
+                            class="copy-button" type="button" data-target="code-24">Kopieren</button></div>
+                    <pre tabindex="0"><code id="code-24" class="language-lua">local function TryRecognizeApplication(message)
+    if string.find(message, &quot;[WDT TEST] APPLY spear&quot;, 1, true) then
+        return &quot;spear&quot;
+    end
+
+    if string.find(message, &quot;[WDT TEST] APPLY light&quot;, 1, true) then
+        return &quot;light&quot;
+    end
+
+    return nil
+end
+
+assert(TryRecognizeApplication(&quot;[WDT TEST] APPLY spear&quot;) == &quot;spear&quot;)
+assert(TryRecognizeApplication(&quot;[WDT TEST] TICK spear&quot;) == nil)</code></pre>
+                </div>
+                <p>Der zweite <code>assert</code> ist wichtiger als der erste: Ein guter Parser beweist nicht nur, was
+                    er erkennen soll, sondern auch, was er <strong>nicht</strong> erkennen darf.</p>
+            </section>
+
+            <section class="tip-section" id="kapitel-13">
+                <div class="section-heading"><span>13</span>
+                    <h2>Grenzen: mehrere Ziele, Stacks, Resists</h2>
+                </div>
+                <p>Version 0.1 ist bewusst ehrlich klein. Bevor wir sie „smart“ nennen, müssen wir benennen, was sie
+                    noch nicht weiß.</p>
+                <div class="table-scroll" tabindex="0">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Problem</th>
+                                <th>Warum 0.1 es nicht löst</th>
+                                <th>Was später nötig wäre</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Mehrere Gegner</td>
+                                <td><code>state.active[id]</code> kennt nur einen Timer pro DoT.</td>
+                                <td>Zusätzlicher Schlüssel für eine verlässliche Zielidentität.</td>
+                            </tr>
+                            <tr>
+                                <td>Gleichnamige Gegner</td>
+                                <td>Ein sichtbarer Name allein ist keine sichere Identität.</td>
+                                <td>API-/Chatdaten prüfen; notfalls Funktionsumfang begrenzen.</td>
+                            </tr>
+                            <tr>
+                                <td>Stacks</td>
+                                <td>Ein einzelner Ablaufzeitpunkt modelliert keine Stapel.</td>
+                                <td>Stackzahl und ggf. getrennte Ablaufzeiten.</td>
+                            </tr>
+                            <tr>
+                                <td>Refresh-Regel</td>
+                                <td>0.1 setzt schlicht auf volle Dauer neu.</td>
+                                <td>Echte Mechanik messen: ersetzen, verlängern, Rest übernehmen?</td>
+                            </tr>
+                            <tr>
+                                <td>Resist/Block</td>
+                                <td>Manueller Start kennt Erfolg oder Fehlschlag nicht.</td>
+                                <td>Nur ein nachweislich erfolgreicher Ereignistyp darf automatisch starten.</td>
+                            </tr>
+                            <tr>
+                                <td>Trait-/Levelabhängigkeit</td>
+                                <td>Definitionen sind feste Lernwerte.</td>
+                                <td>Konfiguration oder dynamisch abgeleitete Dauern.</td>
+                            </tr>
+                            <tr>
+                                <td>Clientsprache</td>
+                                <td>Späteres Chatparsing wäre sprachabhängig.</td>
+                                <td>Locale-Schicht mit getrennten Mustern.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="callout warning"><strong>Das ist kein Makel der ersten Version.</strong> Begrenzungen sind
+                    dann gefährlich, wenn das Plugin sie verschweigt. Ein klar beschrifteter Single-Target-Ticker ist
+                    nützlicher als ein vermeintlich „intelligenter“ Tracker, der bei zwei Orks anfängt, Fanfiction zu
+                    schreiben.</div>
+            </section>
+
+            <section class="tip-section" id="kapitel-14">
+                <div class="section-heading"><span>14</span>
+                    <h2>Übungen und Ausbaustufen</h2>
+                </div>
+
+                <h3>A · Einen vierten Timer hinzufügen</h3>
+                <p>Füge eine Definition <code>long</code> mit 24 Sekunden hinzu und nimm die ID in <code>order</code>
+                    auf. Welche weiteren Stellen musst du ändern?</p>
+                <details>
+                    <summary>Lösung</summary>
+                    <p>In der derzeitigen UI musst du vor allem die Fensterhöhe bzw. die Position der unteren Buttons
+                        anpassen. Die Timerlogik selbst benötigt keine neue Fallunterscheidung. Genau daran erkennst du,
+                        dass die Datenstruktur funktioniert.</p>
+                </details>
+
+                <h3>B · Individuelle Balkenbreite</h3>
+                <p>Erweitere eine Definition um <code>barWidth</code>. Wie müsste <code>CreateRow</code> und
+                    <code>Render</code> angepasst werden?</p>
+                <details>
+                    <summary>Gedanke dahinter</summary>
+                    <p>Die Definition enthält dann auch eine Darstellungsoption. Überlege bewusst, ob das noch zur
+                        fachlichen Definition des DoTs gehört oder besser in eine eigene UI-Konfiguration. Schon diese
+                        kleine Aufgabe zeigt, warum Datenmodell und View später getrennte Module werden.</p>
+                </details>
+
+                <h3>C · Kampfende als optionaler Reset</h3>
+                <p>Hole dir den lokalen Spieler und beobachte <code>InCombatChanged</code>. Wenn der Spieler den Kampf
+                    verlässt, rufe testweise <code>ResetAll("Kampf beendet.")</code> auf.</p>
+                <div class="codebox">
+                    <div class="codebar"><span>Lua · optionale Erweiterung</span><button class="copy-button"
+                            type="button" data-target="code-25">Kopieren</button></div>
+                    <pre tabindex="0"><code id="code-25" class="language-lua">local player = Turbine.Gameplay.LocalPlayer.GetInstance()
+
+local function OnCombatChanged(sender, args)
+    if not player:IsInCombat() then
+        ResetAll(&quot;Kampf beendet.&quot;)
+    end
+end
+
+AddCallback(player, &quot;InCombatChanged&quot;, OnCombatChanged)
+
+-- Beim Unload nicht vergessen:
+RemoveCallback(player, &quot;InCombatChanged&quot;, OnCombatChanged)</code></pre>
+                </div>
+                <p>Ob du dieses Verhalten im fertigen Tracker wirklich willst, ist eine Produktentscheidung. Ein Effekt
+                    kann noch sichtbar relevant sein, obwohl der Kampfstatus gerade wechselt. Deshalb ist das eine Übung
+                    und keine still eingebaute Wahrheit.</p>
+
+                <h3>D · Eigene Messdauer im Spiel</h3>
+                <p>Verwende <code>/wdt start spear 7.5</code>. Prüfe, ob der Balken nach 7,5 Sekunden endet und ob die
+                    Warnschwelle weiterhin sinnvoll wirkt.</p>
+
+                <h3>E · Parser-Negativtests</h3>
+                <p>Sobald wir echte Kampfmeldungen gesammelt haben, schreiben wir zu jeder positiven Regel mindestens
+                    zwei negative Beispiele: ein Tick und ein Fehlschlag, die <strong>nicht</strong> starten dürfen.</p>
+            </section>
+
+            <section class="tip-section" id="kapitel-15">
+                <div class="section-heading"><span>15</span>
+                    <h2>Checkliste und nächster Schritt</h2>
+                </div>
+                <p>Bevor wir Version 0.2 schreiben, sollte Version 0.1 langweilig zuverlässig funktionieren. Das ist ein
+                    Kompliment.</p>
+                <ul>
+                    <li>Plugin lädt und entlädt ohne Fehler.</li>
+                    <li>Drei Timer können gleichzeitig laufen.</li>
+                    <li>Ein erneuter Start setzt nur den betreffenden Timer neu.</li>
+                    <li>Ausblenden stoppt nur das Zeichnen; die Zeit selbst bleibt korrekt.</li>
+                    <li><code>/wdt start &lt;id&gt; &lt;sekunden&gt;</code> validiert Eingaben.</li>
+                    <li>Die Kampfchat-Probe lässt sich ein- und ausschalten und stoppt nach 25 Meldungen.</li>
+                    <li>Beim Entladen werden Chat-Handler und Slash-Befehl entfernt.</li>
+                    <li>Du hast für mindestens einen echten Hüter-DoT Rohmeldungen gesammelt und
+                        Anwendung/Tick/Fehlschlag getrennt.</li>
+                </ul>
+
+                <div class="core-points">
+                    <h2>Die eigentliche Lernleistung dieses Projekts</h2>
+                    <p>Du baust erstmals ein Plugin, dessen Kernlogik von seiner Datenquelle getrennt ist.
+                        <strong>Definitionen</strong> beschreiben die Timer. <strong>state.active</strong> hält die
+                        laufenden Instanzen. <strong>Render</strong> malt den Zustand. <strong>StartTimer</strong> ist
+                        die einzige Tür, durch die eine erkannte Anwendung in die Engine gelangt. Genau diese vier
+                        Schichten machen aus einem Testskript einen Tracker, den wir sinnvoll erweitern können.</p>
+                </div>
+
+                <p>Der nächste logische Schritt ist deshalb nicht „mehr UI“. Es ist: <strong>einen konkreten Hüter-DoT
+                        auswählen, reale deutsche Kampfmeldungen sammeln und daraus eine beweisbare Erkennungsregel
+                        entwickeln.</strong> Danach verdrahten wir diese Regel mit <code>StartTimer</code> und haben den
+                    ersten tatsächlich automatisierten Balken.</p>
+            </section>
+
+            <section class="tip-section" id="kapitel-16">
+                <div class="section-heading"><span>16</span>
+                    <h2>Quellen und Versionshinweise</h2>
+                </div>
+                <p><strong>Stand: 5. Oktober 2026.</strong> Das Tutorial baut auf der beigefügten Einführung „Lua für
+                    LOTRO-Plugins – Julians Werkstatt“ auf und übernimmt deren Grundannahme Lua 5.1 sowie die dort
+                    erläuterten Muster für Timer, <code>Turbine.Chat.Received</code>, Callback-Lebenszyklus und
+                    Plugin-Unload.</p>
+                <ol>
+                    <li><a href="https://www.lotrointerface.com/downloads/fileinfo.php?id=1325">SSG U49 Lua API
+                            Documentation</a> – am 2. Oktober 2026 veröffentlichte Spiegelung der aktuellen
+                        SSG-Lua-API-Dokumentation.</li>
+                    <li><a href="https://www.lotrointerface.com/forums/showthread.php?t=3591">LoTROInterface: Reading
+                            Chat in LUA</a> – praktische Beispiele zu <code>Turbine.Chat.Received</code>,
+                        <code>PlayerCombat</code>, <code>string.find</code> und Callback-Registrierung.</li>
+                    <li><a href="https://www.lotrointerface.com/forums/showthread.php?t=3829">LoTROInterface: chat
+                            parsing, ui, data passing</a> – Diskussion der dokumentierten Felder von
+                        <code>Turbine.Chat.Received</code> und bekannter Einschränkungen von Senderdaten.</li>
+                    <li>Beigefügte Einführung, insbesondere Kapitel 10, 12, 14, 15 und 18: Zustandsmodell,
+                        Callback-Helfer, Kampfchat-Diagnose, Zeitmessung und vollständiger Testtimer.</li>
+                </ol>
+
+                <div class="callout warning"><strong>Bewusste Grenze der Quellenlage:</strong> Dieses Tutorial behauptet
+                    keine aktuellen Hüter-DoT-Dauern und keine fertigen deutschen Parserstrings. Genau diese Werte
+                    sollen wir im nächsten Schritt im tatsächlichen Client messen bzw. aus echten Meldungen ableiten.
+                    Damit bleibt die Programmierlogik belastbar, auch wenn Skillmechaniken oder Lokalisierung sich
+                    ändern.</div>
+            </section>
+
+        </main>
+        <footer class="footer">
+            <p>Für Julian · Projekt 01 der LOTRO-Lua-Werkstatt · Erst messen, dann automatisieren.</p>
+            <a class="back-to-top" href="#anfang">Zurück zum Anfang ↑</a>
+        </footer>
+    </div>
+    <a class="site-top" href="#anfang" aria-label="Zum Anfang der Anleitung">↑ Anfang</a>
+    <script>
+        for (const button of document.querySelectorAll('.copy-button')) {
+            button.addEventListener('click', async () => {
+                const target = document.getElementById(button.dataset.target);
+                const text = target.textContent;
+                try {
+                    if (navigator.clipboard && window.isSecureContext && location.protocol !== 'file:') {
+                        await navigator.clipboard.writeText(text);
+                    } else {
+                        const el = document.createElement('textarea');
+                        el.value = text;
+                        el.style.position = 'fixed';
+                        el.style.top = '-10000px';
+                        document.body.appendChild(el);
+                        el.select();
+                        const ok = document.execCommand('copy');
+                        el.remove();
+                        if (!ok) throw new Error('copy');
+                    }
+                    button.textContent = 'Kopiert';
+                    document.getElementById('copy-status').textContent = 'Codebeispiel kopiert.';
+                } catch (e) {
+                    const range = document.createRange();
+                    range.selectNodeContents(target);
+                    const selection = window.getSelection();
+                    selection.removeAllRanges();
+                    selection.addRange(range);
+                    button.textContent = 'Strg+C';
+                    document.getElementById('copy-status').textContent = 'Code markiert. Bitte mit Strg+C kopieren.';
+                }
+                setTimeout(() => { button.textContent = 'Kopieren'; }, 2200);
+            });
+        }
+
+        const printButton = document.getElementById('print');
+        let opened = [];
+        window.addEventListener('beforeprint', () => {
+            opened = Array.from(document.querySelectorAll('details:not([open])'));
+            opened.forEach(el => el.open = true);
+        });
+        window.addEventListener('afterprint', () => {
+            opened.forEach(el => el.open = false);
+        });
+        printButton.addEventListener('click', () => window.print());
+    </script>
+</body>
+
+</html>
