@@ -3495,229 +3495,229 @@ const validPosts = posts.filter(isValidPost);</code></pre>
     </section>
 
     <hr class="divider" />
-        <section class="card" id="mistakes">
-            <h3>35. Häufige Fehler und was tatsächlich dahintersteckt</h3>
+    <section class="card" id="mistakes">
+      <h3>35. Häufige Fehler und was tatsächlich dahintersteckt</h3>
 
-            <div class="cheat-grid">
-                <article class="cheat-item">
-                    <h4><code>Cannot read properties of null</code></h4>
-                    <p>
-                        Der Selektor findet kein Element, das Skript läuft zu früh oder die Komponente ist auf
-                        dieser Seite nicht vorhanden.
-                    </p>
-                    <pre class="cheat-code"><code class="language-js">const button = document.querySelector("#save");
+      <div class="cheat-grid">
+        <article class="cheat-item">
+          <h4><code>Cannot read properties of null</code></h4>
+          <p>
+            Der Selektor findet kein Element, das Skript läuft zu früh oder die Komponente ist auf
+            dieser Seite nicht vorhanden.
+          </p>
+          <pre class="cheat-code"><code class="language-js">const button = document.querySelector("#save");
 if (!button) return;</code></pre>
-                </article>
+        </article>
 
-                <article class="cheat-item">
-                    <h4><code>... is not a function</code></h4>
-                    <p>
-                        Der Wert besitzt nicht den erwarteten Typ, eine Methode wurde falsch geschrieben oder
-                        eine Funktionsreferenz bereits aufgerufen.
-                    </p>
-                    <pre class="cheat-code"><code class="language-js">// Übergibt die Funktion:
+        <article class="cheat-item">
+          <h4><code>... is not a function</code></h4>
+          <p>
+            Der Wert besitzt nicht den erwarteten Typ, eine Methode wurde falsch geschrieben oder
+            eine Funktionsreferenz bereits aufgerufen.
+          </p>
+          <pre class="cheat-code"><code class="language-js">// Übergibt die Funktion:
 button.addEventListener("click", handleClick);
 
 // Ruft sie sofort auf und übergibt ihr Ergebnis:
 // button.addEventListener("click", handleClick());</code></pre>
-                </article>
+        </article>
 
-                <article class="cheat-item">
-                    <h4><code>Unexpected token</code> bei JSON</h4>
-                    <p>
-                        Häufige Ursachen sind Kommentare, ein abschließendes Komma, falsche Anführungszeichen
-                        oder eine HTML-Fehlerseite, die irrtümlich als JSON geparst wird.
-                    </p>
-                </article>
+        <article class="cheat-item">
+          <h4><code>Unexpected token</code> bei JSON</h4>
+          <p>
+            Häufige Ursachen sind Kommentare, ein abschließendes Komma, falsche Anführungszeichen
+            oder eine HTML-Fehlerseite, die irrtümlich als JSON geparst wird.
+          </p>
+        </article>
 
-                <article class="cheat-item">
-                    <h4><code>Failed to fetch</code></h4>
-                    <p>
-                        Prüfe URL, Groß-/Kleinschreibung, lokalen Server, Network-Tab, CORS und Deploymentpfad.
-                        Auf GitHub Pages sind <code>Posts.json</code> und <code>posts.json</code> verschiedene
-                        Dateien.
-                    </p>
-                </article>
+        <article class="cheat-item">
+          <h4><code>Failed to fetch</code></h4>
+          <p>
+            Prüfe URL, Groß-/Kleinschreibung, lokalen Server, Network-Tab, CORS und Deploymentpfad.
+            Auf GitHub Pages sind <code>Posts.json</code> und <code>posts.json</code> verschiedene
+            Dateien.
+          </p>
+        </article>
 
-                <article class="cheat-item">
-                    <h4>Ein Array wird unerwartet verändert</h4>
-                    <pre class="cheat-code"><code class="language-js">// sort() mutiert:
+        <article class="cheat-item">
+          <h4>Ein Array wird unerwartet verändert</h4>
+          <pre class="cheat-code"><code class="language-js">// sort() mutiert:
 const sorted = [...posts].sort(comparePosts);
 
 // splice() mutiert, slice() nicht:
 const excerpt = posts.slice(0, 3);</code></pre>
-                </article>
+        </article>
 
-                <article class="cheat-item">
-                    <h4>Asynchroner Wert ist nur ein Promise</h4>
-                    <pre class="cheat-code"><code class="language-js">const promise = loadPosts();
+        <article class="cheat-item">
+          <h4>Asynchroner Wert ist nur ein Promise</h4>
+          <pre class="cheat-code"><code class="language-js">const promise = loadPosts();
 // promise ist noch nicht das Array
 
 const posts = await loadPosts();</code></pre>
-                </article>
+        </article>
 
-                <article class="cheat-item">
-                    <h4>Objekte werden falsch verglichen</h4>
-                    <pre class="cheat-code"><code class="language-js">{ id: 1 } === { id: 1 }; // false
+        <article class="cheat-item">
+          <h4>Objekte werden falsch verglichen</h4>
+          <pre class="cheat-code"><code class="language-js">{ id: 1 } === { id: 1 }; // false
 
 const sameId = first.id === second.id;</code></pre>
-                </article>
+        </article>
 
-                <article class="cheat-item">
-                    <h4>Event Listener wird mehrfach registriert</h4>
-                    <p>
-                        Wenn eine Initialisierungsfunktion mehrmals läuft, reagieren Elemente plötzlich
-                        doppelt oder dreifach. Initialisierung nur einmal ausführen oder Listener vor dem
-                        Neuaufbau kontrolliert entfernen.
-                    </p>
-                </article>
+        <article class="cheat-item">
+          <h4>Event Listener wird mehrfach registriert</h4>
+          <p>
+            Wenn eine Initialisierungsfunktion mehrmals läuft, reagieren Elemente plötzlich
+            doppelt oder dreifach. Initialisierung nur einmal ausführen oder Listener vor dem
+            Neuaufbau kontrolliert entfernen.
+          </p>
+        </article>
 
-                <article class="cheat-item">
-                    <h4>Pfad funktioniert lokal, aber nicht online</h4>
-                    <p>
-                        Prüfe Groß-/Kleinschreibung und ob ein führender Slash wirklich zum Domain-Root zeigen
-                        soll. Für Modulressourcen ist <code>new URL(relativePath, import.meta.url)</code> meist
-                        die robusteste Lösung.
-                    </p>
-                </article>
+        <article class="cheat-item">
+          <h4>Pfad funktioniert lokal, aber nicht online</h4>
+          <p>
+            Prüfe Groß-/Kleinschreibung und ob ein führender Slash wirklich zum Domain-Root zeigen
+            soll. Für Modulressourcen ist <code>new URL(relativePath, import.meta.url)</code> meist
+            die robusteste Lösung.
+          </p>
+        </article>
 
-                <article class="cheat-item">
-                    <h4>Zu viel Logik in einem Event Handler</h4>
-                    <pre class="cheat-code"><code class="language-js">function handleFilterChange(event) {
+        <article class="cheat-item">
+          <h4>Zu viel Logik in einem Event Handler</h4>
+          <pre class="cheat-code"><code class="language-js">function handleFilterChange(event) {
   const topic = event.target.value;
   const visiblePosts = filterByTopic(state.posts, topic);
   renderPosts(container, visiblePosts);
 }</code></pre>
-                    <p class="hint">
-                        Der Handler koordiniert. Filtern und Rendern bleiben eigene, benannte Funktionen.
-                    </p>
-                </article>
+          <p class="hint">
+            Der Handler koordiniert. Filtern und Rendern bleiben eigene, benannte Funktionen.
+          </p>
+        </article>
 
-                <article class="cheat-item">
-                    <h4>Komma statt Dezimalpunkt</h4>
-                    <pre class="cheat-code"><code class="language-js">Number("3,14"); // NaN
+        <article class="cheat-item">
+          <h4>Komma statt Dezimalpunkt</h4>
+          <pre class="cheat-code"><code class="language-js">Number("3,14"); // NaN
 Number("3.14"); // 3.14
 
 const normalized = Number(input.replace(",", "."));</code></pre>
-                    <p class="hint">
-                        Eingabeformate sind lokal, JavaScript-Zahlenliterale nicht. Definiere klar, welche
-                        Eingabe du akzeptierst.
-                    </p>
-                </article>
+          <p class="hint">
+            Eingabeformate sind lokal, JavaScript-Zahlenliterale nicht. Definiere klar, welche
+            Eingabe du akzeptierst.
+          </p>
+        </article>
 
-                <article class="cheat-item">
-                    <h4>Zu frühe Abstraktion</h4>
-                    <p>
-                        Schreibe zuerst zwei oder drei konkrete, verständliche Fälle. Erst dann zeigt sich,
-                        was wirklich gemeinsam ist. Abstraktion auf Verdacht schafft oft bloß ein Rätsel mit
-                        Funktionsnamen.
-                    </p>
-                </article>
-            </div>
-            <p><a href="#top">↑ Nach oben</a></p>
-        </section>
+        <article class="cheat-item">
+          <h4>Zu frühe Abstraktion</h4>
+          <p>
+            Schreibe zuerst zwei oder drei konkrete, verständliche Fälle. Erst dann zeigt sich,
+            was wirklich gemeinsam ist. Abstraktion auf Verdacht schafft oft bloß ein Rätsel mit
+            Funktionsnamen.
+          </p>
+        </article>
+      </div>
+      <p><a href="#top">↑ Nach oben</a></p>
+    </section>
 
-        <hr class="divider" />
+    <hr class="divider" />
 
-        <section class="card" id="roadmap">
-            <h3>36. Lernroute: vom Lesen zum tatsächlichen Können</h3>
+    <section class="card" id="roadmap">
+      <h3>36. Lernroute: vom Lesen zum tatsächlichen Können</h3>
 
-            <p>
-                JavaScript lernt man nicht durch ehrfürchtiges Betrachten von Syntax. Jede Stufe sollte in
-                einem kleinen, selbst geschriebenen Projekt enden. Kopieren ist zum Einstieg legitim;
-                Verstehen beginnt dort, wo du das Beispiel ohne Vorlage veränderst.
-            </p>
+      <p>
+        JavaScript lernt man nicht durch ehrfürchtiges Betrachten von Syntax. Jede Stufe sollte in
+        einem kleinen, selbst geschriebenen Projekt enden. Kopieren ist zum Einstieg legitim;
+        Verstehen beginnt dort, wo du das Beispiel ohne Vorlage veränderst.
+      </p>
 
-            <div class="cheat-grid">
-                <article class="cheat-item">
-                    <h4>Stufe 1 — Sprache</h4>
-                    <ul>
-                        <li>Variablen, Datentypen und Operatoren</li>
-                        <li>Bedingungen und Schleifen</li>
-                        <li>Funktionen, Arrays und Objekte</li>
-                    </ul>
-                    <p><strong>Projekt:</strong> Konsolenprogramm, das Messwerte auswertet und kategorisiert.</p>
-                </article>
+      <div class="cheat-grid">
+        <article class="cheat-item">
+          <h4>Stufe 1 — Sprache</h4>
+          <ul>
+            <li>Variablen, Datentypen und Operatoren</li>
+            <li>Bedingungen und Schleifen</li>
+            <li>Funktionen, Arrays und Objekte</li>
+          </ul>
+          <p><strong>Projekt:</strong> Konsolenprogramm, das Messwerte auswertet und kategorisiert.</p>
+        </article>
 
-                <article class="cheat-item">
-                    <h4>Stufe 2 — DOM und Events</h4>
-                    <ul>
-                        <li>Elemente auswählen und erzeugen</li>
-                        <li>Klassen, Attribute und Inhalte ändern</li>
-                        <li>Klicks, Eingaben und Formulare behandeln</li>
-                    </ul>
-                    <p><strong>Projekt:</strong> Filterbare Kartenliste mit Suchfeld und Leerzustand.</p>
-                </article>
+        <article class="cheat-item">
+          <h4>Stufe 2 — DOM und Events</h4>
+          <ul>
+            <li>Elemente auswählen und erzeugen</li>
+            <li>Klassen, Attribute und Inhalte ändern</li>
+            <li>Klicks, Eingaben und Formulare behandeln</li>
+          </ul>
+          <p><strong>Projekt:</strong> Filterbare Kartenliste mit Suchfeld und Leerzustand.</p>
+        </article>
 
-                <article class="cheat-item">
-                    <h4>Stufe 3 — Daten</h4>
-                    <ul>
-                        <li>JSON laden und validieren</li>
-                        <li><code>fetch()</code>, Promises und <code>async/await</code></li>
-                        <li>Lade-, Fehler- und Leerzustände darstellen</li>
-                    </ul>
-                    <p><strong>Projekt:</strong> Eine kleine Seite, die Daten aus einer JSON-Datei rendert.</p>
-                </article>
+        <article class="cheat-item">
+          <h4>Stufe 3 — Daten</h4>
+          <ul>
+            <li>JSON laden und validieren</li>
+            <li><code>fetch()</code>, Promises und <code>async/await</code></li>
+            <li>Lade-, Fehler- und Leerzustände darstellen</li>
+          </ul>
+          <p><strong>Projekt:</strong> Eine kleine Seite, die Daten aus einer JSON-Datei rendert.</p>
+        </article>
 
-                <article class="cheat-item">
-                    <h4>Stufe 4 — Struktur</h4>
-                    <ul>
-                        <li>Reine Funktionen und klare Zuständigkeiten</li>
-                        <li>ES-Module</li>
-                        <li>Fehlerbehandlung, JSDoc und Tests</li>
-                    </ul>
-                    <p><strong>Projekt:</strong> Renderer in Datenzugriff, Filterlogik und DOM-Ausgabe teilen.</p>
-                </article>
+        <article class="cheat-item">
+          <h4>Stufe 4 — Struktur</h4>
+          <ul>
+            <li>Reine Funktionen und klare Zuständigkeiten</li>
+            <li>ES-Module</li>
+            <li>Fehlerbehandlung, JSDoc und Tests</li>
+          </ul>
+          <p><strong>Projekt:</strong> Renderer in Datenzugriff, Filterlogik und DOM-Ausgabe teilen.</p>
+        </article>
 
-                <article class="cheat-item">
-                    <h4>Stufe 5 — Vertiefung</h4>
-                    <ul>
-                        <li>Closures, <code>this</code> und Prototypen</li>
-                        <li>Event Loop und Performance</li>
-                        <li>Sicherheit und Accessibility</li>
-                    </ul>
-                    <p><strong>Projekt:</strong> Eine robuste, tastaturbedienbare Komponente ohne Framework.</p>
-                </article>
+        <article class="cheat-item">
+          <h4>Stufe 5 — Vertiefung</h4>
+          <ul>
+            <li>Closures, <code>this</code> und Prototypen</li>
+            <li>Event Loop und Performance</li>
+            <li>Sicherheit und Accessibility</li>
+          </ul>
+          <p><strong>Projekt:</strong> Eine robuste, tastaturbedienbare Komponente ohne Framework.</p>
+        </article>
 
-                <article class="cheat-item">
-                    <h4>Fünf gute Übungsregeln</h4>
-                    <ol>
-                        <li>Erst selbst vorhersagen, dann ausführen.</li>
-                        <li>Fehler nicht sofort löschen, sondern lesen.</li>
-                        <li>Beispiele absichtlich verändern und brechen.</li>
-                        <li>Code am nächsten Tag ohne Vorlage neu schreiben.</li>
-                        <li>Das Gelernte in einem echten Website-Baustein verwenden.</li>
-                    </ol>
-                </article>
-            </div>
+        <article class="cheat-item">
+          <h4>Fünf gute Übungsregeln</h4>
+          <ol>
+            <li>Erst selbst vorhersagen, dann ausführen.</li>
+            <li>Fehler nicht sofort löschen, sondern lesen.</li>
+            <li>Beispiele absichtlich verändern und brechen.</li>
+            <li>Code am nächsten Tag ohne Vorlage neu schreiben.</li>
+            <li>Das Gelernte in einem echten Website-Baustein verwenden.</li>
+          </ol>
+        </article>
+      </div>
 
-            <details class="news-details">
-                <summary>Geeignete Mini-Projekte in sinnvoller Reihenfolge</summary>
-                <ol>
-                    <li>Zähler mit Plus-, Minus- und Reset-Button</li>
-                    <li>Temperatur- oder Einheitenumrechner</li>
-                    <li>Zeichen- und Wortzähler</li>
-                    <li>Ein-/ausklappbare FAQ</li>
-                    <li>Live-Suche in einer statischen Liste</li>
-                    <li>Formular mit verständlichen Fehlermeldungen</li>
-                    <li>To-do-Liste mit <code>localStorage</code></li>
-                    <li>JSON-basierte Projektgalerie</li>
-                    <li>Tägliche Featured Page</li>
-                    <li>Modularer News-Renderer mit Filterung und Fehlerzuständen</li>
-                </ol>
-            </details>
-            <p><a href="#top">↑ Nach oben</a></p>
-        </section>
+      <details class="news-details">
+        <summary>Geeignete Mini-Projekte in sinnvoller Reihenfolge</summary>
+        <ol>
+          <li>Zähler mit Plus-, Minus- und Reset-Button</li>
+          <li>Temperatur- oder Einheitenumrechner</li>
+          <li>Zeichen- und Wortzähler</li>
+          <li>Ein-/ausklappbare FAQ</li>
+          <li>Live-Suche in einer statischen Liste</li>
+          <li>Formular mit verständlichen Fehlermeldungen</li>
+          <li>To-do-Liste mit <code>localStorage</code></li>
+          <li>JSON-basierte Projektgalerie</li>
+          <li>Tägliche Featured Page</li>
+          <li>Modularer News-Renderer mit Filterung und Fehlerzuständen</li>
+        </ol>
+      </details>
+      <p><a href="#top">↑ Nach oben</a></p>
+    </section>
 
-        <hr class="divider" />
+    <hr class="divider" />
 
-        <section class="card" id="reference">
-            <h3>37. Kurzreferenz: häufig gebrauchte Muster</h3>
+    <section class="card" id="reference">
+      <h3>37. Kurzreferenz: häufig gebrauchte Muster</h3>
 
-            <div class="cheat-grid">
-                <article class="cheat-item">
-                    <h4>Variable und Funktion</h4>
-                    <pre class="cheat-code"><code class="language-js">const fixed = 42;
+      <div class="cheat-grid">
+        <article class="cheat-item">
+          <h4>Variable und Funktion</h4>
+          <pre class="cheat-code"><code class="language-js">const fixed = 42;
 let changing = 0;
 
 function add(a, b) {
@@ -3725,11 +3725,11 @@ function add(a, b) {
 }
 
 const multiply = (a, b) =&gt; a * b;</code></pre>
-                </article>
+        </article>
 
-                <article class="cheat-item">
-                    <h4>Bedingung und Schleife</h4>
-                    <pre class="cheat-code"><code class="language-js">if (condition) {
+        <article class="cheat-item">
+          <h4>Bedingung und Schleife</h4>
+          <pre class="cheat-code"><code class="language-js">if (condition) {
   // ...
 } else {
   // ...
@@ -3738,113 +3738,112 @@ const multiply = (a, b) =&gt; a * b;</code></pre>
 for (const item of items) {
   // ...
 }</code></pre>
-                </article>
+        </article>
 
-                <article class="cheat-item">
-                    <h4>Array transformieren</h4>
-                    <pre class="cheat-code"><code class="language-js">const result = items
+        <article class="cheat-item">
+          <h4>Array transformieren</h4>
+          <pre class="cheat-code"><code class="language-js">const result = items
   .filter(item =&gt; item.active)
   .map(item =&gt; item.name)
   .sort((a, b) =&gt; a.localeCompare(b));</code></pre>
-                </article>
+        </article>
 
-                <article class="cheat-item">
-                    <h4>Objekt lesen und kopieren</h4>
-                    <pre class="cheat-code"><code class="language-js">const { title, topic = "other" } = post;
+        <article class="cheat-item">
+          <h4>Objekt lesen und kopieren</h4>
+          <pre class="cheat-code"><code class="language-js">const { title, topic = "other" } = post;
 const updated = { ...post, title: "Neu" };</code></pre>
-                </article>
+        </article>
 
-                <article class="cheat-item">
-                    <h4>DOM und Event</h4>
-                    <pre class="cheat-code"><code class="language-js">const button = document.querySelector("#save");
+        <article class="cheat-item">
+          <h4>DOM und Event</h4>
+          <pre class="cheat-code"><code class="language-js">const button = document.querySelector("#save");
 
 button?.addEventListener("click", () =&gt; {
   document.body.classList.toggle("saved");
 });</code></pre>
-                </article>
+        </article>
 
-                <article class="cheat-item">
-                    <h4>Asynchron laden</h4>
-                    <pre class="cheat-code"><code class="language-js">async function loadData(url) {
+        <article class="cheat-item">
+          <h4>Asynchron laden</h4>
+          <pre class="cheat-code"><code class="language-js">async function loadData(url) {
   const response = await fetch(url);
   if (!response.ok) {
     throw new Error(&#96;HTTP &#36;{response.status}&#96;);
   }
   return response.json();
 }</code></pre>
-                </article>
+        </article>
 
-                <article class="cheat-item">
-                    <h4>Fehler behandeln</h4>
-                    <pre class="cheat-code"><code class="language-js">try {
+        <article class="cheat-item">
+          <h4>Fehler behandeln</h4>
+          <pre class="cheat-code"><code class="language-js">try {
   const data = await loadData(url);
   render(data);
 } catch (error) {
   console.error(error);
   renderError(error);
 }</code></pre>
-                </article>
+        </article>
 
-                <article class="cheat-item">
-                    <h4>Sichere Standardwerte</h4>
-                    <pre class="cheat-code"><code class="language-js">const title = post?.title ?? "Ohne Titel";
+        <article class="cheat-item">
+          <h4>Sichere Standardwerte</h4>
+          <pre class="cheat-code"><code class="language-js">const title = post?.title ?? "Ohne Titel";
 const images = post.images ?? [];
 const limit = Number(container.dataset.limit ?? 3);</code></pre>
-                </article>
-            </div>
+        </article>
+      </div>
 
-            <p class="hint">
-                Solider JavaScript-Code ist selten der cleverste Code. Er macht Eingaben, Zustände,
-                Nebenwirkungen und Fehlerwege sichtbar — und lässt den nächsten Leser nicht im Nebel
-                stochern. Dieser nächste Leser bist erstaunlich oft du selbst.
-            </p>
-            <p><a href="#top">↑ Nach oben</a></p>
-        </section>
+      <p class="hint">
+        Solider JavaScript-Code ist selten der cleverste Code. Er macht Eingaben, Zustände,
+        Nebenwirkungen und Fehlerwege sichtbar — und lässt den nächsten Leser nicht im Nebel
+        stochern. Dieser nächste Leser bist erstaunlich oft du selbst.
+      </p>
+      <p><a href="#top">↑ Nach oben</a></p>
+    </section>
 
-        <hr class="divider" />
+    <hr class="divider" />
 
-        <section class="card" aria-labelledby="further-reading">
-            <h3 id="further-reading">Weiterführende Dokumentation</h3>
-            <ul>
-                <li>
-                    <a href="https://developer.mozilla.org/de/docs/Web/JavaScript" target="_blank"
-                        rel="noopener noreferrer">
-                        MDN: JavaScript
-                    </a>
-                    — umfassende Referenz zu Sprache und Browser-APIs
-                </li>
-                <li>
-                    <a href="https://developer.mozilla.org/de/docs/Learn_web_development/Core/Scripting" target="_blank"
-                        rel="noopener noreferrer">
-                        MDN Learn: Scripting
-                    </a>
-                    — strukturierter Einstieg mit Übungen
-                </li>
-                <li>
-                    <a href="https://javascript.info/" target="_blank" rel="noopener noreferrer">
-                        The Modern JavaScript Tutorial
-                    </a>
-                    — ausführlicher Kurs vom Sprachkern bis zum Browser
-                </li>
-                <li>
-                    <a href="https://tc39.es/ecma262/" target="_blank" rel="noopener noreferrer">
-                        ECMAScript Language Specification
-                    </a>
-                    — die maßgebliche, aber wenig kuschelige Spezifikation
-                </li>
-            </ul>
-        </section>
+    <section class="card" aria-labelledby="further-reading">
+      <h3 id="further-reading">Weiterführende Dokumentation</h3>
+      <ul>
+        <li>
+          <a href="https://developer.mozilla.org/de/docs/Web/JavaScript" target="_blank" rel="noopener noreferrer">
+            MDN: JavaScript
+          </a>
+          — umfassende Referenz zu Sprache und Browser-APIs
+        </li>
+        <li>
+          <a href="https://developer.mozilla.org/de/docs/Learn_web_development/Core/Scripting" target="_blank"
+            rel="noopener noreferrer">
+            MDN Learn: Scripting
+          </a>
+          — strukturierter Einstieg mit Übungen
+        </li>
+        <li>
+          <a href="https://javascript.info/" target="_blank" rel="noopener noreferrer">
+            The Modern JavaScript Tutorial
+          </a>
+          — ausführlicher Kurs vom Sprachkern bis zum Browser
+        </li>
+        <li>
+          <a href="https://tc39.es/ecma262/" target="_blank" rel="noopener noreferrer">
+            ECMAScript Language Specification
+          </a>
+          — die maßgebliche, aber wenig kuschelige Spezifikation
+        </li>
+      </ul>
+    </section>
 
-        <hr class="divider" />
-        <p class="hint"><a href="#top">↑ top</a>&emsp;<a href="../index.html">⌂ home</a>&emsp;<a href="home.html">←
-                back</a>
-        </p>
-    </main>
+    <hr class="divider" />
+    <p class="hint"><a href="#top">↑ top</a>&emsp;<a href="../index.html">⌂ home</a>&emsp;<a href="home.html">←
+        back</a>
+    </p>
+  </main>
 
-    
-    <footer class="site-footer">
-        <p>© 2026 Julian. Alle Rechte vorbehalten.</p>
-    </footer>
+
+  <footer class="site-footer">
+    <p>© 2026 Julian. Alle Rechte vorbehalten.</p>
+  </footer>
 </body>
 
 </html>
