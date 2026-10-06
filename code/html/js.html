@@ -2276,3 +2276,1223 @@ if (!contentType.includes("application/json")) {
             </div>
             <p><a href="#top">↑ Nach oben</a></p>
         </section>
+
+        
+        <hr class="divider" />
+
+        <section class="card" id="modules">
+            <h3>24. Module, Importe und Pfade auf GitHub Pages</h3>
+
+            <div class="cheat-grid">
+                <article class="cheat-item">
+                    <h4>Benannte Exporte</h4>
+                    <pre class="cheat-code"><code class="language-js">// utils.js
+export function escapeHtml(value) {
+  // ...
+}
+
+export const DEFAULT_LIMIT = 3;
+
+// news.js
+import { escapeHtml, DEFAULT_LIMIT } from "./utils.js";</code></pre>
+                    <p class="hint">
+                        Im Browser muss die Dateiendung <code>.js</code> im Importpfad normalerweise
+                        mitgeschrieben werden.
+                    </p>
+                </article>
+
+                <article class="cheat-item">
+                    <h4>Default Export</h4>
+                    <pre class="cheat-code"><code class="language-js">// renderer.js
+export default function renderPosts(posts) {
+  // ...
+}
+
+// main.js
+import renderPosts from "./renderer.js";</code></pre>
+                    <p class="hint">
+                        Benannte Exporte erleichtern automatische Umbenennungen und zeigen klar, was importiert
+                        wird. Default Exports sparsam verwenden.
+                    </p>
+                </article>
+
+                <article class="cheat-item">
+                    <h4>Import umbenennen</h4>
+                    <pre class="cheat-code"><code class="language-js">import {
+  render as renderPosts,
+  DEFAULT_LIMIT as POST_LIMIT
+} from "./renderer.js";</code></pre>
+                </article>
+
+                <article class="cheat-item">
+                    <h4>Dynamischer Import</h4>
+                    <pre class="cheat-code"><code class="language-js">if (document.querySelector("[data-gallery]")) {
+  const { initializeGallery } = await import("./gallery.js");
+  initializeGallery();
+}</code></pre>
+                    <p class="hint">
+                        So wird optionaler Code nur geladen, wenn die Seite ihn tatsächlich braucht.
+                    </p>
+                </article>
+
+                <article class="cheat-item">
+                    <h4>Drei unterschiedliche Bezugspunkte</h4>
+                    <pre class="cheat-code"><code class="language-js">// In HTML: relativ zur HTML-Datei
+// &lt;script src="../assets/js/page.js"&gt;
+
+// In import: relativ zur importierenden JS-Datei
+import { helper } from "./utils.js";
+
+// In fetch: eine relative URL ist meist relativ zur Dokument-URL
+fetch("../assets/json/posts.json");</code></pre>
+                </article>
+
+                <article class="cheat-item">
+                    <h4>Projektpfad statt Domain-Root</h4>
+                    <p>
+                        Auf einer GitHub-Project-Page kann die Site unter
+                        <code>example.github.io/web/</code> liegen. Ein Pfad wie
+                        <code>/assets/data.json</code> zeigt dann zum Domain-Root und nicht zwingend in das
+                        Repository.
+                    </p>
+                    <pre
+                        class="cheat-code"><code class="language-js">const url = new URL("../json/posts.json", import.meta.url);</code></pre>
+                </article>
+
+                <article class="cheat-item">
+                    <h4>Zyklische Importe vermeiden</h4>
+                    <p>
+                        Wenn <code>a.js</code> aus <code>b.js</code> importiert und <code>b.js</code> wiederum
+                        aus <code>a.js</code>, entstehen schwer verständliche Initialisierungsprobleme.
+                        Gemeinsam benötigte Logik gehört meist in ein drittes Modul.
+                    </p>
+                </article>
+
+                <article class="cheat-item">
+                    <h4>Module werden nur einmal ausgewertet</h4>
+                    <pre class="cheat-code"><code class="language-js">// Mehrere Module dürfen dasselbe Modul importieren.
+// Dessen oberster Code läuft dennoch nur einmal.
+import { settings } from "./settings.js";</code></pre>
+                    <p class="hint">
+                        Exportierte Objekte bleiben allerdings geteilte Referenzen. Verändere sie nicht
+                        heimlich an beliebigen Stellen.
+                    </p>
+                </article>
+            </div>
+            <p><a href="#top">↑ Nach oben</a></p>
+        </section>
+
+        <hr class="divider" />
+
+        <section class="card" id="errors">
+            <h3>25. Fehlerbehandlung: Fehler sichtbar, verständlich und beherrschbar machen</h3>
+
+            <div class="cheat-grid">
+                <article class="cheat-item">
+                    <h4><code>try</code>, <code>catch</code>, <code>finally</code></h4>
+                    <pre class="cheat-code"><code class="language-js">try {
+  const data = JSON.parse(text);
+  render(data);
+} catch (error) {
+  console.error("Daten konnten nicht verarbeitet werden.", error);
+} finally {
+  spinner.hidden = true;
+}</code></pre>
+                </article>
+
+                <article class="cheat-item">
+                    <h4>Eigene Fehler werfen</h4>
+                    <pre class="cheat-code"><code class="language-js">function validatePost(post) {
+  if (!post || typeof post !== "object") {
+    throw new TypeError("Post muss ein Objekt sein.");
+  }
+
+  if (!post.id) {
+    throw new Error("Post-ID fehlt.");
+  }
+}</code></pre>
+                </article>
+
+                <article class="cheat-item">
+                    <h4>Fehler mit Ursache weiterreichen</h4>
+                    <pre class="cheat-code"><code class="language-js">try {
+  return await response.json();
+} catch (error) {
+  throw new Error("Antwort enthält kein gültiges JSON.", {
+    cause: error
+  });
+}</code></pre>
+                </article>
+
+                <article class="cheat-item">
+                    <h4>Nicht alles verschlucken</h4>
+                    <pre class="cheat-code"><code class="language-js">// Schlecht:
+try {
+  riskyOperation();
+} catch {
+  // nichts
+}
+
+// Besser:
+try {
+  riskyOperation();
+} catch (error) {
+  console.error("Operation fehlgeschlagen.", error);
+  showUserMessage("Etwas ist schiefgegangen.");
+}</code></pre>
+                </article>
+
+                <article class="cheat-item">
+                    <h4>Fehlergrenzen sinnvoll setzen</h4>
+                    <p>
+                        Fange Fehler dort ab, wo du eine sinnvolle Reaktion kennst: erneut versuchen, einen
+                        Fallback anzeigen, den Nutzer informieren oder zusätzliche Diagnose liefern.
+                    </p>
+                </article>
+
+                <article class="cheat-item">
+                    <h4>Fehlertyp unterscheiden</h4>
+                    <pre class="cheat-code"><code class="language-js">try {
+  await loadPosts();
+} catch (error) {
+  if (error instanceof SyntaxError) {
+    showUserMessage("Die Datendatei ist ungültig.");
+  } else {
+    throw error;
+  }
+}</code></pre>
+                </article>
+
+                <article class="cheat-item">
+                    <h4>Globale Fehler nur als letztes Netz</h4>
+                    <pre class="cheat-code"><code class="language-js">window.addEventListener("error", event =&gt; {
+  console.error("Unbehandelter Fehler:", event.error);
+});
+
+window.addEventListener("unhandledrejection", event =&gt; {
+  console.error("Unbehandeltes Promise:", event.reason);
+});</code></pre>
+                    <p class="hint">
+                        Diese Listener ersetzen keine lokale Fehlerbehandlung. Sie sind Rauchmelder, keine
+                        Feuerwehr.
+                    </p>
+                </article>
+            </div>
+            <p><a href="#top">↑ Nach oben</a></p>
+        </section>
+
+        <hr class="divider" />
+
+        <section class="card" id="classes">
+            <h3>26. Klassen, Vererbung und Prototypen</h3>
+
+            <div class="cheat-grid">
+                <article class="cheat-item">
+                    <h4>Einfache Klasse</h4>
+                    <pre class="cheat-code"><code class="language-js">class Post {
+  constructor({ id, title, topic }) {
+    this.id = id;
+    this.title = title;
+    this.topic = topic;
+  }
+
+  matchesTopic(topic) {
+    return this.topic === topic;
+  }
+}
+
+const post = new Post({
+  id: "js-guide",
+  title: "JavaScript",
+  topic: "code"
+});</code></pre>
+                </article>
+
+                <article class="cheat-item">
+                    <h4>Private Felder und Getter</h4>
+                    <pre class="cheat-code"><code class="language-js">class Counter {
+  #count = 0;
+
+  increment() {
+    this.#count += 1;
+  }
+
+  get value() {
+    return this.#count;
+  }
+}</code></pre>
+                </article>
+
+                <article class="cheat-item">
+                    <h4>Setter mit Prüfung</h4>
+                    <pre class="cheat-code"><code class="language-js">class Temperature {
+  #celsius = 0;
+
+  set celsius(value) {
+    if (!Number.isFinite(value)) {
+      throw new TypeError("Temperatur muss eine Zahl sein.");
+    }
+    this.#celsius = value;
+  }
+
+  get celsius() {
+    return this.#celsius;
+  }
+}</code></pre>
+                </article>
+
+                <article class="cheat-item">
+                    <h4>Statische Methoden</h4>
+                    <pre class="cheat-code"><code class="language-js">class Post {
+  static fromJson(data) {
+    return new Post(data);
+  }
+}
+
+const post = Post.fromJson(rawPost);</code></pre>
+                </article>
+
+                <article class="cheat-item">
+                    <h4>Vererbung</h4>
+                    <pre class="cheat-code"><code class="language-js">class FeaturedPost extends Post {
+  constructor(data, featuredDate) {
+    super(data);
+    this.featuredDate = featuredDate;
+  }
+}</code></pre>
+                    <p class="hint">
+                        Vererbung ist nützlich, aber leicht zu übertreiben. Kleine Funktionen und
+                        zusammengesetzte Objekte sind oft flexibler.
+                    </p>
+                </article>
+
+                <article class="cheat-item">
+                    <h4>Was darunter liegt: Prototypen</h4>
+                    <pre class="cheat-code"><code class="language-js">const prototype = {
+  describe() {
+    return this.title;
+  }
+};
+
+const post = Object.create(prototype);
+post.title = "JavaScript";</code></pre>
+                    <p class="hint">
+                        Klassen sind komfortable Syntax über dem prototypischen Vererbungsmodell von
+                        JavaScript.
+                    </p>
+                </article>
+
+                <article class="cheat-item">
+                    <h4>Prototypkette prüfen</h4>
+                    <pre class="cheat-code"><code class="language-js">Object.getPrototypeOf(post);
+post instanceof Post;</code></pre>
+                </article>
+
+                <article class="cheat-item">
+                    <h4>Wann keine Klasse nötig ist</h4>
+                    <pre class="cheat-code"><code class="language-js">function createPost(data) {
+  return {
+    ...data,
+    matchesTopic(topic) {
+      return data.topic === topic;
+    }
+  };
+}</code></pre>
+                    <p class="hint">
+                        Für einfache Daten aus JSON genügen meist normale Objekte plus reine Funktionen.
+                    </p>
+                </article>
+            </div>
+            <p><a href="#top">↑ Nach oben</a></p>
+        </section>
+
+        <hr class="divider" />
+
+        <section class="card" id="regex">
+            <h3>27. Reguläre Ausdrücke: Muster in Text erkennen</h3>
+
+            <div class="cheat-grid">
+                <article class="cheat-item">
+                    <h4>Grundlagen</h4>
+                    <pre class="cheat-code"><code class="language-js">const pattern = /javascript/i;
+
+pattern.test("JavaScript Guide"); // true
+"abc123".match(/\d+/);            // ["123"]
+"a  b".replace(/\s+/g, " ");      // "a b"</code></pre>
+                    <p class="hint">
+                        Flags: <code>i</code> ignoriert Groß-/Kleinschreibung, <code>g</code> sucht global,
+                        <code>m</code> arbeitet mehrzeilig.
+                    </p>
+                </article>
+
+                <article class="cheat-item">
+                    <h4>Häufige Bausteine</h4>
+                    <pre class="cheat-code"><code class="language-js">/\d/       // Ziffer
+/\w/       // Wortzeichen
+/\s/       // Leerraum
+/.+/       // mindestens ein beliebiges Zeichen
+/^start/   // Anfang
+/ende$/    // Ende
+/colou?r/  // u ist optional
+/a{2,4}/   // zwei bis vier a</code></pre>
+                </article>
+
+                <article class="cheat-item">
+                    <h4>Zeichenklassen und Alternativen</h4>
+                    <pre class="cheat-code"><code class="language-js">/[abc]/;        // a, b oder c
+/[^0-9]/;      // keine Ziffer
+/(html|css)/i; // html oder css
+/\p{L}+/gu;    // Unicode-Buchstaben</code></pre>
+                </article>
+
+                <article class="cheat-item">
+                    <h4>Benannte Gruppen</h4>
+                    <pre class="cheat-code"><code class="language-js">const match = "2026-08-23".match(
+  /^(?&lt;year&gt;\d{4})-(?&lt;month&gt;\d{2})-(?&lt;day&gt;\d{2})$/
+);
+
+console.log(match?.groups?.year);</code></pre>
+                </article>
+
+                <article class="cheat-item">
+                    <h4>Alle Treffer lesen</h4>
+                    <pre class="cheat-code"><code class="language-js">const matches = [...text.matchAll(/\b\w{5,}\b/gu)];
+
+for (const match of matches) {
+  console.log(match[0], match.index);
+}</code></pre>
+                </article>
+
+                <article class="cheat-item">
+                    <h4>Dynamische Eingaben escapen</h4>
+                    <pre class="cheat-code"><code class="language-js">function escapeRegExp(text) {
+  return text.replace(/[.*+?^&#36;{}()|[\]\\]/g, "\\&#36;&amp;");
+}
+
+const safePattern = new RegExp(
+  escapeRegExp(userSearch),
+  "i"
+);</code></pre>
+                    <p class="hint">
+                        Nutzertext ungeprüft in <code>new RegExp()</code> zu stecken verändert das Muster und
+                        kann sehr teure Ausdrücke erzeugen.
+                    </p>
+                </article>
+            </div>
+
+            <details class="news-details">
+                <summary>Wann Regex nicht die richtige Antwort ist</summary>
+                <p>
+                    Für HTML gibt es den DOM-Parser, für URLs die Klasse <code>URL</code>, für JSON
+                    <code>JSON.parse()</code> und für Datumsformatierung <code>Intl</code>. Reguläre
+                    Ausdrücke sind präzise Werkzeuge für Textmuster, kein Universalschlüssel für jede Tür.
+                </p>
+            </details>
+            <p><a href="#top">↑ Nach oben</a></p>
+        </section>
+
+        <hr class="divider" />
+
+        <section class="card" id="iterators">
+            <h3>28. Iteratoren, Generatoren und benutzerdefinierte Abläufe</h3>
+
+            <div class="cheat-grid">
+                <article class="cheat-item">
+                    <h4>Iterierbare Werte</h4>
+                    <p>
+                        Arrays, Strings, Sets, Maps und viele DOM-Sammlungen können mit
+                        <code>for...of</code> durchlaufen werden.
+                    </p>
+                    <pre class="cheat-code"><code class="language-js">for (const character of "JS") {
+  console.log(character);
+}</code></pre>
+                </article>
+
+                <article class="cheat-item">
+                    <h4>Iterator manuell verwenden</h4>
+                    <pre class="cheat-code"><code class="language-js">const iterator = ["html", "css"][Symbol.iterator]();
+
+iterator.next(); // { value: "html", done: false }
+iterator.next(); // { value: "css", done: false }
+iterator.next(); // { value: undefined, done: true }</code></pre>
+                </article>
+
+                <article class="cheat-item">
+                    <h4>Generatorfunktion</h4>
+                    <pre class="cheat-code"><code class="language-js">function* idGenerator() {
+  let id = 1;
+
+  while (true) {
+    yield id;
+    id += 1;
+  }
+}
+
+const ids = idGenerator();
+ids.next().value; // 1
+ids.next().value; // 2</code></pre>
+                </article>
+
+                <article class="cheat-item">
+                    <h4>Generator praktisch nutzen</h4>
+                    <pre class="cheat-code"><code class="language-js">function* chunks(items, size) {
+  for (let index = 0; index &lt; items.length; index += size) {
+    yield items.slice(index, index + size);
+  }
+}
+
+for (const page of chunks(posts, 10)) {
+  console.log(page);
+}</code></pre>
+                </article>
+
+                <article class="cheat-item">
+                    <h4>Wann das nützlich ist</h4>
+                    <p>
+                        Generatoren berechnen Werte schrittweise. Das hilft bei großen Datenmengen,
+                        Pagination, Zustandsautomaten oder theoretisch unendlichen Folgen. Für gewöhnliche
+                        Listen bleiben Array-Methoden einfacher.
+                    </p>
+                </article>
+            </div>
+            <p><a href="#top">↑ Nach oben</a></p>
+        </section>
+
+        <hr class="divider" />
+
+        <section class="card" id="event-loop">
+            <h3>29. Event Loop, Call Stack, Tasks und Microtasks</h3>
+
+            <p>
+                JavaScript führt normalen Code auf einem Call Stack aus. Browser-APIs übernehmen Timer,
+                Netzwerkzugriffe oder Ereignisse. Fertige Fortsetzungen landen in Warteschlangen und werden
+                ausgeführt, sobald der Stack leer ist.
+            </p>
+
+            <div class="cheat-grid">
+                <article class="cheat-item">
+                    <h4>Promises kommen vor Timern</h4>
+                    <pre class="cheat-code"><code class="language-js">console.log("A");
+
+setTimeout(() =&gt; console.log("D"), 0);
+
+Promise.resolve()
+  .then(() =&gt; console.log("C"));
+
+console.log("B");
+// A, B, C, D</code></pre>
+                    <p class="hint">
+                        Promise-Fortsetzungen laufen als Microtasks vor der nächsten gewöhnlichen Task wie
+                        einem Timer.
+                    </p>
+                </article>
+
+                <article class="cheat-item">
+                    <h4>Langer Code blockiert die Oberfläche</h4>
+                    <pre class="cheat-code"><code class="language-js">// Diese Schleife blockiert Klicks und Darstellung:
+for (let index = 0; index &lt; 1_000_000_000; index += 1) {
+  // schwere Berechnung
+}</code></pre>
+                    <p class="hint">
+                        Rechenintensiver Hauptthread-Code hält Darstellung und Interaktion an. Große Aufgaben
+                        müssen portioniert oder in Web Worker ausgelagert werden.
+                    </p>
+                </article>
+
+                <article class="cheat-item">
+                    <h4>Nach dem nächsten Paint arbeiten</h4>
+                    <pre class="cheat-code"><code class="language-js">requestAnimationFrame(() =&gt; {
+  element.classList.add("is-visible");
+});</code></pre>
+                    <p class="hint">
+                        <code>requestAnimationFrame()</code> eignet sich für visuelle Aktualisierungen, nicht
+                        als allgemeiner Ersatz für Timer.
+                    </p>
+                </article>
+
+                <article class="cheat-item">
+                    <h4>Timer korrekt aufräumen</h4>
+                    <pre class="cheat-code"><code class="language-js">const timeoutId = setTimeout(showMessage, 1000);
+clearTimeout(timeoutId);
+
+const intervalId = setInterval(updateClock, 1000);
+clearInterval(intervalId);</code></pre>
+                </article>
+
+                <article class="cheat-item">
+                    <h4>Idle-Arbeit nur als Optimierung</h4>
+                    <pre class="cheat-code"><code class="language-js">if ("requestIdleCallback" in window) {
+  requestIdleCallback(() =&gt; {
+    buildSearchIndex();
+  });
+}</code></pre>
+                    <p class="hint">
+                        Nicht jede Browser-API ist überall gleich verfügbar. Feature Detection ist ehrlicher
+                        als Hoffnung.
+                    </p>
+                </article>
+            </div>
+            <p><a href="#top">↑ Nach oben</a></p>
+        </section>
+
+
+
+
+        <hr class="divider" />
+
+        <section class="card" id="security">
+            <h3>30. Sicherheit im Browser</h3>
+
+            <div class="cheat-grid">
+                <article class="cheat-item">
+                    <h4>XSS durch unsicheres HTML vermeiden</h4>
+                    <pre class="cheat-code"><code class="language-js">// Sicher für Text:
+element.textContent = userValue;
+
+// Gefährlich bei unkontrollierten Daten:
+// element.innerHTML = userValue;</code></pre>
+                </article>
+
+                <article class="cheat-item">
+                    <h4><code>eval()</code> nicht verwenden</h4>
+                    <pre class="cheat-code"><code class="language-js">// Nicht:
+// eval(userInput);
+
+// Erlaubte Aktionen explizit zuordnen:
+const actions = {
+  open: openPanel,
+  close: closePanel
+};
+
+actions[actionName]?.();</code></pre>
+                </article>
+
+                <article class="cheat-item">
+                    <h4>Externe Links absichern</h4>
+                    <pre class="cheat-code cheat-code-html"><code>&lt;a
+  href="https://example.com"
+  target="_blank"
+  rel="noopener noreferrer"
+&gt;
+  Externe Seite
+&lt;/a&gt;</code></pre>
+                </article>
+
+                <article class="cheat-item">
+                    <h4>URLs mit der URL-API prüfen</h4>
+                    <pre class="cheat-code"><code class="language-js">function isAllowedUrl(value) {
+  try {
+    const url = new URL(value, location.href);
+    return ["http:", "https:"].includes(url.protocol);
+  } catch {
+    return false;
+  }
+}</code></pre>
+                </article>
+
+                <article class="cheat-item">
+                    <h4>Clientcode ist öffentlich</h4>
+                    <p>
+                        Minifizierung oder obskure Variablennamen schützen keine Geheimnisse. API-Schlüssel mit
+                        Schreibrechten, private Tokens und Zugangsdaten benötigen einen vertrauenswürdigen
+                        Server.
+                    </p>
+                </article>
+
+                <article class="cheat-item">
+                    <h4>Daten sind keine Befehle</h4>
+                    <p>
+                        Eingaben, URL-Parameter und JSON-Inhalte bleiben Daten. Baue aus ihnen keine
+                        JavaScript-Ausdrücke, HTML-Attribute oder Selektoren, ohne sie passend zum Zielkontext
+                        zu prüfen.
+                    </p>
+                </article>
+
+                <article class="cheat-item">
+                    <h4>Abhängigkeiten klein halten</h4>
+                    <p>
+                        Jede externe Bibliothek erweitert Angriffsfläche, Ladezeit und Wartungsbedarf. Für eine
+                        statische Seite ist Vanilla JavaScript oft nicht Askese, sondern schlichte Vernunft.
+                    </p>
+                </article>
+
+                <article class="cheat-item">
+                    <h4>Content Security Policy mitdenken</h4>
+                    <p>
+                        Eine CSP kann unerlaubte Skriptquellen und Inline-Code beschränken. Auch wenn GitHub
+                        Pages bei Headern Grenzen setzt, erleichtert sauber ausgelagerter Code eine spätere
+                        strengere Richtlinie.
+                    </p>
+                </article>
+            </div>
+            <p><a href="#top">↑ Nach oben</a></p>
+        </section>
+
+        <hr class="divider" />
+
+        <section class="card" id="performance">
+            <h3>31. Performance ohne Voodoo</h3>
+
+            <div class="cheat-grid">
+                <article class="cheat-item">
+                    <h4>DOM-Abfragen wiederverwenden</h4>
+                    <pre class="cheat-code"><code class="language-js">const list = document.querySelector("#post-list");
+
+for (const post of posts) {
+  // list wiederverwenden, nicht jedes Mal neu suchen
+}</code></pre>
+                </article>
+
+                <article class="cheat-item">
+                    <h4>DOM-Arbeit bündeln</h4>
+                    <pre class="cheat-code"><code class="language-js">const fragment = document.createDocumentFragment();
+
+for (const post of posts) {
+  fragment.append(createPostCard(post));
+}
+
+container.replaceChildren(fragment);</code></pre>
+                </article>
+
+                <article class="cheat-item">
+                    <h4>Layout Thrashing vermeiden</h4>
+                    <pre class="cheat-code"><code class="language-js">// Erst lesen:
+const widths = cards.map(card =&gt; card.offsetWidth);
+
+// Dann schreiben:
+cards.forEach((card, index) =&gt; {
+  card.style.setProperty("--original-width", &#96;&#36;{widths[index]}px&#96;);
+});</code></pre>
+                    <p class="hint">
+                        Wiederholtes Abwechseln zwischen Layoutmessung und Styleänderung kann unnötige
+                        Neuberechnungen erzwingen.
+                    </p>
+                </article>
+
+                <article class="cheat-item">
+                    <h4>Debounce für häufige Eingaben</h4>
+                    <pre class="cheat-code"><code class="language-js">function debounce(callback, delay = 250) {
+  let timeoutId;
+
+  return (...args) =&gt; {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() =&gt; callback(...args), delay);
+  };
+}
+
+searchInput.addEventListener(
+  "input",
+  debounce(event =&gt; search(event.target.value))
+);</code></pre>
+                </article>
+
+                <article class="cheat-item">
+                    <h4>Throttle für laufende Ereignisse</h4>
+                    <pre class="cheat-code"><code class="language-js">function throttle(callback, interval = 100) {
+  let waiting = false;
+
+  return (...args) =&gt; {
+    if (waiting) return;
+    callback(...args);
+    waiting = true;
+    setTimeout(() =&gt; {
+      waiting = false;
+    }, interval);
+  };
+}</code></pre>
+                </article>
+
+                <article class="cheat-item">
+                    <h4>Lazy Loading über Beobachter</h4>
+                    <pre class="cheat-code"><code class="language-js">const observer = new IntersectionObserver(entries =&gt; {
+  for (const entry of entries) {
+    if (!entry.isIntersecting) continue;
+    initializeHeavyWidget(entry.target);
+    observer.unobserve(entry.target);
+  }
+});
+
+observer.observe(document.querySelector("#gallery"));</code></pre>
+                </article>
+
+                <article class="cheat-item">
+                    <h4>Memoization bei teuren reinen Berechnungen</h4>
+                    <pre class="cheat-code"><code class="language-js">function memoize(fn) {
+  const cache = new Map();
+
+  return argument =&gt; {
+    if (cache.has(argument)) return cache.get(argument);
+    const result = fn(argument);
+    cache.set(argument, result);
+    return result;
+  };
+}</code></pre>
+                    <p class="hint">
+                        Ein Cache braucht Speicher und eine klare Strategie. Bei billigen Funktionen macht er
+                        den Code nur komplizierter.
+                    </p>
+                </article>
+
+                <article class="cheat-item">
+                    <h4>Messen statt mutmaßen</h4>
+                    <pre class="cheat-code"><code class="language-js">performance.mark("render-start");
+renderPosts(posts);
+performance.mark("render-end");
+
+performance.measure(
+  "render-posts",
+  "render-start",
+  "render-end"
+);
+
+console.table(performance.getEntriesByName("render-posts"));</code></pre>
+                    <p class="hint">
+                        Bei kleinen Seiten sind Lesbarkeit, Bildgrößen und unnötige Netzwerkanfragen meist
+                        wichtiger als Mikrooptimierungen in einer Schleife.
+                    </p>
+                </article>
+            </div>
+            <p><a href="#top">↑ Nach oben</a></p>
+        </section>
+
+        <hr class="divider" />
+
+        <section class="card" id="debugging">
+            <h3>32. Debugging, Assertions, JSDoc und einfache Tests</h3>
+
+            <div class="cheat-grid">
+                <article class="cheat-item">
+                    <h4>Fehler systematisch eingrenzen</h4>
+                    <ol>
+                        <li>Fehlermeldung vollständig lesen.</li>
+                        <li>Datei und Zeilennummer öffnen.</li>
+                        <li>Ist der Wert vorhanden und vom erwarteten Typ?</li>
+                        <li>Kleinsten reproduzierbaren Fall herstellen.</li>
+                        <li>Ursache beheben, nicht bloß die sichtbare Folge kaschieren.</li>
+                    </ol>
+                </article>
+
+                <article class="cheat-item">
+                    <h4>Debugger und Breakpoints</h4>
+                    <pre class="cheat-code"><code class="language-js">function renderPost(post) {
+  debugger; // hält bei geöffneten DevTools an
+  console.log(post);
+}</code></pre>
+                    <p class="hint">
+                        Ein Breakpoint zeigt Scope, Call Stack und Werte, ohne den Code mit zwanzig
+                        <code>console.log()</code> zu tapezieren.
+                    </p>
+                </article>
+
+                <article class="cheat-item">
+                    <h4>Bedingter Breakpoint</h4>
+                    <p>
+                        In den DevTools kannst du eine Zeile nur dann anhalten lassen, wenn etwa
+                        <code>post.id === wantedId</code> gilt. Das ist bei Schleifen erheblich angenehmer als
+                        hundert manuelle Durchläufe.
+                    </p>
+                </article>
+
+                <article class="cheat-item">
+                    <h4>Assertions</h4>
+                    <pre class="cheat-code"><code class="language-js">console.assert(
+  posts.every(post =&gt; post.id),
+  "Jeder Post benötigt eine ID."
+);</code></pre>
+                </article>
+
+                <article class="cheat-item">
+                    <h4>Kleine Testfunktion ohne Framework</h4>
+                    <pre class="cheat-code"><code class="language-js">function assertEqual(actual, expected, message) {
+  if (!Object.is(actual, expected)) {
+    throw new Error(
+      &#96;&#36;{message}: erwartet &#36;{expected}, erhalten &#36;{actual}&#96;
+    );
+  }
+}
+
+assertEqual(sum(2, 3), 5, "sum addiert zwei Zahlen");</code></pre>
+                </article>
+
+                <article class="cheat-item">
+                    <h4>Mehrere Fälle strukturiert prüfen</h4>
+                    <pre class="cheat-code"><code class="language-js">const cases = [
+  { input: 0, expected: "kalt" },
+  { input: 20, expected: "warm" }
+];
+
+for (const testCase of cases) {
+  assertEqual(
+    classifyTemperature(testCase.input),
+    testCase.expected,
+    &#96;Temperatur &#36;{testCase.input}&#96;
+  );
+}</code></pre>
+                </article>
+
+                <article class="cheat-item">
+                    <h4>JSDoc für verständliche Verträge</h4>
+                    <pre class="cheat-code"><code class="language-js">/**
+ * Filtert Beiträge nach einem exakten Topic.
+ * @param {Array&lt;{topic: string}&gt;} posts
+ * @param {string} topic
+ * @returns {Array&lt;{topic: string}&gt;}
+ */
+function filterByTopic(posts, topic) {
+  return posts.filter(post =&gt; post.topic === topic);
+}</code></pre>
+                    <p class="hint">
+                        Gute Editoren liefern damit Autovervollständigung und Typwarnungen — ganz ohne
+                        TypeScript-Buildschritt.
+                    </p>
+                </article>
+
+                <article class="cheat-item">
+                    <h4>Netzwerkfehler prüfen</h4>
+                    <p>
+                        Im Network-Tab der DevTools siehst du URL, Statuscode, MIME-Type, Cache und Antwort.
+                        Bei <code>fetch()</code>-Problemen ist das meist aufschlussreicher als stures
+                        Herumprobieren am Code.
+                    </p>
+                </article>
+
+                <article class="cheat-item">
+                    <h4>DOM und Events inspizieren</h4>
+                    <p>
+                        Der Elements-Tab zeigt den tatsächlich aufgebauten DOM — nicht nur den HTML-Quelltext.
+                        Dort lassen sich Klassen, berechnete Styles, Event Listener und
+                        Accessibility-Eigenschaften prüfen.
+                    </p>
+                </article>
+
+                <article class="cheat-item">
+                    <h4>Quellkarten sind hier nicht nötig</h4>
+                    <p>
+                        Weil du ohne Bundler direkt lesbare JavaScript-Dateien auslieferst, zeigt der Browser
+                        bereits auf den echten Code. Das ist für Lernen und Fehlersuche ausgesprochen angenehm.
+                    </p>
+                </article>
+            </div>
+            <p><a href="#top">↑ Nach oben</a></p>
+        </section>
+
+        <hr class="divider" />
+
+        <section class="card" id="architecture">
+            <h3>33. Code organisieren: vom Skript zur kleinen Anwendung</h3>
+
+            <div class="cheat-grid">
+                <article class="cheat-item">
+                    <h4>Eine klare Initialisierung</h4>
+                    <pre class="cheat-code"><code class="language-js">async function init() {
+  const containers = document.querySelectorAll("[data-news-mode]");
+  if (containers.length === 0) return;
+
+  try {
+    const posts = await loadPosts();
+    initializeContainers(containers, posts);
+  } catch (error) {
+    renderGlobalError(containers, error);
+  }
+}
+
+init();</code></pre>
+                </article>
+
+                <article class="cheat-item">
+                    <h4>Daten, Logik und Darstellung trennen</h4>
+                    <pre class="cheat-code"><code class="language-js">// Datenzugriff
+const posts = await loadPosts();
+
+// Fachlogik
+const visible = selectVisiblePosts(posts, options);
+
+// Darstellung
+renderPosts(container, visible);</code></pre>
+                    <p class="hint">
+                        Wenn Filtern nicht vom DOM abhängt, kannst du es leichter testen und später an anderer
+                        Stelle wiederverwenden.
+                    </p>
+                </article>
+
+                <article class="cheat-item">
+                    <h4>Konstanten statt magischer Werte</h4>
+                    <pre class="cheat-code"><code class="language-js">const DEFAULT_POST_LIMIT = 3;
+const SUPPORTED_LANGUAGES = new Set(["de", "en"]);
+const POST_SELECTOR = "[data-news-mode]";</code></pre>
+                </article>
+
+                <article class="cheat-item">
+                    <h4>Benennung</h4>
+                    <pre class="cheat-code"><code class="language-js">const isVisible = true;       // Boolean: is/has/can
+const visiblePosts = [];      // Substantiv für Daten
+function loadPosts() {}       // Verb für Handlung
+function handleSubmit() {}    // Event-Handler
+function createPostCard() {}  // Fabrikfunktion</code></pre>
+                </article>
+
+                <article class="cheat-item">
+                    <h4>Dateistruktur ohne Overengineering</h4>
+                    <pre class="cheat-code"><code>assets/
+└── js/
+    ├── news.js
+    ├── news-data.js
+    ├── news-renderer.js
+    └── utils.js</code></pre>
+                    <p class="hint">
+                        Teile erst auf, wenn Verantwortlichkeiten erkennbar auseinanderfallen. Zwanzig Dateien
+                        für drei Funktionen sind keine Architektur, sondern Konfetti.
+                    </p>
+                </article>
+
+                <article class="cheat-item">
+                    <h4>Zustand explizit modellieren</h4>
+                    <pre class="cheat-code"><code class="language-js">const state = {
+  posts: [],
+  topic: null,
+  language: "de",
+  status: "idle"
+};
+
+function setTopic(topic) {
+  state.topic = topic;
+  render();
+}</code></pre>
+                    <p class="hint">
+                        Für kleine Komponenten genügt lokaler Zustand. Ein großes globales State-Objekt ist
+                        nicht automatisch professioneller.
+                    </p>
+                </article>
+
+                <article class="cheat-item">
+                    <h4>Abhängigkeiten als Parameter</h4>
+                    <pre class="cheat-code"><code class="language-js">function createPostLoader(fetchFunction = fetch) {
+  return async function load(url) {
+    const response = await fetchFunction(url);
+    if (!response.ok) throw new Error("Laden fehlgeschlagen");
+    return response.json();
+  };
+}</code></pre>
+                    <p class="hint">
+                        Übergebene Abhängigkeiten machen Code leichter testbar und reduzieren versteckte
+                        Kopplung.
+                    </p>
+                </article>
+
+                <article class="cheat-item">
+                    <h4>Defensive Grenzen, nicht defensive Paranoia</h4>
+                    <p>
+                        Prüfe Daten an Systemgrenzen: nach <code>fetch()</code>, beim Lesen aus Storage und bei
+                        Nutzereingaben. Innerhalb gut kontrollierter Funktionen darfst du anschließend mit
+                        gültigen Daten arbeiten.
+                    </p>
+                </article>
+
+                <article class="cheat-item">
+                    <h4>Seiteneffekte sichtbar benennen</h4>
+                    <pre class="cheat-code"><code class="language-js">function calculateVisiblePosts(posts, options) {
+  // reine Berechnung
+}
+
+function renderVisiblePosts(container, posts) {
+  // verändert den DOM
+}
+
+async function saveSettings(settings) {
+  // schreibt Daten
+}</code></pre>
+                </article>
+
+                <article class="cheat-item">
+                    <h4>Kommentare und README ergänzen</h4>
+                    <p>
+                        Dokumentiere Datenverträge, Einstiegspunkte, Pfadannahmen und ungewöhnliche
+                        Entscheidungen. Eine Liste jeder einzelnen Funktion veraltet hingegen schnell und
+                        dupliziert bloß den Code.
+                    </p>
+                </article>
+            </div>
+            <p><a href="#top">↑ Nach oben</a></p>
+        </section>
+
+        <hr class="divider" />
+
+        <section class="card" id="website-patterns">
+            <h3>34. Praxis: typische Muster für eine statische Projektwebseite</h3>
+
+            <div class="cheat-grid">
+                <article class="cheat-item">
+                    <h4>Posts anhand von <code>data-*</code> filtern</h4>
+                    <pre class="cheat-code"><code class="language-js">function readOptions(container) {
+  return {
+    mode: container.dataset.newsMode ?? "all",
+    topic: container.dataset.newsTopic ?? null,
+    subtopic: container.dataset.newsSubtopic ?? null,
+    limit: Number(container.dataset.newsLimit ?? Infinity)
+  };
+}
+
+function selectPosts(posts, options) {
+  return posts
+    .filter(post =&gt; !options.topic || post.topic === options.topic)
+    .filter(post =&gt; !options.subtopic || post.subtopic === options.subtopic)
+    .sort((a, b) =&gt; b.date.localeCompare(a.date))
+    .slice(0, options.limit);
+}</code></pre>
+                    <p class="hint">
+                        Die exakten <code>topic</code>- und <code>subtopic</code>-Werte bleiben Datenvertrag.
+                        Ein Tippfehler liefert keine halbe Wahrheit, sondern schlicht null Treffer.
+                    </p>
+                </article>
+
+                <article class="cheat-item">
+                    <h4>Täglich eine reproduzierbare Seite hervorheben</h4>
+                    <pre class="cheat-code"><code class="language-js">function getDayNumber(date = new Date()) {
+  const start = Date.UTC(date.getUTCFullYear(), 0, 0);
+  const current = Date.UTC(
+    date.getUTCFullYear(),
+    date.getUTCMonth(),
+    date.getUTCDate()
+  );
+
+  return Math.floor((current - start) / 86_400_000);
+}
+
+function getFeaturedPage(pages, date = new Date()) {
+  if (pages.length === 0) return null;
+  return pages[getDayNumber(date) % pages.length];
+}</code></pre>
+                    <p class="hint">
+                        Modulo verteilt beliebig große Tageszahlen stabil auf die vorhandenen Seitenindizes.
+                        UTC verhindert, dass Sommerzeitwechsel das Ergebnis verwirren.
+                    </p>
+                </article>
+
+                <article class="cheat-item">
+                    <h4>URL-Parameter als Filter</h4>
+                    <pre class="cheat-code"><code class="language-js">const params = new URLSearchParams(location.search);
+const topic = params.get("topic");
+
+params.set("topic", "code");
+
+const nextUrl = &#96;&#36;{location.pathname}?&#36;{params}&#96;;
+history.replaceState(null, "", nextUrl);</code></pre>
+                </article>
+
+                <article class="cheat-item">
+                    <h4>Sprache aus Daten wählen</h4>
+                    <pre class="cheat-code"><code class="language-js">function getLocalizedContent(post, language) {
+  const key = language === "de" ? "content_de" : "content_en";
+  return post[key] || post.content_en || post.content_de || "";
+}</code></pre>
+                </article>
+
+                <article class="cheat-item">
+                    <h4>Sicheres Karten-Rendering</h4>
+                    <pre class="cheat-code"><code class="language-js">function createPostCard(post) {
+  const article = document.createElement("article");
+  article.className = "card news-item";
+
+  const title = document.createElement("h3");
+  title.className = "card-title";
+  title.textContent = post.title;
+
+  const meta = document.createElement("p");
+  meta.className = "card-meta";
+  meta.textContent = post.date;
+
+  article.append(title, meta);
+  return article;
+}</code></pre>
+                </article>
+
+                <article class="cheat-item">
+                    <h4>Markdown sicher rendern</h4>
+                    <pre class="cheat-code"><code class="language-js">function escapeHtml(value) {
+  return String(value).replace(/[&amp;&lt;&gt;"']/g, character =&gt; ({
+    "&amp;": "&amp;amp;",
+    "&lt;": "&amp;lt;",
+    "&gt;": "&amp;gt;",
+    '"': "&amp;quot;",
+    "'": "&amp;#39;"
+  })[character]);
+}</code></pre>
+                    <p class="hint">
+                        Zuerst den Rohtext escapen, erst danach exakt definierte Markdown-Muster in erlaubtes
+                        HTML verwandeln. Die Reihenfolge ist sicherheitsrelevant.
+                    </p>
+                </article>
+
+                <article class="cheat-item">
+                    <h4>Progressive Enhancement</h4>
+                    <pre class="cheat-code cheat-code-html"><code>&lt;a href="archive.html" data-enhanced-filter="code"&gt;
+  Code-Beiträge
+&lt;/a&gt;</code></pre>
+                    <pre class="cheat-code"><code class="language-js">document.documentElement.classList.add("js");
+
+// JavaScript verbessert die Interaktion.
+// Der Link bleibt ohne JavaScript weiterhin brauchbar.</code></pre>
+                </article>
+
+                <article class="cheat-item">
+                    <h4>Leeren Zustand anzeigen</h4>
+                    <pre class="cheat-code"><code class="language-js">function renderEmptyState(container, message) {
+  const paragraph = document.createElement("p");
+  paragraph.className = "hint";
+  paragraph.textContent = message;
+  container.replaceChildren(paragraph);
+}</code></pre>
+                </article>
+
+                <article class="cheat-item">
+                    <h4>Status barrierearm melden</h4>
+                    <pre
+                        class="cheat-code cheat-code-html"><code>&lt;p id="status" role="status" aria-live="polite"&gt;&lt;/p&gt;</code></pre>
+                    <pre
+                        class="cheat-code"><code class="language-js">status.textContent = &#96;&#36;{posts.length} Beiträge geladen.&#96;;</code></pre>
+                    <p class="hint">
+                        Dynamische Änderungen müssen nicht nur sichtbar, sondern bei Bedarf auch für
+                        Screenreader wahrnehmbar sein.
+                    </p>
+                </article>
+
+                <article class="cheat-item">
+                    <h4>Buttons bleiben Buttons</h4>
+                    <pre class="cheat-code cheat-code-html"><code>&lt;button type="button" id="load-more"&gt;
+  Mehr laden
+&lt;/button&gt;</code></pre>
+                    <p class="hint">
+                        Ein klickbares <code>div</code> muss Tastatur, Fokus und Rolle mühsam nachbauen. Ein
+                        echtes <code>button</code> bringt all das bereits mit.
+                    </p>
+                </article>
+
+                <article class="cheat-item">
+                    <h4>Feature Detection</h4>
+                    <pre class="cheat-code"><code class="language-js">if ("IntersectionObserver" in window) {
+  initializeLazyLoading();
+} else {
+  loadEverythingImmediately();
+}</code></pre>
+                </article>
+
+                <article class="cheat-item">
+                    <h4>JSON-Schema pragmatisch prüfen</h4>
+                    <pre class="cheat-code"><code class="language-js">function isValidPost(post) {
+  return Boolean(
+    post
+    &amp;&amp; typeof post === "object"
+    &amp;&amp; typeof post.id === "string"
+    &amp;&amp; typeof post.topic === "string"
+    &amp;&amp; typeof post.title === "string"
+    &amp;&amp; typeof post.date === "string"
+  );
+}
+
+const validPosts = posts.filter(isValidPost);</code></pre>
+                </article>
+            </div>
+            <p><a href="#top">↑ Nach oben</a></p>
+        </section>
+
+        <hr class="divider" />
