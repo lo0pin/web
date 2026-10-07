@@ -75,16 +75,16 @@
       </p>
 
 
-    <div class="hint">
+      <div class="hint">
         <strong>Grundgedanke:</strong>
         Auf einem Mikrocontroller läuft normalerweise kein Betriebssystem,
         das sich um den Rest kümmert. Dein Programm ist sehr unmittelbar
         für die Hardware verantwortlich. Ein falsch gesetzter Pin ist daher
         nicht bloß ein Softwarefehler – er kann im ungünstigsten Fall auch
         elektrische Folgen haben.
-    </div>
+      </div>
 
-    <ul class="toc">
+      <ul class="toc">
         <li><a href="#arduino-concept">Arduino und C++ verstehen</a></li>
         <li><a href="#arduino-sketch">Aufbau eines Sketches</a></li>
         <li><a href="#arduino-syntax">Grundlegende C++-Syntax</a></li>
@@ -120,24 +120,24 @@
         <li><a href="#arduino-style">Sauberer Programmierstil</a></li>
         <li><a href="#arduino-example">Komplettes Praxisbeispiel</a></li>
         <li><a href="#arduino-reference">Kurzreferenz</a></li>
-    </ul>
+      </ul>
 
 
-    <hr class="divider" />
+      <hr class="divider" />
 
-    <h3 id="arduino-concept">Arduino und C++ verstehen</h3>
+      <h3 id="arduino-concept">Arduino und C++ verstehen</h3>
 
-    <div class="cheat-grid">
+      <div class="cheat-grid">
 
         <article class="cheat-item">
-            <h4>Arduino ist keine eigene Programmiersprache</h4>
+          <h4>Arduino ist keine eigene Programmiersprache</h4>
 
-            <p>
-                Ein Arduino-Sketch wird als C++ übersetzt und anschließend
-                für den jeweiligen Mikrocontroller kompiliert.
-            </p>
+          <p>
+            Ein Arduino-Sketch wird als C++ übersetzt und anschließend
+            für den jeweiligen Mikrocontroller kompiliert.
+          </p>
 
-            <pre class="code"><code>int temperatur = 23;
+          <pre class="code"><code>int temperatur = 23;
 
 void setup() {
     Serial.begin(9600);
@@ -147,83 +147,83 @@ void loop() {
     Serial.println(temperatur);
 }</code></pre>
 
-            <p>
-                Variablen, Funktionen, Klassen, Operatoren, Arrays,
-                Strukturen und Kontrollstrukturen stammen aus C++.
-            </p>
+          <p>
+            Variablen, Funktionen, Klassen, Operatoren, Arrays,
+            Strukturen und Kontrollstrukturen stammen aus C++.
+          </p>
         </article>
 
 
         <article class="cheat-item">
-            <h4>Was Arduino ergänzt</h4>
+          <h4>Was Arduino ergänzt</h4>
 
-            <p>Arduino liefert unter anderem:</p>
+          <p>Arduino liefert unter anderem:</p>
 
-            <ul>
-                <li><code>setup()</code> und <code>loop()</code></li>
-                <li><code>digitalWrite()</code></li>
-                <li><code>digitalRead()</code></li>
-                <li><code>analogRead()</code></li>
-                <li><code>analogWrite()</code></li>
-                <li><code>millis()</code></li>
-                <li><code>delay()</code></li>
-                <li><code>Serial</code></li>
-                <li>Bibliotheken für Hardware</li>
-            </ul>
+          <ul>
+            <li><code>setup()</code> und <code>loop()</code></li>
+            <li><code>digitalWrite()</code></li>
+            <li><code>digitalRead()</code></li>
+            <li><code>analogRead()</code></li>
+            <li><code>analogWrite()</code></li>
+            <li><code>millis()</code></li>
+            <li><code>delay()</code></li>
+            <li><code>Serial</code></li>
+            <li>Bibliotheken für Hardware</li>
+          </ul>
         </article>
 
 
         <article class="cheat-item">
-            <h4>Was beim Kompilieren passiert</h4>
+          <h4>Was beim Kompilieren passiert</h4>
 
-            <ol>
-                <li>Der Sketch wird vorbereitet.</li>
-                <li>C++-Quellcode wird kompiliert.</li>
-                <li>Bibliotheken werden eingebunden.</li>
-                <li>Maschinencode wird erzeugt.</li>
-                <li>Das Programm wird auf den Mikrocontroller übertragen.</li>
-            </ol>
+          <ol>
+            <li>Der Sketch wird vorbereitet.</li>
+            <li>C++-Quellcode wird kompiliert.</li>
+            <li>Bibliotheken werden eingebunden.</li>
+            <li>Maschinencode wird erzeugt.</li>
+            <li>Das Programm wird auf den Mikrocontroller übertragen.</li>
+          </ol>
 
-            <p>
-                Der Mikrocontroller versteht am Ende nicht
-                <code>digitalWrite()</code>, sondern ausschließlich
-                Maschinenbefehle.
-            </p>
+          <p>
+            Der Mikrocontroller versteht am Ende nicht
+            <code>digitalWrite()</code>, sondern ausschließlich
+            Maschinenbefehle.
+          </p>
         </article>
 
 
         <article class="cheat-item">
-            <h4>Embedded Programming</h4>
+          <h4>Embedded Programming</h4>
 
-            <p>
-                Arduino-Programmierung unterscheidet sich von klassischer
-                PC-Programmierung vor allem durch beschränkte Ressourcen und
-                den unmittelbaren Kontakt zur Hardware.
-            </p>
+          <p>
+            Arduino-Programmierung unterscheidet sich von klassischer
+            PC-Programmierung vor allem durch beschränkte Ressourcen und
+            den unmittelbaren Kontakt zur Hardware.
+          </p>
 
-            <ul>
-                <li>begrenzter RAM</li>
-                <li>begrenzter Flash-Speicher</li>
-                <li>begrenzte Rechenleistung</li>
-                <li>echte elektrische Ein- und Ausgänge</li>
-                <li>zeitkritische Abläufe</li>
-                <li>oft kein Betriebssystem</li>
-            </ul>
+          <ul>
+            <li>begrenzter RAM</li>
+            <li>begrenzter Flash-Speicher</li>
+            <li>begrenzte Rechenleistung</li>
+            <li>echte elektrische Ein- und Ausgänge</li>
+            <li>zeitkritische Abläufe</li>
+            <li>oft kein Betriebssystem</li>
+          </ul>
         </article>
 
-    </div>
+      </div>
 
 
-    <hr class="divider" />
+      <hr class="divider" />
 
-    <h3 id="arduino-sketch">Aufbau eines Arduino-Sketches</h3>
+      <h3 id="arduino-sketch">Aufbau eines Arduino-Sketches</h3>
 
-    <div class="cheat-grid">
+      <div class="cheat-grid">
 
         <article class="cheat-item">
-            <h4>Minimaler Sketch</h4>
+          <h4>Minimaler Sketch</h4>
 
-            <pre class="code"><code>void setup() {
+          <pre class="code"><code>void setup() {
 
 }
 
@@ -231,62 +231,62 @@ void loop() {
 
 }</code></pre>
 
-            <p>
-                Jeder klassische Arduino-Sketch enthält normalerweise diese
-                beiden Funktionen.
-            </p>
+          <p>
+            Jeder klassische Arduino-Sketch enthält normalerweise diese
+            beiden Funktionen.
+          </p>
         </article>
 
 
         <article class="cheat-item">
-            <h4><code>setup()</code></h4>
+          <h4><code>setup()</code></h4>
 
-            <pre class="code"><code>void setup() {
+          <pre class="code"><code>void setup() {
     Serial.begin(9600);
     pinMode(LED_BUILTIN, OUTPUT);
 }</code></pre>
 
-            <p>
-                <code>setup()</code> wird nach dem Start beziehungsweise
-                Reset einmal aufgerufen.
-            </p>
+          <p>
+            <code>setup()</code> wird nach dem Start beziehungsweise
+            Reset einmal aufgerufen.
+          </p>
 
-            <p>Typische Aufgaben:</p>
+          <p>Typische Aufgaben:</p>
 
-            <ul>
-                <li>Pin-Modi setzen</li>
-                <li>serielle Schnittstelle starten</li>
-                <li>Sensoren initialisieren</li>
-                <li>Displays starten</li>
-                <li>Startwerte festlegen</li>
-            </ul>
+          <ul>
+            <li>Pin-Modi setzen</li>
+            <li>serielle Schnittstelle starten</li>
+            <li>Sensoren initialisieren</li>
+            <li>Displays starten</li>
+            <li>Startwerte festlegen</li>
+          </ul>
         </article>
 
 
         <article class="cheat-item">
-            <h4><code>loop()</code></h4>
+          <h4><code>loop()</code></h4>
 
-            <pre class="code"><code>void loop() {
+          <pre class="code"><code>void loop() {
     int wert = analogRead(A0);
     Serial.println(wert);
 }</code></pre>
 
-            <p>
-                Nach <code>setup()</code> wird <code>loop()</code>
-                permanent wiederholt.
-            </p>
+          <p>
+            Nach <code>setup()</code> wird <code>loop()</code>
+            permanent wiederholt.
+          </p>
 
-            <p>
-                Das Ende der Funktion bedeutet also keineswegs das Ende des
-                Programms. Arduino ruft sie unmittelbar erneut auf.
-            </p>
+          <p>
+            Das Ende der Funktion bedeutet also keineswegs das Ende des
+            Programms. Arduino ruft sie unmittelbar erneut auf.
+          </p>
         </article>
 
 
         <article class="cheat-item">
-            <h4>Was vereinfacht dargestellt dahintersteckt</h4>
+          <h4>Was vereinfacht dargestellt dahintersteckt</h4>
 
-            <pre class="code"><code>int main() {
+          <pre class="code"><code>int main() {
     initialisiereHardware();
 
     setup();
@@ -296,30 +296,30 @@ void loop() {
     }
 }</code></pre>
 
-            <p>
-                Der wirkliche Arduino-Core ist komplexer, aber dieses Modell
-                erklärt sehr gut, warum <code>loop()</code> immer wieder
-                ausgeführt wird.
-            </p>
+          <p>
+            Der wirkliche Arduino-Core ist komplexer, aber dieses Modell
+            erklärt sehr gut, warum <code>loop()</code> immer wieder
+            ausgeführt wird.
+          </p>
         </article>
 
 
         <article class="cheat-item">
-            <h4>Kommentare</h4>
+          <h4>Kommentare</h4>
 
-            <pre class="code"><code>// Einzeiliger Kommentar
+          <pre class="code"><code>// Einzeiliger Kommentar
 
 /*
    Mehrzeiliger
    Kommentar
 */</code></pre>
 
-            <p>
-                Gute Kommentare erklären das <strong>Warum</strong>,
-                nicht das ohnehin sichtbare <strong>Was</strong>.
-            </p>
+          <p>
+            Gute Kommentare erklären das <strong>Warum</strong>,
+            nicht das ohnehin sichtbare <strong>Was</strong>.
+          </p>
 
-            <pre class="code"><code>// schlecht:
+          <pre class="code"><code>// schlecht:
 counter++; // counter um eins erhöhen
 
 // besser:
@@ -327,81 +327,81 @@ counter++; // counter um eins erhöhen
 counter++;</code></pre>
         </article>
 
-    </div>
+      </div>
 
 
-    <hr class="divider" />
+      <hr class="divider" />
 
-    <h3 id="arduino-syntax">Grundlegende C++-Syntax</h3>
+      <h3 id="arduino-syntax">Grundlegende C++-Syntax</h3>
 
-    <div class="cheat-grid">
+      <div class="cheat-grid">
 
         <article class="cheat-item">
-            <h4>Semikolon</h4>
+          <h4>Semikolon</h4>
 
-            <pre class="code"><code>int temperatur = 23;
+          <pre class="code"><code>int temperatur = 23;
 digitalWrite(13, HIGH);
 Serial.println("Hallo");</code></pre>
 
-            <p>
-                Viele Anweisungen enden mit einem Semikolon.
-            </p>
+          <p>
+            Viele Anweisungen enden mit einem Semikolon.
+          </p>
 
-            <div class="hint">
-                Ein vergessenes Semikolon kann Fehlermeldungen an Stellen
-                erzeugen, die mit dem eigentlichen Fehler scheinbar wenig zu
-                tun haben. Der Compiler ist kein Hellseher.
-            </div>
+          <div class="hint">
+            Ein vergessenes Semikolon kann Fehlermeldungen an Stellen
+            erzeugen, die mit dem eigentlichen Fehler scheinbar wenig zu
+            tun haben. Der Compiler ist kein Hellseher.
+          </div>
         </article>
 
 
         <article class="cheat-item">
-            <h4>Blöcke mit geschweiften Klammern</h4>
+          <h4>Blöcke mit geschweiften Klammern</h4>
 
-            <pre class="code"><code>if (temperatur &gt; 30) {
+          <pre class="code"><code>if (temperatur &gt; 30) {
     Serial.println("Heiss");
 }</code></pre>
 
-            <p>
-                <code>{</code> und <code>}</code> markieren zusammengehörige
-                Codeblöcke.
-            </p>
+          <p>
+            <code>{</code> und <code>}</code> markieren zusammengehörige
+            Codeblöcke.
+          </p>
         </article>
 
 
         <article class="cheat-item">
-            <h4>Groß- und Kleinschreibung</h4>
+          <h4>Groß- und Kleinschreibung</h4>
 
-            <pre class="code"><code>int sensorWert = 5;
+          <pre class="code"><code>int sensorWert = 5;
 int sensorwert = 8;</code></pre>
 
-            <p>
-                C++ unterscheidet Groß- und Kleinschreibung. Diese beiden
-                Variablen sind daher verschieden.
-            </p>
+          <p>
+            C++ unterscheidet Groß- und Kleinschreibung. Diese beiden
+            Variablen sind daher verschieden.
+          </p>
 
-            <pre class="code"><code>digitalWrite(13, HIGH); // korrekt
+          <pre class="code"><code>digitalWrite(13, HIGH); // korrekt
 DigitalWrite(13, HIGH); // andere Bezeichnung → Fehler</code></pre>
         </article>
 
 
         <article class="cheat-item">
-            <h4>Einrückung</h4>
+          <h4>Einrückung</h4>
 
-            <pre class="code"><code>if (wert &gt; 500) {
+          <pre class="code"><code>if (wert &gt; 500) {
     digitalWrite(ledPin, HIGH);
 } else {
     digitalWrite(ledPin, LOW);
 }</code></pre>
 
-            <p>
-                Einrückungen verändern die Bedeutung des C++-Codes nicht,
-                wohl aber die Wahrscheinlichkeit, dass ein Mensch ihn noch
-                versteht.
-            </p>
+          <p>
+            Einrückungen verändern die Bedeutung des C++-Codes nicht,
+            wohl aber die Wahrscheinlichkeit, dass ein Mensch ihn noch
+            versteht.
+          </p>
         </article>
 
-    </div>
+      </div>
 
 
 
