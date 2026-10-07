@@ -952,33 +952,33 @@ digitalWrite(ledPin, ausgang);</code></pre>
       </div>
 
 
-    <hr class="divider" />
+      <hr class="divider" />
 
-    <h3 id="arduino-loops">Schleifen</h3>
+      <h3 id="arduino-loops">Schleifen</h3>
 
-    <div class="cheat-grid">
+      <div class="cheat-grid">
 
         <article class="cheat-item">
-            <h4><code>for</code>-Schleife</h4>
+          <h4><code>for</code>-Schleife</h4>
 
-            <pre class="code"><code>for (int i = 0; i &lt; 10; i++) {
+          <pre class="code"><code>for (int i = 0; i &lt; 10; i++) {
     Serial.println(i);
 }</code></pre>
 
-            <p>
-                Aufbau:
-            </p>
+          <p>
+            Aufbau:
+          </p>
 
-            <pre class="code"><code>for (Start; Bedingung; Veränderung) {
+          <pre class="code"><code>for (Start; Bedingung; Veränderung) {
     // Code
 }</code></pre>
         </article>
 
 
         <article class="cheat-item">
-            <h4>LED mehrfach blinken</h4>
+          <h4>LED mehrfach blinken</h4>
 
-            <pre class="code"><code>for (int i = 0; i &lt; 5; i++) {
+          <pre class="code"><code>for (int i = 0; i &lt; 5; i++) {
     digitalWrite(LED_BUILTIN, HIGH);
     delay(200);
 
@@ -989,40 +989,40 @@ digitalWrite(ledPin, ausgang);</code></pre>
 
 
         <article class="cheat-item">
-            <h4><code>while</code></h4>
+          <h4><code>while</code></h4>
 
-            <pre class="code"><code>int x = 0;
+          <pre class="code"><code>int x = 0;
 
 while (x &lt; 10) {
     Serial.println(x);
     x++;
 }</code></pre>
 
-            <p>
-                Wird ausgeführt, solange die Bedingung wahr ist.
-            </p>
+          <p>
+            Wird ausgeführt, solange die Bedingung wahr ist.
+          </p>
         </article>
 
 
         <article class="cheat-item">
-            <h4>Endlosschleife</h4>
+          <h4>Endlosschleife</h4>
 
-            <pre class="code"><code>while (true) {
+          <pre class="code"><code>while (true) {
     // läuft für immer
 }</code></pre>
 
-            <div class="hint">
-                Auf einem Mikrocontroller ist eine versehentliche
-                Endlosschleife besonders lästig: Der Rest des Programms
-                bekommt schlicht nie wieder Gelegenheit, irgendetwas zu tun.
-            </div>
+          <div class="hint">
+            Auf einem Mikrocontroller ist eine versehentliche
+            Endlosschleife besonders lästig: Der Rest des Programms
+            bekommt schlicht nie wieder Gelegenheit, irgendetwas zu tun.
+          </div>
         </article>
 
 
         <article class="cheat-item">
-            <h4><code>do ... while</code></h4>
+          <h4><code>do ... while</code></h4>
 
-            <pre class="code"><code>int x = 0;
+          <pre class="code"><code>int x = 0;
 
 do {
     Serial.println(x);
@@ -1030,33 +1030,33 @@ do {
 }
 while (x &lt; 5);</code></pre>
 
-            <p>
-                Der Block wird mindestens einmal ausgeführt, weil die
-                Bedingung erst am Ende geprüft wird.
-            </p>
+          <p>
+            Der Block wird mindestens einmal ausgeführt, weil die
+            Bedingung erst am Ende geprüft wird.
+          </p>
         </article>
 
 
         <article class="cheat-item">
-            <h4><code>break</code></h4>
+          <h4><code>break</code></h4>
 
-            <pre class="code"><code>for (int i = 0; i &lt; 100; i++) {
+          <pre class="code"><code>for (int i = 0; i &lt; 100; i++) {
 
     if (digitalRead(buttonPin) == LOW) {
         break;
     }
 }</code></pre>
 
-            <p>
-                Beendet die aktuelle Schleife vorzeitig.
-            </p>
+          <p>
+            Beendet die aktuelle Schleife vorzeitig.
+          </p>
         </article>
 
 
         <article class="cheat-item">
-            <h4><code>continue</code></h4>
+          <h4><code>continue</code></h4>
 
-            <pre class="code"><code>for (int i = 0; i &lt; 10; i++) {
+          <pre class="code"><code>for (int i = 0; i &lt; 10; i++) {
 
     if (i == 5) {
         continue;
@@ -1065,58 +1065,58 @@ while (x &lt; 5);</code></pre>
     Serial.println(i);
 }</code></pre>
 
-            <p>
-                Überspringt den Rest des aktuellen Durchlaufs.
-            </p>
+          <p>
+            Überspringt den Rest des aktuellen Durchlaufs.
+          </p>
         </article>
 
-    </div>
+      </div>
 
 
-    <hr class="divider" />
+      <hr class="divider" />
 
-    <h3 id="arduino-functions">Funktionen</h3>
+      <h3 id="arduino-functions">Funktionen</h3>
 
-    <p>
+      <p>
         Funktionen teilen ein großes Programm in überschaubare,
         wiederverwendbare Einheiten. Sobald ein Sketch mehr als einige
         Dutzend Zeilen umfasst, werden sinnvoll benannte Funktionen
         zunehmend wertvoll.
-    </p>
+      </p>
 
-    <div class="cheat-grid">
+      <div class="cheat-grid">
 
         <article class="cheat-item">
-            <h4>Funktion ohne Rückgabewert</h4>
+          <h4>Funktion ohne Rückgabewert</h4>
 
-            <pre class="code"><code>void ledAn() {
+          <pre class="code"><code>void ledAn() {
     digitalWrite(ledPin, HIGH);
 }</code></pre>
 
-            <p>
-                <code>void</code> bedeutet, dass die Funktion keinen Wert
-                zurückgibt.
-            </p>
+          <p>
+            <code>void</code> bedeutet, dass die Funktion keinen Wert
+            zurückgibt.
+          </p>
         </article>
 
 
         <article class="cheat-item">
-            <h4>Funktion mit Parameter</h4>
+          <h4>Funktion mit Parameter</h4>
 
-            <pre class="code"><code>void setLed(bool zustand) {
+          <pre class="code"><code>void setLed(bool zustand) {
     digitalWrite(ledPin, zustand ? HIGH : LOW);
 }</code></pre>
 
-            <p>Aufruf:</p>
+          <p>Aufruf:</p>
 
-            <pre class="code"><code>setLed(true);</code></pre>
+          <pre class="code"><code>setLed(true);</code></pre>
         </article>
 
 
         <article class="cheat-item">
-            <h4>Mehrere Parameter</h4>
+          <h4>Mehrere Parameter</h4>
 
-            <pre class="code"><code>void blinkLed(int pin, unsigned long dauer) {
+          <pre class="code"><code>void blinkLed(int pin, unsigned long dauer) {
 
     digitalWrite(pin, HIGH);
     delay(dauer);
@@ -1128,31 +1128,31 @@ while (x &lt; 5);</code></pre>
 
 
         <article class="cheat-item">
-            <h4>Rückgabewert</h4>
+          <h4>Rückgabewert</h4>
 
-            <pre class="code"><code>int liesSensor() {
+          <pre class="code"><code>int liesSensor() {
     return analogRead(A0);
 }</code></pre>
 
-            <p>Verwendung:</p>
+          <p>Verwendung:</p>
 
-            <pre class="code"><code>int wert = liesSensor();</code></pre>
+          <pre class="code"><code>int wert = liesSensor();</code></pre>
         </article>
 
 
         <article class="cheat-item">
-            <h4>Berechnung auslagern</h4>
+          <h4>Berechnung auslagern</h4>
 
-            <pre class="code"><code>float celsiusZuFahrenheit(float celsius) {
+          <pre class="code"><code>float celsiusZuFahrenheit(float celsius) {
     return celsius * 1.8 + 32.0;
 }</code></pre>
         </article>
 
 
         <article class="cheat-item">
-            <h4>Frühes <code>return</code></h4>
+          <h4>Frühes <code>return</code></h4>
 
-            <pre class="code"><code>void pruefeSensor() {
+          <pre class="code"><code>void pruefeSensor() {
 
     if (!sensorAktiv) {
         return;
@@ -1162,31 +1162,31 @@ while (x &lt; 5);</code></pre>
     Serial.println(wert);
 }</code></pre>
 
-            <p>
-                Das kann tiefe Verschachtelungen vermeiden und Funktionen
-                leichter lesbar machen.
-            </p>
+          <p>
+            Das kann tiefe Verschachtelungen vermeiden und Funktionen
+            leichter lesbar machen.
+          </p>
         </article>
 
 
         <article class="cheat-item">
-            <h4>Parameter per Wert</h4>
+          <h4>Parameter per Wert</h4>
 
-            <pre class="code"><code>void verdopple(int wert) {
+          <pre class="code"><code>void verdopple(int wert) {
     wert *= 2;
 }</code></pre>
 
-            <p>
-                Die Funktion erhält eine Kopie. Die ursprüngliche Variable
-                des Aufrufers wird nicht verändert.
-            </p>
+          <p>
+            Die Funktion erhält eine Kopie. Die ursprüngliche Variable
+            des Aufrufers wird nicht verändert.
+          </p>
         </article>
 
 
         <article class="cheat-item">
-            <h4>Parameter per Referenz</h4>
+          <h4>Parameter per Referenz</h4>
 
-            <pre class="code"><code>void verdopple(int &amp;wert) {
+          <pre class="code"><code>void verdopple(int &amp;wert) {
     wert *= 2;
 }
 
@@ -1196,19 +1196,19 @@ verdopple(zahl);
 // zahl ist nun 20</code></pre>
         </article>
 
-    </div>
+      </div>
 
 
-    <hr class="divider" />
+      <hr class="divider" />
 
-    <h3 id="arduino-scope">Gültigkeitsbereiche von Variablen</h3>
+      <h3 id="arduino-scope">Gültigkeitsbereiche von Variablen</h3>
 
-    <div class="cheat-grid">
+      <div class="cheat-grid">
 
         <article class="cheat-item">
-            <h4>Globale Variable</h4>
+          <h4>Globale Variable</h4>
 
-            <pre class="code"><code>int zaehler = 0;
+          <pre class="code"><code>int zaehler = 0;
 
 void setup() {
     zaehler++;
@@ -1218,33 +1218,33 @@ void loop() {
     Serial.println(zaehler);
 }</code></pre>
 
-            <p>
-                Globale Variablen sind grundsätzlich im gesamten
-                Programm verfügbar.
-            </p>
+          <p>
+            Globale Variablen sind grundsätzlich im gesamten
+            Programm verfügbar.
+          </p>
         </article>
 
 
         <article class="cheat-item">
-            <h4>Lokale Variable</h4>
+          <h4>Lokale Variable</h4>
 
-            <pre class="code"><code>void loop() {
+          <pre class="code"><code>void loop() {
     int messwert = analogRead(A0);
 
     Serial.println(messwert);
 }</code></pre>
 
-            <p>
-                <code>messwert</code> existiert nur innerhalb dieser
-                Funktion.
-            </p>
+          <p>
+            <code>messwert</code> existiert nur innerhalb dieser
+            Funktion.
+          </p>
         </article>
 
 
         <article class="cheat-item">
-            <h4>Block-Scope</h4>
+          <h4>Block-Scope</h4>
 
-            <pre class="code"><code>if (sensorAktiv) {
+          <pre class="code"><code>if (sensorAktiv) {
     int wert = analogRead(A0);
 }
 
@@ -1253,9 +1253,9 @@ void loop() {
 
 
         <article class="cheat-item">
-            <h4><code>static</code> lokal</h4>
+          <h4><code>static</code> lokal</h4>
 
-            <pre class="code"><code>void test() {
+          <pre class="code"><code>void test() {
 
     static int aufrufe = 0;
 
@@ -1264,31 +1264,31 @@ void loop() {
     Serial.println(aufrufe);
 }</code></pre>
 
-            <p>
-                Die Variable ist nur innerhalb der Funktion sichtbar,
-                behält ihren Wert aber zwischen mehreren Funktionsaufrufen.
-            </p>
+          <p>
+            Die Variable ist nur innerhalb der Funktion sichtbar,
+            behält ihren Wert aber zwischen mehreren Funktionsaufrufen.
+          </p>
         </article>
 
-    </div>
+      </div>
 
 
-    <hr class="divider" />
+      <hr class="divider" />
 
-    <h3 id="arduino-arrays">Arrays</h3>
+      <h3 id="arduino-arrays">Arrays</h3>
 
-    <p>
+      <p>
         Ein Array speichert mehrere Werte desselben Datentyps hintereinander.
         Besonders bei Messwerten, LEDs, Pin-Listen und Puffern sind Arrays
         unverzichtbar.
-    </p>
+      </p>
 
-    <div class="cheat-grid">
+      <div class="cheat-grid">
 
         <article class="cheat-item">
-            <h4>Array anlegen</h4>
+          <h4>Array anlegen</h4>
 
-            <pre class="code"><code>int messwerte[5] = {
+          <pre class="code"><code>int messwerte[5] = {
     10,
     20,
     30,
@@ -1299,33 +1299,33 @@ void loop() {
 
 
         <article class="cheat-item">
-            <h4>Index beginnt bei 0</h4>
+          <h4>Index beginnt bei 0</h4>
 
-            <pre class="code"><code>int werte[] = {10, 20, 30};
+          <pre class="code"><code>int werte[] = {10, 20, 30};
 
 Serial.println(werte[0]); // 10
 Serial.println(werte[1]); // 20
 Serial.println(werte[2]); // 30</code></pre>
 
-            <div class="hint">
-                Das erste Element besitzt den Index 0. Diese kleine
-                Eigenheit hat bereits Generationen von Programmierern
-                zuverlässig um genau eins danebenliegen lassen.
-            </div>
+          <div class="hint">
+            Das erste Element besitzt den Index 0. Diese kleine
+            Eigenheit hat bereits Generationen von Programmierern
+            zuverlässig um genau eins danebenliegen lassen.
+          </div>
         </article>
 
 
         <article class="cheat-item">
-            <h4>Array verändern</h4>
+          <h4>Array verändern</h4>
 
-            <pre class="code"><code>werte[1] = 99;</code></pre>
+          <pre class="code"><code>werte[1] = 99;</code></pre>
         </article>
 
 
         <article class="cheat-item">
-            <h4>Array durchlaufen</h4>
+          <h4>Array durchlaufen</h4>
 
-            <pre class="code"><code>int werte[] = {10, 20, 30, 40};
+          <pre class="code"><code>int werte[] = {10, 20, 30, 40};
 
 for (int i = 0; i &lt; 4; i++) {
     Serial.println(werte[i]);
@@ -1334,24 +1334,24 @@ for (int i = 0; i &lt; 4; i++) {
 
 
         <article class="cheat-item">
-            <h4>Anzahl Elemente bestimmen</h4>
+          <h4>Anzahl Elemente bestimmen</h4>
 
-            <pre class="code"><code>int werte[] = {10, 20, 30, 40};
+          <pre class="code"><code>int werte[] = {10, 20, 30, 40};
 
 int anzahl =
     sizeof(werte) / sizeof(werte[0]);</code></pre>
 
-            <p>
-                Damit muss die Array-Länge nicht nochmals als magische Zahl
-                im Programm stehen.
-            </p>
+          <p>
+            Damit muss die Array-Länge nicht nochmals als magische Zahl
+            im Programm stehen.
+          </p>
         </article>
 
 
         <article class="cheat-item">
-            <h4>Mehrere LEDs über Array</h4>
+          <h4>Mehrere LEDs über Array</h4>
 
-            <pre class="code"><code>const int ledPins[] = {3, 5, 6, 9};
+          <pre class="code"><code>const int ledPins[] = {3, 5, 6, 9};
 
 const int anzahl =
     sizeof(ledPins) / sizeof(ledPins[0]);
@@ -1366,76 +1366,76 @@ void setup() {
 
 
         <article class="cheat-item">
-            <h4>Außerhalb des Arrays</h4>
+          <h4>Außerhalb des Arrays</h4>
 
-            <pre class="code"><code>int werte[3] = {1, 2, 3};
+          <pre class="code"><code>int werte[3] = {1, 2, 3};
 
 werte[5] = 20; // FEHLER</code></pre>
 
-            <p>
-                C++ prüft Array-Grenzen normalerweise nicht automatisch.
-                Dadurch kann fremder Speicher überschrieben werden.
-            </p>
+          <p>
+            C++ prüft Array-Grenzen normalerweise nicht automatisch.
+            Dadurch kann fremder Speicher überschrieben werden.
+          </p>
 
-            <div class="hint">
-                Solche Fehler sind besonders unangenehm: Das Programm
-                kompiliert möglicherweise problemlos und benimmt sich
-                anschließend wie ein Gerät mit Poltergeist.
-            </div>
+          <div class="hint">
+            Solche Fehler sind besonders unangenehm: Das Programm
+            kompiliert möglicherweise problemlos und benimmt sich
+            anschließend wie ein Gerät mit Poltergeist.
+          </div>
         </article>
 
-    </div>
+      </div>
 
 
-    <hr class="divider" />
+      <hr class="divider" />
 
-    <h3 id="arduino-strings">Zeichen und Texte</h3>
+      <h3 id="arduino-strings">Zeichen und Texte</h3>
 
-    <div class="cheat-grid">
-
-        <article class="cheat-item">
-            <h4>Ein einzelnes Zeichen</h4>
-
-            <pre class="code"><code>char buchstabe = 'A';</code></pre>
-
-            <p>
-                Einzelne Zeichen verwenden einfache Anführungszeichen.
-            </p>
-        </article>
-
+      <div class="cheat-grid">
 
         <article class="cheat-item">
-            <h4>C-String</h4>
+          <h4>Ein einzelnes Zeichen</h4>
 
-            <pre class="code"><code>char text[] = "Hallo Arduino";</code></pre>
+          <pre class="code"><code>char buchstabe = 'A';</code></pre>
 
-            <p>
-                Klassische C-Strings bestehen aus einem Array von
-                <code>char</code>-Werten und enden intern mit einem
-                Nullzeichen <code>\0</code>.
-            </p>
+          <p>
+            Einzelne Zeichen verwenden einfache Anführungszeichen.
+          </p>
         </article>
 
 
         <article class="cheat-item">
-            <h4>Arduino <code>String</code></h4>
+          <h4>C-String</h4>
 
-            <pre class="code"><code>String name = "Arduino";
+          <pre class="code"><code>char text[] = "Hallo Arduino";</code></pre>
+
+          <p>
+            Klassische C-Strings bestehen aus einem Array von
+            <code>char</code>-Werten und enden intern mit einem
+            Nullzeichen <code>\0</code>.
+          </p>
+        </article>
+
+
+        <article class="cheat-item">
+          <h4>Arduino <code>String</code></h4>
+
+          <pre class="code"><code>String name = "Arduino";
 
 String text =
     "Hallo " + name;</code></pre>
 
-            <p>
-                Die Arduino-Klasse <code>String</code> ist bequem und bietet
-                zahlreiche Methoden.
-            </p>
+          <p>
+            Die Arduino-Klasse <code>String</code> ist bequem und bietet
+            zahlreiche Methoden.
+          </p>
         </article>
 
 
         <article class="cheat-item">
-            <h4>String zusammensetzen</h4>
+          <h4>String zusammensetzen</h4>
 
-            <pre class="code"><code>String ausgabe = "Temperatur: ";
+          <pre class="code"><code>String ausgabe = "Temperatur: ";
 ausgabe += temperatur;
 ausgabe += " C";
 
@@ -1444,9 +1444,9 @@ Serial.println(ausgabe);</code></pre>
 
 
         <article class="cheat-item">
-            <h4>Nützliche String-Methoden</h4>
+          <h4>Nützliche String-Methoden</h4>
 
-            <pre class="code"><code>text.length();
+          <pre class="code"><code>text.length();
 
 text.startsWith("ABC");
 
@@ -1465,50 +1465,50 @@ text.trim();</code></pre>
 
 
         <article class="cheat-item">
-            <h4>String und RAM</h4>
+          <h4>String und RAM</h4>
 
-            <p>
-                Auf kleinen AVR-Mikrocontrollern kann intensives dynamisches
-                Erzeugen und Verändern von <code>String</code>-Objekten den
-                knappen RAM ungünstig fragmentieren.
-            </p>
+          <p>
+            Auf kleinen AVR-Mikrocontrollern kann intensives dynamisches
+            Erzeugen und Verändern von <code>String</code>-Objekten den
+            knappen RAM ungünstig fragmentieren.
+          </p>
 
-            <p>
-                Für kleine Lernprojekte ist <code>String</code> oft völlig
-                ausreichend. Für lang laufende oder speicherkritische
-                Systeme lohnt es sich, C-Strings und statische Puffer zu
-                verstehen.
-            </p>
+          <p>
+            Für kleine Lernprojekte ist <code>String</code> oft völlig
+            ausreichend. Für lang laufende oder speicherkritische
+            Systeme lohnt es sich, C-Strings und statische Puffer zu
+            verstehen.
+          </p>
         </article>
 
 
         <article class="cheat-item">
-            <h4>Flash-String mit <code>F()</code></h4>
+          <h4>Flash-String mit <code>F()</code></h4>
 
-            <pre class="code"><code>Serial.println(
+          <pre class="code"><code>Serial.println(
     F("Diese Zeichenkette bleibt im Flash")
 );</code></pre>
 
-            <p>
-                Auf AVR-Arduinos kann das <code>F()</code>-Makro helfen,
-                statische Textkonstanten nicht unnötig in den knappen SRAM
-                zu kopieren.
-            </p>
+          <p>
+            Auf AVR-Arduinos kann das <code>F()</code>-Makro helfen,
+            statische Textkonstanten nicht unnötig in den knappen SRAM
+            zu kopieren.
+          </p>
         </article>
 
-    </div>
+      </div>
 
 
-    <hr class="divider" />
+      <hr class="divider" />
 
-    <h3 id="arduino-structs">enum, struct und Klassen</h3>
+      <h3 id="arduino-structs">enum, struct und Klassen</h3>
 
-    <div class="cheat-grid">
+      <div class="cheat-grid">
 
         <article class="cheat-item">
-            <h4><code>enum</code></h4>
+          <h4><code>enum</code></h4>
 
-            <pre class="code"><code>enum Betriebsmodus {
+          <pre class="code"><code>enum Betriebsmodus {
     AUS,
     AUTOMATIK,
     MANUELL
@@ -1516,16 +1516,16 @@ text.trim();</code></pre>
 
 Betriebsmodus modus = AUTOMATIK;</code></pre>
 
-            <p>
-                Ein <code>enum</code> gibt Zuständen aussagekräftige Namen.
-            </p>
+          <p>
+            Ein <code>enum</code> gibt Zuständen aussagekräftige Namen.
+          </p>
         </article>
 
 
         <article class="cheat-item">
-            <h4><code>enum class</code></h4>
+          <h4><code>enum class</code></h4>
 
-            <pre class="code"><code>enum class Zustand {
+          <pre class="code"><code>enum class Zustand {
     AUS,
     BEREIT,
     AKTIV,
@@ -1534,25 +1534,25 @@ Betriebsmodus modus = AUTOMATIK;</code></pre>
 
 Zustand zustand = Zustand::BEREIT;</code></pre>
 
-            <p>
-                <code>enum class</code> ist die modernere, stärker
-                typisierte Variante.
-            </p>
+          <p>
+            <code>enum class</code> ist die modernere, stärker
+            typisierte Variante.
+          </p>
         </article>
 
 
         <article class="cheat-item">
-            <h4><code>struct</code></h4>
+          <h4><code>struct</code></h4>
 
-            <pre class="code"><code>struct Messung {
+          <pre class="code"><code>struct Messung {
     float temperatur;
     float luftfeuchte;
     unsigned long zeit;
 };</code></pre>
 
-            <p>Objekt erzeugen:</p>
+          <p>Objekt erzeugen:</p>
 
-            <pre class="code"><code>Messung aktuell;
+          <pre class="code"><code>Messung aktuell;
 
 aktuell.temperatur = 22.5;
 aktuell.luftfeuchte = 51.3;
@@ -1561,31 +1561,31 @@ aktuell.zeit = millis();</code></pre>
 
 
         <article class="cheat-item">
-            <h4>Warum Strukturen nützlich sind</h4>
+          <h4>Warum Strukturen nützlich sind</h4>
 
-            <p>
-                Zusammengehörige Daten werden als logische Einheit
-                behandelt.
-            </p>
+          <p>
+            Zusammengehörige Daten werden als logische Einheit
+            behandelt.
+          </p>
 
-            <pre class="code"><code>struct SensorDaten {
+          <pre class="code"><code>struct SensorDaten {
     float temperatur;
     float druck;
     float feuchte;
     bool gueltig;
 };</code></pre>
 
-            <p>
-                Das ist wesentlich sauberer als vier voneinander
-                unabhängige globale Variablen.
-            </p>
+          <p>
+            Das ist wesentlich sauberer als vier voneinander
+            unabhängige globale Variablen.
+          </p>
         </article>
 
 
         <article class="cheat-item">
-            <h4>Einfache Klasse</h4>
+          <h4>Einfache Klasse</h4>
 
-            <pre class="code"><code>class Led {
+          <pre class="code"><code>class Led {
 public:
 
     Led(int pin)
@@ -1612,9 +1612,9 @@ private:
 
 
         <article class="cheat-item">
-            <h4>Klasse verwenden</h4>
+          <h4>Klasse verwenden</h4>
 
-            <pre class="code"><code>Led statusLed(13);
+          <pre class="code"><code>Led statusLed(13);
 
 void setup() {
     statusLed.begin();
@@ -1624,61 +1624,61 @@ void loop() {
     statusLed.an();
 }</code></pre>
 
-            <p>
-                Viele Arduino-Bibliotheken funktionieren genau nach diesem
-                Prinzip: Ein Objekt repräsentiert ein Hardwaremodul.
-            </p>
+          <p>
+            Viele Arduino-Bibliotheken funktionieren genau nach diesem
+            Prinzip: Ein Objekt repräsentiert ein Hardwaremodul.
+          </p>
         </article>
 
-    </div>
+      </div>
 
 
-    <hr class="divider" />
+      <hr class="divider" />
 
-    <h3 id="arduino-pointers">Zeiger und Referenzen</h3>
+      <h3 id="arduino-pointers">Zeiger und Referenzen</h3>
 
-    <p>
+      <p>
         Zeiger gehören zu den mächtigsten, aber auch fehleranfälligsten
         Eigenschaften von C und C++. Für einfache Arduino-Projekte braucht
         man sie selten direkt. Spätestens bei Bibliotheken, Arrays,
         Speicherpuffern und komplexeren Funktionen begegnen sie einem aber.
-    </p>
+      </p>
 
-    <div class="cheat-grid">
+      <div class="cheat-grid">
 
         <article class="cheat-item">
-            <h4>Adresse einer Variable</h4>
+          <h4>Adresse einer Variable</h4>
 
-            <pre class="code"><code>int wert = 42;
+          <pre class="code"><code>int wert = 42;
 
 int *zeiger = &amp;wert;</code></pre>
 
-            <p>
-                <code>&amp;wert</code> bedeutet:
-                Adresse der Variable <code>wert</code>.
-            </p>
+          <p>
+            <code>&amp;wert</code> bedeutet:
+            Adresse der Variable <code>wert</code>.
+          </p>
         </article>
 
 
         <article class="cheat-item">
-            <h4>Wert über Zeiger lesen</h4>
+          <h4>Wert über Zeiger lesen</h4>
 
-            <pre class="code"><code>int wert = 42;
+          <pre class="code"><code>int wert = 42;
 int *zeiger = &amp;wert;
 
 Serial.println(*zeiger);</code></pre>
 
-            <p>
-                <code>*zeiger</code> greift auf den Wert an der gespeicherten
-                Adresse zu.
-            </p>
+          <p>
+            <code>*zeiger</code> greift auf den Wert an der gespeicherten
+            Adresse zu.
+          </p>
         </article>
 
 
         <article class="cheat-item">
-            <h4>Referenz</h4>
+          <h4>Referenz</h4>
 
-            <pre class="code"><code>int wert = 10;
+          <pre class="code"><code>int wert = 10;
 
 int &amp;referenz = wert;
 
@@ -1686,128 +1686,128 @@ referenz = 20;
 
 // wert ist ebenfalls 20</code></pre>
 
-            <p>
-                Eine Referenz ist vereinfacht betrachtet ein zusätzlicher
-                Name für dasselbe Objekt.
-            </p>
+          <p>
+            Eine Referenz ist vereinfacht betrachtet ein zusätzlicher
+            Name für dasselbe Objekt.
+          </p>
         </article>
 
 
         <article class="cheat-item">
-            <h4>Wann Vorsicht geboten ist</h4>
+          <h4>Wann Vorsicht geboten ist</h4>
 
-            <ul>
-                <li>ungültige Zeiger</li>
-                <li><code>nullptr</code></li>
-                <li>falsche Array-Grenzen</li>
-                <li>Zeiger auf nicht mehr existierende Variablen</li>
-                <li>manuelle Speicherverwaltung</li>
-            </ul>
+          <ul>
+            <li>ungültige Zeiger</li>
+            <li><code>nullptr</code></li>
+            <li>falsche Array-Grenzen</li>
+            <li>Zeiger auf nicht mehr existierende Variablen</li>
+            <li>manuelle Speicherverwaltung</li>
+          </ul>
 
-            <div class="hint">
-                Mikrocontroller bestrafen Speicherfehler gern ohne
-                aussagekräftige Fehlermeldung. Statt „IndexError“ gibt es
-                dann mitunter einfach Unsinn, Reset oder Schweigen.
-            </div>
+          <div class="hint">
+            Mikrocontroller bestrafen Speicherfehler gern ohne
+            aussagekräftige Fehlermeldung. Statt „IndexError“ gibt es
+            dann mitunter einfach Unsinn, Reset oder Schweigen.
+          </div>
         </article>
 
-    </div>
+      </div>
 
 
-    <hr class="divider" />
+      <hr class="divider" />
 
-    <h3 id="arduino-pins">Pins und Pin-Modi</h3>
+      <h3 id="arduino-pins">Pins und Pin-Modi</h3>
 
-    <div class="cheat-grid">
+      <div class="cheat-grid">
 
         <article class="cheat-item">
-            <h4><code>pinMode()</code></h4>
+          <h4><code>pinMode()</code></h4>
 
-            <pre class="code"><code>pinMode(13, OUTPUT);
+          <pre class="code"><code>pinMode(13, OUTPUT);
 pinMode(2, INPUT);
 pinMode(3, INPUT_PULLUP);</code></pre>
 
-            <p>
-                Damit wird festgelegt, welche Aufgabe ein digitaler Pin
-                übernimmt.
-            </p>
+          <p>
+            Damit wird festgelegt, welche Aufgabe ein digitaler Pin
+            übernimmt.
+          </p>
         </article>
 
 
         <article class="cheat-item">
-            <h4><code>OUTPUT</code></h4>
+          <h4><code>OUTPUT</code></h4>
 
-            <pre class="code"><code>pinMode(ledPin, OUTPUT);</code></pre>
+          <pre class="code"><code>pinMode(ledPin, OUTPUT);</code></pre>
 
-            <p>
-                Der Mikrocontroller treibt den Pin aktiv auf einen
-                elektrischen HIGH- oder LOW-Pegel.
-            </p>
+          <p>
+            Der Mikrocontroller treibt den Pin aktiv auf einen
+            elektrischen HIGH- oder LOW-Pegel.
+          </p>
         </article>
 
 
         <article class="cheat-item">
-            <h4><code>INPUT</code></h4>
+          <h4><code>INPUT</code></h4>
 
-            <pre class="code"><code>pinMode(sensorPin, INPUT);</code></pre>
+          <pre class="code"><code>pinMode(sensorPin, INPUT);</code></pre>
 
-            <p>
-                Der Pin wird hochohmig und dient als Eingang.
-            </p>
+          <p>
+            Der Pin wird hochohmig und dient als Eingang.
+          </p>
         </article>
 
 
         <article class="cheat-item">
-            <h4><code>INPUT_PULLUP</code></h4>
+          <h4><code>INPUT_PULLUP</code></h4>
 
-            <pre class="code"><code>pinMode(buttonPin, INPUT_PULLUP);</code></pre>
+          <pre class="code"><code>pinMode(buttonPin, INPUT_PULLUP);</code></pre>
 
-            <p>
-                Aktiviert einen internen Pull-up-Widerstand.
-                Das ist besonders praktisch für Taster.
-            </p>
+          <p>
+            Aktiviert einen internen Pull-up-Widerstand.
+            Das ist besonders praktisch für Taster.
+          </p>
         </article>
 
 
         <article class="cheat-item">
-            <h4>Floating Input</h4>
+          <h4>Floating Input</h4>
 
-            <p>
-                Ein unbeschalteter digitaler Eingang mit
-                <code>INPUT</code> besitzt keinen klar definierten Pegel.
-                Er kann auf elektrische Störungen reagieren.
-            </p>
+          <p>
+            Ein unbeschalteter digitaler Eingang mit
+            <code>INPUT</code> besitzt keinen klar definierten Pegel.
+            Er kann auf elektrische Störungen reagieren.
+          </p>
 
-            <pre class="code"><code>pinMode(buttonPin, INPUT);</code></pre>
+          <pre class="code"><code>pinMode(buttonPin, INPUT);</code></pre>
 
-            <p>
-                Ohne Pull-up oder Pull-down kann das Messergebnis scheinbar
-                zufällig zwischen HIGH und LOW wechseln.
-            </p>
+          <p>
+            Ohne Pull-up oder Pull-down kann das Messergebnis scheinbar
+            zufällig zwischen HIGH und LOW wechseln.
+          </p>
         </article>
 
 
         <article class="cheat-item">
-            <h4>Board-Spannung beachten</h4>
+          <h4>Board-Spannung beachten</h4>
 
-            <p>
-                Nicht jeder Mikrocontroller arbeitet mit denselben
-                Signalspannungen.
-            </p>
+          <p>
+            Nicht jeder Mikrocontroller arbeitet mit denselben
+            Signalspannungen.
+          </p>
 
-            <ul>
-                <li>klassische Uno-/Nano-AVR-Systeme: häufig 5 V</li>
-                <li>viele ARM-, ESP- und RP2040-Systeme: 3,3 V</li>
-            </ul>
+          <ul>
+            <li>klassische Uno-/Nano-AVR-Systeme: häufig 5 V</li>
+            <li>viele ARM-, ESP- und RP2040-Systeme: 3,3 V</li>
+          </ul>
 
-            <div class="hint">
-                Vor dem Anschluss fremder Hardware immer Datenblatt und
-                zulässige Logikpegel prüfen. „Der Stecker hat gepasst“
-                ist keine elektrische Spezifikation.
-            </div>
+          <div class="hint">
+            Vor dem Anschluss fremder Hardware immer Datenblatt und
+            zulässige Logikpegel prüfen. „Der Stecker hat gepasst“
+            ist keine elektrische Spezifikation.
+          </div>
         </article>
 
-    </div>
+      </div>
 
 
 
