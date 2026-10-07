@@ -3412,6 +3412,632 @@ funktion1()</code></pre>
 
 
 
+    <hr class="divider" />
+
+    <h3 id="arduino-debugging">Debugging</h3>
+
+    <p>
+        Bei Arduino-Projekten kann ein Fehler aus Software,
+        Elektronik, Stromversorgung, Verkabelung, Kommunikationsprotokoll
+        oder Timing entstehen. Deshalb ist systematisches Vorgehen
+        besonders wichtig.
+    </p>
+
+    <div class="cheat-grid">
+
+        <article class="cheat-item">
+            <h4>1. Minimalen Test aufbauen</h4>
+
+            <p>
+                Nicht sofort das gesamte Projekt debuggen. Zuerst prüfen,
+                ob die problematische Komponente isoliert funktioniert.
+            </p>
+
+            <pre class="code"><code>void setup() {
+    Serial.begin(115200);
+}
+
+void loop() {
+
+    Serial.println(
+        analogRead(A0)
+    );
+
+    delay(500);
+}</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>2. Zwischenwerte ausgeben</h4>
+
+            <pre class="code"><code>Serial.print("raw=");
+Serial.println(raw);
+
+Serial.print("spannung=");
+Serial.println(spannung);
+
+Serial.print("status=");
+Serial.println(status);</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>3. Programmfluss markieren</h4>
+
+            <pre class="code"><code>Serial.println("A");
+
+sensorInitialisieren();
+
+Serial.println("B");
+
+displayInitialisieren();
+
+Serial.println("C");</code></pre>
+
+            <p>
+                Bleibt die Ausgabe bei B stehen, weißt du zumindest,
+                zwischen welchen beiden Punkten das Problem liegt.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>4. Hardware prüfen</h4>
+
+            <ul>
+                <li>Versorgungsspannung messen</li>
+                <li>GND-Verbindungen prüfen</li>
+                <li>Pinbelegung prüfen</li>
+                <li>Datenblatt konsultieren</li>
+                <li>Leitungen auf Unterbrechungen prüfen</li>
+                <li>Signalpegel kontrollieren</li>
+            </ul>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>5. Eine Änderung nach der anderen</h4>
+
+            <p>
+                Wer gleichzeitig Bibliothek, Verdrahtung, Pinbelegung,
+                Baudrate und Programmstruktur verändert, weiß anschließend
+                nicht, welche Änderung geholfen oder geschadet hat.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Compilerfehler von Laufzeitfehlern unterscheiden</h4>
+
+            <p><strong>Compilerfehler:</strong></p>
+
+            <p>
+                Das Programm lässt sich gar nicht übersetzen.
+            </p>
+
+            <p><strong>Laufzeitfehler:</strong></p>
+
+            <p>
+                Das Programm wird übertragen, verhält sich aber falsch.
+            </p>
+
+            <p><strong>Hardwarefehler:</strong></p>
+
+            <p>
+                Der Code kann völlig korrekt sein, während die reale
+                Schaltung nicht funktioniert.
+            </p>
+        </article>
+
+    </div>
+
+
+    <hr class="divider" />
+
+    <h3 id="arduino-errors">Typische Fehler</h3>
+
+    <div class="cheat-grid">
+
+        <article class="cheat-item">
+            <h4>Semikolon vergessen</h4>
+
+            <pre class="code"><code>int wert = 10
+
+Serial.println(wert);</code></pre>
+
+            <p>Korrekt:</p>
+
+            <pre class="code"><code>int wert = 10;</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4><code>=</code> statt <code>==</code></h4>
+
+            <pre class="code"><code>if (wert = 5) {
+    // falsch gemeint
+}</code></pre>
+
+            <p>Korrekt:</p>
+
+            <pre class="code"><code>if (wert == 5) {
+    // Vergleich
+}</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Falscher Pin-Modus</h4>
+
+            <pre class="code"><code>pinMode(ledPin, INPUT);
+
+digitalWrite(
+    ledPin,
+    HIGH
+);</code></pre>
+
+            <p>
+                Prüfe immer, ob Eingang und Ausgang tatsächlich passend
+                konfiguriert sind.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Floating Input</h4>
+
+            <pre class="code"><code>pinMode(buttonPin, INPUT);</code></pre>
+
+            <p>
+                Ohne definierten Pull-up oder Pull-down kann der Eingang
+                unvorhersehbare Werte liefern.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Falsche Baudrate</h4>
+
+            <pre class="code"><code>Serial.begin(115200);</code></pre>
+
+            <p>
+                Ist der Monitor beispielsweise auf 9600 Baud eingestellt,
+                erscheint häufig unlesbarer Zeichensalat.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Integer-Division</h4>
+
+            <pre class="code"><code>float wert = 5 / 2;
+
+// 2 statt 2.5</code></pre>
+
+            <p>Korrekt:</p>
+
+            <pre class="code"><code>float wert = 5.0 / 2.0;</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Array-Grenzen überschreiten</h4>
+
+            <pre class="code"><code>int daten[5];
+
+daten[5] = 42;</code></pre>
+
+            <p>
+                Die gültigen Indizes sind lediglich
+                <code>0</code> bis <code>4</code>.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4><code>delay()</code> überall</h4>
+
+            <pre class="code"><code>delay(5000);</code></pre>
+
+            <p>
+                Einfache Beispiele funktionieren damit gut.
+                Mehrere gleichzeitig zu behandelnde Aufgaben hingegen
+                werden schnell träge.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Ungeeigneter Datentyp für <code>millis()</code></h4>
+
+            <pre class="code"><code>int zeit = millis(); // problematisch</code></pre>
+
+            <p>Besser:</p>
+
+            <pre class="code"><code>unsigned long zeit =
+    millis();</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Zu viel Strom direkt aus GPIO</h4>
+
+            <p>
+                GPIO-Pins sind für Logiksignale und begrenzte Lasten
+                vorgesehen. Leistungsstarke Verbraucher gehören nicht
+                unmittelbar an einen Mikrocontroller-Pin.
+            </p>
+
+            <p>
+                Motoren, Relais, kräftige LEDs und ähnliche Verbraucher
+                benötigen meist geeignete Treiberstufen.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Motor direkt anschließen</h4>
+
+            <p>
+                Motoren erzeugen Stromspitzen und induktive
+                Spannungsspitzen. Üblicherweise werden Transistoren,
+                MOSFETs oder Motortreiber sowie passende Schutzmaßnahmen
+                verwendet.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Gemeinsame Masse vergessen</h4>
+
+            <p>
+                Werden zwei separat versorgte Schaltungen elektrisch
+                miteinander verbunden, benötigen ihre Logiksignale in
+                vielen Fällen eine gemeinsame Bezugsspannung über GND.
+            </p>
+        </article>
+
+    </div>
+
+
+    <hr class="divider" />
+
+    <h3 id="arduino-style">Sauberer Programmierstil</h3>
+
+    <div class="cheat-grid">
+
+        <article class="cheat-item">
+            <h4>Keine magischen Zahlen</h4>
+
+            <p>Schlecht:</p>
+
+            <pre class="code"><code>if (analogRead(A0) &gt; 742) {
+    digitalWrite(7, HIGH);
+}</code></pre>
+
+            <p>Besser:</p>
+
+            <pre class="code"><code>constexpr int sensorPin = A0;
+constexpr int relayPin = 7;
+
+constexpr int grenzwert = 742;
+
+if (
+    analogRead(sensorPin)
+    &gt; grenzwert
+) {
+    digitalWrite(
+        relayPin,
+        HIGH
+    );
+}</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Funktionen klein halten</h4>
+
+            <p>
+                Eine Funktion sollte möglichst eine klar beschreibbare
+                Aufgabe erledigen.
+            </p>
+
+            <pre class="code"><code>sensorLesen();
+datenVerarbeiten();
+displayAktualisieren();
+datenSpeichern();</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Variablennamen sollen Bedeutung tragen</h4>
+
+            <pre class="code"><code>unsigned long
+    letzteMessung = 0;
+
+float
+    aktuelleTemperatur = 0.0;</code></pre>
+
+            <p>
+                Das ist länger als <code>x</code> und
+                <code>y</code>, aber dramatisch günstiger als
+                archäologische Codeforschung drei Monate später.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Konfiguration zentralisieren</h4>
+
+            <pre class="code"><code>constexpr int SENSOR_PIN = A0;
+constexpr int LED_PIN = 9;
+
+constexpr unsigned long
+    MESSINTERVALL = 1000;</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Hardware und Logik trennen</h4>
+
+            <pre class="code"><code>float temperatur =
+    temperaturLesen();
+
+bool luefterSollAn =
+    temperatur &gt; 30.0;
+
+luefterSetzen(
+    luefterSollAn
+);</code></pre>
+
+            <p>
+                Dadurch bleibt die eigentliche Entscheidungslogik leicht
+                verständlich.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Nicht-blockierend denken</h4>
+
+            <p>
+                Statt:
+            </p>
+
+            <pre class="code"><code>aktionA();
+delay(5000);
+aktionB();</code></pre>
+
+            <p>
+                besser einen zeit- oder zustandsgesteuerten Ablauf
+                verwenden.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Fehlerzustände einplanen</h4>
+
+            <pre class="code"><code>if (!sensor.begin()) {
+
+    Serial.println(
+        "Sensor nicht gefunden"
+    );
+
+    sensorFehler = true;
+}</code></pre>
+
+            <p>
+                Ein gutes Embedded-Programm geht nicht davon aus, dass jede
+                angeschlossene Komponente bis ans Ende aller Tage
+                kooperiert.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Kommentare für Entscheidungen</h4>
+
+            <pre class="code"><code>// 30 ms Entprellzeit verhindert,
+// dass mechanisches Kontaktprellen
+// als mehrere Tastendrücke gilt.
+constexpr unsigned long
+    debounceZeit = 30;</code></pre>
+        </article>
+
+    </div>
+
+
+    <hr class="divider" />
+
+    <h3 id="arduino-example">Komplettes Praxisbeispiel</h3>
+
+    <p>
+        Dieses Beispiel verbindet mehrere zentrale Konzepte:
+        analoge Messung, Taster, LED, Zustandsänderung,
+        nicht-blockierende Zeitsteuerung und serielle Ausgabe.
+    </p>
+
+    <pre class="code"><code>/*
+    Beispiel:
+    Sensorwert regelmäßig einlesen,
+    LED abhängig von Grenzwert steuern,
+    Taster kann Automatik aktivieren/deaktivieren.
+
+    Kein delay() erforderlich.
+*/
+
+
+constexpr int SENSOR_PIN = A0;
+constexpr int LED_PIN = 9;
+constexpr int BUTTON_PIN = 2;
+
+constexpr int GRENZWERT = 600;
+
+constexpr unsigned long
+    MESSINTERVALL = 1000;
+
+constexpr unsigned long
+    DEBOUNCE_ZEIT = 30;
+
+
+unsigned long letzteMessung = 0;
+unsigned long letzteTasterAenderung = 0;
+
+bool automatikAktiv = true;
+
+bool letzterRohzustand = HIGH;
+bool stabilerTasterzustand = HIGH;
+bool letzterStabilerZustand = HIGH;
+
+
+void setup() {
+
+    Serial.begin(115200);
+
+    pinMode(
+        LED_PIN,
+        OUTPUT
+    );
+
+    pinMode(
+        BUTTON_PIN,
+        INPUT_PULLUP
+    );
+
+    Serial.println(
+        F("System gestartet.")
+    );
+}
+
+
+void loop() {
+
+    tasterAktualisieren();
+
+    messungAktualisieren();
+}
+
+
+void tasterAktualisieren() {
+
+    bool rohzustand =
+        digitalRead(BUTTON_PIN);
+
+
+    if (
+        rohzustand
+        != letzterRohzustand
+    ) {
+
+        letzteTasterAenderung =
+            millis();
+
+        letzterRohzustand =
+            rohzustand;
+    }
+
+
+    if (
+        millis()
+        - letzteTasterAenderung
+        &gt;= DEBOUNCE_ZEIT
+    ) {
+
+        stabilerTasterzustand =
+            rohzustand;
+    }
+
+
+    bool wurdeGedrueckt =
+
+        letzterStabilerZustand
+        == HIGH
+
+        &amp;&amp;
+
+        stabilerTasterzustand
+        == LOW;
+
+
+    if (wurdeGedrueckt) {
+
+        automatikAktiv =
+            !automatikAktiv;
+
+        Serial.print(
+            F("Automatik: ")
+        );
+
+        Serial.println(
+            automatikAktiv
+            ? F("AN")
+            : F("AUS")
+        );
+    }
+
+
+    letzterStabilerZustand =
+        stabilerTasterzustand;
+}
+
+
+void messungAktualisieren() {
+
+    unsigned long jetzt =
+        millis();
+
+
+    if (
+        jetzt - letzteMessung
+        &lt; MESSINTERVALL
+    ) {
+        return;
+    }
+
+
+    letzteMessung =
+        jetzt;
+
+
+    int sensorWert =
+        analogRead(SENSOR_PIN);
+
+
+    Serial.print(
+        F("Sensorwert: ")
+    );
+
+    Serial.println(
+        sensorWert
+    );
+
+
+    if (!automatikAktiv) {
+
+        digitalWrite(
+            LED_PIN,
+            LOW
+        );
+
+        return;
+    }
+
+
+    bool grenzwertUeberschritten =
+        sensorWert &gt; GRENZWERT;
+
+
+    digitalWrite(
+        LED_PIN,
+        grenzwertUeberschritten
+        ? HIGH
+        : LOW
+    );
+}</code></pre>
+
+
 
 
 
