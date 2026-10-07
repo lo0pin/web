@@ -1387,6 +1387,429 @@ werte[5] = 20; // FEHLER</code></pre>
     </div>
 
 
+    <hr class="divider" />
+
+    <h3 id="arduino-strings">Zeichen und Texte</h3>
+
+    <div class="cheat-grid">
+
+        <article class="cheat-item">
+            <h4>Ein einzelnes Zeichen</h4>
+
+            <pre class="code"><code>char buchstabe = 'A';</code></pre>
+
+            <p>
+                Einzelne Zeichen verwenden einfache Anführungszeichen.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>C-String</h4>
+
+            <pre class="code"><code>char text[] = "Hallo Arduino";</code></pre>
+
+            <p>
+                Klassische C-Strings bestehen aus einem Array von
+                <code>char</code>-Werten und enden intern mit einem
+                Nullzeichen <code>\0</code>.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Arduino <code>String</code></h4>
+
+            <pre class="code"><code>String name = "Arduino";
+
+String text =
+    "Hallo " + name;</code></pre>
+
+            <p>
+                Die Arduino-Klasse <code>String</code> ist bequem und bietet
+                zahlreiche Methoden.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>String zusammensetzen</h4>
+
+            <pre class="code"><code>String ausgabe = "Temperatur: ";
+ausgabe += temperatur;
+ausgabe += " C";
+
+Serial.println(ausgabe);</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Nützliche String-Methoden</h4>
+
+            <pre class="code"><code>text.length();
+
+text.startsWith("ABC");
+
+text.endsWith("XYZ");
+
+text.indexOf(':');
+
+text.substring(0, 5);
+
+text.toInt();
+
+text.toFloat();
+
+text.trim();</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>String und RAM</h4>
+
+            <p>
+                Auf kleinen AVR-Mikrocontrollern kann intensives dynamisches
+                Erzeugen und Verändern von <code>String</code>-Objekten den
+                knappen RAM ungünstig fragmentieren.
+            </p>
+
+            <p>
+                Für kleine Lernprojekte ist <code>String</code> oft völlig
+                ausreichend. Für lang laufende oder speicherkritische
+                Systeme lohnt es sich, C-Strings und statische Puffer zu
+                verstehen.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Flash-String mit <code>F()</code></h4>
+
+            <pre class="code"><code>Serial.println(
+    F("Diese Zeichenkette bleibt im Flash")
+);</code></pre>
+
+            <p>
+                Auf AVR-Arduinos kann das <code>F()</code>-Makro helfen,
+                statische Textkonstanten nicht unnötig in den knappen SRAM
+                zu kopieren.
+            </p>
+        </article>
+
+    </div>
+
+
+    <hr class="divider" />
+
+    <h3 id="arduino-structs">enum, struct und Klassen</h3>
+
+    <div class="cheat-grid">
+
+        <article class="cheat-item">
+            <h4><code>enum</code></h4>
+
+            <pre class="code"><code>enum Betriebsmodus {
+    AUS,
+    AUTOMATIK,
+    MANUELL
+};
+
+Betriebsmodus modus = AUTOMATIK;</code></pre>
+
+            <p>
+                Ein <code>enum</code> gibt Zuständen aussagekräftige Namen.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4><code>enum class</code></h4>
+
+            <pre class="code"><code>enum class Zustand {
+    AUS,
+    BEREIT,
+    AKTIV,
+    FEHLER
+};
+
+Zustand zustand = Zustand::BEREIT;</code></pre>
+
+            <p>
+                <code>enum class</code> ist die modernere, stärker
+                typisierte Variante.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4><code>struct</code></h4>
+
+            <pre class="code"><code>struct Messung {
+    float temperatur;
+    float luftfeuchte;
+    unsigned long zeit;
+};</code></pre>
+
+            <p>Objekt erzeugen:</p>
+
+            <pre class="code"><code>Messung aktuell;
+
+aktuell.temperatur = 22.5;
+aktuell.luftfeuchte = 51.3;
+aktuell.zeit = millis();</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Warum Strukturen nützlich sind</h4>
+
+            <p>
+                Zusammengehörige Daten werden als logische Einheit
+                behandelt.
+            </p>
+
+            <pre class="code"><code>struct SensorDaten {
+    float temperatur;
+    float druck;
+    float feuchte;
+    bool gueltig;
+};</code></pre>
+
+            <p>
+                Das ist wesentlich sauberer als vier voneinander
+                unabhängige globale Variablen.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Einfache Klasse</h4>
+
+            <pre class="code"><code>class Led {
+public:
+
+    Led(int pin)
+        : _pin(pin) {
+    }
+
+    void begin() {
+        pinMode(_pin, OUTPUT);
+    }
+
+    void an() {
+        digitalWrite(_pin, HIGH);
+    }
+
+    void aus() {
+        digitalWrite(_pin, LOW);
+    }
+
+private:
+
+    int _pin;
+};</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Klasse verwenden</h4>
+
+            <pre class="code"><code>Led statusLed(13);
+
+void setup() {
+    statusLed.begin();
+}
+
+void loop() {
+    statusLed.an();
+}</code></pre>
+
+            <p>
+                Viele Arduino-Bibliotheken funktionieren genau nach diesem
+                Prinzip: Ein Objekt repräsentiert ein Hardwaremodul.
+            </p>
+        </article>
+
+    </div>
+
+
+    <hr class="divider" />
+
+    <h3 id="arduino-pointers">Zeiger und Referenzen</h3>
+
+    <p>
+        Zeiger gehören zu den mächtigsten, aber auch fehleranfälligsten
+        Eigenschaften von C und C++. Für einfache Arduino-Projekte braucht
+        man sie selten direkt. Spätestens bei Bibliotheken, Arrays,
+        Speicherpuffern und komplexeren Funktionen begegnen sie einem aber.
+    </p>
+
+    <div class="cheat-grid">
+
+        <article class="cheat-item">
+            <h4>Adresse einer Variable</h4>
+
+            <pre class="code"><code>int wert = 42;
+
+int *zeiger = &amp;wert;</code></pre>
+
+            <p>
+                <code>&amp;wert</code> bedeutet:
+                Adresse der Variable <code>wert</code>.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Wert über Zeiger lesen</h4>
+
+            <pre class="code"><code>int wert = 42;
+int *zeiger = &amp;wert;
+
+Serial.println(*zeiger);</code></pre>
+
+            <p>
+                <code>*zeiger</code> greift auf den Wert an der gespeicherten
+                Adresse zu.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Referenz</h4>
+
+            <pre class="code"><code>int wert = 10;
+
+int &amp;referenz = wert;
+
+referenz = 20;
+
+// wert ist ebenfalls 20</code></pre>
+
+            <p>
+                Eine Referenz ist vereinfacht betrachtet ein zusätzlicher
+                Name für dasselbe Objekt.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Wann Vorsicht geboten ist</h4>
+
+            <ul>
+                <li>ungültige Zeiger</li>
+                <li><code>nullptr</code></li>
+                <li>falsche Array-Grenzen</li>
+                <li>Zeiger auf nicht mehr existierende Variablen</li>
+                <li>manuelle Speicherverwaltung</li>
+            </ul>
+
+            <div class="hint">
+                Mikrocontroller bestrafen Speicherfehler gern ohne
+                aussagekräftige Fehlermeldung. Statt „IndexError“ gibt es
+                dann mitunter einfach Unsinn, Reset oder Schweigen.
+            </div>
+        </article>
+
+    </div>
+
+
+    <hr class="divider" />
+
+    <h3 id="arduino-pins">Pins und Pin-Modi</h3>
+
+    <div class="cheat-grid">
+
+        <article class="cheat-item">
+            <h4><code>pinMode()</code></h4>
+
+            <pre class="code"><code>pinMode(13, OUTPUT);
+pinMode(2, INPUT);
+pinMode(3, INPUT_PULLUP);</code></pre>
+
+            <p>
+                Damit wird festgelegt, welche Aufgabe ein digitaler Pin
+                übernimmt.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4><code>OUTPUT</code></h4>
+
+            <pre class="code"><code>pinMode(ledPin, OUTPUT);</code></pre>
+
+            <p>
+                Der Mikrocontroller treibt den Pin aktiv auf einen
+                elektrischen HIGH- oder LOW-Pegel.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4><code>INPUT</code></h4>
+
+            <pre class="code"><code>pinMode(sensorPin, INPUT);</code></pre>
+
+            <p>
+                Der Pin wird hochohmig und dient als Eingang.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4><code>INPUT_PULLUP</code></h4>
+
+            <pre class="code"><code>pinMode(buttonPin, INPUT_PULLUP);</code></pre>
+
+            <p>
+                Aktiviert einen internen Pull-up-Widerstand.
+                Das ist besonders praktisch für Taster.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Floating Input</h4>
+
+            <p>
+                Ein unbeschalteter digitaler Eingang mit
+                <code>INPUT</code> besitzt keinen klar definierten Pegel.
+                Er kann auf elektrische Störungen reagieren.
+            </p>
+
+            <pre class="code"><code>pinMode(buttonPin, INPUT);</code></pre>
+
+            <p>
+                Ohne Pull-up oder Pull-down kann das Messergebnis scheinbar
+                zufällig zwischen HIGH und LOW wechseln.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Board-Spannung beachten</h4>
+
+            <p>
+                Nicht jeder Mikrocontroller arbeitet mit denselben
+                Signalspannungen.
+            </p>
+
+            <ul>
+                <li>klassische Uno-/Nano-AVR-Systeme: häufig 5 V</li>
+                <li>viele ARM-, ESP- und RP2040-Systeme: 3,3 V</li>
+            </ul>
+
+            <div class="hint">
+                Vor dem Anschluss fremder Hardware immer Datenblatt und
+                zulässige Logikpegel prüfen. „Der Stecker hat gepasst“
+                ist keine elektrische Spezifikation.
+            </div>
+        </article>
+
+    </div>
+
+
 
 
 
