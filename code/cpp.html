@@ -1810,6 +1810,318 @@ pinMode(3, INPUT_PULLUP);</code></pre>
       </div>
 
 
+    <hr class="divider" />
+
+    <h3 id="arduino-digital">Digitale Ein- und Ausgänge</h3>
+
+    <div class="cheat-grid">
+
+        <article class="cheat-item">
+            <h4>Digitalen Ausgang setzen</h4>
+
+            <pre class="code"><code>digitalWrite(ledPin, HIGH);
+
+digitalWrite(ledPin, LOW);</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Digitalen Eingang lesen</h4>
+
+            <pre class="code"><code>int zustand =
+    digitalRead(buttonPin);</code></pre>
+
+            <p>
+                Der Rückgabewert ist gewöhnlich
+                <code>HIGH</code> oder <code>LOW</code>.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Blink-Beispiel</h4>
+
+            <pre class="code"><code>const int ledPin = LED_BUILTIN;
+
+void setup() {
+    pinMode(ledPin, OUTPUT);
+}
+
+void loop() {
+
+    digitalWrite(ledPin, HIGH);
+    delay(1000);
+
+    digitalWrite(ledPin, LOW);
+    delay(1000);
+}</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Taster steuert LED</h4>
+
+            <pre class="code"><code>const int buttonPin = 2;
+const int ledPin = 13;
+
+void setup() {
+
+    pinMode(buttonPin, INPUT_PULLUP);
+    pinMode(ledPin, OUTPUT);
+}
+
+void loop() {
+
+    bool gedrueckt =
+        digitalRead(buttonPin) == LOW;
+
+    digitalWrite(
+        ledPin,
+        gedrueckt ? HIGH : LOW
+    );
+}</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Warum LOW bei gedrücktem Taster?</h4>
+
+            <p>
+                Bei <code>INPUT_PULLUP</code> zieht der interne Widerstand
+                den Eingang standardmäßig auf HIGH.
+            </p>
+
+            <p>
+                Der Taster wird typischerweise zwischen Eingang und GND
+                angeschlossen. Beim Drücken wird der Eingang daher LOW.
+            </p>
+
+            <pre class="code"><code>nicht gedrueckt → HIGH
+gedrueckt       → LOW</code></pre>
+        </article>
+
+    </div>
+
+
+    <hr class="divider" />
+
+    <h3 id="arduino-buttons">Taster und Entprellung</h3>
+
+    <p>
+        Mechanische Kontakte schließen nicht perfekt. Beim Drücken eines
+        Tasters kann der Kontakt innerhalb weniger Millisekunden mehrfach
+        öffnen und schließen. Dieses Verhalten heißt
+        <strong>Kontaktprellen</strong>.
+    </p>
+
+    <div class="cheat-grid">
+
+        <article class="cheat-item">
+            <h4>Naiver Ansatz</h4>
+
+            <pre class="code"><code>if (digitalRead(buttonPin) == LOW) {
+    zaehler++;
+}</code></pre>
+
+            <p>
+                Das erhöht den Zähler nicht einmal, sondern möglicherweise
+                hunderte oder tausende Male, solange der Taster gedrückt
+                bleibt.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Flankenerkennung</h4>
+
+            <pre class="code"><code>bool letzterZustand = HIGH;
+
+void loop() {
+
+    bool aktuell =
+        digitalRead(buttonPin);
+
+    if (
+        letzterZustand == HIGH &amp;&amp;
+        aktuell == LOW
+    ) {
+        Serial.println("Gedrueckt");
+    }
+
+    letzterZustand = aktuell;
+}</code></pre>
+
+            <p>
+                Damit wird nicht der Zustand selbst, sondern der Übergang
+                von HIGH nach LOW erkannt.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Einfache Entprellzeit</h4>
+
+            <pre class="code"><code>const unsigned long debounceZeit = 30;
+
+unsigned long letzteAenderung = 0;
+bool stabilerZustand = HIGH;
+bool letzterMesswert = HIGH;
+
+void loop() {
+
+    bool messwert =
+        digitalRead(buttonPin);
+
+    if (messwert != letzterMesswert) {
+
+        letzteAenderung = millis();
+        letzterMesswert = messwert;
+    }
+
+    if (
+        millis() - letzteAenderung
+        &gt;= debounceZeit
+    ) {
+        stabilerZustand = messwert;
+    }
+}</code></pre>
+        </article>
+
+    </div>
+
+
+    <hr class="divider" />
+
+    <h3 id="arduino-analog">Analoge Eingänge</h3>
+
+    <p>
+        Digitale Eingänge unterscheiden lediglich HIGH und LOW.
+        Ein Analog-Digital-Wandler – ADC – misst hingegen einen
+        Spannungswert und wandelt ihn in eine Zahl um.
+    </p>
+
+    <div class="cheat-grid">
+
+        <article class="cheat-item">
+            <h4><code>analogRead()</code></h4>
+
+            <pre class="code"><code>int wert = analogRead(A0);</code></pre>
+
+            <p>
+                Auf klassischen 10-Bit-AVR-Arduinos liegt das Ergebnis
+                typischerweise zwischen:
+            </p>
+
+            <pre class="code"><code>0 ... 1023</code></pre>
+
+            <p>
+                Andere Mikrocontroller können andere ADC-Auflösungen
+                verwenden.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Spannung berechnen</h4>
+
+            <pre class="code"><code>int adc = analogRead(A0);
+
+float spannung =
+    adc * (5.0 / 1023.0);</code></pre>
+
+            <p>
+                Dieses Beispiel setzt einen 10-Bit-ADC und eine
+                Referenzspannung von 5 V voraus.
+            </p>
+
+            <div class="hint">
+                Niemals blind 5 V in die Formel schreiben, wenn das konkrete
+                Board mit einer anderen Referenz arbeitet.
+            </div>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Potentiometer auslesen</h4>
+
+            <pre class="code"><code>void setup() {
+    Serial.begin(115200);
+}
+
+void loop() {
+
+    int wert = analogRead(A0);
+
+    Serial.println(wert);
+
+    delay(100);
+}</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4><code>map()</code></h4>
+
+            <pre class="code"><code>int sensor = analogRead(A0);
+
+int prozent =
+    map(sensor, 0, 1023, 0, 100);</code></pre>
+
+            <p>
+                Skaliert einen Wertebereich auf einen anderen.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4><code>map()</code> arbeitet ganzzahlig</h4>
+
+            <p>
+                Die klassische Arduino-Funktion <code>map()</code>
+                verwendet Ganzzahlarithmetik.
+            </p>
+
+            <p>
+                Für präzise Fließkommaberechnungen sollte man daher selbst
+                rechnen.
+            </p>
+
+            <pre class="code"><code>float prozent =
+    sensor / 1023.0 * 100.0;</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4><code>constrain()</code></h4>
+
+            <pre class="code"><code>wert =
+    constrain(wert, 0, 100);</code></pre>
+
+            <p>
+                Begrenzt den Wert auf den angegebenen Bereich.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Messwerte mitteln</h4>
+
+            <pre class="code"><code>long summe = 0;
+
+for (int i = 0; i &lt; 10; i++) {
+    summe += analogRead(A0);
+}
+
+float mittelwert =
+    summe / 10.0;</code></pre>
+
+            <p>
+                Mehrere Messungen zu mitteln kann Rauschen reduzieren.
+            </p>
+        </article>
+
+    </div>
+
 
 
 
