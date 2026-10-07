@@ -403,183 +403,183 @@ DigitalWrite(13, HIGH); // andere Bezeichnung → Fehler</code></pre>
 
       </div>
 
-    <hr class="divider" />
+      <hr class="divider" />
 
-    <h3 id="arduino-variables">Variablen und Datentypen</h3>
+      <h3 id="arduino-variables">Variablen und Datentypen</h3>
 
-    <p>
+      <p>
         Variablen speichern Daten im Arbeitsspeicher. Anders als in Python
         muss in C++ normalerweise angegeben werden, welchen Datentyp eine
         Variable besitzt.
-    </p>
+      </p>
 
-    <div class="cheat-grid">
+      <div class="cheat-grid">
 
         <article class="cheat-item">
-            <h4><code>bool</code></h4>
+          <h4><code>bool</code></h4>
 
-            <pre class="code"><code>bool lichtAn = true;
+          <pre class="code"><code>bool lichtAn = true;
 bool fehler = false;</code></pre>
 
-            <p>
-                Speichert einen Wahrheitswert:
-                <code>true</code> oder <code>false</code>.
-            </p>
+          <p>
+            Speichert einen Wahrheitswert:
+            <code>true</code> oder <code>false</code>.
+          </p>
         </article>
 
 
         <article class="cheat-item">
-            <h4><code>char</code></h4>
+          <h4><code>char</code></h4>
 
-            <pre class="code"><code>char zeichen = 'A';</code></pre>
+          <pre class="code"><code>char zeichen = 'A';</code></pre>
 
-            <p>
-                Speichert ein einzelnes Zeichen.
-            </p>
+          <p>
+            Speichert ein einzelnes Zeichen.
+          </p>
 
-            <p>
-                Einzelne Zeichen stehen in einfachen Anführungszeichen.
-            </p>
+          <p>
+            Einzelne Zeichen stehen in einfachen Anführungszeichen.
+          </p>
         </article>
 
 
         <article class="cheat-item">
-            <h4><code>byte</code></h4>
+          <h4><code>byte</code></h4>
 
-            <pre class="code"><code>byte helligkeit = 255;</code></pre>
+          <pre class="code"><code>byte helligkeit = 255;</code></pre>
 
-            <p>
-                Auf Arduino typischerweise ein vorzeichenloser
-                8-Bit-Wert von 0 bis 255.
-            </p>
+          <p>
+            Auf Arduino typischerweise ein vorzeichenloser
+            8-Bit-Wert von 0 bis 255.
+          </p>
         </article>
 
 
         <article class="cheat-item">
-            <h4><code>int</code></h4>
+          <h4><code>int</code></h4>
 
-            <pre class="code"><code>int temperatur = 23;
+          <pre class="code"><code>int temperatur = 23;
 int differenz = -5;</code></pre>
 
-            <p>
-                Ganzzahltyp. Seine Größe hängt von der Plattform ab.
-                Auf klassischen AVR-Arduinos besitzt <code>int</code>
-                typischerweise 16 Bit, auf vielen moderneren
-                Mikrocontrollern 32 Bit.
-            </p>
+          <p>
+            Ganzzahltyp. Seine Größe hängt von der Plattform ab.
+            Auf klassischen AVR-Arduinos besitzt <code>int</code>
+            typischerweise 16 Bit, auf vielen moderneren
+            Mikrocontrollern 32 Bit.
+          </p>
         </article>
 
 
         <article class="cheat-item">
-            <h4><code>unsigned int</code></h4>
+          <h4><code>unsigned int</code></h4>
 
-            <pre class="code"><code>unsigned int zaehler = 60000;</code></pre>
+          <pre class="code"><code>unsigned int zaehler = 60000;</code></pre>
 
-            <p>
-                Ganzzahl ohne negatives Vorzeichen. Dadurch kann der positive
-                Wertebereich größer sein.
-            </p>
+          <p>
+            Ganzzahl ohne negatives Vorzeichen. Dadurch kann der positive
+            Wertebereich größer sein.
+          </p>
         </article>
 
 
         <article class="cheat-item">
-            <h4><code>long</code></h4>
+          <h4><code>long</code></h4>
 
-            <pre class="code"><code>long position = -150000L;</code></pre>
+          <pre class="code"><code>long position = -150000L;</code></pre>
 
-            <p>
-                Ganzzahltyp für größere Werte.
-            </p>
+          <p>
+            Ganzzahltyp für größere Werte.
+          </p>
         </article>
 
 
         <article class="cheat-item">
-            <h4><code>unsigned long</code></h4>
+          <h4><code>unsigned long</code></h4>
 
-            <pre class="code"><code>unsigned long startzeit = 0;
+          <pre class="code"><code>unsigned long startzeit = 0;
 unsigned long jetzt = millis();</code></pre>
 
-            <p>
-                Besonders wichtig für Zeitmessungen mit
-                <code>millis()</code> und <code>micros()</code>.
-            </p>
+          <p>
+            Besonders wichtig für Zeitmessungen mit
+            <code>millis()</code> und <code>micros()</code>.
+          </p>
         </article>
 
 
         <article class="cheat-item">
-            <h4><code>float</code></h4>
+          <h4><code>float</code></h4>
 
-            <pre class="code"><code>float temperatur = 21.75;</code></pre>
+          <pre class="code"><code>float temperatur = 21.75;</code></pre>
 
-            <p>
-                Gleitkommazahl für Werte mit Nachkommastellen.
-            </p>
+          <p>
+            Gleitkommazahl für Werte mit Nachkommastellen.
+          </p>
 
-            <div class="hint">
-                Gleitkommaoperationen sind auf kleinen Mikrocontrollern
-                häufig deutlich aufwendiger als Ganzzahlarithmetik.
-            </div>
+          <div class="hint">
+            Gleitkommaoperationen sind auf kleinen Mikrocontrollern
+            häufig deutlich aufwendiger als Ganzzahlarithmetik.
+          </div>
         </article>
 
 
         <article class="cheat-item">
-            <h4><code>double</code></h4>
+          <h4><code>double</code></h4>
 
-            <pre class="code"><code>double wert = 3.1415926;</code></pre>
+          <pre class="code"><code>double wert = 3.1415926;</code></pre>
 
-            <p>
-                Auf manchen Arduino-Plattformen besitzt
-                <code>double</code> mehr Genauigkeit als <code>float</code>.
-                Auf klassischen AVR-Arduinos sind beide hingegen gleich groß.
-            </p>
+          <p>
+            Auf manchen Arduino-Plattformen besitzt
+            <code>double</code> mehr Genauigkeit als <code>float</code>.
+            Auf klassischen AVR-Arduinos sind beide hingegen gleich groß.
+          </p>
         </article>
 
 
         <article class="cheat-item">
-            <h4>Explizite Integer-Typen</h4>
+          <h4>Explizite Integer-Typen</h4>
 
-            <pre class="code"><code>#include &lt;stdint.h&gt;
+          <pre class="code"><code>#include &lt;stdint.h&gt;
 
 uint8_t a = 255;
 int16_t b = -1200;
 uint32_t c = 100000;</code></pre>
 
-            <p>
-                Typen wie <code>uint8_t</code>, <code>int16_t</code> oder
-                <code>uint32_t</code> geben ihre Bitbreite ausdrücklich an
-                und sind für hardware-nahe Programme besonders praktisch.
-            </p>
+          <p>
+            Typen wie <code>uint8_t</code>, <code>int16_t</code> oder
+            <code>uint32_t</code> geben ihre Bitbreite ausdrücklich an
+            und sind für hardware-nahe Programme besonders praktisch.
+          </p>
         </article>
 
 
         <article class="cheat-item">
-            <h4>Variable deklarieren</h4>
+          <h4>Variable deklarieren</h4>
 
-            <pre class="code"><code>int messwert;</code></pre>
+          <pre class="code"><code>int messwert;</code></pre>
 
-            <p>
-                Die Variable existiert, erhält hier aber noch keinen
-                expliziten Startwert.
-            </p>
+          <p>
+            Die Variable existiert, erhält hier aber noch keinen
+            expliziten Startwert.
+          </p>
         </article>
 
 
         <article class="cheat-item">
-            <h4>Variable initialisieren</h4>
+          <h4>Variable initialisieren</h4>
 
-            <pre class="code"><code>int messwert = 0;</code></pre>
+          <pre class="code"><code>int messwert = 0;</code></pre>
 
-            <p>
-                Die Variable wird erzeugt und erhält gleichzeitig einen
-                definierten Wert.
-            </p>
+          <p>
+            Die Variable wird erzeugt und erhält gleichzeitig einen
+            definierten Wert.
+          </p>
         </article>
 
 
         <article class="cheat-item">
-            <h4>Wert verändern</h4>
+          <h4>Wert verändern</h4>
 
-            <pre class="code"><code>int wert = 10;
+          <pre class="code"><code>int wert = 10;
 
 wert = 20;
 wert = wert + 5;</code></pre>
@@ -587,9 +587,9 @@ wert = wert + 5;</code></pre>
 
 
         <article class="cheat-item">
-            <h4>Kurzschreibweisen</h4>
+          <h4>Kurzschreibweisen</h4>
 
-            <pre class="code"><code>wert += 5;
+          <pre class="code"><code>wert += 5;
 wert -= 2;
 wert *= 3;
 wert /= 2;
@@ -597,245 +597,245 @@ wert /= 2;
 wert++;
 wert--;</code></pre>
 
-            <p>
-                <code>wert++</code> erhöht den Wert um eins,
-                <code>wert--</code> vermindert ihn um eins.
-            </p>
+          <p>
+            <code>wert++</code> erhöht den Wert um eins,
+            <code>wert--</code> vermindert ihn um eins.
+          </p>
         </article>
 
 
         <article class="cheat-item">
-            <h4>Typumwandlung</h4>
+          <h4>Typumwandlung</h4>
 
-            <pre class="code"><code>float temperatur = 21.8;
+          <pre class="code"><code>float temperatur = 21.8;
 int ganzzahl = (int)temperatur;</code></pre>
 
-            <p>
-                Ergebnis:
-                <code>21</code>.
-            </p>
+          <p>
+            Ergebnis:
+            <code>21</code>.
+          </p>
 
-            <p>
-                Der Nachkommateil wird dabei nicht mathematisch gerundet,
-                sondern abgeschnitten.
-            </p>
+          <p>
+            Der Nachkommateil wird dabei nicht mathematisch gerundet,
+            sondern abgeschnitten.
+          </p>
         </article>
 
 
         <article class="cheat-item">
-            <h4>Integer-Division</h4>
+          <h4>Integer-Division</h4>
 
-            <pre class="code"><code>int a = 5;
+          <pre class="code"><code>int a = 5;
 int b = 2;
 
 float ergebnis = a / b;</code></pre>
 
-            <p>
-                Das Ergebnis ist zunächst <code>2</code>, nicht
-                <code>2.5</code>, weil die Division mit Ganzzahlen erfolgt.
-            </p>
+          <p>
+            Das Ergebnis ist zunächst <code>2</code>, nicht
+            <code>2.5</code>, weil die Division mit Ganzzahlen erfolgt.
+          </p>
 
-            <pre class="code"><code>float ergebnis = (float)a / b;
+          <pre class="code"><code>float ergebnis = (float)a / b;
 
 // ergibt 2.5</code></pre>
         </article>
 
 
         <article class="cheat-item">
-            <h4>Überlauf</h4>
+          <h4>Überlauf</h4>
 
-            <p>
-                Jeder Integer-Typ besitzt einen begrenzten Wertebereich.
-                Wird dieser überschritten, kann der Wert umspringen.
-            </p>
+          <p>
+            Jeder Integer-Typ besitzt einen begrenzten Wertebereich.
+            Wird dieser überschritten, kann der Wert umspringen.
+          </p>
 
-            <pre class="code"><code>uint8_t wert = 255;
+          <pre class="code"><code>uint8_t wert = 255;
 wert++;
 
 Serial.println(wert);
 
 // Ergebnis: 0</code></pre>
 
-            <div class="hint">
-                Diese Eigenschaft ist kein exotischer Sonderfall.
-                Zeitfunktionen wie <code>millis()</code> laufen ebenfalls
-                irgendwann über.
-            </div>
+          <div class="hint">
+            Diese Eigenschaft ist kein exotischer Sonderfall.
+            Zeitfunktionen wie <code>millis()</code> laufen ebenfalls
+            irgendwann über.
+          </div>
         </article>
 
-    </div>
+      </div>
 
 
-    <hr class="divider" />
+      <hr class="divider" />
 
-    <h3 id="arduino-constants">Konstanten und Präprozessor</h3>
+      <h3 id="arduino-constants">Konstanten und Präprozessor</h3>
 
-    <div class="cheat-grid">
+      <div class="cheat-grid">
 
         <article class="cheat-item">
-            <h4><code>const</code></h4>
+          <h4><code>const</code></h4>
 
-            <pre class="code"><code>const int ledPin = 13;
+          <pre class="code"><code>const int ledPin = 13;
 const float grenzwert = 25.0;</code></pre>
 
-            <p>
-                Der Wert darf nach der Initialisierung nicht mehr verändert
-                werden.
-            </p>
+          <p>
+            Der Wert darf nach der Initialisierung nicht mehr verändert
+            werden.
+          </p>
 
-            <p>
-                Für Pin-Nummern und feste Konfigurationswerte ist
-                <code>const</code> meist die sauberste Lösung.
-            </p>
+          <p>
+            Für Pin-Nummern und feste Konfigurationswerte ist
+            <code>const</code> meist die sauberste Lösung.
+          </p>
         </article>
 
 
         <article class="cheat-item">
-            <h4><code>constexpr</code></h4>
+          <h4><code>constexpr</code></h4>
 
-            <pre class="code"><code>constexpr int ledPin = 13;
+          <pre class="code"><code>constexpr int ledPin = 13;
 constexpr unsigned long interval = 1000;</code></pre>
 
-            <p>
-                Modernes C++ ermöglicht mit <code>constexpr</code>,
-                ausdrücklich Konstanten zu definieren, deren Wert bereits
-                zur Übersetzungszeit feststeht.
-            </p>
+          <p>
+            Modernes C++ ermöglicht mit <code>constexpr</code>,
+            ausdrücklich Konstanten zu definieren, deren Wert bereits
+            zur Übersetzungszeit feststeht.
+          </p>
         </article>
 
 
         <article class="cheat-item">
-            <h4><code>#define</code></h4>
+          <h4><code>#define</code></h4>
 
-            <pre class="code"><code>#define LED_PIN 13</code></pre>
+          <pre class="code"><code>#define LED_PIN 13</code></pre>
 
-            <p>
-                Der C/C++-Präprozessor ersetzt
-                <code>LED_PIN</code> vor dem Kompilieren durch
-                <code>13</code>.
-            </p>
+          <p>
+            Der C/C++-Präprozessor ersetzt
+            <code>LED_PIN</code> vor dem Kompilieren durch
+            <code>13</code>.
+          </p>
 
-            <div class="hint">
-                Für einfache Konstanten sind <code>const</code> oder
-                <code>constexpr</code> gewöhnlich sicherer und klarer als
-                <code>#define</code>.
-            </div>
+          <div class="hint">
+            Für einfache Konstanten sind <code>const</code> oder
+            <code>constexpr</code> gewöhnlich sicherer und klarer als
+            <code>#define</code>.
+          </div>
         </article>
 
 
         <article class="cheat-item">
-            <h4>Bedingte Kompilierung</h4>
+          <h4>Bedingte Kompilierung</h4>
 
-            <pre class="code"><code>#define DEBUG
+          <pre class="code"><code>#define DEBUG
 
 #ifdef DEBUG
     Serial.println("Debug-Ausgabe");
 #endif</code></pre>
 
-            <p>
-                Damit können Teile des Programms nur unter bestimmten
-                Bedingungen kompiliert werden.
-            </p>
+          <p>
+            Damit können Teile des Programms nur unter bestimmten
+            Bedingungen kompiliert werden.
+          </p>
         </article>
 
-    </div>
+      </div>
 
 
-    <hr class="divider" />
+      <hr class="divider" />
 
-    <h3 id="arduino-operators">Operatoren</h3>
+      <h3 id="arduino-operators">Operatoren</h3>
 
-    <div class="cheat-grid">
+      <div class="cheat-grid">
 
         <article class="cheat-item">
-            <h4>Arithmetische Operatoren</h4>
+          <h4>Arithmetische Operatoren</h4>
 
-            <pre class="code"><code>a + b
+          <pre class="code"><code>a + b
 a - b
 a * b
 a / b
 a % b</code></pre>
 
-            <p>
-                <code>%</code> liefert den Rest einer Ganzzahldivision.
-            </p>
+          <p>
+            <code>%</code> liefert den Rest einer Ganzzahldivision.
+          </p>
 
-            <pre class="code"><code>int rest = 10 % 3;
+          <pre class="code"><code>int rest = 10 % 3;
 
 // rest = 1</code></pre>
         </article>
 
 
         <article class="cheat-item">
-            <h4>Vergleichsoperatoren</h4>
+          <h4>Vergleichsoperatoren</h4>
 
-            <pre class="code"><code>a == b
+          <pre class="code"><code>a == b
 a != b
 a &gt; b
 a &lt; b
 a &gt;= b
 a &lt;= b</code></pre>
 
-            <p>
-                Das Ergebnis eines Vergleichs ist
-                <code>true</code> oder <code>false</code>.
-            </p>
+          <p>
+            Das Ergebnis eines Vergleichs ist
+            <code>true</code> oder <code>false</code>.
+          </p>
         </article>
 
 
         <article class="cheat-item">
-            <h4>Zuweisung ist nicht Vergleich</h4>
+          <h4>Zuweisung ist nicht Vergleich</h4>
 
-            <pre class="code"><code>wert = 10;      // Zuweisung
+          <pre class="code"><code>wert = 10;      // Zuweisung
 
 wert == 10      // Vergleich</code></pre>
 
-            <div class="hint">
-                <code>=</code> und <code>==</code> zu verwechseln ist ein
-                Klassiker mit jahrzehntelanger Tradition. Man muss diese
-                Tradition nicht fortführen.
-            </div>
+          <div class="hint">
+            <code>=</code> und <code>==</code> zu verwechseln ist ein
+            Klassiker mit jahrzehntelanger Tradition. Man muss diese
+            Tradition nicht fortführen.
+          </div>
         </article>
 
 
         <article class="cheat-item">
-            <h4>Logische Operatoren</h4>
+          <h4>Logische Operatoren</h4>
 
-            <pre class="code"><code>&amp;&amp;   // UND
+          <pre class="code"><code>&amp;&amp;   // UND
 ||   // ODER
 !    // NICHT</code></pre>
 
-            <pre class="code"><code>if (temperatur &gt; 20 &amp;&amp; temperatur &lt; 30) {
+          <pre class="code"><code>if (temperatur &gt; 20 &amp;&amp; temperatur &lt; 30) {
     Serial.println("Temperatur im Bereich");
 }</code></pre>
         </article>
 
-    </div>
+      </div>
 
 
-    <hr class="divider" />
+      <hr class="divider" />
 
-    <h3 id="arduino-conditions">Bedingungen und Programmlogik</h3>
+      <h3 id="arduino-conditions">Bedingungen und Programmlogik</h3>
 
-    <div class="cheat-grid">
+      <div class="cheat-grid">
 
         <article class="cheat-item">
-            <h4><code>if</code></h4>
+          <h4><code>if</code></h4>
 
-            <pre class="code"><code>if (temperatur &gt; 30) {
+          <pre class="code"><code>if (temperatur &gt; 30) {
     digitalWrite(luefterPin, HIGH);
 }</code></pre>
 
-            <p>
-                Der Block wird nur ausgeführt, wenn die Bedingung wahr ist.
-            </p>
+          <p>
+            Der Block wird nur ausgeführt, wenn die Bedingung wahr ist.
+          </p>
         </article>
 
 
         <article class="cheat-item">
-            <h4><code>if ... else</code></h4>
+          <h4><code>if ... else</code></h4>
 
-            <pre class="code"><code>if (lichtwert &lt; 300) {
+          <pre class="code"><code>if (lichtwert &lt; 300) {
     digitalWrite(ledPin, HIGH);
 } else {
     digitalWrite(ledPin, LOW);
@@ -844,9 +844,9 @@ wert == 10      // Vergleich</code></pre>
 
 
         <article class="cheat-item">
-            <h4><code>else if</code></h4>
+          <h4><code>else if</code></h4>
 
-            <pre class="code"><code>if (temperatur &gt;= 30) {
+          <pre class="code"><code>if (temperatur &gt;= 30) {
     Serial.println("heiss");
 }
 else if (temperatur &gt;= 20) {
@@ -862,55 +862,55 @@ else {
 
 
         <article class="cheat-item">
-            <h4>Mehrere Bedingungen</h4>
+          <h4>Mehrere Bedingungen</h4>
 
-            <pre class="code"><code>if (temperatur &gt; 25 &amp;&amp; luftfeuchte &gt; 70) {
+          <pre class="code"><code>if (temperatur &gt; 25 &amp;&amp; luftfeuchte &gt; 70) {
     Serial.println("Warm und feucht");
 }</code></pre>
         </article>
 
 
         <article class="cheat-item">
-            <h4>Negation</h4>
+          <h4>Negation</h4>
 
-            <pre class="code"><code>if (!systemAktiv) {
+          <pre class="code"><code>if (!systemAktiv) {
     Serial.println("System deaktiviert");
 }</code></pre>
         </article>
 
 
         <article class="cheat-item">
-            <h4>Ternärer Operator</h4>
+          <h4>Ternärer Operator</h4>
 
-            <pre class="code"><code>int ausgang = sensorAktiv ? HIGH : LOW;
+          <pre class="code"><code>int ausgang = sensorAktiv ? HIGH : LOW;
 
 digitalWrite(ledPin, ausgang);</code></pre>
 
-            <p>
-                Kurzform für einfache Entscheidungen. Für verschachtelte
-                Logik wird sie rasch schlechter lesbar.
-            </p>
+          <p>
+            Kurzform für einfache Entscheidungen. Für verschachtelte
+            Logik wird sie rasch schlechter lesbar.
+          </p>
         </article>
 
-    </div>
+      </div>
 
 
-    <hr class="divider" />
+      <hr class="divider" />
 
-    <h3 id="arduino-switch">switch / case</h3>
+      <h3 id="arduino-switch">switch / case</h3>
 
-    <p>
+      <p>
         Bei mehreren klar definierten Zuständen kann
         <code>switch</code> übersichtlicher als eine lange
         <code>if / else if</code>-Kette sein.
-    </p>
+      </p>
 
-    <div class="cheat-grid">
+      <div class="cheat-grid">
 
         <article class="cheat-item">
-            <h4>Grundstruktur</h4>
+          <h4>Grundstruktur</h4>
 
-            <pre class="code"><code>switch (modus) {
+          <pre class="code"><code>switch (modus) {
 
     case 0:
         Serial.println("Aus");
@@ -932,24 +932,24 @@ digitalWrite(ledPin, ausgang);</code></pre>
 
 
         <article class="cheat-item">
-            <h4>Warum <code>break</code> wichtig ist</h4>
+          <h4>Warum <code>break</code> wichtig ist</h4>
 
-            <p>
-                Ohne <code>break</code> läuft die Ausführung in den nächsten
-                <code>case</code> weiter.
-            </p>
+          <p>
+            Ohne <code>break</code> läuft die Ausführung in den nächsten
+            <code>case</code> weiter.
+          </p>
 
-            <pre class="code"><code>case 1:
+          <pre class="code"><code>case 1:
     Serial.println("Eins");
     break;</code></pre>
 
-            <p>
-                Dieses sogenannte <em>fall-through</em> kann absichtlich
-                genutzt werden, ist aber häufig schlicht ein Fehler.
-            </p>
+          <p>
+            Dieses sogenannte <em>fall-through</em> kann absichtlich
+            genutzt werden, ist aber häufig schlicht ein Fehler.
+          </p>
         </article>
 
-    </div>
+      </div>
 
 
 
