@@ -4039,6 +4039,484 @@ void messungAktualisieren() {
 
 
 
+    <h4>Was dieses Beispiel demonstriert</h4>
+
+    <ul>
+        <li>
+            Pin-Nummern und Konfiguration werden als
+            <code>constexpr</code> festgelegt.
+        </li>
+
+        <li>
+            Der Taster verwendet
+            <code>INPUT_PULLUP</code>.
+        </li>
+
+        <li>
+            Ein Tastendruck wird über eine Flanke erkannt.
+        </li>
+
+        <li>
+            Der Taster wird softwareseitig entprellt.
+        </li>
+
+        <li>
+            Die Sensorabfrage erfolgt nur einmal pro Sekunde.
+        </li>
+
+        <li>
+            Es wird kein blockierendes
+            <code>delay()</code> benötigt.
+        </li>
+
+        <li>
+            Die einzelnen Aufgaben befinden sich in eigenen Funktionen.
+        </li>
+
+        <li>
+            Die Programmlogik ist von der eigentlichen Hardwareausgabe
+            weitgehend getrennt.
+        </li>
+    </ul>
+
+
+    <hr class="divider" />
+
+    <h3 id="arduino-reference">Arduino-C++-Kurzreferenz</h3>
+
+    <div class="cheat-grid">
+
+        <article class="cheat-item">
+            <h4>Programmstruktur</h4>
+
+            <pre class="code"><code>void setup() {
+}
+
+void loop() {
+}</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Variablen</h4>
+
+            <pre class="code"><code>bool aktiv = true;
+
+char zeichen = 'A';
+
+byte wert = 255;
+
+int zahl = 42;
+
+long gross = 100000;
+
+unsigned long zeit = millis();
+
+float temperatur = 21.5;</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Konstanten</h4>
+
+            <pre class="code"><code>const int pin = 13;
+
+constexpr int pin = 13;</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Digital I/O</h4>
+
+            <pre class="code"><code>pinMode(pin, OUTPUT);
+
+pinMode(pin, INPUT);
+
+pinMode(pin, INPUT_PULLUP);
+
+digitalWrite(pin, HIGH);
+
+digitalWrite(pin, LOW);
+
+digitalRead(pin);</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Analog</h4>
+
+            <pre class="code"><code>analogRead(A0);
+
+analogWrite(pin, 128);
+
+map(
+    wert,
+    0,
+    1023,
+    0,
+    255
+);
+
+constrain(
+    wert,
+    0,
+    255
+);</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Zeit</h4>
+
+            <pre class="code"><code>delay(1000);
+
+delayMicroseconds(10);
+
+millis();
+
+micros();</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Serial</h4>
+
+            <pre class="code"><code>Serial.begin(115200);
+
+Serial.print(wert);
+
+Serial.println(wert);
+
+Serial.available();
+
+Serial.read();
+
+Serial.readStringUntil('\n');</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Bedingungen</h4>
+
+            <pre class="code"><code>if (bedingung) {
+
+}
+else if (bedingung) {
+
+}
+else {
+
+}</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Vergleiche</h4>
+
+            <pre class="code"><code>==
+!=
+&gt;
+&lt;
+&gt;=
+&lt;=</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Logik</h4>
+
+            <pre class="code"><code>&amp;&amp;   // UND
+
+||   // ODER
+
+!    // NICHT</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Schleifen</h4>
+
+            <pre class="code"><code>for (int i = 0; i &lt; 10; i++) {
+
+}
+
+while (bedingung) {
+
+}
+
+do {
+
+}
+while (bedingung);</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Funktion</h4>
+
+            <pre class="code"><code>int addiere(int a, int b) {
+
+    return a + b;
+}</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Array</h4>
+
+            <pre class="code"><code>int werte[] = {
+    10,
+    20,
+    30
+};
+
+werte[0];</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Struct</h4>
+
+            <pre class="code"><code>struct Messung {
+
+    float temperatur;
+    float feuchte;
+};
+
+Messung daten;
+
+daten.temperatur = 22.5;</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Enum</h4>
+
+            <pre class="code"><code>enum class Zustand {
+
+    AUS,
+    BEREIT,
+    AKTIV
+};
+
+Zustand status =
+    Zustand::BEREIT;</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Bibliothek</h4>
+
+            <pre class="code"><code>#include &lt;Wire.h&gt;
+#include &lt;SPI.h&gt;</code></pre>
+        </article>
+
+    </div>
+
+
+    <hr class="divider" />
+
+    <h3>Die wichtigsten Regeln für die Praxis</h3>
+
+    <ol>
+        <li>
+            <strong>Arduino ist C++.</strong>
+            Wer die Sprache hinter dem Framework versteht, stößt wesentlich
+            später an Grenzen.
+        </li>
+
+        <li>
+            <strong>Verwende aussagekräftige Namen.</strong>
+            <code>temperaturSensor</code> ist besser als
+            <code>x2</code>.
+        </li>
+
+        <li>
+            <strong>Verwende <code>const</code> oder
+            <code>constexpr</code> für feste Werte.</strong>
+        </li>
+
+        <li>
+            <strong>Vermeide magische Zahlen.</strong>
+            Pin 7 sollte im Code eine Bedeutung besitzen und nicht
+            geheimnisvoll als nackte Sieben auftauchen.
+        </li>
+
+        <li>
+            <strong>Nutze <code>INPUT_PULLUP</code> für Taster, wenn es
+            elektrisch passt.</strong>
+        </li>
+
+        <li>
+            <strong>Verstehe die invertierte Logik von
+            <code>INPUT_PULLUP</code>.</strong>
+            Gedrückt bedeutet häufig LOW.
+        </li>
+
+        <li>
+            <strong>Entprelle mechanische Taster.</strong>
+        </li>
+
+        <li>
+            <strong>Verwende <code>delay()</code> bewusst und
+            sparsam.</strong>
+        </li>
+
+        <li>
+            <strong>Lerne früh das
+            <code>millis()</code>-Muster.</strong>
+            Es ist einer der wichtigsten Schritte von simplen
+            Demonstrations-Sketchen zu robusten Programmen.
+        </li>
+
+        <li>
+            <strong>Speichere Zeitwerte als
+            <code>unsigned long</code>.</strong>
+        </li>
+
+        <li>
+            <strong>Berechne Zeitdifferenzen durch Subtraktion.</strong>
+        </li>
+
+        <li>
+            <strong>Berücksichtige Integer-Division.</strong>
+        </li>
+
+        <li>
+            <strong>Beachte Wertebereiche und Überläufe.</strong>
+        </li>
+
+        <li>
+            <strong>Verlasse niemals die Grenzen eines Arrays.</strong>
+        </li>
+
+        <li>
+            <strong>Behalte den RAM-Verbrauch im Auge.</strong>
+            Besonders auf kleinen AVR-Boards.
+        </li>
+
+        <li>
+            <strong>Verwende dynamischen Speicher nur, wenn du weißt,
+            warum du ihn brauchst.</strong>
+        </li>
+
+        <li>
+            <strong>Halte Interrupt-Routinen kurz.</strong>
+        </li>
+
+        <li>
+            <strong>Verschiebe umfangreiche Arbeit aus Interrupts in
+            <code>loop()</code>.</strong>
+        </li>
+
+        <li>
+            <strong>Nutze Funktionen zur Strukturierung.</strong>
+        </li>
+
+        <li>
+            <strong>Verwende Zustandsautomaten für komplexe
+            Abläufe.</strong>
+        </li>
+
+        <li>
+            <strong>Prüfe Sensoren zunächst mit einem Minimalprogramm.</strong>
+        </li>
+
+        <li>
+            <strong>Nutze die Beispielprogramme einer Bibliothek.</strong>
+        </li>
+
+        <li>
+            <strong>Vertraue nicht blind auf Pinbelegungen aus fremden
+            Tutorials.</strong>
+            Sie können für ein anderes Board geschrieben worden sein.
+        </li>
+
+        <li>
+            <strong>Prüfe die zulässige Betriebsspannung.</strong>
+        </li>
+
+        <li>
+            <strong>Prüfe die Logikpegel.</strong>
+            3,3 V und 5 V sind nicht automatisch kompatibel.
+        </li>
+
+        <li>
+            <strong>Leistungsstarke Verbraucher gehören nicht direkt an
+            GPIO-Pins.</strong>
+        </li>
+
+        <li>
+            <strong>Nutze geeignete Transistoren, MOSFETs oder
+            Treiberschaltungen.</strong>
+        </li>
+
+        <li>
+            <strong>Bei induktiven Lasten Schutzbeschaltung
+            berücksichtigen.</strong>
+        </li>
+
+        <li>
+            <strong>Vergiss die gemeinsame Masse nicht.</strong>
+        </li>
+
+        <li>
+            <strong>Nutze den Serial Monitor offensiv.</strong>
+        </li>
+
+        <li>
+            <strong>Debugge systematisch.</strong>
+            Erst Versorgung und Hardware, dann Kommunikation, dann
+            Softwarelogik.
+        </li>
+
+        <li>
+            <strong>Ändere beim Debuggen möglichst nur eine Sache
+            gleichzeitig.</strong>
+        </li>
+
+        <li>
+            <strong>Teile große Programme in Module.</strong>
+        </li>
+
+        <li>
+            <strong>Kommentare sollen Entscheidungen erklären.</strong>
+        </li>
+
+        <li>
+            <strong>Behandle Compilerwarnungen nicht als dekorative
+            Prosa.</strong>
+        </li>
+
+        <li>
+            <strong>Lies Datenblätter.</strong>
+            Dort steht, was die Hardware tatsächlich kann – nicht, was ein
+            zufälliger Blogbeitrag behauptet.
+        </li>
+
+        <li>
+            <strong>Denke in Zuständen, Ereignissen und Zeitpunkten.</strong>
+            Das ist der Kern guter Embedded-Software.
+        </li>
+    </ol>
+
+
+    <div class="hint">
+        <strong>Merksatz:</strong>
+        Ein gutes Arduino-Programm besteht nicht darin, möglichst viele
+        Befehle in <code>loop()</code> zu werfen. Es besteht darin,
+        Hardwarezustände zu erfassen, daraus klare Entscheidungen
+        abzuleiten und die erforderlichen Reaktionen rechtzeitig,
+        nachvollziehbar und ohne unnötige Blockierung auszuführen.
+    </div>
+
+
+    <p class="hint">
+        <a href="#top">↑ Nach oben</a>
+    </p>
+
+</section>
+
 
 
 
