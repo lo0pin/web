@@ -1,0 +1,332 @@
+
+<section class="tip-section" id="lotro-api-daten">
+    <div class="section-heading">
+        <span>API</span>
+        <h2>Welche Spielinformationen können LOTRO-Plugins auslesen?</h2>
+    </div>
+
+    <p>
+        Die LOTRO-Lua-API erlaubt den Zugriff auf zahlreiche Zustände des eigenen
+        Charakters, des aktuellen Ziels und der Benutzeroberfläche. Die folgende
+        Übersicht ist nach praktischer Relevanz für Plugins geordnet.
+    </p>
+
+    <div class="table-scroll" tabindex="0" role="region"
+         aria-label="Auslesbare LOTRO-Spielinformationen">
+        <table>
+            <thead>
+                <tr>
+                    <th>Priorität</th>
+                    <th>Information</th>
+                    <th>Zugriff / API</th>
+                    <th>Bewertung</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>★★★★★</td>
+                    <td><strong>Eigene Buffs und Debuffs</strong></td>
+                    <td>
+                        <code>player:GetEffects()</code><br>
+                        <code>EffectAdded</code>,
+                        <code>EffectRemoved</code>,
+                        <code>EffectsCleared</code>
+                    </td>
+                    <td>
+                        Sehr zuverlässig. Name, Kategorie, Dauer, Startzeit,
+                        Debuff-Status usw. können ausgelesen werden.
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>★★★★★</td>
+                    <td><strong>Kampfchat / Chat</strong></td>
+                    <td>
+                        <code>Turbine.Chat.Received</code><br>
+                        <code>args.ChatType</code>,
+                        <code>args.Message</code>
+                    </td>
+                    <td>
+                        Sehr wichtig für Kampfplugins. Der Text muss allerdings
+                        selbst analysiert und interpretiert werden.
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>★★★★★</td>
+                    <td><strong>Aktuelles Ziel</strong></td>
+                    <td>
+                        <code>player:GetTarget()</code><br>
+                        <code>player.TargetChanged</code>
+                    </td>
+                    <td>
+                        Name, Level und weitere Actor-Daten des ausgewählten
+                        Ziels können gelesen werden.
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>★★★★★</td>
+                    <td><strong>Moral / Lebenspunkte des Ziels</strong></td>
+                    <td>
+                        <code>target:GetMorale()</code><br>
+                        <code>target:GetMaxMorale()</code>
+                    </td>
+                    <td>
+                        Sehr gut für Bossanzeigen, Prozentwerte,
+                        Execute-Phasen oder Kampfstatistiken geeignet.
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>★★★★★</td>
+                    <td><strong>Eigener Kampfstatus</strong></td>
+                    <td>
+                        <code>player:IsInCombat()</code><br>
+                        <code>player.InCombatChanged</code>
+                    </td>
+                    <td>
+                        Sehr zuverlässig. Ideal zum automatischen Ein- und
+                        Ausblenden von Kampf-UI.
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>★★★★★</td>
+                    <td><strong>Klassenspezifische Ressourcen</strong></td>
+                    <td>
+                        <code>player:GetClassAttributes()</code>
+                    </td>
+                    <td>
+                        Je nach Klasse z. B. Hüter-Gambitbuilder,
+                        RK-Einstimmung, Beorninger-Zorn oder Jäger-Fokus.
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>★★★★★</td>
+                    <td><strong>Hüter-Gambitbuilder</strong></td>
+                    <td>
+                        <code>GetGambitCount()</code><br>
+                        <code>GetGambit(i)</code><br>
+                        <code>GambitChanged</code>
+                    </td>
+                    <td>
+                        Für einen Hüter-Tracker besonders interessant:
+                        aktuelle Builderfolge und Änderungen können beobachtet werden.
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>★★★★★</td>
+                    <td><strong>Fertigkeiten und Cooldowns</strong></td>
+                    <td>
+                        <code>player:GetTrainedSkills()</code><br>
+                        <code>skill:GetCooldown()</code><br>
+                        <code>skill:GetResetTime()</code><br>
+                        <code>skill:IsUsable()</code>
+                    </td>
+                    <td>
+                        Gut für Cooldownanzeigen. Kein allgemeines Ereignis
+                        „Skill X wurde erfolgreich auf Ziel Y angewendet“.
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>★★★★☆</td>
+                    <td><strong>Effekte auf dem aktuellen Ziel</strong></td>
+                    <td>
+                        <code>target:GetEffects()</code>
+                    </td>
+                    <td>
+                        Technisch verfügbar, aber deutlich weniger zuverlässig
+                        als die eigene Effektliste. Effekte können fehlen,
+                        verspätet erscheinen oder beim Entfernen Probleme machen.
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>★★★★☆</td>
+                    <td><strong>DoTs auf dem aktuellen Ziel</strong></td>
+                    <td>
+                        Suche in <code>target:GetEffects()</code>
+                    </td>
+                    <td>
+                        Möglich, aber nicht als alleinige Wahrheitsquelle
+                        für einen präzisen DoT-Ticker empfehlenswert.
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>★★★★☆</td>
+                    <td><strong>Verderbtheiten des Ziels</strong></td>
+                    <td>
+                        Effekt mit Kategorie
+                        <code>EffectCategory.Corruption</code>
+                    </td>
+                    <td>
+                        Technisch erkennbar. Wegen der Einschränkungen der
+                        Ziel-Effektliste ebenfalls nur bedingt zuverlässig.
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>★★★★☆</td>
+                    <td><strong>Eigene Attribute</strong></td>
+                    <td>
+                        <code>player:GetAttributes()</code>
+                    </td>
+                    <td>
+                        Unter anderem Vitalität, Macht, Beweglichkeit,
+                        Wille, Schicksal, Rüstung und Resistenzen.
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>★★★★☆</td>
+                    <td><strong>Gruppe / Raid</strong></td>
+                    <td>
+                        <code>player:GetParty()</code><br>
+                        <code>GetMemberCount()</code>,
+                        <code>GetMember(i)</code>
+                    </td>
+                    <td>
+                        Gruppenmitglieder, Leader, Assist-Ziele und verschiedene
+                        Zustände können beobachtet werden.
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>★★★★☆</td>
+                    <td><strong>Inventar</strong></td>
+                    <td>
+                        <code>player:GetBackpack()</code>
+                    </td>
+                    <td>
+                        Items, Änderungen, Namen, Kategorien und einige
+                        Metadaten sind zugänglich. Nicht alle Itemstats.
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>★★★★☆</td>
+                    <td><strong>Ausrüstung</strong></td>
+                    <td>
+                        <code>player:GetEquipment()</code>
+                    </td>
+                    <td>
+                        Ausgerüstete Gegenstände je Slot können gelesen sowie
+                        Equip-/Unequip-Ereignisse beobachtet werden.
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>★★★☆☆</td>
+                    <td><strong>Wallet / Währungen</strong></td>
+                    <td>
+                        <code>player:GetWallet()</code>
+                    </td>
+                    <td>
+                        Namen und Mengen verschiedener Währungen können
+                        für eigene Anzeigen verwendet werden.
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>★★★☆☆</td>
+                    <td><strong>Vault / Shared Storage</strong></td>
+                    <td>
+                        <code>player:GetVault()</code><br>
+                        <code>player:GetSharedStorage()</code>
+                    </td>
+                    <td>
+                        Kapazität, Inhalt und Änderungen sind teilweise
+                        auslesbar, sofern der Speicher verfügbar ist.
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>★★★☆☆</td>
+                    <td><strong>Handwerk und Rezepte</strong></td>
+                    <td>
+                        Profession- und Recipe-API
+                    </td>
+                    <td>
+                        Handwerksstufe, Erfahrung, Rezepte, Zutaten,
+                        Ergebnisse und kritische Erfolgschancen.
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>★★☆☆☆</td>
+                    <td><strong>Pet / Begleiter</strong></td>
+                    <td>
+                        <code>player:GetPet()</code><br>
+                        <code>player.PetChanged</code>
+                    </td>
+                    <td>
+                        Vor allem für Klassen mit permanenten Begleitern relevant.
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>★★☆☆☆</td>
+                    <td><strong>Reittier</strong></td>
+                    <td>
+                        <code>player:GetMount()</code>
+                    </td>
+                    <td>
+                        Einige Zustände und insbesondere Daten von
+                        Kriegspferden sind verfügbar.
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>★★☆☆☆</td>
+                    <td><strong>Zeit und Clientinformationen</strong></td>
+                    <td>
+                        <code>Turbine.Engine.GetGameTime()</code><br>
+                        <code>GetDate()</code>,
+                        <code>GetLocalTime()</code>,
+                        <code>GetLanguage()</code>
+                    </td>
+                    <td>
+                        Besonders <code>GetGameTime()</code> ist für Timer
+                        und Cooldownanzeigen wichtig.
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>★★☆☆☆</td>
+                    <td><strong>Bildschirm, Maus und Tastatur</strong></td>
+                    <td>
+                        <code>Turbine.UI.Display</code> und UI-Events
+                    </td>
+                    <td>
+                        Bildschirmgröße, Mausposition, Modifier-Tasten,
+                        Klicks, Drag-and-drop usw.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="callout warning">
+        <strong>Wichtige Grenzen:</strong>
+        Plugins erhalten kein allgemeines Ereignis „Fertigkeit X wurde erfolgreich
+        auf Gegner Y angewendet“. Sie können keine automatische Kampfrotation
+        ausführen, nicht beliebige Gegner auswählen, keine vollständige Liste aller
+        Mobs der Umgebung abrufen und erhalten auch keine vollständigen
+        Gegnerwerte wie Mitigationen oder Resistenzen.
+    </div>
+
+    <div class="callout">
+        <strong>Für den Hüter-DoT-Ticker besonders wertvoll:</strong>
+        <code>GetClassAttributes()</code> und der Gambitbuilder,
+        <code>GetTarget()</code>, Zielmoral, <code>Turbine.Chat.Received</code>
+        sowie ergänzend <code>target:GetEffects()</code>.
+        Am robustesten wird der Tracker durch die Kombination mehrerer
+        dieser Datenquellen statt durch eine einzige.
+    </div>
+</section>
