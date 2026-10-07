@@ -2123,6 +2123,535 @@ float mittelwert =
       </div>
 
 
+    <hr class="divider" />
+
+    <h3 id="arduino-pwm">PWM-Ausgänge</h3>
+
+    <p>
+        Viele Mikrocontroller besitzen nicht auf jedem Pin einen echten
+        analogen Spannungsausgang. Stattdessen wird häufig
+        <strong>Pulsweitenmodulation – PWM</strong> verwendet.
+    </p>
+
+    <div class="cheat-grid">
+
+        <article class="cheat-item">
+            <h4><code>analogWrite()</code></h4>
+
+            <pre class="code"><code>analogWrite(ledPin, 128);</code></pre>
+
+            <p>
+                Auf klassischen Arduino-Boards wird häufig ein Wertebereich
+                von 0 bis 255 verwendet.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>PWM ist meist keine echte Analogspannung</h4>
+
+            <pre class="code"><code>0   → 0 % Tastgrad
+128 → ungefähr 50 %
+255 → 100 %</code></pre>
+
+            <p>
+                Der Ausgang schaltet sehr schnell zwischen LOW und HIGH.
+                Das Verhältnis zwischen Ein- und Ausschaltzeit bestimmt den
+                Mittelwert.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>LED dimmen</h4>
+
+            <pre class="code"><code>for (int helligkeit = 0;
+     helligkeit &lt;= 255;
+     helligkeit++) {
+
+    analogWrite(
+        ledPin,
+        helligkeit
+    );
+
+    delay(5);
+}</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Sensorwert auf PWM abbilden</h4>
+
+            <pre class="code"><code>int sensor =
+    analogRead(A0);
+
+int pwm =
+    map(sensor, 0, 1023, 0, 255);
+
+analogWrite(ledPin, pwm);</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Nicht jeder Pin kann PWM</h4>
+
+            <p>
+                Welche Pins PWM unterstützen, ist vom Board abhängig.
+                Bei klassischen Arduino-Boards sind PWM-Pins häufig mit
+                einem <code>~</code>-Symbol markiert.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Echter DAC</h4>
+
+            <p>
+                Einige Mikrocontroller besitzen echte
+                Digital-Analog-Wandler. Dann kann tatsächlich eine
+                variable Ausgangsspannung erzeugt werden.
+            </p>
+
+            <p>
+                Ob und wie das funktioniert, hängt vom jeweiligen Board ab.
+            </p>
+        </article>
+
+    </div>
+
+
+    <hr class="divider" />
+
+    <h3 id="arduino-timing">Zeitsteuerung</h3>
+
+    <div class="cheat-grid">
+
+        <article class="cheat-item">
+            <h4><code>delay()</code></h4>
+
+            <pre class="code"><code>delay(1000);</code></pre>
+
+            <p>
+                Wartet ungefähr 1000 Millisekunden.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Problem mit <code>delay()</code></h4>
+
+            <pre class="code"><code>digitalWrite(ledPin, HIGH);
+
+delay(10000);
+
+digitalWrite(ledPin, LOW);</code></pre>
+
+            <p>
+                Während dieser zehn Sekunden kann der Programmablauf
+                innerhalb dieses Threads keine anderen Aufgaben erledigen.
+            </p>
+
+            <p>
+                Sensoren, Taster und Kommunikation werden dadurch
+                möglicherweise erst verspätet behandelt.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4><code>millis()</code></h4>
+
+            <pre class="code"><code>unsigned long jetzt =
+    millis();</code></pre>
+
+            <p>
+                Liefert die verstrichene Zeit seit dem Programmstart in
+                Millisekunden.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Nicht-blockierende Zeitsteuerung</h4>
+
+            <pre class="code"><code>const int ledPin = LED_BUILTIN;
+
+const unsigned long interval = 1000;
+
+unsigned long letzteZeit = 0;
+
+bool ledStatus = false;
+
+void setup() {
+
+    pinMode(ledPin, OUTPUT);
+}
+
+void loop() {
+
+    unsigned long jetzt = millis();
+
+    if (
+        jetzt - letzteZeit
+        &gt;= interval
+    ) {
+
+        letzteZeit = jetzt;
+
+        ledStatus = !ledStatus;
+
+        digitalWrite(
+            ledPin,
+            ledStatus
+        );
+    }
+}</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Warum diese Schreibweise?</h4>
+
+            <pre class="code"><code>if (jetzt - letzteZeit &gt;= interval)</code></pre>
+
+            <p>
+                Diese Differenzbildung funktioniert auch dann korrekt, wenn
+                der vorzeichenlose Zeitwert von <code>millis()</code>
+                irgendwann überläuft.
+            </p>
+
+            <p>
+                Weniger robust wäre:
+            </p>
+
+            <pre class="code"><code>if (jetzt &gt;= letzteZeit + interval)</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4><code>micros()</code></h4>
+
+            <pre class="code"><code>unsigned long start =
+    micros();</code></pre>
+
+            <p>
+                Liefert eine Zeitbasis in Mikrosekunden.
+                Die tatsächliche Auflösung ist hardwareabhängig.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4><code>delayMicroseconds()</code></h4>
+
+            <pre class="code"><code>delayMicroseconds(10);</code></pre>
+
+            <p>
+                Für kurze, präzisere Verzögerungen im Mikrosekundenbereich.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Mehrere Intervalle gleichzeitig</h4>
+
+            <pre class="code"><code>unsigned long letzteMessung = 0;
+unsigned long letzteAnzeige = 0;
+
+void loop() {
+
+    unsigned long jetzt = millis();
+
+    if (
+        jetzt - letzteMessung
+        &gt;= 1000
+    ) {
+        letzteMessung = jetzt;
+        sensorLesen();
+    }
+
+    if (
+        jetzt - letzteAnzeige
+        &gt;= 5000
+    ) {
+        letzteAnzeige = jetzt;
+        displayAktualisieren();
+    }
+}</code></pre>
+
+            <p>
+                Genau hier beginnt Arduino-Programmierung interessant zu
+                werden: Mehrere Aufgaben laufen scheinbar gleichzeitig,
+                obwohl sie nacheinander abgearbeitet werden.
+            </p>
+        </article>
+
+    </div>
+
+
+    <hr class="divider" />
+
+    <h3 id="arduino-state">Zustandsautomaten</h3>
+
+    <p>
+        Für größere Programme ist ein Zustandsautomat
+        (<em>Finite State Machine</em>) oft wesentlich besser als eine
+        Landschaft aus verschachtelten <code>if</code>-Blöcken und
+        <code>delay()</code>-Aufrufen.
+    </p>
+
+    <div class="cheat-grid">
+
+        <article class="cheat-item">
+            <h4>Zustände definieren</h4>
+
+            <pre class="code"><code>enum class Zustand {
+    BEREIT,
+    MESSEN,
+    WARTEN,
+    FEHLER
+};
+
+Zustand zustand =
+    Zustand::BEREIT;</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Zustände bearbeiten</h4>
+
+            <pre class="code"><code>switch (zustand) {
+
+    case Zustand::BEREIT:
+
+        if (startBedingung()) {
+            zustand = Zustand::MESSEN;
+        }
+
+        break;
+
+
+    case Zustand::MESSEN:
+
+        messungDurchfuehren();
+
+        zustand = Zustand::WARTEN;
+
+        break;
+
+
+    case Zustand::WARTEN:
+
+        if (wartezeitVorbei()) {
+            zustand = Zustand::BEREIT;
+        }
+
+        break;
+
+
+    case Zustand::FEHLER:
+
+        fehlerAnzeigen();
+
+        break;
+}</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Vorteile</h4>
+
+            <ul>
+                <li>klar definierte Systemzustände</li>
+                <li>weniger Blockierung</li>
+                <li>leichter zu debuggen</li>
+                <li>leichter erweiterbar</li>
+                <li>zeitliche Abläufe werden nachvollziehbar</li>
+            </ul>
+        </article>
+
+    </div>
+
+
+    <hr class="divider" />
+
+    <h3 id="arduino-serial">Serielle Schnittstelle</h3>
+
+    <p>
+        Die serielle Schnittstelle ist eines der wichtigsten Werkzeuge beim
+        Entwickeln. Sie dient sowohl zur Kommunikation mit anderen Geräten
+        als auch zur Fehlersuche.
+    </p>
+
+    <div class="cheat-grid">
+
+        <article class="cheat-item">
+            <h4>Serielle Verbindung starten</h4>
+
+            <pre class="code"><code>void setup() {
+    Serial.begin(115200);
+}</code></pre>
+
+            <p>
+                Sender und Empfänger müssen dieselbe Baudrate verwenden.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4><code>print()</code></h4>
+
+            <pre class="code"><code>Serial.print("Temperatur: ");
+Serial.print(temperatur);
+Serial.print(" C");</code></pre>
+
+            <p>
+                Fügt keinen automatischen Zeilenumbruch hinzu.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4><code>println()</code></h4>
+
+            <pre class="code"><code>Serial.println("Hallo");</code></pre>
+
+            <p>
+                Fügt am Ende einen Zeilenumbruch hinzu.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Mehrere Messwerte</h4>
+
+            <pre class="code"><code>Serial.print("T=");
+Serial.print(temperatur);
+
+Serial.print("; H=");
+Serial.print(feuchte);
+
+Serial.print("; P=");
+Serial.println(druck);</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Nachkommastellen</h4>
+
+            <pre class="code"><code>float wert = 3.14159;
+
+Serial.println(wert, 2);
+
+// 3.14</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Zahlen in verschiedenen Basen</h4>
+
+            <pre class="code"><code>Serial.println(255, DEC);
+Serial.println(255, HEX);
+Serial.println(255, BIN);</code></pre>
+
+            <p>Beispielsweise:</p>
+
+            <pre class="code"><code>255
+FF
+11111111</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Prüfen, ob Daten verfügbar sind</h4>
+
+            <pre class="code"><code>if (Serial.available() &gt; 0) {
+
+    char zeichen =
+        Serial.read();
+
+    Serial.println(zeichen);
+}</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Einzelnes Byte lesen</h4>
+
+            <pre class="code"><code>int daten = Serial.read();</code></pre>
+
+            <p>
+                <code>read()</code> liefert ein empfangenes Byte.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Text bis Zeilenende lesen</h4>
+
+            <pre class="code"><code>if (Serial.available()) {
+
+    String befehl =
+        Serial.readStringUntil('\n');
+
+    befehl.trim();
+
+    Serial.println(befehl);
+}</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Einfache Befehlssteuerung</h4>
+
+            <pre class="code"><code>if (Serial.available()) {
+
+    String befehl =
+        Serial.readStringUntil('\n');
+
+    befehl.trim();
+
+    if (befehl == "LED ON") {
+
+        digitalWrite(
+            ledPin,
+            HIGH
+        );
+    }
+
+    else if (befehl == "LED OFF") {
+
+        digitalWrite(
+            ledPin,
+            LOW
+        );
+    }
+}</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Debugging mit Serial</h4>
+
+            <pre class="code"><code>Serial.print("sensor=");
+Serial.println(sensorWert);
+
+Serial.print("zustand=");
+Serial.println((int)zustand);
+
+Serial.print("millis=");
+Serial.println(millis());</code></pre>
+
+            <div class="hint">
+                Wer bei Embedded-Problemen systematisch Zwischenwerte,
+                Zustände und Zeitpunkte ausgibt, findet Fehler erheblich
+                schneller als jemand, der fünf Minuten lang das Board
+                skeptisch anstarrt.
+            </div>
+        </article>
+
+    </div>
+
 
 
 
