@@ -2654,6 +2654,763 @@ Serial.println(millis());</code></pre>
 
 
 
+    <hr class="divider" />
+
+    <h3 id="arduino-i2c">I²C – Inter-Integrated Circuit</h3>
+
+    <p>
+        I²C ist ein serieller Bus, über den zahlreiche Sensoren, Displays,
+        Echtzeituhren und andere Bausteine mit nur wenigen Leitungen
+        kommunizieren können.
+    </p>
+
+    <div class="cheat-grid">
+
+        <article class="cheat-item">
+            <h4>Typische Leitungen</h4>
+
+            <ul>
+                <li><strong>SDA</strong> – Serial Data</li>
+                <li><strong>SCL</strong> – Serial Clock</li>
+                <li><strong>GND</strong></li>
+                <li>gegebenenfalls Versorgungsspannung</li>
+            </ul>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Wire-Bibliothek</h4>
+
+            <pre class="code"><code>#include &lt;Wire.h&gt;
+
+void setup() {
+    Wire.begin();
+}
+
+void loop() {
+
+}</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>I²C-Adressen</h4>
+
+            <p>
+                Geräte am selben Bus besitzen normalerweise unterschiedliche
+                Adressen.
+            </p>
+
+            <pre class="code"><code>0x27
+0x3C
+0x68
+0x76</code></pre>
+
+            <p>
+                Die tatsächliche Adresse muss aus Dokumentation, Datenblatt
+                oder per I²C-Scanner ermittelt werden.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Daten an Gerät senden</h4>
+
+            <pre class="code"><code>Wire.beginTransmission(0x40);
+
+Wire.write(0x01);
+
+Wire.endTransmission();</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Daten anfordern</h4>
+
+            <pre class="code"><code>Wire.requestFrom(0x40, 2);
+
+while (Wire.available()) {
+
+    byte daten =
+        Wire.read();
+}</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Typische I²C-Probleme</h4>
+
+            <ul>
+                <li>falsche Adresse</li>
+                <li>SDA und SCL vertauscht</li>
+                <li>fehlende gemeinsame Masse</li>
+                <li>falsche Versorgungsspannung</li>
+                <li>fehlende oder ungeeignete Pull-ups</li>
+                <li>zu lange Leitungen</li>
+                <li>inkompatible Logikpegel</li>
+            </ul>
+        </article>
+
+    </div>
+
+
+    <hr class="divider" />
+
+    <h3 id="arduino-spi">SPI – Serial Peripheral Interface</h3>
+
+    <p>
+        SPI ist ein schneller serieller Kommunikationsbus und wird häufig
+        für Displays, SD-Karten, Funkmodule, ADCs und andere Peripherie
+        eingesetzt.
+    </p>
+
+    <div class="cheat-grid">
+
+        <article class="cheat-item">
+            <h4>Typische SPI-Leitungen</h4>
+
+            <ul>
+                <li><strong>SCK</strong> – Clock</li>
+                <li><strong>MOSI</strong> – Controller → Peripherie</li>
+                <li><strong>MISO</strong> – Peripherie → Controller</li>
+                <li><strong>CS / SS</strong> – Chip Select</li>
+            </ul>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>SPI starten</h4>
+
+            <pre class="code"><code>#include &lt;SPI.h&gt;
+
+void setup() {
+    SPI.begin();
+}</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Mehrere Geräte</h4>
+
+            <p>
+                SCK, MOSI und MISO können von mehreren Geräten gemeinsam
+                verwendet werden. Jedes Gerät besitzt normalerweise eine
+                eigene Chip-Select-Leitung.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>I²C oder SPI?</h4>
+
+            <p><strong>I²C:</strong></p>
+
+            <ul>
+                <li>weniger Leitungen</li>
+                <li>Adressierung mehrerer Geräte</li>
+                <li>häufig für Sensoren</li>
+            </ul>
+
+            <p><strong>SPI:</strong></p>
+
+            <ul>
+                <li>meist schneller</li>
+                <li>mehr Leitungen</li>
+                <li>häufig für Displays und Speicher</li>
+            </ul>
+        </article>
+
+    </div>
+
+
+    <hr class="divider" />
+
+    <h3 id="arduino-interrupts">Interrupts</h3>
+
+    <p>
+        Ein Interrupt unterbricht den normalen Programmablauf kurzfristig,
+        sobald ein bestimmtes Ereignis auftritt. Dadurch muss das Programm
+        einen schnellen Vorgang nicht permanent mit
+        <code>digitalRead()</code> abfragen.
+    </p>
+
+    <div class="cheat-grid">
+
+        <article class="cheat-item">
+            <h4>Interrupt einrichten</h4>
+
+            <pre class="code"><code>volatile bool ereignis = false;
+
+void interruptFunktion() {
+    ereignis = true;
+}
+
+void setup() {
+
+    pinMode(2, INPUT_PULLUP);
+
+    attachInterrupt(
+        digitalPinToInterrupt(2),
+        interruptFunktion,
+        FALLING
+    );
+}</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Mögliche Trigger</h4>
+
+            <pre class="code"><code>RISING
+FALLING
+CHANGE</code></pre>
+
+            <p>
+                Verfügbarkeit und zusätzliche Modi können vom Board
+                abhängen.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4><code>volatile</code></h4>
+
+            <pre class="code"><code>volatile bool ereignis = false;</code></pre>
+
+            <p>
+                Variablen, die sowohl im normalen Programm als auch in einer
+                Interrupt-Service-Routine verändert werden, müssen häufig
+                als <code>volatile</code> gekennzeichnet werden.
+            </p>
+
+            <p>
+                Damit wird dem Compiler signalisiert, dass sich der Wert
+                außerhalb des normalen Kontrollflusses ändern kann.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>ISR möglichst kurz halten</h4>
+
+            <pre class="code"><code>void interruptFunktion() {
+    ereignis = true;
+}</code></pre>
+
+            <p>
+                Gute Interrupt-Routinen erledigen nur das absolut Nötige.
+                Umfangreiche Verarbeitung gehört in <code>loop()</code>.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Schlechtes ISR-Muster</h4>
+
+            <pre class="code"><code>void interruptFunktion() {
+
+    // möglichst vermeiden:
+    delay(1000);
+
+    // ebenfalls problematisch:
+    // lange Berechnungen
+
+    // umfangreiche Kommunikation
+}</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Interrupt nur als Signal</h4>
+
+            <pre class="code"><code>volatile bool datenBereit = false;
+
+void sensorInterrupt() {
+    datenBereit = true;
+}
+
+void loop() {
+
+    if (datenBereit) {
+
+        datenBereit = false;
+
+        sensorAuslesen();
+    }
+}</code></pre>
+
+            <p>
+                Dieses Muster ist meist wesentlich robuster als die
+                vollständige Verarbeitung innerhalb der ISR.
+            </p>
+        </article>
+
+    </div>
+
+
+    <hr class="divider" />
+
+    <h3 id="arduino-memory">Speicher verstehen</h3>
+
+    <p>
+        Mikrocontroller besitzen verschiedene Speicherbereiche.
+        Besonders bei kleinen AVR-Arduinos ist RAM eine ausgesprochen
+        endliche Ressource.
+    </p>
+
+    <div class="cheat-grid">
+
+        <article class="cheat-item">
+            <h4>Flash</h4>
+
+            <p>
+                Enthält hauptsächlich den kompilierten Programmcode und
+                konstante Daten.
+            </p>
+
+            <p>
+                Der Inhalt bleibt ohne Versorgungsspannung erhalten.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>SRAM</h4>
+
+            <p>
+                Arbeitsspeicher für:
+            </p>
+
+            <ul>
+                <li>Variablen</li>
+                <li>Arrays</li>
+                <li>Stack</li>
+                <li>dynamische Objekte</li>
+            </ul>
+
+            <p>
+                Der Inhalt geht beim Ausschalten verloren.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>EEPROM</h4>
+
+            <p>
+                Nichtflüchtiger Speicher für kleinere Datenmengen.
+            </p>
+
+            <pre class="code"><code>#include &lt;EEPROM.h&gt;
+
+EEPROM.write(0, 42);
+
+byte wert =
+    EEPROM.read(0);</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>EEPROM nicht endlos beschreiben</h4>
+
+            <p>
+                EEPROM-Speicherzellen besitzen nur eine begrenzte Anzahl
+                zuverlässiger Schreibzyklen.
+            </p>
+
+            <p>
+                Deshalb nicht in jedem
+                <code>loop()</code>-Durchlauf denselben Wert neu schreiben.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Stack</h4>
+
+            <p>
+                Lokale Variablen und Funktionsaufrufe benötigen
+                typischerweise Stack-Speicher.
+            </p>
+
+            <p>
+                Sehr große lokale Arrays oder tiefe Rekursion sind auf
+                kleinen Mikrocontrollern entsprechend riskant.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Heap</h4>
+
+            <p>
+                Dynamisch reservierter Speicher wird typischerweise aus dem
+                Heap bezogen.
+            </p>
+
+            <pre class="code"><code>int *wert = new int;
+
+*wert = 42;
+
+delete wert;</code></pre>
+
+            <div class="hint">
+                Dynamische Speicherverwaltung ist auf kleinen
+                Mikrocontrollern häufig unnötig und kann zu
+                Fragmentierung oder Speicherfehlern führen.
+            </div>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Große Arrays bewusst verwenden</h4>
+
+            <pre class="code"><code>int messwerte[1000];</code></pre>
+
+            <p>
+                Auf einem PC völlig banal. Auf einem kleinen Mikrocontroller
+                kann ein solches Array bereits einen beträchtlichen Teil des
+                verfügbaren RAM verbrauchen.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Speicher sparen</h4>
+
+            <ul>
+                <li>kleinstmöglichen sinnvollen Datentyp verwenden</li>
+                <li>unnötige globale Arrays vermeiden</li>
+                <li>statische Texte sparsam behandeln</li>
+                <li>dynamische Speicherallokation vermeiden, wenn unnötig</li>
+                <li>Daten kontinuierlich verarbeiten statt alles zu puffern</li>
+            </ul>
+        </article>
+
+    </div>
+
+
+    <hr class="divider" />
+
+    <h3 id="arduino-bitwise">Bitoperationen</h3>
+
+    <p>
+        Bitoperationen wirken anfangs unnötig kryptisch, sind bei
+        Mikrocontrollern jedoch ausgesprochen nützlich – etwa für
+        Register, Flags, Kommunikationsprotokolle oder kompakte
+        Zustandsvariablen.
+    </p>
+
+    <div class="cheat-grid">
+
+        <article class="cheat-item">
+            <h4>Binärdarstellung</h4>
+
+            <pre class="code"><code>byte wert = 0b00101101;</code></pre>
+
+            <p>
+                Ein Byte besteht aus acht Bits.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Bitweises UND</h4>
+
+            <pre class="code"><code>byte a = 0b10101010;
+byte b = 0b11110000;
+
+byte c = a &amp; b;</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Bitweises ODER</h4>
+
+            <pre class="code"><code>byte c = a | b;</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>XOR</h4>
+
+            <pre class="code"><code>byte c = a ^ b;</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Bitweises NICHT</h4>
+
+            <pre class="code"><code>byte c = ~a;</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Bitverschiebung</h4>
+
+            <pre class="code"><code>byte wert = 1;
+
+wert = wert &lt;&lt; 3;</code></pre>
+
+            <p>
+                Die Bits werden drei Positionen nach links verschoben.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Arduino-Hilfsfunktionen</h4>
+
+            <pre class="code"><code>bitRead(wert, 3);
+
+bitSet(wert, 3);
+
+bitClear(wert, 3);
+
+bitWrite(wert, 3, 1);</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Flags speichern</h4>
+
+            <pre class="code"><code>const byte FLAG_SENSOR = 0b00000001;
+const byte FLAG_WIFI   = 0b00000010;
+const byte FLAG_ERROR  = 0b00000100;
+
+byte status = 0;
+
+status |= FLAG_SENSOR;</code></pre>
+
+            <p>
+                Mehrere boolesche Zustände können so platzsparend in einem
+                einzigen Byte gespeichert werden.
+            </p>
+        </article>
+
+    </div>
+
+
+    <hr class="divider" />
+
+    <h3 id="arduino-libraries">Bibliotheken</h3>
+
+    <div class="cheat-grid">
+
+        <article class="cheat-item">
+            <h4>Bibliothek einbinden</h4>
+
+            <pre class="code"><code>#include &lt;Wire.h&gt;
+#include &lt;SPI.h&gt;</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Typisches Bibliotheksmuster</h4>
+
+            <pre class="code"><code>#include &lt;Servo.h&gt;
+
+Servo servo;
+
+void setup() {
+
+    servo.attach(9);
+
+    servo.write(90);
+}</code></pre>
+
+            <p>
+                Zunächst wird ein Objekt angelegt, anschließend werden dessen
+                Methoden aufgerufen.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Objekt und Methode</h4>
+
+            <pre class="code"><code>servo.write(90);</code></pre>
+
+            <p>
+                <code>servo</code> ist das Objekt,
+                <code>write()</code> eine Methode dieses Objekts.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Typisches Sensor-Muster</h4>
+
+            <pre class="code"><code>Sensor sensor;
+
+void setup() {
+
+    if (!sensor.begin()) {
+        Serial.println("Sensorfehler");
+    }
+}
+
+void loop() {
+
+    float wert =
+        sensor.readValue();
+}</code></pre>
+
+            <p>
+                Die konkreten Klassennamen und Methoden hängen von der
+                jeweiligen Bibliothek ab.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Bibliotheken sind nicht alle gleich</h4>
+
+            <p>
+                Für denselben Sensor existieren häufig mehrere Bibliotheken
+                verschiedener Entwickler. Sie können sich unterscheiden bei:
+            </p>
+
+            <ul>
+                <li>API</li>
+                <li>Speicherverbrauch</li>
+                <li>Board-Unterstützung</li>
+                <li>Funktionsumfang</li>
+                <li>Stabilität</li>
+                <li>Wartungszustand</li>
+            </ul>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Beispiele lesen</h4>
+
+            <p>
+                Gute Arduino-Bibliotheken enthalten Beispiel-Sketche.
+                Diese sind oft die schnellste Möglichkeit, eine unbekannte
+                Bibliothek korrekt zu initialisieren.
+            </p>
+
+            <div class="hint">
+                Erst das funktionierende Minimalbeispiel testen, dann in das
+                eigene 700-Zeilen-Projekt einbauen. Das spart jene spezielle
+                Sorte Leid, bei der man nicht weiß, ob Sensor, Verdrahtung,
+                Bibliothek oder eigene Logik schuld ist.
+            </div>
+        </article>
+
+    </div>
+
+
+    <hr class="divider" />
+
+    <h3 id="arduino-files">Programme sinnvoll strukturieren</h3>
+
+    <p>
+        Ein gesamtes Projekt in eine einzige riesige
+        <code>.ino</code>-Datei zu schreiben funktioniert technisch erstaunlich
+        lange. Lesbar bleibt es erheblich kürzer.
+    </p>
+
+    <div class="cheat-grid">
+
+        <article class="cheat-item">
+            <h4>Funktionen nach Aufgabe</h4>
+
+            <pre class="code"><code>void setup() {
+
+    serialInitialisieren();
+    pinsInitialisieren();
+    sensorInitialisieren();
+}
+
+void loop() {
+
+    tasterVerarbeiten();
+    sensorVerarbeiten();
+    ausgaengeAktualisieren();
+}</code></pre>
+
+            <p>
+                Schon die oberste Ebene erklärt nun den Aufbau des Programms.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Header-Datei</h4>
+
+            <pre class="code"><code>// sensor.h
+
+#pragma once
+
+float temperaturLesen();
+void sensorInitialisieren();</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>C++-Datei</h4>
+
+            <pre class="code"><code>// sensor.cpp
+
+#include "sensor.h"
+#include &lt;Arduino.h&gt;
+
+void sensorInitialisieren() {
+    // ...
+}
+
+float temperaturLesen() {
+    return 21.5;
+}</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Hauptdatei</h4>
+
+            <pre class="code"><code>#include "sensor.h"
+
+void setup() {
+    sensorInitialisieren();
+}
+
+void loop() {
+
+    float temperatur =
+        temperaturLesen();
+}</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Namensgebung</h4>
+
+            <p>Gut:</p>
+
+            <pre class="code"><code>temperatur
+letzteMessung
+sensorAktiv
+messungStarten()</code></pre>
+
+            <p>Schlecht:</p>
+
+            <pre class="code"><code>x
+abc
+ding
+temp2neu
+funktion1()</code></pre>
+
+            <p>
+                Der Compiler versteht beides. Dein zukünftiges Ich wird
+                dennoch eine klare Präferenz entwickeln.
+            </p>
+        </article>
+
+    </div>
+
+
 
 
 
