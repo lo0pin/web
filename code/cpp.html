@@ -952,6 +952,441 @@ digitalWrite(ledPin, ausgang);</code></pre>
       </div>
 
 
+    <hr class="divider" />
+
+    <h3 id="arduino-loops">Schleifen</h3>
+
+    <div class="cheat-grid">
+
+        <article class="cheat-item">
+            <h4><code>for</code>-Schleife</h4>
+
+            <pre class="code"><code>for (int i = 0; i &lt; 10; i++) {
+    Serial.println(i);
+}</code></pre>
+
+            <p>
+                Aufbau:
+            </p>
+
+            <pre class="code"><code>for (Start; Bedingung; Veränderung) {
+    // Code
+}</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>LED mehrfach blinken</h4>
+
+            <pre class="code"><code>for (int i = 0; i &lt; 5; i++) {
+    digitalWrite(LED_BUILTIN, HIGH);
+    delay(200);
+
+    digitalWrite(LED_BUILTIN, LOW);
+    delay(200);
+}</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4><code>while</code></h4>
+
+            <pre class="code"><code>int x = 0;
+
+while (x &lt; 10) {
+    Serial.println(x);
+    x++;
+}</code></pre>
+
+            <p>
+                Wird ausgeführt, solange die Bedingung wahr ist.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Endlosschleife</h4>
+
+            <pre class="code"><code>while (true) {
+    // läuft für immer
+}</code></pre>
+
+            <div class="hint">
+                Auf einem Mikrocontroller ist eine versehentliche
+                Endlosschleife besonders lästig: Der Rest des Programms
+                bekommt schlicht nie wieder Gelegenheit, irgendetwas zu tun.
+            </div>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4><code>do ... while</code></h4>
+
+            <pre class="code"><code>int x = 0;
+
+do {
+    Serial.println(x);
+    x++;
+}
+while (x &lt; 5);</code></pre>
+
+            <p>
+                Der Block wird mindestens einmal ausgeführt, weil die
+                Bedingung erst am Ende geprüft wird.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4><code>break</code></h4>
+
+            <pre class="code"><code>for (int i = 0; i &lt; 100; i++) {
+
+    if (digitalRead(buttonPin) == LOW) {
+        break;
+    }
+}</code></pre>
+
+            <p>
+                Beendet die aktuelle Schleife vorzeitig.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4><code>continue</code></h4>
+
+            <pre class="code"><code>for (int i = 0; i &lt; 10; i++) {
+
+    if (i == 5) {
+        continue;
+    }
+
+    Serial.println(i);
+}</code></pre>
+
+            <p>
+                Überspringt den Rest des aktuellen Durchlaufs.
+            </p>
+        </article>
+
+    </div>
+
+
+    <hr class="divider" />
+
+    <h3 id="arduino-functions">Funktionen</h3>
+
+    <p>
+        Funktionen teilen ein großes Programm in überschaubare,
+        wiederverwendbare Einheiten. Sobald ein Sketch mehr als einige
+        Dutzend Zeilen umfasst, werden sinnvoll benannte Funktionen
+        zunehmend wertvoll.
+    </p>
+
+    <div class="cheat-grid">
+
+        <article class="cheat-item">
+            <h4>Funktion ohne Rückgabewert</h4>
+
+            <pre class="code"><code>void ledAn() {
+    digitalWrite(ledPin, HIGH);
+}</code></pre>
+
+            <p>
+                <code>void</code> bedeutet, dass die Funktion keinen Wert
+                zurückgibt.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Funktion mit Parameter</h4>
+
+            <pre class="code"><code>void setLed(bool zustand) {
+    digitalWrite(ledPin, zustand ? HIGH : LOW);
+}</code></pre>
+
+            <p>Aufruf:</p>
+
+            <pre class="code"><code>setLed(true);</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Mehrere Parameter</h4>
+
+            <pre class="code"><code>void blinkLed(int pin, unsigned long dauer) {
+
+    digitalWrite(pin, HIGH);
+    delay(dauer);
+
+    digitalWrite(pin, LOW);
+    delay(dauer);
+}</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Rückgabewert</h4>
+
+            <pre class="code"><code>int liesSensor() {
+    return analogRead(A0);
+}</code></pre>
+
+            <p>Verwendung:</p>
+
+            <pre class="code"><code>int wert = liesSensor();</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Berechnung auslagern</h4>
+
+            <pre class="code"><code>float celsiusZuFahrenheit(float celsius) {
+    return celsius * 1.8 + 32.0;
+}</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Frühes <code>return</code></h4>
+
+            <pre class="code"><code>void pruefeSensor() {
+
+    if (!sensorAktiv) {
+        return;
+    }
+
+    int wert = analogRead(A0);
+    Serial.println(wert);
+}</code></pre>
+
+            <p>
+                Das kann tiefe Verschachtelungen vermeiden und Funktionen
+                leichter lesbar machen.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Parameter per Wert</h4>
+
+            <pre class="code"><code>void verdopple(int wert) {
+    wert *= 2;
+}</code></pre>
+
+            <p>
+                Die Funktion erhält eine Kopie. Die ursprüngliche Variable
+                des Aufrufers wird nicht verändert.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Parameter per Referenz</h4>
+
+            <pre class="code"><code>void verdopple(int &amp;wert) {
+    wert *= 2;
+}
+
+int zahl = 10;
+verdopple(zahl);
+
+// zahl ist nun 20</code></pre>
+        </article>
+
+    </div>
+
+
+    <hr class="divider" />
+
+    <h3 id="arduino-scope">Gültigkeitsbereiche von Variablen</h3>
+
+    <div class="cheat-grid">
+
+        <article class="cheat-item">
+            <h4>Globale Variable</h4>
+
+            <pre class="code"><code>int zaehler = 0;
+
+void setup() {
+    zaehler++;
+}
+
+void loop() {
+    Serial.println(zaehler);
+}</code></pre>
+
+            <p>
+                Globale Variablen sind grundsätzlich im gesamten
+                Programm verfügbar.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Lokale Variable</h4>
+
+            <pre class="code"><code>void loop() {
+    int messwert = analogRead(A0);
+
+    Serial.println(messwert);
+}</code></pre>
+
+            <p>
+                <code>messwert</code> existiert nur innerhalb dieser
+                Funktion.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Block-Scope</h4>
+
+            <pre class="code"><code>if (sensorAktiv) {
+    int wert = analogRead(A0);
+}
+
+// wert ist hier nicht mehr sichtbar</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4><code>static</code> lokal</h4>
+
+            <pre class="code"><code>void test() {
+
+    static int aufrufe = 0;
+
+    aufrufe++;
+
+    Serial.println(aufrufe);
+}</code></pre>
+
+            <p>
+                Die Variable ist nur innerhalb der Funktion sichtbar,
+                behält ihren Wert aber zwischen mehreren Funktionsaufrufen.
+            </p>
+        </article>
+
+    </div>
+
+
+    <hr class="divider" />
+
+    <h3 id="arduino-arrays">Arrays</h3>
+
+    <p>
+        Ein Array speichert mehrere Werte desselben Datentyps hintereinander.
+        Besonders bei Messwerten, LEDs, Pin-Listen und Puffern sind Arrays
+        unverzichtbar.
+    </p>
+
+    <div class="cheat-grid">
+
+        <article class="cheat-item">
+            <h4>Array anlegen</h4>
+
+            <pre class="code"><code>int messwerte[5] = {
+    10,
+    20,
+    30,
+    40,
+    50
+};</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Index beginnt bei 0</h4>
+
+            <pre class="code"><code>int werte[] = {10, 20, 30};
+
+Serial.println(werte[0]); // 10
+Serial.println(werte[1]); // 20
+Serial.println(werte[2]); // 30</code></pre>
+
+            <div class="hint">
+                Das erste Element besitzt den Index 0. Diese kleine
+                Eigenheit hat bereits Generationen von Programmierern
+                zuverlässig um genau eins danebenliegen lassen.
+            </div>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Array verändern</h4>
+
+            <pre class="code"><code>werte[1] = 99;</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Array durchlaufen</h4>
+
+            <pre class="code"><code>int werte[] = {10, 20, 30, 40};
+
+for (int i = 0; i &lt; 4; i++) {
+    Serial.println(werte[i]);
+}</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Anzahl Elemente bestimmen</h4>
+
+            <pre class="code"><code>int werte[] = {10, 20, 30, 40};
+
+int anzahl =
+    sizeof(werte) / sizeof(werte[0]);</code></pre>
+
+            <p>
+                Damit muss die Array-Länge nicht nochmals als magische Zahl
+                im Programm stehen.
+            </p>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Mehrere LEDs über Array</h4>
+
+            <pre class="code"><code>const int ledPins[] = {3, 5, 6, 9};
+
+const int anzahl =
+    sizeof(ledPins) / sizeof(ledPins[0]);
+
+void setup() {
+
+    for (int i = 0; i &lt; anzahl; i++) {
+        pinMode(ledPins[i], OUTPUT);
+    }
+}</code></pre>
+        </article>
+
+
+        <article class="cheat-item">
+            <h4>Außerhalb des Arrays</h4>
+
+            <pre class="code"><code>int werte[3] = {1, 2, 3};
+
+werte[5] = 20; // FEHLER</code></pre>
+
+            <p>
+                C++ prüft Array-Grenzen normalerweise nicht automatisch.
+                Dadurch kann fremder Speicher überschrieben werden.
+            </p>
+
+            <div class="hint">
+                Solche Fehler sind besonders unangenehm: Das Programm
+                kompiliert möglicherweise problemlos und benimmt sich
+                anschließend wie ein Gerät mit Poltergeist.
+            </div>
+        </article>
+
+    </div>
+
+
 
 
 
