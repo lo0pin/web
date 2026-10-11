@@ -3181,7 +3181,7 @@
     "id": "2026-04-08_code_html_21_40",
     "topic": "code",
     "subtopic": "html",
-    "date": "2026-04-08",
+    "date": "2026-10-11",
     "title": "A Thought for Later: Live Weather Data from the Raspberry Pi",
     "format": "markdown",
     "teaser": "The BME280 on my Raspberry Pi is already measuring faithfully. The website, meanwhile, still lives in the calmer world of static files. At some point, I would like to bridge that gap and show the sensor data live — I just do not know the cleanest way to do it yet.",
