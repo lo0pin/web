@@ -75,7 +75,8 @@
       pc_build: "PC Build",
       arduino: "Arduino",
       nas: "NAS",
-      bme_meteorology: "BME - Meteorolgy"
+      bme_meteorology: "BME - Meteorolgy",
+      pcb_basics: "PCB Basics",
       
     },
     nerdism: {
@@ -150,6 +151,7 @@
       arduino: "electronics/arduino.html",
       nas: "electronics/nas.html",
       bme_meteorology: "electonics/bme_meteorology.html",
+      pcb_basics: "electonics/pcb.html",
     },
     nerdism: {
       gothic_mod: "nerdism/gothic_mod.html",
