@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Ausführliche Schritt-für-Schritt-Anleitung zum Streaming eines Windows-10-PCs auf einen Windows-11-Rechner über das Internet – mit Parsec Web und Parsec Portable sowie Alternativen.">
+  <meta name="color-scheme" content="light">
+  <title>Remote-Gaming über das Internet: Parsec unter Windows 10 und 11 einrichten</title>
+  <style>
+    :root{--ink:#152337;--muted:#53657a;--navy:#122c48;--accent:#1165a5;--pale:#eff6fc;--line:#dbe4ec;--paper:#fff;--background:#f5f7fa;--green:#13744b;--orange:#9b570e;--shadow:0 7px 28px rgba(20,43,68,.075)}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--background);color:var(--ink);font:16px/1.75 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}a{color:var(--accent);text-underline-offset:3px}a:hover{text-decoration-thickness:2px}p,li{max-width:83ch}header.hero{background:linear-gradient(135deg,#112d4b 0%,#174d70 68%,#287c9a 100%);color:#fff;padding:64px max(24px,calc((100vw - 1180px)/2)) 58px}header .eyebrow{font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;opacity:.8;font-weight:700}header h1{font-size:clamp(2rem,4.5vw,3.35rem);line-height:1.13;max-width:850px;margin:14px 0 20px;letter-spacing:-.035em}header p{max-width:780px;color:#e5f0f7;font-size:1.1rem;margin:0 0 22px}.pills{display:flex;flex-wrap:wrap;gap:10px}.pills span{border:1px solid #ffffff6a;border-radius:30px;padding:4px 13px;font-size:.88rem;color:#f2f7fb}.layout{max-width:1240px;margin:auto;padding:32px 24px 80px;display:grid;grid-template-columns:225px minmax(0,1fr);gap:30px;align-items:start}nav.contents{position:sticky;top:18px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:20px;box-shadow:var(--shadow);max-height:calc(100vh - 36px);overflow:auto}nav.contents h2{margin:0 0 12px;font-size:.98rem}nav.contents ol{margin:0;padding-left:19px}nav.contents li{font-size:.85rem;line-height:1.5;padding-bottom:9px}nav.contents a{text-decoration:none;color:#304965}nav.contents a:hover{text-decoration:underline}main{min-width:0}section{background:var(--paper);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:clamp(20px,4vw,38px);margin-bottom:24px;scroll-margin-top:16px}h2{font-size:clamp(1.35rem,2.6vw,1.85rem);line-height:1.3;letter-spacing:-.02em;margin:0 0 21px}h3{font-size:1.16rem;line-height:1.4;margin:30px 0 11px}h4{font-size:1rem;margin:19px 0 7px}p{margin:0 0 15px}.lead{font-size:1.08rem;color:#304a63}.muted,small{color:var(--muted)}.tag{display:inline-block;border-radius:30px;background:#e9f4eb;color:#11633e;padding:2px 10px;font-size:.75rem;font-weight:750;vertical-align:middle;letter-spacing:.02em}.tag.blue{background:#e5f2fb;color:#07598b}.tag.amber{background:#fff0dd;color:#91510a}.callout{padding:16px 19px;border-left:4px solid var(--accent);background:var(--pale);border-radius:0 9px 9px 0;margin:20px 0}.callout.warning{background:#fff6e9;border-left-color:#e09c40}.callout.success{background:#edf8f1;border-left-color:#2b9764}.callout strong{display:block;margin-bottom:4px}.callout p:last-child{margin-bottom:0}ol.steps{list-style:none;padding:0;counter-reset:steps;margin:16px 0 26px}ol.steps>li{position:relative;padding:0 0 18px 49px;counter-increment:steps}ol.steps>li::before{content:counter(steps);position:absolute;left:0;top:2px;width:30px;height:30px;border-radius:50%;background:#ddecf8;color:#114873;display:flex;align-items:center;justify-content:center;font-size:.86rem;font-weight:800}ol.steps>li:not(:last-child)::after{content:"";position:absolute;left:15px;top:36px;bottom:4px;border-left:1px solid #e0eaf2}ol.steps>li>strong{display:block}ul{padding-left:22px}li{margin:5px 0}code,kbd{font-family:ui-monospace,SFMono-Regular,Consolas,"Liberation Mono",monospace;font-size:.91em;background:#edf2f7;border-radius:5px;padding:2px 6px;overflow-wrap:anywhere}kbd{border:1px solid #c8d3dd;box-shadow:0 2px #c8d3dd}pre{padding:15px 18px;background:#162b42;color:#e9f3fa;border-radius:9px;overflow-x:auto;margin:16px 0 20px;line-height:1.55}pre code{padding:0;background:none;color:inherit}.table-wrap{overflow-x:auto;margin:17px 0 25px;border:1px solid var(--line);border-radius:10px}table{width:100%;border-collapse:collapse;font-size:.94rem;min-width:580px}th{text-align:left;background:#eef4f9;font-size:.9rem;color:#223e59}th,td{padding:12px 13px;vertical-align:top;border-bottom:1px solid var(--line)}tr:last-child td{border-bottom:0}td:first-child{font-weight:650}dl{display:grid;grid-template-columns:165px 1fr;gap:8px 20px}dt{font-weight:750}dd{margin:0 0 9px}.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}.mini{border:1px solid var(--line);border-radius:11px;padding:18px;background:#fbfdff}.mini h3{margin:0 0 7px;font-size:1.07rem}.mini p:last-child{margin-bottom:0}.diagram{display:flex;gap:10px;align-items:stretch;margin:23px 0;flex-wrap:wrap}.node{background:#f2f7fb;border:1px solid #bed4e4;border-radius:12px;padding:18px;flex:1 1 190px;text-align:center}.node strong,.node small{display:block}.node small{font-size:.86rem;margin-top:7px}.arrow{display:flex;align-items:center;font-size:1.4rem;color:var(--accent)}.checklist{list-style:none;padding-left:0}.checklist li{margin:12px 0}.checklist li::before{content:"□";font-size:1.3rem;margin-right:12px;color:var(--accent);vertical-align:-1px}details{border:1px solid var(--line);border-radius:9px;margin-bottom:11px;padding:12px 16px;background:#fbfdff}details summary{font-weight:750;cursor:pointer;color:#1f405d}details p{margin:13px 0 3px}footer{max-width:1130px;margin:0 auto 40px;padding:0 24px;text-align:center;font-size:.86rem;color:var(--muted)}.references li{margin-bottom:10px;overflow-wrap:anywhere}.footnote{font-size:.87rem;color:var(--muted)}.anchor{font-size:.82rem;font-weight:500;margin-left:8px;white-space:nowrap}.crumb{display:block;font-size:.84rem;font-weight:750;letter-spacing:.075em;text-transform:uppercase;color:var(--accent);margin-bottom:9px}@media(max-width:900px){.layout{grid-template-columns:1fr;padding:20px 14px 60px}nav.contents{position:static;max-height:none}nav.contents ol{columns:2}section{padding:24px}.grid2{grid-template-columns:1fr}}@media(max-width:540px){header.hero{padding:42px 20px}nav.contents ol{columns:1}.arrow{justify-content:center;flex-basis:100%;transform:rotate(90deg)}.node{flex:1 1 100%}dl{grid-template-columns:1fr}dt{margin-top:9px}dd{margin:0}}@media print{body{background:#fff;color:#000;font-size:11pt}header.hero{background:#fff!important;color:#000;padding:0 0 20px;border-bottom:2px solid #555}header p{color:#333}.layout{display:block;padding:0}nav.contents{display:none}section{padding:15px 0;border:0;box-shadow:none;page-break-inside:auto}h2,h3,h4{break-after:avoid}li,details,.callout{break-inside:avoid}details p{display:block}a{color:#000;text-decoration:underline}a::after{content:""}.pills span{color:#000;border-color:#aaa}footer{margin:20px}}
+  </style>
+</head>
+<body>
+<header class="hero">
+  <div class="eyebrow">Technik-Experiment · Praxisleitfaden · Stand: Oktober 2026</div>
+  <h1>Remote-Gaming über das Internet: Parsec unter Windows 10 und Windows 11</h1>
+  <p>Ein leistungsfähiger Heim-PC berechnet die Anwendung, ein zweiter Rechner empfängt nur Bild und Ton und schickt Eingaben zurück. Diese Anleitung zeigt zwei Parsec-Wege – ganz ohne Installation am Zielgerät oder mit portabler Anwendung – und erklärt die wichtigsten Alternativen.</p>
+  <div class="pills"><span>Windows 10 als Host</span><span>Windows 11 als Client</span><span>Verschiedene Netzwerke</span><span>Ohne Adminrechte am Client</span><span>Praxisorientiert</span></div>
+</header>
+<div class="layout">
+<nav class="contents" aria-label="Inhaltsverzeichnis">
+  <h2>Inhaltsverzeichnis</h2>
+  <ol>
+    <li><a href="#prinzip">Ziel und Funktionsprinzip</a></li>
+    <li><a href="#voraussetzungen">Voraussetzungen</a></li>
+    <li><a href="#host-install">Heim-PC vorbereiten</a></li>
+    <li><a href="#host-config">Parsec-Host konfigurieren</a></li>
+    <li><a href="#browser">Variante A: Browser</a></li>
+    <li><a href="#portable">Variante B: Portable</a></li>
+    <li><a href="#test">Erster Internet-Test</a></li>
+    <li><a href="#optimierung">Qualität &amp; Latenz</a></li>
+    <li><a href="#steuerung">Maus &amp; Tastatur</a></li>
+    <li><a href="#betriebsbereitschaft">Dauerhafter Betrieb</a></li>
+    <li><a href="#sicherheit">Sicherheit</a></li>
+    <li><a href="#fehler">Fehlersuche</a></li>
+    <li><a href="#vergleich">Alternativen im Vergleich</a></li>
+    <li><a href="#checkliste">Checklisten</a></li>
+    <li><a href="#quellen">Quellen</a></li>
+  </ol>
+</nav>
+<main>
+<section id="prinzip">
+  <span class="crumb">01 · Grundlagen</span>
+  <h2>Ziel und Funktionsprinzip</h2>
+  <p class="lead">Eine grafisch anspruchsvolle Anwendung wird auf dem Heim-PC ausgeführt. Der entfernte Rechner muss sie nicht selbst installieren und benötigt nur genügend Leistung, um einen Videostream wiederzugeben.</p>
+  <div class="diagram" role="img" aria-label="Windows-10-Host sendet über das Internet Bild und Ton an Windows-11-Client; Tastatur und Maus gehen in Gegenrichtung">
+    <div class="node"><strong>Heim-PC · Windows 10</strong><small>Anwendung läuft hier; GPU berechnet und kodiert das Bild</small></div>
+    <div class="arrow">⇄</div>
+    <div class="node"><strong>Internet · getrennte Netze</strong><small>Videodaten → / Eingaben ←</small></div>
+    <div class="arrow">⇄</div>
+    <div class="node"><strong>Remote-PC · Windows 11</strong><small>Browser oder portable App zeigt Bild und Ton; Tastatur und Maus steuern den Host</small></div>
+  </div>
+  <p>Parsec ist <strong>kein Cloud-Gaming-Dienst mit fremder Rechenleistung</strong>. Der eigene PC bleibt zuständig für Spielstart, Updates, Rechenleistung und Stromverbrauch. Der entfernte PC ist weitgehend ein Terminal mit Bildschirmausgabe und Eingabegeräten.</p>
+  <div class="grid2">
+    <div class="mini"><h3>Variante A: Parsec Web <span class="tag blue">ohne Download</span></h3><p>Im unterstützten Browser öffnen und verbinden. Ideal als erster Funktionstest und bei eingeschränkten Benutzerrechten; die Latenz kann höher sein.</p></div>
+    <div class="mini"><h3>Variante B: Parsec Portable <span class="tag">meist besser fürs Spielen</span></h3><p>ZIP-Datei entpacken und die Anwendung ohne klassische Installation starten. Mehr Kontrolle über Decoder, Grafik, Maus und Tastatur.</p></div>
+  </div>
+  <div class="callout"><strong>Kurzentscheidung</strong><p>Zuerst Parsec Web testen. Wenn das grundsätzlich funktioniert, aber die Reaktionszeit oder Bildqualität nicht genügt, Parsec Portable ausprobieren. Auf dem Heim-PC ist in beiden Fällen der regulär installierte Parsec-Host sinnvoll.</p></div>
+</section>
+<section id="voraussetzungen">
+  <span class="crumb">02 · Vorbereitung</span>
+  <h2>Voraussetzungen und Machbarkeitsprüfung</h2>
+  <div class="table-wrap"><table><thead><tr><th>Baustein</th><th>Anforderung</th><th>Prüfung</th></tr></thead><tbody>
+    <tr><td>Heim-PC</td><td>64-Bit-Windows 10, kompatible Grafik mit Video-Encoding, Parsec-Host</td><td><kbd>Win</kbd> + <kbd>R</kbd> → <code>winver</code>; Grafiktreiber aktuell halten</td></tr>
+    <tr><td>Remote-PC</td><td>Windows 11, Internetzugang; Chrome für Web oder Freigabe zum Start portabler EXE-Dateien</td><td>Browser öffnen; Downloads und lokale EXE-Ausführung prüfen</td></tr>
+    <tr><td>Benutzerkonten</td><td>Ein Parsec-Konto mit bestätigter E-Mail; gleiche Anmeldung auf beiden Geräten</td><td><a href="https://parsec.app/" target="_blank" rel="noopener noreferrer">parsec.app</a></td></tr>
+    <tr><td>Netzwerk</td><td>Heim-PC möglichst per LAN; Client LAN oder stabiles 5-GHz-WLAN</td><td>Up- und Download sowie Ping getrennt testen</td></tr>
+    <tr><td>Bildschirm</td><td>Aktives oder virtuelles Display am Heim-PC</td><td>Monitor angeschlossen; keine Headless-Probleme</td></tr>
+    <tr><td>Verfügbarkeit</td><td>Heim-PC eingeschaltet, Parsec aktiv, nicht im Ruhezustand</td><td>Energieoptionen und Autostart kontrollieren</td></tr>
+  </tbody></table></div>
+  <h3>Wie schnell muss die Verbindung sein?</h3>
+  <p>Wichtig ist besonders der <strong>Upload am Heim-PC</strong>, nicht nur dessen Downloadgeschwindigkeit. Für einen ersten Versuch reichen oft geringere Datenraten; für 1080p bei 60 Bildern/s empfiehlt Parsec eine deutlich großzügigere Verbindung.</p>
+  <div class="table-wrap"><table><thead><tr><th>Profil</th><th>Auflösung / Bildrate</th><th>Startwert Videobitrate</th><th>Gedanke dahinter</th></tr></thead><tbody>
+    <tr><td>Stabile Verbindung zuerst</td><td>1280 × 720 / 30 fps</td><td>5–8 Mbit/s</td><td>Robust bei Engpässen</td></tr>
+    <tr><td>Ausgewogen</td><td>1920 × 1080 / 60 fps</td><td>10–15 Mbit/s</td><td>Guter Praxiseinstieg</td></tr>
+    <tr><td>Qualität priorisieren</td><td>1920 × 1080 / 60 fps</td><td>25 Mbit/s oder mehr</td><td>Nur bei ausreichendem Upload und sauberer Verbindung</td></tr>
+  </tbody></table></div>
+  <p class="footnote">Das sind sinnvolle Startprofile, keine garantierten Mindestwerte. Der Hersteller empfiehlt für 1080p/60 fps idealerweise mindestens 30 Mbit/s Upload am Host und 30 Mbit/s Download am Client. Videobitrate ist nicht identisch mit der gesamten erforderlichen Anschlussgeschwindigkeit.</p>
+  <div class="callout warning"><strong>Windows 10 seit Oktober 2025 regulär ohne Support</strong><p>Windows 10 erhielt am 14. Oktober 2025 sein reguläres Supportende. Ein dauerhaft über das Internet erreichbarer Heim-PC sollte möglichst auf ein unterstütztes Betriebssystem aktualisiert oder über das offizielle Extended-Security-Updates-Programm abgesichert werden. Parsec kann Windows 10 weiterhin unterstützen – das ersetzt aber keine Betriebssystem-Sicherheitsupdates.</p></div>
+</section>
+<section id="host-install">
+  <span class="crumb">03 · Heim-PC / Windows 10</span>
+  <h2>Parsec installieren und Konto absichern</h2>
+  <p>Diese Schritte werden <strong>direkt am Heim-PC</strong> mit einem Konto ausgeführt, das Installationen erlauben darf. Hier ist eine reguläre Installation sinnvoll, weil die Anwendung dauerhaft den Host bereitstellen soll.</p>
+  <ol class="steps">
+    <li><strong>Windows und Grafiktreiber vorbereiten.</strong> Ausstehende Updates installieren, Grafiktreiber aktualisieren, Rechner neu starten. Prüfen, dass die Anwendung lokal fehlerfrei läuft.</li>
+    <li><strong>Original-Download öffnen.</strong> <a href="https://parsec.app/downloads" target="_blank" rel="noopener noreferrer">https://parsec.app/downloads</a> aufrufen, unter Windows den regulären Installer herunterladen und starten. Keine inoffiziellen Downloadportale verwenden.</li>
+    <li><strong>Installationsart bewusst auswählen.</strong> <em>Per User</em> startet erst, wenn der betreffende Windows-Benutzer angemeldet ist. <em>Per Computer</em> installiert systemweit und kann auch den Zugang zum Windows-Anmeldebildschirm ermöglichen. Für einen allein genutzten Host mit unbeaufsichtigtem Zugriff ist „Per Computer“ zweckmäßig; dafür sind Administratorrechte erforderlich. Wer nur bei bereits angemeldetem Windows streamt, kann „Per User“ wählen.</li>
+    <li><strong>Optionale Treiber nicht blind mitinstallieren.</strong> Der Virtual Display Driver ist für besondere Display-Szenarien relevant, aber für einen normalen Heim-PC mit angeschlossenem Monitor zunächst nicht erforderlich. Falls angeboten, kann er vorerst abgewählt werden.</li>
+    <li><strong>Parsec-Konto erstellen oder anmelden.</strong> E-Mail verifizieren und in Parsec anmelden. Für den Zugriff auf den eigenen zweiten Rechner wird dort später dasselbe Konto verwendet.</li>
+    <li><strong>Zwei-Faktor-Authentifizierung (2FA) aktivieren.</strong> In den Parsec-Kontoeinstellungen <em>Enable 2FA</em> wählen, Authenticator einrichten und die Wiederherstellungscodes sicher außerhalb des Streaming-PCs speichern. Ein Konto mit Zugriff auf den gesamten Desktop verdient mehr Schutz als ein gewöhnliches Spielekonto.</li>
+    <li><strong>Autostart prüfen.</strong> Im Parsec-Symbol im Infobereich der Windows-Taskleiste prüfen, ob „Run when computer starts“ aktiv ist. Danach neu starten und kontrollieren, ob Parsec wie gewünscht erreichbar bleibt.</li>
+  </ol>
+  <div class="callout success"><strong>Ergebnis</strong><p>Parsec ist auf dem Heim-PC installiert und angemeldet. Die Grundlagen für einen verschlüsselten Fernzugriff über das Internet sind geschaffen – noch bevor am zweiten Rechner etwas eingerichtet wird.</p></div>
+</section>
+<section id="host-config">
+  <span class="crumb">04 · Heim-PC / Host-Einstellungen</span>
+  <h2>Streaming aktivieren und Basiskonfiguration festlegen</h2>
+  <ol class="steps">
+    <li><strong>Einstellungen öffnen.</strong> In Parsec auf das Zahnrad <em>Settings</em> klicken und <em>Host</em> auswählen.</li>
+    <li><strong>Hosting freischalten.</strong> <em>Hosting Enabled</em> auf <em>Enabled</em> stellen. Unter Windows ist dies häufig bereits voreingestellt.</li>
+    <li><strong>Rechner eindeutig benennen.</strong> Falls angeboten, einen neutralen Namen verwenden, beispielsweise <code>HOME-PC</code>. Diesen Namen erkennt man später auf der Remote-Seite wieder.</li>
+    <li><strong>Auflösung festlegen.</strong> Für den Beginn ist <strong>1920 × 1080</strong> sinnvoll. Auflösung bei Bedarf vorab in Windows unter <em>Einstellungen → System → Anzeige</em> einstellen. Parsec kann abhängig von der Konfiguration beim Verbinden auch eine passende Auflösung wählen.</li>
+    <li><strong>Bildrate wählen.</strong> Für interaktive 3D-Anwendungen nach Möglichkeit <strong>60 fps</strong>. Bei schwacher Leitung oder instabiler Hardware sind 30 fps ein brauchbarer Diagnosemodus.</li>
+    <li><strong>Bandbreitenlimit setzen.</strong> Mit <strong>10–15 Mbit/s</strong> beginnen; bei stabilen Messwerten stufenweise auf etwa 20–25 Mbit/s erhöhen. Das Limit nicht einfach über die reale Uploadgeschwindigkeit setzen.</li>
+    <li><strong>Encoder automatisch wählen lassen.</strong> Die Hardware-Videokodierung der GPU bevorzugen. Bei Fehlern die unterstützten Encoder und die Grafikkartentreiber prüfen.</li>
+    <li><strong>Falls eine Windows-Firewall-Abfrage erscheint:</strong> Parsec auf dem privaten Heimnetz zulassen. Keine pauschale Abschaltung der Firewall vornehmen.</li>
+  </ol>
+  <h3>Windows-Energieeinstellungen</h3>
+  <p>Unter Windows 10: <em>Start → Einstellungen → System → Netzbetrieb &amp; Energiesparen</em>. Den <strong>Ruhezustand des PCs im Netzbetrieb</strong> für den gewünschten Fernzugriffszeitraum deaktivieren. Für den ersten Test kann auch das Abschalten des Bildschirms vorübergehend deaktiviert werden. Später lässt sich eine sparsamere, auf die Displayhardware abgestimmte Lösung finden.</p>
+  <h3>Grafikausgabe ohne eingeschalteten Monitor?</h3>
+  <p>Das ist ein häufiger Stolperstein. Manche Monitore – insbesondere über DisplayPort – melden sich beim Ausschalten vollständig ab. Parsec kann dann kein Display mehr erfassen. Mögliche Abhilfen: Monitor angeschlossen und aktiv lassen, unterstützte virtuelle Displayfunktion prüfen oder einen HDMI-Dummy-Adapter einsetzen. Virtuelle Displays, mehrere Monitore und Privacy Mode hängen teils vom Tarif beziehungsweise Treiber ab.</p>
+  <div class="callout warning"><strong>Wichtig: Host-Anmeldung ≠ Client-Anmeldung</strong><p>Wenn Parsec als „Per User“ installiert ist und Windows nach einem Neustart am Anmeldebildschirm stehen bleibt, kann der Host unerreichbar sein. Für echten unbeaufsichtigten Zugriff vorher prüfen, ob der gewählte Installationstyp die Windows-Anmeldung unterstützt. Den Windows-Login nicht aus Bequemlichkeit entfernen.</p></div>
+</section>
+<section id="browser">
+  <span class="crumb">05 · Remote-PC / Variante A</span>
+  <h2>Parsec im Browser: keinerlei Client-Installation</h2>
+  <p>Dieser Weg eignet sich am besten, wenn der Windows-11-Rechner nur mit einem Standardbenutzer verwendet werden darf. Parsec Web braucht weder Administratorrechte noch ein separat installiertes Parsec-Programm. <strong>Chrome</strong> ist der offiziell dokumentierte Weg; aktuelle Edge-Versionen können funktionieren. Firefox wird vom Parsec-Webclient nicht unterstützt.</p>
+  <ol class="steps">
+    <li><strong>Auf dem Windows-11-Rechner Chrome öffnen.</strong> Falls Chrome nicht vorhanden ist, Edge ausprobieren, sofern dessen Nutzung erlaubt ist.</li>
+    <li><strong>Die offizielle Adresse aufrufen:</strong> <a href="https://web.parsec.app/" target="_blank" rel="noopener noreferrer">https://web.parsec.app/</a>. Keine Browser-Erweiterung ist erforderlich.</li>
+    <li><strong>Mit dem Parsec-Konto anmelden</strong>, das bereits auf dem Heim-PC verwendet wird. Wenn 2FA aktiviert ist, den Authenticator-Code eingeben.</li>
+    <li><strong>Rechnerliste öffnen.</strong> Unter <em>Computers</em> sollte der Heim-PC erscheinen. Bei korrekter Konfiguration ist er als verfügbar erkennbar.</li>
+    <li><strong>„Connect“ auswählen.</strong> Parsec baut die Verbindung auf. Die ersten Sekunden für die Verbindungsaushandlung und Videodarstellung abwarten, ohne mehrfach auf „Connect“ zu klicken.</li>
+    <li><strong>Im übertragenen Desktop testen:</strong> Maus bewegen, Startmenü öffnen, Text in einem ungefährlichen Editor tippen und Windows-Töne prüfen. Erst danach eine anspruchsvollere Anwendung starten.</li>
+    <li><strong>Vollbild versuchen.</strong> Browser-Vollbild mit <kbd>F11</kbd>; sofern angeboten, die Vollbildfunktion von Parsec verwenden. Eingabe- und Mausverhalten vor dem Start einer Anwendung testen.</li>
+    <li><strong>Nach dem Test abmelden.</strong> Verbindung trennen und auf gemeinsam verwendeten Rechnern aus dem Parsec-Webkonto ausloggen; keine Kennwörter dauerhaft im Browser speichern.</li>
+  </ol>
+  <h3>Vorteile des Browserwegs</h3>
+  <ul><li>Kein Programmdownload, kein Installer, keine Administratorabfrage.</li><li>Unkomplizierter erster Funktionstest über beliebige Netze.</li><li>Desktopzugriff auch auf einen Rechner mit lokal gestarteten Nicht-Steam-Anwendungen.</li></ul>
+  <h3>Nachteile und Grenzen</h3>
+  <ul><li>Browsertechnik (WebRTC) bietet Parsec weniger Kontrolle über Netzwerk und Videodekodierung als die native Anwendung.</li><li>Höhere Latenz, geringere Stabilität oder schlechtere Eingabeerkennung sind möglich.</li><li>Systemtastenkombinationen, relative Mausbewegungen oder Vollbildsteuerung können im Browser eingeschränkt sein.</li><li>Firmen- oder Schulnetze können WebRTC, UDP oder bestimmte Ziele sperren.</li></ul>
+  <div class="callout"><strong>Diagnoseprinzip</strong><p>Wenn der Browserweg den Desktop anzeigt, aber das Spielen unbefriedigend ist, ist das noch kein Gegenbeweis zur gesamten Streaming-Idee. Im nächsten Schritt sollte die native Portable-Version getestet werden.</p></div>
+</section>
+<section id="portable">
+  <span class="crumb">06 · Remote-PC / Variante B</span>
+  <h2>Parsec Portable: ohne Installer, mit nativer Streaming-Technik</h2>
+  <p>Für einen eingeschränkten Windows-11-Rechner ist Parsec Portable oft die technisch interessantere Variante. Parsec stellt dafür offiziell ein ZIP-Archiv bereit, dessen Dateien direkt gestartet werden können. Das Archiv enthält die <strong>64-Bit-Version</strong>.</p>
+  <ol class="steps">
+    <li><strong>Download-Seite öffnen:</strong> <a href="https://parsec.app/downloads" target="_blank" rel="noopener noreferrer">parsec.app/downloads</a>.</li>
+    <li><strong>„Windows Portable“ auswählen.</strong> Die portable ZIP-Variante wählen, nicht den gewöhnlichen Windows-Installer. Bezeichnungen oder Positionen können sich ändern.</li>
+    <li><strong>ZIP-Datei entpacken.</strong> Im Windows-Explorer Rechtsklick auf die ZIP → <em>Alle extrahieren …</em>. Beispielsweise nach <code>%USERPROFILE%\Apps\ParsecPortable</code>. Diesen Pfad kann man im Explorer in die Adresszeile eingeben; falls <code>Apps</code> fehlt, den Ordner neu erstellen.</li>
+    <li><strong>Ausführbare Datei starten.</strong> Im entpackten Verzeichnis <code>parsecd.exe</code> doppelklicken. <em>Nicht</em> versuchen, die ZIP-Datei selbst zu starten.</li>
+    <li><strong>Mit demselben Parsec-Konto anmelden.</strong> Den Heim-PC unter <em>Computers</em> auswählen und <em>Connect</em> klicken.</li>
+    <li><strong>Client-Einstellungen öffnen.</strong> Nach Möglichkeit <em>Renderer: Direct3D 11</em> und einen passenden <em>Hardware Decoder</em> auswählen. <em>H.265/HEVC</em> testweise aktivieren, wenn beide Geräte es unterstützen; andernfalls wird gegebenenfalls H.264 verwendet.</li>
+    <li><strong>Bildschirm, Ton, Tastatur und Maus testen.</strong> Für schnelle Eingaben ggf. <em>Immersive Mode</em> aktivieren. Weitere Hinweise stehen im Abschnitt „Maus &amp; Tastatur“.</li>
+  </ol>
+  <div class="callout success"><strong>Warum Portable bei Spielen meist besser ist</strong><p>Die native Parsec-Anwendung verwendet ein für Streaming optimiertes Protokoll, kann geeignete Hardwaredecoder nutzen und bietet mehr Steuerungsmöglichkeiten. Die Tatsache, dass sie nicht installiert werden muss, macht sie jedoch <em>nicht</em> immun gegen Sicherheitsrichtlinien.</p></div>
+  <h3>Was, wenn Windows <code>parsecd.exe</code> blockiert?</h3>
+  <p>Auf privat administrierten Computern lassen sich App-Sperren und Sicherheitsmeldungen gegebenenfalls regulär prüfen. Auf verwalteten Geräten gilt: Wird das Ausführen unbekannter EXE-Dateien durch AppLocker, WDAC, Smart App Control oder Sicherheitssoftware untersagt, ist das eine bewusste Richtlinie. <strong>Nicht versuchen, sie über Umbenennen, Verstecken, fremde Konten oder andere Tricks zu umgehen.</strong> In diesem Fall den Browserweg verwenden, sofern er zulässig ist, oder die IT um Freigabe bitten.</p>
+  <h3>Ordnerpflege</h3>
+  <p>Der Portable-Ordner kann – soweit keine Installation erfolgte – nach Beenden der Anwendung wieder gelöscht werden. Kontobezogene Einstellungen und Anmeldedaten können dennoch im Benutzerprofil verbleiben. Auf fremden Computern daher aktiv abmelden und die gespeicherten Anmeldedaten beziehungsweise das lokale Parsec-Profil prüfen.</p>
+</section>
+<section id="test">
+  <span class="crumb">07 · Verbindungstest</span>
+  <h2>Den Fernzugriff wirklich über das Internet testen</h2>
+  <p>Ein Test im selben WLAN prüft nur einen Teil des Systems. Damit das Experiment aussagekräftig ist, müssen Host und Client zeitweise <strong>in unterschiedlichen Netzen</strong> sein.</p>
+  <ol class="steps">
+    <li><strong>Lokale Basisprüfung:</strong> Heim-PC einschalten, Parsec anmelden, Hosting kontrollieren. Wenn möglich zuerst innerhalb des Heimnetzes verbinden. So werden reine Einrichtungsfehler ausgeschlossen.</li>
+    <li><strong>Netze trennen:</strong> Einen zweiten PC über ein anderes WLAN oder einen mobilen Hotspot verbinden. Nicht versehentlich mit demselben Router verbunden bleiben.</li>
+    <li><strong>Speedtest auf beiden Seiten:</strong> Heim-PC: Upload und Ping. Remote-PC: Download, Ping und möglichst Jitter beobachten. Ein hoher Spitzendurchsatz ist weniger wert als eine stabile Latenz.</li>
+    <li><strong>Zuerst Desktop streamen:</strong> Kein 3D-Spiel starten, sondern Fenster verschieben, Text eintippen, Videos und Ton testen.</li>
+    <li><strong>Dann eine 3D-Anwendung starten:</strong> Anfangs mit 1080p/60 fps und niedriger bis mittlerer Qualität. Nach Möglichkeit Fenstervollbild bzw. randlosen Fenstermodus ausprobieren.</li>
+    <li><strong>Web und Portable vergleichen:</strong> Dieselbe Szene für je einige Minuten testen. Bildschärfe, Mausgefühl, Ruckler, Ton und Verbindungsabbrüche notieren.</li>
+    <li><strong>Neustartprobe:</strong> Host neu starten, dessen automatische Verfügbarkeit prüfen. Diesen Schritt nur ausführen, solange bei Bedarf physischer Zugang zum Host besteht.</li>
+  </ol>
+  <h3>Bewertungsbogen für den Vergleich</h3>
+  <div class="table-wrap"><table><thead><tr><th>Kriterium</th><th>Browser</th><th>Portable</th></tr></thead><tbody>
+    <tr><td>Verbindungsaufbau</td><td>Erfolgreich / Fehlercode?</td><td>Erfolgreich / Fehlercode?</td></tr>
+    <tr><td>Auflösung und Flüssigkeit</td><td>720p / 1080p; 30 / 60 fps</td><td>720p / 1080p; 30 / 60 fps</td></tr>
+    <tr><td>Eingabeverzögerung</td><td>Unauffällig / merkbar / störend</td><td>Unauffällig / merkbar / störend</td></tr>
+    <tr><td>Mouse-Look / Kamera</td><td>Funktioniert / problematisch</td><td>Funktioniert / problematisch</td></tr>
+    <tr><td>Audio</td><td>Ton vorhanden / Aussetzer</td><td>Ton vorhanden / Aussetzer</td></tr>
+    <tr><td>Stabilität</td><td>Abbrüche / Standbild / stabil</td><td>Abbrüche / Standbild / stabil</td></tr>
+  </tbody></table></div>
+</section>
+<section id="optimierung">
+  <span class="crumb">08 · Performance</span>
+  <h2>Bildqualität, Verzögerung und Übertragungsrate optimieren</h2>
+  <h3>Was die Latenz verursacht</h3>
+  <p>Die gefühlte Verzögerung setzt sich aus mehreren Teilen zusammen: Eingabeerfassung, Spielberechnung, GPU-Encoding, Netzwerktransport, Videodecoding und Bildschirmdarstellung. Ein niedriger Internet-Ping allein garantiert kein direktes Spielgefühl.</p>
+  <ol class="steps">
+    <li><strong>Netzwerk stabilisieren:</strong> Host nach Möglichkeit mit Ethernet verbinden. Auf dem Client LAN oder 5-GHz-WLAN nutzen; parallele Cloud-Backups und Downloads pausieren.</li>
+    <li><strong>FPS nicht unnötig erzwingen:</strong> 60 fps nur wählen, wenn Host, Encoder und Netzwerk das gleichmäßig liefern. Konstante 30 fps sind besser als stark schwankende 60 fps.</li>
+    <li><strong>Bitrate schrittweise erhöhen:</strong> Bei Artefakten die Bitrate leicht erhöhen, sofern die Leitung genügend Reserven hat. Bei Paketverlust oder Rucklern reduzieren.</li>
+    <li><strong>Auflösung reduzieren:</strong> Von 1080p auf 720p wechseln, wenn Encoder, Upload oder Decoder überlastet sind.</li>
+    <li><strong>Hardwaredecoder nutzen:</strong> In Parsec Portable Direct3D 11 und Hardware-Decoding bevorzugen. Software-Decoding nur als Kompatibilitätsprobe.</li>
+    <li><strong>Codec testen:</strong> HEVC/H.265 kann bei gleicher Bitrate bessere Qualität bringen, aber nicht jedes Gerät unterstützt es gleich gut. Bei schwarzen Bildern, Decoderproblemen oder ungewöhnlicher Latenz H.265 testweise ausschalten.</li>
+    <li><strong>VSync abwägen:</strong> Es kann Bildzerreißen reduzieren, erhöht aber unter Umständen die Latenz. Beim Experiment zwei Einstellungen direkt vergleichen.</li>
+    <li><strong>Spielmodus prüfen:</strong> Randloser Fenstermodus ist bei Capture-Problemen oft einfacher als exklusiver Vollbildmodus. Im Spiel selbst zunächst grafisch anspruchsvolle Effekte reduzieren.</li>
+  </ol>
+  <div class="callout"><strong>Faustregel bei Störungen</strong><p>Wenn <em>das Bild</em> unscharf wird, zuerst Bandbreite und Codec prüfen. Wenn <em>die Eingaben</em> verzögert ankommen, Netzwerk, Framerate und Decoder betrachten. Wenn <em>nur ein Spiel</em> schwarz bleibt, dessen Fenstermodus oder Capture-Verhalten testen.</p></div>
+  <p class="footnote">Eine kontinuierliche Videobitrate von 10 Mbit/s entspricht rechnerisch etwa 4,5 GB Daten pro Stunde; bei 20 Mbit/s etwa 9 GB/h, jeweils ohne zusätzlichen Overhead. Bei Mobilfunk-Tarifen Datenvolumen berücksichtigen.</p>
+</section>
+<section id="steuerung">
+  <span class="crumb">09 · Bedienung</span>
+  <h2>Maus, Tastatur, Sondertasten und Audiowege</h2>
+  <h3>Immersive Mode bei Parsec Portable</h3>
+  <p>Im <em>Immersive Mode</em> können Tastatur und/oder Maus an den entfernten PC gebunden werden. Das ist vor allem bei Spielen wichtig, in denen die Kamera durch relative Mausbewegungen gesteuert wird, oder wenn Windows-Tastenkombinationen an den Host gehen sollen.</p>
+  <div class="table-wrap"><table><thead><tr><th>Aktion</th><th>Standardkürzel (Windows)</th><th>Wirkung</th></tr></thead><tbody>
+    <tr><td>Immersive Mode umschalten</td><td><kbd>Strg</kbd> + <kbd>Umschalt</kbd> + <kbd>I</kbd></td><td>Maustastaturbindung an Host umschalten</td></tr>
+    <tr><td>Eingaben vorübergehend lösen</td><td><kbd>Strg</kbd> + <kbd>Alt</kbd> + <kbd>Z</kbd></td><td>Host erhält bis zum erneuten Aktivieren keine Eingaben</td></tr>
+    <tr><td>Alt+Tab an Host</td><td>Immersive Mode für Tastatur aktivieren</td><td>Wechselt Anwendungen des entfernten PCs statt lokale Fenster</td></tr>
+  </tbody></table></div>
+  <p class="footnote">Tastenkürzel können in Parsec unter <em>Settings → Hotkeys</em> geändert werden. Browser-Eingaben können davon abweichen.</p>
+  <h3>Mehrere Monitore</h3>
+  <p>Parsec kann zwischen Bildschirmen wechseln. Erweiterte gleichzeitige Mehrschirmfunktionen sind teilweise kostenpflichtig. Für den ersten Test genügt ein Bildschirm mit 1080p.</p>
+  <h3>Kein Ton?</h3>
+  <ol><li>Am Client Lautstärke prüfen und im Parsec-Overlay kontrollieren, dass Audio nicht stummgeschaltet ist.</li><li>Am Host <kbd>Win</kbd> + <kbd>R</kbd> → <code>mmsys.cpl</code>; kontrollieren, ob die Anwendung auf dem Windows-Standardausgabegerät Ton ausgibt.</li><li>Gegebenenfalls in Parsec unter <em>Host → Audio</em> ein passendes Ausgabegerät wählen und Anwendung neu starten.</li><li>Virtual-Audio-Tools nur einsetzen, wenn wirklich kein geeignetes Ausgabegerät verfügbar ist.</li></ol>
+</section>
+<section id="betriebsbereitschaft">
+  <span class="crumb">10 · Betrieb</span>
+  <h2>Heim-PC erreichbar halten – und trotzdem sicher betreiben</h2>
+  <p>Der häufigste praktische Fehler tritt nicht beim Streaming auf, sondern davor: Der Heim-PC ist ausgeschaltet, schläft oder wartet nach einem Update auf eine Eingabe.</p>
+  <ul>
+    <li><strong>Strom:</strong> Der Host muss eingeschaltet sein. Parsec selbst startet einen vollständig ausgeschalteten PC nicht.</li>
+    <li><strong>Ruhezustand:</strong> Im gewünschten Zugriffszeitraum deaktivieren; auch USB- und Netzwerk-Energiesparoptionen bei Problemen prüfen.</li>
+    <li><strong>Autostart:</strong> Parsec und die nötigen Launcher sollen nach einem Neustart wie gewünscht verfügbar sein. „Per User“ und „Per Computer“ verhalten sich unterschiedlich.</li>
+    <li><strong>Bildschirm:</strong> Ein angeschlossenes und erkanntes Display ist eine wesentliche Voraussetzung. Ausschalten kann die Display-Erkennung unterbrechen.</li>
+    <li><strong>Windows-Updates:</strong> Unbeaufsichtigte Neustarts und blockierende Startdialoge berücksichtigen.</li>
+    <li><strong>Wake-on-LAN:</strong> Optional kann ein dafür vorbereiteter PC von außerhalb geweckt werden, benötigt aber separate Hardware-, BIOS-, Router- oder VPN-Konfiguration. Parsec ist dafür allein keine Komplettlösung.</li>
+  </ul>
+  <h3>Test für echte Abwesenheit</h3>
+  <p>Vor einer längeren Abwesenheit den Heim-PC neu starten, fünf Minuten in Ruhe lassen und <strong>von einem anderen Netz</strong> verbinden. Damit wird geprüft, ob die Installation auch ohne jemanden vor Ort erreichbar ist.</p>
+</section>
+<section id="sicherheit">
+  <span class="crumb">11 · Sicherheit</span>
+  <h2>Fernzugriff absichern, ohne ihn unnötig zu verkomplizieren</h2>
+  <ol class="steps">
+    <li><strong>Starkes, einzigartiges Parsec-Passwort</strong> verwenden und 2FA aktivieren.</li>
+    <li><strong>Nur eigene Rechner autorisieren.</strong> Keine unbekannten Freundschaftsanfragen oder Freigabelinks akzeptieren; Berechtigungen regelmäßig prüfen.</li>
+    <li><strong>Keine RDP-Portfreigabe.</strong> Port 3389 nicht einfach am Router ins Internet exponieren. Parsec benötigt für eine normale Verbindung in vielen Heimnetzen keine manuelle Portfreigabe.</li>
+    <li><strong>Firewall aktiv lassen.</strong> Falls nötig nur gezielte, nachvollziehbare Parsec-Ausnahmen setzen; Portfreigaben sind ein letzter Diagnoseschritt bei konkreten Fehlern.</li>
+    <li><strong>Host-Display als sichtbar betrachten.</strong> Standardmäßig ist die gestreamte Sitzung auf dem physisch angeschlossenen Monitor möglicherweise zu sehen. Privacy Mode gehört nicht generell zur kostenlosen Ausstattung.</li>
+    <li><strong>Gesperrte Fremdgeräte respektieren.</strong> Fehlende Administratorrechte sind nicht dasselbe wie eine allgemeine Erlaubnis, Programme oder Gaming-Traffic auszuführen. Sicherheitsrichtlinien nicht umgehen.</li>
+    <li><strong>Kontositzungen bereinigen.</strong> Nach der Nutzung auf nicht exklusiv eigenen Geräten abmelden und gespeicherte Anmeldedaten entfernen.</li>
+    <li><strong>Betriebssystem aktualisieren.</strong> Besonders beim Windows-10-Host ein wirksames Sicherheitsupdate-Konzept vorsehen.</li>
+  </ol>
+  <div class="callout warning"><strong>Für verwaltete Geräte</strong><p>Ein technisch möglicher Zugriff ist nicht automatisch ein erlaubter Zugriff. Besonders in Unternehmens-, Bildungs- und Behördennetzen kann privates Streaming rechtlich oder organisatorisch untersagt sein. Nur auf Geräten und Netzen einsetzen, für die eine entsprechende Nutzung gestattet ist.</p></div>
+</section>
+<section id="fehler">
+  <span class="crumb">12 · Fehlerdiagnose</span>
+  <h2>Fehlersuche nach Symptomen</h2>
+  <p>Die folgenden Prüfungen sind vom geringsten zum größten Eingriff geordnet. Am besten immer <strong>nur eine Einstellung gleichzeitig</strong> ändern, sonst lässt sich die Wirkung nicht nachvollziehen.</p>
+  <details open><summary>Der Heim-PC erscheint als „Offline“</summary><p>Ist der Host eingeschaltet und nicht im Standby? Läuft Parsec? Ist dasselbe Konto angemeldet? <em>Hosting Enabled</em> aktiv? Nach einem Neustart eventuell kein Benutzer angemeldet, obwohl nur „Per User“ installiert wurde. Internet am Heim-PC prüfen.</p></details>
+  <details><summary>Browser zeigt Fehler oder verbindet nicht</summary><p>Chrome verwenden; mit aktuellem Edge als Alternative testen. Firefox ist kein unterstützter Parsec-Webclient. Browserdaten bzw. Privatsitzung prüfen, Werbe- und Scriptblocker als Fehlerquelle untersuchen. Bei Fehlern wie 6200 oder 3200X empfiehlt Parsec den nativen Client.</p></details>
+  <details><summary>Fehler -6023 oder -6024: Peer-to-Peer-Verbindung scheitert</summary><p>Firewall, UDP-Blockade, doppeltes NAT oder Carrier-Grade-NAT können ursächlich sein. Zuerst Client/Host neu starten, auf anderen Netzen testen und offizielle Parsec-Diagnose lesen. Portfreigaben erst nach einer konkreten Analyse und nur am eigenen Router erwägen; in verwalteten Netzen IT kontaktieren.</p></details>
+  <details><summary>Schwarzer Bildschirm, Maus oder Ton aber sichtbar</summary><p>Am Host kontrollieren, ob ein funktionierendes Display erkannt wird. Monitor, DisplayPort-Ausschaltverhalten und den Windows-Anzeigemodus testen. Gegebenenfalls virtuelle Displayfunktion oder HDMI-Dummy prüfen. Auch Grafiktreiber und Capture-Fähigkeit kontrollieren.</p></details>
+  <details><summary>Nur eine bestimmte 3D-Anwendung ist schwarz</summary><p>Erst Desktop und eine andere Anwendung testen. Dann den problematischen Titel zwischen Vollbild, Fenstermodus und randlosem Fenstermodus umstellen. Overlays und problematische Capture-/Anticheat-Mechanismen können die Übertragung beeinflussen. Keine Sicherheitsmechanismen der Anwendung umgehen.</p></details>
+  <details><summary>Das Bild ruckelt, obwohl die Internetleitung schnell ist</summary><p>WLAN-Schwankungen, Paketverlust, Jitter, überlasteter Encoder oder Decoder sind oft wichtiger als die nominelle Datenrate. Browser mit Portable vergleichen; 720p/30 fps, 5–8 Mbit/s und LAN-Verbindung testweise verwenden. Downloads/Cloud-Synchronisation pausieren.</p></details>
+  <details><summary>Tastatur funktioniert, Kamera reagiert nicht auf Mausbewegung</summary><p>Bei Parsec Portable <em>Immersive Mode</em> für Maus und Tastatur aktivieren. Im Spiel relative Mauserfassung und Fenstermodus prüfen. Im Browser sind Pointer-Lock und bestimmte Spezialtasten möglicherweise eingeschränkt.</p></details>
+  <details><summary>Windows-Tastenkombinationen werden lokal ausgeführt</summary><p>Immersive Mode für die Tastatur einschalten. Manche sicherheitsrelevanten Kombinationen oder Windows-Anmeldefunktionen werden dennoch anders behandelt. Browser haben zusätzliche eigene Tastenkürzel.</p></details>
+  <details><summary>Keine Audioausgabe</summary><p>Parsec-Overlay auf Stummschaltung kontrollieren. Am Host das Windows-Standardausgabegerät mit <code>mmsys.cpl</code> prüfen; Parsec benötigt ein erfassbares Audio-Ausgabegerät. Testweise Anwendung und Parsec nach einer Änderung neu starten.</p></details>
+  <details><summary>Portable-App lässt sich nicht ausführen</summary><p>Ist die ZIP vollständig entpackt? Wird <code>parsecd.exe</code> statt einer Installationsdatei gestartet? Verhindert eine Sicherheitsrichtlinie die Ausführung? In letzterem Fall den Client nicht „umgehen“, sondern Web verwenden oder Freigabe einholen.</p></details>
+  <details><summary>Verbindung klappt zuhause, aber nicht von einem anderen Netz</summary><p>Prüfen, ob tatsächlich zwei verschiedene Internetanschlüsse verwendet werden. Heimrouter, VPN, CGNAT, Firewalls und UDP-Zugriff vergleichen. Ein Mobilfunk-Hotspot ist ein guter Kontrolltest; er kann allerdings selbst CGNAT und variable Latenzen haben.</p></details>
+  <details><summary>Nach dem Trennen bleibt der Host-Desktop offen</summary><p>Parsec trennt eine Sitzung nicht automatisch mit allen denkbaren Windows-Sicherheitsmaßnahmen. Falls gewünscht, die von Parsec dokumentierte Host-Einstellung <code>host_lock_desktop=true</code> für das Sperren nach dem Trennen des letzten Eigentümer-Clients prüfen, sorgfältig testen und nicht mit „Privacy Mode“ verwechseln. Ein gesperrter Host muss weiterhin erreichbar bleiben.</p></details>
+</section>
+<section id="vergleich">
+  <span class="crumb">13 · Alternativen</span>
+  <h2>Parsec, Steam Link, Moonlight und Windows-Bordmittel</h2>
+  <div class="table-wrap"><table><thead><tr><th>Lösung</th><th>Client ohne Adminrechte</th><th>Über Internet</th><th>Stärken</th><th>Schwächen / Aufwand</th></tr></thead><tbody>
+    <tr><td>Parsec Web</td><td>Ja, unterstützter Browser genügt</td><td>Ja</td><td>Keine Installation; ideal zum Testen</td><td>WebRTC, höhere Latenz und weniger Spezialfunktionen</td></tr>
+    <tr><td>Parsec Portable</td><td>Ja, sofern EXE-Ausführung erlaubt</td><td>Ja</td><td>Gaming-optimiert; Hardwaredecoder; Maus/Keyboard-Kontrolle</td><td>ZIP-Download und ausführbares Programm erforderlich</td></tr>
+    <tr><td>Steam Link / Steam Remote Play</td><td>Je nach App/Steam-Installation; Windows-App ist nicht zwingend portabel</td><td>Ja</td><td>Sehr bequem mit Steam-Bibliothek; gute Controller-Integration</td><td>Kein offizieller universeller Browserclient; externe Launcher/Spiele können zicken</td></tr>
+    <tr><td>Moonlight + Sunshine</td><td>Moonlight Portable verfügbar</td><td>Ja, aber Netzwerkzugriff einrichten</td><td>Open Source, flexibel, geringe Latenz</td><td>Host Sunshine plus Pairing; aktuelle Sunshine-Version setzt laut Dokumentation Windows 11+ voraus</td></tr>
+    <tr><td>Windows Remotedesktop (RDP)</td><td>Client <code>mstsc.exe</code> integriert</td><td>Nur sicher über VPN/Gateway</td><td>Hervorragend für klassische Desktop-Arbeit</td><td>Windows Pro als Host; andere Sitzung/GPU-Verhalten; wenig geeignet für Echtzeit-Gaming</td></tr>
+    <tr><td>Windows-Schnellhilfe</td><td>Oft vorhanden, teils Store-App</td><td>Ja</td><td>Fernhilfe mit Code, sehr geringe Einrichtung</td><td>Gegenstelle muss aktiv zustimmen; nicht zum Spielen optimiert</td></tr>
+  </tbody></table></div>
+  <h3>Steam Link: wann es sich lohnt</h3>
+  <p><a href="https://store.steampowered.com/remoteplay" target="_blank" rel="noopener noreferrer">Steam Remote Play</a> funktioniert über das Internet und eignet sich besonders für Spiele, die unmittelbar in der Steam-Bibliothek laufen. Auf dem Host Steam öffnen und Remote Play aktivieren; auf dem Client Steam oder die Steam-Link-App verwenden und mit dem Host koppeln. Je nach Programm können auch als „Steam-fremd“ hinzugefügte Anwendungen funktionieren, aber externe Launcher und spezielle Grafikmodi bereiten gelegentlich Schwierigkeiten.</p>
+  <p>Valve bietet die Steam-Link-App auch für Windows an. <strong>Eine ZIP-Datei mit Windows-Installer ist aber nicht automatisch eine Portable-Version.</strong> Auf einem Rechner ohne Adminrechte sollte man daher nicht voraussetzen, dass sich Steam Link installieren oder durch Kopieren zuverlässig betreiben lässt. Ein vollwertiger offizieller Browserzugang wie bei Parsec ist für Windows nicht vorgesehen.</p>
+  <h3>Moonlight + Sunshine: die technische Alternative</h3>
+  <p><a href="https://github.com/moonlight-stream/moonlight-qt/releases" target="_blank" rel="noopener noreferrer">Moonlight</a> besitzt eine offizielle portable Windows-Version. Auf dem Heim-PC läuft die Host-Anwendung <a href="https://app.lizardbyte.dev/Sunshine/" target="_blank" rel="noopener noreferrer">Sunshine</a>. Im selben Netz lässt sich das Pairing vergleichsweise unkompliziert einrichten; für die Nutzung über das öffentliche Internet empfiehlt sich eine kontrollierte Verbindung, etwa über ein geeignetes VPN beziehungsweise Tailscale, sofern dieses auf beiden Geräten zulässig und eingerichtet ist. <strong>Achtung beim hier verwendeten Windows-10-Host:</strong> Die aktuelle Sunshine-Dokumentation nennt Windows 11 oder neuer als Systemvoraussetzung. Für Windows 10 müsste eine ausdrücklich kompatible ältere Sunshine-Version samt deren Sicherheitsstatus geprüft werden; ein Betriebssystem-Upgrade ist langfristig die sauberere Lösung.</p>
+  <p>Moonlight/Sunshine ist für ambitionierte Nutzer besonders interessant, wenn sie Streaming-Qualität und Netzwerkarchitektur selbst bestimmen wollen. Es ist jedoch mehr Einrichtungsarbeit als Parsec. Sunshine-Ports oder dessen Verwaltungsoberfläche sollten nicht unüberlegt ins offene Internet freigegeben werden.</p>
+  <h3>Windows-Bordmittel: warum sie für diesen Zweck abfallen</h3>
+  <p><strong>RDP</strong> ist ausgezeichnet für Office-, Entwicklungs- und Verwaltungsaufgaben, aber keine gleichwertige Alternative zu latenzarmem Game-Streaming. <strong>Schnellhilfe</strong> ist für betreute Support-Sitzungen gedacht und verlangt eine Zustimmung am Heim-PC. Für spontanen unbeaufsichtigten Zugriff auf 3D-Anwendungen sind beide suboptimal.</p>
+  <div class="callout success"><strong>Fazit des Vergleichs</strong><p><strong>Am unkompliziertesten:</strong> Parsec Web. <strong>Meist beste Balance aus Komfort und Spielbarkeit:</strong> Parsec Portable. <strong>Für Steam-native Spiele:</strong> Steam Link. <strong>Für maximale Bastel- und Optimierungsfreiheit:</strong> Moonlight + Sunshine. Windows-Bordmittel bleiben für Desktop-Wartung nützlich, nicht für schnelles Gaming.</p></div>
+</section>
+<section id="checkliste">
+  <span class="crumb">14 · Umsetzung</span>
+  <h2>Checklisten für die praktische Einrichtung</h2>
+  <h3>Am Windows-10-Heim-PC</h3>
+  <ul class="checklist"><li>Unterstützte Sicherheitsupdates bzw. Windows-Upgrade geplant</li><li>Parsec von der offiziellen Website installiert</li><li>Parsec-Konto bestätigt, 2FA aktiviert, Wiederherstellungscodes gesichert</li><li><em>Hosting Enabled</em> aktiv; Hostname erkennbar</li><li>Passende Installationsart und Autostart geprüft</li><li>Heim-PC per LAN verbunden (nach Möglichkeit)</li><li>Auflösung / Framerate / Bitratenlimit sinnvoll gewählt</li><li>Standby deaktiviert und Bildschirm wird erkannt</li><li>Grafisch anspruchsvolle Anwendung läuft lokal fehlerfrei</li></ul>
+  <h3>Am Windows-11-Remote-PC</h3>
+  <ul class="checklist"><li>Ein anderes Netzwerk als beim Host verwendet</li><li>Chrome oder unterstützter Browser vorhanden</li><li>Parsec Web geöffnet und mit eigenem Konto angemeldet</li><li>Heim-PC erscheint als online; Verbindung erfolgreich</li><li>Audio und Eingabegeräte getestet</li><li>Optional Parsec Portable ZIP entpackt; <code>parsecd.exe</code> gestartet</li><li>Web und Portable in derselben Testsituation verglichen</li><li>Nach Nutzung abgemeldet, besonders auf gemeinsam genutzten Geräten</li></ul>
+  <h3>Empfohlene Testreihenfolge in einem Satz</h3>
+  <p><strong>Heim-PC stabil konfigurieren → lokal prüfen → anderes Netz verwenden → Parsec Web testen → bei Bedarf Parsec Portable → erst dann Qualität optimieren.</strong></p>
+</section>
+<section id="quellen">
+  <span class="crumb">15 · Weiterführende Dokumentation</span>
+  <h2>Herstellerquellen und Nachschlagewerke</h2>
+  <p>Diese Anleitung basiert auf offiziellen Herstellerinformationen. Produktnamen, Schalter und Zugriffsmodelle können sich ändern; die verlinkten Seiten sind bei Abweichungen maßgeblich. Stand der redaktionellen Prüfung: <strong>13. Oktober 2026</strong>.</p>
+  <ol class="references">
+    <li><a href="https://parsec.app/downloads" target="_blank" rel="noopener noreferrer">Parsec – offizielle Downloads</a> (Installer und Portable)</li>
+    <li><a href="https://support.parsec.app/hc/en-us/articles/32381368159124-Install-Parsec-App-on-Windows" target="_blank" rel="noopener noreferrer">Parsec – Windows-Installation, Per User / Per Computer, Hosting</a></li>
+    <li><a href="https://support.parsec.app/hc/en-us/articles/32381650129300-Use-the-Web-App-browser" target="_blank" rel="noopener noreferrer">Parsec – Browserclient und Einschränkungen</a></li>
+    <li><a href="https://support.parsec.app/hc/en-us/articles/32381199341716-Parsec-App-for-Windows" target="_blank" rel="noopener noreferrer">Parsec – Windows-Anwendung und Portable-Version</a></li>
+    <li><a href="https://support.parsec.app/hc/en-us/articles/32381460716180-Parsec-Connectivity-Requirements" target="_blank" rel="noopener noreferrer">Parsec – Netzwerkanforderungen, Ports, Bandbreite</a></li>
+    <li><a href="https://support.parsec.app/hc/en-us/articles/32361373629972-Gaming-Playtesting-Build-Reviews-and-QA" target="_blank" rel="noopener noreferrer">Parsec – empfohlene Gaming-Einstellungen</a></li>
+    <li><a href="https://support.parsec.app/hc/en-us/articles/32361365988116-Enable-Two-Factor-Authentication" target="_blank" rel="noopener noreferrer">Parsec – Zwei-Faktor-Authentifizierung</a></li>
+    <li><a href="https://support.parsec.app/hc/en-us/articles/32381913636244-Error-Codes-6023-and-6024-Unable-To-Negotiate-A-Successful-Connection" target="_blank" rel="noopener noreferrer">Parsec – Fehler -6023/-6024 und NAT</a></li>
+    <li><a href="https://support.parsec.app/hc/en-us/articles/32381691348116-Black-Screen-Showing-While-I-Hear-Sound-and-Can-See-Mouse" target="_blank" rel="noopener noreferrer">Parsec – schwarzer Bildschirm und fehlendes Display</a></li>
+    <li><a href="https://store.steampowered.com/remoteplay" target="_blank" rel="noopener noreferrer">Valve – Steam Remote Play</a></li>
+    <li><a href="https://github.com/moonlight-stream/moonlight-qt/releases" target="_blank" rel="noopener noreferrer">Moonlight – Windows Portable und Releases</a> · <a href="https://docs.lizardbyte.dev/projects/sunshine/latest/" target="_blank" rel="noopener noreferrer">Sunshine-Dokumentation</a></li>
+    <li><a href="https://support.microsoft.com/de-de/windows/deployment/updates-lifecycle/windows-10-support-has-ended-on-october-14-2025" target="_blank" rel="noopener noreferrer">Microsoft – Ende des Windows-10-Supports</a></li>
+  </ol>
+  <p class="footnote">Hinweis: Hinweise zu Software und Netzwerken richten sich ausschließlich an autorisierte Nutzung auf eigenen oder entsprechend freigegebenen Geräten.</p>
+</section>
+</main>
+</div>
+<footer>Praxisleitfaden Remote-Streaming · neutral formuliert für private Technikexperimente · Stand: Oktober 2026</footer>
+</body>
+</html>
