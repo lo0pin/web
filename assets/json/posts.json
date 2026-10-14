@@ -3206,7 +3206,39 @@
       }
     ]
   },
-  
+{
+  "id": "2026-06-01_making_3dprint_katana_wall_mount",
+  "topic": "making",
+  "subtopic": "3dprint",
+  "date": "2026-06-01",
+  "title": "A Wall Mount for the Katana",
+  "format": "markdown",
+  "teaser": "After buying a katana, I designed and printed a custom wall mount for it. The holders were modelled in Fusion 360, printed in black filament, and mounted on painted wooden backplates in black and gold to match the sword itself. It is now on the wall, stable, functional, and pleasantly theatrical.",
+  "content_en": "~A sword deserves better than leaning awkwardly in a corner.~\n\nAfter buying a **katana**, I wanted a wall mount that would not look like an afterthought.\n\nThe sword itself has a strong black-and-gold visual language, so the mount had to follow the same logic: dark, clean, slightly ornamental, but still functional. Not fantasy-shop excess. More restrained dojo-meets-workbench energy.\n\n## Design\n\nI designed the actual holders in **Fusion 360**.\n\nThe goal was simple:\n\n- hold the katana securely\n- distribute the load cleanly\n- avoid scratching the saya\n- keep the form visually close to the sword’s own design\n- make the mount printable without unnecessary drama\n\nThe shape is deliberately angular and vertical, with a curved front hook holding the sword in place. Each holder sits on a wooden backplate, so the plastic part does the precise holding while the wood provides structure, contrast, and a proper visual frame.\n\n## Printing\n\nThe holders were printed in black filament. The slicer estimated roughly **1 hour and 12 minutes** of total print time for the model shown, using about **43.9 g** of filament.\n\nThe print itself was mostly successful, though not completely without the usual small reminders that molten plastic is an opinionated material. Some layer texture is visible, especially on the larger surfaces, but for a functional wall mount this is entirely acceptable.\n\n~Not every surface has to be jewellery-grade. Sometimes it merely has to hold a sword without committing treason.~\n\n## Finishing and mounting\n\nThe printed holders were mounted onto wooden backing pieces. I painted the wood **black and gold**, matching the katana’s own colour scheme.\n\nThat turned out to be the important aesthetic step. The raw printed parts alone would have worked, but the painted wood makes the whole object feel intentional rather than improvised.\n\nOnce mounted to the wall, the katana sits level, stable, and visually balanced. The two supports carry it cleanly, and the whole assembly looks far better than a generic bought hanger would have.\n\n## Result\n\nThe mount is now finished and installed.\n\nIt holds.\nIt looks good.\nIt matches the sword.\n\nThat is a deeply satisfying kind of project: small enough to finish quickly, specific enough to matter, and useful enough that it immediately becomes part of the room.\n\nA bought bracket would have been faster.\n\nBut this one belongs there.",
+  "content_de": "~Ein Schwert verdient mehr, als schief in irgendeiner Ecke zu lehnen.~\n\nNachdem ich mir ein **Katana** gekauft hatte, wollte ich dafür eine Wandhalterung bauen, die nicht nach Notlösung aussieht.\n\nDas Schwert selbst hat eine starke Schwarz-Gold-Optik. Also musste auch die Halterung dieselbe Sprache sprechen: dunkel, klar, leicht ornamental, aber weiterhin funktional. Kein überdrehtes Fantasy-Regal. Eher: Dojo trifft Werkbank.\n\n## Entwurf\n\nDie eigentlichen Halter habe ich in **Fusion 360** gezeichnet.\n\nDas Ziel war recht klar:\n\n- das Katana sicher halten\n- die Last sauber aufnehmen\n- die Saya nicht zerkratzen\n- formal zum Design des Schwertes passen\n- ohne unnötiges Theater druckbar bleiben\n\nDie Form ist bewusst kantig und vertikal gehalten, mit einem gebogenen vorderen Haken, der das Schwert sichert. Jeder Halter sitzt auf einem Holzstück. Der gedruckte Teil übernimmt also die präzise Haltefunktion, während das Holz Struktur, Kontrast und einen sauberen optischen Rahmen liefert.\n\n## Druck\n\nGedruckt wurden die Halter aus schwarzem Filament. Der Slicer schätzte für das gezeigte Modell rund **1 Stunde und 12 Minuten** Druckzeit und etwa **43,9 g** Filament.\n\nDer Druck selbst war größtenteils gelungen, wenn auch nicht völlig ohne die üblichen kleinen Hinweise darauf, dass geschmolzener Kunststoff ein eigensinniges Material ist. Auf größeren Flächen sieht man etwas Layerstruktur, aber für eine funktionale Wandhalterung ist das völlig in Ordnung.\n\n~Nicht jede Oberfläche muss Schmuckqualität haben. Manchmal reicht es, wenn sie ein Schwert hält und dabei nicht kläglich versagt.~\n\n## Finish und Montage\n\nDie gedruckten Halter wurden auf Holz montiert. Das Holz habe ich **schwarz und gold** bemalt, passend zur Optik des Katanas.\n\nGenau dieser Schritt war ästhetisch entscheidend. Die gedruckten Teile allein hätten funktioniert, aber erst das bemalte Holz macht die Halterung zu einem absichtsvollen Objekt statt zu einer bloßen technischen Lösung.\n\nAn der Wand hängt das Katana nun gerade, stabil und optisch ruhig. Die beiden Halter tragen es sauber, und das Ganze wirkt deutlich stimmiger als eine beliebige gekaufte Halterung.\n\n## Ergebnis\n\nDie Wandhalterung ist fertig und montiert.\n\nSie hält.\nSie sieht gut aus.\nSie passt zum Schwert.\n\nDas ist eine sehr befriedigende Art von Projekt: klein genug, um rasch fertig zu werden, spezifisch genug, um nicht beliebig zu sein, und nützlich genug, um sofort Teil des Raumes zu werden.\n\nEine gekaufte Halterung wäre schneller gewesen.\n\nAber diese hier gehört dorthin.",
+  "images": [
+    {
+      "src": "/web/assets/img/news/2026_katana_wandhalter_03.jpeg",
+      "alt": "Two black 3D printed katana wall mount holders on painted black and gold wooden backplates",
+      "caption": "The finished holders before wall mounting — black printed parts on painted black-and-gold wooden backplates."
+    },
+    {
+      "src": "/web/assets/img/news/2026_katana_wandhalter_04.jpeg",
+      "alt": "Katana mounted horizontally on a wall using two custom black and gold wall holders",
+      "caption": "Installed on the wall: the katana sits level, stable, and visually aligned with the mount."
+    },
+    {
+      "src": "/web/assets/img/news/2026_katana_wandhalter_01.jpeg",
+      "alt": "Slicer preview of a custom 3D printed katana wall mount holder on a Bambu Lab build plate",
+      "caption": "The holder in the slicer — a compact functional print with just enough geometry to do the job."
+    },
+    {
+      "src": "/web/assets/img/news/2026_katana_wandhalter_02.jpeg",
+      "alt": "Close-up of 3D printed katana wall mount showing visible layer lines and surface texture",
+      "caption": "Layer lines and texture up close — not flawless, but absolutely serviceable for a functional mount."
+    }
+  ]
+}  
 
 
   ]
