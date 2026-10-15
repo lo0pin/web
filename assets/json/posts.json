@@ -3239,7 +3239,24 @@
       }
     ]
   },  
-
+  {
+    "id": "2026-03-24_project_layout_routing",
+    "topic": "electronics",
+    "subtopic": "pcb_basics",
+    "date": "2026-03-24",
+    "title": "Routing Reality — When Space Starts to Hurt",
+    "format": "markdown",
+    "teaser": "Routing a single-layer board teaches humility. Every trace is a compromise.",
+    "content_en": "The layout phase is where elegance goes to die — and engineering begins.\n\n**Constraints from the assignment:**\n\n- bottom layer only\n- no top routing\n- minimum distances to holes and components\n\nThis forces deliberate placement before routing even starts.\n\n**Lessons learned:**\n\n- bad placement → impossible routing\n- crossing signals → rethink, not force\n- shorter traces are not always better — cleaner topology is\n\nAt some point, the board stops being pretty.\n\nAnd starts being correct.",
+    "content_de": "Die Layoutphase ist der Punkt, an dem Eleganz endet — und Ingenieursdenken beginnt.\n\n**Vorgaben aus der Aufgabenstellung:**\n\n- nur Bottom-Layer\n- kein Routing auf der Oberseite\n- Mindestabstände zu Bohrungen und Bauteilen\n\nDas erzwingt eine bewusste Platzierung, noch bevor das eigentliche Routing beginnt.\n\n**Erkenntnisse:**\n\n- schlechte Platzierung → Routing wird unmöglich\n- sich kreuzende Signale → neu denken, nicht erzwingen\n- kürzere Leiterbahnen sind nicht immer besser — eine saubere Topologie ist es\n\nIrgendwann hört die Platine auf, schön zu sein.\n\nUnd beginnt, richtig zu sein.",
+    "images": [
+      {
+        "src": "/web/assets/news/img/pcb_basics_40.jpeg",
+        "alt": "PCB layout with routed traces on single layer",
+        "caption": "Single-layer routing — constraint as design teacher."
+      }
+    ]
+  }
 
   ]
 }
