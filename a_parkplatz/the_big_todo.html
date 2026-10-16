@@ -1,400 +1,1605 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Redaktioneller Content-Audit und ausführliche Themen-Roadmap für eine persönliche Projekt- und Wissensplattform auf GitHub Pages.">
-  <meta name="color-scheme" content="light">
-  <title>Content-Audit &amp; Themen-Roadmap | Website</title>
-  <!-- Für die Einbindung im Website-Root kann optional das bestehende Stylesheet aktiviert werden:
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description"
+        content="Redaktioneller Content-Audit und ausführliche Themen-Roadmap für eine persönliche Projekt- und Wissensplattform auf GitHub Pages.">
+    <meta name="color-scheme" content="light">
+    <title>Content-Audit &amp; Themen-Roadmap | Website</title>
+    <!-- Für die Einbindung im Website-Root kann optional das bestehende Stylesheet aktiviert werden:
        <link rel="stylesheet" href="assets/css/main.css">
        Das Dokument enthält alle benötigten Styles selbst und funktioniert daher auch allein. -->
-  <style>
-    :root { --bg:#f7f8fa; --surface:#fff; --surface-alt:#f1f4f7; --text:#202833; --muted:#5d6878; --line:#dce2e8; --link:#315e83; --accent:#244a67; --accent-soft:#e8f1f7; --gold:#b28b4c; --radius:16px; --maxw:1240px; }
-    * { box-sizing:border-box; }
-    html { scroll-behavior:smooth; scroll-padding-top:1.5rem; }
-    body { margin:0; background:var(--bg); color:var(--text); font:16px/1.7 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif; }
-    a { color:var(--link); text-underline-offset:.18em; }
-    a:hover { color:#123650; }
-    a:focus-visible,button:focus-visible,input:focus-visible { outline:3px solid #73a8cd; outline-offset:3px; }
-    h1,h2,h3,h4 { line-height:1.24; text-wrap:balance; }
-    h1 { font-size:clamp(2rem,4vw,3.55rem); font-weight:750; letter-spacing:-.045em; max-width:21ch; margin:.6rem 0 1rem; }
-    h2 { font-size:clamp(1.45rem,2.5vw,2.05rem); margin:0 0 1rem; letter-spacing:-.025em; }
-    h3 { font-size:1.17rem; margin:0 0 .5rem; }
-    h4 { font-size:1.03rem; margin:1.2rem 0 .45rem; }
-    p { margin:.65rem 0 1.1rem; }
-    .skip { position:absolute; top:-100px; left:10px; z-index:100; background:white; padding:.55rem 1rem; }
-    .skip:focus { top:10px; }
-    .site-header { background:var(--surface); border-bottom:1px solid var(--line); }
-    .site-header .inner { max-width:var(--maxw); padding:1.1rem 1.2rem; margin:auto; display:flex; justify-content:space-between; align-items:center; gap:1rem; }
-    .brand { color:var(--text); font-weight:750; text-decoration:none; letter-spacing:.01em; }
-    .header-meta { font-size:.82rem; color:var(--muted); text-align:right; }
-    .page-wrap { max-width:var(--maxw); margin:auto; padding:1.6rem 1.2rem 4rem; }
-    .hero { border-radius:22px; padding:clamp(1.5rem,5vw,3.7rem); background:linear-gradient(126deg,#fff 25%,#eaf1f5 100%); border:1px solid var(--line); margin-bottom:1.3rem; }
-    .eyebrow { text-transform:uppercase; font-size:.76rem; font-weight:800; letter-spacing:.13em; color:var(--accent); }
-    .lead { color:#475768; max-width:76ch; font-size:1.09rem; line-height:1.75; }
-    .meta-line { display:flex; flex-wrap:wrap; align-items:center; gap:.5rem; margin-top:1.35rem; font-size:.81rem; color:var(--muted); }
-    .tag { border:1px solid #c6d2dc; background:#f7fafc; border-radius:20px; padding:.13rem .65rem; display:inline-block; font-size:.77rem; font-weight:650; color:#38516a; vertical-align:middle; }
-    .tag.high { background:#e7f0f6; border-color:#b6cadb; color:#284d67; }
-    .tag.mid { background:#f7f4e9; border-color:#e2d5a8; color:#755e2f; }
-    .metrics { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:.65rem; margin-top:2rem; }
-    .metric { background:rgba(255,255,255,.78); border:1px solid var(--line); border-radius:13px; padding:.85rem 1rem; }
-    .metric strong { display:block; font-size:1.7rem; line-height:1.2; font-variant-numeric:tabular-nums; }
-    .metric span { display:block; color:var(--muted); font-size:.78rem; line-height:1.4; padding-top:.3rem; }
-    .layout { display:grid; grid-template-columns:minmax(0,245px) minmax(0,1fr); align-items:start; gap:1.35rem; }
-    .sidebar { position:sticky; top:1rem; background:var(--surface); border-radius:15px; border:1px solid var(--line); padding:1.25rem; }
-    .sidebar h2 { font-size:.85rem; text-transform:uppercase; letter-spacing:.09em; margin:0 0 .8rem; }
-    .sidebar ul { list-style:none; padding:0; margin:0; font-size:.85rem; }
-    .sidebar li { margin:.45rem 0; line-height:1.45; }
-    .sidebar a { display:block; color:#4b5c6d; text-decoration:none; }
-    .sidebar a:hover { color:var(--accent); text-decoration:underline; }
-    .sidebar .nav-footer { color:var(--muted); font-size:.78rem; border-top:1px solid var(--line); margin-top:1rem; padding-top:.8rem; }
-    main { min-width:0; }
-    section.panel { background:var(--surface); border:1px solid var(--line); padding:clamp(1.35rem,3vw,2.2rem); margin:0 0 1.25rem; border-radius:16px; }
-    .section-kicker { display:block; color:var(--accent); font-size:.72rem; font-weight:800; text-transform:uppercase; letter-spacing:.13em; margin-bottom:.4rem; }
-    .subdued { color:var(--muted); }
-    .callout { padding:1rem 1.15rem; border-left:4px solid #6c97b5; background:#f2f7fa; border-radius:0 10px 10px 0; margin:1.25rem 0; }
-    .callout p:last-child { margin-bottom:0; }
-    .callout.warning { background:#fbf8ef; border-color:#b89b59; }
-    .rule { border:0; border-top:1px solid var(--line); margin:1.4rem 0; }
-    .data-table { width:100%; border-collapse:collapse; font-size:.9rem; margin:1rem 0 1.4rem; }
-    .data-table th { background:#eef2f5; font-size:.79rem; letter-spacing:.02em; font-weight:750; }
-    .data-table th,.data-table td { padding:.6rem .75rem; border-bottom:1px solid var(--line); text-align:left; vertical-align:top; }
-    .data-table tr:nth-child(even) td { background:#fafbfc; }
-    .table-scroller { overflow-x:auto; }
-    .bar-chart { display:grid; gap:.6rem; margin:1.1rem 0 1.2rem; }
-    .bar-row { display:grid; grid-template-columns:115px minmax(0,1fr) 32px; align-items:center; gap:.65rem; font-size:.84rem; }
-    .track { height:12px; background:#e8edf2; border-radius:20px; overflow:hidden; }
-    .fill { height:100%; display:block; border-radius:20px; background:#537b9b; }
-    .bar-row:nth-child(2) .fill { background:#678ca7; }
-    .bar-row:nth-child(n+3) .fill { background:#91a8bc; }
-    .number { font-variant-numeric:tabular-nums; text-align:right; font-weight:700; }
-    .findings { display:grid; gap:.75rem; grid-template-columns:repeat(3,minmax(0,1fr)); margin:1rem 0; }
-    .finding { border:1px solid var(--line); padding:1rem; border-radius:12px; background:#fafbfd; }
-    .finding strong { display:block; margin-bottom:.35rem; }
-    .finding p { font-size:.86rem; color:var(--muted); line-height:1.5; margin:0; }
-    .feature { border:1px solid var(--line); border-radius:14px; padding:1.2rem; margin:1rem 0; background:linear-gradient(90deg,#fff,#fbfcfd); }
-    .feature-head { display:flex; align-items:baseline; justify-content:space-between; gap:1rem; flex-wrap:wrap; margin-bottom:.3rem; }
-    .feature-head h3 { font-size:1.12rem; margin:0; }
-    .feature .origin { font-size:.8rem; color:var(--muted); margin:.2rem 0 .85rem; }
-    .feature p { margin:.5rem 0 .65rem; }
-    .feature ul { padding-left:1.3rem; margin:.4rem 0 .7rem; }
-    .feature li { margin:.2rem 0; }
-    .feature .outcome { font-weight:600; color:#244d66; margin:.85rem 0 0; }
-    .feature .source { color:var(--muted); font-size:.79rem; border-top:1px solid var(--line); padding-top:.65rem; margin-top:.8rem; }
-    .topic-block { padding:1rem 0; border-top:1px solid var(--line); }
-    .topic-block:first-of-type { border-top:0; }
-    .topic-block h3 { margin:.1rem 0 .55rem; }
-    .topic-block ul { margin:.5rem 0; padding-left:1.3rem; }
-    .topic-block li { margin:.44rem 0; }
-    .path-group { display:flex; flex-wrap:wrap; align-items:center; gap:.5rem; padding:1.1rem 0; border-top:1px solid var(--line); }
-    .path-step { background:#eff4f8; border:1px solid #cfdae3; padding:.3rem .65rem; border-radius:7px; color:#38526b; font-size:.82rem; }
-    .arrow { color:#8697a5; }
-    ol { padding-left:1.45rem; }
-    li { margin:.36rem 0; }
-    .workflow li { margin:.6rem 0; }
-    .actions { display:flex; flex-wrap:wrap; align-items:center; gap:.55rem; margin:1rem 0 1.1rem; }
-    button { font:inherit; cursor:pointer; border:1px solid #bacbd7; color:#244964; background:#f5f9fb; border-radius:9px; padding:.45rem .75rem; font-weight:650; font-size:.85rem; }
-    button:hover { background:#e5f0f6; }
-    button.primary { color:white; background:var(--accent); border-color:var(--accent); }
-    button.primary:hover { background:#183c56; }
-    .progress { height:9px; background:#e6ecf0; border-radius:30px; overflow:hidden; margin:.6rem 0 1rem; }
-    .progress span { display:block; background:#547e9d; height:100%; width:0%; transition:width .2s; }
-    .todo-list { list-style:none; padding:0; margin:0; }
-    .todo-list li { display:flex; align-items:flex-start; gap:.72rem; padding:.7rem .35rem; border-top:1px solid var(--line); }
-    .todo-list li:last-child { border-bottom:1px solid var(--line); }
-    .todo-list input { margin-top:.42rem; accent-color:#3f6a88; width:1.1rem; height:1.1rem; flex-shrink:0; }
-    .todo-list label { display:block; cursor:pointer; flex:1; }
-    .todo-list small { color:var(--muted); display:block; line-height:1.5; margin-top:.15rem; }
-    .todo-list input:checked+label strong { text-decoration:line-through; color:#87929b; }
-    .summary { margin-top:1rem; font-size:.91rem; color:var(--muted); }
-    code { background:#eef2f5; padding:.09rem .3rem; border-radius:5px; overflow-wrap:anywhere; font: .89em/1.6 ui-monospace,SFMono-Regular,Consolas,monospace; }
-    pre { padding:1rem; background:#182938; color:#eaf1f6; overflow-x:auto; border-radius:10px; margin:1rem 0; font-size:.86rem; line-height:1.5; }
-    pre code { background:none; padding:0; color:inherit; overflow-wrap:normal; }
-    .footnotes { font-size:.82rem; color:var(--muted); }
-    .page-footer { text-align:center; max-width:var(--maxw); margin:0 auto; padding:1.5rem 1.2rem 2.5rem; font-size:.85rem; color:var(--muted); border-top:1px solid var(--line); }
-    .small-links { display:flex; flex-wrap:wrap; gap:.5rem 1.1rem; margin-top:.8rem; }
-    .small-links a { font-size:.85rem; }
-    .toplink { display:inline-block; margin-top:.8rem; font-size:.8rem; }
-    @media (max-width:900px){ .layout { grid-template-columns:1fr; } .sidebar { position:static; } .sidebar ul { columns:2; } .findings { grid-template-columns:1fr; } }
-    @media (max-width:650px){ .page-wrap { padding:1rem .7rem 3rem; } .hero { border-radius:14px; } .metrics { grid-template-columns:repeat(2,minmax(0,1fr)); } .sidebar ul { columns:1; } .site-header .inner { padding:.8rem .9rem; } .header-meta { display:none; } .bar-row { grid-template-columns:93px minmax(0,1fr) 25px; font-size:.75rem; } .data-table { font-size:.8rem; } .data-table th,.data-table td { padding:.5rem; } .feature-head { align-items:start; } }
-    @media (prefers-reduced-motion:reduce){ html { scroll-behavior:auto; } .progress span { transition:none; } }
-    @media print { body { background:white; font-size:10.5pt; } .site-header,.sidebar,.actions,.toplink,.skip { display:none!important; } .page-wrap { max-width:none; margin:0; padding:0; } .layout { display:block; } .hero,section.panel { box-shadow:none; border-color:#ccd2d9; break-inside:auto; } .hero { padding:1rem; } section.panel { margin:.6rem 0; padding:1rem; } .feature,.topic-block, .finding, .todo-list li { break-inside:avoid; } h2,h3 { break-after:avoid; } a { color:inherit; text-decoration:none; } .metrics { margin-top:1rem; } .metric strong { font-size:1.4rem; } }
-  </style>
+    <style>
+        :root {
+            --bg: #f7f8fa;
+            --surface: #fff;
+            --surface-alt: #f1f4f7;
+            --text: #202833;
+            --muted: #5d6878;
+            --line: #dce2e8;
+            --link: #315e83;
+            --accent: #244a67;
+            --accent-soft: #e8f1f7;
+            --gold: #b28b4c;
+            --radius: 16px;
+            --maxw: 1240px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 1.5rem;
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
+            font: 16px/1.7 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+        }
+
+        a {
+            color: var(--link);
+            text-underline-offset: .18em;
+        }
+
+        a:hover {
+            color: #123650;
+        }
+
+        a:focus-visible,
+        button:focus-visible,
+        input:focus-visible {
+            outline: 3px solid #73a8cd;
+            outline-offset: 3px;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            line-height: 1.24;
+            text-wrap: balance;
+        }
+
+        h1 {
+            font-size: clamp(2rem, 4vw, 3.55rem);
+            font-weight: 750;
+            letter-spacing: -.045em;
+            max-width: 21ch;
+            margin: .6rem 0 1rem;
+        }
+
+        h2 {
+            font-size: clamp(1.45rem, 2.5vw, 2.05rem);
+            margin: 0 0 1rem;
+            letter-spacing: -.025em;
+        }
+
+        h3 {
+            font-size: 1.17rem;
+            margin: 0 0 .5rem;
+        }
+
+        h4 {
+            font-size: 1.03rem;
+            margin: 1.2rem 0 .45rem;
+        }
+
+        p {
+            margin: .65rem 0 1.1rem;
+        }
+
+        .skip {
+            position: absolute;
+            top: -100px;
+            left: 10px;
+            z-index: 100;
+            background: white;
+            padding: .55rem 1rem;
+        }
+
+        .skip:focus {
+            top: 10px;
+        }
+
+        .site-header {
+            background: var(--surface);
+            border-bottom: 1px solid var(--line);
+        }
+
+        .site-header .inner {
+            max-width: var(--maxw);
+            padding: 1.1rem 1.2rem;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .brand {
+            color: var(--text);
+            font-weight: 750;
+            text-decoration: none;
+            letter-spacing: .01em;
+        }
+
+        .header-meta {
+            font-size: .82rem;
+            color: var(--muted);
+            text-align: right;
+        }
+
+        .page-wrap {
+            max-width: var(--maxw);
+            margin: auto;
+            padding: 1.6rem 1.2rem 4rem;
+        }
+
+        .hero {
+            border-radius: 22px;
+            padding: clamp(1.5rem, 5vw, 3.7rem);
+            background: linear-gradient(126deg, #fff 25%, #eaf1f5 100%);
+            border: 1px solid var(--line);
+            margin-bottom: 1.3rem;
+        }
+
+        .eyebrow {
+            text-transform: uppercase;
+            font-size: .76rem;
+            font-weight: 800;
+            letter-spacing: .13em;
+            color: var(--accent);
+        }
+
+        .lead {
+            color: #475768;
+            max-width: 76ch;
+            font-size: 1.09rem;
+            line-height: 1.75;
+        }
+
+        .meta-line {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: .5rem;
+            margin-top: 1.35rem;
+            font-size: .81rem;
+            color: var(--muted);
+        }
+
+        .tag {
+            border: 1px solid #c6d2dc;
+            background: #f7fafc;
+            border-radius: 20px;
+            padding: .13rem .65rem;
+            display: inline-block;
+            font-size: .77rem;
+            font-weight: 650;
+            color: #38516a;
+            vertical-align: middle;
+        }
+
+        .tag.high {
+            background: #e7f0f6;
+            border-color: #b6cadb;
+            color: #284d67;
+        }
+
+        .tag.mid {
+            background: #f7f4e9;
+            border-color: #e2d5a8;
+            color: #755e2f;
+        }
+
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: .65rem;
+            margin-top: 2rem;
+        }
+
+        .metric {
+            background: rgba(255, 255, 255, .78);
+            border: 1px solid var(--line);
+            border-radius: 13px;
+            padding: .85rem 1rem;
+        }
+
+        .metric strong {
+            display: block;
+            font-size: 1.7rem;
+            line-height: 1.2;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .metric span {
+            display: block;
+            color: var(--muted);
+            font-size: .78rem;
+            line-height: 1.4;
+            padding-top: .3rem;
+        }
+
+        .layout {
+            display: grid;
+            grid-template-columns: minmax(0, 245px) minmax(0, 1fr);
+            align-items: start;
+            gap: 1.35rem;
+        }
+
+        .sidebar {
+            position: sticky;
+            top: 1rem;
+            background: var(--surface);
+            border-radius: 15px;
+            border: 1px solid var(--line);
+            padding: 1.25rem;
+        }
+
+        .sidebar h2 {
+            font-size: .85rem;
+            text-transform: uppercase;
+            letter-spacing: .09em;
+            margin: 0 0 .8rem;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            font-size: .85rem;
+        }
+
+        .sidebar li {
+            margin: .45rem 0;
+            line-height: 1.45;
+        }
+
+        .sidebar a {
+            display: block;
+            color: #4b5c6d;
+            text-decoration: none;
+        }
+
+        .sidebar a:hover {
+            color: var(--accent);
+            text-decoration: underline;
+        }
+
+        .sidebar .nav-footer {
+            color: var(--muted);
+            font-size: .78rem;
+            border-top: 1px solid var(--line);
+            margin-top: 1rem;
+            padding-top: .8rem;
+        }
+
+        main {
+            min-width: 0;
+        }
+
+        section.panel {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            padding: clamp(1.35rem, 3vw, 2.2rem);
+            margin: 0 0 1.25rem;
+            border-radius: 16px;
+        }
+
+        .section-kicker {
+            display: block;
+            color: var(--accent);
+            font-size: .72rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: .13em;
+            margin-bottom: .4rem;
+        }
+
+        .subdued {
+            color: var(--muted);
+        }
+
+        .callout {
+            padding: 1rem 1.15rem;
+            border-left: 4px solid #6c97b5;
+            background: #f2f7fa;
+            border-radius: 0 10px 10px 0;
+            margin: 1.25rem 0;
+        }
+
+        .callout p:last-child {
+            margin-bottom: 0;
+        }
+
+        .callout.warning {
+            background: #fbf8ef;
+            border-color: #b89b59;
+        }
+
+        .rule {
+            border: 0;
+            border-top: 1px solid var(--line);
+            margin: 1.4rem 0;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: .9rem;
+            margin: 1rem 0 1.4rem;
+        }
+
+        .data-table th {
+            background: #eef2f5;
+            font-size: .79rem;
+            letter-spacing: .02em;
+            font-weight: 750;
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: .6rem .75rem;
+            border-bottom: 1px solid var(--line);
+            text-align: left;
+            vertical-align: top;
+        }
+
+        .data-table tr:nth-child(even) td {
+            background: #fafbfc;
+        }
+
+        .table-scroller {
+            overflow-x: auto;
+        }
+
+        .bar-chart {
+            display: grid;
+            gap: .6rem;
+            margin: 1.1rem 0 1.2rem;
+        }
+
+        .bar-row {
+            display: grid;
+            grid-template-columns: 115px minmax(0, 1fr) 32px;
+            align-items: center;
+            gap: .65rem;
+            font-size: .84rem;
+        }
+
+        .track {
+            height: 12px;
+            background: #e8edf2;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .fill {
+            height: 100%;
+            display: block;
+            border-radius: 20px;
+            background: #537b9b;
+        }
+
+        .bar-row:nth-child(2) .fill {
+            background: #678ca7;
+        }
+
+        .bar-row:nth-child(n+3) .fill {
+            background: #91a8bc;
+        }
+
+        .number {
+            font-variant-numeric: tabular-nums;
+            text-align: right;
+            font-weight: 700;
+        }
+
+        .findings {
+            display: grid;
+            gap: .75rem;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            margin: 1rem 0;
+        }
+
+        .finding {
+            border: 1px solid var(--line);
+            padding: 1rem;
+            border-radius: 12px;
+            background: #fafbfd;
+        }
+
+        .finding strong {
+            display: block;
+            margin-bottom: .35rem;
+        }
+
+        .finding p {
+            font-size: .86rem;
+            color: var(--muted);
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .feature {
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            padding: 1.2rem;
+            margin: 1rem 0;
+            background: linear-gradient(90deg, #fff, #fbfcfd);
+        }
+
+        .feature-head {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: .3rem;
+        }
+
+        .feature-head h3 {
+            font-size: 1.12rem;
+            margin: 0;
+        }
+
+        .feature .origin {
+            font-size: .8rem;
+            color: var(--muted);
+            margin: .2rem 0 .85rem;
+        }
+
+        .feature p {
+            margin: .5rem 0 .65rem;
+        }
+
+        .feature ul {
+            padding-left: 1.3rem;
+            margin: .4rem 0 .7rem;
+        }
+
+        .feature li {
+            margin: .2rem 0;
+        }
+
+        .feature .outcome {
+            font-weight: 600;
+            color: #244d66;
+            margin: .85rem 0 0;
+        }
+
+        .feature .source {
+            color: var(--muted);
+            font-size: .79rem;
+            border-top: 1px solid var(--line);
+            padding-top: .65rem;
+            margin-top: .8rem;
+        }
+
+        .topic-block {
+            padding: 1rem 0;
+            border-top: 1px solid var(--line);
+        }
+
+        .topic-block:first-of-type {
+            border-top: 0;
+        }
+
+        .topic-block h3 {
+            margin: .1rem 0 .55rem;
+        }
+
+        .topic-block ul {
+            margin: .5rem 0;
+            padding-left: 1.3rem;
+        }
+
+        .topic-block li {
+            margin: .44rem 0;
+        }
+
+        .path-group {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: .5rem;
+            padding: 1.1rem 0;
+            border-top: 1px solid var(--line);
+        }
+
+        .path-step {
+            background: #eff4f8;
+            border: 1px solid #cfdae3;
+            padding: .3rem .65rem;
+            border-radius: 7px;
+            color: #38526b;
+            font-size: .82rem;
+        }
+
+        .arrow {
+            color: #8697a5;
+        }
+
+        ol {
+            padding-left: 1.45rem;
+        }
+
+        li {
+            margin: .36rem 0;
+        }
+
+        .workflow li {
+            margin: .6rem 0;
+        }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: .55rem;
+            margin: 1rem 0 1.1rem;
+        }
+
+        button {
+            font: inherit;
+            cursor: pointer;
+            border: 1px solid #bacbd7;
+            color: #244964;
+            background: #f5f9fb;
+            border-radius: 9px;
+            padding: .45rem .75rem;
+            font-weight: 650;
+            font-size: .85rem;
+        }
+
+        button:hover {
+            background: #e5f0f6;
+        }
+
+        button.primary {
+            color: white;
+            background: var(--accent);
+            border-color: var(--accent);
+        }
+
+        button.primary:hover {
+            background: #183c56;
+        }
+
+        .progress {
+            height: 9px;
+            background: #e6ecf0;
+            border-radius: 30px;
+            overflow: hidden;
+            margin: .6rem 0 1rem;
+        }
+
+        .progress span {
+            display: block;
+            background: #547e9d;
+            height: 100%;
+            width: 0%;
+            transition: width .2s;
+        }
+
+        .todo-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .todo-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: .72rem;
+            padding: .7rem .35rem;
+            border-top: 1px solid var(--line);
+        }
+
+        .todo-list li:last-child {
+            border-bottom: 1px solid var(--line);
+        }
+
+        .todo-list input {
+            margin-top: .42rem;
+            accent-color: #3f6a88;
+            width: 1.1rem;
+            height: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .todo-list label {
+            display: block;
+            cursor: pointer;
+            flex: 1;
+        }
+
+        .todo-list small {
+            color: var(--muted);
+            display: block;
+            line-height: 1.5;
+            margin-top: .15rem;
+        }
+
+        .todo-list input:checked+label strong {
+            text-decoration: line-through;
+            color: #87929b;
+        }
+
+        .summary {
+            margin-top: 1rem;
+            font-size: .91rem;
+            color: var(--muted);
+        }
+
+        code {
+            background: #eef2f5;
+            padding: .09rem .3rem;
+            border-radius: 5px;
+            overflow-wrap: anywhere;
+            font: .89em/1.6 ui-monospace, SFMono-Regular, Consolas, monospace;
+        }
+
+        pre {
+            padding: 1rem;
+            background: #182938;
+            color: #eaf1f6;
+            overflow-x: auto;
+            border-radius: 10px;
+            margin: 1rem 0;
+            font-size: .86rem;
+            line-height: 1.5;
+        }
+
+        pre code {
+            background: none;
+            padding: 0;
+            color: inherit;
+            overflow-wrap: normal;
+        }
+
+        .footnotes {
+            font-size: .82rem;
+            color: var(--muted);
+        }
+
+        .page-footer {
+            text-align: center;
+            max-width: var(--maxw);
+            margin: 0 auto;
+            padding: 1.5rem 1.2rem 2.5rem;
+            font-size: .85rem;
+            color: var(--muted);
+            border-top: 1px solid var(--line);
+        }
+
+        .small-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .5rem 1.1rem;
+            margin-top: .8rem;
+        }
+
+        .small-links a {
+            font-size: .85rem;
+        }
+
+        .toplink {
+            display: inline-block;
+            margin-top: .8rem;
+            font-size: .8rem;
+        }
+
+        @media (max-width:900px) {
+            .layout {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                position: static;
+            }
+
+            .sidebar ul {
+                columns: 2;
+            }
+
+            .findings {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width:650px) {
+            .page-wrap {
+                padding: 1rem .7rem 3rem;
+            }
+
+            .hero {
+                border-radius: 14px;
+            }
+
+            .metrics {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .sidebar ul {
+                columns: 1;
+            }
+
+            .site-header .inner {
+                padding: .8rem .9rem;
+            }
+
+            .header-meta {
+                display: none;
+            }
+
+            .bar-row {
+                grid-template-columns: 93px minmax(0, 1fr) 25px;
+                font-size: .75rem;
+            }
+
+            .data-table {
+                font-size: .8rem;
+            }
+
+            .data-table th,
+            .data-table td {
+                padding: .5rem;
+            }
+
+            .feature-head {
+                align-items: start;
+            }
+        }
+
+        @media (prefers-reduced-motion:reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            .progress span {
+                transition: none;
+            }
+        }
+
+        @media print {
+            body {
+                background: white;
+                font-size: 10.5pt;
+            }
+
+            .site-header,
+            .sidebar,
+            .actions,
+            .toplink,
+            .skip {
+                display: none !important;
+            }
+
+            .page-wrap {
+                max-width: none;
+                margin: 0;
+                padding: 0;
+            }
+
+            .layout {
+                display: block;
+            }
+
+            .hero,
+            section.panel {
+                box-shadow: none;
+                border-color: #ccd2d9;
+                break-inside: auto;
+            }
+
+            .hero {
+                padding: 1rem;
+            }
+
+            section.panel {
+                margin: .6rem 0;
+                padding: 1rem;
+            }
+
+            .feature,
+            .topic-block,
+            .finding,
+            .todo-list li {
+                break-inside: avoid;
+            }
+
+            h2,
+            h3 {
+                break-after: avoid;
+            }
+
+            a {
+                color: inherit;
+                text-decoration: none;
+            }
+
+            .metrics {
+                margin-top: 1rem;
+            }
+
+            .metric strong {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
 </head>
+
 <body>
-  <a class="skip" href="#main">Zum Hauptinhalt springen</a>
-  <header class="site-header" id="top">
-    <div class="inner">
-      <a class="brand" href="index.html" title="Zurück zur Website-Startseite">← Website / Content Strategy</a>
-      <div class="header-meta">Redaktionelle Bestandsaufnahme · 16. Oktober 2026</div>
-    </div>
-  </header>
-  <div class="page-wrap">
-    <section class="hero" aria-labelledby="page-title">
-      <div class="eyebrow">Content-Audit · Wissensarchitektur · Redaktionsplan</div>
-      <h1 id="page-title">Was deiner Website noch fehlt</h1>
-      <p class="lead">Ein umfassender Leitfaden zur inhaltlichen Weiterentwicklung: Welche Erkenntnisse aus dem News-Archiv auf dauerhafte Projektseiten gehören, welche Themen bislang zu kurz kommen und wie daraus eine vernetzte Dokumentations- und Wissensplattform wird.</p>
-      <p class="lead"><strong>Leitgedanke:</strong> News erzählen, <em>was passiert ist</em>. Permanente Seiten erklären, <em>wie es funktioniert, was man gelernt hat und was andere damit anfangen können</em>.</p>
-      <div class="meta-line"><span class="tag">GitHub Pages</span><span class="tag">HTML · CSS · Vanilla JavaScript</span><span class="tag">Bilingual EN/DE</span><span class="tag">Ohne Frameworks</span></div>
-      <div class="metrics" aria-label="Kennzahlen der untersuchten News-Datei">
-        <div class="metric"><strong>140</strong><span>Newsbeiträge</span></div>
-        <div class="metric"><strong>9</strong><span>Themenbereiche</span></div>
-        <div class="metric"><strong>321</strong><span>Bildverweise</span></div>
-        <div class="metric"><strong>10</strong><span>Kalendermonate mit Beiträgen</span></div>
-      </div>
-      <p class="footnotes">Datengrundlage: <code>posts(1).json</code> mit Beiträgen vom 26.01. bis 11.10.2026; ergänzend <code>index.html</code>, <code>sub_categories.md</code>, <code>news.js</code> und <code>main.css</code>. Beurteilt werden die verfügbaren Dateien, nicht sämtliche bereits existierenden Unterseiten.</p>
-    </section>
-
-    <div class="layout">
-      <aside class="sidebar" aria-label="Inhaltsverzeichnis">
-        <h2>Inhaltsverzeichnis</h2>
-        <nav>
-          <ul>
-            <li><a href="#analyse">01 · Bestandsaufnahme</a></li>
-            <li><a href="#prioritaeten">02 · Acht Hauptkandidaten</a></li>
-            <li><a href="#weitere-news">03 · Weitere News-Themen</a></li>
-            <li><a href="#electronics">04 · Electronics</a></li>
-            <li><a href="#code">05 · Code</a></li>
-            <li><a href="#sailing">06 · Sailing</a></li>
-            <li><a href="#astro">07 · Astronomy</a></li>
-            <li><a href="#botanik">08 · Botanics</a></li>
-            <li><a href="#words">09 · Words &amp; Art</a></li>
-            <li><a href="#weitere-kategorien">10 · Weitere Themenfelder</a></li>
-            <li><a href="#architektur">11 · Wissensarchitektur</a></li>
-            <li><a href="#datenqualitaet">12 · JSON-Qualität</a></li>
-            <li><a href="#roadmap">13 · Roadmap</a></li>
-            <li><a href="#umsetzung">14 · Praktische Umsetzung</a></li>
-            <li><a href="#fazit">15 · Fazit</a></li>
-          </ul>
-        </nav>
-        <div class="nav-footer">Ein eigenständiges HTML-Dokument. Die Checkliste funktioniert lokal im Browser und auf GitHub Pages.</div>
-      </aside>
-
-      <main id="main">
-        <section id="analyse" class="panel">
-          <span class="section-kicker">01 · Ausgangslage</span>
-          <h2>Die bisherige Themenverteilung</h2>
-          <p>Die vorhandene <code>posts(1).json</code> enthält <strong>140 eindeutige Beiträge</strong> in neun Hauptkategorien. Die Verteilung ist deutlich unausgewogen – was nicht zwangsläufig ein Fehler ist, sondern eine hilfreiche redaktionelle Beobachtung.</p>
-          <div class="bar-chart" role="img" aria-label="46 Elektronikbeiträge, 35 Botanik, 18 Code, 11 Making, 10 Sailing, je 8 Astro und Outdoor, 3 Nerdism, 1 Words">
-            <div class="bar-row"><span>Electronics</span><div class="track"><span class="fill" style="width:100%"></span></div><span class="number">46</span></div>
-            <div class="bar-row"><span>Botanik</span><div class="track"><span class="fill" style="width:76.1%"></span></div><span class="number">35</span></div>
-            <div class="bar-row"><span>Code</span><div class="track"><span class="fill" style="width:39.1%"></span></div><span class="number">18</span></div>
-            <div class="bar-row"><span>Making</span><div class="track"><span class="fill" style="width:23.9%"></span></div><span class="number">11</span></div>
-            <div class="bar-row"><span>Sailing</span><div class="track"><span class="fill" style="width:21.7%"></span></div><span class="number">10</span></div>
-            <div class="bar-row"><span>Astronomie</span><div class="track"><span class="fill" style="width:17.4%"></span></div><span class="number">8</span></div>
-            <div class="bar-row"><span>Outdoor</span><div class="track"><span class="fill" style="width:17.4%"></span></div><span class="number">8</span></div>
-            <div class="bar-row"><span>Nerdism</span><div class="track"><span class="fill" style="width:6.5%"></span></div><span class="number">3</span></div>
-            <div class="bar-row"><span>Words</span><div class="track"><span class="fill" style="width:2.2%"></span></div><span class="number">1</span></div>
-          </div>
-          <p class="footnotes">Grundlage sind die exakten <code>topic</code>-Werte in der Datei: <code>electronics</code>, <code>botanik</code>, <code>code</code>, <code>making</code>, <code>sailing</code>, <code>astro</code>, <code>outdoor</code>, <code>nerdism</code> und <code>words</code>.</p>
-          <div class="findings">
-            <div class="finding"><strong>Viel dokumentiertes Fachwissen</strong><p>Solar, Meshtastic, Embedded Systems, Pflanzenpflege und Ankern sind bereits zusammenhängende Stoffgebiete – nicht nur Nachrichten.</p></div>
-            <div class="finding"><strong>Wissen verschwindet im Zeitstrom</strong><p>Ein fundierter Artikel wird im Archiv zunehmend von neueren Meldungen überdeckt. Permanente Seiten machen ihn dauerhaft auffindbar.</p></div>
-            <div class="finding"><strong>Breite Interessen, schmale Sichtbarkeit</strong><p>Words &amp; Art, Outdoor, Nerdism und Music erscheinen im Beitragsbestand deutlich schwächer als die Technikthemen.</p></div>
-          </div>
-          <div class="callout"><strong>Redaktionelle Konsequenz:</strong> Die News sollten nicht ersetzt werden. Sie werden zum fortlaufenden Laborjournal; daneben treten stabile Grundlagen-, Projekt- und Übersichtsseiten. Erst die Verbindung beider Ebenen macht den Bestand langfristig wertvoll.</div>
-          <p class="footnotes"><strong>Methodische Grenze:</strong> Eine bestehende Unterseite kann bereits ausführlichen Inhalt enthalten, auch wenn sie hier nicht vollständig geprüft wurde. Deshalb unterscheidet dieser Plan zwischen „neue Seite schaffen“ und „vorhandene Seite vertiefen“.</p>
-          <a class="toplink" href="#top">↑ Nach oben</a>
+    <a class="skip" href="#main">Zum Hauptinhalt springen</a>
+    <header class="site-header" id="top">
+        <div class="inner">
+            <a class="brand" href="index.html" title="Zurück zur Website-Startseite">← Website / Content Strategy</a>
+            <div class="header-meta">Redaktionelle Bestandsaufnahme · 16. Oktober 2026</div>
+        </div>
+    </header>
+    <div class="page-wrap">
+        <section class="hero" aria-labelledby="page-title">
+            <div class="eyebrow">Content-Audit · Wissensarchitektur · Redaktionsplan</div>
+            <h1 id="page-title">Was deiner Website noch fehlt</h1>
+            <p class="lead">Ein umfassender Leitfaden zur inhaltlichen Weiterentwicklung: Welche Erkenntnisse aus dem
+                News-Archiv auf dauerhafte Projektseiten gehören, welche Themen bislang zu kurz kommen und wie daraus
+                eine vernetzte Dokumentations- und Wissensplattform wird.</p>
+            <p class="lead"><strong>Leitgedanke:</strong> News erzählen, <em>was passiert ist</em>. Permanente Seiten
+                erklären, <em>wie es funktioniert, was man gelernt hat und was andere damit anfangen können</em>.</p>
+            <div class="meta-line"><span class="tag">GitHub Pages</span><span class="tag">HTML · CSS · Vanilla
+                    JavaScript</span><span class="tag">Bilingual EN/DE</span><span class="tag">Ohne Frameworks</span>
+            </div>
+            <div class="metrics" aria-label="Kennzahlen der untersuchten News-Datei">
+                <div class="metric"><strong>140</strong><span>Newsbeiträge</span></div>
+                <div class="metric"><strong>9</strong><span>Themenbereiche</span></div>
+                <div class="metric"><strong>321</strong><span>Bildverweise</span></div>
+                <div class="metric"><strong>10</strong><span>Kalendermonate mit Beiträgen</span></div>
+            </div>
+            <p class="footnotes">Datengrundlage: <code>posts(1).json</code> mit Beiträgen vom 26.01. bis 11.10.2026;
+                ergänzend <code>index.html</code>, <code>sub_categories.md</code>, <code>news.js</code> und
+                <code>main.css</code>. Beurteilt werden die verfügbaren Dateien, nicht sämtliche bereits existierenden
+                Unterseiten.</p>
         </section>
 
-        <section id="prioritaeten" class="panel">
-          <span class="section-kicker">02 · Vom News-Archiv zum dauerhaften Wissen</span>
-          <h2>Die acht wichtigsten Kandidaten</h2>
-          <p>Diese Themen haben entweder besonders viele zusammenhängende News oder eine inhaltliche Tiefe, die eine eigenständige Darstellung rechtfertigt. Zu jedem Thema folgen eine sinnvolle Seitenstruktur und die konkreten Anknüpfungspunkte aus deiner Datei.</p>
-          <article class="feature">
-            <div class="feature-head"><h3>1. Solarenergie verstehen – Das kleine Balkonkraftwerk</h3><span class="tag high">Sehr hoch</span></div>
-            <div class="origin">Electronics · <code>solar</code> · 11 Beiträge · permanente Projektdokumentation</div>
-            <p>Aus der achtteiligen Solarversuchsreihe sowie den späteren Erweiterungen mit Seilzug, Sonnenfinder und Handkurbel kann ein vollständiges Lehr- und Praxisprojekt werden.</p>
-            <ul><li><strong>Grundlagen:</strong> Zellenspannung, Reihen-/Parallelschaltung, Solarleistung, Verschattung und Bypasspfade.</li><li><strong>Elektronik:</strong> Spannungsregelung, stabile 5-V-Versorgung, Ladeszenarien und Wirkungsgrad.</li><li><strong>Mechanik:</strong> Montage, Neigungswinkel, Ausrichtung, Seilzugsystem, Sonnenfinder und Handkurbel.</li><li><strong>Messung:</strong> Spannung, Strom, Last, tatsächlicher Ertrag und reproduzierbare Versuche.</li><li><strong>Lessons Learned:</strong> Welche Version funktionierte, welche nicht, welche Iteration wäre sinnvoll?</li></ul>
-            <p class="outcome">Ergebnis: Ein nachvollziehbarer Weg vom Rohmodul zur praktisch nutzbaren Energiequelle.</p>
-            <p class="source">Konkrete Basis: „Part I: A Small Solar Experiment on My Balcony“ (22.03.), „Part IV: From Raw Sunlight to Stable 5.008 V“ (28.03.), „Part VII: What I Would Do Differently“ (07.04.), „Fine Tuning the Sun“ (26.04.) und „A Hand Crank for the Sun“ (24.08.).</p>
-          </article>
-          <article class="feature">
-            <div class="feature-head"><h3>2. Meshtastic &amp; LoRa – Ein autonomes Funknetz</h3><span class="tag high">Sehr hoch</span></div>
-            <div class="origin">Electronics · <code>mesh</code> · 9 Beiträge · Grundlagen + Bauprojekt + Versuchstagebuch</div>
-            <p>Der Bau deiner Heltec-Nodes, die Antennenexperimente und der praktische Funkbetrieb ergeben zusammen ein ausgesprochen ergiebiges Thema.</p>
-            <ul><li>Hardware und Stromversorgung eines mobilen und stationären Nodes; 18650-Akku, Gehäuse, Antenne.</li><li>LoRa-Grundlagen, Polarisation, Sichtverbindung, Fresnel-Zone und Link-Budget.</li><li>RSSI, SNR, Mehrfachzustellungen, ACKs und Grenzen der Nachrichtenpersistenz.</li><li>Reichweitentests und Geländeeinflüsse; Messprotokolle und eigene Karten.</li><li>Weiterentwicklung zu Logging, Store &amp; Forward beziehungsweise einer externen Datenablage.</li></ul>
-            <p class="outcome">Ergebnis: Eine technische Dokumentation, die das Verhalten von Funknetzen aus realen Experimenten erklärt.</p>
-            <p class="source">Konkrete Basis: „Meshtastic — Experimenting with Antenna Positioning“ (16.02.), „Another day - another field experiment“ (20.02.), „Hilltop Link Test“ (06.03.) und „Plabutsch Field Test“ (23.03.).</p>
-          </article>
-          <article class="feature">
-            <div class="feature-head"><h3>3. Arduino-Wetterdisplay – Vom Sensor zum eingebetteten System</h3><span class="tag high">Sehr hoch</span></div>
-            <div class="origin">Electronics · <code>oled_bme</code> · 7 Beiträge als geschlossene Serie</div>
-            <p>Die sieben Teile enthalten bereits ein kohärentes Projekt: Architektur, Messdatenglättung, EEPROM, Zeithaltung und Rendering auf engem Raum.</p>
-            <ul><li>Schaltplan, Bauteilliste und die Rollen von Sensor, RTC, Mikrocontroller und Display.</li><li>Modularer C++-Code, Zustandsmodell und wartbare Schnittstellen.</li><li>Stündliche Mittelwerte, Ringpuffer, Schreibzyklen und Integritätsprüfungen.</li><li>Sommerzeitbehandlung und verlässliche Zeitstempel.</li><li>Darstellung einer 24-Stunden-Historie auf einem 128×32-OLED.</li><li>Vollständiger Quellcode, Fehlerbilder, Testdaten und nächste Iterationen.</li></ul>
-            <p class="outcome">Ergebnis: Ein reproduzierbares, praxisnahes Lehrstück über Embedded Software Engineering.</p>
-            <p class="source">Konkrete Basis: „Weather Display“ Part I bis VII (04.–14.03.2026).</p>
-          </article>
-          <article class="feature">
-            <div class="feature-head"><h3>4. Wetterdaten richtig messen – BME280 und Strahlungsschutz</h3><span class="tag high">Sehr hoch</span></div>
-            <div class="origin">Electronics · <code>bme_meteorology</code> · 4 Beiträge; ergänzt durch <code>outdoor/metorology</code></div>
-            <p>Hier liegt der Unterschied zwischen einem funktionierenden Sensor und einem brauchbaren Messinstrument. Deine Versuche zeigen anschaulich, wie Aufstellort und Sonneneinstrahlung die Daten verfälschen können.</p>
-            <ul><li>Grundlagen der meteorologischen Temperatur- und Luftfeuchtemessung.</li><li>Sensorfehler versus Aufstellungsfehler; Strahlung, Belüftung und Abschattung.</li><li>Bau und Test eines passiven Strahlungsschutzes.</li><li>Messwerte vor und nach einer Änderung vergleichbar visualisieren.</li><li>Python-Auswertung: Zeitreihen, Ausreißer, Glättung und Vergleich mit Referenzstationen.</li></ul>
-            <p class="outcome">Ergebnis: Eine fundierte Anleitung über Messqualität, statt nur eine weitere Sensorbeschreibung.</p>
-            <p class="source">Konkrete Basis: „Smoothing BME280 Data“ (10.08.), „When the BME280 Started Measuring the Sun“ (11.08.), „Building a Small Radiation Shield“ (14.08.), „After the Shield“ (23.08.) und „Watching a Heatwave Arrive“ (01.09.).</p>
-          </article>
-          <article class="feature">
-            <div class="feature-head"><h3>5. Balkonbotanik – Pflanzenlabor mit Jahresverlauf</h3><span class="tag high">Sehr hoch</span></div>
-            <div class="origin">Botanik · 35 Beiträge in mehreren Unterthemen · Pflanzenporträts + Diagnosewissen</div>
-            <p>Viele deiner Pflanzen lassen sich über Monate verfolgen. Besonders wertvoll sind dabei Erholung, Schnitt, Umtopfen, Stressreaktionen und dokumentierte Fehlschläge.</p>
-            <ul><li>Steckbriefe für Himbeere, Ribisel, Feige, Zitrone, Chili, Tomate, Zucchini und weitere Pflanzen.</li><li>Chronologische Pflegelogbücher auf denselben permanenten Seiten.</li><li>Beobachtungen mit Bildern, Datum und dokumentierten Eingriffen.</li><li>Symptome, mögliche Ursachen, Überprüfung und Ergebnis einer Maßnahme.</li><li>Jahresrückblick: Was hat den begrenzten Balkonraum effizient genutzt?</li></ul>
-            <p class="outcome">Ergebnis: Eine empirische, fortlaufende Wissensbasis zum Topf- und Balkongarten.</p>
-            <p class="source">Konkrete Basis: Himbeeren (mehrere Beiträge von Februar bis August), „The Last Comeback“ (28.08.), „One Good Zucchini — Then the Plant Collapsed“ (29.08.), Ribisel-Beiträge und „A Chili Plant Becomes a Colour Chart“ (27.08.).</p>
-          </article>
-          <article class="feature">
-            <div class="feature-head"><h3>6. Funktionaler 3D-Druck – Konstruktion und Fehlerdiagnose</h3><span class="tag high">Hoch</span></div>
-            <div class="origin">Making · <code>3dprint</code> · 11 Beiträge · vorhandene Wissensseite ausbauen</div>
-            <p>Es gibt bereits eine 3D-Druck-Seite im verlinkten Bestand. Sinnvoll ist also deren Ausbau zu einer zentralen Werkstattdokumentation, nicht die Anlage eines redundanten Zweitarchivs.</p>
-            <ul><li>Fusion 360: Skizzen, Parameter, Bauteilkonstruktion und Passungen.</li><li>PLA, Druckorientierung, Layerhöhe, Stützstrukturen und Materialeinsatz.</li><li>Fehlerdiagnose: Überhitzung, Kühlung, Vibration und instabile filigrane Geometrien.</li><li>Fallstudien: Meshtastic-Gehäuse, Katzenklo-Wand, Kühlschrankhalter, Seilzug und Segelbootmodell.</li><li>Downloadbare STL-/3MF-Dateien, Maße, Druckprofile und Änderungen je Revision.</li></ul>
-            <p class="outcome">Ergebnis: Nachvollziehbare funktionale Konstruktionen statt einer bloßen Galerie von Druckerzeugnissen.</p>
-            <p class="source">Konkrete Basis: „When Ventilation Slots Start to ‘Melt’“ (23.02.), „Easy Wins &amp; Hard-Learned Lessons“ (15.04.), „3D-Printed Fridge Shelf Supports“ (21.07.) und „3D-Printed Sailboat Model“ (23.07.).</p>
-          </article>
-          <article class="feature">
-            <div class="feature-head"><h3>7. How This Website Works – Architektur einer statischen Plattform</h3><span class="tag high">Hoch</span></div>
-            <div class="origin">Code · vor allem <code>html</code> · 14 Beiträge · Projekt- und Entwicklerdokumentation</div>
-            <p>Die Website selbst ist längst ein eigenständiges Softwareprojekt: JSON-basierte Beiträge, bilinguales Rendering, eigener Markdown-Parser, Generator, Kategorieseiten und Archiv.</p>
-            <ul><li>Dateistruktur, Komponentenübersicht und Datenfluss von JSON bis DOM.</li><li>Das feste JSON-Schema und die Verwendung von <code>data-*</code>-Filtern.</li><li>Custom Markdown-Rendering, HTML-Escaping und besondere Syntax.</li><li>JSON-Generator mit Live-Vorschau und Validierung.</li><li>GitHub-Pages-Deployment, relative Pfade, Tests und technische Grenzen.</li><li>Lessons Learned: Refactoring, Wartbarkeit und Entscheidungen gegen Frameworks.</li></ul>
-            <p class="outcome">Ergebnis: Ein kleines, vollständig nachvollziehbares Publishing-System als Referenzprojekt.</p>
-            <p class="source">Konkrete Basis: „Building this very Site“ (13.02.), „Web Generator Live“ (14.02.), „Bilingual Posts“ (24.02.), „Refactoring the News System“ (09.04.) und „GitHub Pages — Things You Only Learn“ (06.05.).</p>
-          </article>
-          <article class="feature">
-            <div class="feature-head"><h3>8. Ankern – Von der Praxis zur Physik des Systems</h3><span class="tag high">Hoch</span></div>
-            <div class="origin">Sailing · <code>seamanship</code> · 4 Beiträge · bestehende <code>ankern.html</code> vertiefen</div>
-            <p>Die Ankerserie ist in sich geschlossen und verdient einen prominent zugänglichen Wissensbereich. Weil im Bestand bereits auf eine Ankerseite verwiesen wird, sollte diese als zentrale Dokumentation dienen.</p>
-            <ul><li>Vorbereitung, Anfahrt, Ausbringen, Eingraben und Halteprüfung.</li><li>Kettenlänge im Verhältnis zu Tiefe, Schwell, Schwojraum und Reserven.</li><li>Kettenkurve, Stoßbelastung und die Grenzen der reinen Kettenelastizität.</li><li>Entlastungsstropp beziehungsweise Hahnepot und Lastübertragung auf Klampen.</li><li>Schwojkreis, Nachtwache, Alarmgrenzen und Abbruchkriterien.</li><li>Skizzen und Rechenbeispiele mit klar benannten Annahmen.</li></ul>
-            <p class="outcome">Ergebnis: Ein dauerhaft nützliches seemännisches Nachschlagewerk mit physikalischem Tiefgang.</p>
-            <p class="source">Konkrete Basis: „Anchoring I“ bis „Anchoring IV“ (15., 16., 18. und 19.09.2026).</p>
-          </article>
-          <a class="toplink" href="#top">↑ Nach oben</a>
-        </section>
+        <div class="layout">
+            <aside class="sidebar" aria-label="Inhaltsverzeichnis">
+                <h2>Inhaltsverzeichnis</h2>
+                <nav>
+                    <ul>
+                        <li><a href="#analyse">01 · Bestandsaufnahme</a></li>
+                        <li><a href="#prioritaeten">02 · Acht Hauptkandidaten</a></li>
+                        <li><a href="#weitere-news">03 · Weitere News-Themen</a></li>
+                        <li><a href="#electronics">04 · Electronics</a></li>
+                        <li><a href="#code">05 · Code</a></li>
+                        <li><a href="#sailing">06 · Sailing</a></li>
+                        <li><a href="#astro">07 · Astronomy</a></li>
+                        <li><a href="#botanik">08 · Botanics</a></li>
+                        <li><a href="#words">09 · Words &amp; Art</a></li>
+                        <li><a href="#weitere-kategorien">10 · Weitere Themenfelder</a></li>
+                        <li><a href="#architektur">11 · Wissensarchitektur</a></li>
+                        <li><a href="#datenqualitaet">12 · JSON-Qualität</a></li>
+                        <li><a href="#roadmap">13 · Roadmap</a></li>
+                        <li><a href="#umsetzung">14 · Praktische Umsetzung</a></li>
+                        <li><a href="#fazit">15 · Fazit</a></li>
+                    </ul>
+                </nav>
+                <div class="nav-footer">Ein eigenständiges HTML-Dokument. Die Checkliste funktioniert lokal im Browser
+                    und auf GitHub Pages.</div>
+            </aside>
 
-        <section id="weitere-news" class="panel">
-          <span class="section-kicker">03 · Weitere Themen mit Substanz</span>
-          <h2>Weitere News, die dauerhaft zugänglich sein sollten</h2>
-          <p>Diese Themen benötigen nicht alle eine komplett neue Seite. Oft genügt eine hochwertige permanente Hauptseite, in die man bestehende Nachrichten, Schaltpläne, Messwerte und Downloads strukturiert einbindet.</p>
-          <div class="table-scroller"><table class="data-table">
-            <thead><tr><th scope="col">Thema</th><th scope="col">Inhalt der dauerhaften Seite</th><th scope="col">Priorität</th></tr></thead>
-            <tbody>
-              <tr><td><strong>Arduino &amp; Embedded C++</strong></td><td>Register, Bitoperationen, LEDs, analoge Eingänge, <code>millis()</code>, Ultraschall und Zustandsautomaten; aufbauend aus fünf News.</td><td>Hoch</td></tr>
-              <tr><td><strong>LED-Matrix und Barograph</strong></td><td>Lauftext, Puffer, Fenster, Bildspeicher, Mapping und 24-Stunden-Anzeige im 32×8-Raster.</td><td>Mittel</td></tr>
-              <tr><td><strong>Leiterplattenentwicklung</strong></td><td>Von Leiterbahnen und Lagen über Schaltplan- und Layoutgrundlagen bis zum EAGLE-Workflow und dem Heißer-Draht-Spiel.</td><td>Hoch</td></tr>
-              <tr><td><strong>Heimnetz und NAS</strong></td><td>Ethernet, RJ45, strukturierte Verkabelung, Netzwerkspeicher, RAID-Grenzen und Backup-Strategie; NAS-Inhalte nach Möglichkeit am bestehenden Ort vertiefen.</td><td>Hoch</td></tr>
-              <tr><td><strong>Drohnenfotografie</strong></td><td>Flüge über Plabutsch und Leechwald als Grundlage für Perspektive, Höhe, Licht und cineastische Bewegungen.</td><td>Hoch</td></tr>
-              <tr><td><strong>Segelrevier-Atlas</strong></td><td>Bestehende Routen und Orte ergänzen: Häfen, Buchten, Gegebenheiten, Erfahrungen, Hinweise und eigene Videos.</td><td>Hoch</td></tr>
-              <tr><td><strong>Segelvideo-Workflow</strong></td><td>Von der Aufnahmeplanung über Shotcut-Schnitt, Audio, Farbkorrektur und Storytelling bis zur Veröffentlichung.</td><td>Mittel</td></tr>
-              <tr><td><strong>Praktische Astronomie</strong></td><td>Sternkarten lesen, den saisonalen Himmel verstehen, Planeten beobachten, Beobachtung protokollieren.</td><td>Hoch</td></tr>
-              <tr><td><strong>Motorrad</strong></td><td>Technik, Wartung, Fahreindrücke und Tourendokumentation als Ausbau des Auftaktbeitrags.</td><td>Mittel</td></tr>
-              <tr><td><strong>Pflanzenporträts</strong></td><td>Je Pflanze ein stabiler Steckbrief mit verlinktem Pflege- und Entwicklungsjournal.</td><td>Hoch</td></tr>
-            </tbody>
-          </table></div>
-          <div class="callout"><strong>Auswahlregel:</strong> Ein eigener permanenter Artikel lohnt sich besonders dann, wenn ein Thema wiederholt auftaucht, komplexe Zusammenhänge enthält, häufig nachgeschlagen werden kann oder mehrere deiner Interessen miteinander verbindet.</div>
-        </section>
+            <main id="main">
+                <section id="analyse" class="panel">
+                    <span class="section-kicker">01 · Ausgangslage</span>
+                    <h2>Die bisherige Themenverteilung</h2>
+                    <p>Die vorhandene <code>posts(1).json</code> enthält <strong>140 eindeutige Beiträge</strong> in
+                        neun Hauptkategorien. Die Verteilung ist deutlich unausgewogen – was nicht zwangsläufig ein
+                        Fehler ist, sondern eine hilfreiche redaktionelle Beobachtung.</p>
+                    <div class="bar-chart" role="img"
+                        aria-label="46 Elektronikbeiträge, 35 Botanik, 18 Code, 11 Making, 10 Sailing, je 8 Astro und Outdoor, 3 Nerdism, 1 Words">
+                        <div class="bar-row"><span>Electronics</span>
+                            <div class="track"><span class="fill" style="width:100%"></span></div><span
+                                class="number">46</span>
+                        </div>
+                        <div class="bar-row"><span>Botanik</span>
+                            <div class="track"><span class="fill" style="width:76.1%"></span></div><span
+                                class="number">35</span>
+                        </div>
+                        <div class="bar-row"><span>Code</span>
+                            <div class="track"><span class="fill" style="width:39.1%"></span></div><span
+                                class="number">18</span>
+                        </div>
+                        <div class="bar-row"><span>Making</span>
+                            <div class="track"><span class="fill" style="width:23.9%"></span></div><span
+                                class="number">11</span>
+                        </div>
+                        <div class="bar-row"><span>Sailing</span>
+                            <div class="track"><span class="fill" style="width:21.7%"></span></div><span
+                                class="number">10</span>
+                        </div>
+                        <div class="bar-row"><span>Astronomie</span>
+                            <div class="track"><span class="fill" style="width:17.4%"></span></div><span
+                                class="number">8</span>
+                        </div>
+                        <div class="bar-row"><span>Outdoor</span>
+                            <div class="track"><span class="fill" style="width:17.4%"></span></div><span
+                                class="number">8</span>
+                        </div>
+                        <div class="bar-row"><span>Nerdism</span>
+                            <div class="track"><span class="fill" style="width:6.5%"></span></div><span
+                                class="number">3</span>
+                        </div>
+                        <div class="bar-row"><span>Words</span>
+                            <div class="track"><span class="fill" style="width:2.2%"></span></div><span
+                                class="number">1</span>
+                        </div>
+                    </div>
+                    <p class="footnotes">Grundlage sind die exakten <code>topic</code>-Werte in der Datei:
+                        <code>electronics</code>, <code>botanik</code>, <code>code</code>, <code>making</code>,
+                        <code>sailing</code>, <code>astro</code>, <code>outdoor</code>, <code>nerdism</code> und
+                        <code>words</code>.</p>
+                    <div class="findings">
+                        <div class="finding"><strong>Viel dokumentiertes Fachwissen</strong>
+                            <p>Solar, Meshtastic, Embedded Systems, Pflanzenpflege und Ankern sind bereits
+                                zusammenhängende Stoffgebiete – nicht nur Nachrichten.</p>
+                        </div>
+                        <div class="finding"><strong>Wissen verschwindet im Zeitstrom</strong>
+                            <p>Ein fundierter Artikel wird im Archiv zunehmend von neueren Meldungen überdeckt.
+                                Permanente Seiten machen ihn dauerhaft auffindbar.</p>
+                        </div>
+                        <div class="finding"><strong>Breite Interessen, schmale Sichtbarkeit</strong>
+                            <p>Words &amp; Art, Outdoor, Nerdism und Music erscheinen im Beitragsbestand deutlich
+                                schwächer als die Technikthemen.</p>
+                        </div>
+                    </div>
+                    <div class="callout"><strong>Redaktionelle Konsequenz:</strong> Die News sollten nicht ersetzt
+                        werden. Sie werden zum fortlaufenden Laborjournal; daneben treten stabile Grundlagen-, Projekt-
+                        und Übersichtsseiten. Erst die Verbindung beider Ebenen macht den Bestand langfristig wertvoll.
+                    </div>
+                    <p class="footnotes"><strong>Methodische Grenze:</strong> Eine bestehende Unterseite kann bereits
+                        ausführlichen Inhalt enthalten, auch wenn sie hier nicht vollständig geprüft wurde. Deshalb
+                        unterscheidet dieser Plan zwischen „neue Seite schaffen“ und „vorhandene Seite vertiefen“.</p>
+                    <a class="toplink" href="#top">↑ Nach oben</a>
+                </section>
 
-        <section id="electronics" class="panel">
-          <span class="section-kicker">04 · Neue Themen</span>
-          <h2>Electronics – Von Einzelprojekten zur Ingenieurpraxis</h2>
-          <p>Dein Elektronikbereich ist bereits der umfangreichste. Gerade deshalb bietet sich nun eine zweite Ebene an: technische Grundlagen, die nicht nur ein bestimmtes Projekt erklären, sondern bei zukünftigen Projekten immer wieder helfen.</p>
-          <div class="topic-block"><h3>Elektronische Schaltungen verstehen</h3><p>Ohmsches Gesetz praktisch, Spannungsteiler, RC-Glieder, Transistoren, MOSFET-Schalter, Pull-up- und Pull-down-Widerstände, Schutzdioden sowie typische Schaltfehler. Jeweils mit kleinen nachbaubaren Beispielen.</p></div>
-          <div class="topic-block"><h3>Kommunikationsprotokolle – I²C, SPI, UART und CAN</h3><p>Verdrahtung, Busarchitektur, Adressen, Pegel, Timing, Vor- und Nachteile, Messung mit Logic Analyzer und systematische Fehlersuche. Dein I²C-Scanner bildet dafür bereits einen konkreten Einstieg.</p></div>
-          <div class="topic-block"><h3>Akkutechnik und Stromversorgung</h3><p>Li-Ion-Zellen, Ladeverfahren, Schutzschaltungen, DC/DC-Wandler, Ruhestrom, Laufzeitberechnung und Strombudget. Direkte Verbindungen zu Solar, Meshtastic und mobilen Sensoren.</p></div>
-          <div class="topic-block"><h3>Messgeräte und Messunsicherheit</h3><p>Multimeter, Oszilloskop, Logic Analyzer, Messaufbauten, Kalibrierung, Störeinflüsse sowie die Frage, ob ein Wert tatsächlich das misst, was sein Label verspricht.</p></div>
-          <div class="topic-block"><h3>Antennen- und Hochfrequenztechnik</h3><p>Wellenlänge, Polarisation, Antennengewinn, Freiraumdämpfung, Fresnel-Zone, Stehwellenverhältnis und Link-Budget. Besonders geeignet für Diagramme und die Dokumentation eigener LoRa-Versuche.</p></div>
-          <div class="topic-block"><h3>Datenlogging und Telemetrie</h3><p>Abtastrate, Zeitstempel, Speicherung, CSV, JSON, Datenbanken, Validierung, Plausibilitätsprüfung und Langzeitvisualisierung. Eine Brücke von der Hardware zur Software.</p></div>
-          <div class="callout"><strong>Neue Rubrik-Idee:</strong> Ein <em>Elektronik-Fehlerarchiv</em> nach Symptomen statt nach Bauteilen: „Sensor liefert Unsinn“, „I²C-Gerät wird nicht erkannt“, „Mikrocontroller startet neu“, „Akku hält zu kurz“. Für jeden Fall: Symptom → Hypothesen → Tests → Ursache → Lösung.</div>
-          <a class="toplink" href="#top">↑ Nach oben</a>
-        </section>
+                <section id="prioritaeten" class="panel">
+                    <span class="section-kicker">02 · Vom News-Archiv zum dauerhaften Wissen</span>
+                    <h2>Die acht wichtigsten Kandidaten</h2>
+                    <p>Diese Themen haben entweder besonders viele zusammenhängende News oder eine inhaltliche Tiefe,
+                        die eine eigenständige Darstellung rechtfertigt. Zu jedem Thema folgen eine sinnvolle
+                        Seitenstruktur und die konkreten Anknüpfungspunkte aus deiner Datei.</p>
+                    <article class="feature">
+                        <div class="feature-head">
+                            <h3>1. Solarenergie verstehen – Das kleine Balkonkraftwerk</h3><span class="tag high">Sehr
+                                hoch</span>
+                        </div>
+                        <div class="origin">Electronics · <code>solar</code> · 11 Beiträge · permanente
+                            Projektdokumentation</div>
+                        <p>Aus der achtteiligen Solarversuchsreihe sowie den späteren Erweiterungen mit Seilzug,
+                            Sonnenfinder und Handkurbel kann ein vollständiges Lehr- und Praxisprojekt werden.</p>
+                        <ul>
+                            <li><strong>Grundlagen:</strong> Zellenspannung, Reihen-/Parallelschaltung, Solarleistung,
+                                Verschattung und Bypasspfade.</li>
+                            <li><strong>Elektronik:</strong> Spannungsregelung, stabile 5-V-Versorgung, Ladeszenarien
+                                und Wirkungsgrad.</li>
+                            <li><strong>Mechanik:</strong> Montage, Neigungswinkel, Ausrichtung, Seilzugsystem,
+                                Sonnenfinder und Handkurbel.</li>
+                            <li><strong>Messung:</strong> Spannung, Strom, Last, tatsächlicher Ertrag und
+                                reproduzierbare Versuche.</li>
+                            <li><strong>Lessons Learned:</strong> Welche Version funktionierte, welche nicht, welche
+                                Iteration wäre sinnvoll?</li>
+                        </ul>
+                        <p class="outcome">Ergebnis: Ein nachvollziehbarer Weg vom Rohmodul zur praktisch nutzbaren
+                            Energiequelle.</p>
+                        <p class="source">Konkrete Basis: „Part I: A Small Solar Experiment on My Balcony“ (22.03.),
+                            „Part IV: From Raw Sunlight to Stable 5.008 V“ (28.03.), „Part VII: What I Would Do
+                            Differently“ (07.04.), „Fine Tuning the Sun“ (26.04.) und „A Hand Crank for the Sun“
+                            (24.08.).</p>
+                    </article>
+                    <article class="feature">
+                        <div class="feature-head">
+                            <h3>2. Meshtastic &amp; LoRa – Ein autonomes Funknetz</h3><span class="tag high">Sehr
+                                hoch</span>
+                        </div>
+                        <div class="origin">Electronics · <code>mesh</code> · 9 Beiträge · Grundlagen + Bauprojekt +
+                            Versuchstagebuch</div>
+                        <p>Der Bau deiner Heltec-Nodes, die Antennenexperimente und der praktische Funkbetrieb ergeben
+                            zusammen ein ausgesprochen ergiebiges Thema.</p>
+                        <ul>
+                            <li>Hardware und Stromversorgung eines mobilen und stationären Nodes; 18650-Akku, Gehäuse,
+                                Antenne.</li>
+                            <li>LoRa-Grundlagen, Polarisation, Sichtverbindung, Fresnel-Zone und Link-Budget.</li>
+                            <li>RSSI, SNR, Mehrfachzustellungen, ACKs und Grenzen der Nachrichtenpersistenz.</li>
+                            <li>Reichweitentests und Geländeeinflüsse; Messprotokolle und eigene Karten.</li>
+                            <li>Weiterentwicklung zu Logging, Store &amp; Forward beziehungsweise einer externen
+                                Datenablage.</li>
+                        </ul>
+                        <p class="outcome">Ergebnis: Eine technische Dokumentation, die das Verhalten von Funknetzen aus
+                            realen Experimenten erklärt.</p>
+                        <p class="source">Konkrete Basis: „Meshtastic — Experimenting with Antenna Positioning“
+                            (16.02.), „Another day - another field experiment“ (20.02.), „Hilltop Link Test“ (06.03.)
+                            und „Plabutsch Field Test“ (23.03.).</p>
+                    </article>
+                    <article class="feature">
+                        <div class="feature-head">
+                            <h3>3. Arduino-Wetterdisplay – Vom Sensor zum eingebetteten System</h3><span
+                                class="tag high">Sehr hoch</span>
+                        </div>
+                        <div class="origin">Electronics · <code>oled_bme</code> · 7 Beiträge als geschlossene Serie
+                        </div>
+                        <p>Die sieben Teile enthalten bereits ein kohärentes Projekt: Architektur, Messdatenglättung,
+                            EEPROM, Zeithaltung und Rendering auf engem Raum.</p>
+                        <ul>
+                            <li>Schaltplan, Bauteilliste und die Rollen von Sensor, RTC, Mikrocontroller und Display.
+                            </li>
+                            <li>Modularer C++-Code, Zustandsmodell und wartbare Schnittstellen.</li>
+                            <li>Stündliche Mittelwerte, Ringpuffer, Schreibzyklen und Integritätsprüfungen.</li>
+                            <li>Sommerzeitbehandlung und verlässliche Zeitstempel.</li>
+                            <li>Darstellung einer 24-Stunden-Historie auf einem 128×32-OLED.</li>
+                            <li>Vollständiger Quellcode, Fehlerbilder, Testdaten und nächste Iterationen.</li>
+                        </ul>
+                        <p class="outcome">Ergebnis: Ein reproduzierbares, praxisnahes Lehrstück über Embedded Software
+                            Engineering.</p>
+                        <p class="source">Konkrete Basis: „Weather Display“ Part I bis VII (04.–14.03.2026).</p>
+                    </article>
+                    <article class="feature">
+                        <div class="feature-head">
+                            <h3>4. Wetterdaten richtig messen – BME280 und Strahlungsschutz</h3><span
+                                class="tag high">Sehr hoch</span>
+                        </div>
+                        <div class="origin">Electronics · <code>bme_meteorology</code> · 4 Beiträge; ergänzt durch
+                            <code>outdoor/metorology</code></div>
+                        <p>Hier liegt der Unterschied zwischen einem funktionierenden Sensor und einem brauchbaren
+                            Messinstrument. Deine Versuche zeigen anschaulich, wie Aufstellort und Sonneneinstrahlung
+                            die Daten verfälschen können.</p>
+                        <ul>
+                            <li>Grundlagen der meteorologischen Temperatur- und Luftfeuchtemessung.</li>
+                            <li>Sensorfehler versus Aufstellungsfehler; Strahlung, Belüftung und Abschattung.</li>
+                            <li>Bau und Test eines passiven Strahlungsschutzes.</li>
+                            <li>Messwerte vor und nach einer Änderung vergleichbar visualisieren.</li>
+                            <li>Python-Auswertung: Zeitreihen, Ausreißer, Glättung und Vergleich mit Referenzstationen.
+                            </li>
+                        </ul>
+                        <p class="outcome">Ergebnis: Eine fundierte Anleitung über Messqualität, statt nur eine weitere
+                            Sensorbeschreibung.</p>
+                        <p class="source">Konkrete Basis: „Smoothing BME280 Data“ (10.08.), „When the BME280 Started
+                            Measuring the Sun“ (11.08.), „Building a Small Radiation Shield“ (14.08.), „After the
+                            Shield“ (23.08.) und „Watching a Heatwave Arrive“ (01.09.).</p>
+                    </article>
+                    <article class="feature">
+                        <div class="feature-head">
+                            <h3>5. Balkonbotanik – Pflanzenlabor mit Jahresverlauf</h3><span class="tag high">Sehr
+                                hoch</span>
+                        </div>
+                        <div class="origin">Botanik · 35 Beiträge in mehreren Unterthemen · Pflanzenporträts +
+                            Diagnosewissen</div>
+                        <p>Viele deiner Pflanzen lassen sich über Monate verfolgen. Besonders wertvoll sind dabei
+                            Erholung, Schnitt, Umtopfen, Stressreaktionen und dokumentierte Fehlschläge.</p>
+                        <ul>
+                            <li>Steckbriefe für Himbeere, Ribisel, Feige, Zitrone, Chili, Tomate, Zucchini und weitere
+                                Pflanzen.</li>
+                            <li>Chronologische Pflegelogbücher auf denselben permanenten Seiten.</li>
+                            <li>Beobachtungen mit Bildern, Datum und dokumentierten Eingriffen.</li>
+                            <li>Symptome, mögliche Ursachen, Überprüfung und Ergebnis einer Maßnahme.</li>
+                            <li>Jahresrückblick: Was hat den begrenzten Balkonraum effizient genutzt?</li>
+                        </ul>
+                        <p class="outcome">Ergebnis: Eine empirische, fortlaufende Wissensbasis zum Topf- und
+                            Balkongarten.</p>
+                        <p class="source">Konkrete Basis: Himbeeren (mehrere Beiträge von Februar bis August), „The Last
+                            Comeback“ (28.08.), „One Good Zucchini — Then the Plant Collapsed“ (29.08.),
+                            Ribisel-Beiträge und „A Chili Plant Becomes a Colour Chart“ (27.08.).</p>
+                    </article>
+                    <article class="feature">
+                        <div class="feature-head">
+                            <h3>6. Funktionaler 3D-Druck – Konstruktion und Fehlerdiagnose</h3><span
+                                class="tag high">Hoch</span>
+                        </div>
+                        <div class="origin">Making · <code>3dprint</code> · 11 Beiträge · vorhandene Wissensseite
+                            ausbauen</div>
+                        <p>Es gibt bereits eine 3D-Druck-Seite im verlinkten Bestand. Sinnvoll ist also deren Ausbau zu
+                            einer zentralen Werkstattdokumentation, nicht die Anlage eines redundanten Zweitarchivs.</p>
+                        <ul>
+                            <li>Fusion 360: Skizzen, Parameter, Bauteilkonstruktion und Passungen.</li>
+                            <li>PLA, Druckorientierung, Layerhöhe, Stützstrukturen und Materialeinsatz.</li>
+                            <li>Fehlerdiagnose: Überhitzung, Kühlung, Vibration und instabile filigrane Geometrien.</li>
+                            <li>Fallstudien: Meshtastic-Gehäuse, Katzenklo-Wand, Kühlschrankhalter, Seilzug und
+                                Segelbootmodell.</li>
+                            <li>Downloadbare STL-/3MF-Dateien, Maße, Druckprofile und Änderungen je Revision.</li>
+                        </ul>
+                        <p class="outcome">Ergebnis: Nachvollziehbare funktionale Konstruktionen statt einer bloßen
+                            Galerie von Druckerzeugnissen.</p>
+                        <p class="source">Konkrete Basis: „When Ventilation Slots Start to ‘Melt’“ (23.02.), „Easy Wins
+                            &amp; Hard-Learned Lessons“ (15.04.), „3D-Printed Fridge Shelf Supports“ (21.07.) und
+                            „3D-Printed Sailboat Model“ (23.07.).</p>
+                    </article>
+                    <article class="feature">
+                        <div class="feature-head">
+                            <h3>7. How This Website Works – Architektur einer statischen Plattform</h3><span
+                                class="tag high">Hoch</span>
+                        </div>
+                        <div class="origin">Code · vor allem <code>html</code> · 14 Beiträge · Projekt- und
+                            Entwicklerdokumentation</div>
+                        <p>Die Website selbst ist längst ein eigenständiges Softwareprojekt: JSON-basierte Beiträge,
+                            bilinguales Rendering, eigener Markdown-Parser, Generator, Kategorieseiten und Archiv.</p>
+                        <ul>
+                            <li>Dateistruktur, Komponentenübersicht und Datenfluss von JSON bis DOM.</li>
+                            <li>Das feste JSON-Schema und die Verwendung von <code>data-*</code>-Filtern.</li>
+                            <li>Custom Markdown-Rendering, HTML-Escaping und besondere Syntax.</li>
+                            <li>JSON-Generator mit Live-Vorschau und Validierung.</li>
+                            <li>GitHub-Pages-Deployment, relative Pfade, Tests und technische Grenzen.</li>
+                            <li>Lessons Learned: Refactoring, Wartbarkeit und Entscheidungen gegen Frameworks.</li>
+                        </ul>
+                        <p class="outcome">Ergebnis: Ein kleines, vollständig nachvollziehbares Publishing-System als
+                            Referenzprojekt.</p>
+                        <p class="source">Konkrete Basis: „Building this very Site“ (13.02.), „Web Generator Live“
+                            (14.02.), „Bilingual Posts“ (24.02.), „Refactoring the News System“ (09.04.) und „GitHub
+                            Pages — Things You Only Learn“ (06.05.).</p>
+                    </article>
+                    <article class="feature">
+                        <div class="feature-head">
+                            <h3>8. Ankern – Von der Praxis zur Physik des Systems</h3><span class="tag high">Hoch</span>
+                        </div>
+                        <div class="origin">Sailing · <code>seamanship</code> · 4 Beiträge · bestehende
+                            <code>ankern.html</code> vertiefen</div>
+                        <p>Die Ankerserie ist in sich geschlossen und verdient einen prominent zugänglichen
+                            Wissensbereich. Weil im Bestand bereits auf eine Ankerseite verwiesen wird, sollte diese als
+                            zentrale Dokumentation dienen.</p>
+                        <ul>
+                            <li>Vorbereitung, Anfahrt, Ausbringen, Eingraben und Halteprüfung.</li>
+                            <li>Kettenlänge im Verhältnis zu Tiefe, Schwell, Schwojraum und Reserven.</li>
+                            <li>Kettenkurve, Stoßbelastung und die Grenzen der reinen Kettenelastizität.</li>
+                            <li>Entlastungsstropp beziehungsweise Hahnepot und Lastübertragung auf Klampen.</li>
+                            <li>Schwojkreis, Nachtwache, Alarmgrenzen und Abbruchkriterien.</li>
+                            <li>Skizzen und Rechenbeispiele mit klar benannten Annahmen.</li>
+                        </ul>
+                        <p class="outcome">Ergebnis: Ein dauerhaft nützliches seemännisches Nachschlagewerk mit
+                            physikalischem Tiefgang.</p>
+                        <p class="source">Konkrete Basis: „Anchoring I“ bis „Anchoring IV“ (15., 16., 18. und
+                            19.09.2026).</p>
+                    </article>
+                    <a class="toplink" href="#top">↑ Nach oben</a>
+                </section>
 
-        <section id="code" class="panel">
-          <span class="section-kicker">05 · Neue Themen</span>
-          <h2>Code – Die Übergänge zwischen Technologien dokumentieren</h2>
-          <p>Die vorhandenen HTML-, CSS-, Python- und C++-Hilfen bilden ein Fundament. Besonders lohnend ist jetzt die Dokumentation von Workflows, mit denen daraus wartbare Anwendungen entstehen.</p>
-          <div class="table-scroller"><table class="data-table"><thead><tr><th>Vorgeschlagene Seite</th><th>Ausbaurichtung</th></tr></thead><tbody>
-            <tr><td><strong>Git &amp; GitHub</strong></td><td>Commits, Branches, Merge, Konflikte, Pull Requests, Tags, Releases und sinnvolle Projektgeschichte.</td></tr>
-            <tr><td><strong>JavaScript in der Praxis</strong></td><td>DOM, Events, Module, <code>fetch()</code>, Promises, <code>async/await</code>, Fehlerbehandlung, <code>localStorage</code>.</td></tr>
-            <tr><td><strong>JSON für kleine Websites</strong></td><td>Schema, Validierung, Grenzen, Datenmigration, automatische Erzeugung und clientseitige Suche.</td></tr>
-            <tr><td><strong>Systematisches Debugging</strong></td><td>DevTools, Breakpoints, Konsole, Netzwerkanalyse, Minimalbeispiele und reproduzierbare Tests.</td></tr>
-            <tr><td><strong>Accessibility und SEO</strong></td><td>Semantisches HTML, Tastaturbedienung, Kontraste, Sprachkennzeichnung, Metadaten und Performance.</td></tr>
-            <tr><td><strong>Python-Automatisierung</strong></td><td>JSON/CSV verarbeiten, Dateisystem organisieren, Daten auswerten, wiederkehrende Aufgaben skripten.</td></tr>
-            <tr><td><strong>GitHub Actions</strong></td><td>Validieren, Links prüfen, Inhaltsverzeichnis generieren und statische Daten aktualisieren.</td></tr>
-          </tbody></table></div>
-          <h3>Flaggschiffidee: From Sensor to Website</h3>
-          <p>Das Vorhaben hast du in „A Thought for Later: Live Weather Data from the Raspberry Pi“ vom 11. Oktober bereits angedacht. Es verdient eine permanente Projektseite, sobald du den Aufbau umsetzt.</p>
-          <ol class="workflow"><li>Ein BME280 oder vergleichbarer Sensor erfasst Messwerte am Raspberry Pi.</li><li>Ein Python-Skript bereitet die Werte samt Zeitstempel auf und schreibt eine kleine JSON-Datei.</li><li>Ein geplanter Veröffentlichungsprozess überträgt die Daten ins Repository oder in eine andere statisch erreichbare Datenquelle.</li><li>Vanilla JavaScript lädt die JSON-Datei und zeigt aktuelle Werte sowie eine kleine Zeitreihe an.</li><li>Die Website kennzeichnet Zeitpunkt, Messintervall, Aktualisierungszustand und Sensorstandort auf angemessen allgemeiner Ebene.</li></ol>
-          <p>Die Architektur bleibt statisch. Eine regelmäßige Veröffentlichung der Daten ist dennoch erforderlich; GitHub Pages führt selbst keinen Python-Code auf dem Server aus.</p>
-        </section>
+                <section id="weitere-news" class="panel">
+                    <span class="section-kicker">03 · Weitere Themen mit Substanz</span>
+                    <h2>Weitere News, die dauerhaft zugänglich sein sollten</h2>
+                    <p>Diese Themen benötigen nicht alle eine komplett neue Seite. Oft genügt eine hochwertige
+                        permanente Hauptseite, in die man bestehende Nachrichten, Schaltpläne, Messwerte und Downloads
+                        strukturiert einbindet.</p>
+                    <div class="table-scroller">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Thema</th>
+                                    <th scope="col">Inhalt der dauerhaften Seite</th>
+                                    <th scope="col">Priorität</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Arduino &amp; Embedded C++</strong></td>
+                                    <td>Register, Bitoperationen, LEDs, analoge Eingänge, <code>millis()</code>,
+                                        Ultraschall und Zustandsautomaten; aufbauend aus fünf News.</td>
+                                    <td>Hoch</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>LED-Matrix und Barograph</strong></td>
+                                    <td>Lauftext, Puffer, Fenster, Bildspeicher, Mapping und 24-Stunden-Anzeige im
+                                        32×8-Raster.</td>
+                                    <td>Mittel</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Leiterplattenentwicklung</strong></td>
+                                    <td>Von Leiterbahnen und Lagen über Schaltplan- und Layoutgrundlagen bis zum
+                                        EAGLE-Workflow und dem Heißer-Draht-Spiel.</td>
+                                    <td>Hoch</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Heimnetz und NAS</strong></td>
+                                    <td>Ethernet, RJ45, strukturierte Verkabelung, Netzwerkspeicher, RAID-Grenzen und
+                                        Backup-Strategie; NAS-Inhalte nach Möglichkeit am bestehenden Ort vertiefen.
+                                    </td>
+                                    <td>Hoch</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Drohnenfotografie</strong></td>
+                                    <td>Flüge über Plabutsch und Leechwald als Grundlage für Perspektive, Höhe, Licht
+                                        und cineastische Bewegungen.</td>
+                                    <td>Hoch</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Segelrevier-Atlas</strong></td>
+                                    <td>Bestehende Routen und Orte ergänzen: Häfen, Buchten, Gegebenheiten, Erfahrungen,
+                                        Hinweise und eigene Videos.</td>
+                                    <td>Hoch</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Segelvideo-Workflow</strong></td>
+                                    <td>Von der Aufnahmeplanung über Shotcut-Schnitt, Audio, Farbkorrektur und
+                                        Storytelling bis zur Veröffentlichung.</td>
+                                    <td>Mittel</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Praktische Astronomie</strong></td>
+                                    <td>Sternkarten lesen, den saisonalen Himmel verstehen, Planeten beobachten,
+                                        Beobachtung protokollieren.</td>
+                                    <td>Hoch</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Motorrad</strong></td>
+                                    <td>Technik, Wartung, Fahreindrücke und Tourendokumentation als Ausbau des
+                                        Auftaktbeitrags.</td>
+                                    <td>Mittel</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Pflanzenporträts</strong></td>
+                                    <td>Je Pflanze ein stabiler Steckbrief mit verlinktem Pflege- und
+                                        Entwicklungsjournal.</td>
+                                    <td>Hoch</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="callout"><strong>Auswahlregel:</strong> Ein eigener permanenter Artikel lohnt sich
+                        besonders dann, wenn ein Thema wiederholt auftaucht, komplexe Zusammenhänge enthält, häufig
+                        nachgeschlagen werden kann oder mehrere deiner Interessen miteinander verbindet.</div>
+                </section>
 
-        <section id="sailing" class="panel">
-          <span class="section-kicker">06 · Neue Themen</span>
-          <h2>Sailing – Viel praktisches Wissen, noch mehr Potenzial</h2>
-          <p>In deinem News-Archiv ist Segeln vor allem durch Videos, Regatten, Revierseiten und zuletzt die Ankerserie sichtbar. Eine dauerhaft gepflegte Fachabteilung könnte erheblich breiter angelegt sein.</p>
-          <div class="topic-block"><h3>Segeltrimm und Manöver</h3><p>Anstellwinkel, Twist, Grossschot, Traveller, Holepunkt, Reffen, Beidrehen, Wende, Halse und Segelbalance. Die Kernfrage: Welche Stellgröße verändert welche Kraft?</p></div>
-          <div class="topic-block"><h3>Navigation und Törnplanung</h3><p>Kartenkunde, Kursberechnung, Abdrift, Strom, Wetterfenster, Revierplanung, Alternativhäfen und Sicherheitsreserven. Idealerweise anhand eigener, bereits gesegelter Routen.</p></div>
-          <div class="topic-block"><h3>Bordelektronik und Instrumentierung</h3><p>12-V-Bordnetz, Energiebedarf, Bordbatterien, AIS, GPS, NMEA 0183/2000, Sensoren und Datenlogging. Ein außergewöhnlich passendes Bindeglied zwischen Sailing und Electronics.</p></div>
-          <div class="topic-block"><h3>Regattawissen für Fahrtensegler</h3><p>Startlinie, Vorstartphase, Winddreher, Wegerecht, Spinnaker, Rollenverteilung und Manöverkoordination. Dein 3D-gedrucktes Segelbootmodell könnte als Anschauungsbeispiel dienen.</p></div>
-          <div class="topic-block"><h3>Segelmeteorologie</h3><p>Bora, Jugo, lokale Windsysteme, Fronten, Böen, Wetterkarten und Ankerplatzwahl. Keine lose Wetterübersicht, sondern Entscheidungen aus der Sicht einer Yachtcrew.</p></div>
-          <div class="topic-block"><h3>Bootspflege und Reparaturen</h3><p>Rigg, Leinen, Beschläge, Motor, Batterien, Korrosion, Gelcoat und kleine Bordarbeiten. Bei technischen Behauptungen Herstellerangaben und eigene Versuche sauber trennen.</p></div>
-          <div class="callout"><strong>Redaktionelle Chance:</strong> Viele Segelseiten schildern Orte. Deine Stärke kann sein, <em>Seemannschaft, Wetter, Physik und Elektronik</em> gemeinsam zu dokumentieren – nachvollziehbar und aus praktischer Erfahrung.</div>
-        </section>
+                <section id="electronics" class="panel">
+                    <span class="section-kicker">04 · Neue Themen</span>
+                    <h2>Electronics – Von Einzelprojekten zur Ingenieurpraxis</h2>
+                    <p>Dein Elektronikbereich ist bereits der umfangreichste. Gerade deshalb bietet sich nun eine zweite
+                        Ebene an: technische Grundlagen, die nicht nur ein bestimmtes Projekt erklären, sondern bei
+                        zukünftigen Projekten immer wieder helfen.</p>
+                    <div class="topic-block">
+                        <h3>Elektronische Schaltungen verstehen</h3>
+                        <p>Ohmsches Gesetz praktisch, Spannungsteiler, RC-Glieder, Transistoren, MOSFET-Schalter,
+                            Pull-up- und Pull-down-Widerstände, Schutzdioden sowie typische Schaltfehler. Jeweils mit
+                            kleinen nachbaubaren Beispielen.</p>
+                    </div>
+                    <div class="topic-block">
+                        <h3>Kommunikationsprotokolle – I²C, SPI, UART und CAN</h3>
+                        <p>Verdrahtung, Busarchitektur, Adressen, Pegel, Timing, Vor- und Nachteile, Messung mit Logic
+                            Analyzer und systematische Fehlersuche. Dein I²C-Scanner bildet dafür bereits einen
+                            konkreten Einstieg.</p>
+                    </div>
+                    <div class="topic-block">
+                        <h3>Akkutechnik und Stromversorgung</h3>
+                        <p>Li-Ion-Zellen, Ladeverfahren, Schutzschaltungen, DC/DC-Wandler, Ruhestrom, Laufzeitberechnung
+                            und Strombudget. Direkte Verbindungen zu Solar, Meshtastic und mobilen Sensoren.</p>
+                    </div>
+                    <div class="topic-block">
+                        <h3>Messgeräte und Messunsicherheit</h3>
+                        <p>Multimeter, Oszilloskop, Logic Analyzer, Messaufbauten, Kalibrierung, Störeinflüsse sowie die
+                            Frage, ob ein Wert tatsächlich das misst, was sein Label verspricht.</p>
+                    </div>
+                    <div class="topic-block">
+                        <h3>Antennen- und Hochfrequenztechnik</h3>
+                        <p>Wellenlänge, Polarisation, Antennengewinn, Freiraumdämpfung, Fresnel-Zone,
+                            Stehwellenverhältnis und Link-Budget. Besonders geeignet für Diagramme und die Dokumentation
+                            eigener LoRa-Versuche.</p>
+                    </div>
+                    <div class="topic-block">
+                        <h3>Datenlogging und Telemetrie</h3>
+                        <p>Abtastrate, Zeitstempel, Speicherung, CSV, JSON, Datenbanken, Validierung,
+                            Plausibilitätsprüfung und Langzeitvisualisierung. Eine Brücke von der Hardware zur Software.
+                        </p>
+                    </div>
+                    <div class="callout"><strong>Neue Rubrik-Idee:</strong> Ein <em>Elektronik-Fehlerarchiv</em> nach
+                        Symptomen statt nach Bauteilen: „Sensor liefert Unsinn“, „I²C-Gerät wird nicht erkannt“,
+                        „Mikrocontroller startet neu“, „Akku hält zu kurz“. Für jeden Fall: Symptom → Hypothesen → Tests
+                        → Ursache → Lösung.</div>
+                    <a class="toplink" href="#top">↑ Nach oben</a>
+                </section>
 
-        <section id="astro" class="panel">
-          <span class="section-kicker">07 · Neue Themen</span>
-          <h2>Astronomy – Vom Lexikon zum Beobachtungshandbuch</h2>
-          <p>Der vorhandene Bestand umfasst Planetenbeobachtungen, Sternkarten, den jahreszeitlichen Sternenhimmel und einen Versuch zur Finsternisfotografie. Daraus ließe sich ein sehr anschaulicher Beobachtungsbereich formen.</p>
-          <ul><li><strong>Beobachten mit dem freien Auge und Fernglas:</strong> Welche Objekte sind realistisch sichtbar? Wie hängen Himmelsqualität und Beobachtungserfolg zusammen?</li><li><strong>Teleskop und Optik:</strong> Öffnung, Brennweite, Okulare, sinnvolle Vergrößerung, Auflösungsvermögen, Seeing und Nachführung.</li><li><strong>Deep-Sky-Guide:</strong> Sternhaufen, Nebel und Galaxien mit Beobachtungshinweisen, Schwierigkeitsgrad und Einordnung.</li><li><strong>Astrofotografie:</strong> Smartphone, Kamera, Okularprojektion, Belichtungszeit, Nachführung und Bildverarbeitung.</li><li><strong>Beobachtungslogbuch:</strong> Datum, Ort in grober Form, Objekt, Instrument, Bedingungen, Resultat und eigene Aufnahme.</li><li><strong>Astronomiegeschichte:</strong> Sternbilder als kulturelle Überlieferung, historische Weltbilder und der Weg zur modernen Astronomie.</li></ul>
-          <p>Besonders wertvoll wären Vergleiche zwischen „Was ein Lehrbuchbild zeigt“ und „Was durch mein Instrument tatsächlich erkennbar ist“.</p>
-        </section>
+                <section id="code" class="panel">
+                    <span class="section-kicker">05 · Neue Themen</span>
+                    <h2>Code – Die Übergänge zwischen Technologien dokumentieren</h2>
+                    <p>Die vorhandenen HTML-, CSS-, Python- und C++-Hilfen bilden ein Fundament. Besonders lohnend ist
+                        jetzt die Dokumentation von Workflows, mit denen daraus wartbare Anwendungen entstehen.</p>
+                    <div class="table-scroller">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Vorgeschlagene Seite</th>
+                                    <th>Ausbaurichtung</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Git &amp; GitHub</strong></td>
+                                    <td>Commits, Branches, Merge, Konflikte, Pull Requests, Tags, Releases und sinnvolle
+                                        Projektgeschichte.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>JavaScript in der Praxis</strong></td>
+                                    <td>DOM, Events, Module, <code>fetch()</code>, Promises, <code>async/await</code>,
+                                        Fehlerbehandlung, <code>localStorage</code>.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>JSON für kleine Websites</strong></td>
+                                    <td>Schema, Validierung, Grenzen, Datenmigration, automatische Erzeugung und
+                                        clientseitige Suche.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Systematisches Debugging</strong></td>
+                                    <td>DevTools, Breakpoints, Konsole, Netzwerkanalyse, Minimalbeispiele und
+                                        reproduzierbare Tests.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Accessibility und SEO</strong></td>
+                                    <td>Semantisches HTML, Tastaturbedienung, Kontraste, Sprachkennzeichnung, Metadaten
+                                        und Performance.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Python-Automatisierung</strong></td>
+                                    <td>JSON/CSV verarbeiten, Dateisystem organisieren, Daten auswerten, wiederkehrende
+                                        Aufgaben skripten.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>GitHub Actions</strong></td>
+                                    <td>Validieren, Links prüfen, Inhaltsverzeichnis generieren und statische Daten
+                                        aktualisieren.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <h3>Flaggschiffidee: From Sensor to Website</h3>
+                    <p>Das Vorhaben hast du in „A Thought for Later: Live Weather Data from the Raspberry Pi“ vom 11.
+                        Oktober bereits angedacht. Es verdient eine permanente Projektseite, sobald du den Aufbau
+                        umsetzt.</p>
+                    <ol class="workflow">
+                        <li>Ein BME280 oder vergleichbarer Sensor erfasst Messwerte am Raspberry Pi.</li>
+                        <li>Ein Python-Skript bereitet die Werte samt Zeitstempel auf und schreibt eine kleine
+                            JSON-Datei.</li>
+                        <li>Ein geplanter Veröffentlichungsprozess überträgt die Daten ins Repository oder in eine
+                            andere statisch erreichbare Datenquelle.</li>
+                        <li>Vanilla JavaScript lädt die JSON-Datei und zeigt aktuelle Werte sowie eine kleine Zeitreihe
+                            an.</li>
+                        <li>Die Website kennzeichnet Zeitpunkt, Messintervall, Aktualisierungszustand und Sensorstandort
+                            auf angemessen allgemeiner Ebene.</li>
+                    </ol>
+                    <p>Die Architektur bleibt statisch. Eine regelmäßige Veröffentlichung der Daten ist dennoch
+                        erforderlich; GitHub Pages führt selbst keinen Python-Code auf dem Server aus.</p>
+                </section>
 
-        <section id="botanik" class="panel">
-          <span class="section-kicker">08 · Neue Themen</span>
-          <h2>Botanics – Weg von der isolierten Einzelpflanze</h2>
-          <p>Für die einzelnen Pflanzen gibt es reichlich Material. Zusätzlich braucht es übergreifende Erklärseiten, auf die alle Steckbriefe verweisen können.</p>
-          <div class="table-scroller"><table class="data-table"><thead><tr><th>Thema</th><th>Leitfragen</th></tr></thead><tbody>
-            <tr><td><strong>Pflanzenerde und Substrate</strong></td><td>Was bewirken mineralische und organische Anteile, Drainage, Struktur und pH-Wert?</td></tr>
-            <tr><td><strong>Pflanzenkrankheiten erkennen</strong></td><td>Wie lassen sich Schädlinge, Mangel, Hitze, Nässe und Wurzelstress unterscheiden?</td></tr>
-            <tr><td><strong>Nährstoffe und Düngung</strong></td><td>Welche Rolle spielen N, P, K und Spurenelemente? Wie erkennt man Überversorgung?</td></tr>
-            <tr><td><strong>Bewässerung</strong></td><td>Woran erkennt man tatsächlichen Wasserbedarf? Welche Rolle spielen Gefäßgröße, Wetter und Substrat?</td></tr>
-            <tr><td><strong>Stecklinge und Vermehrung</strong></td><td>Wann schneiden, wie bewurzeln, wie dokumentiert man den Erfolg?</td></tr>
-            <tr><td><strong>Balkon als Versuchslabor</strong></td><td>Wie lassen sich Standort, Pflege, Wachstum und Ertrag über mehrere Saisonen vergleichen?</td></tr>
-          </tbody></table></div>
-          <div class="callout"><strong>Konkretes Werkzeug:</strong> Eine Pflanzen-Diagnosematrix nach dem Schema <em>Symptom → mögliche Ursachen → Prüfung → Maßnahme → Ergebnis</em>. Gerade Misserfolge – etwa bei Himbeere oder Zucchini – werden so zu dauerhaft brauchbarem Erfahrungswissen.</div>
-        </section>
+                <section id="sailing" class="panel">
+                    <span class="section-kicker">06 · Neue Themen</span>
+                    <h2>Sailing – Viel praktisches Wissen, noch mehr Potenzial</h2>
+                    <p>In deinem News-Archiv ist Segeln vor allem durch Videos, Regatten, Revierseiten und zuletzt die
+                        Ankerserie sichtbar. Eine dauerhaft gepflegte Fachabteilung könnte erheblich breiter angelegt
+                        sein.</p>
+                    <div class="topic-block">
+                        <h3>Segeltrimm und Manöver</h3>
+                        <p>Anstellwinkel, Twist, Grossschot, Traveller, Holepunkt, Reffen, Beidrehen, Wende, Halse und
+                            Segelbalance. Die Kernfrage: Welche Stellgröße verändert welche Kraft?</p>
+                    </div>
+                    <div class="topic-block">
+                        <h3>Navigation und Törnplanung</h3>
+                        <p>Kartenkunde, Kursberechnung, Abdrift, Strom, Wetterfenster, Revierplanung, Alternativhäfen
+                            und Sicherheitsreserven. Idealerweise anhand eigener, bereits gesegelter Routen.</p>
+                    </div>
+                    <div class="topic-block">
+                        <h3>Bordelektronik und Instrumentierung</h3>
+                        <p>12-V-Bordnetz, Energiebedarf, Bordbatterien, AIS, GPS, NMEA 0183/2000, Sensoren und
+                            Datenlogging. Ein außergewöhnlich passendes Bindeglied zwischen Sailing und Electronics.</p>
+                    </div>
+                    <div class="topic-block">
+                        <h3>Regattawissen für Fahrtensegler</h3>
+                        <p>Startlinie, Vorstartphase, Winddreher, Wegerecht, Spinnaker, Rollenverteilung und
+                            Manöverkoordination. Dein 3D-gedrucktes Segelbootmodell könnte als Anschauungsbeispiel
+                            dienen.</p>
+                    </div>
+                    <div class="topic-block">
+                        <h3>Segelmeteorologie</h3>
+                        <p>Bora, Jugo, lokale Windsysteme, Fronten, Böen, Wetterkarten und Ankerplatzwahl. Keine lose
+                            Wetterübersicht, sondern Entscheidungen aus der Sicht einer Yachtcrew.</p>
+                    </div>
+                    <div class="topic-block">
+                        <h3>Bootspflege und Reparaturen</h3>
+                        <p>Rigg, Leinen, Beschläge, Motor, Batterien, Korrosion, Gelcoat und kleine Bordarbeiten. Bei
+                            technischen Behauptungen Herstellerangaben und eigene Versuche sauber trennen.</p>
+                    </div>
+                    <div class="callout"><strong>Redaktionelle Chance:</strong> Viele Segelseiten schildern Orte. Deine
+                        Stärke kann sein, <em>Seemannschaft, Wetter, Physik und Elektronik</em> gemeinsam zu
+                        dokumentieren – nachvollziehbar und aus praktischer Erfahrung.</div>
+                </section>
 
-        <section id="words" class="panel">
-          <span class="section-kicker">09 · Die sichtbarste Themenlücke</span>
-          <h2>Words &amp; Art – Der größte ungenutzte Raum</h2>
-          <p>In der JSON-Datei gibt es unter <code>words</code> nur einen Beitrag: „From Footage to Story — Shotcut Quickstart for Sailing Videos“ (02.05., <code>subtopic: video</code>). Das sagt nichts über den tatsächlichen Umfang der statischen Unterseiten, wohl aber über die geringe Sichtbarkeit dieser Kategorie im News-Archiv.</p>
-          <div class="topic-block"><h3>Kreatives Schreiben und Erzähltheorie</h3><p>Figurenentwicklung, Perspektive, Spannung, Dialog, Szenenarchitektur, Metaphern, Stil und Überarbeitung. Ergänzend zu den bereits erstellten Schreibhilfen bieten sich kommentierte Beispiele und kleine Übungen an.</p></div>
-          <div class="topic-block"><h3>Historische Recherche und Quellenkritik</h3><p>Quellentypen, Verlässlichkeit, Kontext, Alltagsgeschichte, historische Karten und die Grenze zwischen belegter Tatsache und literarischer Fiktion.</p></div>
-          <div class="topic-block"><h3>Sprachwissenschaft und Etymologie</h3><p>Bedeutungswandel, Wortherkunft, Dialekte, österreichisches Deutsch, Sprachkontakt, falsche Freunde und rhetorische Wirkung.</p></div>
-          <div class="topic-block"><h3>Rhetorik und öffentliche Kommunikation</h3><p>Verständlichkeit, Framing, Argumentation, Interviewtechnik, Krisenkommunikation, verständliche Fachsprache. Berufliches Erfahrungswissen nur abstrahiert und ohne interne Details veröffentlichen.</p></div>
-          <div class="topic-block"><h3>Philosophie und Psychologie</h3><p>Erkenntnistheorie, Wahrnehmung, Entscheidungsfindung, kognitive Verzerrungen und Sprache als Denkwerkzeug. Lieber präzise Essays als eine beliebige Enzyklopädie.</p></div>
-          <p><strong>Geeignete Essay-Titel:</strong> „Warum wir Geschichten glauben“, „Wie Wörter ihre Bedeutung verändern“, „Wie historische Quellen uns täuschen können“, „Der Unterschied zwischen Beobachtung und Interpretation“.</p>
-          <div class="callout">Diese Rubrik muss nicht nach Beitragszahl mit Electronics konkurrieren. Ihr Gewinn liegt in <strong>gedanklicher Originalität und Tiefe</strong>, nicht in künstlich erzeugter Aktualität.</div>
-        </section>
+                <section id="astro" class="panel">
+                    <span class="section-kicker">07 · Neue Themen</span>
+                    <h2>Astronomy – Vom Lexikon zum Beobachtungshandbuch</h2>
+                    <p>Der vorhandene Bestand umfasst Planetenbeobachtungen, Sternkarten, den jahreszeitlichen
+                        Sternenhimmel und einen Versuch zur Finsternisfotografie. Daraus ließe sich ein sehr
+                        anschaulicher Beobachtungsbereich formen.</p>
+                    <ul>
+                        <li><strong>Beobachten mit dem freien Auge und Fernglas:</strong> Welche Objekte sind
+                            realistisch sichtbar? Wie hängen Himmelsqualität und Beobachtungserfolg zusammen?</li>
+                        <li><strong>Teleskop und Optik:</strong> Öffnung, Brennweite, Okulare, sinnvolle Vergrößerung,
+                            Auflösungsvermögen, Seeing und Nachführung.</li>
+                        <li><strong>Deep-Sky-Guide:</strong> Sternhaufen, Nebel und Galaxien mit Beobachtungshinweisen,
+                            Schwierigkeitsgrad und Einordnung.</li>
+                        <li><strong>Astrofotografie:</strong> Smartphone, Kamera, Okularprojektion, Belichtungszeit,
+                            Nachführung und Bildverarbeitung.</li>
+                        <li><strong>Beobachtungslogbuch:</strong> Datum, Ort in grober Form, Objekt, Instrument,
+                            Bedingungen, Resultat und eigene Aufnahme.</li>
+                        <li><strong>Astronomiegeschichte:</strong> Sternbilder als kulturelle Überlieferung, historische
+                            Weltbilder und der Weg zur modernen Astronomie.</li>
+                    </ul>
+                    <p>Besonders wertvoll wären Vergleiche zwischen „Was ein Lehrbuchbild zeigt“ und „Was durch mein
+                        Instrument tatsächlich erkennbar ist“.</p>
+                </section>
 
-        <section id="weitere-kategorien" class="panel">
-          <span class="section-kicker">10 · Ergänzende Potenziale</span>
-          <h2>Outdoor, Making, Nerdism und Music</h2>
-          <div class="topic-block"><h3>Outdoor</h3><p>Tourenführer für bekannte Wandergebiete, GPS-/GPX-Grundlagen, Navigation, Foto-Standpunkte, saisonale Naturbeobachtung, Wetterdaten aus eigener Messung und Motorradtouren.</p></div>
-          <div class="topic-block"><h3>Making</h3><p>Fusion-360-Grundlagen, parametrisches Konstruieren, Materialkunde, Drucktoleranzen und eine eigene Serie <em>Repair Instead of Replace</em>. Der gedruckte Kühlschrankhalter ist ein besonders greifbares Beispiel.</p></div>
-          <div class="topic-block"><h3>Nerdism</h3><p>Die vorhandenen Gothic-Modding-Beiträge sind ein Auftakt. Vertiefbar wären Daedalus-Scripting, Questdesign, Dialogsysteme, NPC-Routinen, Teststrategien, Toolchains und die Frage, wodurch sich eine glaubwürdige Spielwelt auszeichnet. Optional könnten eigene kleine Gothic-Modding-Beispiele, sauber getrennt von persönlichen Projektdetails, hinzukommen.</p></div>
-          <div class="topic-block"><h3>Music</h3><p>Die Startseite führt Music als Bereich, im analysierten Newsbestand gibt es dazu keine Beiträge. Denkbar wären Musiktheorie, Instrumentenpraxis, Aufnahmetechnik, Musikgeschichte oder Werkbetrachtungen. Ein Ausbau lohnt sich aber nur, wenn du dort wirklich langfristig Inhalte erarbeiten möchtest.</p></div>
-          <p><strong>Grundsatz:</strong> Eine kleine, hervorragend gepflegte Kategorie ist wesentlich besser als eine künstlich befüllte.</p>
-        </section>
+                <section id="botanik" class="panel">
+                    <span class="section-kicker">08 · Neue Themen</span>
+                    <h2>Botanics – Weg von der isolierten Einzelpflanze</h2>
+                    <p>Für die einzelnen Pflanzen gibt es reichlich Material. Zusätzlich braucht es übergreifende
+                        Erklärseiten, auf die alle Steckbriefe verweisen können.</p>
+                    <div class="table-scroller">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Thema</th>
+                                    <th>Leitfragen</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Pflanzenerde und Substrate</strong></td>
+                                    <td>Was bewirken mineralische und organische Anteile, Drainage, Struktur und
+                                        pH-Wert?</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Pflanzenkrankheiten erkennen</strong></td>
+                                    <td>Wie lassen sich Schädlinge, Mangel, Hitze, Nässe und Wurzelstress unterscheiden?
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Nährstoffe und Düngung</strong></td>
+                                    <td>Welche Rolle spielen N, P, K und Spurenelemente? Wie erkennt man Überversorgung?
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Bewässerung</strong></td>
+                                    <td>Woran erkennt man tatsächlichen Wasserbedarf? Welche Rolle spielen Gefäßgröße,
+                                        Wetter und Substrat?</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Stecklinge und Vermehrung</strong></td>
+                                    <td>Wann schneiden, wie bewurzeln, wie dokumentiert man den Erfolg?</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Balkon als Versuchslabor</strong></td>
+                                    <td>Wie lassen sich Standort, Pflege, Wachstum und Ertrag über mehrere Saisonen
+                                        vergleichen?</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="callout"><strong>Konkretes Werkzeug:</strong> Eine Pflanzen-Diagnosematrix nach dem
+                        Schema <em>Symptom → mögliche Ursachen → Prüfung → Maßnahme → Ergebnis</em>. Gerade Misserfolge
+                        – etwa bei Himbeere oder Zucchini – werden so zu dauerhaft brauchbarem Erfahrungswissen.</div>
+                </section>
 
-        <section id="architektur" class="panel">
-          <span class="section-kicker">11 · Informationsarchitektur</span>
-          <h2>Das fehlende Bindeglied: thematische Wissenspfade</h2>
-          <p>Deine stärksten Themen überschneiden sich. Eine feste Kategoriehierarchie bleibt sinnvoll, aber zusätzliche Querverweise eröffnen einen zweiten Zugang: nicht „Welche Rubrik?“, sondern „Welche Frage oder welches Problem?“</p>
-          <div class="path-group"><strong>Solarenergie:</strong><span class="path-step">Solarmodule</span><span class="arrow">→</span><span class="path-step">Spannungsregelung</span><span class="arrow">→</span><span class="path-step">Akkus</span><span class="arrow">→</span><span class="path-step">Meshtastic</span></div>
-          <div class="path-group"><strong>Messtechnik:</strong><span class="path-step">BME280</span><span class="arrow">→</span><span class="path-step">Python</span><span class="arrow">→</span><span class="path-step">Datenanalyse</span><span class="arrow">→</span><span class="path-step">Website</span></div>
-          <div class="path-group"><strong>Segeln:</strong><span class="path-step">Ankern</span><span class="arrow">→</span><span class="path-step">Kräfte &amp; Energie</span><span class="arrow">→</span><span class="path-step">Wetter</span><span class="arrow">→</span><span class="path-step">Törnplanung</span></div>
-          <h3>Empfohlene Struktur für große Projektseiten</h3>
-          <ol class="workflow"><li><strong>Overview:</strong> Was ist das Projekt und welches Problem löst es?</li><li><strong>Fundamentals:</strong> Welche physikalischen oder technischen Grundlagen muss man kennen?</li><li><strong>Build &amp; Implementation:</strong> Bauteile, Schaltpläne, Materialien, Code, mechanischer Aufbau.</li><li><strong>Experiments &amp; Results:</strong> Rohdaten, Messungen, Vergleiche und Fehler.</li><li><strong>Lessons Learned:</strong> Was wurde bestätigt, widerlegt oder verbessert?</li><li><strong>Related News:</strong> Das laufende, automatisch eingebundene Projektjournal.</li><li><strong>Resources:</strong> Dateien, Quellcode, STL/3MF, weiterführende Quellen und Versionen.</li></ol>
-          <h3>Keine News duplizieren – vorhandenes Rendering nutzen</h3>
-          <p>Dein <code>news.js</code> filtert bereits nach exakt passenden <code>topic</code>- und <code>subtopic</code>-Werten. Eine permanente Projektseite kann daher ihre zugehörigen Updates automatisch anfordern:</p>
-          <pre><code>&lt;section class="card"&gt;
+                <section id="words" class="panel">
+                    <span class="section-kicker">09 · Die sichtbarste Themenlücke</span>
+                    <h2>Words &amp; Art – Der größte ungenutzte Raum</h2>
+                    <p>In der JSON-Datei gibt es unter <code>words</code> nur einen Beitrag: „From Footage to Story —
+                        Shotcut Quickstart for Sailing Videos“ (02.05., <code>subtopic: video</code>). Das sagt nichts
+                        über den tatsächlichen Umfang der statischen Unterseiten, wohl aber über die geringe
+                        Sichtbarkeit dieser Kategorie im News-Archiv.</p>
+                    <div class="topic-block">
+                        <h3>Kreatives Schreiben und Erzähltheorie</h3>
+                        <p>Figurenentwicklung, Perspektive, Spannung, Dialog, Szenenarchitektur, Metaphern, Stil und
+                            Überarbeitung. Ergänzend zu den bereits erstellten Schreibhilfen bieten sich kommentierte
+                            Beispiele und kleine Übungen an.</p>
+                    </div>
+                    <div class="topic-block">
+                        <h3>Historische Recherche und Quellenkritik</h3>
+                        <p>Quellentypen, Verlässlichkeit, Kontext, Alltagsgeschichte, historische Karten und die Grenze
+                            zwischen belegter Tatsache und literarischer Fiktion.</p>
+                    </div>
+                    <div class="topic-block">
+                        <h3>Sprachwissenschaft und Etymologie</h3>
+                        <p>Bedeutungswandel, Wortherkunft, Dialekte, österreichisches Deutsch, Sprachkontakt, falsche
+                            Freunde und rhetorische Wirkung.</p>
+                    </div>
+                    <div class="topic-block">
+                        <h3>Rhetorik und öffentliche Kommunikation</h3>
+                        <p>Verständlichkeit, Framing, Argumentation, Interviewtechnik, Krisenkommunikation,
+                            verständliche Fachsprache. Berufliches Erfahrungswissen nur abstrahiert und ohne interne
+                            Details veröffentlichen.</p>
+                    </div>
+                    <div class="topic-block">
+                        <h3>Philosophie und Psychologie</h3>
+                        <p>Erkenntnistheorie, Wahrnehmung, Entscheidungsfindung, kognitive Verzerrungen und Sprache als
+                            Denkwerkzeug. Lieber präzise Essays als eine beliebige Enzyklopädie.</p>
+                    </div>
+                    <p><strong>Geeignete Essay-Titel:</strong> „Warum wir Geschichten glauben“, „Wie Wörter ihre
+                        Bedeutung verändern“, „Wie historische Quellen uns täuschen können“, „Der Unterschied zwischen
+                        Beobachtung und Interpretation“.</p>
+                    <div class="callout">Diese Rubrik muss nicht nach Beitragszahl mit Electronics konkurrieren. Ihr
+                        Gewinn liegt in <strong>gedanklicher Originalität und Tiefe</strong>, nicht in künstlich
+                        erzeugter Aktualität.</div>
+                </section>
+
+                <section id="weitere-kategorien" class="panel">
+                    <span class="section-kicker">10 · Ergänzende Potenziale</span>
+                    <h2>Outdoor, Making, Nerdism und Music</h2>
+                    <div class="topic-block">
+                        <h3>Outdoor</h3>
+                        <p>Tourenführer für bekannte Wandergebiete, GPS-/GPX-Grundlagen, Navigation, Foto-Standpunkte,
+                            saisonale Naturbeobachtung, Wetterdaten aus eigener Messung und Motorradtouren.</p>
+                    </div>
+                    <div class="topic-block">
+                        <h3>Making</h3>
+                        <p>Fusion-360-Grundlagen, parametrisches Konstruieren, Materialkunde, Drucktoleranzen und eine
+                            eigene Serie <em>Repair Instead of Replace</em>. Der gedruckte Kühlschrankhalter ist ein
+                            besonders greifbares Beispiel.</p>
+                    </div>
+                    <div class="topic-block">
+                        <h3>Nerdism</h3>
+                        <p>Die vorhandenen Gothic-Modding-Beiträge sind ein Auftakt. Vertiefbar wären
+                            Daedalus-Scripting, Questdesign, Dialogsysteme, NPC-Routinen, Teststrategien, Toolchains und
+                            die Frage, wodurch sich eine glaubwürdige Spielwelt auszeichnet. Optional könnten eigene
+                            kleine Gothic-Modding-Beispiele, sauber getrennt von persönlichen Projektdetails,
+                            hinzukommen.</p>
+                    </div>
+                    <div class="topic-block">
+                        <h3>Music</h3>
+                        <p>Die Startseite führt Music als Bereich, im analysierten Newsbestand gibt es dazu keine
+                            Beiträge. Denkbar wären Musiktheorie, Instrumentenpraxis, Aufnahmetechnik, Musikgeschichte
+                            oder Werkbetrachtungen. Ein Ausbau lohnt sich aber nur, wenn du dort wirklich langfristig
+                            Inhalte erarbeiten möchtest.</p>
+                    </div>
+                    <p><strong>Grundsatz:</strong> Eine kleine, hervorragend gepflegte Kategorie ist wesentlich besser
+                        als eine künstlich befüllte.</p>
+                </section>
+
+                <section id="architektur" class="panel">
+                    <span class="section-kicker">11 · Informationsarchitektur</span>
+                    <h2>Das fehlende Bindeglied: thematische Wissenspfade</h2>
+                    <p>Deine stärksten Themen überschneiden sich. Eine feste Kategoriehierarchie bleibt sinnvoll, aber
+                        zusätzliche Querverweise eröffnen einen zweiten Zugang: nicht „Welche Rubrik?“, sondern „Welche
+                        Frage oder welches Problem?“</p>
+                    <div class="path-group"><strong>Solarenergie:</strong><span
+                            class="path-step">Solarmodule</span><span class="arrow">→</span><span
+                            class="path-step">Spannungsregelung</span><span class="arrow">→</span><span
+                            class="path-step">Akkus</span><span class="arrow">→</span><span
+                            class="path-step">Meshtastic</span></div>
+                    <div class="path-group"><strong>Messtechnik:</strong><span class="path-step">BME280</span><span
+                            class="arrow">→</span><span class="path-step">Python</span><span class="arrow">→</span><span
+                            class="path-step">Datenanalyse</span><span class="arrow">→</span><span
+                            class="path-step">Website</span></div>
+                    <div class="path-group"><strong>Segeln:</strong><span class="path-step">Ankern</span><span
+                            class="arrow">→</span><span class="path-step">Kräfte &amp; Energie</span><span
+                            class="arrow">→</span><span class="path-step">Wetter</span><span class="arrow">→</span><span
+                            class="path-step">Törnplanung</span></div>
+                    <h3>Empfohlene Struktur für große Projektseiten</h3>
+                    <ol class="workflow">
+                        <li><strong>Overview:</strong> Was ist das Projekt und welches Problem löst es?</li>
+                        <li><strong>Fundamentals:</strong> Welche physikalischen oder technischen Grundlagen muss man
+                            kennen?</li>
+                        <li><strong>Build &amp; Implementation:</strong> Bauteile, Schaltpläne, Materialien, Code,
+                            mechanischer Aufbau.</li>
+                        <li><strong>Experiments &amp; Results:</strong> Rohdaten, Messungen, Vergleiche und Fehler.</li>
+                        <li><strong>Lessons Learned:</strong> Was wurde bestätigt, widerlegt oder verbessert?</li>
+                        <li><strong>Related News:</strong> Das laufende, automatisch eingebundene Projektjournal.</li>
+                        <li><strong>Resources:</strong> Dateien, Quellcode, STL/3MF, weiterführende Quellen und
+                            Versionen.</li>
+                    </ol>
+                    <h3>Keine News duplizieren – vorhandenes Rendering nutzen</h3>
+                    <p>Dein <code>news.js</code> filtert bereits nach exakt passenden <code>topic</code>- und
+                        <code>subtopic</code>-Werten. Eine permanente Projektseite kann daher ihre zugehörigen Updates
+                        automatisch anfordern:</p>
+                    <pre><code>&lt;section class="card"&gt;
   &lt;h2&gt;Projektjournal: Meshtastic&lt;/h2&gt;
   &lt;div data-news-topic="electronics"
        data-news-subtopic="mesh"
@@ -403,131 +1608,266 @@
 &lt;/section&gt;
 
 &lt;script type="module" src="../assets/js/news.js"&gt;&lt;/script&gt;</code></pre>
-          <p class="footnotes">Der relative Skriptpfad ist beispielhaft für eine HTML-Datei eine Ebene unterhalb des Website-Roots. Die URL im vorhandenen <code>news.js</code> wird relativ zum JavaScript-Modul bestimmt; die Datenfilter selbst ändern sich dadurch nicht. Für eine andere Ablage den Pfad entsprechend anpassen.</p>
-          <h3>Was auf der Startseite passieren sollte</h3>
-          <p>Die bisherige Startseite zeigt Kacheln für die Hauptbereiche und die drei neuesten Beiträge. Das ist als Einstieg gut; zusätzlich wäre ein kompakter Bereich <em>Featured Projects</em> sinnvoll: Solar, Meshtastic, Wetterstation und ein wechselndes Projekt aus anderen Kategorien. So gelangen Besucher direkt zu bleibenden Inhalten, statt nur in den jüngsten News zu landen.</p>
-        </section>
+                    <p class="footnotes">Der relative Skriptpfad ist beispielhaft für eine HTML-Datei eine Ebene
+                        unterhalb des Website-Roots. Die URL im vorhandenen <code>news.js</code> wird relativ zum
+                        JavaScript-Modul bestimmt; die Datenfilter selbst ändern sich dadurch nicht. Für eine andere
+                        Ablage den Pfad entsprechend anpassen.</p>
+                    <h3>Was auf der Startseite passieren sollte</h3>
+                    <p>Die bisherige Startseite zeigt Kacheln für die Hauptbereiche und die drei neuesten Beiträge. Das
+                        ist als Einstieg gut; zusätzlich wäre ein kompakter Bereich <em>Featured Projects</em> sinnvoll:
+                        Solar, Meshtastic, Wetterstation und ein wechselndes Projekt aus anderen Kategorien. So gelangen
+                        Besucher direkt zu bleibenden Inhalten, statt nur in den jüngsten News zu landen.</p>
+                </section>
 
-        <section id="datenqualitaet" class="panel">
-          <span class="section-kicker">12 · Redaktionelle und technische Qualität</span>
-          <h2>Kleine Inkonsistenzen mit großer Wirkung</h2>
-          <p>Die JSON-Datei ist grundsätzlich gut auswertbar: 140 eindeutige IDs, vollständige deutsche und englische Inhaltstexte und ein konsistentes Hauptschema. Es gibt aber Metadatenpunkte, die die Navigation und Auffindbarkeit beeinträchtigen können.</p>
-          <div class="table-scroller"><table class="data-table"><thead><tr><th>Beobachtung</th><th>Empfohlene Prüfung</th></tr></thead><tbody>
-            <tr><td><code>botanik/ribisl</code> und <code>botanik/ribisel</code></td><td>Gleicher Sachbereich, zwei verschiedene Filterwerte. Einen kanonischen Wert festlegen und bestehende Filter prüfen.</td></tr>
-            <tr><td><code>botanik/cucumber</code> für Zucchini-Beiträge</td><td>Inhaltliche Bezeichnung prüfen; bei Umbenennung alle Kategorienfilter gemeinsam anpassen.</td></tr>
-            <tr><td><code>outdoor/metorology</code></td><td>Schreibweise kontrollieren; bei einer Migration alte und neue Werte nicht versehentlich mischen.</td></tr>
-            <tr><td><code>astro</code> im JSON, „Astronomy“ auf der Startseite</td><td>Der Anzeigename darf anders lauten. Entscheidend ist, dass die Astro-Unterseiten tatsächlich <code>data-news-topic="astro"</code> verwenden.</td></tr>
-            <tr><td><strong>14</strong> leere oder nicht vorhandene <code>subtopic</code>-Werte</td><td>Prüfen, ob bewusst allgemeine News oder versehentlich nicht einsortierte Beiträge. Sie erscheinen nur dann in Subtopic-Listen, wenn die Filter dazu passen.</td></tr>
-            <tr><td>Ältere <code>sub_categories.md</code> unvollständig</td><td>Die Liste berücksichtigt nicht alle mittlerweile genutzten Unterthemen wie <code>arduino</code>, <code>solar</code>, <code>pcb_basics</code> oder <code>seamanship</code>.</td></tr>
-            <tr><td>Zweimal „Part V“ im Solar-Thema</td><td>Die Reihenfolge der Projektteile in einer dauerhaften Seite eindeutig machen; News-Titel müssen deshalb nicht zwangsläufig nachträglich überschrieben werden.</td></tr>
-          </tbody></table></div>
-          <div class="callout warning"><strong>Wichtig:</strong> <code>topic</code> und <code>subtopic</code> sind bei dir technische Schlüssel, keine bloßen Schlagwörter. Eine redaktionelle Umbenennung ohne Anpassung der zugehörigen <code>data-*</code>-Filter würde Beiträge unsichtbar machen. Bestehende Pfade und das JSON-Schema sollten bei dieser Content-Überarbeitung unverändert bleiben, solange keine gezielte Migration geplant ist.</div>
-          <h3>Pflegeleichte redaktionelle Standards</h3>
-          <ul><li>Jede permanente Seite bekommt einen eindeutigen Titel, eine kurze Einleitung und einen erkennbaren Aktualisierungsstand.</li><li>News erhalten nach Möglichkeit einen Link zur zugehörigen Projektseite; die Projektseite zeigt ihrerseits relevante Updates.</li><li>Messwerte werden mit Datum, Messaufbau, Einheiten und gegebenenfalls Unsicherheit angegeben.</li><li>Technische Hypothesen, eigene Beobachtungen und bestätigte Ergebnisse werden getrennt benannt.</li><li>Downloads und Codebeispiele enthalten Informationen zur Version oder zum verwendeten Aufbau.</li><li>Neue Kategorien nur dann ergänzen, wenn sie tatsächlich längerfristig gepflegt werden können.</li></ul>
-        </section>
+                <section id="datenqualitaet" class="panel">
+                    <span class="section-kicker">12 · Redaktionelle und technische Qualität</span>
+                    <h2>Kleine Inkonsistenzen mit großer Wirkung</h2>
+                    <p>Die JSON-Datei ist grundsätzlich gut auswertbar: 140 eindeutige IDs, vollständige deutsche und
+                        englische Inhaltstexte und ein konsistentes Hauptschema. Es gibt aber Metadatenpunkte, die die
+                        Navigation und Auffindbarkeit beeinträchtigen können.</p>
+                    <div class="table-scroller">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Beobachtung</th>
+                                    <th>Empfohlene Prüfung</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>botanik/ribisl</code> und <code>botanik/ribisel</code></td>
+                                    <td>Gleicher Sachbereich, zwei verschiedene Filterwerte. Einen kanonischen Wert
+                                        festlegen und bestehende Filter prüfen.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>botanik/cucumber</code> für Zucchini-Beiträge</td>
+                                    <td>Inhaltliche Bezeichnung prüfen; bei Umbenennung alle Kategorienfilter gemeinsam
+                                        anpassen.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>outdoor/metorology</code></td>
+                                    <td>Schreibweise kontrollieren; bei einer Migration alte und neue Werte nicht
+                                        versehentlich mischen.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>astro</code> im JSON, „Astronomy“ auf der Startseite</td>
+                                    <td>Der Anzeigename darf anders lauten. Entscheidend ist, dass die Astro-Unterseiten
+                                        tatsächlich <code>data-news-topic="astro"</code> verwenden.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>14</strong> leere oder nicht vorhandene <code>subtopic</code>-Werte</td>
+                                    <td>Prüfen, ob bewusst allgemeine News oder versehentlich nicht einsortierte
+                                        Beiträge. Sie erscheinen nur dann in Subtopic-Listen, wenn die Filter dazu
+                                        passen.</td>
+                                </tr>
+                                <tr>
+                                    <td>Ältere <code>sub_categories.md</code> unvollständig</td>
+                                    <td>Die Liste berücksichtigt nicht alle mittlerweile genutzten Unterthemen wie
+                                        <code>arduino</code>, <code>solar</code>, <code>pcb_basics</code> oder
+                                        <code>seamanship</code>.</td>
+                                </tr>
+                                <tr>
+                                    <td>Zweimal „Part V“ im Solar-Thema</td>
+                                    <td>Die Reihenfolge der Projektteile in einer dauerhaften Seite eindeutig machen;
+                                        News-Titel müssen deshalb nicht zwangsläufig nachträglich überschrieben werden.
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="callout warning"><strong>Wichtig:</strong> <code>topic</code> und <code>subtopic</code>
+                        sind bei dir technische Schlüssel, keine bloßen Schlagwörter. Eine redaktionelle Umbenennung
+                        ohne Anpassung der zugehörigen <code>data-*</code>-Filter würde Beiträge unsichtbar machen.
+                        Bestehende Pfade und das JSON-Schema sollten bei dieser Content-Überarbeitung unverändert
+                        bleiben, solange keine gezielte Migration geplant ist.</div>
+                    <h3>Pflegeleichte redaktionelle Standards</h3>
+                    <ul>
+                        <li>Jede permanente Seite bekommt einen eindeutigen Titel, eine kurze Einleitung und einen
+                            erkennbaren Aktualisierungsstand.</li>
+                        <li>News erhalten nach Möglichkeit einen Link zur zugehörigen Projektseite; die Projektseite
+                            zeigt ihrerseits relevante Updates.</li>
+                        <li>Messwerte werden mit Datum, Messaufbau, Einheiten und gegebenenfalls Unsicherheit angegeben.
+                        </li>
+                        <li>Technische Hypothesen, eigene Beobachtungen und bestätigte Ergebnisse werden getrennt
+                            benannt.</li>
+                        <li>Downloads und Codebeispiele enthalten Informationen zur Version oder zum verwendeten Aufbau.
+                        </li>
+                        <li>Neue Kategorien nur dann ergänzen, wenn sie tatsächlich längerfristig gepflegt werden
+                            können.</li>
+                    </ul>
+                </section>
 
-        <section id="roadmap" class="panel">
-          <span class="section-kicker">13 · Umsetzung priorisieren</span>
-          <h2>Interaktive Content-Roadmap</h2>
-          <p>Zwölf konkrete Schritte – zunächst die Projekte mit dem größten schon vorhandenen Wissensbestand, danach die strukturellen Verbesserungen und neuen Themen. Die Checkliste speichert Markierungen lokal im Browser, soweit er das erlaubt.</p>
-          <div class="actions">
-            <button type="button" class="primary" id="copy-roadmap">Roadmap kopieren</button>
-            <button type="button" id="reset-roadmap">Markierungen zurücksetzen</button>
-            <span id="progress-text" class="subdued" aria-live="polite">0 von 12 erledigt</span>
-          </div>
-          <div class="progress" role="progressbar" aria-label="Roadmap-Fortschritt" aria-valuemin="0" aria-valuemax="12" aria-valuenow="0" id="progressbar"><span id="progress-fill"></span></div>
-          <ol class="todo-list" id="todo-list">
-            <li><input type="checkbox" id="todo1"><label for="todo1"><strong>Solarprojekt auf einer dauerhaften Seite konsolidieren</strong><small>Priorität sehr hoch · Aufwand mittel · 11 vorhandene News nutzen</small></label></li>
-            <li><input type="checkbox" id="todo2"><label for="todo2"><strong>Meshtastic: Bauanleitung, Funkgrundlagen und Feldtests zusammenführen</strong><small>Priorität sehr hoch · Aufwand mittel · 9 vorhandene News nutzen</small></label></li>
-            <li><input type="checkbox" id="todo3"><label for="todo3"><strong>Arduino-Wetterdisplay als Gesamtguide dokumentieren</strong><small>Priorität sehr hoch · Aufwand mittel · 7 Teile zusammenführen</small></label></li>
-            <li><input type="checkbox" id="todo4"><label for="todo4"><strong>BME280-Messreihe einschließlich Fehleranalyse aufbereiten</strong><small>Priorität sehr hoch · Aufwand gering bis mittel</small></label></li>
-            <li><input type="checkbox" id="todo5"><label for="todo5"><strong>Pflanzensteckbriefe und Balkon-Experimentierjournal vereinheitlichen</strong><small>Priorität hoch · Aufwand mittel</small></label></li>
-            <li><input type="checkbox" id="todo6"><label for="todo6"><strong>Website-Architektur und JSON-Publishing dokumentieren</strong><small>Priorität hoch · Aufwand mittel</small></label></li>
-            <li><input type="checkbox" id="todo7"><label for="todo7"><strong>Bestehende Anker- und 3D-Druck-Seiten mit News vernetzen</strong><small>Priorität hoch · Aufwand gering</small></label></li>
-            <li><input type="checkbox" id="todo8"><label for="todo8"><strong>Drohnen- und Fotografie-Wissen zusammenführen</strong><small>Priorität hoch · Aufwand gering bis mittel</small></label></li>
-            <li><input type="checkbox" id="todo9"><label for="todo9"><strong>Astronomisches Beobachtungslogbuch einrichten</strong><small>Priorität mittel · Aufwand mittel</small></label></li>
-            <li><input type="checkbox" id="todo10"><label for="todo10"><strong>Words &amp; Art um Sprachwissenschaft und historische Recherche vertiefen</strong><small>Priorität mittel · Aufwand mittel</small></label></li>
-            <li><input type="checkbox" id="todo11"><label for="todo11"><strong>Raspberry-Pi-Wetterdaten automatisiert veröffentlichen</strong><small>Priorität hoch · Aufwand höher · neues Projekt</small></label></li>
-            <li><input type="checkbox" id="todo12"><label for="todo12"><strong>Elektronik-Fehlerarchiv mit wiederkehrenden Problemen anlegen</strong><small>Priorität mittel · Aufwand gering</small></label></li>
-          </ol>
-          <p class="summary">Die Reihenfolge versteht sich als redaktioneller Vorschlag, nicht als feste Projektplanung. Besonders die bereits vorhandenen Fachserien können ohne neue Hardware zunächst rein inhaltlich konsolidiert werden.</p>
-        </section>
+                <section id="roadmap" class="panel">
+                    <span class="section-kicker">13 · Umsetzung priorisieren</span>
+                    <h2>Interaktive Content-Roadmap</h2>
+                    <p>Zwölf konkrete Schritte – zunächst die Projekte mit dem größten schon vorhandenen Wissensbestand,
+                        danach die strukturellen Verbesserungen und neuen Themen. Die Checkliste speichert Markierungen
+                        lokal im Browser, soweit er das erlaubt.</p>
+                    <div class="actions">
+                        <button type="button" class="primary" id="copy-roadmap">Roadmap kopieren</button>
+                        <button type="button" id="reset-roadmap">Markierungen zurücksetzen</button>
+                        <span id="progress-text" class="subdued" aria-live="polite">0 von 12 erledigt</span>
+                    </div>
+                    <div class="progress" role="progressbar" aria-label="Roadmap-Fortschritt" aria-valuemin="0"
+                        aria-valuemax="12" aria-valuenow="0" id="progressbar"><span id="progress-fill"></span></div>
+                    <ol class="todo-list" id="todo-list">
+                        <li><input type="checkbox" id="todo1"><label for="todo1"><strong>Solarprojekt auf einer
+                                    dauerhaften Seite konsolidieren</strong><small>Priorität sehr hoch · Aufwand mittel
+                                    · 11 vorhandene News nutzen</small></label></li>
+                        <li><input type="checkbox" id="todo2"><label for="todo2"><strong>Meshtastic: Bauanleitung,
+                                    Funkgrundlagen und Feldtests zusammenführen</strong><small>Priorität sehr hoch ·
+                                    Aufwand mittel · 9 vorhandene News nutzen</small></label></li>
+                        <li><input type="checkbox" id="todo3"><label for="todo3"><strong>Arduino-Wetterdisplay als
+                                    Gesamtguide dokumentieren</strong><small>Priorität sehr hoch · Aufwand mittel · 7
+                                    Teile zusammenführen</small></label></li>
+                        <li><input type="checkbox" id="todo4"><label for="todo4"><strong>BME280-Messreihe einschließlich
+                                    Fehleranalyse aufbereiten</strong><small>Priorität sehr hoch · Aufwand gering bis
+                                    mittel</small></label></li>
+                        <li><input type="checkbox" id="todo5"><label for="todo5"><strong>Pflanzensteckbriefe und
+                                    Balkon-Experimentierjournal vereinheitlichen</strong><small>Priorität hoch · Aufwand
+                                    mittel</small></label></li>
+                        <li><input type="checkbox" id="todo6"><label for="todo6"><strong>Website-Architektur und
+                                    JSON-Publishing dokumentieren</strong><small>Priorität hoch · Aufwand
+                                    mittel</small></label></li>
+                        <li><input type="checkbox" id="todo7"><label for="todo7"><strong>Bestehende Anker- und
+                                    3D-Druck-Seiten mit News vernetzen</strong><small>Priorität hoch · Aufwand
+                                    gering</small></label></li>
+                        <li><input type="checkbox" id="todo8"><label for="todo8"><strong>Drohnen- und Fotografie-Wissen
+                                    zusammenführen</strong><small>Priorität hoch · Aufwand gering bis
+                                    mittel</small></label></li>
+                        <li><input type="checkbox" id="todo9"><label for="todo9"><strong>Astronomisches
+                                    Beobachtungslogbuch einrichten</strong><small>Priorität mittel · Aufwand
+                                    mittel</small></label></li>
+                        <li><input type="checkbox" id="todo10"><label for="todo10"><strong>Words &amp; Art um
+                                    Sprachwissenschaft und historische Recherche vertiefen</strong><small>Priorität
+                                    mittel · Aufwand mittel</small></label></li>
+                        <li><input type="checkbox" id="todo11"><label for="todo11"><strong>Raspberry-Pi-Wetterdaten
+                                    automatisiert veröffentlichen</strong><small>Priorität hoch · Aufwand höher · neues
+                                    Projekt</small></label></li>
+                        <li><input type="checkbox" id="todo12"><label for="todo12"><strong>Elektronik-Fehlerarchiv mit
+                                    wiederkehrenden Problemen anlegen</strong><small>Priorität mittel · Aufwand
+                                    gering</small></label></li>
+                    </ol>
+                    <p class="summary">Die Reihenfolge versteht sich als redaktioneller Vorschlag, nicht als feste
+                        Projektplanung. Besonders die bereits vorhandenen Fachserien können ohne neue Hardware zunächst
+                        rein inhaltlich konsolidiert werden.</p>
+                </section>
 
-        <section id="umsetzung" class="panel">
-          <span class="section-kicker">14 · Konkreter Arbeitsablauf</span>
-          <h2>Wie du beginnst, ohne die Website umzubauen</h2>
-          <h3>Schritt 1 – Eine Inhaltsinventur für jede Projektseite</h3>
-          <p>Für den ersten Kandidaten – etwa Solar – notierst du die bereits vorhandenen permanenten Unterseiten, sämtliche relevanten News, Bilder und Dateien. Anschließend ordnest du vorhandenes Material den Abschnitten <em>Grundlagen, Aufbau, Messwerte, Ergebnisse</em> zu. Nicht sofort schreiben: erst sammeln und Doppelungen erkennen.</p>
-          <h3>Schritt 2 – Nur die fehlenden Zusammenhänge ergänzen</h3>
-          <p>Deine News enthalten vielfach bereits gute technische Erklärungen. Statt alles zu duplizieren, formulierst du eine übergreifende Darstellung, verweist bei Bedarf auf die Versuchsberichte und ergänzt die fehlenden Schaltpläne, Tabellen oder Vergleiche.</p>
-          <h3>Schritt 3 – News als lebendiges Journal einbinden</h3>
-          <p>Nutze dein vorhandenes <code>news.js</code> und dessen Filterattribute. Für die acht Hauptprojekte brauchst du prinzipiell weder Framework noch Build-Tool und keine Änderung am festen Post-Schema.</p>
-          <h3>Schritt 4 – Querlinks setzen</h3>
-          <p>Meshtastic verweist auf Akkutechnik und 3D-Druck, Solar auf Spannungsregelung, Wetterstation auf Python und Meteorologie. Durch solche Querverweise wird die bestehende Wissenssammlung erst als zusammenhängendes System sichtbar.</p>
-          <h3>Schritt 5 – Navigation behutsam ergänzen</h3>
-          <p>Die Hauptkategorien bleiben bestehen. Innerhalb der Bereiche bekommen besonders hochwertige Projektseiten sichtbare Einstiegslinks. Auf der Startseite kann eine kleine Auswahl an <em>Featured Projects</em> hinzukommen.</p>
-          <h3>Schritt 6 – Einen nachhaltigen Pflegeprozess etablieren</h3>
-          <p>Beim Veröffentlichen eines neuen Newsbeitrags genügt eine zusätzliche redaktionelle Frage: <em>Enthält dieser Beitrag eine Erkenntnis, die auf einer permanenten Seite ergänzt oder verlinkt werden sollte?</em> So wachsen Journal und Wissensbasis gemeinsam.</p>
-          <div class="callout"><strong>Vier-Wochen-Einstieg:</strong> Woche 1: Solar konsolidieren. Woche 2: Meshtastic. Woche 3: Wetterdisplay und BME280 strukturieren. Woche 4: Navigationslinks, Beitragsfilter, Datenqualität und Startseiten-Features prüfen. Das ist ein Vorschlag für Fokus, keine starre Frist.</div>
-          <h3>Bewusst vermeiden</h3>
-          <ul><li>Nicht aus jedem kurzen Newsbeitrag eine eigene statische Seite machen.</li><li>Kein zweites vollständiges News-Archiv neben <code>posts.json</code> pflegen.</li><li>Vorhandene Projektseiten nicht grundlos duplizieren.</li><li>Keine zusätzlichen Frameworks oder komplexen Content-Management-Systeme einführen.</li><li>Nicht nur Themen sammeln – auch Zusammenhänge, Erkenntnisse und überprüfbare Resultate sichtbar machen.</li></ul>
-        </section>
+                <section id="umsetzung" class="panel">
+                    <span class="section-kicker">14 · Konkreter Arbeitsablauf</span>
+                    <h2>Wie du beginnst, ohne die Website umzubauen</h2>
+                    <h3>Schritt 1 – Eine Inhaltsinventur für jede Projektseite</h3>
+                    <p>Für den ersten Kandidaten – etwa Solar – notierst du die bereits vorhandenen permanenten
+                        Unterseiten, sämtliche relevanten News, Bilder und Dateien. Anschließend ordnest du vorhandenes
+                        Material den Abschnitten <em>Grundlagen, Aufbau, Messwerte, Ergebnisse</em> zu. Nicht sofort
+                        schreiben: erst sammeln und Doppelungen erkennen.</p>
+                    <h3>Schritt 2 – Nur die fehlenden Zusammenhänge ergänzen</h3>
+                    <p>Deine News enthalten vielfach bereits gute technische Erklärungen. Statt alles zu duplizieren,
+                        formulierst du eine übergreifende Darstellung, verweist bei Bedarf auf die Versuchsberichte und
+                        ergänzt die fehlenden Schaltpläne, Tabellen oder Vergleiche.</p>
+                    <h3>Schritt 3 – News als lebendiges Journal einbinden</h3>
+                    <p>Nutze dein vorhandenes <code>news.js</code> und dessen Filterattribute. Für die acht
+                        Hauptprojekte brauchst du prinzipiell weder Framework noch Build-Tool und keine Änderung am
+                        festen Post-Schema.</p>
+                    <h3>Schritt 4 – Querlinks setzen</h3>
+                    <p>Meshtastic verweist auf Akkutechnik und 3D-Druck, Solar auf Spannungsregelung, Wetterstation auf
+                        Python und Meteorologie. Durch solche Querverweise wird die bestehende Wissenssammlung erst als
+                        zusammenhängendes System sichtbar.</p>
+                    <h3>Schritt 5 – Navigation behutsam ergänzen</h3>
+                    <p>Die Hauptkategorien bleiben bestehen. Innerhalb der Bereiche bekommen besonders hochwertige
+                        Projektseiten sichtbare Einstiegslinks. Auf der Startseite kann eine kleine Auswahl an
+                        <em>Featured Projects</em> hinzukommen.</p>
+                    <h3>Schritt 6 – Einen nachhaltigen Pflegeprozess etablieren</h3>
+                    <p>Beim Veröffentlichen eines neuen Newsbeitrags genügt eine zusätzliche redaktionelle Frage:
+                        <em>Enthält dieser Beitrag eine Erkenntnis, die auf einer permanenten Seite ergänzt oder
+                            verlinkt werden sollte?</em> So wachsen Journal und Wissensbasis gemeinsam.</p>
+                    <div class="callout"><strong>Vier-Wochen-Einstieg:</strong> Woche 1: Solar konsolidieren. Woche 2:
+                        Meshtastic. Woche 3: Wetterdisplay und BME280 strukturieren. Woche 4: Navigationslinks,
+                        Beitragsfilter, Datenqualität und Startseiten-Features prüfen. Das ist ein Vorschlag für Fokus,
+                        keine starre Frist.</div>
+                    <h3>Bewusst vermeiden</h3>
+                    <ul>
+                        <li>Nicht aus jedem kurzen Newsbeitrag eine eigene statische Seite machen.</li>
+                        <li>Kein zweites vollständiges News-Archiv neben <code>posts.json</code> pflegen.</li>
+                        <li>Vorhandene Projektseiten nicht grundlos duplizieren.</li>
+                        <li>Keine zusätzlichen Frameworks oder komplexen Content-Management-Systeme einführen.</li>
+                        <li>Nicht nur Themen sammeln – auch Zusammenhänge, Erkenntnisse und überprüfbare Resultate
+                            sichtbar machen.</li>
+                    </ul>
+                </section>
 
-        <section id="fazit" class="panel">
-          <span class="section-kicker">15 · Schlussfolgerung</span>
-          <h2>Vom persönlichen Archiv zur Wissensplattform</h2>
-          <p>Der größte Engpass deiner Website ist nicht die Themenarmut. Es ist die Gefahr, dass technisch und gedanklich wertvolle Inhalte als ältere Nachrichten langsam in den Hintergrund rücken.</p>
-          <p>Die beste nächste Entwicklungsstufe besteht aus drei miteinander verbundenen Ebenen: <strong>News</strong> als chronologisches Tagebuch, <strong>permanente Seiten</strong> als fachliche Wissensbasis und <strong>die Startseite</strong> als Wegweiser zu den wichtigsten Projekten.</p>
-          <p>Die besonders interessante Eigenart deiner Plattform liegt dabei an den Schnittstellen: Solarenergie versorgt Funktechnik, Sensoren liefern Daten für Python und die Website, Segeln verbindet Navigation mit Wetter und Physik, 3D-Druck wird zum Werkzeug der Reparatur und Konstruktion.</p>
-          <div class="callout"><strong>Die Richtung ist klar:</strong> Nicht mehr Beiträge um jeden Preis, sondern mehr Zusammenhang, bessere Auffindbarkeit und konsequent dokumentierte Erkenntnisse. Dann wird aus einer Sammlung interessanter Hobbys eine erkennbare technische und intellektuelle Werkstatt.</div>
-          <p class="footnotes">Dieser Audit bewertet den mitgelieferten Datenstand; vorhandene Unterseiten können einzelne Empfehlungen bereits erfüllen. Alle neuen Themenvorschläge sind redaktionelle Empfehlungen und keine Behauptungen darüber, dass die betreffenden Inhalte auf der Live-Website definitiv fehlen.</p>
-          <a class="toplink" href="#top">↑ Nach oben</a>
-        </section>
-      </main>
+                <section id="fazit" class="panel">
+                    <span class="section-kicker">15 · Schlussfolgerung</span>
+                    <h2>Vom persönlichen Archiv zur Wissensplattform</h2>
+                    <p>Der größte Engpass deiner Website ist nicht die Themenarmut. Es ist die Gefahr, dass technisch
+                        und gedanklich wertvolle Inhalte als ältere Nachrichten langsam in den Hintergrund rücken.</p>
+                    <p>Die beste nächste Entwicklungsstufe besteht aus drei miteinander verbundenen Ebenen:
+                        <strong>News</strong> als chronologisches Tagebuch, <strong>permanente Seiten</strong> als
+                        fachliche Wissensbasis und <strong>die Startseite</strong> als Wegweiser zu den wichtigsten
+                        Projekten.</p>
+                    <p>Die besonders interessante Eigenart deiner Plattform liegt dabei an den Schnittstellen:
+                        Solarenergie versorgt Funktechnik, Sensoren liefern Daten für Python und die Website, Segeln
+                        verbindet Navigation mit Wetter und Physik, 3D-Druck wird zum Werkzeug der Reparatur und
+                        Konstruktion.</p>
+                    <div class="callout"><strong>Die Richtung ist klar:</strong> Nicht mehr Beiträge um jeden Preis,
+                        sondern mehr Zusammenhang, bessere Auffindbarkeit und konsequent dokumentierte Erkenntnisse.
+                        Dann wird aus einer Sammlung interessanter Hobbys eine erkennbare technische und intellektuelle
+                        Werkstatt.</div>
+                    <p class="footnotes">Dieser Audit bewertet den mitgelieferten Datenstand; vorhandene Unterseiten
+                        können einzelne Empfehlungen bereits erfüllen. Alle neuen Themenvorschläge sind redaktionelle
+                        Empfehlungen und keine Behauptungen darüber, dass die betreffenden Inhalte auf der Live-Website
+                        definitiv fehlen.</p>
+                    <a class="toplink" href="#top">↑ Nach oben</a>
+                </section>
+            </main>
+        </div>
     </div>
-  </div>
-  <footer class="page-footer"><p>Content-Audit &amp; Themen-Roadmap · Stand: 16. Oktober 2026 · Für eine statische GitHub-Pages-Website</p><p>HTML, CSS und Vanilla JavaScript · Keine externen Bibliotheken · Druckfreundliche Darstellung</p></footer>
-  <script>
-  (() => {
-    'use strict';
-    const storageKey = 'website-content-audit-roadmap-2026';
-    const checkboxes = [...document.querySelectorAll('#todo-list input[type="checkbox"]')];
-    const text = document.getElementById('progress-text');
-    const progress = document.getElementById('progressbar');
-    const fill = document.getElementById('progress-fill');
-    try {
-      const saved = JSON.parse(localStorage.getItem(storageKey) || '[]');
-      if (Array.isArray(saved)) checkboxes.forEach((cb, index) => { cb.checked = Boolean(saved[index]); });
-    } catch (_) { /* Die Seite bleibt ohne Storage funktionsfähig. */ }
-    function refresh() {
-      const done = checkboxes.filter(cb => cb.checked).length;
-      text.textContent = `${done} von ${checkboxes.length} erledigt`;
-      progress.setAttribute('aria-valuenow', String(done));
-      fill.style.width = `${(done / checkboxes.length) * 100}%`;
-      try { localStorage.setItem(storageKey, JSON.stringify(checkboxes.map(cb => cb.checked))); } catch (_) { }
-    }
-    checkboxes.forEach(cb => cb.addEventListener('change', refresh));
-    document.getElementById('reset-roadmap').addEventListener('click', () => { checkboxes.forEach(cb => { cb.checked = false; }); refresh(); });
-    document.getElementById('copy-roadmap').addEventListener('click', async (event) => {
-      const lines = checkboxes.map((cb, index) => {
-        const label = cb.nextElementSibling;
-        const title = label.querySelector('strong').textContent;
-        const details = label.querySelector('small').textContent;
-        return `${cb.checked ? '[x]' : '[ ]'} ${index + 1}. ${title} – ${details}`;
-      });
-      const output = 'Content-Roadmap Website – 16.10.2026\n\n' + lines.join('\n');
-      try {
-        await navigator.clipboard.writeText(output);
-        const button = event.currentTarget;
-        button.textContent = 'Kopiert ✓';
-        button.addEventListener('blur', () => { button.textContent = 'Roadmap kopieren'; }, { once: true });
-      } catch (_) {
-        const w = window.prompt('Die automatische Zwischenablage ist hier nicht verfügbar. Bitte den Text kopieren:', output);
-        void w;
-      }
-    });
-    refresh();
-  })();
-  </script>
+    <footer class="page-footer">
+        <p>Content-Audit &amp; Themen-Roadmap · Stand: 16. Oktober 2026 · Für eine statische GitHub-Pages-Website</p>
+        <p>HTML, CSS und Vanilla JavaScript · Keine externen Bibliotheken · Druckfreundliche Darstellung</p>
+    </footer>
+    <script>
+        (() => {
+            'use strict';
+            const storageKey = 'website-content-audit-roadmap-2026';
+            const checkboxes = [...document.querySelectorAll('#todo-list input[type="checkbox"]')];
+            const text = document.getElementById('progress-text');
+            const progress = document.getElementById('progressbar');
+            const fill = document.getElementById('progress-fill');
+            try {
+                const saved = JSON.parse(localStorage.getItem(storageKey) || '[]');
+                if (Array.isArray(saved)) checkboxes.forEach((cb, index) => { cb.checked = Boolean(saved[index]); });
+            } catch (_) { /* Die Seite bleibt ohne Storage funktionsfähig. */ }
+            function refresh() {
+                const done = checkboxes.filter(cb => cb.checked).length;
+                text.textContent = `${done} von ${checkboxes.length} erledigt`;
+                progress.setAttribute('aria-valuenow', String(done));
+                fill.style.width = `${(done / checkboxes.length) * 100}%`;
+                try { localStorage.setItem(storageKey, JSON.stringify(checkboxes.map(cb => cb.checked))); } catch (_) { }
+            }
+            checkboxes.forEach(cb => cb.addEventListener('change', refresh));
+            document.getElementById('reset-roadmap').addEventListener('click', () => { checkboxes.forEach(cb => { cb.checked = false; }); refresh(); });
+            document.getElementById('copy-roadmap').addEventListener('click', async (event) => {
+                const lines = checkboxes.map((cb, index) => {
+                    const label = cb.nextElementSibling;
+                    const title = label.querySelector('strong').textContent;
+                    const details = label.querySelector('small').textContent;
+                    return `${cb.checked ? '[x]' : '[ ]'} ${index + 1}. ${title} – ${details}`;
+                });
+                const output = 'Content-Roadmap Website – 16.10.2026\n\n' + lines.join('\n');
+                try {
+                    await navigator.clipboard.writeText(output);
+                    const button = event.currentTarget;
+                    button.textContent = 'Kopiert ✓';
+                    button.addEventListener('blur', () => { button.textContent = 'Roadmap kopieren'; }, { once: true });
+                } catch (_) {
+                    const w = window.prompt('Die automatische Zwischenablage ist hier nicht verfügbar. Bitte den Text kopieren:', output);
+                    void w;
+                }
+            });
+            refresh();
+        })();
+    </script>
 </body>
+
 </html>
