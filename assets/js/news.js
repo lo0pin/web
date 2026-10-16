@@ -44,7 +44,7 @@
       tomato: "Tomato",
       cucumber: "Cucumber",
       corn: "Corn",
-      kapu: "kapu",
+      kapu: "Kapu",
       tobacco: "Tobacco",
       chili: "Chili",
     },
