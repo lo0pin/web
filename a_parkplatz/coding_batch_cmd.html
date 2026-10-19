@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Praxisorientierter, ausführlicher deutschsprachiger Leitfaden zu Windows-Batchdateien: CMD, Variablen, Pfade, Schleifen, Fehlerbehandlung, Robocopy, Aufgabenplanung und Übungen.">
+<title>Batch &amp; CMD – der große Praxisleitfaden</title>
+<!-- Zielort: /web/code/batch_guide.html  |  Die Stylesheets liegen unter /web/assets/css/ -->
+<link rel="stylesheet" href="../assets/css/classy.css">
+<link rel="stylesheet" href="../assets/css/lua-tutorial.css">
+</head>
+<body id="top">
+<a class="skip-link" href="#main">Zum Hauptinhalt springen</a>
+<div class="page">
+<header class="hero">
+<p class="eyebrow">Code / Windows / Automatisierung</p>
+<h1>Batch &amp; CMD: Windows automatisieren</h1>
+<p class="lead">Von <code>echo Hallo</code> bis zum portablen Werkzeugkasten: eine vollständige, gut zugängliche Einführung mit funktionierenden Beispielen, typischen Fallstricken, acht zusätzlichen Übungen und einem Abschlussprojekt.</p>
+<div class="meta"><span class="pill">Deutschsprachig</span><span class="pill">Windows 10 / 11</span><span class="pill">Kein Framework</span><span class="pill">Praxis vor Theorie</span><span class="pill">Mit Kopierfunktion</span></div>
+<div class="intro-note"><strong>Didaktische Leitlinie:</strong> Erst ein Erfolgserlebnis, dann das begriffliche Rüstzeug, anschließend Routine durch eigene Experimente. Die Tiefe wächst mit dem Nutzen – nicht mit dem Bedürfnis, jeden exotischen CMD-Schalter auswendig zu kennen.</div>
+</header>
+<nav class="contents" aria-label="Inhaltsverzeichnis"><h2>Kapitelübersicht</h2><ul>
+<li><a href="#start">Was ist Batch – und wofür ist es gut?</a></li><li><a href="#lernweg">Die sinnvolle Lernreihenfolge</a></li><li><a href="#setup">Arbeitsplatz und erste Batchdatei</a></li><li><a href="#grundbefehle">Die ersten 20 Befehle: Werkzeugkasten</a></li><li><a href="#pfade">Pfade, Laufwerke und der wichtigste Trick: %~dp0</a></li><li><a href="#variablen">Variablen, Umgebungswerte und setlocal</a></li><li><a href="#parameter">Skripte mit Parametern aufrufen</a></li><li><a href="#bedingungen">Entscheidungen mit if, else, exist und defined</a></li><li><a href="#operatoren">Verketten und Umleiten: &amp;, &amp;&amp;, ||, |, &gt; und &gt;&gt;</a></li><li><a href="#fehler">Fehlercodes: ERRORLEVEL richtig lesen</a></li><li><a href="#schleifen">Schleifen mit for: Dateien und Zahlen</a></li><li><a href="#forf">Textdateien einlesen mit for /f</a></li><li><a href="#delayed">Der zentrale Fortgeschrittenentrick: Delayed Expansion</a></li><li><a href="#eingaben">Nutzereingaben, choice und kleine Menüs</a></li><li><a href="#funktionen">Sprünge, Unterprogramme und andere Batchdateien</a></li><li><a href="#dateien">Dateien und Verzeichnisse sicher organisieren</a></li><li><a href="#programme">Programme, Webseiten und Dokumente starten</a></li><li><a href="#logs">Protokolle, Debugging und nachvollziehbare Ausgaben</a></li><li><a href="#backup">Praktisches Projekt: eine verlässliche Sicherung mit robocopy</a></li><li><a href="#uhrzeit">Datumswerte und kollisionsarme Dateinamen</a></li><li><a href="#textsuche">Datei- und Textsuche, Sortierung und Inventar</a></li><li><a href="#netz">Netzwerkdiagnose und Systeminformationen</a></li><li><a href="#zeitplan">Automatisch ausführen: Task Scheduler</a></li><li><a href="#usb">Portable Skripte: USB-Laufwerk ohne festen Buchstaben finden</a></li><li><a href="#git">Projektpraxis: mit Git und VS Code arbeiten</a></li><li><a href="#powershell">Batch + PowerShell: bewusst kombinieren</a></li><li><a href="#syntaxfallen">Die CMD-Parser-Fallen: ^, %, !, &amp;, |, Klammern</a></li><li><a href="#encoding">Umlaute, UTF-8, Codepages und Zeilenenden</a></li><li><a href="#sicherheit">Sicherheit: Rechte, Downloads, Löschungen und sensible Daten</a></li><li><a href="#debug">Fehlersuche: das systematische Vorgehen</a></li><li><a href="#faq">FAQ: die typischen Rätsel</a></li><li><a href="#uebungen">Übungsparcours: acht Mini-Aufgaben mit Lösungen</a></li><li><a href="#abschlussprojekt">Abschlussprojekt: dein portabler Windows-Werkzeugkasten</a></li><li><a href="#crossplatform">Linux, macOS, WSL und PowerShell im Vergleich</a></li><li><a href="#cheatsheet">Spickzettel: Syntax, die du wirklich oft brauchst</a></li><li><a href="#checkliste">12 Regeln für Batchdateien, die du morgen noch verstehst</a></li><li><a href="#next">Was du als Nächstes konkret automatisieren könntest</a></li><li><a href="#quellen">Weiterführende Dokumentation und Nachschlagen</a></li></ul></nav>
+<main id="main">
+<section id="start" class="tip-section"><div class="section-heading"><span>01</span><h2>Was ist Batch – und wofür ist es gut?</h2></div><p class="lead">Ein kleines Skript kann Dutzende Handgriffe auf einen Doppelklick reduzieren. Der Preis dafür ist eine eigensinnige, historische Syntax.</p>
+<p><strong>Batch</strong> bezeichnet eine Folge von Befehlen, die der Windows-Kommandointerpreter <code>cmd.exe</code> abarbeitet. Eine <code>.bat</code>- oder <code>.cmd</code>-Datei ist eine <em>Textdatei mit Anweisungen</em>, keine kompilierte Anwendung. Batch ist somit eine Skriptsprache beziehungsweise genauer: die Skriptsyntax der Windows-CMD. Du musst nichts installieren, um sie auf einem gewöhnlichen Windows-10- oder Windows-11-Rechner zu verwenden.</p>
+<div class="intro-note"><strong>Die Grundidee:</strong> Wenn du eine Aktion in der Eingabeaufforderung ausführen kannst, lässt sie sich meistens in eine Batchdatei schreiben, kombinieren, wiederholen, prüfen und zeitgesteuert starten.</div>
+<div class="table-scroll"><table><thead><tr><th>Geeignet für Batch</th><th>Eher PowerShell / Python / Bash</th></tr></thead><tbody><tr><td>Ordner öffnen; Programme starten; Dateikopien; Backups; einfache Menüführung</td><td>Komplexe Datenstrukturen; APIs; JSON-Parsing; moderne Systemverwaltung</td></tr><tr><td>Vorhandene Windows-Programme mit Optionen verketten</td><td>Zuverlässiges Arbeiten mit Unicode, komplizierten Pfaden oder sehr viel Text</td></tr><tr><td>Kurze, portable Helfer ohne zusätzliche Laufzeit</td><td>Größere Projekte mit Modulen, Tests und langfristiger Wartung</td></tr></tbody></table></div>
+<p><strong>Und Linux/macOS?</strong> Batchdateien für <code>cmd.exe</code> laufen dort <strong>nicht nativ</strong>. Die vergleichbare Technik sind Shellskripte, meist <code>.sh</code> mit Bash oder <code>zsh</code>. Die Konzepte sind ähnlich (Befehle, Variablen, Schleifen), die Syntax aber anders. Auch PowerShell ist eine andere Sprache; sie ist plattformübergreifend verfügbar. Eine Gegenüberstellung folgt am Ende.</p>
+</section>
+<section id="lernweg" class="tip-section"><div class="section-heading"><span>02</span><h2>Die sinnvolle Lernreihenfolge</h2></div><p class="lead">Nicht jedes Kapitel muss am ersten Tag sitzen. Die 80/20-Regel ist hier erstaunlich ergiebig.</p>
+<ol class="tip-list" style="--counter-start:0"><li><h3>Einsteiger · 30–60 Minuten</h3><p>Kapitel 3–9: Datei anlegen, Befehle ausführen, Pfade und Variablen verstehen, erste Bedingungen. Danach hast du bereits brauchbare Alltagshelfer.</p></li><li><h3>Praxis · 2–3 Stunden</h3><p>Kapitel 10–19: Rückgabewerte, Schleifen, Eingaben, Funktionsblöcke, Logs, Backups und Automatisierung. Hier liegt der größte praktische Nutzen.</p></li><li><h3>Vertiefung · nach Bedarf</h3><p>Kapitel 20–29: Parser-Fallen, Zeichencodierung, PowerShell-Brücken, Debugging, USB-Erkennung und robuste Vorlagen.</p></li></ol>
+<p>Arbeite <strong>aktiv</strong>: Beispiel zunächst ausführen, <em>dann</em> einzelne Zeilen ändern, Verhalten prognostizieren und Fehler absichtlich provozieren. Passive Lektüre erzeugt allenfalls einen sehr gebildeten Zuschauer.</p>
+</section>
+<section id="setup" class="tip-section"><div class="section-heading"><span>03</span><h2>Arbeitsplatz und erste Batchdatei</h2></div>
+<ol><li>Lege einen Ordner <code>C:\BatchLabor</code> an. Darin liegen ausschließlich Testdateien – nicht deine echten Dokumente.</li><li>Öffne VS Code oder den Windows-Editor. Speichere eine Datei als <code>hallo.bat</code>; in Notepad nötigenfalls Dateityp <em>Alle Dateien</em> wählen, damit nicht <code>hallo.bat.txt</code> entsteht.</li><li>Öffne die Datei mit einem Doppelklick. Alternativ: Explorer-Adressleiste mit <code>cmd</code> öffnen, dann <code>hallo.bat</code> eintippen.</li><li>Zum Debuggen in einer bestehenden CMD starten oder <code>cmd /k "C:\BatchLabor\hallo.bat"</code> verwenden; so verschwindet das Fenster nicht sofort.</li></ol>
+<div class="codebox"><div class="codebar"><span>hallo.bat · batch</span><button class="copy-button" type="button" aria-label="Code kopieren">Kopieren</button></div><pre><code>@echo off
+rem Meine erste Batchdatei
+echo Hallo, Windows!
+echo Dieses Skript liegt in: %~dp0
+pause</code></pre></div>
+<p><code>@echo off</code> unterdrückt die Anzeige jedes einzelnen Befehls, <code>echo</code> schreibt Text, <code>rem</code> kommentiert eine Zeile aus. <code>%~dp0</code> ist der Ordner der aktuellen Batchdatei; <code>pause</code> wartet auf einen Tastendruck.</p><div class="callout"><strong>Wichtiger Starttipp</strong><p>Die Einstellung „Dateinamenerweiterungen anzeigen“ im Explorer aktivieren. Eine Datei namens <code>backup.bat.txt</code> sieht sonst verdächtig überzeugend wie ein Skript aus.</p></div>
+<div class="exercise"><strong>Selbstversuch: Begrüßung personalisieren</strong><p>Gib deinen Windows-Benutzernamen, das heutige Datum und die Uhrzeit aus. Verhindere, dass sich das Fenster unmittelbar schließt.</p></div><details><summary>Musterlösung und Erklärung anzeigen</summary><div class="answer">
+<div class="codebox"><div class="codebar"><span>Musterlösung.bat · batch</span><button class="copy-button" type="button" aria-label="Code kopieren">Kopieren</button></div><pre><code>@echo off
+echo Hallo %USERNAME%!
+echo Datum: %DATE%
+echo Uhrzeit: %TIME%
+pause</code></pre></div>
+<p><code>%DATE%</code> und <code>%TIME%</code> sind system- beziehungsweise ländereinstellungsabhängig. Für stabile Dateinamen verwenden wir später eine andere Methode.</p>
+</div></details>
+</section>
+<section id="grundbefehle" class="tip-section"><div class="section-heading"><span>04</span><h2>Die ersten 20 Befehle: Werkzeugkasten</h2></div>
+<div class="table-scroll"><table><thead><tr><th>Befehl</th><th>Wirkung</th><th>Einprägsames Beispiel</th></tr></thead><tbody>
+<tr><td><code>echo</code></td><td>Text oder Zustand ausgeben</td><td><code>echo Fertig</code></td></tr>
+<tr><td><code>rem</code></td><td>Kommentar</td><td><code>rem Nur ein Test</code></td></tr>
+<tr><td><code>pause</code></td><td>Auf Taste warten</td><td><code>pause</code></td></tr>
+<tr><td><code>cls</code></td><td>Bildschirm leeren</td><td><code>cls</code></td></tr>
+<tr><td><code>dir</code></td><td>Dateien auflisten</td><td><code>dir /b</code></td></tr>
+<tr><td><code>cd /d</code></td><td>Ordner und Laufwerk wechseln</td><td><code>cd /d "C:\BatchLabor"</code></td></tr>
+<tr><td><code>mkdir</code></td><td>Ordner erstellen</td><td><code>mkdir "Test"</code></td></tr>
+<tr><td><code>rmdir</code></td><td>Ordner löschen</td><td><code>rmdir "Leer"</code></td></tr>
+<tr><td><code>copy</code></td><td>Datei kopieren</td><td><code>copy "a.txt" "b.txt"</code></td></tr>
+<tr><td><code>xcopy</code></td><td>Historisches Kopierwerkzeug</td><td>Für neue Backups lieber <code>robocopy</code></td></tr>
+<tr><td><code>move</code></td><td>Dateien verschieben</td><td><code>move "a.txt" "archiv\"</code></td></tr>
+<tr><td><code>ren</code></td><td>Dateien umbenennen</td><td><code>ren "a.txt" "neu.txt"</code></td></tr>
+<tr><td><code>type</code></td><td>Textdatei anzeigen</td><td><code>type "info.txt"</code></td></tr>
+<tr><td><code>findstr</code></td><td>Text suchen</td><td><code>findstr /i "fehler" "log.txt"</code></td></tr>
+<tr><td><code>where</code></td><td>Programme im Suchpfad finden</td><td><code>where git</code></td></tr>
+<tr><td><code>start</code></td><td>Prozess, Dokument oder URL öffnen</td><td><code>start "" notepad.exe</code></td></tr>
+<tr><td><code>set</code></td><td>Variable speichern</td><td><code>set "NAME=Test"</code></td></tr>
+<tr><td><code>if</code></td><td>Bedingung prüfen</td><td><code>if exist "a.txt" echo Ja</code></td></tr>
+<tr><td><code>for</code></td><td>Wiederholung / Iteration</td><td><code>for %%F in (*.txt) do echo %%F</code></td></tr>
+<tr><td><code>exit /b</code></td><td>Skript beenden</td><td><code>exit /b 0</code></td></tr>
+</tbody></table></div>
+<p>Viele Befehle haben eine eingebaute Hilfe: <code>dir /?</code>, <code>for /?</code>, <code>robocopy /?</code>. Besonders praktisch ist <code>help</code> für eine Übersicht. Nicht jeder externe Befehl unterstützt <code>/?</code>.</p>
+<div class="codebox"><div class="codebar"><span>labor.bat · batch</span><button class="copy-button" type="button" aria-label="Code kopieren">Kopieren</button></div><pre><code>@echo off
+cd /d &quot;%~dp0&quot;
+if not exist &quot;demo&quot; mkdir &quot;demo&quot;
+echo Erster Versuch&gt;&quot;demo\notiz.txt&quot;
+dir &quot;demo&quot; /b
+type &quot;demo\notiz.txt&quot;
+pause</code></pre></div>
+<p>Das Zeichen <code>&gt;</code> im Beispiel <strong>überschreibt</strong> den Inhalt der Zieldatei – es ist eine Umleitung, kein Bestandteil von <code>echo</code>. Genau darum behandeln wir Ausgabekanäle später separat.</p>
+</section>
+<section id="pfade" class="tip-section"><div class="section-heading"><span>05</span><h2>Pfade, Laufwerke und der wichtigste Trick: %~dp0</h2></div>
+<p>Ein Batchskript besitzt zwei verschiedene Ortsangaben: den <strong>aktuellen Arbeitsordner</strong> (von dem relative Pfade ausgehen) und den <strong>Ordner, in dem die Batchdatei liegt</strong>. Diese können verschieden sein. Doppelklick, Task Scheduler und Start aus einem Terminal liefern nicht zwingend denselben Arbeitsordner.</p>
+<div class="codebox"><div class="codebar"><span>wo-bin-ich.bat · batch</span><button class="copy-button" type="button" aria-label="Code kopieren">Kopieren</button></div><pre><code>@echo off
+echo Arbeitsordner: %CD%
+echo Skriptordner:  %~dp0
+echo Dateipfad:   %~f0
+pause</code></pre></div>
+<p>Baue Skripte deshalb möglichst relativ zur eigenen Datei. Der Wert <code>%~dp0</code> endet bereits mit einem Backslash; <code>"%~dp0daten"</code> ist ein Unterordner neben dem Skript.</p>
+<div class="codebox"><div class="codebar"><span>portabler-ordner.bat · batch</span><button class="copy-button" type="button" aria-label="Code kopieren">Kopieren</button></div><pre><code>@echo off
+setlocal
+set &quot;DATEN=%~dp0daten&quot;
+if not exist &quot;%DATEN%\.&quot; mkdir &quot;%DATEN%&quot;
+start &quot;&quot; &quot;%DATEN%&quot;
+endlocal</code></pre></div>
+<div class="callout warning"><strong>Pfadregel Nummer 1</strong><p>Pfadargumente in <code>"doppelte Anführungszeichen"</code> setzen, sonst werden Leerzeichen oft als Argumentgrenze verstanden. Variablen sauber so definieren: <code>set "PFAD=C:\Mein Ordner"</code>, nicht <code>set PFAD="C:\Mein Ordner"</code>.</p></div>
+<p><strong>UNC-Netzwerkpfade:</strong> <code>cd</code> kann einen UNC-Pfad wie <code>\\server\freigabe</code> nicht direkt als CMD-Arbeitsordner nutzen. <code>pushd "\\server\freigabe"</code> ordnet (bei aktivierten Erweiterungen) vorübergehend einen Laufwerksbuchstaben zu; <code>popd</code> hebt ihn wieder auf.</p>
+<div class="codebox"><div class="codebar"><span>netzwerk.bat · batch</span><button class="copy-button" type="button" aria-label="Code kopieren">Kopieren</button></div><pre><code>@echo off
+pushd &quot;\\server\freigabe&quot; || exit /b 1
+dir /b
+popd</code></pre></div>
+<div class="exercise"><strong>Selbstversuch: Arbeitsordner meistern</strong><p>Erstelle neben dem Batchskript automatisch einen Unterordner namens <code>ausgabe</code> und öffne ihn. Der Aufruf soll unabhängig vom aktuell eingestellten Arbeitsordner funktionieren.</p></div><details><summary>Musterlösung und Erklärung anzeigen</summary><div class="answer">
+<div class="codebox"><div class="codebar"><span>Musterlösung.bat · batch</span><button class="copy-button" type="button" aria-label="Code kopieren">Kopieren</button></div><pre><code>@echo off
+setlocal
+set &quot;ZIEL=%~dp0ausgabe&quot;
+if not exist &quot;%ZIEL%\.&quot; mkdir &quot;%ZIEL%&quot;
+start &quot;&quot; &quot;%ZIEL%&quot;</code></pre></div>
+</div></details>
+</section>
+<section id="variablen" class="tip-section"><div class="section-heading"><span>06</span><h2>Variablen, Umgebungswerte und setlocal</h2></div>
+<p>Batchvariablen sind überwiegend <strong>Text</strong>. Sie werden gewöhnlich als <code>%NAME%</code> eingesetzt. Ein paar nützliche Windows-Variablen sind bereits vorhanden: <code>%USERNAME%</code>, <code>%USERPROFILE%</code>, <code>%TEMP%</code>, <code>%COMPUTERNAME%</code>, <code>%PATH%</code>, <code>%CD%</code>.</p>
+<div class="codebox"><div class="codebar"><span>variablen.bat · batch</span><button class="copy-button" type="button" aria-label="Code kopieren">Kopieren</button></div><pre><code>@echo off
+setlocal
+set &quot;PROJEKT=BatchLabor&quot;
+set &quot;ZIEL=%USERPROFILE%\Desktop&quot;
+echo Projekt: %PROJEKT%
+echo Zielordner: %ZIEL%
+set &quot;PROJEKT=&quot;
+endlocal</code></pre></div>
+<p><code>setlocal</code> isoliert Umgebungsänderungen auf das Skript; <code>endlocal</code> stellt den vorherigen Zustand wieder her. Am Dateiende geschieht das auch automatisch. <code>set "NAME="</code> entfernt eine Variable. Batch unterscheidet bei Variablennamen standardmäßig nicht nach Groß- und Kleinschreibung.</p>
+<div class="codebox"><div class="codebar"><span>eingabe-und-rechnen.bat · batch</span><button class="copy-button" type="button" aria-label="Code kopieren">Kopieren</button></div><pre><code>@echo off
+setlocal
+set /a &quot;anzahl=3+4*2&quot;
+set /a &quot;anzahl+=1&quot;
+echo Ergebnis: %anzahl%
+set /p &quot;NAME=Wie heisst du? &quot;
+echo Willkommen, %NAME%!
+endlocal</code></pre></div>
+<p><code>set /a</code> kann mit ganzen Zahlen rechnen (arithmetische Operatoren etwa <code>+ - * / %%</code>, Vergleiche und Bitoperationen); es ist kein Ersatz für Gleitkommaarithmetik. <code>set /p</code> liest eine Zeile von der Tastatur. Der Text ist unvalidiert – deshalb niemals ungeprüft in gefährliche Befehle einbauen.</p>
+</section>
+<section id="parameter" class="tip-section"><div class="section-heading"><span>07</span><h2>Skripte mit Parametern aufrufen</h2></div>
+<p>Ein Skript kann Werte beim Start erhalten: <code>begruessung.bat Anna</code>. <code>%0</code> steht für den Skriptaufruf, <code>%1</code> bis <code>%9</code> für Argumente. Mit <code>%~1</code> entfernst du äußere Anführungszeichen, mit <code>%*</code> erhältst du die gesamte Argumentliste. <code>shift</code> schiebt Argumente nach links.</p>
+<div class="codebox"><div class="codebar"><span>begruessung.bat · batch</span><button class="copy-button" type="button" aria-label="Code kopieren">Kopieren</button></div><pre><code>@echo off
+setlocal
+if &quot;%~1&quot;==&quot;&quot; (
+    echo Aufruf: %~nx0 ^&lt;Name^&gt;
+    exit /b 2
+)
+echo Hallo, %~1!
+echo Diese Datei heisst: %~nx0
+exit /b 0</code></pre></div>
+<p>Weitere nützliche Modifikatoren: <code>%~f1</code> (absoluter Pfad zu Argument 1), <code>%~dp1</code> (Laufwerk + Ordner), <code>%~nx1</code> (Dateiname + Erweiterung). Dateien aus dem Explorer auf eine Batchdatei zu ziehen, übergibt ihre Pfade als Argumente.</p>
+<div class="codebox"><div class="codebar"><span>drag-and-drop.bat · batch</span><button class="copy-button" type="button" aria-label="Code kopieren">Kopieren</button></div><pre><code>@echo off
+if &quot;%~1&quot;==&quot;&quot; (
+    echo Ziehe eine Datei auf dieses Skript.
+    pause
+    exit /b 1
+)
+if not exist &quot;%~1&quot; (
+    echo Datei nicht gefunden: &quot;%~1&quot;
+    exit /b 1
+)
+echo Voller Pfad: %~f1
+echo Dateiname:   %~nx1
+pause</code></pre></div>
+</section>
+<section id="bedingungen" class="tip-section"><div class="section-heading"><span>08</span><h2>Entscheidungen mit if, else, exist und defined</h2></div>
+<p><code>if</code> macht aus einer starren Befehlsliste ein Programm. Am wichtigsten sind Dateiprüfungen, Stringvergleiche, Zahlenvergleiche und die Frage, ob eine Variable überhaupt gesetzt wurde.</p>
+<div class="codebox"><div class="codebar"><span>if-else.bat · batch</span><button class="copy-button" type="button" aria-label="Code kopieren">Kopieren</button></div><pre><code>@echo off
+setlocal
+set &quot;MODUS=test&quot;
+if /i &quot;%MODUS%&quot;==&quot;test&quot; (
+    echo Testmodus aktiv
+) else (
+    echo Produktivmodus aktiv
+)
+if exist &quot;%~dp0config.ini&quot; echo Konfiguration vorhanden
+if not exist &quot;%~dp0daten\.&quot; echo Ordner fehlt
+if defined MODUS echo MODUS ist gesetzt
+endlocal</code></pre></div>
+<p><code>/i</code> ignoriert Groß-/Kleinschreibung beim Stringvergleich. Bei Zahlen sind <code>EQU</code> (gleich), <code>NEQ</code> (ungleich), <code>LSS</code> (kleiner), <code>LEQ</code> (kleiner/gleich), <code>GTR</code> (größer), <code>GEQ</code> (größer/gleich) nützlich. Wenn Zahlen von außen stammen, vorher prüfen – Batch ist bei Typfehlern wenig entgegenkommend.</p>
+<div class="codebox"><div class="codebar"><span>zahlenvergleich.bat · batch</span><button class="copy-button" type="button" aria-label="Code kopieren">Kopieren</button></div><pre><code>@echo off
+setlocal
+set /a &quot;ALTER=20&quot;
+if %ALTER% GEQ 18 (
+    echo Volljaehrig
+) else (
+    echo Minderjaehrig
+)
+endlocal</code></pre></div>
+<p><strong>Stolperfalle:</strong> <code>) else (</code> muss bei dieser Schreibweise zusammenstehen. Die geöffnete Klammer startet einen Block; im Block werden Prozentvariablen oft bereits beim Einlesen des gesamten Blocks erweitert. Die späte Variablenerweiterung lösen wir in Kapitel 12.</p>
+</section>
+<section id="operatoren" class="tip-section"><div class="section-heading"><span>09</span><h2>Verketten und Umleiten: &, &&, ||, |, > und >></h2></div>
+<div class="table-scroll"><table><thead><tr><th>Zeichen</th><th>Bedeutung</th><th>Beispiel</th></tr></thead><tbody><tr><td><code>&amp;</code></td><td>Befehl A, danach B – unabhängig vom Erfolg</td><td><code>echo A &amp; echo B</code></td></tr><tr><td><code>&amp;&amp;</code></td><td>B nur bei Erfolg von A</td><td><code>mkdir "data" &amp;&amp; echo OK</code></td></tr><tr><td><code>||</code></td><td>B nur bei Misserfolg von A</td><td><code>where git &gt;nul 2&gt;&amp;1 || echo Git fehlt</code></td></tr><tr><td><code>|</code></td><td>Ausgabe von A als Eingabe an B</td><td><code>dir /b | findstr /i ".txt"</code></td></tr><tr><td><code>&gt;</code></td><td>Standardausgabe in Datei, überschreiben</td><td><code>echo Start &gt;log.txt</code></td></tr><tr><td><code>&gt;&gt;</code></td><td>Standardausgabe an Datei anhängen</td><td><code>echo Weiter &gt;&gt;log.txt</code></td></tr><tr><td><code>2&gt;</code></td><td>Fehlerausgabe (stderr) umleiten</td><td><code>dir fehlt 2&gt;fehler.txt</code></td></tr><tr><td><code>2&gt;&amp;1</code></td><td>Fehlerausgabe auf dasselbe Ziel wie stdout leiten</td><td><code>befehl &gt;alles.log 2&gt;&amp;1</code></td></tr></tbody></table></div>
+<p><strong>Reihenfolge zählt:</strong> <code>befehl &gt;alles.log 2&gt;&amp;1</code> bündelt beide Kanäle; <code>befehl 2&gt;&amp;1 &gt;alles.log</code> hingegen nicht. <code>nul</code> ist ein spezielles Verwerfungsziel. Ein Pipe-Ausdruck kann Teilkommandos in eigenen CMD-Kontexten ausführen; Variablenänderungen darin nicht naiv weiterverwenden.</p>
+<div class="codebox"><div class="codebar"><span>umleitung.bat · batch</span><button class="copy-button" type="button" aria-label="Code kopieren">Kopieren</button></div><pre><code>@echo off
+setlocal
+where git &gt;nul 2&gt;&amp;1
+if errorlevel 1 (
+    echo Git ist nicht im PATH.
+) else (
+    echo Git gefunden.
+)
+echo Test gestartet&gt;&quot;%TEMP%\batch-test.log&quot;
+echo Fertig&gt;&gt;&quot;%TEMP%\batch-test.log&quot;
+endlocal</code></pre></div>
+</section>
+<section id="fehler" class="tip-section"><div class="section-heading"><span>10</span><h2>Fehlercodes: ERRORLEVEL richtig lesen</h2></div>
+<p>Programme geben beim Beenden einen numerischen Status zurück. Viele verwenden <code>0</code> für Erfolg und einen von null verschiedenen Wert für Fehler. Das ist eine Konvention, <strong>keine universelle Regel</strong>: <code>robocopy</code> besitzt eigene abgestufte Rückgabewerte.</p>
+<div class="codebox"><div class="codebar"><span>status-pruefen.bat · batch</span><button class="copy-button" type="button" aria-label="Code kopieren">Kopieren</button></div><pre><code>@echo off
+where git &gt;nul 2&gt;&amp;1
+if errorlevel 1 (
+    echo FEHLER: Git fehlt.
+    exit /b 1
+)
+echo OK: Git kann gestartet werden.
+exit /b 0</code></pre></div>
+<div class="callout warning"><strong>Der häufigste Denkfehler</strong><p><code>if errorlevel 1</code> bedeutet <strong>größer oder gleich 1</strong>, nicht „exakt gleich 1“. Mehrere Schwellwerte daher stets in <strong>absteigender</strong> Reihenfolge prüfen. Für exakte Codes ohne Block-Parsen <code>if %ERRORLEVEL% EQU 2</code> verwenden – innerhalb geklammerter Blöcke später die Erweiterung beachten.</p></div>
+<div class="codebox"><div class="codebar"><span>robocopy-status.bat · batch</span><button class="copy-button" type="button" aria-label="Code kopieren">Kopieren</button></div><pre><code>@echo off
+setlocal
+robocopy &quot;%USERPROFILE%\Documents&quot; &quot;%USERPROFILE%\BatchBackup&quot; /E /R:1 /W:1
+if errorlevel 8 (
+    echo FEHLER: Mindestens eine Datei konnte nicht kopiert werden.
+    exit /b 1
+)
+echo Robocopy abgeschlossen, Rueckgabewert unter 8.
+exit /b 0</code></pre></div>
+<p>Vor diesem Test sicherstellen, dass der Quellordner existiert; auf manchen Rechnern liegt „Dokumente“ durch OneDrive-Umleitung woanders. Der Robocopy-Erfolg ist auch bei Codes 1 bis 7 möglich, Codes ab 8 signalisieren mindestens einen Kopierfehler.</p>
+</section>
+<section id="schleifen" class="tip-section"><div class="section-heading"><span>11</span><h2>Schleifen mit for: Dateien und Zahlen</h2></div>
+<p>Mit <code>for</code> erledigst du denselben Arbeitsschritt wiederholt. <strong>Innerhalb einer Batchdatei</strong> wird die Laufvariable mit doppeltem Prozentzeichen geschrieben (<code>%%F</code>); direkt in der interaktiven CMD reicht ein Prozentzeichen (<code>%F</code>).</p>
+<div class="codebox"><div class="codebar"><span>for-dateien-zahlen.bat · batch</span><button class="copy-button" type="button" aria-label="Code kopieren">Kopieren</button></div><pre><code>@echo off
+for %%F in (&quot;%~dp0*.bat&quot;) do (
+    echo Datei: %%~nxF
+    echo Pfad:  %%~fF
+)
+for /l %%N in (1,1,5) do echo Durchlauf %%N</code></pre></div>
+<p><code>for /l %%N in (Start,Schritt,Ende)</code> erzeugt eine Zahlenfolge. <code>for /d</code> läuft über Verzeichnisse, <code>for /r</code> rekursiv über Dateien. Häufige Modifikatoren: <code>%%~nF</code> Dateiname ohne Endung, <code>%%~xF</code> Endung, <code>%%~zF</code> Größe in Bytes, <code>%%~tF</code> Änderungsdatum, <code>%%~fF</code> voller Pfad.</p>
+<div class="codebox"><div class="codebar"><span>rekursiv.bat · batch</span><button class="copy-button" type="button" aria-label="Code kopieren">Kopieren</button></div><pre><code>@echo off
+setlocal
+set &quot;QUELLE=%~dp0eingang&quot;
+if not exist &quot;%QUELLE%\.&quot; (
+    echo Eingangsordner fehlt.
+    exit /b 1
+)
+for /r &quot;%QUELLE%&quot; %%F in (*.txt) do echo %%~fF
+endlocal</code></pre></div>
+<p>Bei Mustern ohne Treffer sind sorgfältige Vorbedingungen sinnvoll; nach Möglichkeit Verzeichnis zuerst prüfen und bei sicherheitskritischen Aktionen den Einzelfall <code>if exist "%%~fF"</code> beachten. Niemals eine destruktive Schleife als ersten Versuch laufen lassen: zunächst <code>echo</code> statt <code>del</code>/<code>move</code>.</p>
+<div class="exercise"><strong>Selbstversuch: Dateigrößen inventarisieren</strong><p>Gib Namen und Bytegröße aller <code>.bat</code>-Dateien neben dem Skript aus.</p></div><details><summary>Musterlösung und Erklärung anzeigen</summary><div class="answer">
+<div class="codebox"><div class="codebar"><span>Musterlösung.bat · batch</span><button class="copy-button" type="button" aria-label="Code kopieren">Kopieren</button></div><pre><code>@echo off
+for %%F in (&quot;%~dp0*.bat&quot;) do (
+    if exist &quot;%%~fF&quot; echo %%~nxF - %%~zF Bytes
+)</code></pre></div>
+</div></details>
+</section>
+<section id="forf" class="tip-section"><div class="section-heading"><span>12</span><h2>Textdateien einlesen mit for /f</h2></div>
+<p><code>for /f</code> ist eines der mächtigsten und zugleich sperrigsten Batch-Werkzeuge: Es kann <strong>Zeilen lesen</strong>, Text in Felder zerlegen oder die Ausgabe eines Kommandos verarbeiten. Standardmäßig überspringt es leere Zeilen und behandelt eine Zeile mit führendem <code>;</code> als Kommentar; das Trennzeichen ist normalerweise Leerraum.</p>
+<div class="codebox"><div class="codebar"><span>lesen.bat · batch</span><button class="copy-button" type="button" aria-label="Code kopieren">Kopieren</button></div><pre><code>@echo off
+rem Liest jede nichtleere Zeile, soweit sie nicht als Kommentar gilt.
+for /f &quot;usebackq delims=&quot; %%L in (&quot;%~dp0namen.txt&quot;) do (
+    echo Name: %%L
+)</code></pre></div>
+<p><code>usebackq</code> erlaubt einen <strong>in Anführungszeichen gesetzten Dateipfad</strong> im <code>in (...)</code>-Teil. <code>delims=</code> verhindert die übliche Aufteilung an Leerzeichen. Dateien mit Leerzeilen, führenden Semikolons oder sonderbaren Zeichen benötigen je nach Format sorgfältigere Behandlung. <code>for /f</code> ist <strong>kein vollwertiger CSV-Parser</strong> (Anführungszeichen und eingebettete Trennzeichen werden nicht korrekt als CSV-Semantik verstanden).</p>
+<div class="codebox"><div class="codebar"><span>text-und-befehl.bat · batch</span><button class="copy-button" type="button" aria-label="Code kopieren">Kopieren</button></div><pre><code>@echo off
+rem Beispiel input: Anna;Graz
+for /f &quot;usebackq tokens=1,2 delims=;&quot; %%A in (&quot;%~dp0personen.txt&quot;) do (
+    echo Person %%A lebt in %%B
+)
+rem Ausgabe eines Programms als Eingabe:
+for /f &quot;delims=&quot; %%D in (&#x27;ver&#x27;) do echo %%D</code></pre></div>
+<p>Für kleine, streng kontrollierte Textdateien nützlich. Für richtige CSV-/JSON-Dateien: PowerShell, Python oder JavaScript. Gerade die Formatverarbeitung ist einer der Punkte, an denen CMD nicht mehr elegant, sondern nur noch stur ist.</p>
+</section>
+<section id="delayed" class="tip-section"><div class="section-heading"><span>13</span><h2>Der zentrale Fortgeschrittenentrick: Delayed Expansion</h2></div>
+<p>CMD ersetzt <code>%VAR%</code> in einem geklammerten Block <strong>bereits beim Einlesen des gesamten Blocks</strong>. Eine in der Schleife geänderte Variable erscheint mit <code>%VAR%</code> deshalb oft unverändert. <code>setlocal EnableDelayedExpansion</code> aktiviert eine spätere Auswertung mit <code>!VAR!</code>.</p>
+<div class="codebox"><div class="codebar"><span>zaehler-richtig.bat · batch</span><button class="copy-button" type="button" aria-label="Code kopieren">Kopieren</button></div><pre><code>@echo off
+setlocal EnableDelayedExpansion
+set /a &quot;ZAHL=0&quot;
+for /l %%N in (1,1,3) do (
+    set /a &quot;ZAHL+=1&quot;
+    echo Zaehler = !ZAHL!
+)
+echo Ergebnis = %ZAHL%
+endlocal</code></pre></div>
+<div class="callout warning"><strong>Die Kehrseite von !VAR!</strong><p>Bei aktivierter Delayed Expansion können <strong>Ausrufezeichen in Dateinamen oder Eingabedaten</strong> verändert oder entfernt werden. Für Verarbeitung beliebiger Dateien diese Option deshalb nicht durchgehend aktivieren; die einfachen Dateischleifen der vorherigen Kapitel funktionieren bewusst ohne sie. Wenn du Delayed Expansion nicht brauchst, lass sie aus.</p></div>
+<div class="codebox"><div class="codebar"><span>parser-ueberraschung.bat · batch</span><button class="copy-button" type="button" aria-label="Code kopieren">Kopieren</button></div><pre><code>@echo off
+setlocal
+set &quot;WERT=alt&quot;
+(
+    set &quot;WERT=neu&quot;
+    echo Mit Prozent: %WERT%
+)
+echo Nach dem Block: %WERT%
+endlocal</code></pre></div>
+<p><strong>Merksatz:</strong> Prozentwerte werden in Blöcken früh expandiert; Ausrufezeichenwerte bei aktivierter Delayed Expansion später. Beide Mechanismen sind nicht gleichbedeutend mit „Variablen live einlesen“ unter allen Umständen; CMD kennt mehrere Parsing-Phasen.</p>
+</section>
+<section id="eingaben" class="tip-section"><div class="section-heading"><span>14</span><h2>Nutzereingaben, choice und kleine Menüs</h2></div>
+<p>Für Ja/Nein- und Menüfragen ist <code>choice</code> meist die bessere Wahl als freie Texteingaben. Es liefert einen definierten numerischen Rückgabecode; <code>if errorlevel</code> wird deshalb absteigend geprüft.</p>
+<div class="codebox"><div class="codebar"><span>frage.bat · batch</span><button class="copy-button" type="button" aria-label="Code kopieren">Kopieren</button></div><pre><code>@echo off
+choice /c JN /n /m &quot;Ordner oeffnen? [J/N] &quot;
+if errorlevel 2 (
+    echo Abgebrochen.
+    exit /b 0
+)
+if errorlevel 1 start &quot;&quot; &quot;%~dp0&quot;
+exit /b 0</code></pre></div>
+<div class="codebox"><div class="codebar"><span>menue.bat · batch</span><button class="copy-button" type="button" aria-label="Code kopieren">Kopieren</button></div><pre><code>@echo off
+:MENU
+cls
+echo 1 - Editor starten
+echo 2 - Skriptordner oeffnen
+echo 3 - Beenden
+choice /c 123 /n /m &quot;Auswahl: &quot;
+if errorlevel 3 goto ENDE
+if errorlevel 2 start &quot;&quot; &quot;%~dp0&quot;
+if errorlevel 1 start &quot;&quot; notepad.exe
+goto MENU
+:ENDE
+exit /b 0</code></pre></div>
+<p><code>set /p</code> eignet sich für freie Textwerte; diese müssen vor einer Weitergabe an CMD-Konstrukte oder andere Programme geprüft werden. <code>choice</code> hat auch eine Timeout-Option (<code>/t</code> und <code>/d</code>), praktisch für nicht interaktive Abläufe.</p>
+</section>
+<section id="funktionen" class="tip-section"><div class="section-heading"><span>15</span><h2>Sprünge, Unterprogramme und andere Batchdateien</h2></div>
+<p>Batch kennt keine Funktionen wie Python. Einen ähnlichen Zweck erfüllen <strong>Labels</strong> (<code>:NAME</code>), <code>call :NAME</code>, <code>goto</code> und <code>exit /b</code>. Das reicht für kleine, wiederverwendbare Routinen – bei viel Logik wird es unübersichtlich.</p>
+<div class="codebox"><div class="codebar"><span>unterprogramme.bat · batch</span><button class="copy-button" type="button" aria-label="Code kopieren">Kopieren</button></div><pre><code>@echo off
+setlocal
+call :INFO &quot;Skript gestartet&quot;
+call :INFO &quot;Alles erledigt&quot;
+exit /b 0
+
+:INFO
+echo [INFO] %~1
+exit /b 0</code></pre></div>
+<p>Eine <strong>andere Batchdatei</strong> aus einer Batchdatei heraus mit <code>call "andere.bat"</code> aufrufen, wenn die Ausführung danach zurückkehren soll. Ein bloßer Aufruf ohne <code>call</code> übergibt normalerweise die Steuerung an die andere Batchdatei; dein ursprüngliches Skript läuft danach nicht wie erwartet weiter.</p>
+<div class="codebox"><div class="codebar"><span>orchestrierung.bat · batch</span><button class="copy-button" type="button" aria-label="Code kopieren">Kopieren</button></div><pre><code>@echo off
+call &quot;%~dp0schritt1.bat&quot;
+if errorlevel 1 exit /b 1
+call &quot;%~dp0schritt2.bat&quot;
+if errorlevel 1 exit /b 1
+echo Beide Schritte erfolgreich.
+exit /b 0</code></pre></div>
+</section>
+<section id="dateien" class="tip-section"><div class="section-heading"><span>16</span><h2>Dateien und Verzeichnisse sicher organisieren</h2></div>
+<p>Batch eignet sich glänzend zum Anlegen, Umbenennen, Kopieren und Archivieren. Arbeiten an echten Dateien beginnen immer mit einem <strong>Testordner</strong> und einer Sichtprüfung.</p>
+<div class="codebox"><div class="codebar"><span>dateien-demo.bat · batch</span><button class="copy-button" type="button" aria-label="Code kopieren">Kopieren</button></div><pre><code>@echo off
+setlocal
+set &quot;BASIS=%~dp0labor&quot;
+if not exist &quot;%BASIS%\.&quot; mkdir &quot;%BASIS%&quot;
+if not exist &quot;%BASIS%\archiv\.&quot; mkdir &quot;%BASIS%\archiv&quot;
+echo Beispielinhalt&gt;&quot;%BASIS%\test.txt&quot;
+copy /y &quot;%BASIS%\test.txt&quot; &quot;%BASIS%\archiv\test-kopie.txt&quot;
+dir &quot;%BASIS%&quot; /b
+endlocal</code></pre></div>
+<p><code>copy /y</code> überschreibt vorhandene Zieldateien ohne Nachfrage; das ist für automatische Abläufe praktisch, aber nicht immer erwünscht. <code>move</code>, <code>del</code> und <code>rmdir /s</code> gehören zu den gefährlicheren Befehlen. <strong><code>del</code> löscht nicht in den Papierkorb.</strong> <code>rmdir /s /q</code> beseitigt ganze Ordnerbäume ohne Bestätigung.</p>
+<div class="codebox"><div class="codebar"><span>dry-run.bat · batch</span><button class="copy-button" type="button" aria-label="Code kopieren">Kopieren</button></div><pre><code>@echo off
+rem Vorschau: welche TXT-Dateien WUERDEN verschoben?
+for %%F in (&quot;%~dp0eingang\*.txt&quot;) do (
+    if exist &quot;%%~fF&quot; echo move &quot;%%~fF&quot; &quot;%~dp0archiv\&quot;
+)
+pause</code></pre></div>
+<div class="callout"><strong>Dry Run als Grundhaltung</strong><p>Ersetze riskante Zeilen zunächst durch <code>echo</code> vor dem Befehl. Teste mit künstlichen Dateien und prüfe die Ausgabe; erst danach die produktive Operation freischalten.</p></div>
+</section>
+<section id="programme" class="tip-section"><div class="section-heading"><span>17</span><h2>Programme, Webseiten und Dokumente starten</h2></div>
+<p><code>start</code> startet eine Anwendung oder übergibt eine Datei beziehungsweise URL an Windows. <strong>Wichtig:</strong> Wenn der erste Parameter in Anführungszeichen steht, interpretiert <code>start</code> ihn als Fenstertitel. Deshalb fast immer <code>start "" "Pfad"</code> schreiben.</p>
+<div class="codebox"><div class="codebar"><span>starter.bat · batch</span><button class="copy-button" type="button" aria-label="Code kopieren">Kopieren</button></div><pre><code>@echo off
+start &quot;&quot; notepad.exe
+start &quot;&quot; &quot;https://learn.microsoft.com/windows-server/administration/windows-commands/&quot;
+start &quot;&quot; &quot;%USERPROFILE%&quot;
+rem Beispiel fuer ein bekanntes Programm per exaktem Pfad:
+rem start &quot;&quot; &quot;C:\Programme\App\App.exe&quot;</code></pre></div>
+<p>Mit <code>start /wait "" "programm.exe"</code> wartest du auf das Ende des gestarteten Prozesses (bei GUI-Programmen kann die tatsächliche Wartewirkung je nach Launcher variieren). <code>start /min</code> startet das neue Fenster minimiert. Für Konsolenprogramme mit zuverlässig abzufragendem Exit-Code ist es oft besser, sie <em>direkt</em> aufzurufen, statt über <code>start</code>.</p>
+<div class="codebox"><div class="codebar"><span>projekt-oeffnen.bat · batch</span><button class="copy-button" type="button" aria-label="Code kopieren">Kopieren</button></div><pre><code>@echo off
+if not exist &quot;%~dp0docs\.&quot; mkdir &quot;%~dp0docs&quot;
+start &quot;&quot; &quot;%~dp0docs&quot;
+start &quot;&quot; &quot;https://github.com/&quot;
+where code &gt;nul 2&gt;&amp;1
+if not errorlevel 1 start &quot;&quot; code &quot;%~dp0&quot;
+exit /b 0</code></pre></div>
+</section>
+<section id="logs" class="tip-section"><div class="section-heading"><span>18</span><h2>Protokolle, Debugging und nachvollziehbare Ausgaben</h2></div>
+<p>Ein automatisiertes Skript braucht eine Antwort auf zwei Fragen: <strong>Was hat es getan?</strong> und <strong>was ist fehlgeschlagen?</strong> Eine einfache Logdatei spart später viel Zeit. Batch-Logs sind keine strukturierten Ereignisdaten; für Standardabläufe reichen sie.</p>
+<div class="codebox"><div class="codebar"><span>einfaches-logging.bat · batch</span><button class="copy-button" type="button" aria-label="Code kopieren">Kopieren</button></div><pre><code>@echo off
+setlocal
+set &quot;LOG=%~dp0lauf.log&quot;
+echo ==== Start: %DATE% %TIME% ====&gt;&gt;&quot;%LOG%&quot;
+dir &quot;%~dp0&quot; /b &gt;&gt;&quot;%LOG%&quot; 2&gt;&amp;1
+if errorlevel 1 (
+    echo [FEHLER] Ordnerliste fehlgeschlagen&gt;&gt;&quot;%LOG%&quot;
+    exit /b 1
+)
+echo [OK] Fertig: %DATE% %TIME%&gt;&gt;&quot;%LOG%&quot;
+exit /b 0</code></pre></div>
+<p>Zum Debuggen <code>@echo off</code> vorübergehend entfernen oder <code>echo on</code> setzen. Zusätzliche <code>echo [DEBUG] Variable=... </code>-Zeilen zeigen Zwischenschritte. Bedenke, dass <code>echo</code> keine versteckten Geheimnisse darstellen sollte: Passwörter, Tokens und vertrauliche Pfade gehören nicht ins Log.</p>
+<div class="codebox"><div class="codebar"><span>fehlerausgabe.bat · batch</span><button class="copy-button" type="button" aria-label="Code kopieren">Kopieren</button></div><pre><code>@echo off
+setlocal
+set &quot;DATEI=%~dp0probe.txt&quot;
+if not exist &quot;%DATEI%&quot; (
+    &gt;&amp;2 echo FEHLER: &quot;%DATEI%&quot; existiert nicht.
+    exit /b 2
+)
+echo Datei gefunden.
+exit /b 0</code></pre></div>
+</section>
+<section id="backup" class="tip-section"><div class="section-heading"><span>19</span><h2>Praktisches Projekt: eine verlässliche Sicherung mit robocopy</h2></div>
+<p>Für Dateien und Ordner ist <code>robocopy</code> einem selbstgebauten <code>for</code>-Kopierkonstrukt meist überlegen. Es kann Verzeichnisstrukturen verarbeiten, Wiederholungen begrenzen, Attribute erhalten und Protokolle schreiben. <strong>Wichtiger Unterschied:</strong> <code>/E</code> kopiert Unterordner inklusive leerer Ordner; <code>/MIR</code> spiegelt einschließlich Löschungen im Ziel. Deshalb nehmen wir zum Einstieg ausdrücklich <code>/E</code>, nicht <code>/MIR</code>.</p>
+<div class="codebox"><div class="codebar"><span>backup.bat · batch</span><button class="copy-button" type="button" aria-label="Code kopieren">Kopieren</button></div><pre><code>@echo off
+setlocal
+set &quot;QUELLE=%~dp0Daten&quot;
+set &quot;ZIEL=%~dp0Sicherung&quot;
+set &quot;LOG=%~dp0sicherung.log&quot;
+
+if not exist &quot;%QUELLE%\.&quot; (
+    echo FEHLER: Quelldaten fehlen: &quot;%QUELLE%&quot;
+    exit /b 2
+)
+if not exist &quot;%ZIEL%\.&quot; mkdir &quot;%ZIEL%&quot;
+
+robocopy &quot;%QUELLE%&quot; &quot;%ZIEL%&quot; /E /R:2 /W:2 /XJ /TEE /LOG+:&quot;%LOG%&quot;
+if errorlevel 8 (
+    echo FEHLER: Sicherung nicht vollstaendig. Log: &quot;%LOG%&quot;
+    exit /b 1
+)
+echo Sicherung abgeschlossen. Log: &quot;%LOG%&quot;
+exit /b 0</code></pre></div>
+<p><code>/R:2</code> höchstens zwei erneute Versuche, <code>/W:2</code> zwei Sekunden Wartezeit zwischen Versuchen, <code>/XJ</code> Verzeichnisverknüpfungen (Junctions) ausschließen, <code>/TEE</code> Konsolen- <em>und</em> Logausgabe, <code>/LOG+</code> anhängen. <code>/XJ</code> ist besonders nützlich, um unbeabsichtigte Traversierung mancher Ordnerumleitungen zu vermeiden.</p>
+<div class="callout warning"><strong>Keine falsche Backup-Sicherheit</strong><p>Eine Kopie auf derselben physischen SSD schützt nicht vor Hardwaredefekt, Diebstahl oder Schadsoftware. Dafür ist ein räumlich beziehungsweise technisch getrenntes Medium nötig. Ein synchronisierter oder ständig angeschlossener Backupordner ist allein noch keine vollständige Datensicherungsstrategie.</p></div>
+<div class="exercise"><strong>Selbstversuch: Eigene Testdaten sichern</strong><p>Lege im Skriptordner den Unterordner <code>Daten</code> und darin drei Textdateien an. Führe das Backupskript zweimal aus. Welche Robocopy-Codes ergeben sich? Sieh ins Log.</p></div><details><summary>Musterlösung und Erklärung anzeigen</summary><div class="answer">
+<div class="codebox"><div class="codebar"><span>Musterlösung.bat · batch</span><button class="copy-button" type="button" aria-label="Code kopieren">Kopieren</button></div><pre><code>@echo off
+if not exist &quot;%~dp0Daten\.&quot; mkdir &quot;%~dp0Daten&quot;
+echo A&gt;&quot;%~dp0Daten\a.txt&quot;
+echo B&gt;&quot;%~dp0Daten\b.txt&quot;
+echo C&gt;&quot;%~dp0Daten\c.txt&quot;
+call &quot;%~dp0backup.bat&quot;
+exit /b %ERRORLEVEL%</code></pre></div>
+<p>Bei einem ersten Kopierlauf sind z. B. <code>1</code>, beim zweiten ohne Änderungen häufig <code>0</code> zu erwarten. Andere positive Statuswerte sind situationsabhängig; maßgeblich ist die Grenze <code>8</code>.</p>
+</div></details>
+</section>
+<section id="uhrzeit" class="tip-section"><div class="section-heading"><span>20</span><h2>Datumswerte und kollisionsarme Dateinamen</h2></div>
+<p><code>%DATE%</code> und <code>%TIME%</code> lassen sich zwar zerschneiden, das Ergebnis ist aber vom regionalen Windows-Format abhängig. Für einen Dateinamen wie <code>2026-10-19_14-05</code> ist ein kurzer Aufruf von PowerShell meist solider.</p>
+<div class="codebox"><div class="codebar"><span>zeitstempel.bat · batch</span><button class="copy-button" type="button" aria-label="Code kopieren">Kopieren</button></div><pre><code>@echo off
+setlocal
+set &quot;STEMPEL=&quot;
+for /f %%T in (&#x27;powershell.exe -NoProfile -Command &quot;Get-Date -Format yyyy-MM-dd_HH-mm-ss&quot;&#x27;) do set &quot;STEMPEL=%%T&quot;
+if not defined STEMPEL (
+    echo FEHLER: Zeitstempel konnte nicht ermittelt werden.
+    exit /b 1
+)
+set &quot;DATEI=%~dp0bericht_%STEMPEL%.txt&quot;
+echo Erstellt am %DATE% um %TIME%&gt;&quot;%DATEI%&quot;
+echo Geschrieben: &quot;%DATEI%&quot;
+exit /b 0</code></pre></div>
+<p>Mit dem Jahr-Monat-Tag-Schema werden Dateien lexikografisch sinnvoll sortiert. Der bis auf Sekunden genaue Zeitstempel verhindert Kollisionen <em>oft</em>, aber nicht garantiert bei Parallelstarts innerhalb derselben Sekunde. Für wirklich einzigartige Namen benötigst du eine weitere Kennung, z. B. eine GUID.</p>
+</section>
+<section id="textsuche" class="tip-section"><div class="section-heading"><span>21</span><h2>Datei- und Textsuche, Sortierung und Inventar</h2></div>
+<p>Neben <code>dir</code> sind <code>findstr</code>, <code>sort</code>, <code>tree</code> und <code>where</code> nützliche Klassiker. Für moderne Unicode- und komplexe Textsuche ist PowerShell oft geeigneter.</p>
+<div class="codebox"><div class="codebar"><span>inventar.bat · batch</span><button class="copy-button" type="button" aria-label="Code kopieren">Kopieren</button></div><pre><code>@echo off
+setlocal
+set &quot;BASIS=%~dp0&quot;
+dir &quot;%BASIS%*.bat&quot; /b /a-d &gt;&quot;%BASIS%batch-liste.txt&quot;
+if errorlevel 1 echo Keine Treffer oder ein Fehler beim Auflisten.
+sort &quot;%BASIS%batch-liste.txt&quot;
+findstr /n /i &quot;backup&quot; &quot;%BASIS%batch-liste.txt&quot;
+echo --- Ordnerstruktur ---
+tree &quot;%BASIS%&quot; /a
+endlocal</code></pre></div>
+<p><code>findstr /i</code> ignoriert Groß-/Kleinschreibung, <code>/n</code> zeigt Zeilennummern, <code>/s</code> sucht in Unterordnern. <code>findstr</code> interpretiert Standardsuchmuster teilweise als reguläre Ausdrücke; für wörtliche Suche <code>/l</code> verwenden, für Regex <code>/r</code>. Es ist kein modernes Regex-Tool im PCRE-Sinn.</p>
+<div class="codebox"><div class="codebar"><span>todo-finden.bat · batch</span><button class="copy-button" type="button" aria-label="Code kopieren">Kopieren</button></div><pre><code>@echo off
+findstr /s /n /i /l &quot;TODO&quot; &quot;%~dp0*.txt&quot;
+if errorlevel 1 echo Keine TODO-Treffer oder Fehler.
+exit /b 0</code></pre></div>
+</section>
+<section id="netz" class="tip-section"><div class="section-heading"><span>22</span><h2>Netzwerkdiagnose und Systeminformationen</h2></div>
+<p>Batch kann die Bordmittel des Betriebssystems zu einem Diagnoseablauf bündeln: <code>ipconfig</code>, <code>ping</code>, <code>nslookup</code>, <code>whoami</code>, <code>tasklist</code>, <code>systeminfo</code> und <code>netstat</code>. Für Netzwerktests sind mehrere Fehlerszenarien möglich: DNS-Probleme, Firewall, kein ICMP, keine Verbindung zum Ziel.</p>
+<div class="codebox"><div class="codebar"><span>netzcheck.bat · batch</span><button class="copy-button" type="button" aria-label="Code kopieren">Kopieren</button></div><pre><code>@echo off
+setlocal
+set &quot;LOG=%~dp0netzcheck.txt&quot;
+(
+    echo ==== Diagnose %DATE% %TIME% ====
+    whoami
+    hostname
+    ipconfig
+    nslookup example.com
+    ping -n 2 1.1.1.1
+) &gt;&quot;%LOG%&quot; 2&gt;&amp;1
+start &quot;&quot; notepad.exe &quot;%LOG%&quot;
+exit /b 0</code></pre></div>
+<p>Ein gescheiterter <code>ping</code> ist kein Beweis, dass das Ziel offline ist – ICMP kann gesperrt sein. Bei Systemdaten dürfen Logs keine ungewollten Informationen wie interne IPs oder Nutzernamen öffentlich machen.</p>
+</section>
+<section id="zeitplan" class="tip-section"><div class="section-heading"><span>23</span><h2>Automatisch ausführen: Task Scheduler</h2></div>
+<p>Batchskripte müssen nicht per Doppelklick starten. Die <strong>Windows-Aufgabenplanung</strong> (<code>taskschd.msc</code>) kann sie täglich, beim Anmelden oder durch bestimmte Ereignisse ausführen.</p>
+<ol><li>Aufgabenplanung öffnen und <em>Einfache Aufgabe erstellen</em> auswählen.</li><li>Name und Trigger wählen, zum Beispiel <em>Täglich</em>.</li><li>Aktion <em>Programm starten</em>: vorzugsweise <code>cmd.exe</code> als Programm wählen.</li><li>Als Argumente beispielsweise <code>/c "C:\BatchLabor\backup.bat"</code> eintragen; „Starten in“ kann <code>C:\BatchLabor</code> sein.</li><li>Einmal manuell über <em>Ausführen</em> testen und Verlauf, Exit-Code und Logdatei prüfen.</li></ol>
+<p>Aufgaben, die im Hintergrund laufen, dürfen keine unbedienten <code>pause</code>- oder <code>set /p</code>-Eingaben enthalten. Netzlaufwerke aus einer interaktiven Sitzung sind bei geplanten Aufgaben nicht immer verfügbar; UNC-Pfade sind meist verlässlicher, sofern Berechtigungen stimmen.</p>
+<div class="codebox"><div class="codebar"><span>CMD – einmaliger Einrichtungsbefehl · cmd</span><button class="copy-button" type="button" aria-label="Code kopieren">Kopieren</button></div><pre><code>schtasks /create /sc DAILY /st 18:00 /tn &quot;MeinBatchBackup&quot; /tr &quot;C:\BatchLabor\backup.bat&quot; /f</code></pre></div>
+<p><code>schtasks</code> ist eine alternative Kommandozeilenschnittstelle. Dieser Beispielpfad muss vorher stimmen; die Aktion läuft im Kontext des konfigurierten Benutzerkontos. Es werden keine Administratorrechte benötigt, solange Aufgabe, Zielorte und Berechtigungen das nicht verlangen.</p>
+</section>
+<section id="usb" class="tip-section"><div class="section-heading"><span>24</span><h2>Portable Skripte: USB-Laufwerk ohne festen Buchstaben finden</h2></div>
+<p>USB-Medien bekommen auf unterschiedlichen PCs oft unterschiedliche Laufwerksbuchstaben. Und selbst <strong>Datenträgerbezeichnungen</strong> sind keine unveränderliche Identität. Die robustere Strategie für kleine Helfer ist häufig: <strong>einen bekannten Ordner oder eine Markierungsdatei suchen</strong>, nicht einen fixen Buchstaben oder Namen annehmen.</p>
+<div class="codebox"><div class="codebar"><span>usb-ordner-finden.bat · batch</span><button class="copy-button" type="button" aria-label="Code kopieren">Kopieren</button></div><pre><code>@echo off
+setlocal
+set &quot;REL=###Backup\BULME\Fachbuecher&quot;
+
+for %%D in (D E F G H I J K L M N O P Q R S T U V W X Y Z) do (
+    if exist &quot;%%D:\%REL%\.&quot; (
+        echo Gefunden auf Laufwerk %%D:
+        start &quot;&quot; &quot;%%D:\%REL%&quot;
+        exit /b 0
+    )
+)
+echo Ordner nicht gefunden. USB-Stick verbunden?
+pause
+exit /b 1</code></pre></div>
+<p>Das Skript arbeitet ohne Administratorrechte und ignoriert den Laufwerksnamen. Voraussetzung: Die relative Ordnerstruktur ist tatsächlich auf dem Stick vorhanden. Die Suche kann auch andere passende Laufwerke erwischen; wenn mehrere Treffer möglich sind, brauchst du einen bewusst eindeutigen <strong>Marker</strong>, z. B. eine Datei namens <code>_mein_usb.marker</code> im Stammverzeichnis, und prüfst <em>beide</em> Bedingungen.</p>
+<div class="codebox"><div class="codebar"><span>usb-marker.bat · batch</span><button class="copy-button" type="button" aria-label="Code kopieren">Kopieren</button></div><pre><code>@echo off
+setlocal
+for %%D in (D E F G H I J K L M N O P Q R S T U V W X Y Z) do (
+    if exist &quot;%%D:\_mein_usb.marker&quot; (
+        echo Mein USB-Laufwerk: %%D:
+        start &quot;&quot; &quot;%%D:\&quot;
+        exit /b 0
+    )
+)
+echo Markiertes Laufwerk nicht gefunden.
+exit /b 1</code></pre></div>
+<p>Die Liste berücksichtigt absichtlich nur <code>D:</code> bis <code>Z:</code> und kann Laufwerke <code>A:</code>/<code>B:</code> oder bestimmte Netzpfade ausschließen. Für systematische Hardware- und Geräteerkennung wäre PowerShell mit <code>Get-Volume</code>/<code>Get-CimInstance</code> das präzisere Werkzeug. <strong>Nicht verwechseln:</strong> Eine CMD-Datei, die Windows-Laufwerke sucht, wird dadurch nicht zu einem Skript für Linux.</p>
+</section>
+<section id="git" class="tip-section"><div class="section-heading"><span>25</span><h2>Projektpraxis: mit Git und VS Code arbeiten</h2></div>
+<p>Für ein kleines Webprojekt sind Skripte als „Projekt-Starter“ hervorragend: Ordner öffnen, Entwicklungsumgebung starten, Git-Status abfragen oder eine Vorschau vorbereiten.</p>
+<div class="codebox"><div class="codebar"><span>webprojekt.bat · batch</span><button class="copy-button" type="button" aria-label="Code kopieren">Kopieren</button></div><pre><code>@echo off
+setlocal
+set &quot;REPO=%~dp0&quot;
+where git &gt;nul 2&gt;&amp;1
+if errorlevel 1 (
+    echo Git ist nicht installiert oder nicht im PATH.
+    exit /b 1
+)
+git -C &quot;%REPO%&quot; status
+if errorlevel 1 (
+    echo Ordner ist moeglicherweise kein Git-Repository.
+    exit /b 1
+)
+where code &gt;nul 2&gt;&amp;1
+if not errorlevel 1 start &quot;&quot; code &quot;%REPO%&quot;
+exit /b 0</code></pre></div>
+<div class="callout"><strong>Absichtliche Zurückhaltung</strong><p>Dieses Skript führt kein blindes <code>git add .</code>, <code>commit</code> oder <code>push</code> aus. Gerade bei <code>posts.json</code> und Bildern willst du vor dem Commit prüfen, <em>was</em> du veröffentlichst. Automatisierung soll Entscheidungen erleichtern, nicht Sorgfalt ersetzen.</p></div>
+<div class="codebox"><div class="codebar"><span>git-pruefen.bat · batch</span><button class="copy-button" type="button" aria-label="Code kopieren">Kopieren</button></div><pre><code>@echo off
+setlocal
+set &quot;REPO=%~dp0&quot;
+git -C &quot;%REPO%&quot; diff --check
+if errorlevel 1 exit /b 1
+git -C &quot;%REPO%&quot; status --short
+if errorlevel 1 exit /b 1
+echo Bitte Aenderungen vor einem Commit bewusst pruefen.
+exit /b 0</code></pre></div>
+</section>
+<section id="powershell" class="tip-section"><div class="section-heading"><span>26</span><h2>Batch + PowerShell: bewusst kombinieren</h2></div>
+<p>Die Stärke von Batch ist die unkomplizierte Orchestrierung. Wenn eine Teilaufgabe sehr schwierig wird, kann eine einzelne PowerShell-Zeile die Sache sauber erledigen: Datum formatiert ausgeben, Dateien nach Eigenschaften filtern, JSON lesen oder ein Dialogfeld anzeigen.</p>
+<div class="codebox"><div class="codebar"><span>powershell-bruecke.bat · batch</span><button class="copy-button" type="button" aria-label="Code kopieren">Kopieren</button></div><pre><code>@echo off
+powershell.exe -NoProfile -Command &quot;Get-Date -Format yyyy-MM-dd&quot;
+powershell.exe -NoProfile -Command &quot;Get-ChildItem -LiteralPath $env:USERPROFILE -File | Select-Object -First 5 -ExpandProperty Name&quot;
+exit /b 0</code></pre></div>
+<p><code>-NoProfile</code> verhindert, dass benutzerspezifische PowerShell-Profile die Ausführung beeinflussen. Beachte zwei verschiedene Variablenwelten: In Batch <code>%USERPROFILE%</code>; in PowerShell <code>$env:USERPROFILE</code>. Sobald die Zeile länger wird oder komplexe Anführungszeichen enthält, ist eine <em>separate <code>.ps1</code>-Datei</em> lesbarer.</p>
+<div class="codebox"><div class="codebar"><span>json-zaehlen.bat · batch</span><button class="copy-button" type="button" aria-label="Code kopieren">Kopieren</button></div><pre><code>@echo off
+setlocal
+set &quot;DATEI=%~dp0posts.json&quot;
+if not exist &quot;%DATEI%&quot; (
+    echo posts.json fehlt im Skriptordner.
+    exit /b 1
+)
+powershell.exe -NoProfile -Command ^
+ &quot;$p = Get-Content -LiteralPath $env:DATEI -Raw | ConvertFrom-Json; &#x27;Posts: &#x27; + $p.posts.Count&quot;
+exit /b %ERRORLEVEL%</code></pre></div>
+<p>Dieses Beispiel zählt lediglich die Einträge in <code>posts.json</code>, <strong>ohne sie zu verändern</strong>. Eine echte JSON-Datei zu bearbeiten ist in CMD selbst meist unverhältnismäßig fehleranfällig; PowerShell (<code>ConvertFrom-Json</code>/<code>ConvertTo-Json</code>) oder Python ist dafür besser geeignet. PowerShells JSON-Serialisierung kann Darstellung und Einrückung ändern – Änderungen vorher diffen.</p>
+</section>
+<section id="syntaxfallen" class="tip-section"><div class="section-heading"><span>27</span><h2>Die CMD-Parser-Fallen: ^, %, !, &, |, Klammern</h2></div>
+<p>Die CMD-Syntax hat eine Art historisch gewachsenen Charme, wie ein Sicherungskasten mit zwölf Generationen von Beschriftungen. Diese sechs Zeichen solltest du besonders gut verstehen:</p>
+<div class="table-scroll"><table><thead><tr><th>Zeichen</th><th>Rolle</th><th>Wichtige Warnung</th></tr></thead><tbody>
+<tr><td><code>%</code></td><td>Variablen, Argumente, Schleifen</td><td><code>%%F</code> in Batch-Schleifen; <code>%%</code> für ein wörtliches Prozentzeichen in einfachen Batch-Echo-Texten.</td></tr>
+<tr><td><code>!</code></td><td>Delayed Expansion</td><td>Kann Nutzdaten mit Ausrufezeichen beschädigen, wenn aktiviert.</td></tr>
+<tr><td><code>^</code></td><td>Escape-Zeichen, Fortsetzungszeichen</td><td>Für Sonderzeichen-Kontexte, aber mehrfache Parsing-Pässe sind tückisch.</td></tr>
+<tr><td><code>&amp;</code> / <code>|</code></td><td>Verkettung / Pipe</td><td>Nicht als harmlosen Text in ungeprüfte Befehle einfügen.</td></tr>
+<tr><td><code>(</code> / <code>)</code></td><td>Befehlblöcke</td><td>Beeinflussen frühe Variablenerweiterung; Vorsicht bei Text mit <code>)</code>.</td></tr>
+<tr><td><code>"</code></td><td>Meist Argumentbegrenzung</td><td>CMD hat kein einfaches, universelles POSIX-artiges Escaping; Syntax hängt vom Kontext ab.</td></tr>
+</tbody></table></div>
+<div class="codebox"><div class="codebar"><span>escape-demo.bat · batch</span><button class="copy-button" type="button" aria-label="Code kopieren">Kopieren</button></div><pre><code>@echo off
+echo 50%% erledigt
+echo Das ist eine Klammer: ^)
+echo Ein Ampersand: ^&amp;
+echo Ein Pipezeichen: ^|
+echo Eine spitze Klammer: ^&lt;
+echo Ein groesser-Zeichen: ^&gt;</code></pre></div>
+<p>In langen Befehlen steht <code>^</code> unmittelbar am Zeilenende als Fortsetzungszeichen – <strong>ohne Leerzeichen danach</strong>. Einfacher und wartungsfreundlicher sind oft mehrere klar benannte Variablen oder eine ausgelagerte PowerShell-Datei.</p>
+<div class="codebox"><div class="codebar"><span>zeilenumbruch.bat · batch</span><button class="copy-button" type="button" aria-label="Code kopieren">Kopieren</button></div><pre><code>@echo off
+robocopy &quot;%~dp0Daten&quot; &quot;%~dp0Sicherung&quot; ^
+ /E /R:2 /W:2 /XJ ^
+ /NFL /NDL</code></pre></div>
+<p>Weitere Besonderheit: <code>:: Kommentar</code> ist ein verbreiteter Trick mit einem ungültigen Label, aber kein echter Kommentarbefehl. Innerhalb mancher geklammerter Blöcke kann er Probleme verursachen. Für verlässliche Kommentare <code>rem</code> verwenden.</p>
+</section>
+<section id="encoding" class="tip-section"><div class="section-heading"><span>28</span><h2>Umlaute, UTF-8, Codepages und Zeilenenden</h2></div>
+<p>HTML-Dateien sind heute unkompliziert UTF-8. <strong>CMD ist es nicht.</strong> Konsolen-Codepage, Datei-Encoding, installierte Windows-Version, Terminal und das aufgerufene Programm können zusammenwirken. Der häufige Effekt: „Grüße“ wird zu Zeichensalat.</p>
+<ul><li>Für portable Batch-Beispiele verwende ich in den ausführbaren Skripten überwiegend <strong>ASCII</strong> (also z. B. <code>ue</code> statt <code>ü</code>).</li><li>Auf modernen Systemen kann <code>chcp 65001 &gt;nul</code> auf UTF-8 umstellen, <strong>garantiert aber nicht</strong>, dass alle alten Konsolenprogramme korrekt mit UTF-8 umgehen.</li><li>Wenn du UTF-8-Dateien nutzt, wähle im Editor <em>UTF-8 ohne BOM</em>; ein BOM vor dem ersten Batch-Befehl kann CMD irritieren.</li><li>CRLF als Zeilenende ist die konservative Wahl für <code>.bat</code>/<code>.cmd</code>.</li><li><code>for /f</code>, <code>findstr</code> und Ausgabeumleitungen sind besonders anfällig bei Unicode-Text. Für verlässliche Textverarbeitung PowerShell oder Python nehmen.</li></ul>
+<div class="codebox"><div class="codebar"><span>codepage-test.bat · batch</span><button class="copy-button" type="button" aria-label="Code kopieren">Kopieren</button></div><pre><code>@echo off
+chcp 65001 &gt;nul
+echo UTF-8-Codepage wurde angefordert.
+chcp
+pause</code></pre></div>
+<p>Führe zuerst einen eigenen Test mit Umlauten und Dateinamen durch. Ein Skript, das bei dir funktioniert, kann auf einem anderen Windows-PC dennoch andere Encoding-Effekte zeigen.</p>
+</section>
+<section id="sicherheit" class="tip-section"><div class="section-heading"><span>29</span><h2>Sicherheit: Rechte, Downloads, Löschungen und sensible Daten</h2></div>
+<p>Eine Batchdatei wird mit den Berechtigungen des Kontos ausgeführt, das sie startet. <strong>Sie bekommt nicht automatisch Administratorrechte.</strong> Sie kann aber alles tun, was dieser Nutzer tun dürfte – und destruktive Befehle wirken unmittelbar.</p>
+<ul><li><strong>Unbekannte .bat/.cmd-Dateien wie Programme behandeln:</strong> vor Ausführung im Texteditor prüfen. Besonders gefährlich sind stilles Löschen, Registry-Änderungen und unkontrollierte Downloads.</li><li><strong>Keine Passwörter, Tokens oder Schlüssel</strong> als Klartext im Skript speichern; Git-Repositories und Logdateien können sie verbreiten.</li><li><strong>Vorschau vor Löschung:</strong> bei <code>del</code>, <code>rmdir /s</code> und <code>robocopy /MIR</code> erst in einem Laborordner testen.</li><li><strong>Untrusted input</strong> nicht blind in Befehle oder <code>call</code>/<code>cmd /c</code>-Konstrukte interpolieren – CMD-Sonderzeichen machen Befehlsinjektion möglich.</li><li><strong>Berechtigungen respektieren:</strong> IT-Richtlinien und Schutzmechanismen auf verwalteten Arbeitsgeräten nicht heimlich umgehen.</li></ul>
+<div class="codebox"><div class="codebar"><span>loeschen-nur-im-labor.bat · batch</span><button class="copy-button" type="button" aria-label="Code kopieren">Kopieren</button></div><pre><code>@echo off
+setlocal
+set &quot;ZIEL=%~dp0testordner&quot;
+if not exist &quot;%ZIEL%\.&quot; (
+    echo Testordner nicht gefunden; nichts zu loeschen.
+    exit /b 1
+)
+echo Der folgende Ordner WUERDE geloescht:
+echo &quot;%ZIEL%&quot;
+choice /c JN /n /m &quot;Wirklich loeschen? [J/N] &quot;
+if errorlevel 2 exit /b 0
+rmdir /s &quot;%ZIEL%&quot;
+exit /b %ERRORLEVEL%</code></pre></div>
+<div class="callout warning"><strong>Selbst dieses Beispiel löscht echt!</strong><p>Nur unter <code>BatchLabor</code> ausprobieren, nicht blind kopieren. Das Skript löscht nach Bestätigung ausschließlich den eigenen <code>testordner</code>-Unterordner. Der beste Schutz besteht darin, Quell- und Zielpfade vorab sichtbar zu machen.</p></div>
+</section>
+<section id="debug" class="tip-section"><div class="section-heading"><span>30</span><h2>Fehlersuche: das systematische Vorgehen</h2></div>
+<ol><li><strong>Terminal offen halten:</strong> aus einer bestehenden CMD starten statt Doppelklick.</li><li><strong>Befehl isolieren:</strong> problematische Zeile einmal direkt in <code>cmd.exe</code> ausführen; bei <code>for</code> von <code>%%F</code> auf <code>%F</code> umstellen.</li><li><strong>Variablen sichtbar machen:</strong> <code>echo PFAD="%PFAD%"</code>. Prüfen, ob Variablen leer sind oder Anführungszeichen enthalten.</li><li><strong>Exit-Code unmittelbar abfragen:</strong> ein nachfolgender Befehl kann ihn überschreiben.</li><li><strong>Blöcke und Sonderzeichen prüfen:</strong> Prozent-/Ausrufezeichen-Expansion, <code>^</code>, <code>(</code>/<code>)</code> und <code>&amp;</code>.</li><li><strong>Pfad und Rechte prüfen:</strong> <code>if exist</code>, <code>whoami</code>, <code>dir</code>, verwaltete Computer, UNC-Pfade.</li><li><strong>Bei geplanten Tasks:</strong> ohne Interaktion testen, Arbeitsordner explizit setzen, Ausführungskonto und Logs kontrollieren.</li></ol>
+<div class="codebox"><div class="codebar"><span>debug.bat · batch</span><button class="copy-button" type="button" aria-label="Code kopieren">Kopieren</button></div><pre><code>@echo on
+setlocal
+set &quot;TEST=%~dp0test.txt&quot;
+echo TEST=%TEST%
+if exist &quot;%TEST%&quot; (
+    echo Datei vorhanden
+) else (
+    echo Datei fehlt
+)
+echo Letzter Status: %ERRORLEVEL%
+pause</code></pre></div>
+<p>Ein häufiger Sonderfall: <code>%ERRORLEVEL%</code> in einem geklammerten Block gibt womöglich einen <em>vorher</em> expandierten Wert wieder. Bei kritischen Befehlen den Status möglichst direkt danach außerhalb eines Blockes mit <code>if errorlevel</code> prüfen.</p>
+</section>
+<section id="faq" class="tip-section"><div class="section-heading"><span>31</span><h2>FAQ: die typischen Rätsel</h2></div>
+<details><summary>Die Batchdatei geht sofort wieder zu. Fehler?</summary><p>Nicht zwingend. Sie ist wahrscheinlich fertig. In einer offenen CMD ausführen oder zum Lernen <code>pause</code> ans Ende setzen.</p></details>
+<details><summary>Warum findet mein Skript den Ordner nicht?</summary><p>Oft stimmt der Arbeitsordner nicht. <code>echo %CD%</code> und <code>echo %~dp0</code> vergleichen. Beim Task Scheduler zusätzlich „Starten in“ prüfen.</p></details>
+<details><summary>Warum funktioniert mein for-Befehl in CMD, aber nicht in .bat?</summary><p>Direkt in CMD <code>%F</code>, in der Batchdatei <code>%%F</code>. Das ist kein Tippfehler.</p></details>
+<details><summary>Warum wird eine Variable in der Schleife nicht aktualisiert?</summary><p>Frühe Expansion von <code>%VAR%</code> beim Parsen eines geklammerten Blocks. Wo geeignet <code>setlocal EnableDelayedExpansion</code> und <code>!VAR!</code> verwenden – aber Vorsicht mit Ausrufezeichen in Nutzdaten.</p></details>
+<details><summary>Warum beginnt start mit einem merkwürdigen Fenstertitel?</summary><p>Der erste in Anführungszeichen gesetzte Parameter wird als Titel interpretiert. Verwende <code>start "" "C:\Pfad mit Leerzeichen\App.exe"</code>.</p></details>
+<details><summary>Warum ist robocopy trotz eines Codes 1 erfolgreich?</summary><p>Robocopy nutzt ein anderes Statusschema. Codes 0 bis 7 bedeuten keine Kopierfehler; ab 8 gab es mindestens einen Fehler.</p></details>
+<details><summary>Kann ich eine Batchdatei mit Rechtsklick als Administrator ausführen?</summary><p>Ja, sofern Windows das erlaubt und du die benötigten Rechte hast. Für normale Automatisierung lieber ohne Erhöhung arbeiten; Administratorrechte vergrößern bei Fehlern den Schaden.</p></details>
+<details><summary>Sollte ich statt .bat lieber .cmd verwenden?</summary><p>Für die hier gezeigten modernen CMD-Grundlagen ist der Unterschied praktisch gering. Beide führen CMD-Befehle aus. <code>.cmd</code> ist das mit Windows NT eingeführte Skriptformat; <code>.bat</code> historisch älter. Unterschiedliches Verhalten kann in speziellen Fehler- und Kompatibilitätsfällen auftreten.</p></details>
+<details><summary>Warum ist meine Textausgabe voller falscher Umlaute?</summary><p>Encoding und Konsolen-Codepage passen nicht zusammen. Siehe Kapitel „Umlaute, UTF-8 und Codepages“; für komplexen Unicode-Text PowerShell verwenden.</p></details>
+<details><summary>Kann ich Batchdateien auf GitHub Pages ausführen?</summary><p>Nein. GitHub Pages liefert statische Dateien aus. Ein Browser kann Batch nicht lokal ausführen. Die <code>.bat</code> kann lediglich als Download oder Codebeispiel bereitstehen.</p></details>
+</section>
+<section id="uebungen" class="tip-section"><div class="section-heading"><span>32</span><h2>Übungsparcours: acht Mini-Aufgaben mit Lösungen</h2></div><p class="lead">Die Aufgaben steigen in kleinen Schritten im Schwierigkeitsgrad. Hier entsteht die eigentliche Routine.</p>
+<div class="exercise"><strong>Selbstversuch: 1 · Programmliste</strong><p>Starte Editor und öffne deinen eigenen Skriptordner mit einem Doppelklick.</p></div><details><summary>Musterlösung und Erklärung anzeigen</summary><div class="answer">
+<div class="codebox"><div class="codebar"><span>Musterlösung.bat · batch</span><button class="copy-button" type="button" aria-label="Code kopieren">Kopieren</button></div><pre><code>@echo off
+start &quot;&quot; notepad.exe
+start &quot;&quot; &quot;%~dp0&quot;</code></pre></div>
+</div></details>
+<div class="exercise"><strong>Selbstversuch: 2 · Bei Bedarf Ordner anlegen</strong><p>Lege neben dem Skript einen Ordner <code>archiv</code> an, aber nur, wenn er noch nicht vorhanden ist.</p></div><details><summary>Musterlösung und Erklärung anzeigen</summary><div class="answer">
+<div class="codebox"><div class="codebar"><span>Musterlösung.bat · batch</span><button class="copy-button" type="button" aria-label="Code kopieren">Kopieren</button></div><pre><code>@echo off
+if not exist &quot;%~dp0archiv\.&quot; mkdir &quot;%~dp0archiv&quot;</code></pre></div>
+</div></details>
+<div class="exercise"><strong>Selbstversuch: 3 · Parameterskript</strong><p>Nimm einen Dateipfad über Drag &amp; Drop entgegen. Gib dessen Namen und Größe aus.</p></div><details><summary>Musterlösung und Erklärung anzeigen</summary><div class="answer">
+<div class="codebox"><div class="codebar"><span>Musterlösung.bat · batch</span><button class="copy-button" type="button" aria-label="Code kopieren">Kopieren</button></div><pre><code>@echo off
+if &quot;%~1&quot;==&quot;&quot; exit /b 2
+if not exist &quot;%~1&quot; exit /b 1
+for %%F in (&quot;%~1&quot;) do echo %%~nxF - %%~zF Bytes</code></pre></div>
+</div></details>
+<div class="exercise"><strong>Selbstversuch: 4 · Kleine Schleife</strong><p>Gib die Zahlen 10, 20, 30, 40 und 50 aus.</p></div><details><summary>Musterlösung und Erklärung anzeigen</summary><div class="answer">
+<div class="codebox"><div class="codebar"><span>Musterlösung.bat · batch</span><button class="copy-button" type="button" aria-label="Code kopieren">Kopieren</button></div><pre><code>@echo off
+for /l %%N in (10,10,50) do echo %%N</code></pre></div>
+</div></details>
+<div class="exercise"><strong>Selbstversuch: 5 · Kontrollierte Eingabe</strong><p>Frage, ob der Windows-Editor gestartet werden soll. Bei Nein ohne Fehlermeldung beenden.</p></div><details><summary>Musterlösung und Erklärung anzeigen</summary><div class="answer">
+<div class="codebox"><div class="codebar"><span>Musterlösung.bat · batch</span><button class="copy-button" type="button" aria-label="Code kopieren">Kopieren</button></div><pre><code>@echo off
+choice /c JN /n /m &quot;Editor starten? [J/N] &quot;
+if errorlevel 2 exit /b 0
+if errorlevel 1 start &quot;&quot; notepad.exe</code></pre></div>
+</div></details>
+<div class="exercise"><strong>Selbstversuch: 6 · Zählen im Block</strong><p>Erzeuge eine Schleife 1 bis 5 und erhöhe einen Zähler pro Durchlauf.</p></div><details><summary>Musterlösung und Erklärung anzeigen</summary><div class="answer">
+<div class="codebox"><div class="codebar"><span>Musterlösung.bat · batch</span><button class="copy-button" type="button" aria-label="Code kopieren">Kopieren</button></div><pre><code>@echo off
+setlocal EnableDelayedExpansion
+set /a N=0
+for /l %%I in (1,1,5) do (
+    set /a N+=1
+    echo !N!
+)
+endlocal</code></pre></div>
+</div></details>
+<div class="exercise"><strong>Selbstversuch: 7 · Logdatei</strong><p>Schreibe Datum, Computername und eine Dateiliste an eine Logdatei an – ohne vorhandene Inhalte zu überschreiben.</p></div><details><summary>Musterlösung und Erklärung anzeigen</summary><div class="answer">
+<div class="codebox"><div class="codebar"><span>Musterlösung.bat · batch</span><button class="copy-button" type="button" aria-label="Code kopieren">Kopieren</button></div><pre><code>@echo off
+set &quot;LOG=%~dp0log.txt&quot;
+echo --- %DATE% / %COMPUTERNAME% --- &gt;&gt;&quot;%LOG%&quot;
+dir &quot;%~dp0&quot; /b &gt;&gt;&quot;%LOG%&quot; 2&gt;&amp;1</code></pre></div>
+</div></details>
+<div class="exercise"><strong>Selbstversuch: 8 · Diagnose bei fehlendem Git</strong><p>Prüfe, ob Git im Suchpfad liegt. Gib einen Fehlerstatus aus, falls nicht.</p></div><details><summary>Musterlösung und Erklärung anzeigen</summary><div class="answer">
+<div class="codebox"><div class="codebar"><span>Musterlösung.bat · batch</span><button class="copy-button" type="button" aria-label="Code kopieren">Kopieren</button></div><pre><code>@echo off
+where git &gt;nul 2&gt;&amp;1
+if errorlevel 1 (
+    &gt;&amp;2 echo Git fehlt.
+    exit /b 1
+)
+echo Git gefunden.
+exit /b 0</code></pre></div>
+</div></details>
+</section>
+<section id="abschlussprojekt" class="tip-section"><div class="section-heading"><span>33</span><h2>Abschlussprojekt: dein portabler Windows-Werkzeugkasten</h2></div><p class="lead">Ein Menü, ein Projektordner, eine Sicherung und die Suche nach einem bestimmten USB-Ordner. Keine Installation, keine Bibliotheken, keine unnötige Magie.</p>
+<p>Lege die folgende Datei als <code>werkzeugkasten.bat</code> in dein <code>BatchLabor</code>. Erstelle daneben einen Ordner <code>Daten</code> mit Testdateien. Die Menüoption „Sichern“ kopiert nach <code>Sicherung</code>; die USB-Suche erwartet den definierten Ordnerpfad. Alles ist bewusst sichtbar und kommentiert.</p>
+<div class="codebox"><div class="codebar"><span>werkzeugkasten.bat · vollständiges Projekt · batch</span><button class="copy-button" type="button" aria-label="Code kopieren">Kopieren</button></div><pre><code>@echo off
+setlocal EnableExtensions DisableDelayedExpansion
+set &quot;BASIS=%~dp0&quot;
+set &quot;QUELLE=%BASIS%Daten&quot;
+set &quot;ZIEL=%BASIS%Sicherung&quot;
+set &quot;LOG=%BASIS%werkzeugkasten.log&quot;
+set &quot;USB_REL=###Backup\BULME\Fachbuecher&quot;
+
+:MENU
+cls
+echo ==================================
+echo      BATCH-WERKZEUGKASTEN
+echo ==================================
+echo [1] Skriptordner oeffnen
+echo [2] Testdaten sichern
+echo [3] Git-Status anzeigen
+echo [4] USB-Ordner suchen
+echo [5] Beenden
+echo.
+choice /c 12345 /n /m &quot;Auswahl: &quot;
+if errorlevel 5 goto ENDE
+if errorlevel 4 goto USB
+if errorlevel 3 goto GIT
+if errorlevel 2 goto SICHERUNG
+if errorlevel 1 goto ORDNER
+goto MENU
+
+:ORDNER
+start &quot;&quot; &quot;%BASIS%&quot;
+goto WEITER
+
+:SICHERUNG
+if not exist &quot;%QUELLE%\.&quot; (
+    echo Quelldaten fehlen: &quot;%QUELLE%&quot;
+    goto WEITER
+)
+if not exist &quot;%ZIEL%\.&quot; mkdir &quot;%ZIEL%&quot;
+robocopy &quot;%QUELLE%&quot; &quot;%ZIEL%&quot; /E /R:2 /W:2 /XJ /TEE /LOG+:&quot;%LOG%&quot;
+if errorlevel 8 (
+    echo WARNUNG: Sicherung fehlerhaft. Log pruefen.
+) else (
+    echo Sicherung abgeschlossen.
+)
+goto WEITER
+
+:GIT
+where git &gt;nul 2&gt;&amp;1
+if errorlevel 1 (
+    echo Git ist nicht im PATH.
+) else (
+    git -C &quot;%BASIS%&quot; status --short
+    if errorlevel 1 echo Kein Git-Repository oder Git-Fehler.
+)
+goto WEITER
+
+:USB
+for %%D in (D E F G H I J K L M N O P Q R S T U V W X Y Z) do (
+    if exist &quot;%%D:\%USB_REL%\.&quot; (
+        echo Gefunden: %%D:\%USB_REL%
+        start &quot;&quot; &quot;%%D:\%USB_REL%&quot;
+        goto WEITER
+    )
+)
+echo USB-Ordner nicht gefunden.
+
+:WEITER
+echo.
+pause
+goto MENU
+
+:ENDE
+exit /b 0</code></pre></div>
+<div class="callout"><strong>Was du hier bereits beherrschst</strong><p>Start einer Batchdatei; lokale Variablen; Menü mit Rückgabewerten; Labels und Sprünge; Dateiexistenz; Robocopy und dessen Sondercodes; ausführbaren Git-Befehl überprüfen; feste relative Unterordner statt unzuverlässiger Laufwerksbuchstaben.</p></div>
+<p><strong>Erweiterungsideen:</strong> Optionen aus einer <code>config.ini</code> lesen, automatisches tägliches Backup, mehrere USB-Treffer als Auswahl anzeigen, vor dem Kopieren den freien Speicherplatz prüfen (besser PowerShell), Logdatei beim Ende öffnen, Testmodus mit reiner Vorschau.</p>
+</section>
+<section id="crossplatform" class="tip-section"><div class="section-heading"><span>34</span><h2>Linux, macOS, WSL und PowerShell im Vergleich</h2></div>
+<div class="table-scroll"><table><thead><tr><th>Aufgabe</th><th>Windows CMD / Batch</th><th>Linux/macOS Bash</th><th>PowerShell</th></tr></thead><tbody>
+<tr><td>Text ausgeben</td><td><code>echo Hallo</code></td><td><code>echo Hallo</code></td><td><code>Write-Output 'Hallo'</code></td></tr>
+<tr><td>Variable setzen</td><td><code>set "X=42"</code></td><td><code>X=42</code></td><td><code>$x = 42</code></td></tr>
+<tr><td>Variable ausgeben</td><td><code>echo %X%</code></td><td><code>echo "$X"</code></td><td><code>$x</code></td></tr>
+<tr><td>Schleife</td><td><code>for %%F in (*.txt) do ...</code></td><td><code>for f in *.txt; do ...; done</code></td><td><code>Get-ChildItem *.txt | ForEach-Object {...}</code></td></tr>
+<tr><td>Bedingung</td><td><code>if exist "a.txt" ...</code></td><td><code>if [ -e "a.txt" ]; then ...; fi</code></td><td><code>if (Test-Path 'a.txt') {...}</code></td></tr>
+<tr><td>Übliche Dateiendung</td><td><code>.bat</code>, <code>.cmd</code></td><td><code>.sh</code> (Konvention)</td><td><code>.ps1</code></td></tr>
+<tr><td>Typischer Interpreter</td><td><code>cmd.exe</code></td><td><code>bash</code> / <code>zsh</code></td><td><code>pwsh</code> bzw. Windows PowerShell</td></tr>
+</tbody></table></div>
+<p>Unter Linux/macOS ist <code>#!/usr/bin/env bash</code> der übliche Shebang für ein Bash-Skript, danach <code>chmod +x script.sh</code> und <code>./script.sh</code>; alternativ <code>bash script.sh</code>. macOS verwendet bei neuen Terminal-Sitzungen meist <code>zsh</code>, Bash ist aber ebenfalls verfügbar. WSL ermöglicht eine Linux-Umgebung unter Windows, macht jedoch <code>.bat</code> nicht zu einem portablen Shellskript.</p>
+<div class="codebox"><div class="codebar"><span>vergleich.sh · nicht in Windows-CMD ausführen · bash</span><button class="copy-button" type="button" aria-label="Code kopieren">Kopieren</button></div><pre><code>#!/usr/bin/env bash
+set -e
+script_dir=&quot;$(cd -- &quot;$(dirname -- &quot;${BASH_SOURCE[0]}&quot;)&quot; &amp;&amp; pwd)&quot;
+printf &#x27;Skriptordner: %s\n&#x27; &quot;$script_dir&quot;
+mkdir -p &quot;$script_dir/ausgabe&quot;</code></pre></div>
+<p>Die übertragbare <strong>Denkweise</strong> ist wertvoller als die Übernahme von Syntax: Ein Skript orchestriert Prozesse, verarbeitet Ein- und Ausgaben, prüft Bedingungen und behandelt Fehler. Wer Batch versteht, findet leichter zu Bash oder PowerShell – auch wenn die Befehle anders heißen.</p>
+</section>
+<section id="cheatsheet" class="tip-section"><div class="section-heading"><span>35</span><h2>Spickzettel: Syntax, die du wirklich oft brauchst</h2></div>
+<div class="table-scroll"><table><thead><tr><th>Aufgabe</th><th>Kurzform</th></tr></thead><tbody>
+<tr><td>Sauberer Skriptbeginn</td><td><code>@echo off</code> + <code>setlocal</code></td></tr>
+<tr><td>Ordner des Skripts</td><td><code>%~dp0</code></td></tr>
+<tr><td>Variable</td><td><code>set "X=Wert"</code> → <code>%X%</code></td></tr>
+<tr><td>Verzeichnis prüfen</td><td><code>if exist "C:\Ziel\." ...</code></td></tr>
+<tr><td>Programm im PATH prüfen</td><td><code>where git &gt;nul 2&gt;&amp;1</code></td></tr>
+<tr><td>Fehler prüfen</td><td><code>if errorlevel 1 ...</code></td></tr>
+<tr><td>Dateischleife</td><td><code>for %%F in (*.txt) do echo %%F</code></td></tr>
+<tr><td>Zählschleife</td><td><code>for /l %%I in (1,1,5) do echo %%I</code></td></tr>
+<tr><td>Variable in Schleifenblock</td><td><code>setlocal EnableDelayedExpansion</code> + <code>!X!</code></td></tr>
+<tr><td>Unterprogramm aufrufen</td><td><code>call :LABEL</code></td></tr>
+<tr><td>Anderes Batchskript</td><td><code>call "anderes.bat"</code></td></tr>
+<tr><td>Protokoll anhängen</td><td><code>befehl &gt;&gt;log.txt 2&gt;&amp;1</code></td></tr>
+<tr><td>Ja/Nein-Frage</td><td><code>choice /c JN /m "Weiter?"</code></td></tr>
+<tr><td>Ordner öffnen</td><td><code>start "" "C:\Ordner"</code></td></tr>
+<tr><td>Backup</td><td><code>robocopy "Q" "Z" /E /R:2 /W:2</code></td></tr>
+<tr><td>Erfolgreich beenden</td><td><code>exit /b 0</code></td></tr>
+<tr><td>Fehler dokumentieren</td><td><code>&gt;&amp;2 echo FEHLER: ...</code></td></tr>
+<tr><td>Hilfetext</td><td><code>command /?</code> oder <code>help command</code></td></tr>
+</tbody></table></div>
+</section>
+<section id="checkliste" class="tip-section"><div class="section-heading"><span>36</span><h2>12 Regeln für Batchdateien, die du morgen noch verstehst</h2></div>
+<ol class="tip-list" style="--counter-start:0">
+<li><h3>Mit @echo off und setlocal beginnen</h3><p>Bewusstes Verhalten, möglichst keine Nebenwirkungen auf die aufrufende Umgebung.</p></li>
+<li><h3>Alles relativ zur Batchdatei verorten</h3><p><code>%~dp0</code> ist oft zuverlässiger als Annahmen über den aktuellen Arbeitsordner.</p></li>
+<li><h3>Pfade quoten</h3><p>Das berüchtigte Leerzeichen in „Meine Dokumente“ ist kein Sonderfall, sondern Alltag.</p></li>
+<li><h3>Quellordner vor Kopier- und Löschaktionen prüfen</h3><p>Sonst wird aus Automatisierung eine überraschend konsequente Fehlhandlung.</p></li>
+<li><h3>Rückgabecodes richtig interpretieren</h3><p>Nicht jedes Tool spricht exakt dieselbe Fehlercodesprache.</p></li>
+<li><h3>Mit Dry Runs beginnen</h3><p>Zuerst anzeigen, was passieren würde; erst später produktiv handeln.</p></li>
+<li><h3>Fehler sofort behandeln</h3><p>Keine nachfolgenden Befehle den relevanten Status verdecken lassen.</p></li>
+<li><h3>Logs schreiben, aber keine Geheimnisse</h3><p>Ohne Logs ist eine geplante Aufgabe eine Blackbox.</p></li>
+<li><h3>Delayed Expansion gezielt einsetzen</h3><p>Nicht pauschal, wenn Dateinamen oder Texte Ausrufezeichen enthalten können.</p></li>
+<li><h3>Keine Umlaute voraussetzen</h3><p>Bei portablem CMD-Code mit ASCII arbeiten oder Encoding gezielt testen.</p></li>
+<li><h3>Kein blindes Löschen und Spiegeln</h3><p><code>/MIR</code> ist kein harmloses Synonym für „kopieren“.</p></li>
+<li><h3>Komplexität rechtzeitig auslagern</h3><p>Wenn Batch einen halben Parser nachbauen muss, ist PowerShell oder Python billiger.</p></li>
+</ol>
+</section>
+<section id="next" class="tip-section"><div class="section-heading"><span>37</span><h2>Was du als Nächstes konkret automatisieren könntest</h2></div>
+<div class="grid2" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px"><div class="intro-note"><h3>5-Minuten-Gewinn</h3><p>Ein Doppelklick öffnet VS Code, Projektordner und gewünschte Webadressen. Sehr geringer Aufwand, sofortiger Nutzen.</p></div><div class="intro-note"><h3>30-Minuten-Gewinn</h3><p>Ein markierter USB-Stick wird unabhängig vom Laufwerksbuchstaben gefunden; Lieblingsordner öffnet sich automatisch.</p></div><div class="intro-note"><h3>1-Stunden-Gewinn</h3><p>Ordnerbezogene Datensicherung mit Robocopy, klarer Fehlerbehandlung und Logdatei, anschließend täglicher Task.</p></div><div class="intro-note"><h3>Perspektive</h3><p>Für GitHub-Pages-JSON und bildbasierte Veröffentlichungen: Batch als Starter, die eigentliche JSON-Bearbeitung lieber in Python oder PowerShell und Git-Commits bewusst prüfen.</p></div></div>
+<p><strong>Pragmatischer Lernmaßstab:</strong> Du musst CMD nicht auswendig beherrschen. Wenn du Variablen, Pfade, Bedingungen, Schleifen, Fehlercodes und Protokolle sicher anwenden kannst, deckst du bereits einen Großteil sinnvoller Windows-Automatisierungen ab. Den Rest schlägst du nach.</p>
+</section>
+<section id="quellen" class="tip-section"><div class="section-heading"><span>38</span><h2>Weiterführende Dokumentation und Nachschlagen</h2></div>
+<p>Die Beispiele orientieren sich an den Windows-Bordmitteln und der offiziellen Referenz. Microsoft Learn ist die verlässlichste Anlaufstelle, wenn ein Parameter oder ein Fehlercode im Detail geklärt werden muss.</p>
+<ul class="references">
+<li><a href="https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/windows-commands" target="_blank" rel="noopener noreferrer">Microsoft Learn – Windows Commands A–Z</a></li>
+<li><a href="https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/cmd" target="_blank" rel="noopener noreferrer">CMD: Befehlsinterpreter, Syntax und Erweiterungen</a></li>
+<li><a href="https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/for" target="_blank" rel="noopener noreferrer">FOR: Schleifen, FOR /F und Variablenmodifikatoren</a></li>
+<li><a href="https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/setlocal" target="_blank" rel="noopener noreferrer">SETLOCAL: lokale Variablen und Delayed Expansion</a></li>
+<li><a href="https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy" target="_blank" rel="noopener noreferrer">ROBOCOPY: Optionen und Exit-Codes</a></li>
+<li><a href="https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/choice" target="_blank" rel="noopener noreferrer">CHOICE: definierte Benutzereingaben</a></li>
+<li><a href="https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/schtasks-create" target="_blank" rel="noopener noreferrer">SCHTASKS /CREATE: geplante Aufgaben</a></li>
+<li><a href="https://learn.microsoft.com/en-us/powershell/scripting/overview" target="_blank" rel="noopener noreferrer">PowerShell-Dokumentation – der nächste logische Schritt</a></li>
+</ul><p class="footnote">Stand des Leitfadens: Oktober 2026. Beispielskripte für Windows 10/11, ohne zusätzliche CMD-Bibliotheken. Bei produktiver Nutzung in einer isolierten Testumgebung beginnen und die Pfade vorab anpassen.</p>
+</section></main>
+<div class="core-points"><h2>Das Wichtigste in einem Satz</h2><p>Eine gute Batchdatei ist kein Zaubertrick: Sie macht wiederkehrende Handgriffe nachvollziehbar, prüft Voraussetzungen, behandelt Fehler und hinterlässt eine brauchbare Spur dessen, was sie getan hat.</p><button class="print-button" type="button" onclick="window.print()">Handbuch drucken</button><p><a class="back-to-top" href="#top">Zurück nach oben ↑</a></p></div>
+<footer class="footer"><p>Technische Lernnotizen · Statisches HTML · Windows CMD / Batch · Stand Oktober 2026</p></footer>
+</div>
+<a href="#top" class="site-top" aria-label="Zurück nach oben">↑ Nach oben</a>
+<script>
+// Nur Komfort: kein Framework, keine Bibliothek, keine Datenübertragung.
+document.querySelectorAll('.copy-button').forEach(function(button) {
+  button.addEventListener('click', async function() {
+    const source = button.closest('.codebox').querySelector('pre code');
+    const value = source.textContent;
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(value);
+      } else {
+        const field = document.createElement('textarea');
+        field.value = value;a
+        field.style.position = 'fixed';
+        field.style.opacity = '0';
+        document.body.appendChild(field);
+        field.select();
+        const successful = document.execCommand('copy');
+        field.remove();
+        if (!successful) throw new Error('Kopieren nicht unterstützt');
+      }
+      button.textContent = 'Kopiert ✓';
+    } catch (err) {
+      button.textContent = 'Manuell markieren';
+    }
+    window.setTimeout(function() {button.textContent = 'Kopieren';}, 2200);
+  });
+});
+</script>
+</body>
+</html>
