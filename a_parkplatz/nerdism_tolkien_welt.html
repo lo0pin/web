@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Ein eigenständiger, deutschsprachiger Wegweiser durch Tolkiens Legendarium: Schöpfung, Zeitalter, Völker, Länder, Kriege, Ringe, Sprachen und Begriffe.">
+  <meta name="theme-color" content="#244a46">
+  <title>Tolkiens Welt – ein Wegweiser durch Arda</title>
+  <!-- Bei Ablage in /web/nerdism/ verweist dieser Pfad auf /web/assets/css/classy.css. -->
+  <link rel="stylesheet" href="../assets/css/classy.css">
+  <style>
+    /* Ergänzungen zur vorhandenen classy.css, bewusst auf diese Seite begrenzt. */
+    .tolkien-page{--t-forest:#244a46;--t-gold:#a17d42;--t-parchment:#f7f2e8;--t-rule:#ded8ca;--t-ink:#292b27;max-width:1150px;color:var(--t-ink)}
+    .tolkien-page .hero{background:linear-gradient(125deg,#f4f0e5,#fff 55%,#edf2ed);border-top:5px solid var(--t-forest);position:relative;overflow:hidden}
+    .tolkien-page .hero::after{content:"✧";position:absolute;font-family:Georgia,serif;font-size:15rem;color:#264b3810;right:-1.2rem;bottom:-8rem;pointer-events:none}
+    .tolkien-page .hero h1{max-width:21ch;color:#273a32;position:relative;z-index:1}
+    .tolkien-page .hero .eyebrow{color:var(--t-forest)}
+    .tolkien-page .lead{max-width:76ch;position:relative;z-index:1}
+    .tolkien-page .deck{display:flex;flex-wrap:wrap;gap:.55rem;margin-top:1.4rem;position:relative;z-index:1}
+    .tolkien-page .deck span{border:1px solid #cbd5ca;background:#fff9;border-radius:50px;font-size:.83rem;padding:.22rem .7rem;color:#436354}
+    .tolkien-page .breadcrumbs{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;padding:.6rem 0 1rem;font-size:.88rem}
+    .tolkien-page .breadcrumbs a{color:var(--t-forest)}
+    .tolkien-page .contents{background:#fffcf5;border-color:var(--t-rule)}
+    .tolkien-page .contents ul{grid-template-columns:repeat(3,minmax(0,1fr));gap:.45rem 1.15rem}
+    .tolkien-page .contents a{font-size:.92rem;color:var(--t-forest)}
+    .tolkien-page .tip-section{margin-top:4rem}
+    .tolkien-page .section-heading span{background:var(--t-forest)}
+    .tolkien-page .section-heading h2{color:#29463b}
+    .tolkien-page .atlas-paper{background:#fff;border:1px solid #e6e1d8;border-radius:14px;padding:clamp(1.25rem,3.7vw,2.55rem);box-shadow:0 5px 20px #283e2509}
+    .tolkien-page .atlas-paper h3{font-family:Georgia,'Times New Roman',serif;font-size:1.5rem;line-height:1.25;color:#345247;margin:2rem 0 .75rem}
+    .tolkien-page .atlas-paper h3:first-child{margin-top:0}
+    .tolkien-page .atlas-paper h4{font-size:1.07rem;color:#3b4d44;margin:1.5rem 0 .55rem}
+    .tolkien-page p,.tolkien-page li{max-width:90ch}
+    .tolkien-page .atlas-paper p{line-height:1.8}
+    .tolkien-page strong{color:#284539}
+    .tolkien-page .atlas-lead{font-size:1.13rem;color:#454941}
+    .tolkien-page .cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin:1.5rem 0}
+    .tolkien-page .cols.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .tolkien-page .entry{border:1px solid var(--t-rule);border-radius:10px;background:#fcfaf6;padding:1.1rem 1.2rem}
+    .tolkien-page .entry h4{margin:0 0 .4rem;color:#335649}
+    .tolkien-page .entry p{margin:0;font-size:.96rem}
+    .tolkien-page .entry small{display:block;color:#6e7568;margin-bottom:.4rem}
+    .tolkien-page .note{border-left:4px solid var(--t-gold);background:var(--t-parchment);border-radius:0 9px 9px 0;padding:1rem 1.2rem;margin:1.5rem 0}
+    .tolkien-page .note p:last-child{margin-bottom:0}
+    .tolkien-page .note.caution{border-left-color:#a65f43;background:#fff6ed}
+    .tolkien-page .note strong{display:block}
+    .tolkien-page .table-scroll{overflow-x:auto;border:1px solid var(--t-rule);border-radius:9px;margin:1.2rem 0 1.7rem}
+    .tolkien-page table{width:100%;border-collapse:collapse;font-size:.94rem;min-width:620px}
+    .tolkien-page th,.tolkien-page td{padding:.75rem .85rem;text-align:left;vertical-align:top;border-bottom:1px solid #e9e5df}
+    .tolkien-page th{background:#eef1eb;color:#2e4a3d}
+    .tolkien-page tr:last-child td{border-bottom:0}
+    .tolkien-page tr:nth-child(even) td{background:#fcfaf6}
+    .tolkien-page .era-list{padding-left:1.5rem}
+    .tolkien-page .era-list li{margin:0 0 .95rem;padding-left:.25rem}
+    .tolkien-page .era-list strong{display:block}
+    .tolkien-page .overline{font-size:.76rem;text-transform:uppercase;letter-spacing:.12em;font-weight:750;color:var(--t-gold);margin-bottom:.75rem}
+    .tolkien-page details{border:1px solid var(--t-rule);border-radius:8px;background:#fffefa;padding:.8rem 1rem;margin:.65rem 0}
+    .tolkien-page summary{cursor:pointer;font-weight:700;color:#294d3e}
+    .tolkien-page details p{margin:.65rem 0 0}
+    .tolkien-page .topic-index{display:flex;flex-wrap:wrap;gap:.55rem;margin:.9rem 0 1.4rem}
+    .tolkien-page .topic-index a{text-decoration:none;border:1px solid #cbd8cd;border-radius:50px;padding:.32rem .75rem;color:#345b4b;font-size:.86rem}
+    .tolkien-page .topic-index a:hover{background:#edf3ec}
+    .tolkien-page .glossary-toolbar{display:grid;grid-template-columns:minmax(0,2fr) minmax(155px,1fr);gap:.7rem;margin:1.25rem 0}
+    .tolkien-page .glossary-toolbar label{font-size:.81rem;font-weight:700;color:#3b4a3e;display:block;margin-bottom:.35rem}
+    .tolkien-page .glossary-toolbar input,.tolkien-page .glossary-toolbar select{width:100%;padding:.7rem .8rem;border:1px solid #c8d0c6;border-radius:8px;background:white;color:#26362d;font:inherit}
+    .tolkien-page .glossary-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.65rem}
+    .tolkien-page .glossary-item{border:1px solid #e6e2d8;border-radius:8px;padding:.8rem 1rem;background:#fcfaf5}
+    .tolkien-page .glossary-item h4{margin:0 0 .3rem;font-size:1rem;color:#2e4b3f}
+    .tolkien-page .glossary-item p{margin:0;font-size:.9rem;line-height:1.55}
+    .tolkien-page .glossary-item small{font-size:.72rem;color:#73684c;display:block;margin-bottom:.35rem;letter-spacing:.04em}
+    .tolkien-page .glossary-item[hidden]{display:none}
+    .tolkien-page .glossary-count{font-size:.85rem;color:#657063;margin-bottom:1rem}
+    .tolkien-page .site-note{color:#696961;font-size:.88rem;margin:2rem 0}
+    .tolkien-page .footer-actions{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:1.6rem}
+    .tolkien-page .footer-actions a{display:inline-block;border:1px solid #c2d0c3;background:#f0f4ef;border-radius:7px;text-decoration:none;color:#2d5142;padding:.45rem .8rem;font-weight:700;font-size:.9rem}
+    .tolkien-page .bibliography li{margin:.55rem 0}
+    .tolkien-page .mini-key{display:inline-block;font-size:.72rem;border-radius:20px;background:#e7ece5;color:#365948;padding:0 .5rem;margin-left:.35rem}
+    @media(max-width:830px){.tolkien-page .contents ul{grid-template-columns:repeat(2,minmax(0,1fr))}.tolkien-page .cols.three{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media(max-width:640px){.tolkien-page .contents ul,.tolkien-page .cols,.tolkien-page .cols.three,.tolkien-page .glossary-grid,.tolkien-page .glossary-toolbar{grid-template-columns:1fr}.tolkien-page .atlas-paper{padding:1.15rem}.tolkien-page .hero::after{font-size:10rem;bottom:-5rem}.tolkien-page .tip-section{margin-top:3.1rem}}
+    @media print{.tolkien-page .contents,.tolkien-page .breadcrumbs,.tolkien-page .glossary-toolbar,.tolkien-page .footer-actions{display:none}.tolkien-page .hero,.tolkien-page .atlas-paper{box-shadow:none}.tolkien-page .tip-section{break-before:auto}.tolkien-page .glossary-item{break-inside:avoid}}
+    @media(prefers-reduced-motion:reduce){.tolkien-page *{scroll-behavior:auto!important}}
+  </style>
+</head>
+<body>
+  <div class="page tolkien-page" id="top">
+    <nav class="breadcrumbs" aria-label="Brotkrumennavigation">
+      <a href="./home.html">← Nerdism</a>
+      <span>Literatur · Mythologie · Weltgeschichte einer erfundenen Welt</span>
+    </nav>
+    <header class="hero">
+      <p class="eyebrow">Ein eigenständiger Wegweiser durch das Legendarium</p>
+      <h1>Tolkiens Welt: Von der ersten Musik bis zum Vierten Zeitalter</h1>
+      <p class="lead">Ein systematisches Nachschlagewerk über <strong>Arda und Mittelerde</strong>: ihre Entstehung, ihre Völker und Sprachen, die wechselnden Landschaften, Herrschaftsgebiete und Kriege – und die langen historischen Linien, die hinter den vergleichsweise kurzen Reisen Bilbos und Frodos liegen.</p>
+      <div class="deck" aria-label="Thematische Schwerpunkte"><span>Schöpfungsmythos</span><span>Zeitalter &amp; Chronologie</span><span>Länder &amp; Reiche</span><span>Völker &amp; Wesen</span><span>Ringe der Macht</span><span>Begriffslexikon</span><span>Spoiler: sämtliche Hauptwerke</span></div>
+    </header>
+    <div class="note caution"><strong>Hinweis zu Quellen und Urheberrecht</strong><p>Dieser Text ist eine neu verfasste, thematisch eigenständige Übersicht und kein Ersatz für David Days <em>An Atlas of Tolkien</em> oder die Werke J. R. R. Tolkiens. Er übernimmt weder Formulierungen in nennenswertem Umfang noch Karten, Stammbäume oder Illustrationen aus dem Buch. Wo der Atlas eigene zeitliche oder geografische Rekonstruktionen verwendet, wird dies kenntlich gemacht. Sämtliche Figuren, Namen und Schauplätze gehören zur literarischen Welt Tolkiens; die Seite ist ein unabhängiges, nicht offizielles Fan- und Wissensprojekt.</p></div>
+    <nav class="contents" aria-label="Inhaltsverzeichnis">
+      <h2>Inhaltsverzeichnis</h2>
+      <ul>
+        <li><a href="#grundlagen">Lesehilfe &amp; Quellen</a></li>
+        <li><a href="#kosmos">Eä, Arda und die Schöpfung</a></li>
+        <li><a href="#valar">Valar und Maiar</a></li>
+        <li><a href="#fruehzeit">Lampen, Bäume und Sterne</a></li>
+        <li><a href="#zeiten">Zeitalter &amp; Chronologie</a></li>
+        <li><a href="#voelker">Völker und Wesen</a></li>
+        <li><a href="#elben">Elben: Wanderung &amp; Häuser</a></li>
+        <li><a href="#geografie">Geografie und Wandel</a></li>
+        <li><a href="#erstes">Das Erste Zeitalter</a></li>
+        <li><a href="#zweites">Das Zweite Zeitalter</a></li>
+        <li><a href="#drittes">Das Dritte Zeitalter</a></li>
+        <li><a href="#hobbit">Bilbos Reise</a></li>
+        <li><a href="#ringe">Die Ringe der Macht</a></li>
+        <li><a href="#ringkrieg">Der Ringkrieg</a></li>
+        <li><a href="#reiche">Staaten, Städte und Orte</a></li>
+        <li><a href="#artefakte">Schätze und Artefakte</a></li>
+        <li><a href="#natur">Flora, Fauna und Kreaturen</a></li>
+        <li><a href="#sprachen">Sprachen &amp; Namenswelten</a></li>
+        <li><a href="#motive">Die großen Leitmotive</a></li>
+        <li><a href="#glossar">Durchsuchbares Glossar</a></li>
+        <li><a href="#literatur">Quellen &amp; Grenzen</a></li>
+      </ul>
+    </nav>
+
+    <section class="tip-section" id="grundlagen">
+      <div class="section-heading"><span>01</span><h2>Wie man Tolkiens Welt liest</h2></div>
+      <div class="atlas-paper">
+        <p class="atlas-lead">Mittelerde ist kein einzelner Schauplatz und keine in sich abgeschlossene Romanwelt. Es ist der bekannteste Teil einer über Jahrtausende entwickelten Mythologie, in der Literatur, Sprachgeschichte, Geografie und die Erinnerung an vergangene Zeitalter untrennbar ineinanderwirken.</p>
+        <h3>Vier Begriffe als Orientierung</h3>
+        <div class="cols">
+          <div class="entry"><h4>Eä</h4><p>Die geschaffene Welt bzw. das Universum, das aus dem Willen Ilúvatars hervorgeht. Arda liegt innerhalb Eäs.</p></div>
+          <div class="entry"><h4>Arda</h4><p>Die Welt der Handlung: Landmassen, Meere, Himmel und ihre wechselnde Gestalt. Nicht zu verwechseln mit Mittelerde allein.</p></div>
+          <div class="entry"><h4>Mittelerde</h4><p>Der sterbliche Kontinent bzw. die bewohnten Länder, in denen ein Großteil der Geschichten spielt.</p></div>
+          <div class="entry"><h4>Aman</h4><p>Der weit westlich gelegene Kontinent mit Valinor; zur Zeit der Elbenwanderung Ziel vieler Eldar und Sitz der Valar.</p></div>
+        </div>
+        <h3>Warum scheinbar widersprüchliche Angaben vorkommen</h3>
+        <p>Tolkien überarbeitete seine Legenden über Jahrzehnte. Manche Texte sind Erzählungen aus einer fiktiven Überlieferung, andere Skizzen oder nur fragmentarische Entwürfe. Zeitrechnung, Kosmologie, Herkunft einzelner Wesen und sogar die geografische Gestalt der Welt sind daher nicht in allen Fassungen identisch. Auch postum herausgegebene Bücher beruhen auf editorischen Entscheidungen.</p>
+        <p><strong>Der Atlas als Ausgangspunkt:</strong> David Day verbindet geographische Übersichten, chronologische Tafeln, genealogische Darstellungen und Beschreibungen von Landschaften und Ereignissen. Die vorliegende Seite greift diese Perspektive auf, ordnet den Stoff aber nach Sachfragen und Zusammenhängen neu.</p>
+        <div class="note caution"><strong>Wichtig: Days Zeitmodell ist nicht Tolkiens verbindliche Datierung</strong><p>Der Atlas verwendet unter anderem „Zeitalter der Schöpfung“, „Zeitalter der Lampen“, „Zeitalter der Dunkelheit“, „Zeitalter der Sterne“ sowie „Zeitalter der Sonne“ und rechnet Frühperioden in einen einheitlichen Rahmen von Menschenjahren um. Day erklärt selbst, dass diese Benennungen beziehungsweise ihre systematische Verbindung teilweise seine eigene Konvention darstellen. Hier werden deshalb für die frühe Geschichte vor allem <em>Ereignisabfolgen</em> angegeben und absolute Zahlen nur dort, wo die Überlieferung ausreichend stabil ist.</p></div>
+        <h3>Welche Geschichten zusammengehören</h3>
+        <ul>
+          <li><strong>Das Silmarillion:</strong> Schöpfung, Valar, Elbenreiche, Silmaril, Kriege von Beleriand, Númenor und die Vorgeschichte der Ringe.</li>
+          <li><strong>Der Hobbit:</strong> Bilbos Reise zum Erebor, der Konflikt mit Smaug und die Schlacht der Fünf Heere.</li>
+          <li><strong>Der Herr der Ringe:</strong> Ende des Dritten Zeitalters, Schicksal des Einen Rings, Rohan, Gondor und der Übergang zur Herrschaft der Menschen.</li>
+          <li><strong>Nachgelassene Texte:</strong> Ergänzungen, Alternativfassungen, Karten, Annalen und sprachgeschichtliche Entwürfe, die manche vermeintlich eindeutige Antwort relativieren.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="tip-section" id="kosmos">
+      <div class="section-heading"><span>02</span><h2>Eä, Arda und die Schöpfung</h2></div>
+      <div class="atlas-paper">
+        <h3>Ilúvatar und die große Musik</h3>
+        <p>Am Anfang steht <strong>Eru Ilúvatar</strong>, der Eine. Er bringt geistige Wesen hervor, die <strong>Ainur</strong>, und lässt sie an einer gewaltigen, vielstimmigen Musik teilhaben. Die Motive dieser Musik sind nicht bloß Klänge: In ihnen liegen die Entwürfe kommender Wirklichkeit. Ein Ainu namens Melkor versucht, seine eigene Vorstellung von Macht und Ordnung gegen das gemeinsame Thema durchzusetzen. Der Konflikt wird zum Urbild des späteren Bösen.</p>
+        <p>Ilúvatar verleiht der Vision Dasein. Aus der gedachten Gestalt wird <strong>Eä</strong>; innerhalb dieser Welt entsteht Arda. Ein Teil der Ainur tritt in die geschaffene Welt ein, um sie zu gestalten. Die Welt ist somit nicht auf einen Schlag fertiggestellt: Ihre Geschichte beginnt als Wechselspiel aus schöpferischer Formung, Widerstand, Zerstörung und Erneuerung.</p>
+        <h3>Die Gestaltung von Arda</h3>
+        <p>Die eingetretenen Mächte erschaffen keine selbstständige Wirklichkeit neben Ilúvatars Werk, sondern formen die vorhandene Schöpfung. Aulë wirkt auf Stoffe, Berge und Handwerk, Ulmo auf die Wasser, Yavanna auf das pflanzliche Leben. Die Gestalt des Landes bleibt instabil, weil Melkor die Werke seiner Gefährten verändert und verdirbt. In diesem Grundkonflikt liegt der Ursprung vieler späterer Landschaften, Verwüstungen und Ungeheuer.</p>
+        <p>Ein entscheidender Gedanke ist die <strong>Versehrung Ardas</strong>: Das Böse bleibt bei Tolkien nicht auf einzelne böse Figuren beschränkt. Es prägt die materielle Welt, die Geschichte und die Möglichkeiten ihrer Bewohner. Dennoch gelingt es Melkor nie, völlig unabhängig schöpferisch zu werden; vieles, was er hervorbringt, ist Umformung, Verführung oder Missbrauch des schon Existierenden.</p>
+        <h3>Weltbild und Überlieferung</h3>
+        <p>In verbreiteten Fassungen der älteren Mythologie besitzt Arda zunächst eine andere kosmische Gestalt als nach dem Untergang Númenors. Die Trennung Amans von den gewöhnlichen Wegen der Menschen ist nicht nur eine kartografische Verschiebung, sondern ein grundlegender Wechsel der Weltordnung. Tolkien experimentierte später auch mit anderen Vorstellungen, weshalb starre „physikalische“ Gesamtkarten der gesamten Frühgeschichte problematisch sind.</p>
+        <div class="note"><strong>Merksatz</strong><p>Das Legendarium ist zugleich Weltgeschichte und Entstehungsgeschichte des Verlusts: Von einem ursprünglichen Entwurf bleibt in jeder späteren Epoche etwas erhalten, aber niemals unversehrt.</p></div>
+      </div>
+    </section>
+
+    <section class="tip-section" id="valar">
+      <div class="section-heading"><span>03</span><h2>Die Valar, die Maiar und der erste Dunkle Herrscher</h2></div>
+      <div class="atlas-paper">
+        <p class="atlas-lead">Die Ainur sind geistige Wesen. Jene großen Mächte, die in Arda wirken, heißen <strong>Valar</strong>; zahlreiche andere, ihnen verwandte Geister werden <strong>Maiar</strong> genannt. Das sind keine Menschen mit besonders starken Zauberkräften, sondern Wesen einer anderen Seinsordnung.</p>
+        <div class="table-scroll"><table><thead><tr><th>Vala</th><th>Wirkungsbereich und Bedeutung</th></tr></thead><tbody>
+          <tr><td>Manwë</td><td>Wind, Luft und Königtum; führende Macht der Valar in Arda.</td></tr>
+          <tr><td>Varda (Elbereth)</td><td>Sterne und Licht; von den Elben besonders verehrt.</td></tr>
+          <tr><td>Ulmo</td><td>Meere und Gewässer; wirkt auch fern von Valinor und bleibt mit Mittelerde verbunden.</td></tr>
+          <tr><td>Aulë</td><td>Gestein, Erz, Kunstfertigkeit und handwerkliches Schaffen; mit der Vorgeschichte der Zwerge verbunden.</td></tr>
+          <tr><td>Yavanna</td><td>Wachstum, Pflanzen und lebendige Natur; ihr Anliegen führt auch zur Entstehung der Ents.</td></tr>
+          <tr><td>Námo (Mandos)</td><td>Schicksal, Urteil und Hallen der Toten; der Name Mandos bezeichnet auch seinen Wohnsitz.</td></tr>
+          <tr><td>Vairë</td><td>Webt die Geschehnisse der Welt in ihre Bilder und Gewebe.</td></tr>
+          <tr><td>Irmo (Lórien)</td><td>Träume, Visionen und Trost; sein Garten ist ein Ort der Erholung.</td></tr>
+          <tr><td>Estë</td><td>Heilung und Erholung.</td></tr>
+          <tr><td>Nienna</td><td>Trauer, Mitleid und die Weisheit des Mitgefühls.</td></tr>
+          <tr><td>Oromë</td><td>Jagd und Wälder; entdeckt die erwachten Elben.</td></tr>
+          <tr><td>Vána</td><td>Jugend, Blühen und Neubeginn.</td></tr>
+          <tr><td>Tulkas</td><td>Kraft, Mut und unmittelbarer Kampf gegen Melkor.</td></tr>
+          <tr><td>Nessa</td><td>Bewegung, Tanz und Schnelligkeit.</td></tr>
+          <tr><td>Melkor (Morgoth)</td><td>Ursprünglich einer der mächtigsten Ainur; rebelliert gegen die Ordnung und wird zum ersten großen Feind Ardas. Er gehört nicht zur späteren Gemeinschaft der Valar.</td></tr>
+        </tbody></table></div>
+        <h3>Bekannte Maiar</h3>
+        <div class="cols three">
+          <div class="entry"><h4>Melian</h4><p>Maia, die als Königin an der Seite Thingols das Elbenreich Doriath prägt; Mutter Lúthiens.</p></div>
+          <div class="entry"><h4>Ossë und Uinen</h4><p>Mit den Meeren verbundene Geister; wichtig besonders für die Seefahrt und die Küstenkulturen.</p></div>
+          <div class="entry"><h4>Arien und Tilion</h4><p>Lenken in der überlieferten Erzählung die Gefäße der Sonne und des Mondes.</p></div>
+          <div class="entry"><h4>Sauron</h4><p>Begann als Maia im Umfeld Aulës, wurde Morgoths Diener und später selbst zum Dunklen Herrscher.</p></div>
+          <div class="entry"><h4>Balrogs</h4><p>Gefallene Maiar, die Morgoth als mächtige Diener dienen; mit Feuer, Finsternis und zerstörerischer Gewalt verbunden.</p></div>
+          <div class="entry"><h4>Istari</h4><p>Die fünf nach Mittelerde entsandten Zauberer: Gandalf, Saruman, Radagast und die beiden Blauen Zauberer.</p></div>
+        </div>
+        <h3>Melkor und Sauron sind nicht dieselbe Macht</h3>
+        <p><strong>Morgoth</strong> führt den ersten weltumspannenden Widerstand gegen die Valar, hält Utumno und später Angband und steht im Mittelpunkt der Kriege des Ersten Zeitalters. <strong>Sauron</strong> ist zunächst sein Gefolgsmann. Nach Morgoths Niederlage entwickelt Sauron eigene Strategien: Er verbindet militärische Macht mit Täuschung, politischer Verführung und dem Willen, alles durch ein einziges Herrschaftsinstrument zu kontrollieren.</p>
+        <div class="note"><strong>Keine einfache Götterhierarchie</strong><p>Valar, Maiar, Elben und Menschen lassen sich nicht wie Figuren eines Rollenspiels nach einer einzigen Stärkeskala ordnen. Macht, Erkenntnis, körperliche Gestalt und Schicksal sind bei Tolkien unterschiedliche Größen. Gerade Gandalf wirkt oftmals durch Rat und Ermutigung, nicht durch offene Machtdemonstration.</p></div>
+      </div>
+    </section>
+
+    <section class="tip-section" id="fruehzeit">
+      <div class="section-heading"><span>04</span><h2>Vor der Sonne: Lampen, Bäume und Sterne</h2></div>
+      <div class="atlas-paper">
+        <p>Bevor in Tolkiens überlieferter Frühgeschichte Sonne und Mond den Rhythmus der Welt bestimmen, folgen mehrere einschneidende Veränderungen der Beleuchtung und der Landschaft. Der Atlas widmet diesen Phasen ungewöhnlich viel Raum, weil sie erklären, weshalb das Erste Zeitalter der Sonne bereits eine lange Vorgeschichte besitzt.</p>
+        <ol class="era-list">
+          <li><strong>Almaren und die großen Lampen</strong>Auf einer frühen Gestalt Ardas errichten die Valar ihren Wohnsitz Almaren. Zwei gewaltige Leuchten, <em>Illuin</em> im Norden und <em>Ormal</em> im Süden, erhellen die Welt. Melkor zerstört die Lampen; die Katastrophe verändert die Gestalt der Länder und beendet die vermeintlich dauerhafte Ruhe.</li>
+          <li><strong>Rückzug nach Aman</strong>Die Valar nehmen im Westen Wohnsitz. Dort liegt <em>Valinor</em>, geschützt durch die Pelóri-Berge. <em>Valimar</em> ist die Stadt der Valar; <em>Eldamar</em> wird später zur Heimat zahlreicher Elben.</li>
+          <li><strong>Telperion und Laurelin</strong>In Valinor wachsen die beiden Bäume des Lichts: der silbern strahlende Telperion und der goldene Laurelin. Ihre sich abwechselnden Lichtphasen bestimmen eine neue Form von Zeit. Die besondere Leuchtkraft der Bäume wird zum Maßstab verlorener Schönheit.</li>
+          <li><strong>Das Erwachen der Elben</strong>Die ersten Elben erscheinen bei <em>Cuiviénen</em> im Osten Mittelerdes. Sie erblicken zunächst die Sterne; deren Licht prägt ihre Kultur, ihre Namen und ihre Liebe zur Welt.</li>
+          <li><strong>Die große Wanderung</strong>Oromë entdeckt die Elben; viele folgen dem Ruf der Valar nach Westen. Andere bleiben zurück, weitere unterbrechen ihre Reise. Aus unterschiedlichen Wegen entstehen später unterscheidbare elbische Kulturen.</li>
+          <li><strong>Die Silmaril und der Bruch</strong>Fëanor bewahrt etwas vom Licht der beiden Bäume in drei Juwelen. Melkor und die riesige Spinnengestalt Ungoliant vernichten die Bäume; Melkor raubt die Silmaril. Seine Tat löst Fëanors Eid und die verhängnisvolle Rückkehr großer Teile der Noldor nach Mittelerde aus.</li>
+          <li><strong>Der erste Aufgang von Mond und Sonne</strong>Aus dem letzten bewahrten Licht der Bäume entstehen in der erzählten Überlieferung die himmlischen Leuchten. Mit ihrem Aufstieg tritt auch das Erwachen der Menschen in den Vordergrund. Die Geschichte erhält eine neue zeitliche Einteilung.</li>
+        </ol>
+        <h3>Die Geografie der Frühzeit</h3>
+        <p><strong>Utumno</strong> liegt im hohen Norden und ist Melkors frühe Festung. <strong>Angband</strong> wird zum späteren Machtzentrum im Nordwesten Mittelerdes. <strong>Alqualondë</strong> ist die Hafenstadt der Teleri in Aman; hier führt der Konflikt um Schiffe zum ersten Sippenmord der Elben. <strong>Tirion</strong> ist eine bedeutende Elbenstadt in Eldamar. <strong>Formenos</strong> ist mit dem Exil Fëanors und der Verwahrung der Silmaril verbunden.</p>
+        <h3>Von der Erschaffung der Sterne zum Erinnerungsort</h3>
+        <p>Sterne, Bäume, Sonne und Mond sind nicht einfach verschiedene Lichtquellen. An ihnen hängen die Erfahrungen einer immer älter werdenden Welt: Manche Elben kennen noch das Licht der Bäume, andere nur die Sterne über Mittelerde. Dadurch werden Licht und Erinnerung zu Zeichen unterschiedlicher Nähe zum Ursprung. Wenn Jahrtausende später in Galadriels Reich alte Schönheit noch einmal sichtbar wird, wirkt die Frühgeschichte unmittelbar in die Handlung des Ringkriegs hinein.</p>
+      </div>
+    </section>
+
+    <section class="tip-section" id="zeiten">
+      <div class="section-heading"><span>05</span><h2>Zeitalter und Zeitsysteme</h2></div>
+      <div class="atlas-paper">
+        <p class="atlas-lead">Die Geschichten von <em>Der Hobbit</em> und <em>Der Herr der Ringe</em> sind der späte Teil einer sehr langen Abfolge. Die Aufteilung in Zeiträume hilft, Ursachen und Folgen zu erkennen – sie ersetzt jedoch nicht die unterschiedlichen Annalen und Kalender der Erzählwelt.</p>
+        <div class="table-scroll"><table><thead><tr><th>Phase</th><th>Wesentliche Entwicklungen</th><th>Datierung</th></tr></thead><tbody>
+          <tr><td>Vor der Sonne</td><td>Schöpfung, Formung Ardas, Lampen, Bäume, Sterne, Erwachen der Elben, Wanderungen, Raub der Silmaril.</td><td>Mehrere konkurrierende Zeitmaßstäbe; keine einfache Umrechnung.</td></tr>
+          <tr><td>Erstes Zeitalter</td><td>Morgoths Kriege, Beleriand, Menschenhäuser der Edain, Beren und Lúthien, Gondolin, Ende Angbands.</td><td>Beginn wird je nach Kontext unterschiedlich gefasst; die Jahre der Sonne bilden den bekannten späten Abschnitt.</td></tr>
+          <tr><td>Zweites Zeitalter</td><td>Númenor, Eregion, Schmieden der Ringe, Saurons Aufstieg, Untergang Númenors und Letztes Bündnis.</td><td>3441 Jahre.</td></tr>
+          <tr><td>Drittes Zeitalter</td><td>Reiche der Dúnedain, Angmar, Gondors Krise, Wanderung der Hobbits, Smaug, Ringkrieg.</td><td>3021 Jahre.</td></tr>
+          <tr><td>Viertes Zeitalter</td><td>Erneuertes Königtum der Menschen, Abreise zahlreicher Elben, allmählicher Wandel des Wunderbaren.</td><td>Im Vergleich zu den früheren Epochen weniger ausführlich überliefert.</td></tr>
+        </tbody></table></div>
+        <h3>Orientierende Daten</h3>
+        <div class="table-scroll"><table><thead><tr><th>Zeitpunkt</th><th>Ereignis</th><th>Historische Tragweite</th></tr></thead><tbody>
+          <tr><td>Z. Z. 32</td><td>Gründung Númenors.</td><td>Aufstieg des mächtigsten Menschenreichs seiner Epoche.</td></tr>
+          <tr><td>Z. Z. ca. 1500–1600</td><td>Arbeiten an den Ringen der Macht; Schmieden des Einen Rings um 1600.</td><td>Saurons Versuch, andere Mächte an seinen Willen zu binden.</td></tr>
+          <tr><td>Z. Z. 1693–1701</td><td>Krieg zwischen Sauron und den Elben.</td><td>Zerstörung Eregions; Hilfe durch Númenor.</td></tr>
+          <tr><td>Z. Z. 3319</td><td>Untergang Númenors.</td><td>Weltveränderung; Flucht der Getreuen nach Mittelerde.</td></tr>
+          <tr><td>Z. Z. 3320</td><td>Gründung der Exilreiche Arnor und Gondor.</td><td>Neue politische Ordnung im Nordwesten und Süden.</td></tr>
+          <tr><td>Z. Z. 3441</td><td>Niederlage Saurons am Ende des Letzten Bündnisses.</td><td>Beginn des Dritten Zeitalters.</td></tr>
+          <tr><td>D. Z. 2</td><td>Isildurs Tod in der Katastrophe an den Schwertelfeldern.</td><td>Der Eine Ring geht verloren.</td></tr>
+          <tr><td>D. Z. 1050 ff.</td><td>Wachsender Einfluss des Schattens von Dol Guldur; westliche Wanderungen der Hobbits.</td><td>Langsame Verschiebung von Bevölkerungen und Machtzentren.</td></tr>
+          <tr><td>D. Z. 1601</td><td>Ansiedlung der Hobbits im späteren Auenland.</td><td>Entstehung ihres bekanntesten Heimatgebiets.</td></tr>
+          <tr><td>D. Z. 1975</td><td>Niederlage Angmars.</td><td>Ende des Hexenkönigreichs, aber keine Wiederherstellung Arnors.</td></tr>
+          <tr><td>D. Z. 2941</td><td>Bilbos Reise; Tod Smaugs; Schlacht der Fünf Heere.</td><td>Stärkung der freien Völker im Nordosten.</td></tr>
+          <tr><td>D. Z. 3018–3019</td><td>Ringkrieg und Untergang des Einen Rings.</td><td>Ende von Saurons Herrschaftsanspruch.</td></tr>
+          <tr><td>D. Z. 3021</td><td>Abreise der Ringträger über das Meer.</td><td>Symbolischer und zeitlicher Abschluss des Dritten Zeitalters.</td></tr>
+        </tbody></table></div>
+        <p><small>Z. Z. = Zweites Zeitalter; D. Z. = Drittes Zeitalter. Die Daten der späteren Epochen sind leichter an den überlieferten Annalen zu prüfen als die absolute Dauer der vorsonnenzeitlichen Geschichte.</small></p>
+        <div class="note caution"><strong>Keine Scheingenauigkeit</strong><p>Days Atlas stellt eine geschlossene Gesamtdauer von rund 37.000 Jahren seit der Schöpfung bis zum Ende des Dritten Zeitalters dar. Diese Zahl ist als <em>editorische Modellrechnung</em>, nicht als gesicherte, durchgängig gültige Tolkien-Chronologie zu verstehen. Auf einer referenzfähigen Website sollte sie nicht als absolute historische Zahl erscheinen.</p></div>
+      </div>
+    </section>
+
+    <section class="tip-section" id="voelker">
+      <div class="section-heading"><span>06</span><h2>Völker, Lebewesen und ihre Herkunft</h2></div>
+      <div class="atlas-paper">
+        <p>Die Bewohner Ardas unterscheiden sich nicht nur nach Aussehen oder Lebensweise. Ihre Herkunft bestimmt grundlegende Fragen: Können sie altern? Wohin gehen sie nach dem Tod? Wie stehen sie zu Geschichte, Erinnerung, Kunst und Herrschaft? Gerade die gegensätzlichen Schicksale von Elben und Menschen prägen viele der bedeutendsten Erzählungen.</p>
+        <div class="cols">
+          <div class="entry"><small>Erstgeborene</small><h4>Elben – Quendi</h4><p>Sie gehören zur Welt, solange diese besteht. Gewalt kann ihren Leib töten, doch ihre geistige Existenz ist enger mit Arda verbunden als jene der Menschen. Ihre lange Erinnerung macht sie zugleich kunstfertig und anfällig für Trauer über den Verfall.</p></div>
+          <div class="entry"><small>Nachgeborene</small><h4>Menschen – Atani</h4><p>Sie werden sterblich geboren und verlassen nach dem Tod die Grenzen des bekannten Weltgeschehens. Ihre kurze Lebenszeit verleiht ihrer Geschichte eine andere Dringlichkeit. Númenors Tragödie entsteht wesentlich aus dem Kampf gegen diese Grenze.</p></div>
+          <div class="entry"><small>Kinder Aulës</small><h4>Zwerge – Khazâd</h4><p>Von Aulë ursprünglich aus eigenem Antrieb geformt und von Ilúvatar angenommen. Sie lieben Stein, Metall und bleibende Werke, besitzen ausgeprägte Häusertraditionen und können große unterirdische Städte errichten.</p></div>
+          <div class="entry"><small>Verwandte der Menschen</small><h4>Hobbits</h4><p>Kleine, zumeist sesshafte Bewohner mit besonderer Vorliebe für Garten, Haus, Vorrat und Gewohnheit. Ihre Stärke liegt selten in militärischer Macht, sondern in Beharrlichkeit, Freundschaft und einer ungewöhnlichen Unempfänglichkeit gegen heroische Selbstinszenierung.</p></div>
+          <div class="entry"><small>Hüter der Wälder</small><h4>Ents und Huorns</h4><p>Ents sind denkende Baumhirten, deren Geschichte mit Yavannas Sorge um lebendige Gewächse verknüpft ist. Huorns stehen zwischen gewöhnlichen Bäumen und den Ents; ihre genaue Natur wird nicht abschließend systematisiert.</p></div>
+          <div class="entry"><small>Feindliche Heere</small><h4>Orks und Uruk-hai</h4><p>Orks treten seit der Frühgeschichte als Diener dunkler Mächte auf. Später erscheinen besonders große und kriegstüchtige Formen. Ihre biologische und moralische Herkunft blieb in Tolkiens Entwürfen umstritten.</p></div>
+        </div>
+        <h3>Andere wichtige Wesen</h3>
+        <div class="table-scroll"><table><thead><tr><th>Wesen</th><th>Einordnung</th><th>Beispiele</th></tr></thead><tbody>
+          <tr><td>Drachen</td><td>Von Morgoth gezüchtete bzw. in seinen Diensten hervorgebrachte Ungeheuer; Feuer speiende und nicht Feuer speiende Formen, geflügelte und ungeflügelte.</td><td>Glaurung, Ancalagon, Smaug</td></tr>
+          <tr><td>Balrogs</td><td>Gefallene Maiar; nicht als zoologische Tierart zu behandeln.</td><td>Gothmog, Durins Fluch</td></tr>
+          <tr><td>Trolle</td><td>Gewaltige, unterschiedliche Wesen in den Heeren der Dunklen Mächte.</td><td>Höhlentrolle, Olog-hai</td></tr>
+          <tr><td>Große Adler</td><td>Eigenständige, intelligente Mächte oder Diener in Verbindung mit Manwë; eingreifend, aber keine bequem abrufbaren Reittiere.</td><td>Thorondor, Gwaihir</td></tr>
+          <tr><td>Große Spinnen</td><td>Bedrohliche Nachkommenschaft und Verwandtschaftslinien um Ungoliant.</td><td>Ungoliant, Kankra</td></tr>
+          <tr><td>Warge und Werwölfe</td><td>Feindliche Wolfswesen verschiedener Natur; die Begriffe sind nicht deckungsgleich.</td><td>Draugluin, Carcharoth, Warge des Nebelgebirges</td></tr>
+          <tr><td>Nazgûl</td><td>Neun versklavte Ringgeister, ursprünglich sterbliche Menschen.</td><td>Hexenkönig von Angmar, Khamûl</td></tr>
+          <tr><td>Zauberer</td><td>Als ältere Männer erscheinende, mit begrenztem Auftrag entsandte Maiar.</td><td>Gandalf, Saruman, Radagast</td></tr>
+        </tbody></table></div>
+        <h3>Die Orkfrage als Beispiel für unvollendete Überlieferung</h3>
+        <p>Der Atlas referiert die bekannte Erklärung, Morgoth habe aus gefangenen Elben Orks hervorgebracht. Diese Vorstellung ist in einer verbreiteten Textfassung präsent. Tolkien entwickelte aber auch andere Möglichkeiten und warf selbst Fragen nach Herkunft, Willensfreiheit und der Fähigkeit zum Guten auf. Die Aussage, alle Orks stammten eindeutig und ausschließlich von verwandelten Elben ab, wäre deshalb unzulässig bestimmt.</p>
+        <h3>Elben, Menschen und Halbelben</h3>
+        <p>Einige Familien verbinden beide Geschlechter. Besonders die Linien von <strong>Beren und Lúthien</strong> sowie <strong>Tuor und Idril</strong> führen später zu <strong>Eärendil</strong>, <strong>Elwing</strong>, <strong>Elrond</strong> und <strong>Elros</strong>. Ihre Geschichte zeigt, dass die Grenze zwischen Sterblichkeit und elbischem Schicksal für wenige Gestalten ausdrücklich zum Gegenstand einer besonderen Entscheidung wird. Aus Elros' Linie gehen die Könige Númenors hervor; über Elrond führt sie in die Geschichte Rivendells und Arwens.</p>
+      </div>
+    </section>
+
+    <section class="tip-section" id="elben">
+      <div class="section-heading"><span>07</span><h2>Die Elben: Aufbruch, Spaltung und Häuser</h2></div>
+      <div class="atlas-paper">
+        <h3>Die große Wanderung</h3>
+        <p>Die ersten Elben erwachen bei Cuiviénen. Nach dem Ruf der Valar beginnt eine Wanderung nach Westen. Diejenigen, die dem Ruf grundsätzlich folgen, werden <strong>Eldar</strong> genannt; die <strong>Avari</strong> bleiben abseits der großen Reise. Aber auch unter den Eldar entstehen zahlreiche Unterschiede, je nachdem, wo sie sich niederlassen und ob sie das Licht der Zwei Bäume erleben.</p>
+        <div class="table-scroll"><table><thead><tr><th>Gruppe</th><th>Herkunft und Profil</th></tr></thead><tbody>
+          <tr><td>Vanyar</td><td>Ein besonders eng mit Aman verbundenes Elbenvolk; bleibt weitgehend bei den Valar.</td></tr>
+          <tr><td>Noldor</td><td>Stark mit Wissen, Kunstfertigkeit, Schmieden und später den dramatischen Kriegen um die Silmaril verbunden.</td></tr>
+          <tr><td>Teleri</td><td>Große, auf verschiedene Gebiete verteilte Gruppe; Seefahrt und Musik spielen bei vielen ihrer Kulturen eine herausragende Rolle.</td></tr>
+          <tr><td>Sindar</td><td>Die Grauelben Beleriands, insbesondere unter Thingol und Melian in Doriath.</td></tr>
+          <tr><td>Nandor und Laiquendi</td><td>Gruppen, die bei der Wanderung eigene Wege einschlagen; die Grünelben Beleriands gehören in diesen Zusammenhang.</td></tr>
+          <tr><td>Avari</td><td>Elben, die sich der großen Wanderung nach Aman nicht anschließen.</td></tr>
+        </tbody></table></div>
+        <p><strong>Calaquendi</strong> bezeichnet Elben, die das Licht der Bäume in Aman gesehen haben; <strong>Moriquendi</strong> ist ein anders gelagerter Sammelbegriff der Licht-Überlieferung. Diese Begriffe überschneiden sich nicht schlicht mit den politischen und genealogischen Gruppen. Auch „Hochelben“ wird in verschiedenen Kontexten enger oder weiter gebraucht.</p>
+        <h3>Die Noldor und die Tragödie Fëanors</h3>
+        <p>Unter dem Hochkönig <strong>Finwë</strong> entstehen drei besonders wichtige Familienlinien: die seiner Söhne <strong>Fëanor</strong>, <strong>Fingolfin</strong> und <strong>Finarfin</strong>. Fëanor erschafft die Silmaril und bindet sein Haus durch einen unbedingten Eid an ihre Rückgewinnung. Fingolfins Linie prägt die Herrschaft in Hithlum und später Gondolin; Finarfins Nachkommen wirken besonders in Beleriand und über lange Zeit in der Geschichte Galadriels.</p>
+        <div class="cols three">
+          <div class="entry"><h4>Fëanor</h4><p>Außergewöhnlicher Künstler und Schöpfer der Silmaril; seine Entschlossenheit schlägt in zerstörerischen Besitzanspruch um.</p></div>
+          <div class="entry"><h4>Fingolfin</h4><p>Führender Noldor-Fürst; sein Kampf gegen Morgoth wird zu einer der bekanntesten Heldentaten des Ersten Zeitalters.</p></div>
+          <div class="entry"><h4>Finarfin</h4><p>Bleibt in Aman; seine Kinder gehören zu den bedeutenden Noldor, die nach Mittelerde gelangen.</p></div>
+          <div class="entry"><h4>Thingol</h4><p>Elbenkönig von Doriath und Gemahl der Maia Melian; Vater Lúthiens.</p></div>
+          <div class="entry"><h4>Galadriel</h4><p>Noldorin, überlebt die großen Umwälzungen und bewahrt im Dritten Zeitalter mit Celeborn Lothlórien.</p></div>
+          <div class="entry"><h4>Celebrimbor</h4><p>Meisterschmied Eregions und zentrale Gestalt bei der Herstellung der Ringe der Macht.</p></div>
+        </div>
+        <h3>Die großen elbischen Lebensräume</h3>
+        <p><strong>Doriath</strong> ist das Waldreich Thingols und Melians mit der unterirdischen Hauptstadt <strong>Menegroth</strong>. <strong>Gondolin</strong> entsteht als verborgenes Königreich Turgons in einem geschützten Tal. <strong>Nargothrond</strong> ist Finrod Felagunds bedeutende unterirdische Festung am Narog. <strong>Hithlum</strong> liegt im Nordwesten Beleriands. Nach dessen Untergang bleiben neue Machtzentren: <strong>Lindon</strong>, <strong>Eregion</strong>, <strong>Bruchtal</strong> und <strong>Lothlórien</strong>.</p>
+        <div class="note"><strong>Warum Stammbäume hier so wichtig sind</strong><p>Abstammung erklärt bei Tolkien häufig mehr als bloße Erbfolge: Sie verbindet Eide, vererbte Gegenstände, alte Bündnisse, den Anspruch auf Herrschaft und die Entscheidung über das Schicksal der Menschen und Elben. Die gesamte Geschichte Aragorns lässt sich ohne die früheren Linien von Beren, Lúthien, Elros und den Dúnedain kaum verstehen.</p></div>
+      </div>
+    </section>
+
+    <section class="tip-section" id="geografie">
+      <div class="section-heading"><span>08</span><h2>Die Geografie Ardas – eine Welt in Bewegung</h2></div>
+      <div class="atlas-paper">
+        <p class="atlas-lead">In einem normalen Atlas ist die Karte der Ausgangspunkt. In Tolkiens Welt braucht jede Karte erst eine Datierung. Meere dringen vor, Länder versinken, Inseln entstehen und verschwinden, Reiche werden verlegt, Straßen verwildern.</p>
+        <h3>Die drei großen geografischen Horizonte</h3>
+        <div class="cols three">
+          <div class="entry"><small>Vor und im Ersten Zeitalter</small><h4>Beleriand</h4><p>Westliche Länder mit Küsten, Waldreichen und Noldor-Festungen, in denen der Kampf gegen Morgoth ausgetragen wird. Der größte Teil verschwindet am Ende des Ersten Zeitalters unter dem Meer.</p></div>
+          <div class="entry"><small>Zweites Zeitalter</small><h4>Númenor</h4><p>Ein mächtiges Inselreich westlich von Mittelerde; sein Untergang verändert Küsten, Weltordnung und die politische Geschichte der Menschen grundlegend.</p></div>
+          <div class="entry"><small>Besonders Drittes Zeitalter</small><h4>Nordwestliches Mittelerde</h4><p>Das aus <em>Der Hobbit</em> und <em>Der Herr der Ringe</em> vertraute Netz aus Eriador, Nebelgebirge, Rhovanion, Rohan, Gondor und Mordor.</p></div>
+        </div>
+        <h3>Aman und die unsterblichen Lande</h3>
+        <p><strong>Aman</strong> ist ein Kontinent im Westen; <strong>Valinor</strong> bezeichnet darin das Land der Valar. <strong>Eldamar</strong> ist mit den Siedlungsgebieten der Elben verbunden. <strong>Tol Eressëa</strong> ist eine Insel vor Aman. Der Ausdruck „Unsterbliche Lande“ bedeutet nicht, dass Sterbliche durch ihren Aufenthalt unsterblich würden. Das Reich ist mit unsterblichen Bewohnern und besonderen Bedingungen verbunden, nicht mit einer allgemeinen Aufhebung des menschlichen Todes.</p>
+        <h3>Beleriand und die Überreste seiner Landschaft</h3>
+        <p>Westlich der später vertrauten Länder lagen Doriath, Hithlum, Nevrast, Nargothrond, Gondolin und weitere Zentren der altelbischen Geschichte. Angband war Morgoths nordische Basis, während <strong>Thangorodrim</strong> mit seinen gewaltigen Gipfeln zu seinem Schrecken wurde. Nach dem Krieg des Zorns ist diese Landschaft größtenteils verloren. <strong>Lindon</strong> und einige Küsten- und Inselreste erinnern an die einstigen westlichen Länder; die genaue Gleichsetzung einzelner späterer Geländepunkte mit früheren Karten verlangt Vorsicht.</p>
+        <h3>Die Landschaften des Dritten Zeitalters</h3>
+        <div class="table-scroll"><table><thead><tr><th>Region</th><th>Merkmale</th><th>Wichtige Orte</th></tr></thead><tbody>
+          <tr><td>Eriador</td><td>Westliches Land zwischen Blauen Bergen und Nebelgebirge, geprägt von den Resten Arnors.</td><td>Auenland, Bree, Wetterspitze, Bruchtal, Fornost</td></tr>
+          <tr><td>Nebelgebirge</td><td>Lange Gebirgsschranke, Durchgänge von großer strategischer Bedeutung.</td><td>Moria, Caradhras, Gundabad, Hoher Pass</td></tr>
+          <tr><td>Rhovanion</td><td>Weiträumige Länder östlich des Gebirges; Wälder, Flusslandschaften und Berge.</td><td>Düsterwald, Erebor, Thal, Esgaroth, Anduin</td></tr>
+          <tr><td>Rohan</td><td>Grasländer der Reiter und Nachfolger der Éothéod.</td><td>Edoras, Meduseld, Helms Klamm, Fangorn</td></tr>
+          <tr><td>Gondor</td><td>Südliches Erbreich der Dúnedain, von großen Städten und Grenzfestungen geprägt.</td><td>Minas Tirith, Osgiliath, Ithilien, Dol Amroth</td></tr>
+          <tr><td>Mordor</td><td>Von Gebirgen gerahmtes Herrschaftsgebiet Saurons, mit Vulkanlandschaft und dunklen Festungen.</td><td>Barad-dûr, Orodruin, Minas Morgul, Morannon</td></tr>
+          <tr><td>Harad, Rhûn und Khand</td><td>Weite südliche und östliche Länder, in der Haupthandlung meist nur aus der Perspektive der Westlande erfasst.</td><td>Harad, östliche Reiche, Khand, Umbar als wichtiger südlicher Hafen</td></tr>
+          <tr><td>Meer und Küsten</td><td>Der Große Ozean, Häfen und Seeverbindungen sind entscheidend für Elben und Númenórer.</td><td>Graue Anfurten, Pelargir, Umbar, Belfalas</td></tr>
+        </tbody></table></div>
+        <h3>Flüsse, Pässe und natürliche Grenzen</h3>
+        <p>Der <strong>Anduin</strong> verbindet nördliche Landschaften mit Gondor und bildet eine historische Hauptachse. Der <strong>Bruinen</strong> schützt die Zugänge nach Bruchtal. Der <strong>Isen</strong> begrenzt Rohan im Westen. Der <strong>Sirion</strong> war eine bedeutende Verbindung Beleriands. Im Nebelgebirge entscheiden Pässe wie die Route über den <strong>Caradhras</strong> oder durch <strong>Moria</strong> über das Gelingen ganzer Unternehmungen.</p>
+        <h3>Die Welt lässt sich nicht auf eine einzige Karte reduzieren</h3>
+        <p>Eine Karte der Reiche Beleriands, ein Stadtplan Númenors und eine politische Karte Gondors zeigen nicht unterschiedliche Ausschnitte derselben unveränderten Landschaft. Sie gehören verschiedenen Zuständen Ardas an. Wer ältere und jüngere Karten übereinanderlegt, sollte kenntlich machen, welche Verbindungen textlich belegt sind und wo moderne Rekonstruktionen beginnen.</p>
+      </div>
+    </section>
+
+    <section class="tip-section" id="erstes">
+      <div class="section-heading"><span>09</span><h2>Das Erste Zeitalter: Beleriand und die Silmaril</h2></div>
+      <div class="atlas-paper">
+        <p class="atlas-lead">Das Erste Zeitalter erzählt vom größten Glanz und den verhängnisvollsten Fehlern der Elben in Mittelerde. Im Hintergrund steht Morgoth, doch die eigentliche Tragödie entsteht ebenso aus Stolz, Eiden, Missverständnissen, Hoffnung und Entscheidungen, die sich nicht mehr zurücknehmen lassen.</p>
+        <h3>Die Rückkehr der Noldor</h3>
+        <p>Nach dem Raub der Silmaril verlassen viele Noldor Valinor, um Morgoth zu verfolgen. Fëanors Söhne sind durch ihren Eid an die Rückgewinnung der Juwelen gebunden, unabhängig davon, wer sie später besitzt. Der Konflikt spaltet die Elben bereits vor ihrer Rückkehr: In Alqualondë kommt es zur Gewalt zwischen Elben, danach zu weiteren Verlusten auf den Wegen nach Mittelerde.</p>
+        <p>In Beleriand entstehen Königreiche und befestigte Zufluchtsorte. Manche Noldor versuchen, Morgoth militärisch zu isolieren; andere verwalten ihre Gebiete als langfristige Heimstätten. Doch die scheinbare Stabilität ist fragil: Angband ist niemals endgültig bezwungen, und die Kräfte Morgoths wachsen hinter den Fronten.</p>
+        <h3>Die großen Schlachten und Zusammenbrüche</h3>
+        <div class="table-scroll"><table><thead><tr><th>Konflikt</th><th>Bedeutung für die Geschichte</th></tr></thead><tbody>
+          <tr><td>Dagor-nuin-Giliath – Schlacht unter den Sternen</td><td>Eine der ersten großen Auseinandersetzungen der zurückgekehrten Noldor mit Morgoths Heeren; Fëanor stirbt nach dem Kampf.</td></tr>
+          <tr><td>Dagor Aglareb – Glorreiche Schlacht</td><td>Die Elben erringen einen bedeutenden Erfolg und beginnen eine lange Belagerung Angbands.</td></tr>
+          <tr><td>Dagor Bragollach – Schlacht des jähen Feuers</td><td>Morgoth durchbricht die Belagerung; Feuer, Truppen und Ungeheuer verwüsten den Norden. Bisherige politische Ordnungen geraten ins Wanken.</td></tr>
+          <tr><td>Nirnaeth Arnoediad – Schlacht der ungezählten Tränen</td><td>Ein großes Bündnis der Gegner Morgoths zerbricht; Verrat und militärische Überlegenheit besiegeln einen entscheidenden Rückschlag.</td></tr>
+          <tr><td>Fall von Nargothrond und Doriath</td><td>Alte Reiche verschwinden durch Krieg, Täuschung und die Folgen der Silmaril-Geschichte.</td></tr>
+          <tr><td>Fall von Gondolin</td><td>Auch das lange verborgene Königreich wird gefunden und zerstört; Überlebende bewahren einen Weg in die Zukunft.</td></tr>
+          <tr><td>Krieg des Zorns</td><td>Eine Macht von jenseits des Meeres besiegt Morgoths Herrschaft. Der Krieg verändert Beleriands Geografie nachhaltig.</td></tr>
+        </tbody></table></div>
+        <h3>Beren und Lúthien</h3>
+        <p>Der sterbliche <strong>Beren</strong> und die Elbin <strong>Lúthien</strong>, Tochter Thingols und Melians, verbinden persönliche Liebe mit einem weltgeschichtlichen Auftrag. Um Thingols Forderung zu erfüllen, muss Beren einen Silmaril aus Morgoths Krone gewinnen. Die Geschichte führt über Gefahr, Gefangenschaft, wundersame Hilfe und die Begegnung mit dem Dunklen Herrscher selbst.</p>
+        <p>Diese Erzählung ist weit mehr als eine Heldensage: Die Entscheidung Lúthiens verändert das Verständnis von Sterblichkeit im Legendarium. Zugleich verbindet sie die Geschlechterlinien, aus denen später Eärendil, Elros und Elrond hervorgehen.</p>
+        <h3>Túrin Turambar</h3>
+        <p>Túrins Lebensweg ist durch Morgoths Fluch, verlorene Herkunft, verfehlte Entscheidungen und bittere Ironie geprägt. Im Kampf gegen den Drachen <strong>Glaurung</strong> wird die Grenze zwischen Mut und tragischer Selbstüberschätzung sichtbar. Seine Geschichte gehört zu den düstersten Passagen des Ersten Zeitalters und zeigt, dass große Tapferkeit nicht zwangsläufig zur Rettung führt.</p>
+        <h3>Tuor, Idril und Gondolin</h3>
+        <p><strong>Tuor</strong>, ein Mensch, gelangt in die verborgene Elbenstadt Gondolin und verbindet sich mit <strong>Idril</strong>, der Tochter König Turgons. Ihr Sohn <strong>Eärendil</strong> wird zur Schlüsselfigur der folgenden Weltenwende. Der Untergang Gondolins ist damit nicht nur das Ende eines Reiches, sondern zugleich der Beginn einer neuen Hoffnung.</p>
+        <h3>Eärendils Fahrt und Morgoths Ende</h3>
+        <p>Der Seefahrer <strong>Eärendil</strong>, verbunden mit Elwing, sucht einen Ausweg aus der aussichtslos gewordenen Lage Mittelerdes. Seine Reise in den Westen führt zum Eingreifen der Mächte jenseits des Meeres. Morgoths Heere werden im Krieg des Zorns geschlagen, und Morgoth selbst wird aus der Welt verbannt. Ein Silmaril bleibt mit Eärendil als Licht am Himmel verbunden; die anderen beiden gehen ihrer eigenen schicksalhaften Wege.</p>
+        <p>Mit dem Versinken großer Teile Beleriands endet eine Epoche, deren Königreiche auf späteren Karten kaum noch zu finden sind. Überlebende Elben ziehen fort oder begründen neue Heimstätten; auch für die Edain beginnt eine andere Geschichte.</p>
+        <div class="note"><strong>Die historische Klammer</strong><p>Die Silmaril sind zugleich Kunstwerk, Erinnerungsgefäß und Konfliktauslöser. Nicht die Juwelen selbst erzwingen die Katastrophen, sondern die Ansprüche, Eide und Machtverhältnisse, die sich um ihren Besitz bilden.</p></div>
+      </div>
+    </section>
+
+    <section class="tip-section" id="zweites">
+      <div class="section-heading"><span>10</span><h2>Das Zweite Zeitalter: Númenor und Saurons Aufstieg</h2></div>
+      <div class="atlas-paper">
+        <p class="atlas-lead">Mit Morgoths Sturz ist das Böse nicht verschwunden. Das Zweite Zeitalter zeigt, wie sich die Konflikte verändern: Aus dem Krieg um die Silmaril werden Machtpolitik, Verführung, die Suche nach Unsterblichkeit und die Herstellung der Ringe der Macht.</p>
+        <h3>Das Geschenk Númenor</h3>
+        <p>Den Menschen der <strong>Edain</strong>, die im Kampf gegen Morgoth auf Seiten der Elben standen, wird eine Heimat auf einer Insel zwischen Mittelerde und Aman gewährt. <strong>Elros</strong>, der sich für das menschliche Schicksal entschieden hat, wird erster König. Seine Nachkommen bilden die Herrscherlinie Númenors.</p>
+        <p>Das Reich gewinnt durch Schifffahrt, Handwerk, Forschung und langes Leben seiner Bewohner außerordentlichen Einfluss. Seine Häfen verbinden es mit Mittelerde. Doch gerade sein Wohlstand nährt die Frage, warum Menschen sterblich bleiben, obwohl sie mächtig und langlebig sein können.</p>
+        <h3>Vom Entdeckerreich zur imperialen Macht</h3>
+        <p>Anfangs suchen viele Númenórer freundschaftliche Beziehungen zu den Menschen Mittelerdes. Mit der Zeit wächst die wirtschaftliche und militärische Dominanz; Kolonialstützpunkte, Abgaben und Machtansprüche treten stärker hervor. Im eigenen Land entsteht eine politische und kulturelle Spaltung zwischen jenen, die den alten Bindungen an Elben und Valar treu bleiben, und jenen, die den westlichen Mächten mit Neid oder Feindschaft begegnen.</p>
+        <h3>Saurons Verführung</h3>
+        <p>Sauron baut in Mittelerde eine eigene Machtbasis auf. In der Gestalt eines scheinbar wohlwollenden Ratgebers nähert er sich den Elbenschmieden Eregions und unterstützt das Wissen um die Ringe. Gleichzeitig schmiedet er in Mordor den <strong>Einen Ring</strong>, um die anderen Ringe und ihre Träger zu beherrschen. Als seine Absicht erkannt wird, entbrennt Krieg; Eregion wird zerstört.</p>
+        <p>Später erweist sich das militärische Númenor als so stark, dass Sauron sich dessen Herrscher ausliefert. Aus der Gefangenschaft heraus wird er zum Berater und schließlich zum Verderber des Hofes. Er macht die Angst vor dem Tod politisch nutzbar und lenkt den letzten König, <strong>Ar-Pharazôn</strong>, in einen Angriff gegen den verbotenen Westen.</p>
+        <h3>Der Untergang und die Weltveränderung</h3>
+        <p>Númenor geht unter. Die Überlieferung verknüpft damit die Umgestaltung der Welt und die Entrückung Amans aus den gewöhnlichen Wegen der Sterblichen. Einige Getreue unter <strong>Elendil</strong> und seinen Söhnen <strong>Isildur</strong> und <strong>Anárion</strong> entkommen und erreichen Mittelerde. Sie gründen <strong>Arnor</strong> und <strong>Gondor</strong>, die Exilreiche der Dúnedain.</p>
+        <h3>Das Letzte Bündnis</h3>
+        <p>Sauron kehrt nach Mordor zurück und greift die neuen Reiche an. Menschen und Elben bilden das <strong>Letzte Bündnis</strong> unter Elendil und dem Elbenkönig <strong>Gil-galad</strong>. Nach langem Krieg fällt Saurons körperliche Gestalt. Isildur nimmt den Einen Ring an sich, statt ihn zu vernichten. Dadurch bleibt Saurons Rückkehr möglich.</p>
+        <div class="table-scroll"><table><thead><tr><th>Persönlichkeit oder Ort</th><th>Rolle im Zweiten Zeitalter</th></tr></thead><tbody>
+          <tr><td>Elros</td><td>Erster König Númenors, Bruder Elronds, Stammvater der Könige der Menschen.</td></tr>
+          <tr><td>Ar-Pharazôn</td><td>Letzter König Númenors; führt das Reich in seine größte Katastrophe.</td></tr>
+          <tr><td>Amandil und Elendil</td><td>Mit den Getreuen verbunden; Elendil begründet die Exilreiche in Mittelerde.</td></tr>
+          <tr><td>Eregion und Ost-in-Edhil</td><td>Elbenschmiede und bedeutendes Kulturzentrum, dessen Geschichte Sauron zerstört.</td></tr>
+          <tr><td>Lindon und Gil-galad</td><td>Elbisches Machtzentrum, wichtig im Widerstand gegen Sauron.</td></tr>
+          <tr><td>Barad-dûr und Orodruin</td><td>Machtzentrum Saurons und Ort, an dem der Eine Ring geschmiedet wird.</td></tr>
+          <tr><td>Umbar</td><td>Hafen- und später Machtbasis südlicher númenórischer Gruppen; im Dritten Zeitalter häufig Gegner Gondors.</td></tr>
+        </tbody></table></div>
+        <div class="note"><strong>Das zentrale Paradox Númenors</strong><p>Die Númenórer erhalten mehr Zeit, Wissen und Möglichkeiten als viele andere Menschen. Gerade daraus erwächst die Versuchung, nicht nur ihre Lebensbedingungen, sondern die Grenzen ihres Menschseins selbst überwinden zu wollen.</p></div>
+      </div>
+    </section>
+
+    <section class="tip-section" id="drittes">
+      <div class="section-heading"><span>11</span><h2>Das Dritte Zeitalter: die langsame Rückkehr des Schattens</h2></div>
+      <div class="atlas-paper">
+        <p>Das Dritte Zeitalter beginnt mit einem Sieg, der nicht vollständig ist. Sauron verliert seine Herrschaft, aber nicht die Möglichkeit der Wiederkehr. Der Eine Ring verschwindet im Anduin, und die Reiche der Sieger geraten über Jahrtausende unter den Druck innerer Teilungen, militärischer Angriffe und schwindender Erinnerung.</p>
+        <h3>Arnor – das verlorene Nordkönigreich</h3>
+        <p>Arnor ist das nördliche Königreich der Dúnedain. Nach dem Ende einer gemeinsamen Königslinie zerfällt es in <strong>Arthedain</strong>, <strong>Cardolan</strong> und <strong>Rhudaur</strong>. Aus dem Norden bedroht das vom Hexenkönig beherrschte <strong>Angmar</strong> die Nachfolgereiche. Trotz später militärischer Hilfe verschwindet die königliche Staatlichkeit Arnors; die Erben Isildurs leben schließlich als Häuptlinge der Waldläufer fort.</p>
+        <p>Diese Linie führt zu <strong>Aragorn</strong>. Seine verborgene Herkunft ist deshalb keine zufällige Überraschung im Ringkrieg: Sie bewahrt die lange, fast vergessene Verbindung zwischen Elendils Reich und der politischen Zukunft Mittelerdes.</p>
+        <h3>Gondor – Macht, Krisen und Truchsessen</h3>
+        <p>Das Südreich erlebt Erweiterungen, dynastische Streitigkeiten, Seuchen und Kriege gegen benachbarte Mächte. <strong>Osgiliath</strong> verliert seine frühere Bedeutung, während <strong>Minas Tirith</strong> zum politischen Mittelpunkt wird. Die Herrschaft geht über längere Zeit an die Truchsessen, die im Namen des abwesenden Königtums regieren.</p>
+        <p>Auch <strong>Minas Ithil</strong>, einst ein Grenzposten gegenüber Mordor, geht verloren und wird als <strong>Minas Morgul</strong> zum Ort feindlicher Macht. Der Wandel der Städtenamen markiert den Wandel ihrer Geschichte.</p>
+        <h3>Rohan und die nördlichen Reitervölker</h3>
+        <p>Die <strong>Éothéod</strong> leben einst im Norden des Anduintals. Nach der Hilfeleistung für Gondor erhalten ihre Nachkommen die Ebenen von Calenardhon, aus denen das Reiterreich <strong>Rohan</strong> entsteht. Das Bündnis mit Gondor ist eine politische und kulturelle Grundachse der späteren Geschichte.</p>
+        <h3>Zwerge, Moria und Erebor</h3>
+        <p>Das Zwergenreich <strong>Khazad-dûm</strong> erlebt einst lange Blüte. Seine Geschichte endet in Moria nicht durch einen gewöhnlichen Grenzkrieg, sondern durch das Erwachen des Balrogs, der als <strong>Durins Fluch</strong> bekannt wird. Die Zwerge verlieren ihre alten Hallen und verlagern Siedlungen und Machtzentren. <strong>Erebor</strong>, der Einsame Berg, wird zu einem neuen Symbol zwergischer Herrschaft.</p>
+        <p>Mit der Eroberung Erebors durch den Drachen <strong>Smaug</strong> geht auch diese Heimat verloren. Über Jahrzehnte leben Überlebende in der Fremde. Der Wunsch, den Berg zurückzugewinnen, ist später der Ausgangspunkt für Bilbos Abenteuer.</p>
+        <h3>Der Weiße Rat, Dol Guldur und die Istari</h3>
+        <p>In den Wäldern des Südens von Düsterwald wächst der Schatten von <strong>Dol Guldur</strong>. Mächtige Elben und Zauberer versuchen, seine Ursache zu erkennen und einzudämmen. Der <strong>Weiße Rat</strong> vereint unter anderem Galadriel, Elrond, Gandalf und Saruman. Dass Sauron im Verborgenen Kräfte sammeln kann, zeigt die Grenzen selbst weitreichender elbischer Erkenntnis.</p>
+        <h3>Warum der Niedergang der Elben wichtig ist</h3>
+        <p>Bruchtal und Lothlórien bewahren Wissen, Kultur und Schutzräume, gehören aber einer Epoche an, die sich dem Ende zuneigt. Die freie Welt kann sich nicht dauerhaft darauf verlassen, dass ältere und mächtigere Wesen alle Gefahren abwehren. Dieser Übergang bereitet das Vierte Zeitalter vor: die Zeit, in der Menschen die hauptsächliche Verantwortung tragen.</p>
+      </div>
+    </section>
+
+    <section class="tip-section" id="hobbit">
+      <div class="section-heading"><span>12</span><h2>Die Fahrt zum Erebor: Bilbo, Smaug und fünf Heere</h2></div>
+      <div class="atlas-paper">
+        <p class="atlas-lead">Im Jahr 2941 des Dritten Zeitalters führt eine scheinbar überschaubare Expedition aus dem Auenland in einen Konflikt, dessen Folgen weit über eine verlorene Zwergenbeute hinausreichen.</p>
+        <h3>Warum Thorin den Einsamen Berg zurückwill</h3>
+        <p><strong>Thorin Eichenschild</strong> stammt aus einer bedeutenden Zwergenkönigslinie. Seine Familie wurde durch Smaug aus Erebor vertrieben. Als er mit zwölf Gefährten, Gandalf und dem Hobbit <strong>Bilbo Beutlin</strong> aufbricht, geht es deshalb um Heimat, Souveränität, Geschichte und die Wiederherstellung einer Herrschaft.</p>
+        <h3>Stationen der Reise</h3>
+        <ol class="era-list">
+          <li><strong>Auenland und Bree</strong>Das behagliche Leben eines Hobbits trifft auf eine gefährliche Welt alter Straßen und Geschichten.</li>
+          <li><strong>Trolle, Bruchtal und Nebelgebirge</strong>Die Gefährten entdecken Waffen älterer Zeitalter und stoßen auf unterirdische Orkgebiete.</li>
+          <li><strong>Bilbo und Gollum</strong>In dunklen Gängen findet Bilbo einen unscheinbaren Ring. Im Augenblick der Entdeckung versteht niemand seine spätere weltgeschichtliche Bedeutung.</li>
+          <li><strong>Die Adler und Beorn</strong>Die Reise führt an mächtige, weitgehend unabhängige Helfer und Schutzräume jenseits der gewöhnlichen Menschenreiche.</li>
+          <li><strong>Düsterwald</strong>Spinnen, Gefangenschaft und die schwierige Beziehung zu Thranduils Waldelben machen die Unternehmung erneut gefährlich.</li>
+          <li><strong>Esgaroth und Erebor</strong>Die Gefährten erreichen den See und den Berg. Bilbos Aufgabe wird durch sein Geschick und seine Zurückhaltung erfüllt, nicht durch körperliche Überlegenheit.</li>
+          <li><strong>Smaugs Ende</strong>Der Drache greift die Seestadt an und fällt durch Bard; der Tod schafft neue Möglichkeiten und einen Streit über Besitz und Verteilung des Schatzes.</li>
+          <li><strong>Schlacht der Fünf Heere</strong>Elben, Menschen und Zwerge müssen sich angesichts eines übergeordneten Angriffs neu zueinander verhalten. Der Sieg ermöglicht die Erneuerung der Reiche von Erebor und Thal.</li>
+        </ol>
+        <h3>Die Arkenstein-Frage</h3>
+        <p>Der <strong>Arkenstein</strong> ist ein herausragender Schatz des Einsamen Berges und ein Symbol königlichen Anspruchs. Er ist <strong>kein Silmaril</strong>. Der Roman zeigt an ihm, wie leicht ein wertvolles Objekt zum Brennpunkt für Stolz, politische Interessen und zerbrechliche Bündnisse wird.</p>
+        <h3>Die verborgene Bedeutung der Ereignisse</h3>
+        <p>Die Rückkehr eines starken Zwergenreichs unter dem Berg und eines menschlichen Gemeinwesens in Thal stärkt den Nordosten Mittelerdes. Als Jahrzehnte später der Ringkrieg beginnt, sind diese Gebiete Teil eines größeren Widerstands gegen Saurons Kriegsführung. Gleichzeitig gelangt der Eine Ring aus Gollums Besitz in Bilbos Hände und schließlich zu Frodo.</p>
+      </div>
+    </section>
+
+    <section class="tip-section" id="ringe">
+      <div class="section-heading"><span>13</span><h2>Die Ringe der Macht und die Geschichte des Einen</h2></div>
+      <div class="atlas-paper">
+        <p class="atlas-lead">Die Ringe sind keine beliebigen magischen Werkzeuge. In ihrer Geschichte bündeln sich die Sehnsucht nach Bewahrung, Saurons Wille zur Kontrolle und die Frage, ob gute Absichten durch Mittel kompromittiert werden, die Freiheit zerstören.</p>
+        <div class="cols three">
+          <div class="entry"><small>3 Elbenringe</small><h4>Vilya, Nenya, Narya</h4><p>Mit Erhaltung, Schutz und Stärkung verbunden. Sie werden von Celebrimbor ohne Saurons unmittelbare Mitwirkung geschmiedet, bleiben jedoch durch den Einen Ring gefährdet.</p></div>
+          <div class="entry"><small>7 Zwergenringe</small><h4>Reichtum und Begierde</h4><p>Sauron kann die Zwerge nicht in derselben Weise versklaven wie menschliche Ringträger; die Ringe verstärken allerdings Gier und Konflikte um Schätze.</p></div>
+          <div class="entry"><small>9 Menschenringe</small><h4>Die Ringgeister</h4><p>Die neun Träger werden allmählich unsichtbare, von Sauron abhängige Nazgûl. Ihr oberster ist der Hexenkönig.</p></div>
+        </div>
+        <h3>Die drei Elbenringe im Überblick</h3>
+        <div class="table-scroll"><table><thead><tr><th>Ring</th><th>Traditionelle Zuordnung</th><th>Bekannter später Träger</th></tr></thead><tbody>
+          <tr><td>Vilya – Ring der Luft</td><td>Gil-galad erhält den Ring; später gelangt er zu Elrond.</td><td>Elrond in Bruchtal</td></tr>
+          <tr><td>Nenya – Ring des Wassers</td><td>Wird Galadriel anvertraut.</td><td>Galadriel in Lothlórien</td></tr>
+          <tr><td>Narya – Ring des Feuers</td><td>Wird Círdan anvertraut; später gibt er ihn an Gandalf.</td><td>Gandalf</td></tr>
+        </tbody></table></div>
+        <h3>Der Eine Ring</h3>
+        <p>Sauron schmiedet den Einen Ring im <strong>Orodruin</strong>, dem Schicksalsberg. Er bindet einen erheblichen Anteil seiner Macht an ihn, um die Träger der übrigen Ringe zu beherrschen. Dadurch erlangt der Ring besondere Wirksamkeit – und wird zugleich zu Saurons empfindlichster Schwachstelle.</p>
+        <p>Die Nutzung des Rings ist gefährlich, auch wenn sie einem anfangs guten Zweck dienen soll. Machtvolle Menschen oder Elben könnten versucht sein, ihn gegen Sauron einzusetzen; die dahinterstehende Logik von Kontrolle und Unterwerfung würde damit aber fortbestehen. Deshalb besteht die entscheidende Aufgabe nicht im Besitzwechsel, sondern in der Vernichtung.</p>
+        <h3>Eine kurze Biografie des Einen Rings</h3>
+        <ol class="era-list">
+          <li><strong>Schmieden im Zweiten Zeitalter</strong>Sauron erschafft ihn in Mordor, während die Ringe der Macht bereits Teil der Geschichte Eregions sind.</li>
+          <li><strong>Verlust am Ende des Letzten Bündnisses</strong>Isildur nimmt ihn von Saurons besiegter Gestalt.</li>
+          <li><strong>Die Schwertelfelder</strong>Nach Isildurs Tod verschwindet der Ring im Anduin und bleibt lange unbekannt.</li>
+          <li><strong>Déagol und Sméagol</strong>Der Ring wird im Fluss wiedergefunden; Sméagol bringt ihn durch Mord an sich und wird schließlich zu Gollum.</li>
+          <li><strong>Bilbos Fund</strong>Im Jahr 2941 D. Z. wechselt er ohne Wissen um seine wahre Natur zu Bilbo.</li>
+          <li><strong>Frodos Erbschaft</strong>Bilbo überlässt den Ring Frodo. Die Erkenntnis seiner Identität setzt die große Reise in Gang.</li>
+          <li><strong>Vernichtung im Orodruin</strong>Mit dem Ende des Rings zerbricht Saurons an ihn gebundene Herrschaft.</li>
+        </ol>
+        <h3>Warum die anderen Ringe an Macht verlieren</h3>
+        <p>Die Zerstörung des Einen Rings lässt die Macht der Drei verblassen. Damit enden auch die Bedingungen, die elbische Zufluchtsorte auf besonders wundersame Weise erhalten haben. Das Ende Saurons ist folglich nicht die Rückkehr in den alten Zustand, sondern eine Befreiung, die einen unvermeidlichen Abschied einschließt.</p>
+        <div class="note caution"><strong>Vorsicht mit Zahlen und Zuschreibungen</strong><p>Die bekannten „Drei, Sieben, Neun und Einer“ sind die zentrale Ringordnung. Dennoch sollten ihre Verteilung, die Identität aller ursprünglichen Träger und die Rolle Saurons beim Schmieden nicht schematisch vereinfacht werden. Insbesondere stammen die Drei nicht aus einer direkten Schmiedearbeit Saurons.</p></div>
+      </div>
+    </section>
+
+    <section class="tip-section" id="ringkrieg">
+      <div class="section-heading"><span>14</span><h2>Der Ringkrieg: eine Geschichte zweier Fronten</h2></div>
+      <div class="atlas-paper">
+        <p class="atlas-lead">Der Ringkrieg ist kein einfacher Feldzug von Gut gegen Böse. Während Heere versuchen, Zeit zu gewinnen, muss ein beinahe unbewaffnetes Unternehmen ins Machtzentrum des Gegners vordringen. Die militärischen Siege wären ohne die heimliche Reise bedeutungslos; die heimliche Reise wäre ohne den offenen Widerstand kaum möglich.</p>
+        <h3>Von Beutelsend bis zum Rat Elronds</h3>
+        <p>Als Gandalf die Identität von Bilbos Ring erkennt, wird Frodos Besitz zur Gefahr für das Auenland. <strong>Frodo</strong> verlässt mit <strong>Sam</strong>, <strong>Merry</strong> und <strong>Pippin</strong> die Heimat. Auf ihrem Weg begegnen ihnen der Alte Wald und <strong>Tom Bombadil</strong>, die Hügelgräber und die Schwarzen Reiter. In Bree tritt <strong>Aragorn</strong> zunächst als Streicher auf. Nach dem Angriff an der Wetterspitze führt der Weg zum Schutz von Bruchtal.</p>
+        <p>Der <strong>Rat Elronds</strong> verbindet verschiedene Völker und politische Interessen. Seine Entscheidung lautet nicht, den Ring zu verwahren oder militärisch zu erbeuten, sondern ihn im Feuer seines Ursprungs zu zerstören.</p>
+        <h3>Die Gemeinschaft und ihr Zerfall</h3>
+        <p>Die Gemeinschaft besteht aus Frodo, Sam, Merry, Pippin, Gandalf, Aragorn, Boromir, Legolas und Gimli. Der Versuch, die Nebelberge zu überqueren, scheitert; die Reisenden betreten <strong>Moria</strong>. Dort führt Gandalfs Kampf mit dem Balrog in die Tiefe. Die Überlebenden erreichen <strong>Lothlórien</strong>, wo sie Schutz und wichtige Gaben erhalten.</p>
+        <p>Am <strong>Anduin</strong>, nahe den <strong>Argonath</strong> und den Wasserfällen des <strong>Rauros</strong>, zerbricht die Gemeinschaft. Boromirs Versuchung durch den Ring enthüllt, wie selbst ehrbare Motive korrumpiert werden können. Frodo und Sam gehen allein weiter; Aragorn, Legolas und Gimli verfolgen die entführten Hobbits.</p>
+        <h3>Rohan, Isengart und die Ents</h3>
+        <p><strong>Saruman</strong> verwandelt Isengart in eine kriegerische Produktionsstätte. Seine Uruk-hai bedrohen Rohan; zugleich versucht er politisch, das Königshaus um <strong>Théoden</strong> zu lähmen. Gandalfs Rückkehr, die Verteidigung von <strong>Helms Klamm</strong> und der Aufstand der Ents gegen Isengart beenden Sarumans unmittelbare Macht im Westen.</p>
+        <p>Merry und Pippin sind nicht bloße Nebenfiguren dieses Krieges. Ihr Zusammentreffen mit <strong>Baumbart</strong> verknüpft den Ringkrieg mit der lange verdrängten Geschichte Fangorns und der Gewalt industrieller Verwüstung.</p>
+        <h3>Frodo und Sam in den Grenzlanden Mordors</h3>
+        <p>Gollum wird Wegführer der beiden Hobbits. Die Reise führt durch die <strong>Toten Sümpfe</strong>, nach Ithilien und an <strong>Henneth Annûn</strong>, einen verborgenen Stützpunkt Faramirs. Der Zugang über das Schwarze Tor ist versperrt; Gollum schlägt den Weg über <strong>Cirith Ungol</strong> vor. Dort lauert <strong>Kankra</strong>, eine uralte Spinnengestalt. Nach Gefangenschaft und Rettung erreichen die Hobbits unter extremen Entbehrungen das Innere Mordors.</p>
+        <h3>Gondor und die Pelennor-Felder</h3>
+        <p>Die Belagerung von <strong>Minas Tirith</strong> und die <strong>Schlacht auf den Pelennor-Feldern</strong> sind der sichtbare Höhepunkt des Krieges. Die Reiter Rohans greifen ein; zugleich entscheidet sich der Kampf am Anduin und an den Zugängen zur Stadt. Der Hexenkönig wird durch <strong>Éowyn</strong> unter entscheidender Mitwirkung Merrys besiegt.</p>
+        <h3>Aragorns Weg zur Königswürde</h3>
+        <p>Aragorn sucht die Unterstützung der <strong>Toten von Dunharg</strong>, deren alter Eid sie bindet. Nach Erfüllung ihrer Verpflichtung kann er Kräfte des Südens sammeln und Gondor zur Hilfe kommen. Sein Anspruch beruht auf der langen Linie der Dúnedain, seine tatsächliche Legitimität aber ebenso auf seiner Bereitschaft, Verantwortung zu übernehmen.</p>
+        <h3>Das Schwarze Tor und der Schicksalsberg</h3>
+        <p>Um Saurons Blick von Frodo abzulenken, ziehen die Heerführer der freien Völker zum <strong>Morannon</strong>, dem Schwarzen Tor. Die Unternehmung kann militärisch kaum gewinnen; ihr eigentlicher Zweck ist Ablenkung. Auf dem Schicksalsberg scheitert Frodo im letzten Augenblick daran, den Ring freiwillig aufzugeben. Durch Gollums Eingreifen fällt der Ring dennoch ins Feuer. Die Vernichtung beendet Saurons Herrschaft.</p>
+        <h3>Orientierende Abfolge des Ringkriegs</h3>
+        <div class="table-scroll"><table><thead><tr><th>Phase</th><th>Handlungsschauplätze</th><th>Entscheidende Bedeutung</th></tr></thead><tbody>
+          <tr><td>Herbst 3018</td><td>Auenland, Bree, Wetterspitze, Bruchtal</td><td>Der Ring entgeht den Nazgûl; die Gemeinschaft wird gebildet.</td></tr>
+          <tr><td>Winter 3018/3019</td><td>Caradhras, Moria, Lothlórien</td><td>Verlust Gandalfs, Bewahrung und Neuorientierung der Gefährten.</td></tr>
+          <tr><td>Frühjahr 3019</td><td>Rauros, Fangorn, Rohan, Isengart</td><td>Trennung der Wege; Sarumans Armee scheitert; Ents greifen ein.</td></tr>
+          <tr><td>März 3019</td><td>Ithilien, Cirith Ungol, Minas Tirith</td><td>Annäherung an Mordor; Angriff Saurons auf Gondor.</td></tr>
+          <tr><td>15. März 3019</td><td>Pelennor-Felder</td><td>Wichtiger Sieg der Verteidiger Gondors; Ende des Hexenkönigs.</td></tr>
+          <tr><td>25. März 3019</td><td>Morannon und Orodruin</td><td>Vernichtung des Einen Rings und Zusammenbruch Saurons.</td></tr>
+          <tr><td>Nach Kriegsende</td><td>Gondor, Auenland, Graue Anfurten</td><td>Erneuerung der Reiche; Heimkehr, letzte Kämpfe und Abschied.</td></tr>
+        </tbody></table></div>
+        <h3>Die weiteren Kriegsschauplätze im Norden und Osten</h3>
+        <p>Der Ringkrieg erschöpft sich nicht in Rohan und Gondor. Saurons Verbündete greifen auch <strong>Thal und Erebor</strong> an; die Verteidiger im Nordosten müssen erhebliche Verluste hinnehmen. Gleichzeitig sind <strong>Lothlórien</strong> und das elbische Gebiet im <strong>Düsterwald</strong> Bedrohungen aus Dol Guldur ausgesetzt. Die Kämpfe erklären, weshalb viele freie Völker nicht einfach mit ihren gesamten Streitkräften nach Minas Tirith ziehen können. Erst nach dem Zusammenbruch von Saurons Macht lösen sich diese Bedrohungen nachhaltig.</p>
+        <p>Auch die <strong>Korsaren von Umbar</strong> und die Heere aus <strong>Harad</strong> sowie östlichen Regionen gehören zur militärischen Gesamtlage. Die Erzählung betrachtet diese Länder überwiegend von den Westreichen aus; daraus sollte man nicht schließen, ihre Bevölkerungen bestünden ausschließlich aus Saurons freiwilligen Anhängern.</p>
+        <h3>Das Auenland nach dem Sieg</h3>
+        <p>Die Heimkehr der Hobbits ist keine Rückkehr zur unberührten Normalität. Im Auenland begegnen sie Ausbeutung, Gewalt und dem Rest von Sarumans Herrschaft. Dass Merry, Pippin, Sam und Frodo selbst handeln müssen, vollendet ihre Entwicklung. Das Ende des Rings löst nicht jede örtliche Ungerechtigkeit von allein.</p>
+        <h3>Ein neuer König und das Ende einer alten Welt</h3>
+        <p>Aragorn wird König des wiedervereinigten Reiches von Gondor und Arnor. Arwen entscheidet sich für ein sterbliches Leben an seiner Seite. Zugleich verlassen zahlreiche Elben Mittelerde. Die letzten Ringträger brechen über das Meer auf; Sam bleibt zunächst im Auenland. Das Vierte Zeitalter beginnt als Menschenzeit, nicht als bloße Fortsetzung aller alten Wunder.</p>
+      </div>
+    </section>
+
+    <section class="tip-section" id="reiche">
+      <div class="section-heading"><span>15</span><h2>Reiche, Städte, Festungen und Erinnerungsorte</h2></div>
+      <div class="atlas-paper">
+        <p>Die folgende Auswahl ordnet bedeutende Schauplätze nach ihrer politischen Funktion. Manche Orte sind Festungen gegen eine äußere Macht; andere bewahren Kunst und Erinnerung; wiederum andere werden durch Eroberung zu einem Symbol des Verfalls. Die Zuordnung meint jeweils ihre bekannteste Epoche, nicht eine unveränderliche Herrschaft über alle Zeiten.</p>
+        <div class="table-scroll"><table><thead><tr><th>Ort</th><th>Zugehörigkeit</th><th>Geschichtliche Funktion</th></tr></thead><tbody>
+          <tr><td>Valimar</td><td>Aman</td><td>Wohnsitz und Stadt der Valar.</td></tr>
+          <tr><td>Tirion</td><td>Eldamar</td><td>Bedeutendes Zentrum der Vanyar und Noldor.</td></tr>
+          <tr><td>Alqualondë</td><td>Aman</td><td>Teleri-Hafen und Schauplatz des ersten Sippenmords.</td></tr>
+          <tr><td>Menegroth</td><td>Doriath</td><td>Unterirdische Hallen Thingols und Melians.</td></tr>
+          <tr><td>Nargothrond</td><td>Beleriand</td><td>Unterirdische Festungsstadt Finrods und seiner Nachfolger.</td></tr>
+          <tr><td>Gondolin</td><td>Beleriand</td><td>Verborgene Stadt Turgons, später zerstört.</td></tr>
+          <tr><td>Angband</td><td>Nordbeleriand</td><td>Morgoths wichtigste Festung im Ersten Zeitalter.</td></tr>
+          <tr><td>Armenelos</td><td>Númenor</td><td>Königliche Hauptstadt des Inselreichs.</td></tr>
+          <tr><td>Andúnië</td><td>Númenor</td><td>Westlicher Hafen und Sitz einer bedeutenden Linie der Getreuen.</td></tr>
+          <tr><td>Ost-in-Edhil</td><td>Eregion</td><td>Stadt der Elbenschmiede und Zentrum der Ringgeschichte.</td></tr>
+          <tr><td>Bruchtal / Imladris</td><td>Eriador</td><td>Elronds Zuflucht, Bewahrer von Überlieferung und Ort des Rates.</td></tr>
+          <tr><td>Graue Anfurten / Mithlond</td><td>Lindon</td><td>Hafen Círdans und Ausgangspunkt der Elbenschiffe in den Westen.</td></tr>
+          <tr><td>Khazad-dûm / Moria</td><td>Nebelgebirge</td><td>Alte Zwerghallen; später von Orks und Balrog beherrscht.</td></tr>
+          <tr><td>Fornost</td><td>Arnor / Arthedain</td><td>Bedeutende Königsstadt des nördlichen Reiches.</td></tr>
+          <tr><td>Annúminas</td><td>Arnor</td><td>Frühe Hauptstadt Elendils im Norden.</td></tr>
+          <tr><td>Osgiliath</td><td>Gondor</td><td>Alte Hauptstadt am Anduin, später Kriegsschauplatz.</td></tr>
+          <tr><td>Minas Tirith</td><td>Gondor</td><td>„Turm der Wacht“ und Sitz des Truchsessen, später des Königs.</td></tr>
+          <tr><td>Minas Morgul</td><td>Grenze zu Mordor</td><td>Aus Minas Ithil hervorgegangene feindliche Stadt.</td></tr>
+          <tr><td>Barad-dûr</td><td>Mordor</td><td>Saurons Dunkler Turm und Herrschaftszentrum.</td></tr>
+          <tr><td>Edoras / Meduseld</td><td>Rohan</td><td>Königssitz der Rohirrim und goldene Halle.</td></tr>
+          <tr><td>Helms Klamm / Hornburg</td><td>Rohan</td><td>Verteidigungsstellung und entscheidender Schauplatz des Krieges gegen Saruman.</td></tr>
+          <tr><td>Isengart / Orthanc</td><td>Fangorn-Grenzraum</td><td>Alter Turm Gondors; Sarumans Sitz und Waffenstandort.</td></tr>
+          <tr><td>Erebor</td><td>Nördliches Rhovanion</td><td>Einsamer Berg, Schatzkammern und Königreich der Zwerge.</td></tr>
+          <tr><td>Thal / Esgaroth</td><td>Am Erebor und Langer See</td><td>Städte des Handels und des menschlichen Wiederaufbaus im Norden.</td></tr>
+          <tr><td>Dol Guldur</td><td>Düsterwald</td><td>Verborgene Festung Saurons im Dritten Zeitalter.</td></tr>
+          <tr><td>Henneth Annûn</td><td>Ithilien</td><td>Verborgener Zufluchtsort der Waldläufer Gondors.</td></tr>
+          <tr><td>Cirith Ungol</td><td>Mordors Westgrenze</td><td>Pass und Wachturm auf dem gefährlichen Weg der Ringträger.</td></tr>
+        </tbody></table></div>
+        <h3>Politische Zusammenhänge</h3>
+        <h4>Arnor und Gondor</h4><p>Beide Reiche gehen auf Überlebende Númenors zurück. Im Norden verläuft die Geschichte der Königsmacht in mehreren getrennten Nachfolgereichen und schließlich den Waldläufern; im Süden übernehmen für lange Zeit die Truchsessen die Regierung. Ihre Wiedervereinigung ist eine historische Wiederherstellung, keine Neugründung ohne Vorgeschichte.</p>
+        <h4>Die Waldreiche der Elben</h4><p>Doriath im Ersten Zeitalter, die Waldelben des Düsterwaldes und Lothlórien sind keine gleichartigen Kopien eines „Elbenstaates“. Ihre Bevölkerungen, Sprachen, Herrscherlinien und Beziehungen zu den Valar unterscheiden sich. Die Gemeinsamkeit liegt in der Bedeutung der Landschaft als Lebensraum und Gedächtnis.</p>
+        <h4>Mordors Grenzen</h4><p>Die <strong>Ephel Dúath</strong> im Westen und die <strong>Ered Lithui</strong> im Norden schützen Mordors Kernland. Das <strong>Morannon</strong> ist ein stark befestigter Zugang; die Pässe bei Minas Morgul und Cirith Ungol sind alternative, aber ebenso gefährliche Übergänge. Der <strong>Orodruin</strong> ist nicht nur Berg, sondern Ursprung und Ende des Rings.</p>
+      </div>
+    </section>
+
+    <section class="tip-section" id="artefakte">
+      <div class="section-heading"><span>16</span><h2>Artefakte, Waffen und Zeichen der Herrschaft</h2></div>
+      <div class="atlas-paper">
+        <p>Gegenstände speichern bei Tolkien Geschichte. Eine Klinge kann ein untergegangenes Reich mit der Gegenwart verbinden; ein Juwel kann Erinnerung bewahren und zugleich zerstörerische Besitzansprüche hervorrufen. Die Bedeutung eines Artefakts liegt deshalb oft ebenso in seiner Überlieferung wie in einer unmittelbaren magischen Wirkung.</p>
+        <div class="cols">
+          <div class="entry"><h4>Die Silmaril</h4><p>Drei von Fëanor geschaffene Juwelen, die das Licht der Zwei Bäume bewahren. Kern des Konflikts zwischen den Noldor und Morgoth.</p></div>
+          <div class="entry"><h4>Das Schwert Narsil / Andúril</h4><p>Narsil zerbricht im Kampf des Letzten Bündnisses; seine Neuschmiedung als Andúril macht Aragorns Königslinie sichtbar.</p></div>
+          <div class="entry"><h4>Die Palantíri</h4><p>Sehsteine aus älterer Kunst. Sie dienen der Wahrnehmung und Verständigung über Entfernungen, bergen aber Risiken durch falsche Deutung und feindliche Einflussnahme.</p></div>
+          <div class="entry"><h4>Der Arkenstein</h4><p>Außergewöhnlicher Stein aus Erebor, Symbol der Zwergenherrschaft und Gegenstand heftiger Besitzkonflikte; nicht mit den Silmaril gleichzusetzen.</p></div>
+          <div class="entry"><h4>Das Nauglamír</h4><p>Ein berühmtes Zwergengeschmeide aus der Frühgeschichte, das mit einem Silmaril verbunden wird und den Streit um Doriath verschärft.</p></div>
+          <div class="entry"><h4>Die Phiole Galadriels</h4><p>Ein Geschenk an Frodo, das das Licht Eärendils bewahrt und in dunklen Momenten Hoffnung und Orientierung schenkt.</p></div>
+          <div class="entry"><h4>Stich / Sting</h4><p>Bilbos und später Frodos kurze Elbenklinge aus älterer Zeit. Sie steht für die Verbindung scheinbar kleiner Unternehmungen mit uralten Konflikten.</p></div>
+          <div class="entry"><h4>Glamdring und Orcrist</h4><p>Alte Schwerter aus Gondolin; erinnern daran, dass selbst in der kleinen Geschichte des Hobbits Überreste versunkener Epochen auftauchen.</p></div>
+          <div class="entry"><h4>Das Weiße Baumzeichen</h4><p>Die Tradition des Weißen Baumes verbindet die Bäume von Valinor, Númenor und Gondor; steht für Kontinuität und rechtmäßige Herrschaft.</p></div>
+          <div class="entry"><h4>Der Elbenstern und Erbstücke Aragorns</h4><p>Wappen und Gaben treten in Beziehung zu dynastischen Ansprüchen, Liebe und dem Zusammenspiel menschlicher und elbischer Linien.</p></div>
+        </div>
+        <h3>Magie in der materiellen Welt</h3>
+        <p>Tolkien bietet keine überall einheitliche technische Magietheorie. Handwerk, Sprache, Wesen und Willenskraft überschneiden sich. Was Hobbits „Zauberei“ nennen, kann für Elben eine natürliche Kunstfertigkeit sein. Gerade deshalb sollte man aus einzelnen Gegenständen keine allgemeine Liste fest definierter Zauberfähigkeiten ableiten.</p>
+      </div>
+    </section>
+
+    <section class="tip-section" id="natur">
+      <div class="section-heading"><span>17</span><h2>Flora, Fauna und die lebendige Landschaft</h2></div>
+      <div class="atlas-paper">
+        <p>Der Atlas behandelt eigens die <em>Olvar</em> (Pflanzenwelt) und <em>Kelvar</em> (Tierwelt) Ardas. Das ist mehr als ein dekoratives Bestiarium: Viele Landschaften handeln beinahe wie Figuren, tragen Spuren der Weltgeschichte oder bewahren Erinnerungen an das Licht früherer Zeiten.</p>
+        <h3>Bäume, Pflanzen und Blumen</h3>
+        <div class="table-scroll"><table><thead><tr><th>Bezeichnung</th><th>Bedeutung</th></tr></thead><tbody>
+          <tr><td>Telperion und Laurelin</td><td>Silberner und goldener Baum des Lichts in Valinor; Ausgangspunkt einer langen Symbolgeschichte.</td></tr>
+          <tr><td>Nimloth und die Weißen Bäume</td><td>Nachkommen und Abbilder einer alten Baumtradition, die über Númenor nach Gondor gelangt.</td></tr>
+          <tr><td>Mallorn</td><td>Goldblättrige Bäume, besonders mit Lothlórien verbunden; prägen die Landschaft und Architektur.</td></tr>
+          <tr><td>Athelas / Königskraut</td><td>Heilkraut, dessen Wirkung mit Wissen und den heilenden Händen eines Königs verknüpft wird.</td></tr>
+          <tr><td>Elanor</td><td>Goldene Blume aus Lothlórien; Name mit persönlicher und genealogischer Nachwirkung.</td></tr>
+          <tr><td>Niphredil</td><td>Zarte weiße Blume, in elbischen Landschaftsbeschreibungen besonders hervorgehoben.</td></tr>
+          <tr><td>Simbelmynë</td><td>Kleine weiße Blume auf den Grabhügeln Rohans; Symbol der Erinnerung an die Vorfahren.</td></tr>
+          <tr><td>Alter Weidenmann</td><td>Unheimliche Baumgestalt im Alten Wald, zeigt die bedrohliche Eigenständigkeit mancher Landschaften.</td></tr>
+        </tbody></table></div>
+        <h3>Tiere, Gefährten und ungewöhnliche Kreaturen</h3>
+        <div class="cols">
+          <div class="entry"><h4>Huan</h4><p>Großer Jagdhund aus Valinor, der in der Erzählung von Beren und Lúthien eine entscheidende Rolle spielt.</p></div>
+          <div class="entry"><h4>Die Mearas</h4><p>Außergewöhnliche Pferdelinie Rohans. Gandalf reitet Schattenfell, ein besonders berühmtes Tier dieser Linie.</p></div>
+          <div class="entry"><h4>Olifanten / Mûmakil</h4><p>Riesige Tiere aus südlichen Ländern, die in den Kriegen Gondors als gewaltige Last- und Kriegstiere auftreten.</p></div>
+          <div class="entry"><h4>Große Adler</h4><p>Intelligente, selbstständig handelnde Wesen, die an Wendepunkten Hilfe leisten. Ihr Eingreifen besitzt Gewicht, weil es nicht jederzeit verfügbar ist.</p></div>
+          <div class="entry"><h4>Drachen</h4><p>Glaurung, Ancalagon und Smaug verkörpern unterschiedliche Ausprägungen der von Morgoth ausgehenden Drachenbedrohung.</p></div>
+          <div class="entry"><h4>Spinnenwesen</h4><p>Ungoliant gehört zu den rätselhaftesten Gestalten der Frühgeschichte; Kankra setzt die Bedrohung in Mordors Nähe fort.</p></div>
+        </div>
+        <h3>Fangorn, Huorns und Natur als politischer Akteur</h3>
+        <p>Der Wald <strong>Fangorn</strong> ist weder bloß Kulisse noch ein idyllischer Gegenpol zu „zivilisierten“ Städten. Die Ents besitzen Gedächtnis und ein eigenes Verständnis von Zeit. Ihr Vorgehen gegen Saruman entsteht aus der Erfahrung langandauernder Zerstörung. Damit erhält die Landschaft politische Handlungsfähigkeit.</p>
+        <h3>Die ökologische Perspektive</h3>
+        <p>Im Auenland sind Äcker, Hecken und Obstgärten Zeichen bewohnter Vertrautheit; in Isengart machen Rauch, Maschinen und gefällte Bäume den Missbrauch technischer Macht sichtbar. Tolkien war nicht pauschal gegen Handwerk – Aulë und die großen Elbenschmiede bezeugen das Gegenteil. Die entscheidende Frage lautet, <em>wozu</em> Können und Gestaltungsmacht eingesetzt werden.</p>
+      </div>
+    </section>
+
+    <section class="tip-section" id="sprachen">
+      <div class="section-heading"><span>18</span><h2>Sprachen, Namensformen und Etymologie</h2></div>
+      <div class="atlas-paper">
+        <p>Sprachen sind im Legendarium kein nachträglich aufgesetzter Schmuck. Tolkien erschuf Sprachformen und entwickelte zu ihnen Völker, historische Trennungen und Wanderungsbewegungen. Ein Ortsname kann deshalb eine eigene kleine Geschichtsquelle sein.</p>
+        <div class="table-scroll"><table><thead><tr><th>Sprache oder Sprachgruppe</th><th>Verwendung und Charakter</th></tr></thead><tbody>
+          <tr><td>Quenya</td><td>Ältere elbische Hoch- und Überlieferungssprache, besonders mit Aman und den Noldor verbunden.</td></tr>
+          <tr><td>Sindarin</td><td>Elbische Sprache Beleriands und vieler späterer Elbenreiche; in Orts- und Personennamen sehr präsent.</td></tr>
+          <tr><td>Telerin und andere elbische Sprachen</td><td>Zeugnisse der Aufspaltung der Elben und ihrer unterschiedlichen Wanderungswege.</td></tr>
+          <tr><td>Khuzdul</td><td>Traditionssprache der Zwerge; Außenstehenden nur begrenzt zugänglich.</td></tr>
+          <tr><td>Westron</td><td>Gemeinsprache vieler Völker des Dritten Zeitalters; in der Erzählung durch vertraute moderne Sprachformen wiedergegeben.</td></tr>
+          <tr><td>Adûnaisch</td><td>Sprache Númenors; prägt die Überlieferung der Dúnedain.</td></tr>
+          <tr><td>Rohirrische Sprache</td><td>Mit den Nordmenschen verwandt; in der literarischen Darstellung an altenglische Formen angelehnt.</td></tr>
+          <tr><td>Schwarze Sprache</td><td>Mit Saurons Herrschaftsanspruch verbunden; bekannt insbesondere durch die Inschrift des Einen Rings.</td></tr>
+          <tr><td>Entisch</td><td>Sprache der Ents, deren ausführliche, geduldige Ausdrucksweise zu ihrer Wahrnehmung der Zeit passt.</td></tr>
+        </tbody></table></div>
+        <h3>Mehrere Namen, ein Ort</h3>
+        <div class="cols">
+          <div class="entry"><h4>Imladris – Bruchtal – Rivendell</h4><p>Elbischer Name und verschiedene Übersetzungen desselben Zufluchtsorts Elronds.</p></div>
+          <div class="entry"><h4>Khazad-dûm – Moria</h4><p>Alter zwergischer Name und später verbreitete elbische Bezeichnung der gewaltigen Bergstadt.</p></div>
+          <div class="entry"><h4>Orodruin – Schicksalsberg</h4><p>Elbischer Name des Vulkans und seine geläufige deutsche Bezeichnung.</p></div>
+          <div class="entry"><h4>Minas Ithil – Minas Morgul</h4><p>Der Namenswechsel dokumentiert eine tatsächliche politische und geistige Umwandlung.</p></div>
+          <div class="entry"><h4>Barad-dûr – Dunkler Turm</h4><p>Eigenname und beschreibende Übertragung von Saurons Festung.</p></div>
+          <div class="entry"><h4>Mithlond – Graue Anfurten</h4><p>Elbischer und deutscher Name des westlichen Hafens.</p></div>
+        </div>
+        <h3>Warum Übersetzungsvarianten normal sind</h3>
+        <p>Deutsche Ausgaben, Sekundärliteratur und Spiele verwenden teils verschiedene Schreibungen oder Übersetzungsentscheidungen. Für eine Wissensseite empfiehlt sich daher: zuerst eine durchgehende deutsche Form, danach bei Bedarf die englische und die elbische Bezeichnung nennen. Exakte Wortetymologien sollte man nur angeben, wenn ihre Herleitung in Tolkiens sprachlichen Texten gesichert ist; scheinbar plausible Zerlegungen können falsch sein.</p>
+      </div>
+    </section>
+
+    <section class="tip-section" id="motive">
+      <div class="section-heading"><span>19</span><h2>Die übergreifenden Gedanken des Legendariums</h2></div>
+      <div class="atlas-paper">
+        <h3>Bewahren und loslassen</h3><p>Fëanor möchte die Silmaril zurückgewinnen, die Elben möchten Schönheit und Zeit erhalten, die Númenórer möchten den Tod überwinden, Sauron möchte die Welt kontrollieren. Nicht alle diese Wünsche sind moralisch gleich. Doch überall wird sichtbar, wie leicht die legitime Sehnsucht nach Dauer in Aneignung und Besitzdenken übergeht.</p>
+        <h3>Der Preis der Macht</h3><p>Der Eine Ring verleiht Einfluss, aber keine unschuldige Herrschaft. Besonders den Mächtigen bietet er die Illusion, Gewalt sei zulässig, wenn das beabsichtigte Ziel nur edel genug sei. Das Gegenmodell bilden Personen, die eigene Grenzen anerkennen und Macht nicht als Selbstzweck verstehen.</p>
+        <h3>Treue, Barmherzigkeit und unerwartete Folgen</h3><p>Bilbos Mitleid mit Gollum und Frodos spätere Schonung zeigen, dass der Erfolg einer Handlung nicht stets durch überlegene Planung entsteht. Freundschaft, Geduld und kleine Akte der Barmherzigkeit greifen tief in Ereignisse ein, die auf dem Schlachtfeld nicht zu entscheiden sind.</p>
+        <h3>Geschichte als Verlust</h3><p>Gondolin verschwindet, Beleriand versinkt, Númenor geht unter, Arnor zerfällt, Lothlóriens Glanz wird vergehen. Die wiederkehrende Erfahrung verlorener Orte prägt Tolkiens Atmosphäre. Selbst der Sieg des Ringkriegs bringt nicht alles Verlorene zurück. Dieses melancholische Geschichtsverständnis unterscheidet seine Welt von einer reinen Abenteuersammlung.</p>
+        <h3>Die kleinen Völker und das große Weltgeschehen</h3><p>Das Auenland liegt weit entfernt von den alten Machtzentren. Gerade deshalb kann sich dort eine Lebensform erhalten, die Saurons Logik widerspricht: Freundschaft ohne Rangdenken, Freude ohne Eroberung, handwerkliche Geschicklichkeit ohne Herrschaftsanspruch. Dass Hobbits die entscheidende Aufgabe übernehmen, ist mehr als eine erzählerische Pointe.</p>
+        <h3>Ein offener Horizont</h3><p>Auch das Vierte Zeitalter ist nicht das Ende jeder Geschichte. Es bezeichnet eine Verschiebung der Verantwortung: Das Außerordentliche zieht sich zurück, und Menschen müssen mit Erinnerung, Freiheit und Fehlbarkeit eine eigene Zukunft gestalten. Aus Mythos wird allmählich Geschichte.</p>
+      </div>
+    </section>
+
+    <section class="tip-section" id="glossar">
+      <div class="section-heading"><span>20</span><h2>Alphabetisch durchsuchbares Glossar</h2></div>
+      <div class="atlas-paper">
+        <p>Das Lexikon versammelt wichtige Namen, Orte, Wesen, Begriffe und Gegenstände. Die Kurzbeschreibungen sollen beim Lesen helfen und ersetzen nicht die ausführlichen Abschnitte. Die Einträge sind bereits im HTML enthalten und damit auch ohne JavaScript lesbar.</p>
+        <div class="glossary-toolbar">
+          <div><label for="glossarySearch">Begriff oder Beschreibung suchen</label><input id="glossarySearch" type="search" placeholder="z. B. Númenor, Ring, Gondolin, Maia …" autocomplete="off"></div>
+          <div><label for="glossaryType">Kategorie</label><select id="glossaryType"><option value="all">Alle Kategorien</option><option value="Kosmologie">Kosmologie</option><option value="Personen">Personen &amp; Völker</option><option value="Orte">Orte &amp; Reiche</option><option value="Ereignisse">Ereignisse</option><option value="Gegenstände">Gegenstände</option><option value="Natur">Natur &amp; Wesen</option><option value="Sprachen">Sprachen</option></select></div>
+        </div>
+        <p class="glossary-count" id="glossaryCount" role="status" aria-live="polite">Begriffe alphabetisch geordnet.</p>
+        <div class="glossary-grid" id="glossaryGrid">
+          <article class="glossary-item" data-kind="Kosmologie"><small>Kosmologie</small><h4>Ainur</h4><p>Ursprüngliche Geistwesen, die am großen Musikthema Ilúvatars teilhaben.</p></article>
+          <article class="glossary-item" data-kind="Orte"><small>Orte</small><h4>Almaren</h4><p>Früher Wohnsitz der Valar während der Zeit der großen Lampen.</p></article>
+          <article class="glossary-item" data-kind="Orte"><small>Orte</small><h4>Alqualondë</h4><p>Teleri-Hafen in Aman, Schauplatz eines verhängnisvollen Sippenmords.</p></article>
+          <article class="glossary-item" data-kind="Orte"><small>Orte</small><h4>Aman</h4><p>Westlicher Kontinent mit Valinor und bedeutenden Wohnorten der Eldar.</p></article>
+          <article class="glossary-item" data-kind="Orte"><small>Orte</small><h4>Anduin</h4><p>Großer Fluss vom Norden durch Rhovanion und Gondor.</p></article>
+          <article class="glossary-item" data-kind="Orte"><small>Orte</small><h4>Angband</h4><p>Morgoths nördliche Festung in der Zeit der Kriege Beleriands.</p></article>
+          <article class="glossary-item" data-kind="Orte"><small>Orte</small><h4>Angmar</h4><p>Reich des Hexenkönigs im Norden, Gegner der Nachfolgereiche Arnors.</p></article>
+          <article class="glossary-item" data-kind="Orte"><small>Orte</small><h4>Annúminas</h4><p>Frühe Hauptstadt des nördlichen Dúnedain-Reiches Arnor.</p></article>
+          <article class="glossary-item" data-kind="Personen"><small>Personen</small><h4>Aragorn</h4><p>Erbe Isildurs und später König des vereinigten Arnor und Gondor.</p></article>
+          <article class="glossary-item" data-kind="Kosmologie"><small>Kosmologie</small><h4>Arda</h4><p>Die geschaffene Welt, zu der auch Mittelerde und Aman gehören.</p></article>
+          <article class="glossary-item" data-kind="Gegenstände"><small>Gegenstände</small><h4>Arkenstein</h4><p>Berühmter Schatz Erebors; nicht mit den Silmaril identisch.</p></article>
+          <article class="glossary-item" data-kind="Orte"><small>Orte</small><h4>Arnor</h4><p>Nördliches Königreich der Dúnedain nach dem Untergang Númenors.</p></article>
+          <article class="glossary-item" data-kind="Personen"><small>Personen</small><h4>Arwen</h4><p>Tochter Elronds; verbindet ihr Schicksal mit dem sterblichen Aragorn.</p></article>
+          <article class="glossary-item" data-kind="Natur"><small>Natur</small><h4>Athelas</h4><p>Königskraut mit heilender Bedeutung in der Geschichte Gondors.</p></article>
+          <article class="glossary-item" data-kind="Personen"><small>Personen</small><h4>Avari</h4><p>Elben, die der großen Wanderung nach Westen nicht folgen.</p></article>
+          <article class="glossary-item" data-kind="Natur"><small>Natur</small><h4>Balrogs</h4><p>Gefallene Maiar in Morgoths Diensten, mit Feuer und Schatten verbunden.</p></article>
+          <article class="glossary-item" data-kind="Orte"><small>Orte</small><h4>Barad-dûr</h4><p>Dunkler Turm Saurons im Land Mordor.</p></article>
+          <article class="glossary-item" data-kind="Orte"><small>Orte</small><h4>Beleriand</h4><p>Westliche Länder des Ersten Zeitalters, später größtenteils versunken.</p></article>
+          <article class="glossary-item" data-kind="Personen"><small>Personen</small><h4>Beren</h4><p>Sterblicher Held; seine Liebe zu Lúthien gehört zu den großen Geschichten Beleriands.</p></article>
+          <article class="glossary-item" data-kind="Personen"><small>Personen</small><h4>Bilbo Beutlin</h4><p>Hobbit, der am Erebor-Abenteuer teilnimmt und den Einen Ring findet.</p></article>
+          <article class="glossary-item" data-kind="Orte"><small>Orte</small><h4>Bruchtal</h4><p>Imladris oder Rivendell, Zuflucht Elronds in Eriador.</p></article>
+          <article class="glossary-item" data-kind="Personen"><small>Personen</small><h4>Calaquendi</h4><p>Elben, die das Licht der Zwei Bäume in Aman geschaut haben.</p></article>
+          <article class="glossary-item" data-kind="Orte"><small>Orte</small><h4>Caradhras</h4><p>Hoher Gipfel des Nebelgebirges; schwierige Route der Ringgemeinschaft.</p></article>
+          <article class="glossary-item" data-kind="Orte"><small>Orte</small><h4>Cirith Ungol</h4><p>Gefährlicher Gebirgspass an der Grenze Mordors.</p></article>
+          <article class="glossary-item" data-kind="Orte"><small>Orte</small><h4>Cuiviénen</h4><p>Ort des Erwachens der ersten Elben in Mittelerde.</p></article>
+          <article class="glossary-item" data-kind="Personen"><small>Personen</small><h4>Círdan</h4><p>Elbischer Schiffbauer, Herr der Grauen Anfurten und einst Träger Naryas.</p></article>
+          <article class="glossary-item" data-kind="Ereignisse"><small>Ereignisse</small><h4>Dagor Aglareb</h4><p>Glorreiche Schlacht, gefolgt von einer langen Einschließung Angbands.</p></article>
+          <article class="glossary-item" data-kind="Ereignisse"><small>Ereignisse</small><h4>Dagor Bragollach</h4><p>Schlacht des jähen Feuers: Morgoths Durchbruch gegen die Belagerung Angbands.</p></article>
+          <article class="glossary-item" data-kind="Orte"><small>Orte</small><h4>Dol Guldur</h4><p>Schattenfestung im südlichen Düsterwald.</p></article>
+          <article class="glossary-item" data-kind="Orte"><small>Orte</small><h4>Doriath</h4><p>Elbisches Waldreich Thingols und Melians in Beleriand.</p></article>
+          <article class="glossary-item" data-kind="Natur"><small>Natur</small><h4>Durins Fluch</h4><p>Balrog, dessen Auftreten zum Verlust von Khazad-dûm führt.</p></article>
+          <article class="glossary-item" data-kind="Personen"><small>Personen</small><h4>Dúnedain</h4><p>Nachkommen der Númenórer und Bewohner beziehungsweise Erben ihrer Exilreiche.</p></article>
+          <article class="glossary-item" data-kind="Orte"><small>Orte</small><h4>Düsterwald</h4><p>Großes Waldgebiet Rhovanions, zeitweilig vom Schatten Dol Guldurs geprägt.</p></article>
+          <article class="glossary-item" data-kind="Personen"><small>Personen</small><h4>Edain</h4><p>Menschliche Häuser, die in den Kriegen Beleriands eng mit den Elben verbündet sind.</p></article>
+          <article class="glossary-item" data-kind="Orte"><small>Orte</small><h4>Eldamar</h4><p>Elbische Wohngebiete im Westen am Rand Valinors.</p></article>
+          <article class="glossary-item" data-kind="Personen"><small>Personen</small><h4>Elendil</h4><p>Überlebender Númenors und Begründer der Dúnedain-Exilreiche.</p></article>
+          <article class="glossary-item" data-kind="Personen"><small>Personen</small><h4>Elrond</h4><p>Halbelb und Herr von Bruchtal, einer der wichtigsten Bewahrer der Überlieferung.</p></article>
+          <article class="glossary-item" data-kind="Personen"><small>Personen</small><h4>Elros</h4><p>Bruder Elronds, erster König Númenors.</p></article>
+          <article class="glossary-item" data-kind="Natur"><small>Natur</small><h4>Ents</h4><p>Baumhirten, die besonders mit Fangorn und der Sorge Yavannas verbunden sind.</p></article>
+          <article class="glossary-item" data-kind="Orte"><small>Orte</small><h4>Erebor</h4><p>Einsamer Berg, wichtiges Zwergenreich und Schauplatz der Smaug-Geschichte.</p></article>
+          <article class="glossary-item" data-kind="Orte"><small>Orte</small><h4>Eregion</h4><p>Elbisches Schmiedereich; Ort der Herstellung bedeutender Ringe der Macht.</p></article>
+          <article class="glossary-item" data-kind="Kosmologie"><small>Kosmologie</small><h4>Eru Ilúvatar</h4><p>Der Eine, Ursprung der Ainur und der Schöpfung.</p></article>
+          <article class="glossary-item" data-kind="Orte"><small>Orte</small><h4>Esgaroth</h4><p>Seestadt am Langen See, die Smaug angreift.</p></article>
+          <article class="glossary-item" data-kind="Personen"><small>Personen</small><h4>Eärendil</h4><p>Seefahrer und Vermittler einer letzten Hoffnung im Ersten Zeitalter.</p></article>
+          <article class="glossary-item" data-kind="Orte"><small>Orte</small><h4>Fangorn</h4><p>Alter Wald am Rand Rohans und Heimat Baumbarts.</p></article>
+          <article class="glossary-item" data-kind="Personen"><small>Personen</small><h4>Fingolfin</h4><p>Noldor-Fürst, bekannt für seinen persönlichen Kampf gegen Morgoth.</p></article>
+          <article class="glossary-item" data-kind="Personen"><small>Personen</small><h4>Frodo Beutlin</h4><p>Ringträger, dessen Reise nach Mordor über Saurons Schicksal entscheidet.</p></article>
+          <article class="glossary-item" data-kind="Personen"><small>Personen</small><h4>Fëanor</h4><p>Meister der Noldor, Schöpfer der Silmaril und Urheber eines verhängnisvollen Eides.</p></article>
+          <article class="glossary-item" data-kind="Personen"><small>Personen</small><h4>Galadriel</h4><p>Noldorin, Bewahrerin Lothlóriens und Trägerin Nenyas.</p></article>
+          <article class="glossary-item" data-kind="Personen"><small>Personen</small><h4>Gandalf</h4><p>Einer der Istari und wichtiger Ratgeber der freien Völker.</p></article>
+          <article class="glossary-item" data-kind="Natur"><small>Natur</small><h4>Glaurung</h4><p>Berühmter Drache Morgoths in den Geschichten von Túrin.</p></article>
+          <article class="glossary-item" data-kind="Personen"><small>Personen</small><h4>Gollum</h4><p>Früher Sméagol, durch den Einen Ring verändert und von ihm abhängig.</p></article>
+          <article class="glossary-item" data-kind="Orte"><small>Orte</small><h4>Gondolin</h4><p>Verborgene Stadt Turgons in Beleriand.</p></article>
+          <article class="glossary-item" data-kind="Orte"><small>Orte</small><h4>Gondor</h4><p>Südliches Exilreich der Dúnedain, mit Minas Tirith als späterem Zentrum.</p></article>
+          <article class="glossary-item" data-kind="Orte"><small>Orte</small><h4>Graue Anfurten</h4><p>Mithlond, westlicher Hafen Círdans und Ausgangsort der Elbenschiffe.</p></article>
+          <article class="glossary-item" data-kind="Orte"><small>Orte</small><h4>Henneth Annûn</h4><p>Verborgener Stützpunkt Faramirs und seiner Waldläufer in Ithilien.</p></article>
+          <article class="glossary-item" data-kind="Personen"><small>Personen</small><h4>Hexenkönig</h4><p>Herrscher von Angmar und oberster der neun Nazgûl.</p></article>
+          <article class="glossary-item" data-kind="Personen"><small>Personen</small><h4>Hobbits</h4><p>Kleine, menschenverwandte Bewohner, besonders des Auenlandes.</p></article>
+          <article class="glossary-item" data-kind="Natur"><small>Natur</small><h4>Huorns</h4><p>Geheimnisvolle Wesen aus dem Grenzbereich zwischen Bäumen und Ents.</p></article>
+          <article class="glossary-item" data-kind="Kosmologie"><small>Kosmologie</small><h4>Ilúvatar</h4><p>Kurzform für Eru Ilúvatar, den einen Schöpfer.</p></article>
+          <article class="glossary-item" data-kind="Orte"><small>Orte</small><h4>Isengart</h4><p>Von Saruman zum Militär- und Machtzentrum umgestaltetes Gebiet um Orthanc.</p></article>
+          <article class="glossary-item" data-kind="Personen"><small>Personen</small><h4>Isildur</h4><p>Sohn Elendils; nimmt am Ende des Zweiten Zeitalters den Einen Ring an sich.</p></article>
+          <article class="glossary-item" data-kind="Personen"><small>Personen</small><h4>Istari</h4><p>Die als Zauberer auftretenden Maiar, die im Dritten Zeitalter nach Mittelerde kommen.</p></article>
+          <article class="glossary-item" data-kind="Natur"><small>Natur</small><h4>Kankra</h4><p>Gefährliches Spinnenwesen am Weg von Cirith Ungol.</p></article>
+          <article class="glossary-item" data-kind="Natur"><small>Natur</small><h4>Kelvar</h4><p>Bezeichnung für die Tierwelt beziehungsweise Tiere Ardas.</p></article>
+          <article class="glossary-item" data-kind="Orte"><small>Orte</small><h4>Khazad-dûm</h4><p>Zwergischer Name der später als Moria bekannten unterirdischen Stadt.</p></article>
+          <article class="glossary-item" data-kind="Sprachen"><small>Sprachen</small><h4>Khuzdul</h4><p>Eigene Traditionssprache der Zwerge.</p></article>
+          <article class="glossary-item" data-kind="Natur"><small>Natur</small><h4>Laurelin</h4><p>Goldener Baum des Lichts in Valinor.</p></article>
+          <article class="glossary-item" data-kind="Ereignisse"><small>Ereignisse</small><h4>Letztes Bündnis</h4><p>Koalition von Elben und Menschen gegen Sauron am Ende des Zweiten Zeitalters.</p></article>
+          <article class="glossary-item" data-kind="Orte"><small>Orte</small><h4>Lindon</h4><p>Westliches Elbengebiet mit den Grauen Anfurten nach dem Untergang Beleriands.</p></article>
+          <article class="glossary-item" data-kind="Orte"><small>Orte</small><h4>Lothlórien</h4><p>Elbisches Waldreich, das Galadriel und Celeborn im Dritten Zeitalter prägen.</p></article>
+          <article class="glossary-item" data-kind="Personen"><small>Personen</small><h4>Lúthien</h4><p>Tochter Thingols und Melians; verbindet ihr Schicksal mit Beren.</p></article>
+          <article class="glossary-item" data-kind="Kosmologie"><small>Kosmologie</small><h4>Maiar</h4><p>Geistige Mächte der Ainur, zu denen auch Sauron und die Istari gehören.</p></article>
+          <article class="glossary-item" data-kind="Natur"><small>Natur</small><h4>Mallorn</h4><p>Goldblättrige Baumart, besonders mit Lothlórien verbunden.</p></article>
+          <article class="glossary-item" data-kind="Kosmologie"><small>Kosmologie</small><h4>Manwë</h4><p>Führender Vala, besonders mit Himmel, Luft und Wind verbunden.</p></article>
+          <article class="glossary-item" data-kind="Orte"><small>Orte</small><h4>Meduseld</h4><p>Goldene Halle von Edoras und Sitz der Könige Rohans.</p></article>
+          <article class="glossary-item" data-kind="Personen"><small>Personen</small><h4>Melian</h4><p>Maia und Königin an der Seite Thingols in Doriath.</p></article>
+          <article class="glossary-item" data-kind="Personen"><small>Personen</small><h4>Melkor</h4><p>Erster Dunkler Herrscher Ardas, später Morgoth genannt.</p></article>
+          <article class="glossary-item" data-kind="Orte"><small>Orte</small><h4>Menegroth</h4><p>Unterirdische Hallen und Hauptstadt Doriaths.</p></article>
+          <article class="glossary-item" data-kind="Orte"><small>Orte</small><h4>Minas Morgul</h4><p>Aus Minas Ithil hervorgegangene feindliche Grenzfestung.</p></article>
+          <article class="glossary-item" data-kind="Orte"><small>Orte</small><h4>Minas Tirith</h4><p>Bedeutende Festungsstadt Gondors und späterer Sitz des Königs.</p></article>
+          <article class="glossary-item" data-kind="Personen"><small>Personen</small><h4>Morgoth</h4><p>Name Melkors als Dunkler Feind; Gegenspieler im Ersten Zeitalter.</p></article>
+          <article class="glossary-item" data-kind="Orte"><small>Orte</small><h4>Moria</h4><p>Späterer Name der Zwergenstadt Khazad-dûm im Nebelgebirge.</p></article>
+          <article class="glossary-item" data-kind="Orte"><small>Orte</small><h4>Nargothrond</h4><p>Elbisches Höhlen- und Festungsreich in Beleriand.</p></article>
+          <article class="glossary-item" data-kind="Gegenstände"><small>Gegenstände</small><h4>Narya</h4><p>Elbischer Ring des Feuers, später von Gandalf getragen.</p></article>
+          <article class="glossary-item" data-kind="Personen"><small>Personen</small><h4>Nazgûl</h4><p>Neun durch Ringe der Macht versklavte Menschengeister.</p></article>
+          <article class="glossary-item" data-kind="Gegenstände"><small>Gegenstände</small><h4>Nenya</h4><p>Elbischer Ring des Wassers, von Galadriel getragen.</p></article>
+          <article class="glossary-item" data-kind="Natur"><small>Natur</small><h4>Nimloth</h4><p>Weißer Baum Númenors, Teil einer älteren Baumtradition.</p></article>
+          <article class="glossary-item" data-kind="Ereignisse"><small>Ereignisse</small><h4>Nirnaeth Arnoediad</h4><p>Schlacht der ungezählten Tränen, katastrophaler Rückschlag gegen Morgoth.</p></article>
+          <article class="glossary-item" data-kind="Personen"><small>Personen</small><h4>Noldor</h4><p>Elbisches Volk bedeutender Gelehrter und Schmiede.</p></article>
+          <article class="glossary-item" data-kind="Orte"><small>Orte</small><h4>Númenor</h4><p>Untergegangenes Inselreich der Edain im Zweiten Zeitalter.</p></article>
+          <article class="glossary-item" data-kind="Natur"><small>Natur</small><h4>Olvar</h4><p>Bezeichnung für die Pflanzenwelt Ardas.</p></article>
+          <article class="glossary-item" data-kind="Orte"><small>Orte</small><h4>Orodruin</h4><p>Schicksalsberg in Mordor, Schmiede- und Vernichtungsort des Einen Rings.</p></article>
+          <article class="glossary-item" data-kind="Orte"><small>Orte</small><h4>Osgiliath</h4><p>Alte Hauptstadt Gondors am Anduin, im Ringkrieg umkämpft.</p></article>
+          <article class="glossary-item" data-kind="Gegenstände"><small>Gegenstände</small><h4>Palantíri</h4><p>Sichtsteine, die über weite Entfernungen Wahrnehmung und Verständigung ermöglichen.</p></article>
+          <article class="glossary-item" data-kind="Orte"><small>Orte</small><h4>Pelennor-Felder</h4><p>Ebene vor Minas Tirith und Schauplatz einer entscheidenden Schlacht.</p></article>
+          <article class="glossary-item" data-kind="Sprachen"><small>Sprachen</small><h4>Quenya</h4><p>Elbische Hoch- und Überlieferungssprache, eng mit Aman verbunden.</p></article>
+          <article class="glossary-item" data-kind="Orte"><small>Orte</small><h4>Rhovanion</h4><p>Große Länder östlich des Nebelgebirges, mit Düsterwald und Erebor.</p></article>
+          <article class="glossary-item" data-kind="Orte"><small>Orte</small><h4>Rohan</h4><p>Reiterreich südlich von Fangorn und Verbündeter Gondors.</p></article>
+          <article class="glossary-item" data-kind="Personen"><small>Personen</small><h4>Rohirrim</h4><p>Reitervolk Rohans, eng mit den Éothéod verwandt.</p></article>
+          <article class="glossary-item" data-kind="Personen"><small>Personen</small><h4>Samweis Gamdschie</h4><p>Frodos Gefährte, dessen Treue für die Ringreise unentbehrlich ist.</p></article>
+          <article class="glossary-item" data-kind="Personen"><small>Personen</small><h4>Saruman</h4><p>Istar und einstiger Leiter des Weißen Rates, der seine Macht missbraucht.</p></article>
+          <article class="glossary-item" data-kind="Personen"><small>Personen</small><h4>Sauron</h4><p>Maia, früher Diener Morgoths, später Schöpfer des Einen Rings und Herrscher Mordors.</p></article>
+          <article class="glossary-item" data-kind="Natur"><small>Natur</small><h4>Schattenfell</h4><p>Besonders berühmtes Pferd aus der Linie der Mearas.</p></article>
+          <article class="glossary-item" data-kind="Gegenstände"><small>Gegenstände</small><h4>Silmaril</h4><p>Drei von Fëanor geschaffene Juwelen mit dem Licht der Zwei Bäume.</p></article>
+          <article class="glossary-item" data-kind="Sprachen"><small>Sprachen</small><h4>Sindarin</h4><p>Elbische Sprache Beleriands, besonders stark in Ortsnamen Mittelerdes vertreten.</p></article>
+          <article class="glossary-item" data-kind="Natur"><small>Natur</small><h4>Smaug</h4><p>Drache, der Erebor besetzt und Esgaroth verwüstet.</p></article>
+          <article class="glossary-item" data-kind="Natur"><small>Natur</small><h4>Telperion</h4><p>Silberner Baum des Lichts in Valinor.</p></article>
+          <article class="glossary-item" data-kind="Orte"><small>Orte</small><h4>Thangorodrim</h4><p>Gewaltige Gipfel über Morgoths Festungsbereich Angband.</p></article>
+          <article class="glossary-item" data-kind="Personen"><small>Personen</small><h4>Thingol</h4><p>Elbenkönig Doriaths, Gemahl Melians und Vater Lúthiens.</p></article>
+          <article class="glossary-item" data-kind="Personen"><small>Personen</small><h4>Thorin Eichenschild</h4><p>Anführer der Zwergenfahrt zum Erebor im Dritten Zeitalter.</p></article>
+          <article class="glossary-item" data-kind="Orte"><small>Orte</small><h4>Tirion</h4><p>Stadt der Elben in Eldamar am Fuß des Taniquetil-Gebirges.</p></article>
+          <article class="glossary-item" data-kind="Personen"><small>Personen</small><h4>Tuor</h4><p>Sterblicher Held, der nach Gondolin gelangt und mit Idril Eärendils Vater wird.</p></article>
+          <article class="glossary-item" data-kind="Personen"><small>Personen</small><h4>Túrin Turambar</h4><p>Tragischer Held des Ersten Zeitalters, Gegner des Drachen Glaurung.</p></article>
+          <article class="glossary-item" data-kind="Natur"><small>Natur</small><h4>Ungoliant</h4><p>Rätselhaftes Spinnenwesen, das mit Melkor die Zwei Bäume vernichtet.</p></article>
+          <article class="glossary-item" data-kind="Orte"><small>Orte</small><h4>Utumno</h4><p>Frühe Festung Melkors im Norden Ardas.</p></article>
+          <article class="glossary-item" data-kind="Kosmologie"><small>Kosmologie</small><h4>Valar</h4><p>Die großen in Arda wirkenden Mächte unter den Ainur.</p></article>
+          <article class="glossary-item" data-kind="Orte"><small>Orte</small><h4>Valinor</h4><p>Land der Valar auf dem westlichen Kontinent Aman.</p></article>
+          <article class="glossary-item" data-kind="Kosmologie"><small>Kosmologie</small><h4>Varda</h4><p>Vala des Sternenlichts, bei den Elben auch als Elbereth bekannt.</p></article>
+          <article class="glossary-item" data-kind="Gegenstände"><small>Gegenstände</small><h4>Vilya</h4><p>Elbischer Ring der Luft, später von Elrond getragen.</p></article>
+          <article class="glossary-item" data-kind="Sprachen"><small>Sprachen</small><h4>Westron</h4><p>Gemeinsprache vieler Völker Mittelerdes im Dritten Zeitalter.</p></article>
+          <article class="glossary-item" data-kind="Kosmologie"><small>Kosmologie</small><h4>Yavanna</h4><p>Vala des Wachstums und der Pflanzenwelt.</p></article>
+          <article class="glossary-item" data-kind="Ereignisse"><small>Ereignisse</small><h4>Zweiter Sippenmord</h4><p>Gewaltakt im Streit um die Silmaril, der das Reich Doriath erschüttert.</p></article>
+          <article class="glossary-item" data-kind="Personen"><small>Personen</small><h4>Éowyn</h4><p>Rohirrische Schildmaid, deren Kampf den Hexenkönig zu Fall bringt.</p></article>
+        </div>
+        <p id="glossaryEmpty" hidden>Für diese Suche wurden keine Begriffe gefunden.</p>
+      </div>
+    </section>
+
+    <section class="tip-section" id="literatur">
+      <div class="section-heading"><span>21</span><h2>Quellen, Einordnung und Veröffentlichung</h2></div>
+      <div class="atlas-paper">
+        <h3>Verwendete Ausgangsquelle</h3>
+        <p><strong>David Day:</strong> <em>An Atlas of Tolkien.</em> Cassell / Octopus Publishing Group, Ausgabe 2015, ISBN 978-0-75372-937-3. Herangezogen wurden insbesondere die geografische und chronologische Grundkonzeption, die Themen der Kapitel zur Frühgeschichte, zu Beleriand, Númenor und den späteren Zeitaltern sowie die Übersichten zu Völkern, Reichen und Ringen.</p>
+        <h3>Primärtexte zur Überprüfung und Vertiefung</h3>
+        <ul class="bibliography">
+          <li><strong>J. R. R. Tolkien:</strong> <em>The Silmarillion / Das Silmarillion</em> – besonders Ainulindalë, Valaquenta, Quenta Silmarillion, Akallabêth und die Darstellung der Ringe der Macht.</li>
+          <li><strong>J. R. R. Tolkien:</strong> <em>The Hobbit / Der Hobbit</em> – Bilbos Reise, der Einsame Berg und die Schlacht der Fünf Heere.</li>
+          <li><strong>J. R. R. Tolkien:</strong> <em>The Lord of the Rings / Der Herr der Ringe</em> samt Anhängen – politische Geschichte des Dritten Zeitalters, Kriege, Stammbäume und Zeitrechnungen.</li>
+          <li><strong>Weitere von Christopher Tolkien herausgegebene Texte:</strong> <em>Unfinished Tales / Nachrichten aus Mittelerde</em> sowie die Bände der <em>History of Middle-earth</em> – nützlich, wenn einzelne Deutungen, Jahreszahlen oder Herkunftsgeschichten strittig sind.</li>
+        </ul>
+        <h3>Was aus dem Atlas übernommen wurde – und was nicht</h3>
+        <p>Die <strong>Auswahl der großen Sachgebiete</strong> orientiert sich an Days Werk: Schöpfung, Frühgeschichte der Lichtquellen, Elbenwanderung, Beleriand, Númenor, spätere Reiche, Bilbos Reise und Ringkrieg. Der vorliegende Text ist jedoch <strong>neu geschrieben und anders strukturiert</strong>; Querverbindungen, Lesehilfen und thematische Deutungen sind redaktionelle Ergänzungen. Einige Einordnungen beruhen auf allgemeinem Tolkien-Wissen und sollten bei wissenschaftlicher Weiterverwendung mit den genannten Primärtexten gegengeprüft werden.</p>
+        <p>Dies ist bewusst <strong>kein detaillierter Kartenersatz</strong>: Days Karten, Zeitleisten, Genealogiegrafiken und Illustrationen wurden weder übernommen noch nachgezeichnet. Insbesondere die sehr genaue vorsonnenzeitliche Chronologie des Atlas und seine Systematisierung mancher Kreaturen gelten hier nicht als verbindliche Grundlage.</p>
+        <h3>Hinweise für die Veröffentlichung auf einer privaten Website</h3>
+        <ul>
+          <li><strong>Eigenständiger Text:</strong> Die hier verfassten erklärenden Abschnitte stehen ohne längere Buchzitate und ohne Reproduktion geschützter Buchseiten bereit.</li>
+          <li><strong>Kein Bildmaterial aus dem Buch:</strong> Karten, Kunstwerke, Buchseiten, Filmbilder und Spielgrafiken nur verwenden, wenn jeweils eigene Nutzungsrechte dafür bestehen.</li>
+          <li><strong>Saubere Einordnung:</strong> Den Quellenhinweis, die Kennzeichnung von Days Rekonstruktionen und den Hinweis auf den unabhängigen Charakter des Projekts beibehalten.</li>
+          <li><strong>Keine fingierten Quellenangaben:</strong> Buchseiten wurden nicht für jede einzelne Aussage behauptet; für vertiefende Arbeiten sollten die Originaltexte konkret geprüft werden.</li>
+          <li><strong>Rechtliche Grenze:</strong> Eine eigenständige, sachbezogene Zusammenstellung reduziert urheberrechtliche Risiken, ist aber keine pauschale Garantie für jede denkbare kommerzielle Nutzung oder Verwendung geschützter Kennzeichen.</li>
+        </ul>
+        <div class="note"><strong>Redaktioneller Schlussgedanke</strong><p>Der besondere Reiz von Tolkiens Welt liegt nicht allein in der Zahl ihrer Orte und Namen. Erst die Verbindungen zwischen Geografie, Erinnerung, Sprache und dem Schicksal ihrer Bewohner machen aus Mittelerde einen Schauplatz mit historischer Tiefe. Eine gute Übersicht sollte deshalb Wege eröffnen – und die Lektüre der Geschichten nicht ersetzen.</p></div>
+        <div class="footer-actions"><a href="#top">↑ Zurück zum Anfang</a><a href="#glossar">Begriffe nachschlagen</a><a href="./home.html">← Zurück zu Nerdism</a></div>
+      </div>
+    </section>
+    <footer class="site-note"><p>Unabhängiges Fan- und Wissensprojekt zu J. R. R. Tolkiens Legendarium. Keine Verbindung zu Tolkiens Nachlass, Verlagen oder Film- und Spieleproduzenten. Namen, Figuren und Schauplätze werden ausschließlich beschreibend verwendet.</p></footer>
+  </div>
+  <script>
+  (() => {
+    'use strict';
+    const search = document.getElementById('glossarySearch');
+    const category = document.getElementById('glossaryType');
+    const count = document.getElementById('glossaryCount');
+    const empty = document.getElementById('glossaryEmpty');
+    const items = Array.from(document.querySelectorAll('#glossaryGrid .glossary-item'));
+    const normalize = value => String(value).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase('de');
+    const values = items.map(item => ({ item, text: normalize(item.textContent), type: item.dataset.kind }));
+    const update = () => {
+      const query = normalize(search.value.trim());
+      const kind = category.value;
+      let shown = 0;
+      values.forEach(entry => {
+        const visible = (kind === 'all' || entry.type === kind) && (!query || entry.text.includes(query));
+        entry.item.hidden = !visible;
+        if (visible) shown++;
+      });
+      count.textContent = `${shown} von ${items.length} Begriffen sichtbar`;
+      empty.hidden = shown !== 0;
+    };
+    search.addEventListener('input', update);
+    category.addEventListener('change', update);
+    update();
+  })();
+  </script>
+</body>
+</html>
