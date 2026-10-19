@@ -1,212 +1,580 @@
 <!doctype html>
 <html lang="de">
+
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Ausführlicher Praxisleitfaden zu Windows-Pfaden: absolute, relative und UNC-Pfade, Home-Verzeichnis, Variablen, USB-Sticks, Verknüpfungen, Batch, PowerShell und Python.">
-  <meta name="color-scheme" content="light">
-  <title>Windows-Pfade verstehen und sicher verwenden – Praxisleitfaden</title>
-  <!-- Bestehende CSS-Dateien: Pfade bei Einbindung auf der Website ggf. anpassen. -->
-  <link rel="stylesheet" href="main.css">
-  <link rel="stylesheet" href="serious.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description"
+        content="Ausführlicher Praxisleitfaden zu Windows-Pfaden: absolute, relative und UNC-Pfade, Home-Verzeichnis, Variablen, USB-Sticks, Verknüpfungen, Batch, PowerShell und Python.">
+    <meta name="color-scheme" content="light">
+    <title>Windows-Pfade verstehen und sicher verwenden – Praxisleitfaden</title>
+    <!-- Bestehende CSS-Dateien: Pfade bei Einbindung auf der Website ggf. anpassen. -->
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="serious.css">
 </head>
+
 <body id="top">
-  <header class="site-header" aria-label="Seitenkopf">
-    <div class="header-inner">
-      <span class="site-title">Technisches Nachschlagewerk</span>
-      <nav class="top-nav" aria-label="Schnellnavigation"><a href="#ueberblick">Grundlagen</a><a href="#usb-script">USB-Praxis</a><a href="#entscheidungsbaum">Strategie</a><a href="#quellen">Quellen</a></nav>
-    </div>
-  </header>
-  <header class="hero">
-    <div class="eyebrow">Windows · Dateisystem · Automatisierung</div>
-    <h1>Windows-Pfade verstehen und richtig verwenden</h1>
-    <p>Von <strong>C:\Ordner\Datei</strong> über relative Pfade und Benutzerverzeichnisse bis zu Netzfreigaben, Verknüpfungen und USB-Sticks: ein ausführlicher Leitfaden mit sofort einsetzbaren Beispielen für Explorer, CMD, PowerShell, Python und HTML.</p>
-    <div class="pills"><span>23 Kapitel</span><span>Praktische Codebeispiele</span><span>Offline nutzbar</span><span>Windows 10/11</span></div>
-  </header>
-  <div class="layout">
-    <nav class="contents" aria-label="Inhaltsverzeichnis"><h2>Inhaltsverzeichnis</h2><ol>
-<li><a href="#ueberblick">Der Bauplan eines Windows-Pfades</a></li>
-<li><a href="#formen">Absolute, relative und laufwerksrelative Pfade</a></li>
-<li><a href="#relativ">Relative Pfade richtig denken</a></li>
-<li><a href="#arbeitsverzeichnis">CMD, PowerShell und Explorer: drei Kontexte</a></li>
-<li><a href="#home">Home-Verzeichnis, Benutzerordner und Sonderordner</a></li>
-<li><a href="#variablen">Umgebungsvariablen: Syntax und Fallstricke</a></li>
-<li><a href="#zeichen">Leerzeichen, Sonderzeichen und Groß-/Kleinschreibung</a></li>
-<li><a href="#netzwerk">UNC-Pfade und Netzwerkfreigaben</a></li>
-<li><a href="#usb">USB-Sticks: Laufwerksbuchstabe, Name und Identität</a></li>
-<li><a href="#usb-script">Praxislösung: ein PC-unabhängiger USB-Ordnerstarter</a></li>
-<li><a href="#usb-label">Praxislösung: USB-Stick anhand seiner Bezeichnung finden</a></li>
-<li><a href="#links">Windows-Verknüpfungen (.lnk): Ziel und »Ausführen in«</a></li>
-<li><a href="#ntfslinks">Symbolische Links, Junctions und Hardlinks</a></li>
-<li><a href="#powershell">PowerShell: Pfade robust zusammenbauen und prüfen</a></li>
-<li><a href="#batch">CMD/Batch: die wichtigsten Pfadvariablen</a></li>
-<li><a href="#python">Python, C++ und JavaScript: Pfade beim Programmieren</a></li>
-<li><a href="#html">HTML-Links sind URLs – keine Windows-Dateipfade</a></li>
-<li><a href="#wsl">Windows und Linux / WSL: ähnliche Idee, andere Wurzel</a></li>
-<li><a href="#grenzen">Pfadlängen, Dateisysteme und Berechtigungen</a></li>
-<li><a href="#werkzeuge">Fehlersuche und Werkzeugkasten</a></li>
-<li><a href="#entscheidungsbaum">Welche Pfadstrategie ist die richtige?</a></li>
-<li><a href="#quiz">Kleine Selbstkontrolle</a></li>
-<li><a href="#quellen">Quellen und weiterführende Dokumentation</a></li>
-    </ol></nav>
-    <main id="inhalt">
-      <section aria-labelledby="kurzstart">
-        <span class="crumb">Schnelleinstieg</span>
-        <h2 id="kurzstart">Sechs Regeln, die 90 % aller Pfadprobleme erklären</h2>
-        <ol class="steps">
-          <li><strong>Ein Pfad hat einen Ausgangspunkt.</strong> Entweder nennt er Laufwerk/Freigabe explizit oder er ist relativ zu einem aktuellen Verzeichnis.</li>
-          <li><strong>Der Backslash zählt.</strong> <code>C:\Daten</code> ist nicht <code>C:Daten</code>.</li>
-          <li><strong>CMD, PowerShell, Browser und Programmcode sprechen nicht exakt dieselbe Pfadsprache.</strong> Variablen und Quotes sind kontextabhängig.</li>
-          <li><strong>Ein Laufwerksbuchstabe ist keine dauerhafte Datenträgeridentität.</strong> Ein USB-Stick kann auf jedem PC anders eingebunden werden.</li>
-          <li><strong>„Relativ“ heißt: relativ zu etwas Bestimmtem.</strong> Am zuverlässigsten ist ein expliziter Skript- oder Projektordner.</li>
-          <li><strong>Eine Verknüpfung ist kein Zauberstab.</strong> Ein <code>.lnk</code>-Ziel bleibt von Erreichbarkeit, Rechten und Pfadauflösung abhängig.</li>
-        </ol>
-        <div class="callout"><strong>Unser Praxisbeispiel</strong><p>Ein USB-Stick mit dem Ordner <code>\###Backup\BULME\Fachbücher</code> soll an unterschiedlichen PCs funktionieren – unabhängig davon, ob Windows ihm <code>D:</code>, <code>F:</code> oder <code>G:</code> zuweist. Die Lösung steht in <a href="#usb-script">Kapitel 10</a>.</p></div>
-      </section>
-<section id="ueberblick" aria-labelledby="title-ueberblick"><span class="crumb">Praxiswissen · Windows</span><h2 id="title-ueberblick">01 · Der Bauplan eines Windows-Pfades <a class="anchor" href="#ueberblick" aria-label="Abschnitt verlinken">#</a></h2>
+    <header class="site-header" aria-label="Seitenkopf">
+        <div class="header-inner">
+            <span class="site-title">Technisches Nachschlagewerk</span>
+            <nav class="top-nav" aria-label="Schnellnavigation"><a href="#ueberblick">Grundlagen</a><a
+                    href="#usb-script">USB-Praxis</a><a href="#entscheidungsbaum">Strategie</a><a
+                    href="#quellen">Quellen</a></nav>
+        </div>
+    </header>
+    <header class="hero">
+        <div class="eyebrow">Windows · Dateisystem · Automatisierung</div>
+        <h1>Windows-Pfade verstehen und richtig verwenden</h1>
+        <p>Von <strong>C:\Ordner\Datei</strong> über relative Pfade und Benutzerverzeichnisse bis zu Netzfreigaben,
+            Verknüpfungen und USB-Sticks: ein ausführlicher Leitfaden mit sofort einsetzbaren Beispielen für Explorer,
+            CMD, PowerShell, Python und HTML.</p>
+        <div class="pills"><span>23 Kapitel</span><span>Praktische Codebeispiele</span><span>Offline
+                nutzbar</span><span>Windows 10/11</span></div>
+    </header>
+    <div class="layout">
+        <nav class="contents" aria-label="Inhaltsverzeichnis">
+            <h2>Inhaltsverzeichnis</h2>
+            <ol>
+                <li><a href="#ueberblick">Der Bauplan eines Windows-Pfades</a></li>
+                <li><a href="#formen">Absolute, relative und laufwerksrelative Pfade</a></li>
+                <li><a href="#relativ">Relative Pfade richtig denken</a></li>
+                <li><a href="#arbeitsverzeichnis">CMD, PowerShell und Explorer: drei Kontexte</a></li>
+                <li><a href="#home">Home-Verzeichnis, Benutzerordner und Sonderordner</a></li>
+                <li><a href="#variablen">Umgebungsvariablen: Syntax und Fallstricke</a></li>
+                <li><a href="#zeichen">Leerzeichen, Sonderzeichen und Groß-/Kleinschreibung</a></li>
+                <li><a href="#netzwerk">UNC-Pfade und Netzwerkfreigaben</a></li>
+                <li><a href="#usb">USB-Sticks: Laufwerksbuchstabe, Name und Identität</a></li>
+                <li><a href="#usb-script">Praxislösung: ein PC-unabhängiger USB-Ordnerstarter</a></li>
+                <li><a href="#usb-label">Praxislösung: USB-Stick anhand seiner Bezeichnung finden</a></li>
+                <li><a href="#links">Windows-Verknüpfungen (.lnk): Ziel und »Ausführen in«</a></li>
+                <li><a href="#ntfslinks">Symbolische Links, Junctions und Hardlinks</a></li>
+                <li><a href="#powershell">PowerShell: Pfade robust zusammenbauen und prüfen</a></li>
+                <li><a href="#batch">CMD/Batch: die wichtigsten Pfadvariablen</a></li>
+                <li><a href="#python">Python, C++ und JavaScript: Pfade beim Programmieren</a></li>
+                <li><a href="#html">HTML-Links sind URLs – keine Windows-Dateipfade</a></li>
+                <li><a href="#wsl">Windows und Linux / WSL: ähnliche Idee, andere Wurzel</a></li>
+                <li><a href="#grenzen">Pfadlängen, Dateisysteme und Berechtigungen</a></li>
+                <li><a href="#werkzeuge">Fehlersuche und Werkzeugkasten</a></li>
+                <li><a href="#entscheidungsbaum">Welche Pfadstrategie ist die richtige?</a></li>
+                <li><a href="#quiz">Kleine Selbstkontrolle</a></li>
+                <li><a href="#quellen">Quellen und weiterführende Dokumentation</a></li>
+            </ol>
+        </nav>
+        <main id="inhalt">
+            <section aria-labelledby="kurzstart">
+                <span class="crumb">Schnelleinstieg</span>
+                <h2 id="kurzstart">Sechs Regeln, die 90 % aller Pfadprobleme erklären</h2>
+                <ol class="steps">
+                    <li><strong>Ein Pfad hat einen Ausgangspunkt.</strong> Entweder nennt er Laufwerk/Freigabe explizit
+                        oder er ist relativ zu einem aktuellen Verzeichnis.</li>
+                    <li><strong>Der Backslash zählt.</strong> <code>C:\Daten</code> ist nicht <code>C:Daten</code>.</li>
+                    <li><strong>CMD, PowerShell, Browser und Programmcode sprechen nicht exakt dieselbe
+                            Pfadsprache.</strong> Variablen und Quotes sind kontextabhängig.</li>
+                    <li><strong>Ein Laufwerksbuchstabe ist keine dauerhafte Datenträgeridentität.</strong> Ein USB-Stick
+                        kann auf jedem PC anders eingebunden werden.</li>
+                    <li><strong>„Relativ“ heißt: relativ zu etwas Bestimmtem.</strong> Am zuverlässigsten ist ein
+                        expliziter Skript- oder Projektordner.</li>
+                    <li><strong>Eine Verknüpfung ist kein Zauberstab.</strong> Ein <code>.lnk</code>-Ziel bleibt von
+                        Erreichbarkeit, Rechten und Pfadauflösung abhängig.</li>
+                </ol>
+                <div class="callout"><strong>Unser Praxisbeispiel</strong>
+                    <p>Ein USB-Stick mit dem Ordner <code>\###Backup\BULME\Fachbücher</code> soll an unterschiedlichen
+                        PCs funktionieren – unabhängig davon, ob Windows ihm <code>D:</code>, <code>F:</code> oder
+                        <code>G:</code> zuweist. Die Lösung steht in <a href="#usb-script">Kapitel 10</a>.</p>
+                </div>
+            </section>
+            <section id="ueberblick" aria-labelledby="title-ueberblick"><span class="crumb">Praxiswissen ·
+                    Windows</span>
+                <h2 id="title-ueberblick">01 · Der Bauplan eines Windows-Pfades <a class="anchor" href="#ueberblick"
+                        aria-label="Abschnitt verlinken">#</a></h2>
 
-<p class="lead">Ein Dateipfad beschreibt, <strong>wo</strong> eine Datei oder ein Ordner liegt. Er ist keine Eigenschaft der Datei selbst, sondern eine Adresse innerhalb eines Dateisystems oder einer Netzwerkfreigabe.</p>
-<div class="diagram" aria-label="Aufbau eines Dateipfads">
-  <div class="node"><strong>F:\</strong><small>Laufwerk und Stammverzeichnis</small></div><div class="arrow">→</div>
-  <div class="node"><strong>###Backup\BULME\</strong><small>Ordnerhierarchie</small></div><div class="arrow">→</div>
-  <div class="node"><strong>Fachbücher\</strong><small>Zielordner</small></div>
-</div>
-<p>Beispiel: <code>F:\###Backup\BULME\Fachbücher</code>. Der Backslash <code>\</code> trennt die einzelnen Pfadbestandteile. Die <code>#</code>-Zeichen sind hier ganz gewöhnliche Bestandteile des Ordnernamens – keine Sonderoperatoren.</p>
-<div class="grid2"><div class="mini"><h3>Pfad zu einem Ordner</h3><p><code>C:\Projekte\Elektronik</code></p><p>Er endet bei einem Verzeichnis.</p></div><div class="mini"><h3>Pfad zu einer Datei</h3><p><code>C:\Projekte\Elektronik\sensor.py</code></p><p>Die letzte Komponente bezeichnet eine Datei.</p></div></div>
-<p>Windows verwendet hauptsächlich Backslashes (<code>\</code>). Einige APIs akzeptieren auch <code>/</code>; in CMD kann ein Schrägstrich jedoch als Optionszeichen interpretiert werden. Für klassische Windows-Pfade ist <code>\</code> die sicherere Schreibweise.</p>
+                <p class="lead">Ein Dateipfad beschreibt, <strong>wo</strong> eine Datei oder ein Ordner liegt. Er ist
+                    keine Eigenschaft der Datei selbst, sondern eine Adresse innerhalb eines Dateisystems oder einer
+                    Netzwerkfreigabe.</p>
+                <div class="diagram" aria-label="Aufbau eines Dateipfads">
+                    <div class="node"><strong>F:\</strong><small>Laufwerk und Stammverzeichnis</small></div>
+                    <div class="arrow">→</div>
+                    <div class="node"><strong>###Backup\BULME\</strong><small>Ordnerhierarchie</small></div>
+                    <div class="arrow">→</div>
+                    <div class="node"><strong>Fachbücher\</strong><small>Zielordner</small></div>
+                </div>
+                <p>Beispiel: <code>F:\###Backup\BULME\Fachbücher</code>. Der Backslash <code>\</code> trennt die
+                    einzelnen Pfadbestandteile. Die <code>#</code>-Zeichen sind hier ganz gewöhnliche Bestandteile des
+                    Ordnernamens – keine Sonderoperatoren.</p>
+                <div class="grid2">
+                    <div class="mini">
+                        <h3>Pfad zu einem Ordner</h3>
+                        <p><code>C:\Projekte\Elektronik</code></p>
+                        <p>Er endet bei einem Verzeichnis.</p>
+                    </div>
+                    <div class="mini">
+                        <h3>Pfad zu einer Datei</h3>
+                        <p><code>C:\Projekte\Elektronik\sensor.py</code></p>
+                        <p>Die letzte Komponente bezeichnet eine Datei.</p>
+                    </div>
+                </div>
+                <p>Windows verwendet hauptsächlich Backslashes (<code>\</code>). Einige APIs akzeptieren auch
+                    <code>/</code>; in CMD kann ein Schrägstrich jedoch als Optionszeichen interpretiert werden. Für
+                    klassische Windows-Pfade ist <code>\</code> die sicherere Schreibweise.</p>
 
-<p class="footnote"><a href="#top">↑ Zum Seitenanfang</a></p>
-</section>
-<section id="formen" aria-labelledby="title-formen"><span class="crumb">Praxiswissen · Windows</span><h2 id="title-formen">02 · Absolute, relative und laufwerksrelative Pfade <a class="anchor" href="#formen" aria-label="Abschnitt verlinken">#</a></h2>
-<div class="table-wrap"><table><thead><tr><th scope="col">Schreibweise</th><th scope="col">Bedeutung</th><th scope="col">Beurteilung</th></tr></thead><tbody><tr><td><code>C:\Daten\bericht.txt</code></td><td>Vollständiger lokaler Pfad mit Laufwerk und Wurzel.</td><td>Eindeutig, solange C: auf diesen Ort verweist.</td></tr><tr><td><code>F:\###Backup\BULME\Fachbücher</code></td><td>Vollständiger Pfad auf Laufwerk F:.</td><td>Kann bei USB-Sticks wegen Buchstabenwechsel brechen.</td></tr><tr><td><code>\\Server\Freigabe\bericht.txt</code></td><td>Vollständiger UNC-Netzwerkpfad.</td><td>Unabhängig vom Laufwerksbuchstaben des Clients.</td></tr><tr><td><code>Daten\bericht.txt</code></td><td>Relativ zum aktuellen Arbeitsverzeichnis.</td><td>Nur mit bekanntem Ausgangsort sinnvoll.</td></tr><tr><td><code>.\Daten\bericht.txt</code></td><td>Ebenfalls relativ zum aktuellen Arbeitsverzeichnis.</td><td>Das . macht die Absicht ausdrücklich.</td></tr><tr><td><code>..\Daten\bericht.txt</code></td><td>Zunächst eine Ebene hinauf, dann Daten.</td><td>Gut für portable Projektordner.</td></tr><tr><td><code>\Daten\bericht.txt</code></td><td>Ab Stammverzeichnis des <em>aktuellen</em> Laufwerks.</td><td>Wurzelbezogen, aber nicht laufwerkseindeutig.</td></tr><tr><td><code>C:Daten\bericht.txt</code></td><td>Relativ zum auf C: gemerkten aktuellen Verzeichnis.</td><td>Tückisch: <code>C:Daten</code> ist nicht <code>C:\Daten</code>.</td></tr><tr><td><code>.\</code></td><td>Aktuelles Verzeichnis.</td><td>Häufig in Skripten.</td></tr><tr><td><code>..\</code></td><td>Übergeordnetes Verzeichnis.</td><td>Erst Ausgangsverzeichnis klären.</td></tr></tbody></table></div>
-<div class="callout warning"><strong>Der berühmte Doppelpunkt-Fallstrick</strong><p><code>C:Ordner</code> und <code>C:\Ordner</code> sind nicht dasselbe. Bei der ersten Form fehlt der Backslash nach dem Doppelpunkt; der Pfad hängt vom aktuellen Verzeichnis auf <code>C:</code> ab.</p></div>
-<h3>Was ist das »aktuelle Verzeichnis«?</h3>
-<p>Jeder Prozess arbeitet in einem bestimmten Verzeichnis. Ein relativer Pfad wird von <em>diesem</em> Ort aus interpretiert. Wo eine Verknüpfung liegt, wo ein Skript gespeichert ist und welches Arbeitsverzeichnis ein Prozess hat, sind drei unterschiedliche Dinge.</p>
+                <p class="footnote"><a href="#top">↑ Zum Seitenanfang</a></p>
+            </section>
+            <section id="formen" aria-labelledby="title-formen"><span class="crumb">Praxiswissen · Windows</span>
+                <h2 id="title-formen">02 · Absolute, relative und laufwerksrelative Pfade <a class="anchor"
+                        href="#formen" aria-label="Abschnitt verlinken">#</a></h2>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th scope="col">Schreibweise</th>
+                                <th scope="col">Bedeutung</th>
+                                <th scope="col">Beurteilung</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>C:\Daten\bericht.txt</code></td>
+                                <td>Vollständiger lokaler Pfad mit Laufwerk und Wurzel.</td>
+                                <td>Eindeutig, solange C: auf diesen Ort verweist.</td>
+                            </tr>
+                            <tr>
+                                <td><code>F:\###Backup\BULME\Fachbücher</code></td>
+                                <td>Vollständiger Pfad auf Laufwerk F:.</td>
+                                <td>Kann bei USB-Sticks wegen Buchstabenwechsel brechen.</td>
+                            </tr>
+                            <tr>
+                                <td><code>\\Server\Freigabe\bericht.txt</code></td>
+                                <td>Vollständiger UNC-Netzwerkpfad.</td>
+                                <td>Unabhängig vom Laufwerksbuchstaben des Clients.</td>
+                            </tr>
+                            <tr>
+                                <td><code>Daten\bericht.txt</code></td>
+                                <td>Relativ zum aktuellen Arbeitsverzeichnis.</td>
+                                <td>Nur mit bekanntem Ausgangsort sinnvoll.</td>
+                            </tr>
+                            <tr>
+                                <td><code>.\Daten\bericht.txt</code></td>
+                                <td>Ebenfalls relativ zum aktuellen Arbeitsverzeichnis.</td>
+                                <td>Das . macht die Absicht ausdrücklich.</td>
+                            </tr>
+                            <tr>
+                                <td><code>..\Daten\bericht.txt</code></td>
+                                <td>Zunächst eine Ebene hinauf, dann Daten.</td>
+                                <td>Gut für portable Projektordner.</td>
+                            </tr>
+                            <tr>
+                                <td><code>\Daten\bericht.txt</code></td>
+                                <td>Ab Stammverzeichnis des <em>aktuellen</em> Laufwerks.</td>
+                                <td>Wurzelbezogen, aber nicht laufwerkseindeutig.</td>
+                            </tr>
+                            <tr>
+                                <td><code>C:Daten\bericht.txt</code></td>
+                                <td>Relativ zum auf C: gemerkten aktuellen Verzeichnis.</td>
+                                <td>Tückisch: <code>C:Daten</code> ist nicht <code>C:\Daten</code>.</td>
+                            </tr>
+                            <tr>
+                                <td><code>.\</code></td>
+                                <td>Aktuelles Verzeichnis.</td>
+                                <td>Häufig in Skripten.</td>
+                            </tr>
+                            <tr>
+                                <td><code>..\</code></td>
+                                <td>Übergeordnetes Verzeichnis.</td>
+                                <td>Erst Ausgangsverzeichnis klären.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="callout warning"><strong>Der berühmte Doppelpunkt-Fallstrick</strong>
+                    <p><code>C:Ordner</code> und <code>C:\Ordner</code> sind nicht dasselbe. Bei der ersten Form fehlt
+                        der Backslash nach dem Doppelpunkt; der Pfad hängt vom aktuellen Verzeichnis auf <code>C:</code>
+                        ab.</p>
+                </div>
+                <h3>Was ist das »aktuelle Verzeichnis«?</h3>
+                <p>Jeder Prozess arbeitet in einem bestimmten Verzeichnis. Ein relativer Pfad wird von <em>diesem</em>
+                    Ort aus interpretiert. Wo eine Verknüpfung liegt, wo ein Skript gespeichert ist und welches
+                    Arbeitsverzeichnis ein Prozess hat, sind drei unterschiedliche Dinge.</p>
 
-<p class="footnote"><a href="#top">↑ Zum Seitenanfang</a></p>
-</section>
-<section id="relativ" aria-labelledby="title-relativ"><span class="crumb">Praxiswissen · Windows</span><h2 id="title-relativ">03 · Relative Pfade richtig denken <a class="anchor" href="#relativ" aria-label="Abschnitt verlinken">#</a></h2>
+                <p class="footnote"><a href="#top">↑ Zum Seitenanfang</a></p>
+            </section>
+            <section id="relativ" aria-labelledby="title-relativ"><span class="crumb">Praxiswissen · Windows</span>
+                <h2 id="title-relativ">03 · Relative Pfade richtig denken <a class="anchor" href="#relativ"
+                        aria-label="Abschnitt verlinken">#</a></h2>
 
-<p>Angenommen, dein Arbeitsverzeichnis lautet <code>C:\Projekte\SailSense\src</code> und folgende Struktur existiert:</p>
-<p class="muted"><small>Verzeichnisbaum</small></p><pre><code>C:\Projekte\SailSense\
+                <p>Angenommen, dein Arbeitsverzeichnis lautet <code>C:\Projekte\SailSense\src</code> und folgende
+                    Struktur existiert:</p>
+                <p class="muted"><small>Verzeichnisbaum</small></p>
+                <pre><code>C:\Projekte\SailSense\
 ├── data\
 │   └── messwerte.csv
 ├── docs\
 │   └── anleitung.pdf
 └── src\
     └── logger.py</code></pre>
-<p>Dann verweisen die folgenden Ausdrücke auf konkrete Dateien:</p>
-<div class="table-wrap"><table><thead><tr><th scope="col">Relativer Pfad von src aus</th><th scope="col">Ergebnis</th></tr></thead><tbody><tr><td><code>..\data\messwerte.csv</code></td><td><code>C:\Projekte\SailSense\data\messwerte.csv</code></td></tr><tr><td><code>.\logger.py</code></td><td><code>C:\Projekte\SailSense\src\logger.py</code></td></tr><tr><td><code>..\docs\anleitung.pdf</code></td><td><code>C:\Projekte\SailSense\docs\anleitung.pdf</code></td></tr><tr><td><code>..\..\</code></td><td><code>C:\Projekte\</code></td></tr></tbody></table></div>
-<p>Die Regel ist simpel: <code>.</code> bleibt am Ort, <code>..</code> geht eine Ebene nach oben. Jeder weitere Ordnername steigt in den angegebenen Ordner hinab. Die Sache wird erst kompliziert, wenn man den Ausgangsort stillschweigend falsch annimmt.</p>
+                <p>Dann verweisen die folgenden Ausdrücke auf konkrete Dateien:</p>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th scope="col">Relativer Pfad von src aus</th>
+                                <th scope="col">Ergebnis</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>..\data\messwerte.csv</code></td>
+                                <td><code>C:\Projekte\SailSense\data\messwerte.csv</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>.\logger.py</code></td>
+                                <td><code>C:\Projekte\SailSense\src\logger.py</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>..\docs\anleitung.pdf</code></td>
+                                <td><code>C:\Projekte\SailSense\docs\anleitung.pdf</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>..\..\</code></td>
+                                <td><code>C:\Projekte\</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p>Die Regel ist simpel: <code>.</code> bleibt am Ort, <code>..</code> geht eine Ebene nach oben. Jeder
+                    weitere Ordnername steigt in den angegebenen Ordner hinab. Die Sache wird erst kompliziert, wenn man
+                    den Ausgangsort stillschweigend falsch annimmt.</p>
 
-<p class="footnote"><a href="#top">↑ Zum Seitenanfang</a></p>
-</section>
-<section id="arbeitsverzeichnis" aria-labelledby="title-arbeitsverzeichnis"><span class="crumb">Praxiswissen · Windows</span><h2 id="title-arbeitsverzeichnis">04 · CMD, PowerShell und Explorer: drei Kontexte <a class="anchor" href="#arbeitsverzeichnis" aria-label="Abschnitt verlinken">#</a></h2>
+                <p class="footnote"><a href="#top">↑ Zum Seitenanfang</a></p>
+            </section>
+            <section id="arbeitsverzeichnis" aria-labelledby="title-arbeitsverzeichnis"><span class="crumb">Praxiswissen
+                    · Windows</span>
+                <h2 id="title-arbeitsverzeichnis">04 · CMD, PowerShell und Explorer: drei Kontexte <a class="anchor"
+                        href="#arbeitsverzeichnis" aria-label="Abschnitt verlinken">#</a></h2>
 
-<p>Die gleiche Zeichenfolge kann in drei Anwendungen unterschiedlich ausgewertet werden. Die wichtigste Frage lautet daher stets: <strong>Wo gebe ich den Pfad ein?</strong></p>
-<h3>CMD (Eingabeaufforderung)</h3>
-<p class="muted"><small>CMD</small></p><pre><code>cd
+                <p>Die gleiche Zeichenfolge kann in drei Anwendungen unterschiedlich ausgewertet werden. Die wichtigste
+                    Frage lautet daher stets: <strong>Wo gebe ich den Pfad ein?</strong></p>
+                <h3>CMD (Eingabeaufforderung)</h3>
+                <p class="muted"><small>CMD</small></p>
+                <pre><code>cd
 cd /d &quot;D:\Projekte\SailSense&quot;
 dir &quot;.\data&quot;
 dir &quot;..\AndereProjekte&quot;
 echo %CD%</code></pre>
-<p><code>cd /d</code> wechselt gleichzeitig Verzeichnis <em>und</em> Laufwerk. Ohne <code>/d</code> kann das Verhalten beim Laufwerkswechsel überraschen.</p>
-<h3>PowerShell</h3>
-<p class="muted"><small>PowerShell</small></p><pre><code>Get-Location
+                <p><code>cd /d</code> wechselt gleichzeitig Verzeichnis <em>und</em> Laufwerk. Ohne <code>/d</code> kann
+                    das Verhalten beim Laufwerkswechsel überraschen.</p>
+                <h3>PowerShell</h3>
+                <p class="muted"><small>PowerShell</small></p>
+                <pre><code>Get-Location
 Set-Location &#x27;D:\Projekte\SailSense&#x27;
 Get-ChildItem &#x27;.\data&#x27;
 Resolve-Path &#x27;.\data&#x27;
 Test-Path -LiteralPath &#x27;.\data\messwerte.csv&#x27;</code></pre>
-<p>PowerShell kennt zusätzlich andere <em>Provider</em>, etwa <code>HKCU:\</code> für einen Teil der Registry. Nicht alles, was wie ein PowerShell-Pfad aussieht, ist ein Pfad im Windows-Dateisystem.</p>
-<h3>Explorer</h3>
-<p>In die Adressleiste des Explorers (oder nach <kbd>Win</kbd> + <kbd>R</kbd>) kannst du einen gewöhnlichen absoluten Pfad wie <code>D:\Projekte</code> oder einen UNC-Pfad eingeben. Im Explorer funktionieren außerdem viele Umgebungsvariablen und Shell-Aliasse. Das ist jedoch <strong>nicht dieselbe Syntax wie in PowerShell</strong>.</p>
+                <p>PowerShell kennt zusätzlich andere <em>Provider</em>, etwa <code>HKCU:\</code> für einen Teil der
+                    Registry. Nicht alles, was wie ein PowerShell-Pfad aussieht, ist ein Pfad im Windows-Dateisystem.
+                </p>
+                <h3>Explorer</h3>
+                <p>In die Adressleiste des Explorers (oder nach <kbd>Win</kbd> + <kbd>R</kbd>) kannst du einen
+                    gewöhnlichen absoluten Pfad wie <code>D:\Projekte</code> oder einen UNC-Pfad eingeben. Im Explorer
+                    funktionieren außerdem viele Umgebungsvariablen und Shell-Aliasse. Das ist jedoch <strong>nicht
+                        dieselbe Syntax wie in PowerShell</strong>.</p>
 
-<p class="footnote"><a href="#top">↑ Zum Seitenanfang</a></p>
-</section>
-<section id="home" aria-labelledby="title-home"><span class="crumb">Praxiswissen · Windows</span><h2 id="title-home">05 · Home-Verzeichnis, Benutzerordner und Sonderordner <a class="anchor" href="#home" aria-label="Abschnitt verlinken">#</a></h2>
+                <p class="footnote"><a href="#top">↑ Zum Seitenanfang</a></p>
+            </section>
+            <section id="home" aria-labelledby="title-home"><span class="crumb">Praxiswissen · Windows</span>
+                <h2 id="title-home">05 · Home-Verzeichnis, Benutzerordner und Sonderordner <a class="anchor"
+                        href="#home" aria-label="Abschnitt verlinken">#</a></h2>
 
-<p>Anders als unter Linux gibt es nicht <em>eine</em> universelle Schreibweise für das Home-Verzeichnis. Es hängt vom Kontext ab:</p>
-<div class="table-wrap"><table><thead><tr><th scope="col">Kontext</th><th scope="col">Home des angemeldeten Benutzers</th></tr></thead><tbody><tr><td>CMD / Batch</td><td><code>%USERPROFILE%</code></td></tr><tr><td>PowerShell</td><td><code>$HOME</code> oder <code>$env:USERPROFILE</code></td></tr><tr><td>PowerShell-Kurzform</td><td><code>~</code> (in passenden PowerShell-Pfadkontexten)</td></tr><tr><td>Python</td><td><code>Path.home()</code></td></tr><tr><td>Explorer-Adressleiste</td><td><code>%USERPROFILE%</code></td></tr></tbody></table></div>
-<h3>Die wichtigsten Windows-Umgebungsvariablen</h3>
-<div class="table-wrap"><table><thead><tr><th scope="col">Variable</th><th scope="col">Typischer Inhalt / Zweck</th></tr></thead><tbody><tr><td><code>%USERPROFILE%</code></td><td>Benutzerprofil: <code>C:\Users\Benutzername</code> (Beispiel)</td></tr><tr><td><code>%HOMEDRIVE%</code> + <code>%HOMEPATH%</code></td><td>Home-Laufwerk und Home-Pfad, ggf. anders als <code>USERPROFILE</code>.</td></tr><tr><td><code>%APPDATA%</code></td><td>Roaming-Profil: <code>...\AppData\Roaming</code></td></tr><tr><td><code>%LOCALAPPDATA%</code></td><td>Lokale App-Daten: <code>...\AppData\Local</code></td></tr><tr><td><code>%PROGRAMDATA%</code></td><td>Gemeinsame Anwendungsdaten für alle Nutzer.</td></tr><tr><td><code>%PUBLIC%</code></td><td>Öffentlicher Benutzerordner.</td></tr><tr><td><code>%TEMP%</code></td><td>Temporäre Dateien.</td></tr><tr><td><code>%USERNAME%</code></td><td>Nutzername <em>ohne</em> vollständigen Pfad.</td></tr><tr><td><code>%COMPUTERNAME%</code></td><td>Computername <em>ohne</em> Laufwerks- oder Freigabebezeichnung.</td></tr><tr><td><code>%OneDrive%</code></td><td>Oft vorhanden, falls OneDrive eingerichtet ist; kein universeller Standard für alle PCs.</td></tr></tbody></table></div>
-<h3>Praktische Abfragen</h3>
-<p class="muted"><small>CMD</small></p><pre><code>echo %USERPROFILE%
-explorer.exe &quot;%APPDATA%&quot;</code></pre><p class="muted"><small>PowerShell</small></p><pre><code>$HOME
+                <p>Anders als unter Linux gibt es nicht <em>eine</em> universelle Schreibweise für das Home-Verzeichnis.
+                    Es hängt vom Kontext ab:</p>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th scope="col">Kontext</th>
+                                <th scope="col">Home des angemeldeten Benutzers</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>CMD / Batch</td>
+                                <td><code>%USERPROFILE%</code></td>
+                            </tr>
+                            <tr>
+                                <td>PowerShell</td>
+                                <td><code>$HOME</code> oder <code>$env:USERPROFILE</code></td>
+                            </tr>
+                            <tr>
+                                <td>PowerShell-Kurzform</td>
+                                <td><code>~</code> (in passenden PowerShell-Pfadkontexten)</td>
+                            </tr>
+                            <tr>
+                                <td>Python</td>
+                                <td><code>Path.home()</code></td>
+                            </tr>
+                            <tr>
+                                <td>Explorer-Adressleiste</td>
+                                <td><code>%USERPROFILE%</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <h3>Die wichtigsten Windows-Umgebungsvariablen</h3>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th scope="col">Variable</th>
+                                <th scope="col">Typischer Inhalt / Zweck</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>%USERPROFILE%</code></td>
+                                <td>Benutzerprofil: <code>C:\Users\Benutzername</code> (Beispiel)</td>
+                            </tr>
+                            <tr>
+                                <td><code>%HOMEDRIVE%</code> + <code>%HOMEPATH%</code></td>
+                                <td>Home-Laufwerk und Home-Pfad, ggf. anders als <code>USERPROFILE</code>.</td>
+                            </tr>
+                            <tr>
+                                <td><code>%APPDATA%</code></td>
+                                <td>Roaming-Profil: <code>...\AppData\Roaming</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>%LOCALAPPDATA%</code></td>
+                                <td>Lokale App-Daten: <code>...\AppData\Local</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>%PROGRAMDATA%</code></td>
+                                <td>Gemeinsame Anwendungsdaten für alle Nutzer.</td>
+                            </tr>
+                            <tr>
+                                <td><code>%PUBLIC%</code></td>
+                                <td>Öffentlicher Benutzerordner.</td>
+                            </tr>
+                            <tr>
+                                <td><code>%TEMP%</code></td>
+                                <td>Temporäre Dateien.</td>
+                            </tr>
+                            <tr>
+                                <td><code>%USERNAME%</code></td>
+                                <td>Nutzername <em>ohne</em> vollständigen Pfad.</td>
+                            </tr>
+                            <tr>
+                                <td><code>%COMPUTERNAME%</code></td>
+                                <td>Computername <em>ohne</em> Laufwerks- oder Freigabebezeichnung.</td>
+                            </tr>
+                            <tr>
+                                <td><code>%OneDrive%</code></td>
+                                <td>Oft vorhanden, falls OneDrive eingerichtet ist; kein universeller Standard für alle
+                                    PCs.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <h3>Praktische Abfragen</h3>
+                <p class="muted"><small>CMD</small></p>
+                <pre><code>echo %USERPROFILE%
+explorer.exe &quot;%APPDATA%&quot;</code></pre>
+                <p class="muted"><small>PowerShell</small></p>
+                <pre><code>$HOME
 $env:USERPROFILE
 [Environment]::GetFolderPath(&#x27;Desktop&#x27;)
 [Environment]::GetFolderPath(&#x27;MyDocuments&#x27;)</code></pre>
-<div class="callout warning"><strong>Documents und Desktop liegen nicht zwangsläufig im Profilordner.</strong><p>OneDrive oder eine Unternehmensrichtlinie kann die bekannten Ordner umleiten. <code>%USERPROFILE%\Documents</code> ist daher keine universelle Garantie. Für Programme sind die Windows-APIs für „Known Folders“ zuverlässiger.</p></div>
-<h3>Praktische Explorer-Aliasse</h3>
-<p class="muted"><small>Explorer-Adressleiste oder Win + R</small></p><pre><code>shell:Desktop
+                <div class="callout warning"><strong>Documents und Desktop liegen nicht zwangsläufig im
+                        Profilordner.</strong>
+                    <p>OneDrive oder eine Unternehmensrichtlinie kann die bekannten Ordner umleiten.
+                        <code>%USERPROFILE%\Documents</code> ist daher keine universelle Garantie. Für Programme sind
+                        die Windows-APIs für „Known Folders“ zuverlässiger.</p>
+                </div>
+                <h3>Praktische Explorer-Aliasse</h3>
+                <p class="muted"><small>Explorer-Adressleiste oder Win + R</small></p>
+                <pre><code>shell:Desktop
 shell:Personal
 shell:Downloads
 shell:AppData
 shell:Startup</code></pre>
-<p>Diese <code>shell:</code>-Adressen sind Shell-Kommandos, keine normalen Dateisystempfade. Man sollte sie nicht blind an beliebige Datei-APIs übergeben.</p>
+                <p>Diese <code>shell:</code>-Adressen sind Shell-Kommandos, keine normalen Dateisystempfade. Man sollte
+                    sie nicht blind an beliebige Datei-APIs übergeben.</p>
 
-<p class="footnote"><a href="#top">↑ Zum Seitenanfang</a></p>
-</section>
-<section id="variablen" aria-labelledby="title-variablen"><span class="crumb">Praxiswissen · Windows</span><h2 id="title-variablen">06 · Umgebungsvariablen: Syntax und Fallstricke <a class="anchor" href="#variablen" aria-label="Abschnitt verlinken">#</a></h2>
+                <p class="footnote"><a href="#top">↑ Zum Seitenanfang</a></p>
+            </section>
+            <section id="variablen" aria-labelledby="title-variablen"><span class="crumb">Praxiswissen · Windows</span>
+                <h2 id="title-variablen">06 · Umgebungsvariablen: Syntax und Fallstricke <a class="anchor"
+                        href="#variablen" aria-label="Abschnitt verlinken">#</a></h2>
 
-<p>Ein Platzhalter ist keine universelle Windows-Zeichenfolge. Die jeweilige Shell muss ihn zuerst interpretieren.</p>
-<div class="table-wrap"><table><thead><tr><th scope="col">Aufgabe</th><th scope="col">CMD</th><th scope="col">PowerShell</th></tr></thead><tbody><tr><td>Benutzerprofil lesen</td><td><code>echo %USERPROFILE%</code></td><td><code>$env:USERPROFILE</code></td></tr><tr><td>Verzeichnis wechseln</td><td><code>cd /d &quot;%USERPROFILE%\Downloads&quot;</code></td><td><code>Set-Location &quot;$HOME\Downloads&quot;</code></td></tr><tr><td>Neuen Pfad zusammensetzen</td><td><code>set &quot;ZIEL=%USERPROFILE%\Daten&quot;</code></td><td><code>$ziel = Join-Path $HOME &quot;Daten&quot;</code></td></tr><tr><td>Aktuelles Verzeichnis</td><td><code>%CD%</code></td><td><code>$PWD.Path</code></td></tr></tbody></table></div>
-<h3>PATH ist nicht gleich Pfad</h3>
-<p>Die Variable <code>PATH</code> enthält eine Liste von Verzeichnissen, in denen das System nach ausführbaren Programmen sucht; sie ist nicht „der aktuelle Dateipfad“.</p>
-<p class="muted"><small>Windows: CMD-Befehl in Zeile 1; PowerShell in Zeilen 2–3</small></p><pre><code>where.exe python
+                <p>Ein Platzhalter ist keine universelle Windows-Zeichenfolge. Die jeweilige Shell muss ihn zuerst
+                    interpretieren.</p>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th scope="col">Aufgabe</th>
+                                <th scope="col">CMD</th>
+                                <th scope="col">PowerShell</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Benutzerprofil lesen</td>
+                                <td><code>echo %USERPROFILE%</code></td>
+                                <td><code>$env:USERPROFILE</code></td>
+                            </tr>
+                            <tr>
+                                <td>Verzeichnis wechseln</td>
+                                <td><code>cd /d &quot;%USERPROFILE%\Downloads&quot;</code></td>
+                                <td><code>Set-Location &quot;$HOME\Downloads&quot;</code></td>
+                            </tr>
+                            <tr>
+                                <td>Neuen Pfad zusammensetzen</td>
+                                <td><code>set &quot;ZIEL=%USERPROFILE%\Daten&quot;</code></td>
+                                <td><code>$ziel = Join-Path $HOME &quot;Daten&quot;</code></td>
+                            </tr>
+                            <tr>
+                                <td>Aktuelles Verzeichnis</td>
+                                <td><code>%CD%</code></td>
+                                <td><code>$PWD.Path</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <h3>PATH ist nicht gleich Pfad</h3>
+                <p>Die Variable <code>PATH</code> enthält eine Liste von Verzeichnissen, in denen das System nach
+                    ausführbaren Programmen sucht; sie ist nicht „der aktuelle Dateipfad“.</p>
+                <p class="muted"><small>Windows: CMD-Befehl in Zeile 1; PowerShell in Zeilen 2–3</small></p>
+                <pre><code>where.exe python
 $env:PATH -split &#x27;;&#x27;
 Get-Command python</code></pre>
-<p>In PowerShell werden Variablen in doppelten Anführungszeichen interpoliert, in einfachen nicht: <code>"$HOME\Daten"</code> wird expandiert, <code>'$HOME\Daten'</code> bleibt wörtlich.</p>
+                <p>In PowerShell werden Variablen in doppelten Anführungszeichen interpoliert, in einfachen nicht:
+                    <code>"$HOME\Daten"</code> wird expandiert, <code>'$HOME\Daten'</code> bleibt wörtlich.</p>
 
-<p class="footnote"><a href="#top">↑ Zum Seitenanfang</a></p>
-</section>
-<section id="zeichen" aria-labelledby="title-zeichen"><span class="crumb">Praxiswissen · Windows</span><h2 id="title-zeichen">07 · Leerzeichen, Sonderzeichen und Groß-/Kleinschreibung <a class="anchor" href="#zeichen" aria-label="Abschnitt verlinken">#</a></h2>
+                <p class="footnote"><a href="#top">↑ Zum Seitenanfang</a></p>
+            </section>
+            <section id="zeichen" aria-labelledby="title-zeichen"><span class="crumb">Praxiswissen · Windows</span>
+                <h2 id="title-zeichen">07 · Leerzeichen, Sonderzeichen und Groß-/Kleinschreibung <a class="anchor"
+                        href="#zeichen" aria-label="Abschnitt verlinken">#</a></h2>
 
-<p>Das Zeichen <code>#</code> in <code>###Backup</code> ist unter Windows unproblematisch. Viel häufiger scheitert ein Befehl an Leerzeichen oder an einer falschen Quote-Ebene.</p>
-<p class="muted"><small>CMD: Pfade mit Leerzeichen immer sicher quotieren</small></p><pre><code>cd /d &quot;C:\Meine Dateien\Projekte&quot;
+                <p>Das Zeichen <code>#</code> in <code>###Backup</code> ist unter Windows unproblematisch. Viel häufiger
+                    scheitert ein Befehl an Leerzeichen oder an einer falschen Quote-Ebene.</p>
+                <p class="muted"><small>CMD: Pfade mit Leerzeichen immer sicher quotieren</small></p>
+                <pre><code>cd /d &quot;C:\Meine Dateien\Projekte&quot;
 explorer.exe &quot;F:\###Backup\BULME\Fachbücher&quot;</code></pre>
-<p>Unter Windows sind folgende Zeichen in normalen Datei- oder Ordnernamen nicht zulässig: <code>&lt; &gt; : " / \ | ? *</code> sowie bestimmte Steuerzeichen. Auch Namen wie <code>CON</code>, <code>NUL</code>, <code>PRN</code>, <code>AUX</code> und <code>COM1</code> sind reserviert. Dateinamen sollten nicht mit Punkt oder Leerzeichen enden.</p>
-<p>NTFS arbeitet üblicherweise <strong>ohne</strong> Beachtung der Groß-/Kleinschreibung: <code>BULME</code> und <code>Bulme</code> führen meist zum selben Eintrag. Ausnahmen sind möglich, etwa bei speziell konfigurierten Ordnern oder in Linux-/WSL-Kontexten.</p>
-<div class="callout"><strong>Wichtig für PowerShell</strong><p><code>[</code> und <code>]</code> können bei <code>-Path</code> als Wildcard-Syntax interpretiert werden. Soll der angegebene Dateiname exakt gelten, verwende wenn verfügbar <code>-LiteralPath</code>.</p></div>
-<p class="muted"><small>PowerShell: Zeichen nicht als Muster deuten</small></p><pre><code>Test-Path -LiteralPath &#x27;C:\Daten\Messung[1].csv&#x27;
+                <p>Unter Windows sind folgende Zeichen in normalen Datei- oder Ordnernamen nicht zulässig:
+                    <code>&lt; &gt; : " / \ | ? *</code> sowie bestimmte Steuerzeichen. Auch Namen wie <code>CON</code>,
+                    <code>NUL</code>, <code>PRN</code>, <code>AUX</code> und <code>COM1</code> sind reserviert.
+                    Dateinamen sollten nicht mit Punkt oder Leerzeichen enden.</p>
+                <p>NTFS arbeitet üblicherweise <strong>ohne</strong> Beachtung der Groß-/Kleinschreibung:
+                    <code>BULME</code> und <code>Bulme</code> führen meist zum selben Eintrag. Ausnahmen sind möglich,
+                    etwa bei speziell konfigurierten Ordnern oder in Linux-/WSL-Kontexten.</p>
+                <div class="callout"><strong>Wichtig für PowerShell</strong>
+                    <p><code>[</code> und <code>]</code> können bei <code>-Path</code> als Wildcard-Syntax interpretiert
+                        werden. Soll der angegebene Dateiname exakt gelten, verwende wenn verfügbar
+                        <code>-LiteralPath</code>.</p>
+                </div>
+                <p class="muted"><small>PowerShell: Zeichen nicht als Muster deuten</small></p>
+                <pre><code>Test-Path -LiteralPath &#x27;C:\Daten\Messung[1].csv&#x27;
 Get-Item  -LiteralPath &#x27;C:\Daten\Messung[1].csv&#x27;</code></pre>
-<p>In CMD sind außerdem <code>&amp;</code>, <code>|</code>, <code>&gt;</code>, <code>&lt;</code>, <code>^</code> und <code>%</code> für den Befehlsparser besonders relevant. In Batchdateien braucht das Prozentzeichen ggf. eine Verdoppelung (<code>%%</code>); bei aktivierter verzögerter Expansion verdient auch <code>!</code> Aufmerksamkeit.</p>
+                <p>In CMD sind außerdem <code>&amp;</code>, <code>|</code>, <code>&gt;</code>, <code>&lt;</code>,
+                    <code>^</code> und <code>%</code> für den Befehlsparser besonders relevant. In Batchdateien braucht
+                    das Prozentzeichen ggf. eine Verdoppelung (<code>%%</code>); bei aktivierter verzögerter Expansion
+                    verdient auch <code>!</code> Aufmerksamkeit.</p>
 
-<p class="footnote"><a href="#top">↑ Zum Seitenanfang</a></p>
-</section>
-<section id="netzwerk" aria-labelledby="title-netzwerk"><span class="crumb">Praxiswissen · Windows</span><h2 id="title-netzwerk">08 · UNC-Pfade und Netzwerkfreigaben <a class="anchor" href="#netzwerk" aria-label="Abschnitt verlinken">#</a></h2>
+                <p class="footnote"><a href="#top">↑ Zum Seitenanfang</a></p>
+            </section>
+            <section id="netzwerk" aria-labelledby="title-netzwerk"><span class="crumb">Praxiswissen · Windows</span>
+                <h2 id="title-netzwerk">08 · UNC-Pfade und Netzwerkfreigaben <a class="anchor" href="#netzwerk"
+                        aria-label="Abschnitt verlinken">#</a></h2>
 
-<p>Für gemeinsam genutzte Ordner kommt häufig das Format <code>\\SERVER\FREIGABE\Ordner\Datei</code> zum Einsatz. UNC steht für <em>Universal Naming Convention</em>.</p>
-<p class="muted"><small>UNC-Beispiele</small></p><pre><code>\\NAS\Dokumente\Projekte
+                <p>Für gemeinsam genutzte Ordner kommt häufig das Format <code>\\SERVER\FREIGABE\Ordner\Datei</code> zum
+                    Einsatz. UNC steht für <em>Universal Naming Convention</em>.</p>
+                <p class="muted"><small>UNC-Beispiele</small></p>
+                <pre><code>\\NAS\Dokumente\Projekte
 \\Server01\Team\Presse\Bericht.docx
 \\Client\D$\###Backup\BULME</code></pre>
-<p>Die beiden ersten Beispiele setzen normale Netzwerkfreigaben voraus. Bei <code>D$</code> handelt es sich typischerweise um eine <strong>administrative Freigabe</strong>. Der Pfad ist keine Hintertür: Rechner, Netzwerkzugriff, Freigabe und Berechtigungen müssen entsprechend konfiguriert sein.</p>
-<h3>Laufwerk verbinden – oder UNC direkt verwenden?</h3>
-<p class="muted"><small>CMD: Netzlaufwerk zuweisen / entfernen</small></p><pre><code>net use Z: &quot;\\NAS\Dokumente&quot;
+                <p>Die beiden ersten Beispiele setzen normale Netzwerkfreigaben voraus. Bei <code>D$</code> handelt es
+                    sich typischerweise um eine <strong>administrative Freigabe</strong>. Der Pfad ist keine Hintertür:
+                    Rechner, Netzwerkzugriff, Freigabe und Berechtigungen müssen entsprechend konfiguriert sein.</p>
+                <h3>Laufwerk verbinden – oder UNC direkt verwenden?</h3>
+                <p class="muted"><small>CMD: Netzlaufwerk zuweisen / entfernen</small></p>
+                <pre><code>net use Z: &quot;\\NAS\Dokumente&quot;
 net use Z: /delete</code></pre>
-<p>Ein gemapptes Netzlaufwerk <code>Z:</code> ist bequem, die Zuordnung ist aber benutzer- und sitzungsspezifisch. In Skripten ist ein UNC-Pfad oft robuster. Zugriffsrechte werden weiterhin geprüft.</p>
-<div class="callout warning"><strong>Netzlaufwerke sind kein Ersatz für Berechtigungen.</strong><p>Ein „Pfad nicht gefunden“ kann ebenso an fehlendem VPN, nicht erreichbarer Namensauflösung oder fehlenden Freigaberechten liegen. Ein Pfad beweist noch keine Erreichbarkeit.</p></div>
+                <p>Ein gemapptes Netzlaufwerk <code>Z:</code> ist bequem, die Zuordnung ist aber benutzer- und
+                    sitzungsspezifisch. In Skripten ist ein UNC-Pfad oft robuster. Zugriffsrechte werden weiterhin
+                    geprüft.</p>
+                <div class="callout warning"><strong>Netzlaufwerke sind kein Ersatz für Berechtigungen.</strong>
+                    <p>Ein „Pfad nicht gefunden“ kann ebenso an fehlendem VPN, nicht erreichbarer Namensauflösung oder
+                        fehlenden Freigaberechten liegen. Ein Pfad beweist noch keine Erreichbarkeit.</p>
+                </div>
 
-<p class="footnote"><a href="#top">↑ Zum Seitenanfang</a></p>
-</section>
-<section id="usb" aria-labelledby="title-usb"><span class="crumb">Praxiswissen · Windows</span><h2 id="title-usb">09 · USB-Sticks: Laufwerksbuchstabe, Name und Identität <a class="anchor" href="#usb" aria-label="Abschnitt verlinken">#</a></h2>
+                <p class="footnote"><a href="#top">↑ Zum Seitenanfang</a></p>
+            </section>
+            <section id="usb" aria-labelledby="title-usb"><span class="crumb">Praxiswissen · Windows</span>
+                <h2 id="title-usb">09 · USB-Sticks: Laufwerksbuchstabe, Name und Identität <a class="anchor" href="#usb"
+                        aria-label="Abschnitt verlinken">#</a></h2>
 
-<p>Ein USB-Stick hat mehrere Eigenschaften, die leicht verwechselt werden:</p>
-<div class="table-wrap"><table><thead><tr><th scope="col">Begriff</th><th scope="col">Beispiel</th><th scope="col">Wie stabil?</th></tr></thead><tbody><tr><td>Laufwerksbuchstabe</td><td><code>F:</code></td><td>Kann je nach PC oder Belegung anders sein.</td></tr><tr><td>Volumebezeichnung</td><td><code>KINGSTON</code></td><td>Wird normalerweise mit dem Volume gespeichert; lässt sich umbenennen und ist nicht eindeutig.</td></tr><tr><td>Datenträger-/Partitionsidentität</td><td>Seriennummer, Volume-ID, Partitionskennung</td><td>Technisch nützlich, aber nicht jede Kennung bleibt über Formatierungen erhalten.</td></tr><tr><td>Volume-GUID-Pfad</td><td><code>\\?\Volume{GUID}\</code></td><td>Kann einen Buchstaben umgehen, ist aber keine pauschale Garantie für beliebige PCs.</td></tr></tbody></table></div>
-<h3>Was ist angeschlossen?</h3>
-<p class="muted"><small>PowerShell</small></p><pre><code>Get-Volume | Format-Table DriveLetter, FileSystemLabel, FileSystem, Size
+                <p>Ein USB-Stick hat mehrere Eigenschaften, die leicht verwechselt werden:</p>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th scope="col">Begriff</th>
+                                <th scope="col">Beispiel</th>
+                                <th scope="col">Wie stabil?</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Laufwerksbuchstabe</td>
+                                <td><code>F:</code></td>
+                                <td>Kann je nach PC oder Belegung anders sein.</td>
+                            </tr>
+                            <tr>
+                                <td>Volumebezeichnung</td>
+                                <td><code>KINGSTON</code></td>
+                                <td>Wird normalerweise mit dem Volume gespeichert; lässt sich umbenennen und ist nicht
+                                    eindeutig.</td>
+                            </tr>
+                            <tr>
+                                <td>Datenträger-/Partitionsidentität</td>
+                                <td>Seriennummer, Volume-ID, Partitionskennung</td>
+                                <td>Technisch nützlich, aber nicht jede Kennung bleibt über Formatierungen erhalten.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Volume-GUID-Pfad</td>
+                                <td><code>\\?\Volume{GUID}\</code></td>
+                                <td>Kann einen Buchstaben umgehen, ist aber keine pauschale Garantie für beliebige PCs.
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <h3>Was ist angeschlossen?</h3>
+                <p class="muted"><small>PowerShell</small></p>
+                <pre><code>Get-Volume | Format-Table DriveLetter, FileSystemLabel, FileSystem, Size
 Get-Volume -DriveLetter F
 Get-PSDrive -PSProvider FileSystem</code></pre>
-<p>Für einmalige private Nutzung kann man einen festen Buchstaben in der Datenträgerverwaltung (<code>diskmgmt.msc</code>) festlegen. Das ist aber primär eine Konfiguration <em>dieses</em> Windows-PCs; auf einem anderen Gerät kann der Stick trotzdem anders heißen.</p>
-<div class="callout success"><strong>Die entscheidende Strategie</strong><p>Liegt dein Startskript <em>auf dem Stick selbst</em>, braucht es weder Volumenamen noch feste Laufwerksbuchstaben. Es ermittelt das Laufwerk aus seinem eigenen Speicherort.</p></div>
+                <p>Für einmalige private Nutzung kann man einen festen Buchstaben in der Datenträgerverwaltung
+                    (<code>diskmgmt.msc</code>) festlegen. Das ist aber primär eine Konfiguration <em>dieses</em>
+                    Windows-PCs; auf einem anderen Gerät kann der Stick trotzdem anders heißen.</p>
+                <div class="callout success"><strong>Die entscheidende Strategie</strong>
+                    <p>Liegt dein Startskript <em>auf dem Stick selbst</em>, braucht es weder Volumenamen noch feste
+                        Laufwerksbuchstaben. Es ermittelt das Laufwerk aus seinem eigenen Speicherort.</p>
+                </div>
 
-<p class="footnote"><a href="#top">↑ Zum Seitenanfang</a></p>
-</section>
-<section id="usb-script" aria-labelledby="title-usb-script"><span class="crumb">Praxiswissen · Windows</span><h2 id="title-usb-script">10 · Praxislösung: ein PC-unabhängiger USB-Ordnerstarter <a class="anchor" href="#usb-script" aria-label="Abschnitt verlinken">#</a></h2>
+                <p class="footnote"><a href="#top">↑ Zum Seitenanfang</a></p>
+            </section>
+            <section id="usb-script" aria-labelledby="title-usb-script"><span class="crumb">Praxiswissen ·
+                    Windows</span>
+                <h2 id="title-usb-script">10 · Praxislösung: ein PC-unabhängiger USB-Ordnerstarter <a class="anchor"
+                        href="#usb-script" aria-label="Abschnitt verlinken">#</a></h2>
 
-<p>Ausgangssituation: Auf einem USB-Stick befindet sich der Ordner <code>\###Backup\BULME\Fachbücher</code>. Der Laufwerksbuchstabe wechselt je nach PC.</p>
-<h3>Variante A: Startdatei im Stammverzeichnis des USB-Sticks</h3>
-<p>Erstelle im Hauptverzeichnis des Sticks die Datei <code>Fachbuecher.cmd</code>:</p>
-<p class="muted"><small>Fachbuecher.cmd</small></p><pre><code>@echo off
+                <p>Ausgangssituation: Auf einem USB-Stick befindet sich der Ordner
+                    <code>\###Backup\BULME\Fachbücher</code>. Der Laufwerksbuchstabe wechselt je nach PC.</p>
+                <h3>Variante A: Startdatei im Stammverzeichnis des USB-Sticks</h3>
+                <p>Erstelle im Hauptverzeichnis des Sticks die Datei <code>Fachbuecher.cmd</code>:</p>
+                <p class="muted"><small>Fachbuecher.cmd</small></p>
+                <pre><code>@echo off
 chcp 65001 &gt;nul
 setlocal
 set &quot;ZIEL=%~d0\###Backup\BULME\Fachbücher&quot;
@@ -217,22 +585,40 @@ if exist &quot;%ZIEL%\&quot; (
     echo Ordner nicht gefunden: &quot;%ZIEL%&quot;
     pause
 )</code></pre>
-<p><code>%~d0</code> ermittelt das Laufwerk der gerade ausgeführten Batchdatei, beispielsweise <code>F:</code>. Dadurch bleibt der Einstiegspunkt korrekt, wenn Windows dem Stick später <code>D:</code> oder <code>G:</code> zuweist.</p>
-<p><strong>Speicherhinweis:</strong> Für dieses Beispiel die <code>.cmd</code>-Datei als <strong>UTF-8 ohne BOM</strong> speichern (etwa in VS Code) und die Zeile <code>chcp 65001</code> beibehalten. Damit wird der Umlaut in <code>Fachbücher</code> bei Windows 10/11 in der Regel korrekt interpretiert. Zeichensatz- und Richtlinienbesonderheiten älterer oder verwalteter Rechner können dennoch eine Anpassung erfordern.</p>
-<h3>Variante B: Das Skript liegt neben dem Zielordner</h3>
-<p>Der Speicherort der Batchdatei selbst ist mit <code>%~dp0</code> abrufbar. Das Kürzel enthält Laufwerk <em>und</em> Verzeichnis – mit abschließendem Backslash.</p>
-<p class="muted"><small>Falls Fachbuecher.cmd direkt neben dem Ordner Fachbücher liegt</small></p><pre><code>@echo off
+                <p><code>%~d0</code> ermittelt das Laufwerk der gerade ausgeführten Batchdatei, beispielsweise
+                    <code>F:</code>. Dadurch bleibt der Einstiegspunkt korrekt, wenn Windows dem Stick später
+                    <code>D:</code> oder <code>G:</code> zuweist.</p>
+                <p><strong>Speicherhinweis:</strong> Für dieses Beispiel die <code>.cmd</code>-Datei als <strong>UTF-8
+                        ohne BOM</strong> speichern (etwa in VS Code) und die Zeile <code>chcp 65001</code> beibehalten.
+                    Damit wird der Umlaut in <code>Fachbücher</code> bei Windows 10/11 in der Regel korrekt
+                    interpretiert. Zeichensatz- und Richtlinienbesonderheiten älterer oder verwalteter Rechner können
+                    dennoch eine Anpassung erfordern.</p>
+                <h3>Variante B: Das Skript liegt neben dem Zielordner</h3>
+                <p>Der Speicherort der Batchdatei selbst ist mit <code>%~dp0</code> abrufbar. Das Kürzel enthält
+                    Laufwerk <em>und</em> Verzeichnis – mit abschließendem Backslash.</p>
+                <p class="muted"><small>Falls Fachbuecher.cmd direkt neben dem Ordner Fachbücher liegt</small></p>
+                <pre><code>@echo off
 explorer.exe &quot;%~dp0Fachbücher&quot;</code></pre>
-<p>Das ist die pflegeleichteste Lösung für portable Projektordner auf USB-Sticks oder externen Festplatten.</p>
-<div class="callout warning"><strong>Grenze dieser Methode</strong><p>Die <code>.cmd</code>-Datei muss zugänglich sein. Ein Desktop-Symbol auf einem völlig fremden PC entsteht nicht von allein. Wird die Batchdatei vom Stick auf den Desktop verschoben, zeigt <code>%~d0</code> auf das Desktop-Laufwerk und damit nicht mehr auf den Stick.</p></div>
+                <p>Das ist die pflegeleichteste Lösung für portable Projektordner auf USB-Sticks oder externen
+                    Festplatten.</p>
+                <div class="callout warning"><strong>Grenze dieser Methode</strong>
+                    <p>Die <code>.cmd</code>-Datei muss zugänglich sein. Ein Desktop-Symbol auf einem völlig fremden PC
+                        entsteht nicht von allein. Wird die Batchdatei vom Stick auf den Desktop verschoben, zeigt
+                        <code>%~d0</code> auf das Desktop-Laufwerk und damit nicht mehr auf den Stick.</p>
+                </div>
 
-<p class="footnote"><a href="#top">↑ Zum Seitenanfang</a></p>
-</section>
-<section id="usb-label" aria-labelledby="title-usb-label"><span class="crumb">Praxiswissen · Windows</span><h2 id="title-usb-label">11 · Praxislösung: USB-Stick anhand seiner Bezeichnung finden <a class="anchor" href="#usb-label" aria-label="Abschnitt verlinken">#</a></h2>
+                <p class="footnote"><a href="#top">↑ Zum Seitenanfang</a></p>
+            </section>
+            <section id="usb-label" aria-labelledby="title-usb-label"><span class="crumb">Praxiswissen · Windows</span>
+                <h2 id="title-usb-label">11 · Praxislösung: USB-Stick anhand seiner Bezeichnung finden <a class="anchor"
+                        href="#usb-label" aria-label="Abschnitt verlinken">#</a></h2>
 
-<p>Wenn die Startdatei auf dem <strong>Desktop</strong> bleiben soll, kann PowerShell alle lokal eingebundenen Volumes nach <code>KINGSTON</code> durchsuchen. Das ist unabhängig vom konkreten Laufwerksbuchstaben, aber die Volumebezeichnung ist nicht eindeutig und kann geändert werden.</p>
-<p>Speichere folgenden Inhalt in einer Datei <code>Fachbuecher.ps1</code>:</p>
-<p class="muted"><small>PowerShell: Fachbuecher.ps1</small></p><pre><code>$label = &#x27;KINGSTON&#x27;
+                <p>Wenn die Startdatei auf dem <strong>Desktop</strong> bleiben soll, kann PowerShell alle lokal
+                    eingebundenen Volumes nach <code>KINGSTON</code> durchsuchen. Das ist unabhängig vom konkreten
+                    Laufwerksbuchstaben, aber die Volumebezeichnung ist nicht eindeutig und kann geändert werden.</p>
+                <p>Speichere folgenden Inhalt in einer Datei <code>Fachbuecher.ps1</code>:</p>
+                <p class="muted"><small>PowerShell: Fachbuecher.ps1</small></p>
+                <pre><code>$label = &#x27;KINGSTON&#x27;
 $unterordner = &#x27;###Backup\BULME\Fachbücher&#x27;
 
 $treffer = @(
@@ -255,38 +641,131 @@ if ($treffer.Count -eq 1) {
     Write-Warning &#x27;Mehrere passende Datenträger gefunden – keine automatische Auswahl.&#x27;
     $treffer
 }</code></pre>
-<p><strong>Warum mit <code>Test-Path -LiteralPath</code>?</strong> Das Skript prüft nicht nur, ob ein Datenträger den gewünschten Namen trägt, sondern auch, ob die betreffende Ordnerstruktur tatsächlich existiert. Wenn mehrere Kandidaten passen, trifft es absichtlich keine riskante Zufallsauswahl.</p>
-<p>In einer geöffneten PowerShell kannst du die Datei im entsprechenden Verzeichnis mit <code>.\Fachbuecher.ps1</code> aufrufen, <em>sofern</em> die geltenden Ausführungsrichtlinien das zulassen. Windows PowerShell 5.1 liest UTF-8 mit BOM für Unicode-Skripte besonders zuverlässig; in VS Code beim Speichern auf diese Codierung achten. Auf verwalteten PCs können Skriptrichtlinien die Ausführung verhindern – dann die Freigabe mit der Administration klären, statt Schutzmaßnahmen blind zu umgehen.</p>
-<p>Willst du eine echte Desktop-Verknüpfung, kann sie beispielsweise PowerShell mit der Skriptdatei als Parameter starten; das Skript muss dann an dem in der Verknüpfung angegebenen Ort existieren. Die portable Alternative bleibt die Startdatei <em>auf</em> dem Stick.</p>
+                <p><strong>Warum mit <code>Test-Path -LiteralPath</code>?</strong> Das Skript prüft nicht nur, ob ein
+                    Datenträger den gewünschten Namen trägt, sondern auch, ob die betreffende Ordnerstruktur tatsächlich
+                    existiert. Wenn mehrere Kandidaten passen, trifft es absichtlich keine riskante Zufallsauswahl.</p>
+                <p>In einer geöffneten PowerShell kannst du die Datei im entsprechenden Verzeichnis mit
+                    <code>.\Fachbuecher.ps1</code> aufrufen, <em>sofern</em> die geltenden Ausführungsrichtlinien das
+                    zulassen. Windows PowerShell 5.1 liest UTF-8 mit BOM für Unicode-Skripte besonders zuverlässig; in
+                    VS Code beim Speichern auf diese Codierung achten. Auf verwalteten PCs können Skriptrichtlinien die
+                    Ausführung verhindern – dann die Freigabe mit der Administration klären, statt Schutzmaßnahmen blind
+                    zu umgehen.</p>
+                <p>Willst du eine echte Desktop-Verknüpfung, kann sie beispielsweise PowerShell mit der Skriptdatei als
+                    Parameter starten; das Skript muss dann an dem in der Verknüpfung angegebenen Ort existieren. Die
+                    portable Alternative bleibt die Startdatei <em>auf</em> dem Stick.</p>
 
-<p class="footnote"><a href="#top">↑ Zum Seitenanfang</a></p>
-</section>
-<section id="links" aria-labelledby="title-links"><span class="crumb">Praxiswissen · Windows</span><h2 id="title-links">12 · Windows-Verknüpfungen (.lnk): Ziel und »Ausführen in« <a class="anchor" href="#links" aria-label="Abschnitt verlinken">#</a></h2>
+                <p class="footnote"><a href="#top">↑ Zum Seitenanfang</a></p>
+            </section>
+            <section id="links" aria-labelledby="title-links"><span class="crumb">Praxiswissen · Windows</span>
+                <h2 id="title-links">12 · Windows-Verknüpfungen (.lnk): Ziel und »Ausführen in« <a class="anchor"
+                        href="#links" aria-label="Abschnitt verlinken">#</a></h2>
 
-<p>Eine <code>.lnk</code>-Datei ist ein von der Windows-Shell verwalteter Verweis. Sie ist <strong>nicht</strong> dasselbe wie ein relativer Dateipfad und auch nicht dasselbe wie ein symbolischer Link.</p>
-<ol class="steps"><li><strong>Normale Verknüpfung erstellen.</strong> Rechtsklick → Neu → Verknüpfung; Zielpfad angeben.</li>
-<li><strong>Unter Eigenschaften prüfen.</strong> Das Feld „Ziel“ beschreibt das zu öffnende Objekt oder Programm.</li>
-<li><strong>„Ausführen in“ verstehen.</strong> Dieses Feld legt bei ausführbaren Programmen das Arbeitsverzeichnis fest; es ist nicht automatisch der Speicherort der <code>.lnk</code>-Datei.</li>
-<li><strong>Portabilität prüfen.</strong> Windows kann Verknüpfungsziele teils nachverfolgen, dennoch ist für wechselnde Laufwerksbuchstaben eine explizite Skriptlösung verlässlicher.</li></ol>
-<h3>Die häufigsten Konstellationen</h3>
-<div class="table-wrap"><table><thead><tr><th scope="col">Ziel</th><th scope="col">Was funktioniert zuverlässig?</th></tr></thead><tbody><tr><td><code>C:\Projekte\App.exe</code></td><td>Wenn der Pfad auf diesem PC gültig bleibt.</td></tr><tr><td><code>%USERPROFILE%\Documents</code></td><td>Kann über die Shell expandiert werden; im konkreten Shortcut testen, besonders bei Umleitungen.</td></tr><tr><td><code>.\Fachbücher</code></td><td>Nicht als universelle portable .lnk-Syntax annehmen; Arbeitsverzeichnis und Linkauflösung können abweichen.</td></tr><tr><td><code>F:\###Backup\BULME\Fachbücher</code></td><td>Solange der USB-Stick hier wirklich F: ist.</td></tr></tbody></table></div>
-<p>Eine <code>.url</code>-Datei ist wiederum eine Internet-Verknüpfung. Sie zeigt auf eine URL und gehört nicht in dieselbe Kategorie wie Dateisystemlinks.</p>
+                <p>Eine <code>.lnk</code>-Datei ist ein von der Windows-Shell verwalteter Verweis. Sie ist
+                    <strong>nicht</strong> dasselbe wie ein relativer Dateipfad und auch nicht dasselbe wie ein
+                    symbolischer Link.</p>
+                <ol class="steps">
+                    <li><strong>Normale Verknüpfung erstellen.</strong> Rechtsklick → Neu → Verknüpfung; Zielpfad
+                        angeben.</li>
+                    <li><strong>Unter Eigenschaften prüfen.</strong> Das Feld „Ziel“ beschreibt das zu öffnende Objekt
+                        oder Programm.</li>
+                    <li><strong>„Ausführen in“ verstehen.</strong> Dieses Feld legt bei ausführbaren Programmen das
+                        Arbeitsverzeichnis fest; es ist nicht automatisch der Speicherort der <code>.lnk</code>-Datei.
+                    </li>
+                    <li><strong>Portabilität prüfen.</strong> Windows kann Verknüpfungsziele teils nachverfolgen,
+                        dennoch ist für wechselnde Laufwerksbuchstaben eine explizite Skriptlösung verlässlicher.</li>
+                </ol>
+                <h3>Die häufigsten Konstellationen</h3>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th scope="col">Ziel</th>
+                                <th scope="col">Was funktioniert zuverlässig?</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>C:\Projekte\App.exe</code></td>
+                                <td>Wenn der Pfad auf diesem PC gültig bleibt.</td>
+                            </tr>
+                            <tr>
+                                <td><code>%USERPROFILE%\Documents</code></td>
+                                <td>Kann über die Shell expandiert werden; im konkreten Shortcut testen, besonders bei
+                                    Umleitungen.</td>
+                            </tr>
+                            <tr>
+                                <td><code>.\Fachbücher</code></td>
+                                <td>Nicht als universelle portable .lnk-Syntax annehmen; Arbeitsverzeichnis und
+                                    Linkauflösung können abweichen.</td>
+                            </tr>
+                            <tr>
+                                <td><code>F:\###Backup\BULME\Fachbücher</code></td>
+                                <td>Solange der USB-Stick hier wirklich F: ist.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p>Eine <code>.url</code>-Datei ist wiederum eine Internet-Verknüpfung. Sie zeigt auf eine URL und
+                    gehört nicht in dieselbe Kategorie wie Dateisystemlinks.</p>
 
-<p class="footnote"><a href="#top">↑ Zum Seitenanfang</a></p>
-</section>
-<section id="ntfslinks" aria-labelledby="title-ntfslinks"><span class="crumb">Praxiswissen · Windows</span><h2 id="title-ntfslinks">13 · Symbolische Links, Junctions und Hardlinks <a class="anchor" href="#ntfslinks" aria-label="Abschnitt verlinken">#</a></h2>
+                <p class="footnote"><a href="#top">↑ Zum Seitenanfang</a></p>
+            </section>
+            <section id="ntfslinks" aria-labelledby="title-ntfslinks"><span class="crumb">Praxiswissen · Windows</span>
+                <h2 id="title-ntfslinks">13 · Symbolische Links, Junctions und Hardlinks <a class="anchor"
+                        href="#ntfslinks" aria-label="Abschnitt verlinken">#</a></h2>
 
-<p>Windows kennt auch echte Verknüpfungen auf Dateisystemebene. Sie sind nützlich, wenn Programme einen Pfad <em>wie ein echtes Verzeichnis</em> sehen sollen, obwohl die Daten anderswo liegen.</p>
-<div class="table-wrap"><table><thead><tr><th scope="col">Typ</th><th scope="col">Befehl in CMD</th><th scope="col">Eigenschaften</th></tr></thead><tbody><tr><td>Symbolischer Verzeichnislink</td><td><code>mklink /D &quot;C:\Datenlink&quot; &quot;D:\Daten&quot;</code></td><td>Verweist auf ein Verzeichnis; Ziel kann je nach Linktyp/Umgebung relativ oder absolut sein.</td></tr><tr><td>Junction (Verzeichnisverbindung)</td><td><code>mklink /J &quot;C:\Datenlink&quot; &quot;D:\Daten&quot;</code></td><td>NTFS-Verzeichnisverbindung zu lokalem Ziel; nicht für beliebige Netzwerkziele.</td></tr><tr><td>Hardlink (Datei)</td><td><code>mklink /H &quot;C:\Kopie.txt&quot; &quot;C:\Original.txt&quot;</code></td><td>Zweiter Dateiname derselben Dateidaten, nur innerhalb desselben Volumes.</td></tr></tbody></table></div>
-<p><code>mklink</code> ist ein CMD-Befehl (in PowerShell ggf. über <code>cmd /c</code> auszuführen). Das Erstellen symbolischer Links setzt normalerweise erhöhte Berechtigungen oder eine passende Developer-Mode-/Systemkonfiguration voraus. Junctions und Hardlinks haben andere Regeln.</p>
-<div class="callout warning"><strong>Nicht für den wechselnden USB-Buchstaben gedacht.</strong><p>Eine Junction nach <code>F:\...</code> rettet dich nicht automatisch, wenn derselbe Stick später <code>G:</code> heißt. Für portable Verzeichnisse sind relative symbolische Links – wo unterstützt – oder Skripte vom Datenträger selbst besser. Vor dem Löschen und beim Backup immer unterscheiden, ob du einen Link oder das Ziel bearbeitest.</p></div>
+                <p>Windows kennt auch echte Verknüpfungen auf Dateisystemebene. Sie sind nützlich, wenn Programme einen
+                    Pfad <em>wie ein echtes Verzeichnis</em> sehen sollen, obwohl die Daten anderswo liegen.</p>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th scope="col">Typ</th>
+                                <th scope="col">Befehl in CMD</th>
+                                <th scope="col">Eigenschaften</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Symbolischer Verzeichnislink</td>
+                                <td><code>mklink /D &quot;C:\Datenlink&quot; &quot;D:\Daten&quot;</code></td>
+                                <td>Verweist auf ein Verzeichnis; Ziel kann je nach Linktyp/Umgebung relativ oder
+                                    absolut sein.</td>
+                            </tr>
+                            <tr>
+                                <td>Junction (Verzeichnisverbindung)</td>
+                                <td><code>mklink /J &quot;C:\Datenlink&quot; &quot;D:\Daten&quot;</code></td>
+                                <td>NTFS-Verzeichnisverbindung zu lokalem Ziel; nicht für beliebige Netzwerkziele.</td>
+                            </tr>
+                            <tr>
+                                <td>Hardlink (Datei)</td>
+                                <td><code>mklink /H &quot;C:\Kopie.txt&quot; &quot;C:\Original.txt&quot;</code></td>
+                                <td>Zweiter Dateiname derselben Dateidaten, nur innerhalb desselben Volumes.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p><code>mklink</code> ist ein CMD-Befehl (in PowerShell ggf. über <code>cmd /c</code> auszuführen). Das
+                    Erstellen symbolischer Links setzt normalerweise erhöhte Berechtigungen oder eine passende
+                    Developer-Mode-/Systemkonfiguration voraus. Junctions und Hardlinks haben andere Regeln.</p>
+                <div class="callout warning"><strong>Nicht für den wechselnden USB-Buchstaben gedacht.</strong>
+                    <p>Eine Junction nach <code>F:\...</code> rettet dich nicht automatisch, wenn derselbe Stick später
+                        <code>G:</code> heißt. Für portable Verzeichnisse sind relative symbolische Links – wo
+                        unterstützt – oder Skripte vom Datenträger selbst besser. Vor dem Löschen und beim Backup immer
+                        unterscheiden, ob du einen Link oder das Ziel bearbeitest.</p>
+                </div>
 
-<p class="footnote"><a href="#top">↑ Zum Seitenanfang</a></p>
-</section>
-<section id="powershell" aria-labelledby="title-powershell"><span class="crumb">Praxiswissen · Windows</span><h2 id="title-powershell">14 · PowerShell: Pfade robust zusammenbauen und prüfen <a class="anchor" href="#powershell" aria-label="Abschnitt verlinken">#</a></h2>
+                <p class="footnote"><a href="#top">↑ Zum Seitenanfang</a></p>
+            </section>
+            <section id="powershell" aria-labelledby="title-powershell"><span class="crumb">Praxiswissen ·
+                    Windows</span>
+                <h2 id="title-powershell">14 · PowerShell: Pfade robust zusammenbauen und prüfen <a class="anchor"
+                        href="#powershell" aria-label="Abschnitt verlinken">#</a></h2>
 
-<p>In Programmen solltest du Pfade möglichst aus Bestandteilen zusammensetzen, statt Zeichenfolgen mechanisch zusammenzukleben.</p>
-<p class="muted"><small>PowerShell</small></p><pre><code>$basis = $HOME
+                <p>In Programmen solltest du Pfade möglichst aus Bestandteilen zusammensetzen, statt Zeichenfolgen
+                    mechanisch zusammenzukleben.</p>
+                <p class="muted"><small>PowerShell</small></p>
+                <pre><code>$basis = $HOME
 $datei = Join-Path -Path $basis -ChildPath &#x27;Dokumente\messwerte.csv&#x27;
 $datei
 Test-Path -LiteralPath $datei
@@ -294,27 +773,79 @@ Test-Path -LiteralPath $datei
 # Ordner der aktuell ausgeführten .ps1-Datei:
 $skriptordner = $PSScriptRoot
 $log = Join-Path $skriptordner &#x27;logs\lauf.txt&#x27;</code></pre>
-<p><code>$PSScriptRoot</code> zeigt in einem ausgeführten Skript auf dessen Verzeichnis. Beim manuellen Tippen in einer interaktiven Sitzung ist diese Variable normalerweise nicht der gesuchte Skriptordner.</p>
-<h3>Wildcards oder exakter Dateiname?</h3>
-<p class="muted"><small>PowerShell</small></p><pre><code>Get-ChildItem -Path &#x27;C:\Daten\*.csv&#x27;           # Suchen mit Muster
+                <p><code>$PSScriptRoot</code> zeigt in einem ausgeführten Skript auf dessen Verzeichnis. Beim manuellen
+                    Tippen in einer interaktiven Sitzung ist diese Variable normalerweise nicht der gesuchte
+                    Skriptordner.</p>
+                <h3>Wildcards oder exakter Dateiname?</h3>
+                <p class="muted"><small>PowerShell</small></p>
+                <pre><code>Get-ChildItem -Path &#x27;C:\Daten\*.csv&#x27;           # Suchen mit Muster
 Get-Item -LiteralPath &#x27;C:\Daten\A[1].csv&#x27;     # Exakter Name</code></pre>
-<h3>Eine Datei sicher öffnen</h3>
-<p class="muted"><small>PowerShell</small></p><pre><code>$ordner = &#x27;C:\Projekte\Elektronik&#x27;
+                <h3>Eine Datei sicher öffnen</h3>
+                <p class="muted"><small>PowerShell</small></p>
+                <pre><code>$ordner = &#x27;C:\Projekte\Elektronik&#x27;
 if (Test-Path -LiteralPath $ordner -PathType Container) {
     Invoke-Item -LiteralPath $ordner
 } else {
     Write-Warning &quot;Nicht gefunden: $ordner&quot;
 }</code></pre>
-<p>Die Prüfung mit <code>-PathType Container</code> unterscheidet einen Ordner von einer Datei. Für komplexere Automatisierung sind zusätzlich Fehlerbehandlung und Berechtigungsprüfung sinnvoll.</p>
+                <p>Die Prüfung mit <code>-PathType Container</code> unterscheidet einen Ordner von einer Datei. Für
+                    komplexere Automatisierung sind zusätzlich Fehlerbehandlung und Berechtigungsprüfung sinnvoll.</p>
 
-<p class="footnote"><a href="#top">↑ Zum Seitenanfang</a></p>
-</section>
-<section id="batch" aria-labelledby="title-batch"><span class="crumb">Praxiswissen · Windows</span><h2 id="title-batch">15 · CMD/Batch: die wichtigsten Pfadvariablen <a class="anchor" href="#batch" aria-label="Abschnitt verlinken">#</a></h2>
+                <p class="footnote"><a href="#top">↑ Zum Seitenanfang</a></p>
+            </section>
+            <section id="batch" aria-labelledby="title-batch"><span class="crumb">Praxiswissen · Windows</span>
+                <h2 id="title-batch">15 · CMD/Batch: die wichtigsten Pfadvariablen <a class="anchor" href="#batch"
+                        aria-label="Abschnitt verlinken">#</a></h2>
 
-<p>Batchdateien besitzen eigene Parameter-Modifikatoren. Insbesondere <code>%~d0</code> und <code>%~dp0</code> sind für portable Skripte Gold wert.</p>
-<div class="table-wrap"><table><thead><tr><th scope="col">Ausdruck</th><th scope="col">Bedeutung</th></tr></thead><tbody><tr><td><code>%0</code></td><td>Aufrufname bzw. Aufrufpfad des Batchskripts.</td></tr><tr><td><code>%~f0</code></td><td>Vollständig qualifizierter Pfad der Batchdatei.</td></tr><tr><td><code>%~d0</code></td><td>Laufwerk der Batchdatei, beispielsweise F:.</td></tr><tr><td><code>%~p0</code></td><td>Verzeichnisanteil ohne Laufwerk.</td></tr><tr><td><code>%~dp0</code></td><td>Laufwerk und Verzeichnis der Batchdatei.</td></tr><tr><td><code>%~n0</code></td><td>Dateiname der Batchdatei ohne Erweiterung.</td></tr><tr><td><code>%~x0</code></td><td>Dateiendung der Batchdatei.</td></tr><tr><td><code>%CD%</code></td><td>Aktuelles Arbeitsverzeichnis; kann vom Skriptverzeichnis abweichen.</td></tr></tbody></table></div>
-<h3>Unabhängig vom aktuellen Arbeitsverzeichnis</h3>
-<p class="muted"><small>Batch: Unterordner neben dem Skript</small></p><pre><code>@echo off
+                <p>Batchdateien besitzen eigene Parameter-Modifikatoren. Insbesondere <code>%~d0</code> und
+                    <code>%~dp0</code> sind für portable Skripte Gold wert.</p>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th scope="col">Ausdruck</th>
+                                <th scope="col">Bedeutung</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>%0</code></td>
+                                <td>Aufrufname bzw. Aufrufpfad des Batchskripts.</td>
+                            </tr>
+                            <tr>
+                                <td><code>%~f0</code></td>
+                                <td>Vollständig qualifizierter Pfad der Batchdatei.</td>
+                            </tr>
+                            <tr>
+                                <td><code>%~d0</code></td>
+                                <td>Laufwerk der Batchdatei, beispielsweise F:.</td>
+                            </tr>
+                            <tr>
+                                <td><code>%~p0</code></td>
+                                <td>Verzeichnisanteil ohne Laufwerk.</td>
+                            </tr>
+                            <tr>
+                                <td><code>%~dp0</code></td>
+                                <td>Laufwerk und Verzeichnis der Batchdatei.</td>
+                            </tr>
+                            <tr>
+                                <td><code>%~n0</code></td>
+                                <td>Dateiname der Batchdatei ohne Erweiterung.</td>
+                            </tr>
+                            <tr>
+                                <td><code>%~x0</code></td>
+                                <td>Dateiendung der Batchdatei.</td>
+                            </tr>
+                            <tr>
+                                <td><code>%CD%</code></td>
+                                <td>Aktuelles Arbeitsverzeichnis; kann vom Skriptverzeichnis abweichen.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <h3>Unabhängig vom aktuellen Arbeitsverzeichnis</h3>
+                <p class="muted"><small>Batch: Unterordner neben dem Skript</small></p>
+                <pre><code>@echo off
 setlocal
 set &quot;ORDNER=%~dp0daten&quot;
 if exist &quot;%ORDNER%\&quot; (
@@ -322,14 +853,20 @@ if exist &quot;%ORDNER%\&quot; (
 ) else (
   echo Verzeichnis fehlt: &quot;%ORDNER%&quot;
 )</code></pre>
-<p>Wenn du in Batch-Schleifen Variablen mit <code>%var%</code> innerhalb desselben Klammerblocks änderst, greift häufig die Expansion beim Parsen des Blocks. In solchen Fällen arbeitet man gezielt mit <code>setlocal EnableDelayedExpansion</code> und <code>!var!</code>; Vorsicht, das beeinflusst wörtliche Ausrufezeichen in Dateinamen.</p>
+                <p>Wenn du in Batch-Schleifen Variablen mit <code>%var%</code> innerhalb desselben Klammerblocks
+                    änderst, greift häufig die Expansion beim Parsen des Blocks. In solchen Fällen arbeitet man gezielt
+                    mit <code>setlocal EnableDelayedExpansion</code> und <code>!var!</code>; Vorsicht, das beeinflusst
+                    wörtliche Ausrufezeichen in Dateinamen.</p>
 
-<p class="footnote"><a href="#top">↑ Zum Seitenanfang</a></p>
-</section>
-<section id="python" aria-labelledby="title-python"><span class="crumb">Praxiswissen · Windows</span><h2 id="title-python">16 · Python, C++ und JavaScript: Pfade beim Programmieren <a class="anchor" href="#python" aria-label="Abschnitt verlinken">#</a></h2>
+                <p class="footnote"><a href="#top">↑ Zum Seitenanfang</a></p>
+            </section>
+            <section id="python" aria-labelledby="title-python"><span class="crumb">Praxiswissen · Windows</span>
+                <h2 id="title-python">16 · Python, C++ und JavaScript: Pfade beim Programmieren <a class="anchor"
+                        href="#python" aria-label="Abschnitt verlinken">#</a></h2>
 
-<h3>Python: <code>pathlib</code> statt Backslash-Bastelei</h3>
-<p class="muted"><small>Python 3</small></p><pre><code>from pathlib import Path
+                <h3>Python: <code>pathlib</code> statt Backslash-Bastelei</h3>
+                <p class="muted"><small>Python 3</small></p>
+                <pre><code>from pathlib import Path
 
 home = Path.home()
 projekt = Path(__file__).resolve().parent
@@ -337,34 +874,47 @@ csv_datei = projekt / &#x27;data&#x27; / &#x27;messwerte.csv&#x27;
 
 if csv_datei.is_file():
     print(csv_datei.read_text(encoding=&#x27;utf-8&#x27;))</code></pre>
-<p><code>__file__</code> ist für regulär ausgeführte Skriptdateien gedacht; in interaktiven Umgebungen wie einer REPL oder einem Notebook kann es fehlen. <code>Path.cwd()</code> fragt stattdessen das aktuelle Arbeitsverzeichnis ab.</p>
-<p class="muted"><small>Python: Windows-Pfad als Raw String</small></p><pre><code>from pathlib import Path
+                <p><code>__file__</code> ist für regulär ausgeführte Skriptdateien gedacht; in interaktiven Umgebungen
+                    wie einer REPL oder einem Notebook kann es fehlen. <code>Path.cwd()</code> fragt stattdessen das
+                    aktuelle Arbeitsverzeichnis ab.</p>
+                <p class="muted"><small>Python: Windows-Pfad als Raw String</small></p>
+                <pre><code>from pathlib import Path
 
 ordner = Path(r&#x27;C:\Projekte\Elektronik&#x27;)
 print(ordner / &#x27;logger.py&#x27;)
 # Vorsicht: Eine Python-Raw-String-Literale darf
 # nicht mit genau einem Backslash enden!</code></pre>
-<h3>C++17: <code>std::filesystem</code></h3>
-<p class="muted"><small>C++17</small></p><pre><code>#include &lt;filesystem&gt;
+                <h3>C++17: <code>std::filesystem</code></h3>
+                <p class="muted"><small>C++17</small></p>
+                <pre><code>#include &lt;filesystem&gt;
 namespace fs = std::filesystem;
 
 fs::path basis = fs::current_path();
 fs::path datei = basis / &quot;data&quot; / &quot;messwerte.csv&quot;;</code></pre>
-<p>In plattformübergreifendem Code bevorzugst du APIs, die Pfadbestandteile korrekt verknüpfen, statt harte Backslashes zu hinterlegen.</p>
-<h3>JavaScript / JSON</h3>
-<p class="muted"><small>JavaScript und JSON: getrennte Beispiele</small></p><pre><code>// Ein Backslash muss im JavaScript-String escaped werden:
+                <p>In plattformübergreifendem Code bevorzugst du APIs, die Pfadbestandteile korrekt verknüpfen, statt
+                    harte Backslashes zu hinterlegen.</p>
+                <h3>JavaScript / JSON</h3>
+                <p class="muted"><small>JavaScript und JSON: getrennte Beispiele</small></p>
+                <pre><code>// Ein Backslash muss im JavaScript-String escaped werden:
 const pfad = &quot;C:\\Projekte\\Elektronik\\logger.py&quot;;
 
 // In JSON genauso:
 {&quot;pfad&quot;: &quot;C:\\Projekte\\Elektronik\\logger.py&quot;}</code></pre>
-<p>Wichtig: Die Python-, C++-, JavaScript- oder JSON-Quelltextdarstellung eines Pfades ist nicht identisch mit der Pfadzeichenfolge zur Laufzeit. Quelltext-Escape-Sequenzen sind eine weitere Ebene.</p>
+                <p>Wichtig: Die Python-, C++-, JavaScript- oder JSON-Quelltextdarstellung eines Pfades ist nicht
+                    identisch mit der Pfadzeichenfolge zur Laufzeit. Quelltext-Escape-Sequenzen sind eine weitere Ebene.
+                </p>
 
-<p class="footnote"><a href="#top">↑ Zum Seitenanfang</a></p>
-</section>
-<section id="html" aria-labelledby="title-html"><span class="crumb">Praxiswissen · Windows</span><h2 id="title-html">17 · HTML-Links sind URLs – keine Windows-Dateipfade <a class="anchor" href="#html" aria-label="Abschnitt verlinken">#</a></h2>
+                <p class="footnote"><a href="#top">↑ Zum Seitenanfang</a></p>
+            </section>
+            <section id="html" aria-labelledby="title-html"><span class="crumb">Praxiswissen · Windows</span>
+                <h2 id="title-html">17 · HTML-Links sind URLs – keine Windows-Dateipfade <a class="anchor" href="#html"
+                        aria-label="Abschnitt verlinken">#</a></h2>
 
-<p>Für deine Website ist diese Unterscheidung essenziell: Ein <code>href</code> wird nach <strong>URL-Regeln</strong> aufgelöst, nicht nach CMD- oder Explorer-Regeln. Webadressen verwenden normalerweise <code>/</code>.</p>
-<p class="muted"><small>HTML</small></p><pre><code>&lt;!-- Relativ zur HTML-Datei --&gt;
+                <p>Für deine Website ist diese Unterscheidung essenziell: Ein <code>href</code> wird nach
+                    <strong>URL-Regeln</strong> aufgelöst, nicht nach CMD- oder Explorer-Regeln. Webadressen verwenden
+                    normalerweise <code>/</code>.</p>
+                <p class="muted"><small>HTML</small></p>
+                <pre><code>&lt;!-- Relativ zur HTML-Datei --&gt;
 &lt;a href=&quot;../downloads/anleitung.pdf&quot;&gt;Anleitung&lt;/a&gt;
 
 &lt;!-- Relativ zur Domain-Wurzel: auf Unterseiten beachten! --&gt;
@@ -372,88 +922,294 @@ const pfad = &quot;C:\\Projekte\\Elektronik\\logger.py&quot;;
 
 &lt;!-- Externe absolute URL --&gt;
 &lt;a href=&quot;https://example.org/dokumentation&quot;&gt;Dokumentation&lt;/a&gt;</code></pre>
-<p>Wenn eine Seite etwa unter <code>https://beispiel.at/web/electronics/pfade.html</code> liegt, bedeutet <code>../downloads/a.pdf</code> etwas anderes als <code>/downloads/a.pdf</code>. Der erste Pfad steigt in der URL-Struktur eine Ebene hinauf; der zweite beginnt an der Website-Wurzel. Bei Projektseiten auf GitHub Pages ist ein führender Slash deshalb besonders genau zu prüfen.</p>
-<h3>Was ist mit <code>file://</code>?</h3>
-<p class="muted"><small>Datei-URL – kein gewöhnlicher href für öffentliche Websites</small></p><pre><code>file:///C:/Projekte/Elektronik/bericht.pdf</code></pre>
-<p>Eine lokale HTML-Datei kann unter bestimmten Voraussetzungen Datei-URLs verwenden. Eine öffentlich ausgelieferte <code>https://</code>-Website darf jedoch aus Sicherheitsgründen nicht einfach Dateien von den Festplatten ihrer Besucher öffnen. Ein Link auf <code>F:\...</code> ist deshalb <strong>keine</strong> portable Lösung für eine Website.</p>
+                <p>Wenn eine Seite etwa unter <code>https://beispiel.at/web/electronics/pfade.html</code> liegt,
+                    bedeutet <code>../downloads/a.pdf</code> etwas anderes als <code>/downloads/a.pdf</code>. Der erste
+                    Pfad steigt in der URL-Struktur eine Ebene hinauf; der zweite beginnt an der Website-Wurzel. Bei
+                    Projektseiten auf GitHub Pages ist ein führender Slash deshalb besonders genau zu prüfen.</p>
+                <h3>Was ist mit <code>file://</code>?</h3>
+                <p class="muted"><small>Datei-URL – kein gewöhnlicher href für öffentliche Websites</small></p>
+                <pre><code>file:///C:/Projekte/Elektronik/bericht.pdf</code></pre>
+                <p>Eine lokale HTML-Datei kann unter bestimmten Voraussetzungen Datei-URLs verwenden. Eine öffentlich
+                    ausgelieferte <code>https://</code>-Website darf jedoch aus Sicherheitsgründen nicht einfach Dateien
+                    von den Festplatten ihrer Besucher öffnen. Ein Link auf <code>F:\...</code> ist deshalb
+                    <strong>keine</strong> portable Lösung für eine Website.</p>
 
-<p class="footnote"><a href="#top">↑ Zum Seitenanfang</a></p>
-</section>
-<section id="wsl" aria-labelledby="title-wsl"><span class="crumb">Praxiswissen · Windows</span><h2 id="title-wsl">18 · Windows und Linux / WSL: ähnliche Idee, andere Wurzel <a class="anchor" href="#wsl" aria-label="Abschnitt verlinken">#</a></h2>
+                <p class="footnote"><a href="#top">↑ Zum Seitenanfang</a></p>
+            </section>
+            <section id="wsl" aria-labelledby="title-wsl"><span class="crumb">Praxiswissen · Windows</span>
+                <h2 id="title-wsl">18 · Windows und Linux / WSL: ähnliche Idee, andere Wurzel <a class="anchor"
+                        href="#wsl" aria-label="Abschnitt verlinken">#</a></h2>
 
-<p>Unter Linux beginnen absolute Pfade mit <code>/</code>, Windows nutzt gewöhnlich eine Laufwerksangabe und den Backslash. Die Konzepte <code>.</code> und <code>..</code> sind vertraut, aber die Wurzeln unterscheiden sich.</p>
-<div class="table-wrap"><table><thead><tr><th scope="col">Kontext</th><th scope="col">Beispiel</th></tr></thead><tbody><tr><td>Linux oder WSL</td><td><code>/home/benutzer/projekt</code></td></tr><tr><td>Windows</td><td><code>C:\Users\Benutzer\projekt</code></td></tr><tr><td>WSL-Zugriff auf Windows-C:</td><td><code>/mnt/c/Users/Benutzer/projekt</code></td></tr><tr><td>Explorer-Zugriff auf WSL-Dateien</td><td><code>\\wsl.localhost\Ubuntu\home\benutzer</code> (Distributionsname kann abweichen)</td></tr></tbody></table></div>
-<p>Die Tilde <code>~</code> ist in Linux-Shells und in PowerShell gebräuchlich, aber kein universelles Präfix für Windows-Explorer-Verknüpfungen. Zwischen WSL- und Windows-Tools Dateipfade möglichst explizit umwandeln.</p>
+                <p>Unter Linux beginnen absolute Pfade mit <code>/</code>, Windows nutzt gewöhnlich eine Laufwerksangabe
+                    und den Backslash. Die Konzepte <code>.</code> und <code>..</code> sind vertraut, aber die Wurzeln
+                    unterscheiden sich.</p>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th scope="col">Kontext</th>
+                                <th scope="col">Beispiel</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Linux oder WSL</td>
+                                <td><code>/home/benutzer/projekt</code></td>
+                            </tr>
+                            <tr>
+                                <td>Windows</td>
+                                <td><code>C:\Users\Benutzer\projekt</code></td>
+                            </tr>
+                            <tr>
+                                <td>WSL-Zugriff auf Windows-C:</td>
+                                <td><code>/mnt/c/Users/Benutzer/projekt</code></td>
+                            </tr>
+                            <tr>
+                                <td>Explorer-Zugriff auf WSL-Dateien</td>
+                                <td><code>\\wsl.localhost\Ubuntu\home\benutzer</code> (Distributionsname kann abweichen)
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p>Die Tilde <code>~</code> ist in Linux-Shells und in PowerShell gebräuchlich, aber kein universelles
+                    Präfix für Windows-Explorer-Verknüpfungen. Zwischen WSL- und Windows-Tools Dateipfade möglichst
+                    explizit umwandeln.</p>
 
-<p class="footnote"><a href="#top">↑ Zum Seitenanfang</a></p>
-</section>
-<section id="grenzen" aria-labelledby="title-grenzen"><span class="crumb">Praxiswissen · Windows</span><h2 id="title-grenzen">19 · Pfadlängen, Dateisysteme und Berechtigungen <a class="anchor" href="#grenzen" aria-label="Abschnitt verlinken">#</a></h2>
+                <p class="footnote"><a href="#top">↑ Zum Seitenanfang</a></p>
+            </section>
+            <section id="grenzen" aria-labelledby="title-grenzen"><span class="crumb">Praxiswissen · Windows</span>
+                <h2 id="title-grenzen">19 · Pfadlängen, Dateisysteme und Berechtigungen <a class="anchor"
+                        href="#grenzen" aria-label="Abschnitt verlinken">#</a></h2>
 
-<h3>Pfadlänge: die 260-Zeichen-Falle</h3>
-<p>Die traditionelle Win32-Grenze <code>MAX_PATH</code> liegt bei 260 Zeichen. Moderne Windows-Versionen erlauben längere Pfade in vielen Situationen, jedoch nicht automatisch in jeder Anwendung. Systemkonfiguration <em>und</em> die jeweilige Anwendung müssen das unterstützen.</p>
-<p class="muted"><small>Erweiterte Win32-Pfadsyntax für passende APIs</small></p><pre><code>\\?\C:\Sehr\Langer\Pfad\Datei.txt
+                <h3>Pfadlänge: die 260-Zeichen-Falle</h3>
+                <p>Die traditionelle Win32-Grenze <code>MAX_PATH</code> liegt bei 260 Zeichen. Moderne Windows-Versionen
+                    erlauben längere Pfade in vielen Situationen, jedoch nicht automatisch in jeder Anwendung.
+                    Systemkonfiguration <em>und</em> die jeweilige Anwendung müssen das unterstützen.</p>
+                <p class="muted"><small>Erweiterte Win32-Pfadsyntax für passende APIs</small></p>
+                <pre><code>\\?\C:\Sehr\Langer\Pfad\Datei.txt
 \\?\UNC\Server\Freigabe\Ordner\Datei.txt</code></pre>
-<p>Diese Präfixe sind kein universeller Trick für Explorer, Browser oder jedes Kommando. Für alltägliche Dateiarbeit sollte man zuerst eine kürzere, nachvollziehbare Ordnerstruktur wählen.</p>
-<h3>Dateisystem ist nicht gleich Dateisystem</h3>
-<p>NTFS, exFAT und FAT32 unterscheiden sich unter anderem bei Rechten, Links, Dateigrößen und Metadaten. Insbesondere unterstützt ein exFAT-USB-Stick nicht dieselben NTFS-Linkmechanismen wie ein internes NTFS-Laufwerk.</p>
-<h3>Warum ist ein gültiger Pfad trotzdem unzugänglich?</h3>
-<ul><li>Das Laufwerk fehlt, ist nicht eingebunden oder ist verschlüsselt.</li><li>Freigaben, Netzwerk oder Berechtigungen fehlen.</li><li>Der Ordner wurde umbenannt, verschoben oder gelöscht.</li><li>Die Anwendung hat andere Rechte als der interaktiv angemeldete Nutzer.</li><li>Der Pfad wird in der falschen Syntax oder mit falschen Anführungszeichen übergeben.</li></ul>
+                <p>Diese Präfixe sind kein universeller Trick für Explorer, Browser oder jedes Kommando. Für alltägliche
+                    Dateiarbeit sollte man zuerst eine kürzere, nachvollziehbare Ordnerstruktur wählen.</p>
+                <h3>Dateisystem ist nicht gleich Dateisystem</h3>
+                <p>NTFS, exFAT und FAT32 unterscheiden sich unter anderem bei Rechten, Links, Dateigrößen und Metadaten.
+                    Insbesondere unterstützt ein exFAT-USB-Stick nicht dieselben NTFS-Linkmechanismen wie ein internes
+                    NTFS-Laufwerk.</p>
+                <h3>Warum ist ein gültiger Pfad trotzdem unzugänglich?</h3>
+                <ul>
+                    <li>Das Laufwerk fehlt, ist nicht eingebunden oder ist verschlüsselt.</li>
+                    <li>Freigaben, Netzwerk oder Berechtigungen fehlen.</li>
+                    <li>Der Ordner wurde umbenannt, verschoben oder gelöscht.</li>
+                    <li>Die Anwendung hat andere Rechte als der interaktiv angemeldete Nutzer.</li>
+                    <li>Der Pfad wird in der falschen Syntax oder mit falschen Anführungszeichen übergeben.</li>
+                </ul>
 
-<p class="footnote"><a href="#top">↑ Zum Seitenanfang</a></p>
-</section>
-<section id="werkzeuge" aria-labelledby="title-werkzeuge"><span class="crumb">Praxiswissen · Windows</span><h2 id="title-werkzeuge">20 · Fehlersuche und Werkzeugkasten <a class="anchor" href="#werkzeuge" aria-label="Abschnitt verlinken">#</a></h2>
+                <p class="footnote"><a href="#top">↑ Zum Seitenanfang</a></p>
+            </section>
+            <section id="werkzeuge" aria-labelledby="title-werkzeuge"><span class="crumb">Praxiswissen · Windows</span>
+                <h2 id="title-werkzeuge">20 · Fehlersuche und Werkzeugkasten <a class="anchor" href="#werkzeuge"
+                        aria-label="Abschnitt verlinken">#</a></h2>
 
-<p>Bevor du eine komplexe Lösung schreibst, prüfe in dieser Reihenfolge: Existiert das Laufwerk? Existiert der Ordner? Wie lautet das aktuelle Verzeichnis? Welche Shell interpretiert den Pfad?</p>
-<div class="table-wrap"><table><thead><tr><th scope="col">Was will ich wissen?</th><th scope="col">Geeigneter Befehl / Weg</th></tr></thead><tbody><tr><td>Aktueller Ort in CMD</td><td><code>cd</code> oder <code>echo %CD%</code></td></tr><tr><td>Aktueller Ort in PowerShell</td><td><code>Get-Location</code></td></tr><tr><td>Existiert die Datei exakt?</td><td><code>Test-Path -LiteralPath &quot;F:\Daten\a.txt&quot;</code></td></tr><tr><td>Welche Laufwerke sind vorhanden?</td><td><code>Get-Volume</code></td></tr><tr><td>Welches Programm wird gefunden?</td><td><code>where.exe python</code> (CMD) oder <code>Get-Command python</code> (PowerShell)</td></tr><tr><td>Ordner über Explorer öffnen</td><td><code>explorer.exe &quot;F:\Daten&quot;</code></td></tr><tr><td>Laufwerksverwaltung öffnen</td><td><code>diskmgmt.msc</code></td></tr><tr><td>Dateipfad im Explorer kopieren</td><td><kbd>Strg</kbd> + <kbd>Umschalt</kbd> + <kbd>C</kbd> in passenden Explorer-Versionen oder Kontextmenü „Als Pfad kopieren“.</td></tr></tbody></table></div>
-<h3>Dateien sicher kopieren: zunächst Probelauf</h3>
-<p class="muted"><small>CMD: /L zeigt nur an, was kopiert würde</small></p><pre><code>robocopy &quot;C:\Quelle&quot; &quot;F:\Backup&quot; /E /L</code></pre>
-<p>Erst wenn die angezeigten Quell- und Zielordner stimmen, <code>/L</code> für den tatsächlichen Kopiervorgang entfernen. <code>/MIR</code> ist ausdrücklich <strong>nicht</strong> einfach „mehr Backup“: Spiegelung kann Dateien am Ziel löschen, die in der Quelle nicht existieren.</p>
-<h3>Häufige Fehlermeldungen richtig lesen</h3>
-<div class="table-wrap"><table><thead><tr><th scope="col">Meldung</th><th scope="col">Mögliche Ursache / nächster Test</th></tr></thead><tbody><tr><td>Pfad nicht gefunden</td><td>Laufwerksbuchstabe und alle Ordnerkomponenten prüfen; einzeln von der Wurzel aus navigieren.</td></tr><tr><td>Zugriff verweigert</td><td>NTFS-/Freigaberechte, Verschlüsselung oder geöffnete Datei prüfen.</td></tr><tr><td>Datei nicht gefunden</td><td>Mit <code>Get-ChildItem</code> bzw. Explorer Erweiterung und Schreibweise kontrollieren.</td></tr><tr><td>Skript wird nicht ausgeführt</td><td>PowerShell-Ausführungsrichtlinie, Dateityp und Vertrauenswürdigkeit prüfen.</td></tr><tr><td>Funktioniert auf meinem PC, anderswo nicht</td><td>Relative Basis, Profilumleitung, Programminstallation und USB-Laufwerksbuchstaben untersuchen.</td></tr></tbody></table></div>
+                <p>Bevor du eine komplexe Lösung schreibst, prüfe in dieser Reihenfolge: Existiert das Laufwerk?
+                    Existiert der Ordner? Wie lautet das aktuelle Verzeichnis? Welche Shell interpretiert den Pfad?</p>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th scope="col">Was will ich wissen?</th>
+                                <th scope="col">Geeigneter Befehl / Weg</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Aktueller Ort in CMD</td>
+                                <td><code>cd</code> oder <code>echo %CD%</code></td>
+                            </tr>
+                            <tr>
+                                <td>Aktueller Ort in PowerShell</td>
+                                <td><code>Get-Location</code></td>
+                            </tr>
+                            <tr>
+                                <td>Existiert die Datei exakt?</td>
+                                <td><code>Test-Path -LiteralPath &quot;F:\Daten\a.txt&quot;</code></td>
+                            </tr>
+                            <tr>
+                                <td>Welche Laufwerke sind vorhanden?</td>
+                                <td><code>Get-Volume</code></td>
+                            </tr>
+                            <tr>
+                                <td>Welches Programm wird gefunden?</td>
+                                <td><code>where.exe python</code> (CMD) oder <code>Get-Command python</code>
+                                    (PowerShell)</td>
+                            </tr>
+                            <tr>
+                                <td>Ordner über Explorer öffnen</td>
+                                <td><code>explorer.exe &quot;F:\Daten&quot;</code></td>
+                            </tr>
+                            <tr>
+                                <td>Laufwerksverwaltung öffnen</td>
+                                <td><code>diskmgmt.msc</code></td>
+                            </tr>
+                            <tr>
+                                <td>Dateipfad im Explorer kopieren</td>
+                                <td><kbd>Strg</kbd> + <kbd>Umschalt</kbd> + <kbd>C</kbd> in passenden Explorer-Versionen
+                                    oder Kontextmenü „Als Pfad kopieren“.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <h3>Dateien sicher kopieren: zunächst Probelauf</h3>
+                <p class="muted"><small>CMD: /L zeigt nur an, was kopiert würde</small></p>
+                <pre><code>robocopy &quot;C:\Quelle&quot; &quot;F:\Backup&quot; /E /L</code></pre>
+                <p>Erst wenn die angezeigten Quell- und Zielordner stimmen, <code>/L</code> für den tatsächlichen
+                    Kopiervorgang entfernen. <code>/MIR</code> ist ausdrücklich <strong>nicht</strong> einfach „mehr
+                    Backup“: Spiegelung kann Dateien am Ziel löschen, die in der Quelle nicht existieren.</p>
+                <h3>Häufige Fehlermeldungen richtig lesen</h3>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th scope="col">Meldung</th>
+                                <th scope="col">Mögliche Ursache / nächster Test</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Pfad nicht gefunden</td>
+                                <td>Laufwerksbuchstabe und alle Ordnerkomponenten prüfen; einzeln von der Wurzel aus
+                                    navigieren.</td>
+                            </tr>
+                            <tr>
+                                <td>Zugriff verweigert</td>
+                                <td>NTFS-/Freigaberechte, Verschlüsselung oder geöffnete Datei prüfen.</td>
+                            </tr>
+                            <tr>
+                                <td>Datei nicht gefunden</td>
+                                <td>Mit <code>Get-ChildItem</code> bzw. Explorer Erweiterung und Schreibweise
+                                    kontrollieren.</td>
+                            </tr>
+                            <tr>
+                                <td>Skript wird nicht ausgeführt</td>
+                                <td>PowerShell-Ausführungsrichtlinie, Dateityp und Vertrauenswürdigkeit prüfen.</td>
+                            </tr>
+                            <tr>
+                                <td>Funktioniert auf meinem PC, anderswo nicht</td>
+                                <td>Relative Basis, Profilumleitung, Programminstallation und USB-Laufwerksbuchstaben
+                                    untersuchen.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
 
-<p class="footnote"><a href="#top">↑ Zum Seitenanfang</a></p>
-</section>
-<section id="entscheidungsbaum" aria-labelledby="title-entscheidungsbaum"><span class="crumb">Praxiswissen · Windows</span><h2 id="title-entscheidungsbaum">21 · Welche Pfadstrategie ist die richtige? <a class="anchor" href="#entscheidungsbaum" aria-label="Abschnitt verlinken">#</a></h2>
+                <p class="footnote"><a href="#top">↑ Zum Seitenanfang</a></p>
+            </section>
+            <section id="entscheidungsbaum" aria-labelledby="title-entscheidungsbaum"><span class="crumb">Praxiswissen ·
+                    Windows</span>
+                <h2 id="title-entscheidungsbaum">21 · Welche Pfadstrategie ist die richtige? <a class="anchor"
+                        href="#entscheidungsbaum" aria-label="Abschnitt verlinken">#</a></h2>
 
-<div class="grid2">
-<div class="mini"><h3>Nur dieser PC?</h3><p><strong>Absoluter Pfad</strong> ist oft völlig ausreichend: <code>C:\Projekte\...</code>.</p></div>
-<div class="mini"><h3>Mehrere Benutzer auf einem PC?</h3><p><strong>Benutzerprofil oder Known Folder</strong> verwenden, z. B. <code>%USERPROFILE%</code> oder die passende API.</p></div>
-<div class="mini"><h3>Projekt wird verschoben oder geteilt?</h3><p><strong>Relative Pfade ab einem bewusst definierten Projekt- oder Skriptverzeichnis</strong>.</p></div>
-<div class="mini"><h3>USB-Stick an beliebigen PCs?</h3><p><strong>Startdatei auf dem Stick</strong> mit <code>%~d0</code> bzw. <code>%~dp0</code>.</p></div>
-<div class="mini"><h3>Desktopstarter für bestimmten USB-Stick?</h3><p><strong>Suche nach Volume-Label plus Ordnerprüfung</strong>; Duplikate und Skriptrichtlinien berücksichtigen.</p></div>
-<div class="mini"><h3>Server oder NAS?</h3><p><strong>UNC-Pfad</strong> bevorzugen, wenn die Freigabe über mehrere Rechner konsistent erreichbar sein soll.</p></div>
-</div>
-<p><strong>Grundregel:</strong> Je portabler eine Lösung werden soll, desto weniger sollte sie von willkürlichen Laufwerksbuchstaben, konkreten Benutzernamen oder unkontrollierten Arbeitsverzeichnissen abhängen.</p>
+                <div class="grid2">
+                    <div class="mini">
+                        <h3>Nur dieser PC?</h3>
+                        <p><strong>Absoluter Pfad</strong> ist oft völlig ausreichend: <code>C:\Projekte\...</code>.</p>
+                    </div>
+                    <div class="mini">
+                        <h3>Mehrere Benutzer auf einem PC?</h3>
+                        <p><strong>Benutzerprofil oder Known Folder</strong> verwenden, z. B. <code>%USERPROFILE%</code>
+                            oder die passende API.</p>
+                    </div>
+                    <div class="mini">
+                        <h3>Projekt wird verschoben oder geteilt?</h3>
+                        <p><strong>Relative Pfade ab einem bewusst definierten Projekt- oder Skriptverzeichnis</strong>.
+                        </p>
+                    </div>
+                    <div class="mini">
+                        <h3>USB-Stick an beliebigen PCs?</h3>
+                        <p><strong>Startdatei auf dem Stick</strong> mit <code>%~d0</code> bzw. <code>%~dp0</code>.</p>
+                    </div>
+                    <div class="mini">
+                        <h3>Desktopstarter für bestimmten USB-Stick?</h3>
+                        <p><strong>Suche nach Volume-Label plus Ordnerprüfung</strong>; Duplikate und Skriptrichtlinien
+                            berücksichtigen.</p>
+                    </div>
+                    <div class="mini">
+                        <h3>Server oder NAS?</h3>
+                        <p><strong>UNC-Pfad</strong> bevorzugen, wenn die Freigabe über mehrere Rechner konsistent
+                            erreichbar sein soll.</p>
+                    </div>
+                </div>
+                <p><strong>Grundregel:</strong> Je portabler eine Lösung werden soll, desto weniger sollte sie von
+                    willkürlichen Laufwerksbuchstaben, konkreten Benutzernamen oder unkontrollierten
+                    Arbeitsverzeichnissen abhängen.</p>
 
-<p class="footnote"><a href="#top">↑ Zum Seitenanfang</a></p>
-</section>
-<section id="quiz" aria-labelledby="title-quiz"><span class="crumb">Praxiswissen · Windows</span><h2 id="title-quiz">22 · Kleine Selbstkontrolle <a class="anchor" href="#quiz" aria-label="Abschnitt verlinken">#</a></h2>
+                <p class="footnote"><a href="#top">↑ Zum Seitenanfang</a></p>
+            </section>
+            <section id="quiz" aria-labelledby="title-quiz"><span class="crumb">Praxiswissen · Windows</span>
+                <h2 id="title-quiz">22 · Kleine Selbstkontrolle <a class="anchor" href="#quiz"
+                        aria-label="Abschnitt verlinken">#</a></h2>
 
-<details><summary>1. Ist <code>C:Daten\Text.txt</code> ein absoluter Pfad?</summary><p>Nein. Der Pfad ist laufwerksrelativ. Vollständig wäre etwa <code>C:\Daten\Text.txt</code>.</p></details>
-<details><summary>2. Was ist der Unterschied zwischen <code>%CD%</code> und <code>%~dp0</code>?</summary><p><code>%CD%</code> ist das aktuelle Arbeitsverzeichnis. <code>%~dp0</code> ist Laufwerk plus Verzeichnis der gerade ausgeführten Batchdatei.</p></details>
-<details><summary>3. Wie greife ich in PowerShell auf das Benutzerprofil zu?</summary><p>Mit <code>$HOME</code> oder <code>$env:USERPROFILE</code>. <code>%USERPROFILE%</code> ist CMD-/Umgebungsvariablensyntax.</p></details>
-<details><summary>4. Macht die Volumebezeichnung KINGSTON meinen USB-Stick eindeutig?</summary><p>Nein. Bezeichnungen können geändert werden und sind nicht zwingend einmalig. Darum vor dem Öffnen zusätzlich den erwarteten Ordnerpfad prüfen.</p></details>
-<details><summary>5. Kann meine Website ein <code>F:\Fachbücher</code> des Besuchers öffnen?</summary><p>Eine über HTTPS ausgelieferte Website kann lokale Datenträger aus Sicherheitsgründen nicht beliebig durchsuchen. HTML-Links verwenden URL-Regeln, keine Windows-Laufwerksadressierung.</p></details>
+                <details>
+                    <summary>1. Ist <code>C:Daten\Text.txt</code> ein absoluter Pfad?</summary>
+                    <p>Nein. Der Pfad ist laufwerksrelativ. Vollständig wäre etwa <code>C:\Daten\Text.txt</code>.</p>
+                </details>
+                <details>
+                    <summary>2. Was ist der Unterschied zwischen <code>%CD%</code> und <code>%~dp0</code>?</summary>
+                    <p><code>%CD%</code> ist das aktuelle Arbeitsverzeichnis. <code>%~dp0</code> ist Laufwerk plus
+                        Verzeichnis der gerade ausgeführten Batchdatei.</p>
+                </details>
+                <details>
+                    <summary>3. Wie greife ich in PowerShell auf das Benutzerprofil zu?</summary>
+                    <p>Mit <code>$HOME</code> oder <code>$env:USERPROFILE</code>. <code>%USERPROFILE%</code> ist
+                        CMD-/Umgebungsvariablensyntax.</p>
+                </details>
+                <details>
+                    <summary>4. Macht die Volumebezeichnung KINGSTON meinen USB-Stick eindeutig?</summary>
+                    <p>Nein. Bezeichnungen können geändert werden und sind nicht zwingend einmalig. Darum vor dem Öffnen
+                        zusätzlich den erwarteten Ordnerpfad prüfen.</p>
+                </details>
+                <details>
+                    <summary>5. Kann meine Website ein <code>F:\Fachbücher</code> des Besuchers öffnen?</summary>
+                    <p>Eine über HTTPS ausgelieferte Website kann lokale Datenträger aus Sicherheitsgründen nicht
+                        beliebig durchsuchen. HTML-Links verwenden URL-Regeln, keine Windows-Laufwerksadressierung.</p>
+                </details>
 
-<p class="footnote"><a href="#top">↑ Zum Seitenanfang</a></p>
-</section>
-<section id="quellen" aria-labelledby="title-quellen"><span class="crumb">Praxiswissen · Windows</span><h2 id="title-quellen">23 · Quellen und weiterführende Dokumentation <a class="anchor" href="#quellen" aria-label="Abschnitt verlinken">#</a></h2>
+                <p class="footnote"><a href="#top">↑ Zum Seitenanfang</a></p>
+            </section>
+            <section id="quellen" aria-labelledby="title-quellen"><span class="crumb">Praxiswissen · Windows</span>
+                <h2 id="title-quellen">23 · Quellen und weiterführende Dokumentation <a class="anchor" href="#quellen"
+                        aria-label="Abschnitt verlinken">#</a></h2>
 
-<p>Die praktischen Beispiele orientieren sich an den dokumentierten Windows-/PowerShell-Pfadregeln. Für Spezialfälle – etwa Windows-API-Aufrufe, Reparse Points oder systemweite Richtlinien – sind die Herstellerdokumentationen maßgeblich.</p>
-<ul class="references">
-<li><a href="https://learn.microsoft.com/de-de/windows/win32/fileio/naming-a-file" target="_blank" rel="noopener noreferrer">Microsoft Learn: Benennen von Dateien, Pfaden und Namespaces</a></li>
-<li><a href="https://learn.microsoft.com/de-de/dotnet/standard/io/file-path-formats" target="_blank" rel="noopener noreferrer">Microsoft Learn: Formate von Dateipfaden unter Windows</a></li>
-<li><a href="https://learn.microsoft.com/de-de/windows/win32/fileio/maximum-file-path-limitation" target="_blank" rel="noopener noreferrer">Microsoft Learn: Maximale Längenbeschränkung für Pfade</a></li>
-<li><a href="https://learn.microsoft.com/de-de/windows-server/administration/windows-commands/mklink" target="_blank" rel="noopener noreferrer">Microsoft Learn: mklink</a></li>
-<li><a href="https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_locations?view=powershell-7.5" target="_blank" rel="noopener noreferrer">Microsoft Learn: PowerShell – about_Locations</a></li>
-<li><a href="https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_automatic_variables?view=powershell-5.1" target="_blank" rel="noopener noreferrer">Microsoft Learn: PowerShell – automatische Variablen</a></li>
-</ul>
-<p class="footnote">Stand: Oktober 2026 · Schwerpunkt: Windows 10/11, CMD, Windows PowerShell/PowerShell und portable Datenträger. Die beschriebene Funktionsweise kann durch Unternehmensrichtlinien oder abweichende Dateisysteme eingeschränkt werden.</p>
+                <p>Die praktischen Beispiele orientieren sich an den dokumentierten Windows-/PowerShell-Pfadregeln. Für
+                    Spezialfälle – etwa Windows-API-Aufrufe, Reparse Points oder systemweite Richtlinien – sind die
+                    Herstellerdokumentationen maßgeblich.</p>
+                <ul class="references">
+                    <li><a href="https://learn.microsoft.com/de-de/windows/win32/fileio/naming-a-file" target="_blank"
+                            rel="noopener noreferrer">Microsoft Learn: Benennen von Dateien, Pfaden und Namespaces</a>
+                    </li>
+                    <li><a href="https://learn.microsoft.com/de-de/dotnet/standard/io/file-path-formats" target="_blank"
+                            rel="noopener noreferrer">Microsoft Learn: Formate von Dateipfaden unter Windows</a></li>
+                    <li><a href="https://learn.microsoft.com/de-de/windows/win32/fileio/maximum-file-path-limitation"
+                            target="_blank" rel="noopener noreferrer">Microsoft Learn: Maximale Längenbeschränkung für
+                            Pfade</a></li>
+                    <li><a href="https://learn.microsoft.com/de-de/windows-server/administration/windows-commands/mklink"
+                            target="_blank" rel="noopener noreferrer">Microsoft Learn: mklink</a></li>
+                    <li><a href="https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_locations?view=powershell-7.5"
+                            target="_blank" rel="noopener noreferrer">Microsoft Learn: PowerShell – about_Locations</a>
+                    </li>
+                    <li><a href="https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_automatic_variables?view=powershell-5.1"
+                            target="_blank" rel="noopener noreferrer">Microsoft Learn: PowerShell – automatische
+                            Variablen</a></li>
+                </ul>
+                <p class="footnote">Stand: Oktober 2026 · Schwerpunkt: Windows 10/11, CMD, Windows PowerShell/PowerShell
+                    und portable Datenträger. Die beschriebene Funktionsweise kann durch Unternehmensrichtlinien oder
+                    abweichende Dateisysteme eingeschränkt werden.</p>
 
-<p class="footnote"><a href="#top">↑ Zum Seitenanfang</a></p>
-</section>
-    </main>
-  </div>
-  <footer>Windows-Pfade – technisches Nachschlagewerk. HTML-Struktur mit den bestehenden Stylesheets <code>main.css</code> und <code>serious.css</code>. <a href="#top">Nach oben ↑</a></footer>
+                <p class="footnote"><a href="#top">↑ Zum Seitenanfang</a></p>
+            </section>
+        </main>
+    </div>
+    <footer>Windows-Pfade – technisches Nachschlagewerk. HTML-Struktur mit den bestehenden Stylesheets
+        <code>main.css</code> und <code>serious.css</code>. <a href="#top">Nach oben ↑</a></footer>
 </body>
+
 </html>
