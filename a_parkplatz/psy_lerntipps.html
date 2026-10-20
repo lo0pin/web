@@ -1,527 +1,1333 @@
 <!doctype html>
 <html lang="de">
+
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Ein eigenständig verfasstes, wissenschaftlich eingeordnetes Lernkompendium: 111 umsetzbare Tipps, tägliche Impulse, Lerntechniken, Prüfungen, Lesen, Schreiben und eine vollständige Suchübersicht.">
-  <title>Lernen lernen – 111 praktische Lerntipps | Knowledge</title>
-  <link rel="stylesheet" href="../assets/css/main.css">
-  <!-- Pfadannahme: Diese Datei liegt unter /web/words/lernen.html. -->
-  <style>
-    /* Ergänzt das vorhandene main.css ohne Eingriff in die globale Gestaltung. */
-    .learn-page { --learn-ink:#183346; --learn-accent:#1d6673; --learn-soft:#eaf3f3; --learn-warm:#fff8ea; }
-    .learn-page .content { max-width:1160px; padding-top:1.7rem; }
-    .learn-page h1,.learn-page h2,.learn-page h3 { line-height:1.25; overflow-wrap:anywhere; }
-    .learn-page h1 { font-size:clamp(2rem,5vw,3.55rem); margin:.35rem 0 .9rem; letter-spacing:-.035em; }
-    .learn-page h2 { font-size:clamp(1.3rem,2.7vw,1.85rem); margin:0 0 .85rem; }
-    .learn-page h3 { font-size:1.12rem; margin:1.25rem 0 .45rem; }
-    .learn-page p { line-height:1.73; }
-    .learn-page .page-lead { font-size:1.13rem; max-width:75ch; }
-    .learn-page .eyebrow { color:var(--learn-accent); letter-spacing:.12em; text-transform:uppercase; font-size:.76rem; font-weight:800; }
-    .learn-page .intro { background:linear-gradient(130deg,#f7faf9,#e7f2f1); border:1px solid #d2e5e3; border-radius:var(--radius,16px); padding:clamp(1.2rem,3.5vw,2.5rem); }
-    .learn-page .intro .kicker { max-width:75ch; }
-    .learn-page .intro-meta { display:flex; flex-wrap:wrap; gap:.6rem; margin-top:1.4rem; }
-    .learn-page .intro-meta span { border:1px solid #bddbd7; background:#fff9; border-radius:999px; padding:.3rem .72rem; font-size:.84rem; }
-    .learn-page .jump-nav { display:flex; flex-wrap:wrap; gap:.45rem; margin:1.1rem 0; }
-    .learn-page .jump-nav a { text-decoration:none; border:1px solid var(--border); border-radius:999px; background:var(--surface); padding:.43rem .75rem; font-size:.9rem; }
-    .learn-page .jump-nav a:hover,.learn-page .jump-nav a:focus-visible { border-color:var(--learn-accent); color:var(--learn-accent); }
-    .learn-page .learn-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1rem; }
-    .learn-page .card { margin:1.15rem 0; }
-    .learn-page .card> :first-child { margin-top:0; }
-    .learn-page .muted { color:var(--muted,#6b7280); }
-    .learn-page .tag { color:var(--learn-accent); font-size:.82rem; font-weight:700; letter-spacing:.03em; }
-    .learn-page .quote-line { font-size:clamp(1.38rem,2.5vw,2.05rem); line-height:1.35; font-weight:720; margin:.45rem 0 .8rem; color:var(--learn-ink); }
-    .learn-page .daycard { border-left:5px solid var(--learn-accent); background:linear-gradient(110deg,#fff,#f5fafa); }
-    .learn-page .daycard .card-meta { margin:.2rem 0; }
-    .learn-page .button-row { display:flex; gap:.55rem; flex-wrap:wrap; margin-top:1rem; }
-    .learn-page button,.learn-page select,.learn-page input[type="search"],.learn-page input[type="text"],.learn-page input[type="number"] { font:inherit; }
-    .learn-page button { cursor:pointer; border:1px solid #a8c9c8; border-radius:9px; padding:.55rem .85rem; background:#fff; color:#164956; font-weight:650; }
-    .learn-page button:hover { background:var(--learn-soft); }
-    .learn-page button:focus-visible,.learn-page input:focus-visible,.learn-page select:focus-visible { outline:3px solid #6db8c7; outline-offset:2px; }
-    .learn-page button.primary { border-color:var(--learn-accent); background:var(--learn-accent); color:white; }
-    .learn-page button.primary:hover { background:#124e59; }
-    .learn-page button[aria-pressed="true"] { background:#edf5ef; color:#236344; border-color:#a9c9b4; }
-    .learn-page .twocol { display:grid; grid-template-columns:minmax(0,1.6fr) minmax(250px,.9fr); gap:1.4rem; align-items:start; }
-    .learn-page .soft-note { padding:1rem 1.15rem; border-radius:12px; border:1px solid #e0e4d7; background:var(--learn-warm); }
-    .learn-page .soft-note p:last-child { margin-bottom:0; }
-    .learn-page .chapter-index { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:.8rem; list-style:none; padding:0; margin:1.2rem 0; }
-    .learn-page .chapter-index a { display:block; height:100%; padding:1rem; border:1px solid var(--border); border-radius:12px; background:white; text-decoration:none; }
-    .learn-page .chapter-index a:hover { border-color:var(--learn-accent); }
-    .learn-page .chapter-index small { display:block; color:var(--muted); line-height:1.4; margin-top:.4rem; }
-    .learn-page .chapter { scroll-margin-top:1rem; }
-    .learn-page .chapter .source-hint { font-size:.83rem; color:var(--muted); border-top:1px solid var(--border); padding-top:.6rem; margin-top:1rem; }
-    .learn-page .chapter ul,.learn-page .chapter ol { padding-left:1.3rem; }
-    .learn-page .chapter li { margin-bottom:.5rem; }
-    .learn-page .table-scroll { overflow-x:auto; border:1px solid var(--border); border-radius:12px; background:white; }
-    .learn-page table { border-collapse:collapse; width:100%; min-width:670px; font-size:.94rem; }
-    .learn-page th,.learn-page td { border-bottom:1px solid var(--border); padding:.73rem .78rem; text-align:left; vertical-align:top; }
-    .learn-page th { background:#f1f5f4; font-weight:730; color:var(--learn-ink); }
-    .learn-page tr:last-child td { border-bottom:none; }
-    .learn-page tbody tr:nth-child(even) { background:#fbfcfc; }
-    .learn-page .small-table { margin:1rem 0; }
-    .learn-page .small-table table { min-width:530px; }
-    .learn-page .mini-pill { display:inline-block; border:1px solid #cadbdf; border-radius:7px; background:#f4fafb; padding:.1rem .45rem; font-size:.8rem; white-space:nowrap; }
-    .learn-page .filter-grid { display:grid; grid-template-columns:minmax(180px,2fr) minmax(165px,1.2fr) minmax(145px,.8fr); gap:.7rem; align-items:end; }
-    .learn-page .filter-grid label,.learn-page .planner label { display:flex; gap:.28rem; flex-direction:column; font-size:.88rem; font-weight:650; }
-    .learn-page .filter-grid input,.learn-page .filter-grid select,.learn-page .planner input,.learn-page .planner select { background:#fff; border:1px solid #bdcbcf; border-radius:9px; padding:.6rem; width:100%; color:var(--text); }
-    .learn-page .filter-bottom { display:flex; justify-content:space-between; align-items:center; gap:.6rem; flex-wrap:wrap; margin:1rem 0 .8rem; }
-    .learn-page .simple-checkbox { display:inline-flex; align-items:center; gap:.4rem; font-weight:500; }
-    .learn-page td .fav { padding:.22rem .48rem; line-height:1.3; min-width:2.1rem; }
-    .learn-page td .fav[aria-pressed="true"] { background:#fff7df; color:#795200; border-color:#d9bd6e; }
-    .learn-page td .tip-name { font-weight:700; }
-    .learn-page .tip-detail { margin-top:.5rem; font-size:.9rem; }
-    .learn-page .tip-detail summary { cursor:pointer; color:var(--learn-accent); font-weight:650; }
-    .learn-page .tip-detail p { margin:.45rem 0 .1rem; }
-    .learn-page #catalog tr:target { outline:3px solid #7ab6b0; background:#f0faf8; }
-    .learn-page .count { font-size:.9rem; color:var(--muted); }
-    .learn-page .planner { display:grid; grid-template-columns:minmax(160px,1fr) minmax(115px,.65fr) auto; gap:.65rem; align-items:end; }
-    .learn-page .planner-result { margin-top:1rem; padding:1rem; border:1px solid #bcd5ca; border-radius:10px; background:#f1f8f4; }
-    .learn-page .planner-result:empty { display:none; }
-    .learn-page .planner-result p { margin:.35rem 0; }
-    .learn-page .evidence-list dt { font-weight:760; color:var(--learn-ink); margin-top:1rem; }
-    .learn-page .evidence-list dd { margin:.25rem 0 1rem; }
-    .learn-page .references li { margin-bottom:.65rem; }
-    .learn-page a.back { display:inline-block; font-size:.9rem; margin-top:.6rem; }
-    .learn-page .no-js { background:#fff1cf; border:1px solid #d7bc77; padding:.7rem; border-radius:8px; }
-    .learn-page .main-footer { font-size:.87rem; }
-    @media(max-width:880px) {
-      .learn-page .chapter-index { grid-template-columns:repeat(2,minmax(0,1fr)); }
-      .learn-page .twocol { grid-template-columns:1fr; }
-    }
-    @media(max-width:680px) {
-      .learn-page .learn-grid,.learn-page .chapter-index,.learn-page .filter-grid,.learn-page .planner { grid-template-columns:1fr; }
-      .learn-page .button-row button { flex:1 1 auto; }
-      .learn-page .intro-meta { gap:.35rem; }
-      .learn-page .intro-meta span { font-size:.77rem; }
-      .learn-page .content { padding:.9rem .8rem 2rem; }
-      .learn-page .card { padding:1rem; }
-    }
-    @media print {
-      .learn-page .jump-nav,.learn-page .button-row,.learn-page .filter-grid,.learn-page .filter-bottom,.learn-page .planner,.learn-page .top-nav,.learn-page .back { display:none!important; }
-      .learn-page .card { break-inside:avoid; }
-      .learn-page .chapter { break-inside:auto; }
-      .learn-page a { color:#000; }
-      .learn-page .table-scroll { overflow:visible; }
-      .learn-page table { min-width:0; font-size:.75rem; }
-      .learn-page .site-header,.learn-page .site-footer { background:#fff; }
-    }
-    @media(prefers-reduced-motion:reduce) { .learn-page * { scroll-behavior:auto!important; } }
-  </style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description"
+        content="Ein eigenständig verfasstes, wissenschaftlich eingeordnetes Lernkompendium: 111 umsetzbare Tipps, tägliche Impulse, Lerntechniken, Prüfungen, Lesen, Schreiben und eine vollständige Suchübersicht.">
+    <title>Lernen lernen – 111 praktische Lerntipps | Knowledge</title>
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <!-- Pfadannahme: Diese Datei liegt unter /web/words/lernen.html. -->
+    <style>
+        /* Ergänzt das vorhandene main.css ohne Eingriff in die globale Gestaltung. */
+        .learn-page {
+            --learn-ink: #183346;
+            --learn-accent: #1d6673;
+            --learn-soft: #eaf3f3;
+            --learn-warm: #fff8ea;
+        }
+
+        .learn-page .content {
+            max-width: 1160px;
+            padding-top: 1.7rem;
+        }
+
+        .learn-page h1,
+        .learn-page h2,
+        .learn-page h3 {
+            line-height: 1.25;
+            overflow-wrap: anywhere;
+        }
+
+        .learn-page h1 {
+            font-size: clamp(2rem, 5vw, 3.55rem);
+            margin: .35rem 0 .9rem;
+            letter-spacing: -.035em;
+        }
+
+        .learn-page h2 {
+            font-size: clamp(1.3rem, 2.7vw, 1.85rem);
+            margin: 0 0 .85rem;
+        }
+
+        .learn-page h3 {
+            font-size: 1.12rem;
+            margin: 1.25rem 0 .45rem;
+        }
+
+        .learn-page p {
+            line-height: 1.73;
+        }
+
+        .learn-page .page-lead {
+            font-size: 1.13rem;
+            max-width: 75ch;
+        }
+
+        .learn-page .eyebrow {
+            color: var(--learn-accent);
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            font-size: .76rem;
+            font-weight: 800;
+        }
+
+        .learn-page .intro {
+            background: linear-gradient(130deg, #f7faf9, #e7f2f1);
+            border: 1px solid #d2e5e3;
+            border-radius: var(--radius, 16px);
+            padding: clamp(1.2rem, 3.5vw, 2.5rem);
+        }
+
+        .learn-page .intro .kicker {
+            max-width: 75ch;
+        }
+
+        .learn-page .intro-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .6rem;
+            margin-top: 1.4rem;
+        }
+
+        .learn-page .intro-meta span {
+            border: 1px solid #bddbd7;
+            background: #fff9;
+            border-radius: 999px;
+            padding: .3rem .72rem;
+            font-size: .84rem;
+        }
+
+        .learn-page .jump-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .45rem;
+            margin: 1.1rem 0;
+        }
+
+        .learn-page .jump-nav a {
+            text-decoration: none;
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            background: var(--surface);
+            padding: .43rem .75rem;
+            font-size: .9rem;
+        }
+
+        .learn-page .jump-nav a:hover,
+        .learn-page .jump-nav a:focus-visible {
+            border-color: var(--learn-accent);
+            color: var(--learn-accent);
+        }
+
+        .learn-page .learn-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1rem;
+        }
+
+        .learn-page .card {
+            margin: 1.15rem 0;
+        }
+
+        .learn-page .card> :first-child {
+            margin-top: 0;
+        }
+
+        .learn-page .muted {
+            color: var(--muted, #6b7280);
+        }
+
+        .learn-page .tag {
+            color: var(--learn-accent);
+            font-size: .82rem;
+            font-weight: 700;
+            letter-spacing: .03em;
+        }
+
+        .learn-page .quote-line {
+            font-size: clamp(1.38rem, 2.5vw, 2.05rem);
+            line-height: 1.35;
+            font-weight: 720;
+            margin: .45rem 0 .8rem;
+            color: var(--learn-ink);
+        }
+
+        .learn-page .daycard {
+            border-left: 5px solid var(--learn-accent);
+            background: linear-gradient(110deg, #fff, #f5fafa);
+        }
+
+        .learn-page .daycard .card-meta {
+            margin: .2rem 0;
+        }
+
+        .learn-page .button-row {
+            display: flex;
+            gap: .55rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .learn-page button,
+        .learn-page select,
+        .learn-page input[type="search"],
+        .learn-page input[type="text"],
+        .learn-page input[type="number"] {
+            font: inherit;
+        }
+
+        .learn-page button {
+            cursor: pointer;
+            border: 1px solid #a8c9c8;
+            border-radius: 9px;
+            padding: .55rem .85rem;
+            background: #fff;
+            color: #164956;
+            font-weight: 650;
+        }
+
+        .learn-page button:hover {
+            background: var(--learn-soft);
+        }
+
+        .learn-page button:focus-visible,
+        .learn-page input:focus-visible,
+        .learn-page select:focus-visible {
+            outline: 3px solid #6db8c7;
+            outline-offset: 2px;
+        }
+
+        .learn-page button.primary {
+            border-color: var(--learn-accent);
+            background: var(--learn-accent);
+            color: white;
+        }
+
+        .learn-page button.primary:hover {
+            background: #124e59;
+        }
+
+        .learn-page button[aria-pressed="true"] {
+            background: #edf5ef;
+            color: #236344;
+            border-color: #a9c9b4;
+        }
+
+        .learn-page .twocol {
+            display: grid;
+            grid-template-columns: minmax(0, 1.6fr) minmax(250px, .9fr);
+            gap: 1.4rem;
+            align-items: start;
+        }
+
+        .learn-page .soft-note {
+            padding: 1rem 1.15rem;
+            border-radius: 12px;
+            border: 1px solid #e0e4d7;
+            background: var(--learn-warm);
+        }
+
+        .learn-page .soft-note p:last-child {
+            margin-bottom: 0;
+        }
+
+        .learn-page .chapter-index {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: .8rem;
+            list-style: none;
+            padding: 0;
+            margin: 1.2rem 0;
+        }
+
+        .learn-page .chapter-index a {
+            display: block;
+            height: 100%;
+            padding: 1rem;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: white;
+            text-decoration: none;
+        }
+
+        .learn-page .chapter-index a:hover {
+            border-color: var(--learn-accent);
+        }
+
+        .learn-page .chapter-index small {
+            display: block;
+            color: var(--muted);
+            line-height: 1.4;
+            margin-top: .4rem;
+        }
+
+        .learn-page .chapter {
+            scroll-margin-top: 1rem;
+        }
+
+        .learn-page .chapter .source-hint {
+            font-size: .83rem;
+            color: var(--muted);
+            border-top: 1px solid var(--border);
+            padding-top: .6rem;
+            margin-top: 1rem;
+        }
+
+        .learn-page .chapter ul,
+        .learn-page .chapter ol {
+            padding-left: 1.3rem;
+        }
+
+        .learn-page .chapter li {
+            margin-bottom: .5rem;
+        }
+
+        .learn-page .table-scroll {
+            overflow-x: auto;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: white;
+        }
+
+        .learn-page table {
+            border-collapse: collapse;
+            width: 100%;
+            min-width: 670px;
+            font-size: .94rem;
+        }
+
+        .learn-page th,
+        .learn-page td {
+            border-bottom: 1px solid var(--border);
+            padding: .73rem .78rem;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        .learn-page th {
+            background: #f1f5f4;
+            font-weight: 730;
+            color: var(--learn-ink);
+        }
+
+        .learn-page tr:last-child td {
+            border-bottom: none;
+        }
+
+        .learn-page tbody tr:nth-child(even) {
+            background: #fbfcfc;
+        }
+
+        .learn-page .small-table {
+            margin: 1rem 0;
+        }
+
+        .learn-page .small-table table {
+            min-width: 530px;
+        }
+
+        .learn-page .mini-pill {
+            display: inline-block;
+            border: 1px solid #cadbdf;
+            border-radius: 7px;
+            background: #f4fafb;
+            padding: .1rem .45rem;
+            font-size: .8rem;
+            white-space: nowrap;
+        }
+
+        .learn-page .filter-grid {
+            display: grid;
+            grid-template-columns: minmax(180px, 2fr) minmax(165px, 1.2fr) minmax(145px, .8fr);
+            gap: .7rem;
+            align-items: end;
+        }
+
+        .learn-page .filter-grid label,
+        .learn-page .planner label {
+            display: flex;
+            gap: .28rem;
+            flex-direction: column;
+            font-size: .88rem;
+            font-weight: 650;
+        }
+
+        .learn-page .filter-grid input,
+        .learn-page .filter-grid select,
+        .learn-page .planner input,
+        .learn-page .planner select {
+            background: #fff;
+            border: 1px solid #bdcbcf;
+            border-radius: 9px;
+            padding: .6rem;
+            width: 100%;
+            color: var(--text);
+        }
+
+        .learn-page .filter-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: .6rem;
+            flex-wrap: wrap;
+            margin: 1rem 0 .8rem;
+        }
+
+        .learn-page .simple-checkbox {
+            display: inline-flex;
+            align-items: center;
+            gap: .4rem;
+            font-weight: 500;
+        }
+
+        .learn-page td .fav {
+            padding: .22rem .48rem;
+            line-height: 1.3;
+            min-width: 2.1rem;
+        }
+
+        .learn-page td .fav[aria-pressed="true"] {
+            background: #fff7df;
+            color: #795200;
+            border-color: #d9bd6e;
+        }
+
+        .learn-page td .tip-name {
+            font-weight: 700;
+        }
+
+        .learn-page .tip-detail {
+            margin-top: .5rem;
+            font-size: .9rem;
+        }
+
+        .learn-page .tip-detail summary {
+            cursor: pointer;
+            color: var(--learn-accent);
+            font-weight: 650;
+        }
+
+        .learn-page .tip-detail p {
+            margin: .45rem 0 .1rem;
+        }
+
+        .learn-page #catalog tr:target {
+            outline: 3px solid #7ab6b0;
+            background: #f0faf8;
+        }
+
+        .learn-page .count {
+            font-size: .9rem;
+            color: var(--muted);
+        }
+
+        .learn-page .planner {
+            display: grid;
+            grid-template-columns: minmax(160px, 1fr) minmax(115px, .65fr) auto;
+            gap: .65rem;
+            align-items: end;
+        }
+
+        .learn-page .planner-result {
+            margin-top: 1rem;
+            padding: 1rem;
+            border: 1px solid #bcd5ca;
+            border-radius: 10px;
+            background: #f1f8f4;
+        }
+
+        .learn-page .planner-result:empty {
+            display: none;
+        }
+
+        .learn-page .planner-result p {
+            margin: .35rem 0;
+        }
+
+        .learn-page .evidence-list dt {
+            font-weight: 760;
+            color: var(--learn-ink);
+            margin-top: 1rem;
+        }
+
+        .learn-page .evidence-list dd {
+            margin: .25rem 0 1rem;
+        }
+
+        .learn-page .references li {
+            margin-bottom: .65rem;
+        }
+
+        .learn-page a.back {
+            display: inline-block;
+            font-size: .9rem;
+            margin-top: .6rem;
+        }
+
+        .learn-page .no-js {
+            background: #fff1cf;
+            border: 1px solid #d7bc77;
+            padding: .7rem;
+            border-radius: 8px;
+        }
+
+        .learn-page .main-footer {
+            font-size: .87rem;
+        }
+
+        @media(max-width:880px) {
+            .learn-page .chapter-index {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .learn-page .twocol {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media(max-width:680px) {
+
+            .learn-page .learn-grid,
+            .learn-page .chapter-index,
+            .learn-page .filter-grid,
+            .learn-page .planner {
+                grid-template-columns: 1fr;
+            }
+
+            .learn-page .button-row button {
+                flex: 1 1 auto;
+            }
+
+            .learn-page .intro-meta {
+                gap: .35rem;
+            }
+
+            .learn-page .intro-meta span {
+                font-size: .77rem;
+            }
+
+            .learn-page .content {
+                padding: .9rem .8rem 2rem;
+            }
+
+            .learn-page .card {
+                padding: 1rem;
+            }
+        }
+
+        @media print {
+
+            .learn-page .jump-nav,
+            .learn-page .button-row,
+            .learn-page .filter-grid,
+            .learn-page .filter-bottom,
+            .learn-page .planner,
+            .learn-page .top-nav,
+            .learn-page .back {
+                display: none !important;
+            }
+
+            .learn-page .card {
+                break-inside: avoid;
+            }
+
+            .learn-page .chapter {
+                break-inside: auto;
+            }
+
+            .learn-page a {
+                color: #000;
+            }
+
+            .learn-page .table-scroll {
+                overflow: visible;
+            }
+
+            .learn-page table {
+                min-width: 0;
+                font-size: .75rem;
+            }
+
+            .learn-page .site-header,
+            .learn-page .site-footer {
+                background: #fff;
+            }
+        }
+
+        @media(prefers-reduced-motion:reduce) {
+            .learn-page * {
+                scroll-behavior: auto !important;
+            }
+        }
+    </style>
 </head>
+
 <body class="learn-page">
-<header class="site-header" id="seitenanfang">
-  <div class="header-inner">
-    <p class="site-title">Knowledge · Lernen</p>
-    <nav class="top-nav" aria-label="Navigation">
-      <a href="../index.html">Startseite</a>
-      <a href="home.html">Words &amp; Art</a>
-      <a href="#tipps">111 Tipps</a>
-      <a href="#quellen">Quellen</a>
-    </nav>
-  </div>
-</header>
-<main class="content">
-  <section class="intro" aria-labelledby="page-heading">
-    <span class="eyebrow">Lernpsychologie · Methodik · Praxis</span>
-    <h1 id="page-heading">Lernen lernen.</h1>
-    <p class="page-lead">Wie Wissen entsteht, bleibt und im richtigen Moment verfügbar wird. Ein ausführliches Nachschlagewerk für Lernende, Lehrende und Eltern – mit 111 eigenständig formulierten Anregungen, einer täglichen Rotation und einer vollständigen Tippsammlung.</p>
-    <p class="kicker muted">Ein guter Lernprozess besteht nicht darin, möglichst lange auf eine Buchseite zu blicken. Er besteht darin, Inhalte zu verstehen, sie wiederholt abzurufen, Irrtümer zu korrigieren – und dabei neugierig zu bleiben.</p>
-    <div class="intro-meta" aria-label="Eigenschaften der Seite">
-      <span>111 Praxisimpulse</span><span>12 Themenfelder</span><span>1 Tipp täglich</span><span>Such- und Filterfunktion</span><span>Ohne externe Bibliotheken</span>
-    </div>
-  </section>
-  <nav class="jump-nav" aria-label="Sprungmarken">
-    <a href="#tagesimpuls">Tipp des Tages</a><a href="#sofunktionierts">So funktioniert Lernen</a><a href="#kapitel">Wissenskapitel</a><a href="#tipps">Alle 111 Tipps</a><a href="#lernplan">Lernsitzung planen</a><a href="#einordnung">Wissenschaftliche Einordnung</a>
-  </nav>
-  <div class="learn-grid">
-    <section class="card daycard" id="tagesimpuls" aria-labelledby="day-title">
-      <span class="eyebrow">Dein Tagesimpuls</span>
-      <h2 id="day-title">Heute ausprobieren</h2>
-      <p class="card-meta" id="daily-meta">Tipp wird geladen …</p>
-      <p class="quote-line" id="daily-heading">Eine gute Frage ist ein guter Anfang.</p>
-      <p id="daily-action">Die Tippsammlung ist auch ohne automatische Auswahl im folgenden Verzeichnis zugänglich.</p>
-      <p class="muted" id="daily-note"></p>
-      <div class="button-row">
-        <button type="button" id="another-tip" class="primary">Anderen Tipp entdecken</button>
-        <button type="button" id="today-tip">Zurück zum Tagestipp</button>
-        <button type="button" id="favorite-daily" aria-pressed="false">☆ Merken</button>
-        <button type="button" id="find-daily">In der Liste finden</button>
-      </div>
-      <p class="hint" id="rotation-description">Die Tagesrotation wechselt einmal täglich und berücksichtigt innerhalb eines Zyklus jeden Tipp genau einmal.</p>
-    </section>
-    <section class="card" id="sofunktionierts">
-      <span class="eyebrow">Das Lernprinzip in Kürze</span>
-      <h2>Fünf Schritte, die tragen</h2>
-      <ol>
-        <li><strong>Orientieren:</strong> Was weiß ich schon, welches Ziel verfolge ich?</li>
-        <li><strong>Verstehen:</strong> Wie hängen die neuen Gedanken zusammen?</li>
-        <li><strong>Selbst abrufen:</strong> Kann ich das Wichtigste ohne Vorlage erklären?</li>
-        <li><strong>Rückmeldung nutzen:</strong> Welche Fehler oder Lücken sind sichtbar?</li>
-        <li><strong>Verteilt wiederholen:</strong> Ist das Wissen auch später noch verfügbar?</li>
-      </ol>
-      <div class="soft-note"><strong>Die entscheidende Unterscheidung:</strong><p>„Das kommt mir bekannt vor“ ist nicht dasselbe wie „Ich kann es erklären und anwenden“. Gute Lernmethoden machen genau diesen Unterschied sichtbar.</p></div>
-    </section>
-  </div>
-  <section class="card" aria-labelledby="origin-heading">
-    <div class="twocol">
-      <div>
-        <h2 id="origin-heading">Ausgangspunkt und Eigenständigkeit</h2>
-        <p>Die thematische Anregung für diese Seite stammt aus <em>Die 111 besten Lern-Tipps</em> von <strong>Konrad Puchbauer-Schnabel</strong> (öbv &amp; hpt, Wien, 2002; Nachdruck 2003). Das Buch setzt Schwerpunkte auf ganzheitliches Lernen, Aufmerksamkeit, Wiederholung, Lernorganisation, Belastungsregulation sowie die Förderung des Lesens und Schreibens.</p>
-        <p>Die vorliegende Seite ist <strong>keine digitale Neuauflage</strong>, keine Rekonstruktion der Buchkapitel und keine Übernahme der Buchgrafiken. Sie bietet einen eigenständig entwickelten, neu gegliederten Leitfaden mit <strong>111 neu geschriebenen Praxistipps</strong>, aktuellen methodischen Ergänzungen und gesonderter Bewertung historischer Aussagen.</p>
-      </div>
-      <aside class="soft-note">
-        <strong>Was diese Seite leisten soll</strong>
-        <p>Ein strukturiertes Werkzeug für die Praxis – nicht die Behauptung, jede der 111 Empfehlungen sei empirisch gleich gut belegt. Wo die Evidenz unterschiedlich ausfällt, wird das ausdrücklich erläutert.</p>
-        <p class="muted">Die Quellen und die Einordnung älterer Behauptungen stehen am Seitenende.</p>
-      </aside>
-    </div>
-  </section>
-  <section class="card" id="kapitel" aria-labelledby="index-heading">
-    <h2 id="index-heading">Das Kompendium – zwölf Themenfelder</h2>
-    <p>Für das Verständnis die Kapitel lesen; für die unmittelbare Praxis die einzelnen Tipps nutzen. Beide Zugänge sind bewusst unabhängig voneinander.</p>
-    <ol class="chapter-index">
-      <li><a href="#kap-start"><strong>01 · Einstieg &amp; Aufmerksamkeit</strong><small>Neugier, Ziele, Vorwissen</small></a></li>
-      <li><a href="#kap-understand"><strong>02 · Verstehen &amp; Vernetzen</strong><small>Strukturieren, Erklären, Transfer</small></a></li>
-      <li><a href="#kap-retrieve"><strong>03 · Aktives Lernen</strong><small>Erinnern statt Wiedererkennen</small></a></li>
-      <li><a href="#kap-repeat"><strong>04 · Gedächtnis &amp; Wiederholung</strong><small>Abstände, Abruf, Fehleranalyse</small></a></li>
-      <li><a href="#kap-plan"><strong>05 · Lernplanung</strong><small>Aufgaben, Zeit, Umgebung</small></a></li>
-      <li><a href="#kap-pause"><strong>06 · Körperliche Grundlagen</strong><small>Pausen, Schlaf, Bewegung, Ernährung</small></a></li>
-      <li><a href="#kap-feedback"><strong>07 · Motivation &amp; Feedback</strong><small>Fortschritt, Fehlerkultur, Selbstregulation</small></a></li>
-      <li><a href="#kap-exam"><strong>08 · Prüfungen &amp; Stress</strong><small>Vorbereitung, Abruf unter Druck</small></a></li>
-      <li><a href="#kap-reading"><strong>09 · Lesen</strong><small>Strategien des Textverstehens</small></a></li>
-      <li><a href="#kap-writing"><strong>10 · Schreiben</strong><small>Planen, formulieren, überarbeiten</small></a></li>
-      <li><a href="#kap-teaching"><strong>11 · Unterricht</strong><small>Gutes Erklären und gutes Üben</small></a></li>
-      <li><a href="#kap-family"><strong>12 · Lernen im Alltag</strong><small>Eltern, Selbstständigkeit, Begleitung</small></a></li>
-    </ol>
-  </section>
+    <header class="site-header" id="seitenanfang">
+        <div class="header-inner">
+            <p class="site-title">Knowledge · Lernen</p>
+            <nav class="top-nav" aria-label="Navigation">
+                <a href="../index.html">Startseite</a>
+                <a href="home.html">Words &amp; Art</a>
+                <a href="#tipps">111 Tipps</a>
+                <a href="#quellen">Quellen</a>
+            </nav>
+        </div>
+    </header>
+    <main class="content">
+        <section class="intro" aria-labelledby="page-heading">
+            <span class="eyebrow">Lernpsychologie · Methodik · Praxis</span>
+            <h1 id="page-heading">Lernen lernen.</h1>
+            <p class="page-lead">Wie Wissen entsteht, bleibt und im richtigen Moment verfügbar wird. Ein ausführliches
+                Nachschlagewerk für Lernende, Lehrende und Eltern – mit 111 eigenständig formulierten Anregungen, einer
+                täglichen Rotation und einer vollständigen Tippsammlung.</p>
+            <p class="kicker muted">Ein guter Lernprozess besteht nicht darin, möglichst lange auf eine Buchseite zu
+                blicken. Er besteht darin, Inhalte zu verstehen, sie wiederholt abzurufen, Irrtümer zu korrigieren – und
+                dabei neugierig zu bleiben.</p>
+            <div class="intro-meta" aria-label="Eigenschaften der Seite">
+                <span>111 Praxisimpulse</span><span>12 Themenfelder</span><span>1 Tipp täglich</span><span>Such- und
+                    Filterfunktion</span><span>Ohne externe Bibliotheken</span>
+            </div>
+        </section>
+        <nav class="jump-nav" aria-label="Sprungmarken">
+            <a href="#tagesimpuls">Tipp des Tages</a><a href="#sofunktionierts">So funktioniert Lernen</a><a
+                href="#kapitel">Wissenskapitel</a><a href="#tipps">Alle 111 Tipps</a><a href="#lernplan">Lernsitzung
+                planen</a><a href="#einordnung">Wissenschaftliche Einordnung</a>
+        </nav>
+        <div class="learn-grid">
+            <section class="card daycard" id="tagesimpuls" aria-labelledby="day-title">
+                <span class="eyebrow">Dein Tagesimpuls</span>
+                <h2 id="day-title">Heute ausprobieren</h2>
+                <p class="card-meta" id="daily-meta">Tipp wird geladen …</p>
+                <p class="quote-line" id="daily-heading">Eine gute Frage ist ein guter Anfang.</p>
+                <p id="daily-action">Die Tippsammlung ist auch ohne automatische Auswahl im folgenden Verzeichnis
+                    zugänglich.</p>
+                <p class="muted" id="daily-note"></p>
+                <div class="button-row">
+                    <button type="button" id="another-tip" class="primary">Anderen Tipp entdecken</button>
+                    <button type="button" id="today-tip">Zurück zum Tagestipp</button>
+                    <button type="button" id="favorite-daily" aria-pressed="false">☆ Merken</button>
+                    <button type="button" id="find-daily">In der Liste finden</button>
+                </div>
+                <p class="hint" id="rotation-description">Die Tagesrotation wechselt einmal täglich und berücksichtigt
+                    innerhalb eines Zyklus jeden Tipp genau einmal.</p>
+            </section>
+            <section class="card" id="sofunktionierts">
+                <span class="eyebrow">Das Lernprinzip in Kürze</span>
+                <h2>Fünf Schritte, die tragen</h2>
+                <ol>
+                    <li><strong>Orientieren:</strong> Was weiß ich schon, welches Ziel verfolge ich?</li>
+                    <li><strong>Verstehen:</strong> Wie hängen die neuen Gedanken zusammen?</li>
+                    <li><strong>Selbst abrufen:</strong> Kann ich das Wichtigste ohne Vorlage erklären?</li>
+                    <li><strong>Rückmeldung nutzen:</strong> Welche Fehler oder Lücken sind sichtbar?</li>
+                    <li><strong>Verteilt wiederholen:</strong> Ist das Wissen auch später noch verfügbar?</li>
+                </ol>
+                <div class="soft-note"><strong>Die entscheidende Unterscheidung:</strong>
+                    <p>„Das kommt mir bekannt vor“ ist nicht dasselbe wie „Ich kann es erklären und anwenden“. Gute
+                        Lernmethoden machen genau diesen Unterschied sichtbar.</p>
+                </div>
+            </section>
+        </div>
+        <section class="card" aria-labelledby="origin-heading">
+            <div class="twocol">
+                <div>
+                    <h2 id="origin-heading">Ausgangspunkt und Eigenständigkeit</h2>
+                    <p>Die thematische Anregung für diese Seite stammt aus <em>Die 111 besten Lern-Tipps</em> von
+                        <strong>Konrad Puchbauer-Schnabel</strong> (öbv &amp; hpt, Wien, 2002; Nachdruck 2003). Das Buch
+                        setzt Schwerpunkte auf ganzheitliches Lernen, Aufmerksamkeit, Wiederholung, Lernorganisation,
+                        Belastungsregulation sowie die Förderung des Lesens und Schreibens.</p>
+                    <p>Die vorliegende Seite ist <strong>keine digitale Neuauflage</strong>, keine Rekonstruktion der
+                        Buchkapitel und keine Übernahme der Buchgrafiken. Sie bietet einen eigenständig entwickelten,
+                        neu gegliederten Leitfaden mit <strong>111 neu geschriebenen Praxistipps</strong>, aktuellen
+                        methodischen Ergänzungen und gesonderter Bewertung historischer Aussagen.</p>
+                </div>
+                <aside class="soft-note">
+                    <strong>Was diese Seite leisten soll</strong>
+                    <p>Ein strukturiertes Werkzeug für die Praxis – nicht die Behauptung, jede der 111 Empfehlungen sei
+                        empirisch gleich gut belegt. Wo die Evidenz unterschiedlich ausfällt, wird das ausdrücklich
+                        erläutert.</p>
+                    <p class="muted">Die Quellen und die Einordnung älterer Behauptungen stehen am Seitenende.</p>
+                </aside>
+            </div>
+        </section>
+        <section class="card" id="kapitel" aria-labelledby="index-heading">
+            <h2 id="index-heading">Das Kompendium – zwölf Themenfelder</h2>
+            <p>Für das Verständnis die Kapitel lesen; für die unmittelbare Praxis die einzelnen Tipps nutzen. Beide
+                Zugänge sind bewusst unabhängig voneinander.</p>
+            <ol class="chapter-index">
+                <li><a href="#kap-start"><strong>01 · Einstieg &amp; Aufmerksamkeit</strong><small>Neugier, Ziele,
+                            Vorwissen</small></a></li>
+                <li><a href="#kap-understand"><strong>02 · Verstehen &amp; Vernetzen</strong><small>Strukturieren,
+                            Erklären, Transfer</small></a></li>
+                <li><a href="#kap-retrieve"><strong>03 · Aktives Lernen</strong><small>Erinnern statt
+                            Wiedererkennen</small></a></li>
+                <li><a href="#kap-repeat"><strong>04 · Gedächtnis &amp; Wiederholung</strong><small>Abstände, Abruf,
+                            Fehleranalyse</small></a></li>
+                <li><a href="#kap-plan"><strong>05 · Lernplanung</strong><small>Aufgaben, Zeit, Umgebung</small></a>
+                </li>
+                <li><a href="#kap-pause"><strong>06 · Körperliche Grundlagen</strong><small>Pausen, Schlaf, Bewegung,
+                            Ernährung</small></a></li>
+                <li><a href="#kap-feedback"><strong>07 · Motivation &amp; Feedback</strong><small>Fortschritt,
+                            Fehlerkultur, Selbstregulation</small></a></li>
+                <li><a href="#kap-exam"><strong>08 · Prüfungen &amp; Stress</strong><small>Vorbereitung, Abruf unter
+                            Druck</small></a></li>
+                <li><a href="#kap-reading"><strong>09 · Lesen</strong><small>Strategien des Textverstehens</small></a>
+                </li>
+                <li><a href="#kap-writing"><strong>10 · Schreiben</strong><small>Planen, formulieren,
+                            überarbeiten</small></a></li>
+                <li><a href="#kap-teaching"><strong>11 · Unterricht</strong><small>Gutes Erklären und gutes
+                            Üben</small></a></li>
+                <li><a href="#kap-family"><strong>12 · Lernen im Alltag</strong><small>Eltern, Selbstständigkeit,
+                            Begleitung</small></a></li>
+            </ol>
+        </section>
 
-  <article class="card chapter" id="kap-start">
-    <span class="eyebrow">Kapitel 01</span><h2>Aufmerksamkeit ist kein Lichtschalter</h2>
-    <p>Neugier, Interesse, Wachheit und vorhandenes Wissen bestimmen mit, wie gut ein Lernangebot überhaupt aufgenommen wird. Wer in ein unbekanntes Thema hineinstürzt, ohne eine Frage an den Text zu haben, muss viele Details zunächst unverbunden verarbeiten. Ein guter Einstieg schafft Orientierung: ein überraschender Sachverhalt, ein kleines Rätsel, eine Alltagsbeobachtung oder eine präzise Leitfrage.</p>
-    <h3>Ein belastbarer Einstieg in drei Minuten</h3>
-    <ol><li>Die Überschriften und eine zentrale Abbildung ansehen.</li><li>Eine eigene Frage formulieren, etwa „Weshalb schwimmt Eis auf Wasser?“.</li><li>Vorwissen in drei Stichworten aktivieren und Unsicherheiten kennzeichnen.</li><li>Ein überprüfbares Ziel festlegen: „Nach der Einheit kann ich die Ursache in vier Sätzen erklären“.</li></ol>
-    <p>Aufmerksamkeit ist begrenzt, aber nicht von Person zu Person auf einen konstanten Wert festgelegt. Dauer, Aufgabe, Schlaf, Belastung und Interesse verändern sie. Statt Konzentration durch bloßen Appell einzufordern, helfen überschaubare Arbeitsschritte, eine klare Frage und gelegentliche aktive Rückmeldung. Ein positiver Umgangston schafft dabei günstige Lernbedingungen, ersetzt aber nicht die gedankliche Anstrengung.</p>
-    <div class="soft-note"><strong>Praxisbeispiel · Geschichte</strong><p>Statt „Lerne die Ursachen des Ersten Weltkriegs“ lautet das Einstiegsproblem: „Warum führte ein Attentat zu einem Krieg zwischen Großmächten?“ Nun werden Bündnisse, Mobilisierung, Interessen und Eskalationsmechanismen sinnvoll miteinander verknüpft.</p></div>
-    <p class="source-hint">Thematische Anregung: Aufmerksamkeit und Neugier (Originalausgabe S. 16–17).</p>
-  </article>
+        <article class="card chapter" id="kap-start">
+            <span class="eyebrow">Kapitel 01</span>
+            <h2>Aufmerksamkeit ist kein Lichtschalter</h2>
+            <p>Neugier, Interesse, Wachheit und vorhandenes Wissen bestimmen mit, wie gut ein Lernangebot überhaupt
+                aufgenommen wird. Wer in ein unbekanntes Thema hineinstürzt, ohne eine Frage an den Text zu haben, muss
+                viele Details zunächst unverbunden verarbeiten. Ein guter Einstieg schafft Orientierung: ein
+                überraschender Sachverhalt, ein kleines Rätsel, eine Alltagsbeobachtung oder eine präzise Leitfrage.</p>
+            <h3>Ein belastbarer Einstieg in drei Minuten</h3>
+            <ol>
+                <li>Die Überschriften und eine zentrale Abbildung ansehen.</li>
+                <li>Eine eigene Frage formulieren, etwa „Weshalb schwimmt Eis auf Wasser?“.</li>
+                <li>Vorwissen in drei Stichworten aktivieren und Unsicherheiten kennzeichnen.</li>
+                <li>Ein überprüfbares Ziel festlegen: „Nach der Einheit kann ich die Ursache in vier Sätzen erklären“.
+                </li>
+            </ol>
+            <p>Aufmerksamkeit ist begrenzt, aber nicht von Person zu Person auf einen konstanten Wert festgelegt. Dauer,
+                Aufgabe, Schlaf, Belastung und Interesse verändern sie. Statt Konzentration durch bloßen Appell
+                einzufordern, helfen überschaubare Arbeitsschritte, eine klare Frage und gelegentliche aktive
+                Rückmeldung. Ein positiver Umgangston schafft dabei günstige Lernbedingungen, ersetzt aber nicht die
+                gedankliche Anstrengung.</p>
+            <div class="soft-note"><strong>Praxisbeispiel · Geschichte</strong>
+                <p>Statt „Lerne die Ursachen des Ersten Weltkriegs“ lautet das Einstiegsproblem: „Warum führte ein
+                    Attentat zu einem Krieg zwischen Großmächten?“ Nun werden Bündnisse, Mobilisierung, Interessen und
+                    Eskalationsmechanismen sinnvoll miteinander verknüpft.</p>
+            </div>
+            <p class="source-hint">Thematische Anregung: Aufmerksamkeit und Neugier (Originalausgabe S. 16–17).</p>
+        </article>
 
-  <article class="card chapter" id="kap-understand">
-    <span class="eyebrow">Kapitel 02</span><h2>Verstehen heißt: Beziehungen erkennen</h2>
-    <p>Ein Sachverhalt lässt sich nicht durch isolierte Stichwörter beherrschen. Wer Wissen sinnvoll organisieren will, fragt nach Oberbegriffen, Gegensätzen, Bedingungen, zeitlichen Folgen und Ursache-Wirkungs-Beziehungen. Strukturzeichnungen, Concept-Maps, Vergleiche oder Zeitleisten können dabei helfen. Eine schöne Mindmap ist allerdings noch kein Beleg für Verständnis: Entscheidend ist, ob die Beziehungen zutreffen und begründet werden können.</p>
-    <h3>Vier Werkzeuge zur Strukturierung</h3>
-    <ul><li><strong>Begriffsnetz:</strong> zentrale Aussage, drei bis fünf Hauptideen und beschriftete Verbindungslinien.</li><li><strong>Vergleichsmatrix:</strong> zwei oder mehr Konzepte nebeneinander mit Merkmalen, Gemeinsamkeiten und Differenzen.</li><li><strong>Ablaufdiagramm:</strong> Reihenfolge, Verzweigung und Rückwirkung eines Prozesses sichtbar machen.</li><li><strong>Beispiel und Gegenbeispiel:</strong> präzisieren, wann eine Regel gilt – und wann gerade nicht.</li></ul>
-    <p>Bei anspruchsvollen Fertigkeiten ist die Abfolge wesentlich: Zuerst ein vollständiges Muster nachvollziehen, dann einen Teil selbst übernehmen, schließlich neue Fälle eigenständig lösen. So muss nicht gleichzeitig die Grundlage und die komplexeste Anwendung erfunden werden. Später kann das gemischte Üben verschiedener Aufgabentypen sinnvoll sein; es trainiert die Entscheidung, welche Methode zum Problem passt.</p>
-    <div class="soft-note"><strong>Praxisbeispiel · Elektronik</strong><p>Eine Schaltung erst in Funktionsblöcke gliedern: Energieversorgung, Sensor, Mikrocontroller, Ausgabe. Danach Signalfluss und Spannungspegel einzeichnen. Erst im letzten Schritt geht es um den einzelnen Widerstandswert.</p></div>
-    <p class="source-hint">Thematische Anregung: Überblick, Reihenfolge und vernetztes Lernen (S. 18–21).</p>
-  </article>
+        <article class="card chapter" id="kap-understand">
+            <span class="eyebrow">Kapitel 02</span>
+            <h2>Verstehen heißt: Beziehungen erkennen</h2>
+            <p>Ein Sachverhalt lässt sich nicht durch isolierte Stichwörter beherrschen. Wer Wissen sinnvoll
+                organisieren will, fragt nach Oberbegriffen, Gegensätzen, Bedingungen, zeitlichen Folgen und
+                Ursache-Wirkungs-Beziehungen. Strukturzeichnungen, Concept-Maps, Vergleiche oder Zeitleisten können
+                dabei helfen. Eine schöne Mindmap ist allerdings noch kein Beleg für Verständnis: Entscheidend ist, ob
+                die Beziehungen zutreffen und begründet werden können.</p>
+            <h3>Vier Werkzeuge zur Strukturierung</h3>
+            <ul>
+                <li><strong>Begriffsnetz:</strong> zentrale Aussage, drei bis fünf Hauptideen und beschriftete
+                    Verbindungslinien.</li>
+                <li><strong>Vergleichsmatrix:</strong> zwei oder mehr Konzepte nebeneinander mit Merkmalen,
+                    Gemeinsamkeiten und Differenzen.</li>
+                <li><strong>Ablaufdiagramm:</strong> Reihenfolge, Verzweigung und Rückwirkung eines Prozesses sichtbar
+                    machen.</li>
+                <li><strong>Beispiel und Gegenbeispiel:</strong> präzisieren, wann eine Regel gilt – und wann gerade
+                    nicht.</li>
+            </ul>
+            <p>Bei anspruchsvollen Fertigkeiten ist die Abfolge wesentlich: Zuerst ein vollständiges Muster
+                nachvollziehen, dann einen Teil selbst übernehmen, schließlich neue Fälle eigenständig lösen. So muss
+                nicht gleichzeitig die Grundlage und die komplexeste Anwendung erfunden werden. Später kann das
+                gemischte Üben verschiedener Aufgabentypen sinnvoll sein; es trainiert die Entscheidung, welche Methode
+                zum Problem passt.</p>
+            <div class="soft-note"><strong>Praxisbeispiel · Elektronik</strong>
+                <p>Eine Schaltung erst in Funktionsblöcke gliedern: Energieversorgung, Sensor, Mikrocontroller, Ausgabe.
+                    Danach Signalfluss und Spannungspegel einzeichnen. Erst im letzten Schritt geht es um den einzelnen
+                    Widerstandswert.</p>
+            </div>
+            <p class="source-hint">Thematische Anregung: Überblick, Reihenfolge und vernetztes Lernen (S. 18–21).</p>
+        </article>
 
-  <article class="card chapter" id="kap-retrieve">
-    <span class="eyebrow">Kapitel 03</span><h2>Aktives Abrufen: die unscheinbare Königsdisziplin</h2>
-    <p>Viele vertraute Lernhandlungen fühlen sich produktiv an, obwohl sie wenig diagnostischen Wert besitzen: eine Seite mehrfach lesen, Sätze markieren, Zusammenfassungen neben dem Original vergleichen. Sie können eine erste Orientierung schaffen – sind aber als alleinige Strategie schwach. Eine zentrale Alternative ist das <strong>aktive Abrufen</strong> (<em>retrieval practice</em>): Nach einer Lernphase werden Informationen ohne sichtbare Lösung reproduziert, erklärt oder angewendet.</p>
-    <p>Der Versuch selbst ist relevant. Er offenbart Lücken, zwingt zu einer Antwort und schafft die Grundlage für wirksame Rückmeldung. Selbst ein unvollständiger Abruf kann nützlich sein, wenn anschließend eine korrekte Lösung geprüft wird. Der Unterschied zur bloßen Selbstabfrage mit offenem Buch ist beträchtlich: Eine Antwort erst suchen und dann kontrollieren ist etwas anderes, als sie beim Überfliegen wiederzuerkennen.</p>
-    <h3>Die geschlossene-Buch-Methode</h3>
-    <ol><li>Einen kurzen Abschnitt gründlich verstehen.</li><li>Unterlagen schließen; drei Fragen schriftlich oder mündlich beantworten.</li><li>Antworten mit der Quelle vergleichen und Fehler markieren.</li><li>Die fehlenden Punkte erneut erklären, wiederum ohne Vorlage.</li><li>Einige Tage später dieselben Kernfragen in veränderter Form stellen.</li></ol>
-    <p>Zu den geeigneten Formaten gehören Karteikarten, freie Zusammenfassungen, mündliche Erklärungen, Skizzen aus dem Gedächtnis und echte Übungsaufgaben. Welche Form passt, richtet sich nach dem Lernziel: Vokabeln, mathematische Verfahren, Interpretationen und praktisches Handeln verlangen nicht identische Prüfungen.</p>
-    <p class="source-hint">Thematische Anregung: mehrere Lernformen und Feedback (S. 25–47). Die Betonung von Abrufübungen ist eine aktuelle Ergänzung.</p>
-  </article>
+        <article class="card chapter" id="kap-retrieve">
+            <span class="eyebrow">Kapitel 03</span>
+            <h2>Aktives Abrufen: die unscheinbare Königsdisziplin</h2>
+            <p>Viele vertraute Lernhandlungen fühlen sich produktiv an, obwohl sie wenig diagnostischen Wert besitzen:
+                eine Seite mehrfach lesen, Sätze markieren, Zusammenfassungen neben dem Original vergleichen. Sie können
+                eine erste Orientierung schaffen – sind aber als alleinige Strategie schwach. Eine zentrale Alternative
+                ist das <strong>aktive Abrufen</strong> (<em>retrieval practice</em>): Nach einer Lernphase werden
+                Informationen ohne sichtbare Lösung reproduziert, erklärt oder angewendet.</p>
+            <p>Der Versuch selbst ist relevant. Er offenbart Lücken, zwingt zu einer Antwort und schafft die Grundlage
+                für wirksame Rückmeldung. Selbst ein unvollständiger Abruf kann nützlich sein, wenn anschließend eine
+                korrekte Lösung geprüft wird. Der Unterschied zur bloßen Selbstabfrage mit offenem Buch ist
+                beträchtlich: Eine Antwort erst suchen und dann kontrollieren ist etwas anderes, als sie beim
+                Überfliegen wiederzuerkennen.</p>
+            <h3>Die geschlossene-Buch-Methode</h3>
+            <ol>
+                <li>Einen kurzen Abschnitt gründlich verstehen.</li>
+                <li>Unterlagen schließen; drei Fragen schriftlich oder mündlich beantworten.</li>
+                <li>Antworten mit der Quelle vergleichen und Fehler markieren.</li>
+                <li>Die fehlenden Punkte erneut erklären, wiederum ohne Vorlage.</li>
+                <li>Einige Tage später dieselben Kernfragen in veränderter Form stellen.</li>
+            </ol>
+            <p>Zu den geeigneten Formaten gehören Karteikarten, freie Zusammenfassungen, mündliche Erklärungen, Skizzen
+                aus dem Gedächtnis und echte Übungsaufgaben. Welche Form passt, richtet sich nach dem Lernziel:
+                Vokabeln, mathematische Verfahren, Interpretationen und praktisches Handeln verlangen nicht identische
+                Prüfungen.</p>
+            <p class="source-hint">Thematische Anregung: mehrere Lernformen und Feedback (S. 25–47). Die Betonung von
+                Abrufübungen ist eine aktuelle Ergänzung.</p>
+        </article>
 
-  <article class="card chapter" id="kap-repeat">
-    <span class="eyebrow">Kapitel 04</span><h2>Gedächtnis benötigt Wiederbegegnungen – mit Abstand</h2>
-    <p>Vergessen ist kein Defekt des Lernens, sondern ein normaler Vorgang. Gerade deshalb sollte eine erfolgreiche Lernphase nicht mit der Vorstellung enden, der Inhalt sei nun dauerhaft erledigt. <strong>Verteiltes Üben</strong> verlagert Wiederholungen auf mehrere Zeitpunkte, statt alles in einem Block abzuarbeiten. Kombiniert mit aktivem Abrufen gehört es zu den am besten unterstützten allgemeinen Lernstrategien.</p>
-    <div class="table-scroll small-table"><table><caption class="muted" style="padding:.65rem;text-align:left">Beispiel für einen flexiblen Wiederholungsrhythmus – keine starre Gedächtnisformel</caption><thead><tr><th>Zeitpunkt</th><th>Aufgabe</th><th>Kontrolle</th></tr></thead><tbody><tr><td>Tag 0</td><td>Verstehen und erstes Abrufen</td><td>Fragen beantworten</td></tr><tr><td>Tag 1</td><td>Kurzer Abruf</td><td>Fehler korrigieren</td></tr><tr><td>Tag 3</td><td>Gemischte Übung</td><td>Übertragen und vergleichen</td></tr><tr><td>Tag 7</td><td>Erneuter Test ohne Vorlage</td><td>Unsicheres zurück in die Übung</td></tr><tr><td>Tag 14+</td><td>Später Kontrollabruf</td><td>Langfristige Verfügbarkeit prüfen</td></tr></tbody></table></div>
-    <p>Die Abstände dürfen vom Material abhängen. Ein schwieriger Sachverhalt braucht womöglich frühe zusätzliche Übungen, ein sicher beherrschter Begriff erst später Aufmerksamkeit. Sinnvoll ist eine <strong>Fehlerliste mit nächstem Wiederholungstermin</strong>, nicht ein dogmatischer Kalender. Anders als ein universeller Prozentwert der „Vergessenskurve“ bietet das eigene spätere Abrufresultat eine konkrete Entscheidungsgrundlage.</p>
-    <p class="source-hint">Thematische Anregung: Lernstoff-Wiederholungen und Vergessenskurve (S. 43–45).</p>
-  </article>
+        <article class="card chapter" id="kap-repeat">
+            <span class="eyebrow">Kapitel 04</span>
+            <h2>Gedächtnis benötigt Wiederbegegnungen – mit Abstand</h2>
+            <p>Vergessen ist kein Defekt des Lernens, sondern ein normaler Vorgang. Gerade deshalb sollte eine
+                erfolgreiche Lernphase nicht mit der Vorstellung enden, der Inhalt sei nun dauerhaft erledigt.
+                <strong>Verteiltes Üben</strong> verlagert Wiederholungen auf mehrere Zeitpunkte, statt alles in einem
+                Block abzuarbeiten. Kombiniert mit aktivem Abrufen gehört es zu den am besten unterstützten allgemeinen
+                Lernstrategien.</p>
+            <div class="table-scroll small-table">
+                <table>
+                    <caption class="muted" style="padding:.65rem;text-align:left">Beispiel für einen flexiblen
+                        Wiederholungsrhythmus – keine starre Gedächtnisformel</caption>
+                    <thead>
+                        <tr>
+                            <th>Zeitpunkt</th>
+                            <th>Aufgabe</th>
+                            <th>Kontrolle</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Tag 0</td>
+                            <td>Verstehen und erstes Abrufen</td>
+                            <td>Fragen beantworten</td>
+                        </tr>
+                        <tr>
+                            <td>Tag 1</td>
+                            <td>Kurzer Abruf</td>
+                            <td>Fehler korrigieren</td>
+                        </tr>
+                        <tr>
+                            <td>Tag 3</td>
+                            <td>Gemischte Übung</td>
+                            <td>Übertragen und vergleichen</td>
+                        </tr>
+                        <tr>
+                            <td>Tag 7</td>
+                            <td>Erneuter Test ohne Vorlage</td>
+                            <td>Unsicheres zurück in die Übung</td>
+                        </tr>
+                        <tr>
+                            <td>Tag 14+</td>
+                            <td>Später Kontrollabruf</td>
+                            <td>Langfristige Verfügbarkeit prüfen</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p>Die Abstände dürfen vom Material abhängen. Ein schwieriger Sachverhalt braucht womöglich frühe
+                zusätzliche Übungen, ein sicher beherrschter Begriff erst später Aufmerksamkeit. Sinnvoll ist eine
+                <strong>Fehlerliste mit nächstem Wiederholungstermin</strong>, nicht ein dogmatischer Kalender. Anders
+                als ein universeller Prozentwert der „Vergessenskurve“ bietet das eigene spätere Abrufresultat eine
+                konkrete Entscheidungsgrundlage.</p>
+            <p class="source-hint">Thematische Anregung: Lernstoff-Wiederholungen und Vergessenskurve (S. 43–45).</p>
+        </article>
 
-  <article class="card chapter" id="kap-plan">
-    <span class="eyebrow">Kapitel 05</span><h2>Planung: Aufgaben portionieren, nicht bloß Zeit füllen</h2>
-    <p>Ein Lernplan ist nur dann hilfreich, wenn er handlungsfähig macht. „Drei Stunden lernen“ sagt fast nichts darüber aus, was am Ende gekonnt wird. Ein überprüfbares Ziel benennt ein Ergebnis: sechs Aufgaben selbstständig lösen, eine Zeitleiste erklären, zehn unbekannte Wörter später aus dem Gedächtnis schreiben oder einen argumentativen Absatz überarbeiten. Lernportionen sollten klein genug sein, um einen Anfang zu ermöglichen.</p>
-    <h3>Rückwärts vom Prüfungstermin</h3>
-    <p>Trage zunächst Prüfungstermin und Anforderungen ein. Plane dann feste Tage für die Erarbeitung, mehrere verteilte Abrufe und einen Probedurchgang. Reserviere Puffer für unerwartete Schwierigkeiten. Der Tag vor der Prüfung eignet sich eher für kurze Kontrolle, Übersicht und Schlaf als für die erstmalige Erschließung ganzer Stoffgebiete.</p>
-    <h3>Lernumgebung mit geringem Aufwand verbessern</h3>
-    <ul><li>Benötigtes Material und konkrete Aufgaben vorab zusammenstellen.</li><li>Benachrichtigungen und sonstige Ablenkungen für eine Arbeitsphase ausschalten.</li><li>Für ausreichendes Licht, Sitzkomfort und ein angenehmes Raumklima sorgen.</li><li>Den Arbeitsmodus je nach Aufgabe wählen: schwierige Texte oft ohne Hintergrundgespräche oder Liedtexte bearbeiten.</li><li>Den Plan nach tatsächlichen Ergebnissen anpassen; keine Ausrede, aber auch kein Selbstbestrafungsinstrument daraus machen.</li></ul>
-    <p>Eine allgemeingültige „beste Lernzeit“ am Vormittag oder nach 15 Uhr gibt es nicht. Eigener Rhythmus, Schulzeiten, Pausen und Schlaf sind relevanter als eine universal gedachte Tageskurve.</p>
-    <p class="source-hint">Thematische Anregung: Lernen nach Plan, Hausaufgaben, Prüfungsorganisation (S. 49–52).</p>
-  </article>
+        <article class="card chapter" id="kap-plan">
+            <span class="eyebrow">Kapitel 05</span>
+            <h2>Planung: Aufgaben portionieren, nicht bloß Zeit füllen</h2>
+            <p>Ein Lernplan ist nur dann hilfreich, wenn er handlungsfähig macht. „Drei Stunden lernen“ sagt fast nichts
+                darüber aus, was am Ende gekonnt wird. Ein überprüfbares Ziel benennt ein Ergebnis: sechs Aufgaben
+                selbstständig lösen, eine Zeitleiste erklären, zehn unbekannte Wörter später aus dem Gedächtnis
+                schreiben oder einen argumentativen Absatz überarbeiten. Lernportionen sollten klein genug sein, um
+                einen Anfang zu ermöglichen.</p>
+            <h3>Rückwärts vom Prüfungstermin</h3>
+            <p>Trage zunächst Prüfungstermin und Anforderungen ein. Plane dann feste Tage für die Erarbeitung, mehrere
+                verteilte Abrufe und einen Probedurchgang. Reserviere Puffer für unerwartete Schwierigkeiten. Der Tag
+                vor der Prüfung eignet sich eher für kurze Kontrolle, Übersicht und Schlaf als für die erstmalige
+                Erschließung ganzer Stoffgebiete.</p>
+            <h3>Lernumgebung mit geringem Aufwand verbessern</h3>
+            <ul>
+                <li>Benötigtes Material und konkrete Aufgaben vorab zusammenstellen.</li>
+                <li>Benachrichtigungen und sonstige Ablenkungen für eine Arbeitsphase ausschalten.</li>
+                <li>Für ausreichendes Licht, Sitzkomfort und ein angenehmes Raumklima sorgen.</li>
+                <li>Den Arbeitsmodus je nach Aufgabe wählen: schwierige Texte oft ohne Hintergrundgespräche oder
+                    Liedtexte bearbeiten.</li>
+                <li>Den Plan nach tatsächlichen Ergebnissen anpassen; keine Ausrede, aber auch kein
+                    Selbstbestrafungsinstrument daraus machen.</li>
+            </ul>
+            <p>Eine allgemeingültige „beste Lernzeit“ am Vormittag oder nach 15 Uhr gibt es nicht. Eigener Rhythmus,
+                Schulzeiten, Pausen und Schlaf sind relevanter als eine universal gedachte Tageskurve.</p>
+            <p class="source-hint">Thematische Anregung: Lernen nach Plan, Hausaufgaben, Prüfungsorganisation (S.
+                49–52).</p>
+        </article>
 
-  <article class="card chapter" id="kap-pause">
-    <span class="eyebrow">Kapitel 06</span><h2>Pausen, Schlaf, Bewegung und Versorgung</h2>
-    <p>Das Gehirn ist kein isolierter Datenspeicher. Müdigkeit, Stress, Bewegung, Hunger, Durst und Lichtbedingungen können Aufmerksamkeit und Wohlbefinden beeinflussen. Daraus folgt allerdings nicht, dass bestimmte Frühstücksprozente, besondere Präparate oder eine exakt definierte Gehirnfrequenz den Lernerfolg garantieren.</p>
-    <h3>Pausen mit Funktion</h3>
-    <p>Nach einer intensiven Phase hilft häufig eine kurze Unterbrechung. Sie sollte möglichst tatsächlich entlasten: aufstehen, ein Stück gehen, den Blick in die Ferne richten oder kurz nichts konsumieren. Die oft genannten Intervalle von 25 oder 30 Minuten sind <em>Startpunkte</em>; Kinder, Erwachsene, Routineaufgaben und komplexe Texte benötigen nicht denselben Takt.</p>
-    <h3>Schlaf ist Teil der Arbeit</h3>
-    <p>Schlaf unterstützt Gedächtnisprozesse und geistige Leistungsfähigkeit. Eine Lernnacht, die Schlaf massiv verkürzt, kann deshalb kontraproduktiv sein. Besonders vor Prüfungen gehört genügend Schlaf zur Vorbereitung. Wer langfristig erschöpft ist, benötigt möglicherweise mehr als eine andere Lerntechnik.</p>
-    <h3>Ernährung ohne Lernmythologie</h3>
-    <p>Regelmäßige, ausgewogene Mahlzeiten und ausreichendes Trinken sind vernünftige allgemeine Empfehlungen. Es gibt aber keine seriöse Grundlage für die Behauptung, Bildschirmarbeit entziehe pauschal Vitamin A und B1 oder Obst sei nach einer bestimmten Uhrzeit unverträglich. Nahrungsergänzungsmittel sollten nicht als pauschale Konzentrationshilfe eingesetzt werden; bei Verdacht auf Mangel ist eine medizinische Abklärung angemessen.</p>
-    <p class="source-hint">Thematische Anregung: Pausen, Tageszeiten, Sinneswahrnehmung und Mahlzeiten (S. 22–29, 83–90).</p>
-  </article>
+        <article class="card chapter" id="kap-pause">
+            <span class="eyebrow">Kapitel 06</span>
+            <h2>Pausen, Schlaf, Bewegung und Versorgung</h2>
+            <p>Das Gehirn ist kein isolierter Datenspeicher. Müdigkeit, Stress, Bewegung, Hunger, Durst und
+                Lichtbedingungen können Aufmerksamkeit und Wohlbefinden beeinflussen. Daraus folgt allerdings nicht,
+                dass bestimmte Frühstücksprozente, besondere Präparate oder eine exakt definierte Gehirnfrequenz den
+                Lernerfolg garantieren.</p>
+            <h3>Pausen mit Funktion</h3>
+            <p>Nach einer intensiven Phase hilft häufig eine kurze Unterbrechung. Sie sollte möglichst tatsächlich
+                entlasten: aufstehen, ein Stück gehen, den Blick in die Ferne richten oder kurz nichts konsumieren. Die
+                oft genannten Intervalle von 25 oder 30 Minuten sind <em>Startpunkte</em>; Kinder, Erwachsene,
+                Routineaufgaben und komplexe Texte benötigen nicht denselben Takt.</p>
+            <h3>Schlaf ist Teil der Arbeit</h3>
+            <p>Schlaf unterstützt Gedächtnisprozesse und geistige Leistungsfähigkeit. Eine Lernnacht, die Schlaf massiv
+                verkürzt, kann deshalb kontraproduktiv sein. Besonders vor Prüfungen gehört genügend Schlaf zur
+                Vorbereitung. Wer langfristig erschöpft ist, benötigt möglicherweise mehr als eine andere Lerntechnik.
+            </p>
+            <h3>Ernährung ohne Lernmythologie</h3>
+            <p>Regelmäßige, ausgewogene Mahlzeiten und ausreichendes Trinken sind vernünftige allgemeine Empfehlungen.
+                Es gibt aber keine seriöse Grundlage für die Behauptung, Bildschirmarbeit entziehe pauschal Vitamin A
+                und B1 oder Obst sei nach einer bestimmten Uhrzeit unverträglich. Nahrungsergänzungsmittel sollten nicht
+                als pauschale Konzentrationshilfe eingesetzt werden; bei Verdacht auf Mangel ist eine medizinische
+                Abklärung angemessen.</p>
+            <p class="source-hint">Thematische Anregung: Pausen, Tageszeiten, Sinneswahrnehmung und Mahlzeiten (S.
+                22–29, 83–90).</p>
+        </article>
 
-  <article class="card chapter" id="kap-feedback">
-    <span class="eyebrow">Kapitel 07</span><h2>Fehlerkultur, Motivation und Rückmeldung</h2>
-    <p>Lernen ohne Fehler ist unrealistisch. Entscheidend ist, ob eine falsche Antwort sichtbar wird, erklärt und verbessert werden kann. Pauschales Urteil – „unbegabt“, „faul“ oder „schlampig“ – liefert wenig Information für die nächste Handlung. Gutes Feedback benennt den Fehler im Verhältnis zur Aufgabe, gibt einen nächsten sinnvollen Schritt an und stärkt die Selbstkontrolle.</p>
-    <h3>Von „falsch“ zu „verbesserbar“</h3>
-    <p>Ein Rechenfehler kann aus einem missverstandenen Begriff, einem übersprungenen Zwischenschritt, einer verwech­selten Regel oder einem Flüchtigkeitsfehler stammen. Jede Ursache verlangt eine andere Reaktion. Erst die Diagnose macht Training effizient. Ein Fehlerprotokoll darf deshalb sehr kurz sein: Aufgabe, Ursache, korrigierte Strategie, nächster Testtermin.</p>
-    <p>Motivation entsteht nicht immer <em>vor</em> der Arbeit. Häufig wächst sie durch sichtbaren Fortschritt. Kleine erreichbare Ziele, Rückmeldung über gelungene Schritte und sinnvolle Wahlmöglichkeiten unterstützen die Bereitschaft, dranzubleiben. Umgekehrt führen dauernde Drohungen und öffentlicher Vergleich leicht zu vermeidbarem Druck.</p>
-    <div class="soft-note"><strong>Beispiel für umsetzbares Feedback</strong><p>Statt „Deine Argumentation ist schlecht“: „Die These ist erkennbar. Im zweiten Absatz fehlt der Beleg; ergänze eine konkrete Quelle und erkläre, weshalb sie die These stützt.“</p></div>
-    <p class="source-hint">Thematische Anregung: Stimmungslage, Fehler und Feedback (S. 31–32, 40–47).</p>
-  </article>
+        <article class="card chapter" id="kap-feedback">
+            <span class="eyebrow">Kapitel 07</span>
+            <h2>Fehlerkultur, Motivation und Rückmeldung</h2>
+            <p>Lernen ohne Fehler ist unrealistisch. Entscheidend ist, ob eine falsche Antwort sichtbar wird, erklärt
+                und verbessert werden kann. Pauschales Urteil – „unbegabt“, „faul“ oder „schlampig“ – liefert wenig
+                Information für die nächste Handlung. Gutes Feedback benennt den Fehler im Verhältnis zur Aufgabe, gibt
+                einen nächsten sinnvollen Schritt an und stärkt die Selbstkontrolle.</p>
+            <h3>Von „falsch“ zu „verbesserbar“</h3>
+            <p>Ein Rechenfehler kann aus einem missverstandenen Begriff, einem übersprungenen Zwischenschritt, einer
+                verwech­selten Regel oder einem Flüchtigkeitsfehler stammen. Jede Ursache verlangt eine andere Reaktion.
+                Erst die Diagnose macht Training effizient. Ein Fehlerprotokoll darf deshalb sehr kurz sein: Aufgabe,
+                Ursache, korrigierte Strategie, nächster Testtermin.</p>
+            <p>Motivation entsteht nicht immer <em>vor</em> der Arbeit. Häufig wächst sie durch sichtbaren Fortschritt.
+                Kleine erreichbare Ziele, Rückmeldung über gelungene Schritte und sinnvolle Wahlmöglichkeiten
+                unterstützen die Bereitschaft, dranzubleiben. Umgekehrt führen dauernde Drohungen und öffentlicher
+                Vergleich leicht zu vermeidbarem Druck.</p>
+            <div class="soft-note"><strong>Beispiel für umsetzbares Feedback</strong>
+                <p>Statt „Deine Argumentation ist schlecht“: „Die These ist erkennbar. Im zweiten Absatz fehlt der
+                    Beleg; ergänze eine konkrete Quelle und erkläre, weshalb sie die These stützt.“</p>
+            </div>
+            <p class="source-hint">Thematische Anregung: Stimmungslage, Fehler und Feedback (S. 31–32, 40–47).</p>
+        </article>
 
-  <article class="card chapter" id="kap-exam">
-    <span class="eyebrow">Kapitel 08</span><h2>Prüfungen: Können unter Bedingungen abrufen</h2>
-    <p>Prüfungen verlangen mehr als den Besitz von Wissen: Unter Zeitbedingungen muss es erkannt, ausgewählt, angewendet und verständlich dargestellt werden. Daher gehören Übungsaufgaben im <strong>Format der tatsächlichen Prüfung</strong> zur Vorbereitung. Für eine mündliche Prüfung ist freies Erklären besonders sinnvoll; für Mathematik das eigenständige Lösen; für einen Aufsatz das Schreiben unter realistischem Zeitrahmen.</p>
-    <h3>Vorbereitung in drei Phasen</h3>
-    <ol><li><strong>Klärung:</strong> Stoff, Aufgabentypen, Kriterien und Prüfungsdauer sammeln.</li><li><strong>Aufbau:</strong> Inhalte verstehen, gezielt abrufen, Fehler beheben und Üben verteilen.</li><li><strong>Simulation:</strong> mindestens einen Probedurchgang durchführen und die verbleibenden Schwächen priorisieren.</li></ol>
-    <h3>Bei Stress handlungsfähig bleiben</h3>
-    <p>Etwas Anspannung ist normal; starke Angst kann die Bearbeitung erheblich erschweren. Kurze Atempausen, eine klare Aufgabenreihenfolge und realistische Selbstinstruktionen können helfen. Sätze wie „Ich werde garantiert alles wissen“ sind weniger nützlich als überprüfbare Handlungen: „Ich lese zuerst alle Aufgaben; ich beginne mit den lösbaren.“</p>
-    <p>Entspannungsverfahren wie progressive Muskelentspannung können zur Belastungsregulation beitragen. Sie sollten jedoch nicht als technische Methode dargestellt werden, eine bestimmte EEG-Frequenz herzustellen. Wenn Prüfungsangst wiederholt zu starken Blockaden führt, ist fachliche Unterstützung angebracht.</p>
-    <p class="source-hint">Thematische Anregung: Prüfungstermine, Stress, Bewegung, Atmung, Entspannung (S. 50–71).</p>
-  </article>
+        <article class="card chapter" id="kap-exam">
+            <span class="eyebrow">Kapitel 08</span>
+            <h2>Prüfungen: Können unter Bedingungen abrufen</h2>
+            <p>Prüfungen verlangen mehr als den Besitz von Wissen: Unter Zeitbedingungen muss es erkannt, ausgewählt,
+                angewendet und verständlich dargestellt werden. Daher gehören Übungsaufgaben im <strong>Format der
+                    tatsächlichen Prüfung</strong> zur Vorbereitung. Für eine mündliche Prüfung ist freies Erklären
+                besonders sinnvoll; für Mathematik das eigenständige Lösen; für einen Aufsatz das Schreiben unter
+                realistischem Zeitrahmen.</p>
+            <h3>Vorbereitung in drei Phasen</h3>
+            <ol>
+                <li><strong>Klärung:</strong> Stoff, Aufgabentypen, Kriterien und Prüfungsdauer sammeln.</li>
+                <li><strong>Aufbau:</strong> Inhalte verstehen, gezielt abrufen, Fehler beheben und Üben verteilen.</li>
+                <li><strong>Simulation:</strong> mindestens einen Probedurchgang durchführen und die verbleibenden
+                    Schwächen priorisieren.</li>
+            </ol>
+            <h3>Bei Stress handlungsfähig bleiben</h3>
+            <p>Etwas Anspannung ist normal; starke Angst kann die Bearbeitung erheblich erschweren. Kurze Atempausen,
+                eine klare Aufgabenreihenfolge und realistische Selbstinstruktionen können helfen. Sätze wie „Ich werde
+                garantiert alles wissen“ sind weniger nützlich als überprüfbare Handlungen: „Ich lese zuerst alle
+                Aufgaben; ich beginne mit den lösbaren.“</p>
+            <p>Entspannungsverfahren wie progressive Muskelentspannung können zur Belastungsregulation beitragen. Sie
+                sollten jedoch nicht als technische Methode dargestellt werden, eine bestimmte EEG-Frequenz
+                herzustellen. Wenn Prüfungsangst wiederholt zu starken Blockaden führt, ist fachliche Unterstützung
+                angebracht.</p>
+            <p class="source-hint">Thematische Anregung: Prüfungstermine, Stress, Bewegung, Atmung, Entspannung (S.
+                50–71).</p>
+        </article>
 
-  <article class="card chapter" id="kap-reading">
-    <span class="eyebrow">Kapitel 09</span><h2>Lesen heißt konstruieren, nicht nur entziffern</h2>
-    <p>Wer einen Sachtext liest, muss Wörter erkennen, Sätze verstehen, Bezüge herstellen, wichtige Informationen auswählen und den Gesamtgedanken rekonstruieren. Flüssigkeit und Genauigkeit im Lesen sind nützlich, aber die eigentliche Leistung zeigt sich darin, ob eine Passage erklärt, zusammengefasst oder kritisch beurteilt werden kann.</p>
-    <h3>Eine praktikable Lesestrategie</h3>
-    <ol><li><strong>Vorher:</strong> Titel, Gliederung und Abbildungen betrachten; eine Leitfrage formulieren.</li><li><strong>Währenddessen:</strong> kurze Abschnitte lesen, zentrale Begriffe klären, logische Verknüpfungen erkennen.</li><li><strong>Danach:</strong> Unterlagen schließen, die Kernaussage in eigenen Worten erklären und die Leitfrage beantworten.</li></ol>
-    <p>Markierungen sind hilfreich, wenn sie sparsam bleiben und einen konkreten Zweck erfüllen. Wer fast jeden Satz färbt, macht den Text nicht leichter. Bei komplexen Argumenten kann eine Tabelle aus These, Begründung, Beleg und Einwand mehr leisten als farbige Streifen.</p>
-    <p>Bei anhaltenden Schwierigkeiten mit Lesegenauigkeit, Lesefluss oder Textverständnis ist eine zielgerichtete pädagogische Diagnostik sinnvoll. Pauschale Aussagen über „Augentraining“, visuelle Entspannung oder vermeintliche Sinnestypen ersetzen eine fachlich begründete Förderung nicht.</p>
-    <p class="source-hint">Thematische Anregung: Leseprobleme, Lesetraining, Leseverständnis (S. 73–76).</p>
-  </article>
+        <article class="card chapter" id="kap-reading">
+            <span class="eyebrow">Kapitel 09</span>
+            <h2>Lesen heißt konstruieren, nicht nur entziffern</h2>
+            <p>Wer einen Sachtext liest, muss Wörter erkennen, Sätze verstehen, Bezüge herstellen, wichtige
+                Informationen auswählen und den Gesamtgedanken rekonstruieren. Flüssigkeit und Genauigkeit im Lesen sind
+                nützlich, aber die eigentliche Leistung zeigt sich darin, ob eine Passage erklärt, zusammengefasst oder
+                kritisch beurteilt werden kann.</p>
+            <h3>Eine praktikable Lesestrategie</h3>
+            <ol>
+                <li><strong>Vorher:</strong> Titel, Gliederung und Abbildungen betrachten; eine Leitfrage formulieren.
+                </li>
+                <li><strong>Währenddessen:</strong> kurze Abschnitte lesen, zentrale Begriffe klären, logische
+                    Verknüpfungen erkennen.</li>
+                <li><strong>Danach:</strong> Unterlagen schließen, die Kernaussage in eigenen Worten erklären und die
+                    Leitfrage beantworten.</li>
+            </ol>
+            <p>Markierungen sind hilfreich, wenn sie sparsam bleiben und einen konkreten Zweck erfüllen. Wer fast jeden
+                Satz färbt, macht den Text nicht leichter. Bei komplexen Argumenten kann eine Tabelle aus These,
+                Begründung, Beleg und Einwand mehr leisten als farbige Streifen.</p>
+            <p>Bei anhaltenden Schwierigkeiten mit Lesegenauigkeit, Lesefluss oder Textverständnis ist eine
+                zielgerichtete pädagogische Diagnostik sinnvoll. Pauschale Aussagen über „Augentraining“, visuelle
+                Entspannung oder vermeintliche Sinnestypen ersetzen eine fachlich begründete Förderung nicht.</p>
+            <p class="source-hint">Thematische Anregung: Leseprobleme, Lesetraining, Leseverständnis (S. 73–76).</p>
+        </article>
 
-  <article class="card chapter" id="kap-writing">
-    <span class="eyebrow">Kapitel 10</span><h2>Schreiben als Prozess: denken, entwerfen, prüfen</h2>
-    <p>Eine tragfähige Textproduktion besteht aus verschiedenen Teilaufgaben. Zuerst werden Inhalt und Absicht geklärt; anschließend kommt eine sinnvolle Gliederung; danach ein Rohentwurf; zuletzt die Überarbeitung. Wer alle vier Schritte gleichzeitig perfektionieren will, blockiert leicht den Gedankenfluss. Gerade bei komplexen Aufgaben kann es deshalb helfen, Schreib- und Korrekturphase bewusst zu trennen.</p>
-    <h3>Die vier Kontrollebenen</h3>
-    <ul><li><strong>Inhalt:</strong> Beantwortet der Text die Aufgabenstellung? Sind Aussagen plausibel oder belegt?</li><li><strong>Aufbau:</strong> Entwickelt sich ein roter Faden? Sind Absätze sinnvoll verbunden?</li><li><strong>Sprache:</strong> Sind Aussagen präzise, Beispiele treffend und Sätze verständlich?</li><li><strong>Norm:</strong> Stimmen Rechtschreibung, Grammatik und Zeichensetzung?</li></ul>
-    <p>Beim Rechtschreibenlernen können persönliche Fehlerschwerpunkte gesammelt werden: eine kurze Regel, zwei Beispiele und eine spätere Gegenprobe. Das ist zielgerichteter als zufälliges Wiederholen langer Wortlisten. Bei grundsätzlichen oder hartnäckigen Schwierigkeiten gehört fachdidaktisch begründete Förderung dazu; einzelne vermeintliche „Tricks“ lösen nicht jede Ursache.</p>
-    <div class="soft-note"><strong>Kleine Übung</strong><p>Schreibe zu einem Thema fünf Sätze. Lies nur deren Anfang: Ist die gedankliche Reihenfolge klar? Überarbeite anschließend zunächst die Logik und erst dann die Kommas.</p></div>
-    <p class="source-hint">Thematische Anregung: Rechtschreibübungen und Texttraining (S. 77–82).</p>
-  </article>
+        <article class="card chapter" id="kap-writing">
+            <span class="eyebrow">Kapitel 10</span>
+            <h2>Schreiben als Prozess: denken, entwerfen, prüfen</h2>
+            <p>Eine tragfähige Textproduktion besteht aus verschiedenen Teilaufgaben. Zuerst werden Inhalt und Absicht
+                geklärt; anschließend kommt eine sinnvolle Gliederung; danach ein Rohentwurf; zuletzt die Überarbeitung.
+                Wer alle vier Schritte gleichzeitig perfektionieren will, blockiert leicht den Gedankenfluss. Gerade bei
+                komplexen Aufgaben kann es deshalb helfen, Schreib- und Korrekturphase bewusst zu trennen.</p>
+            <h3>Die vier Kontrollebenen</h3>
+            <ul>
+                <li><strong>Inhalt:</strong> Beantwortet der Text die Aufgabenstellung? Sind Aussagen plausibel oder
+                    belegt?</li>
+                <li><strong>Aufbau:</strong> Entwickelt sich ein roter Faden? Sind Absätze sinnvoll verbunden?</li>
+                <li><strong>Sprache:</strong> Sind Aussagen präzise, Beispiele treffend und Sätze verständlich?</li>
+                <li><strong>Norm:</strong> Stimmen Rechtschreibung, Grammatik und Zeichensetzung?</li>
+            </ul>
+            <p>Beim Rechtschreibenlernen können persönliche Fehlerschwerpunkte gesammelt werden: eine kurze Regel, zwei
+                Beispiele und eine spätere Gegenprobe. Das ist zielgerichteter als zufälliges Wiederholen langer
+                Wortlisten. Bei grundsätzlichen oder hartnäckigen Schwierigkeiten gehört fachdidaktisch begründete
+                Förderung dazu; einzelne vermeintliche „Tricks“ lösen nicht jede Ursache.</p>
+            <div class="soft-note"><strong>Kleine Übung</strong>
+                <p>Schreibe zu einem Thema fünf Sätze. Lies nur deren Anfang: Ist die gedankliche Reihenfolge klar?
+                    Überarbeite anschließend zunächst die Logik und erst dann die Kommas.</p>
+            </div>
+            <p class="source-hint">Thematische Anregung: Rechtschreibübungen und Texttraining (S. 77–82).</p>
+        </article>
 
-  <article class="card chapter" id="kap-teaching">
-    <span class="eyebrow">Kapitel 11</span><h2>Unterricht, der geistige Arbeit sichtbar macht</h2>
-    <p>Lehrpersonen gestalten Bedingungen, unter denen Lernen wahrscheinlicher wird. Dazu gehören die transparente Zielsetzung, das Aktivieren von Vorwissen, ein gut nachvollziehbares Modell, angeleitete Übung, zunehmend selbstständige Anwendung und überprüfbare Rückmeldung. Verschiedene Methoden sind sinnvoll, aber nicht wegen einer starren Einteilung von Kindern in visuelle, auditive oder motorische Lerntypen.</p>
-    <p>Die geeignete Darstellungsform hängt in erster Linie vom <strong>Gegenstand und Lernziel</strong> ab: Musik verlangt Hören, Geometrie räumliche Veranschaulichung, historische Urteilsbildung Arbeit mit Quellen. Es kann helfen, zusammenpassende Darstellungen zu kombinieren, etwa eine Skizze mit sprachlicher Erläuterung. Entscheidend ist nicht die maximale Reizmenge, sondern der Erkenntnisgewinn.</p>
-    <h3>Eine lernwirksame Unterrichtsfolge</h3>
-    <ol><li>Eine Frage oder ein Problem eröffnen.</li><li>Vorwissen und typische Fehlvorstellungen erkennen.</li><li>Einen Lösungsweg modellieren und begründen.</li><li>Die Lernenden selbst üben lassen und die Hilfen schrittweise reduzieren.</li><li>Mit einer kurzen Abruffrage oder Anwendungsaufgabe überprüfen.</li><li>Eine spätere Wiederbegegnung einplanen.</li></ol>
-    <p>Feedback ist dann stark, wenn es eine nächste Handlung ermöglicht. Die Frage „War alles klar?“ liefert dafür wenig; eine zwei Minuten lange eigenständige Erklärung ist wesentlich informativer.</p>
-    <p class="source-hint">Thematische Anregung: Lernformen und Unterrichtsmodell (S. 30, 45–48); methodisch ergänzt.</p>
-  </article>
+        <article class="card chapter" id="kap-teaching">
+            <span class="eyebrow">Kapitel 11</span>
+            <h2>Unterricht, der geistige Arbeit sichtbar macht</h2>
+            <p>Lehrpersonen gestalten Bedingungen, unter denen Lernen wahrscheinlicher wird. Dazu gehören die
+                transparente Zielsetzung, das Aktivieren von Vorwissen, ein gut nachvollziehbares Modell, angeleitete
+                Übung, zunehmend selbstständige Anwendung und überprüfbare Rückmeldung. Verschiedene Methoden sind
+                sinnvoll, aber nicht wegen einer starren Einteilung von Kindern in visuelle, auditive oder motorische
+                Lerntypen.</p>
+            <p>Die geeignete Darstellungsform hängt in erster Linie vom <strong>Gegenstand und Lernziel</strong> ab:
+                Musik verlangt Hören, Geometrie räumliche Veranschaulichung, historische Urteilsbildung Arbeit mit
+                Quellen. Es kann helfen, zusammenpassende Darstellungen zu kombinieren, etwa eine Skizze mit
+                sprachlicher Erläuterung. Entscheidend ist nicht die maximale Reizmenge, sondern der Erkenntnisgewinn.
+            </p>
+            <h3>Eine lernwirksame Unterrichtsfolge</h3>
+            <ol>
+                <li>Eine Frage oder ein Problem eröffnen.</li>
+                <li>Vorwissen und typische Fehlvorstellungen erkennen.</li>
+                <li>Einen Lösungsweg modellieren und begründen.</li>
+                <li>Die Lernenden selbst üben lassen und die Hilfen schrittweise reduzieren.</li>
+                <li>Mit einer kurzen Abruffrage oder Anwendungsaufgabe überprüfen.</li>
+                <li>Eine spätere Wiederbegegnung einplanen.</li>
+            </ol>
+            <p>Feedback ist dann stark, wenn es eine nächste Handlung ermöglicht. Die Frage „War alles klar?“ liefert
+                dafür wenig; eine zwei Minuten lange eigenständige Erklärung ist wesentlich informativer.</p>
+            <p class="source-hint">Thematische Anregung: Lernformen und Unterrichtsmodell (S. 30, 45–48); methodisch
+                ergänzt.</p>
+        </article>
 
-  <article class="card chapter" id="kap-family">
-    <span class="eyebrow">Kapitel 12</span><h2>Familie, Alltag und Selbstständigkeit</h2>
-    <p>Ein funktionierender Lernalltag braucht Struktur, aber nicht permanente Kontrolle. Kinder und Jugendliche profitieren von verständlichen Erwartungen, hilfreichen Routinen, ausreichender Freizeit und erwachsenen Bezugspersonen, die Schwierigkeiten ernst nehmen, ohne jede Aufgabe an sich zu ziehen. Hilfe ist gut, wenn sie zur selbstständigen Bewältigung führt.</p>
-    <h3>Unterstützen statt erledigen</h3>
-    <p>Bei Hausaufgaben kann eine erwachsene Person den Auftrag klären, Materialien verfügbar machen oder mit einer Einstiegsfrage helfen. Die eigentliche Denkleistung bleibt möglichst bei der lernenden Person. Bei wiederkehrenden Fehlern sollte nicht bloß die richtige Lösung vorgesagt werden, sondern ein sinnvoller nächster Lernschritt gefunden werden.</p>
-    <p>Auch die Kommunikation zwischen Schule und Elternhaus gewinnt durch konkrete Beobachtungen: „Bei Textaufgaben versteht sie den Sachverhalt, verliert aber die Einheiten“ ist brauchbarer als „Mathematik geht gar nicht“. Belastungen, Konflikte oder ausgeprägte Ängste verdienen ein Gespräch, das nicht schon mit einer Schuldzuweisung beginnt.</p>
-    <p>Und schließlich ist Freizeit kein Restposten. Bewegung, Schlaf, soziale Kontakte und selbstbestimmte Interessen gehören zu einem tragfähigen Alltag. Dauerhafte Überforderung lässt sich nicht dadurch lösen, dass das Lernen einfach in jede freie Minute ausgedehnt wird.</p>
-    <p class="source-hint">Thematische Anregung: Tagesorganisation, Schulkontakte, familiäre Konflikte (S. 91–98).</p>
-  </article>
+        <article class="card chapter" id="kap-family">
+            <span class="eyebrow">Kapitel 12</span>
+            <h2>Familie, Alltag und Selbstständigkeit</h2>
+            <p>Ein funktionierender Lernalltag braucht Struktur, aber nicht permanente Kontrolle. Kinder und Jugendliche
+                profitieren von verständlichen Erwartungen, hilfreichen Routinen, ausreichender Freizeit und erwachsenen
+                Bezugspersonen, die Schwierigkeiten ernst nehmen, ohne jede Aufgabe an sich zu ziehen. Hilfe ist gut,
+                wenn sie zur selbstständigen Bewältigung führt.</p>
+            <h3>Unterstützen statt erledigen</h3>
+            <p>Bei Hausaufgaben kann eine erwachsene Person den Auftrag klären, Materialien verfügbar machen oder mit
+                einer Einstiegsfrage helfen. Die eigentliche Denkleistung bleibt möglichst bei der lernenden Person. Bei
+                wiederkehrenden Fehlern sollte nicht bloß die richtige Lösung vorgesagt werden, sondern ein sinnvoller
+                nächster Lernschritt gefunden werden.</p>
+            <p>Auch die Kommunikation zwischen Schule und Elternhaus gewinnt durch konkrete Beobachtungen: „Bei
+                Textaufgaben versteht sie den Sachverhalt, verliert aber die Einheiten“ ist brauchbarer als „Mathematik
+                geht gar nicht“. Belastungen, Konflikte oder ausgeprägte Ängste verdienen ein Gespräch, das nicht schon
+                mit einer Schuldzuweisung beginnt.</p>
+            <p>Und schließlich ist Freizeit kein Restposten. Bewegung, Schlaf, soziale Kontakte und selbstbestimmte
+                Interessen gehören zu einem tragfähigen Alltag. Dauerhafte Überforderung lässt sich nicht dadurch lösen,
+                dass das Lernen einfach in jede freie Minute ausgedehnt wird.</p>
+            <p class="source-hint">Thematische Anregung: Tagesorganisation, Schulkontakte, familiäre Konflikte (S.
+                91–98).</p>
+        </article>
 
-  <section class="card" id="tipps" aria-labelledby="tips-heading">
-    <span class="eyebrow">Das vollständig zugängliche Repertoire</span>
-    <h2 id="tips-heading">Alle 111 Lerntipps auf einen Blick</h2>
-    <p>Die tägliche Rotation ist nur ein zusätzlicher Zugang. <strong>Hier stehen sämtliche 111 neu geschriebenen Tipps jederzeit zur Verfügung.</strong> Suche nach einem Stichwort, filtere nach Thema oder lass dir nur deine gemerkten Einträge anzeigen. Ein Klick auf „Warum?“ öffnet die zusätzliche Erläuterung.</p>
-    <noscript><p class="no-js"><strong>Hinweis:</strong> Die interaktive Tabelle benötigt JavaScript. Die ausführlichen zwölf Kapitel darüber sind auch ohne JavaScript lesbar.</p></noscript>
-    <div class="filter-grid" role="group" aria-label="Tipps filtern">
-      <label for="tip-search">Stichwortsuche<input type="search" id="tip-search" placeholder="z. B. Prüfung, Fehler, Text …" autocomplete="off"></label>
-      <label for="tip-category">Themenfeld<select id="tip-category"><option value="all">Alle Themenfelder</option></select></label>
-      <label for="tip-sort">Sortierung<select id="tip-sort"><option value="number">Nach Nummer</option><option value="title">Alphabetisch</option><option value="category">Nach Themenfeld</option></select></label>
-    </div>
-    <div class="filter-bottom">
-      <label class="simple-checkbox" for="only-favorites"><input type="checkbox" id="only-favorites"> Nur gemerkte Tipps</label>
-      <span class="count" id="result-count" role="status" aria-live="polite">111 Tipps verfügbar</span>
-      <div class="button-row" style="margin:0"><button type="button" id="reset-filters">Filter zurücksetzen</button><button type="button" id="export-csv">Ansicht als CSV</button></div>
-    </div>
-    <div class="table-scroll" id="catalog" tabindex="-1">
-      <table aria-label="111 Lerntipps mit Nummer, Themenfeld und Anwendung">
-        <thead><tr><th scope="col" style="width:4.4rem">Nr.</th><th scope="col" style="width:11rem">Thema</th><th scope="col">Tipp und Erläuterung</th><th scope="col">Direkte Anwendung</th><th scope="col" style="width:4.1rem">Merken</th></tr></thead>
-        <tbody id="tips-body"><tr><td colspan="5">Tabelle wird vorbereitet …</td></tr></tbody>
-      </table>
-    </div>
-    <p class="hint">Die Merkliste wird nur lokal in diesem Browser gespeichert (sofern der Browser das erlaubt). Es erfolgt keine Übertragung an einen Server.</p>
-  </section>
+        <section class="card" id="tipps" aria-labelledby="tips-heading">
+            <span class="eyebrow">Das vollständig zugängliche Repertoire</span>
+            <h2 id="tips-heading">Alle 111 Lerntipps auf einen Blick</h2>
+            <p>Die tägliche Rotation ist nur ein zusätzlicher Zugang. <strong>Hier stehen sämtliche 111 neu
+                    geschriebenen Tipps jederzeit zur Verfügung.</strong> Suche nach einem Stichwort, filtere nach Thema
+                oder lass dir nur deine gemerkten Einträge anzeigen. Ein Klick auf „Warum?“ öffnet die zusätzliche
+                Erläuterung.</p>
+            <noscript>
+                <p class="no-js"><strong>Hinweis:</strong> Die interaktive Tabelle benötigt JavaScript. Die
+                    ausführlichen zwölf Kapitel darüber sind auch ohne JavaScript lesbar.</p>
+            </noscript>
+            <div class="filter-grid" role="group" aria-label="Tipps filtern">
+                <label for="tip-search">Stichwortsuche<input type="search" id="tip-search"
+                        placeholder="z. B. Prüfung, Fehler, Text …" autocomplete="off"></label>
+                <label for="tip-category">Themenfeld<select id="tip-category">
+                        <option value="all">Alle Themenfelder</option>
+                    </select></label>
+                <label for="tip-sort">Sortierung<select id="tip-sort">
+                        <option value="number">Nach Nummer</option>
+                        <option value="title">Alphabetisch</option>
+                        <option value="category">Nach Themenfeld</option>
+                    </select></label>
+            </div>
+            <div class="filter-bottom">
+                <label class="simple-checkbox" for="only-favorites"><input type="checkbox" id="only-favorites"> Nur
+                    gemerkte Tipps</label>
+                <span class="count" id="result-count" role="status" aria-live="polite">111 Tipps verfügbar</span>
+                <div class="button-row" style="margin:0"><button type="button" id="reset-filters">Filter
+                        zurücksetzen</button><button type="button" id="export-csv">Ansicht als CSV</button></div>
+            </div>
+            <div class="table-scroll" id="catalog" tabindex="-1">
+                <table aria-label="111 Lerntipps mit Nummer, Themenfeld und Anwendung">
+                    <thead>
+                        <tr>
+                            <th scope="col" style="width:4.4rem">Nr.</th>
+                            <th scope="col" style="width:11rem">Thema</th>
+                            <th scope="col">Tipp und Erläuterung</th>
+                            <th scope="col">Direkte Anwendung</th>
+                            <th scope="col" style="width:4.1rem">Merken</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tips-body">
+                        <tr>
+                            <td colspan="5">Tabelle wird vorbereitet …</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="hint">Die Merkliste wird nur lokal in diesem Browser gespeichert (sofern der Browser das erlaubt).
+                Es erfolgt keine Übertragung an einen Server.</p>
+        </section>
 
-  <section class="card" id="lernplan" aria-labelledby="planner-heading">
-    <span class="eyebrow">Kleine interaktive Lernhilfe</span><h2 id="planner-heading">Eine Lernsitzung sinnvoll aufteilen</h2>
-    <p>Ein durchdachter Ablauf kombiniert Einstieg, Bearbeitung, aktives Erinnern und Kontrolle. Trage ein Thema und eine Gesamtdauer ein – daraus entsteht ein einfacher Sitzungsplan. Er ist eine organisatorische Hilfestellung, kein wissenschaftlich vorgeschriebener Takt.</p>
-    <form class="planner" id="planner-form">
-      <label for="plan-topic">Mein Thema<input id="plan-topic" type="text" maxlength="100" value="Mein nächstes Lernkapitel" required></label>
-      <label for="plan-minutes">Gesamtdauer<select id="plan-minutes"><option value="20">20 Minuten</option><option value="30" selected>30 Minuten</option><option value="45">45 Minuten</option><option value="60">60 Minuten</option><option value="90">90 Minuten</option></select></label>
-      <button type="submit" class="primary">Plan erstellen</button>
-    </form>
-    <div id="planner-result" class="planner-result" aria-live="polite"></div>
-  </section>
+        <section class="card" id="lernplan" aria-labelledby="planner-heading">
+            <span class="eyebrow">Kleine interaktive Lernhilfe</span>
+            <h2 id="planner-heading">Eine Lernsitzung sinnvoll aufteilen</h2>
+            <p>Ein durchdachter Ablauf kombiniert Einstieg, Bearbeitung, aktives Erinnern und Kontrolle. Trage ein Thema
+                und eine Gesamtdauer ein – daraus entsteht ein einfacher Sitzungsplan. Er ist eine organisatorische
+                Hilfestellung, kein wissenschaftlich vorgeschriebener Takt.</p>
+            <form class="planner" id="planner-form">
+                <label for="plan-topic">Mein Thema<input id="plan-topic" type="text" maxlength="100"
+                        value="Mein nächstes Lernkapitel" required></label>
+                <label for="plan-minutes">Gesamtdauer<select id="plan-minutes">
+                        <option value="20">20 Minuten</option>
+                        <option value="30" selected>30 Minuten</option>
+                        <option value="45">45 Minuten</option>
+                        <option value="60">60 Minuten</option>
+                        <option value="90">90 Minuten</option>
+                    </select></label>
+                <button type="submit" class="primary">Plan erstellen</button>
+            </form>
+            <div id="planner-result" class="planner-result" aria-live="polite"></div>
+        </section>
 
-  <section class="card" id="einordnung" aria-labelledby="science-heading">
-    <span class="eyebrow">Historische Quelle – heutiger Kenntnisstand</span><h2 id="science-heading">Was sich seit 2002 wissenschaftlich verändert hat</h2>
-    <p>Das verwendete Buch enthält viel pädagogisch Brauchbares – etwa die Bedeutung von Übung, Fehleranalyse, sinnvollen Pausen und Lernorganisation. Zugleich finden sich zeittypische neurobiologische Vereinfachungen, starre Typologien und alternativmedizinische Behauptungen. Eine zeitgemäße Lernseite muss diese Unterschiede offenlegen.</p>
-    <dl class="evidence-list">
-      <dt>1. „Optimales Lernen bei exakt 20 Hertz“</dt><dd>So lässt sich Lernqualität nicht definieren. EEG-Frequenzbänder beschreiben Aspekte neuronaler Aktivität, sind aber kein individuell einzustellender Lernknopf. Eine exakte Zielzahl ist kein seriöser allgemeiner Praxistipp.</dd>
-      <dt>2. Starre auditive, visuelle oder motorische Lerntypen</dt><dd>Individuelle Vorlieben und Fähigkeiten existieren. Die Behauptung, Lernleistungen stiegen zuverlässig, wenn Unterricht nach einem diagnostizierten „Lerntyp“ angepasst werde, ist jedoch nicht überzeugend belegt. Besser: Darstellungsformen nach Stoff und Aufgabe wählen.</dd>
-      <dt>3. Fixe Prozentwerte zur Merkfähigkeit einzelner Sinne</dt><dd>Beliebte Merkpyramiden mit präzisen Behaltensquoten für Hören, Sehen und Handeln sind keine allgemein gültigen Gesetze. Aktives Verarbeiten kann hilfreich sein; die exakte Erfolgsquote hängt aber von vielen Bedingungen ab.</dd>
-      <dt>4. Die einzig richtige Tageszeit zum Lernen</dt><dd>Leistungsfähigkeit schwankt, aber starre Zeitfenster wie „erst nach 15 Uhr Hausaufgaben“ gelten nicht universell. Lebensalter, Schlaf, Chronotyp und Tagesbelastung müssen berücksichtigt werden.</dd>
-      <dt>5. Musik als garantierte Gehirnsteuerung</dt><dd>Musik kann angenehme Stimmung oder Entspannung unterstützen. Bei sprachlich anspruchsvollen Aufgaben kann sie ebenso stören. Eine verlässliche Steuerung der Gehirnwellen auf einen optimalen Lerntakt ist nicht belegt.</dd>
-      <dt>6. Blütenessenzen gegen Angst oder Lernprobleme</dt><dd>Für spezifische Wirkungen über Placeboeffekte hinaus gibt es keine überzeugenden Nachweise. Sie sollten nicht als Lösung für ausgeprägte Angst, Konzentrationsprobleme oder Lernstörungen dargestellt werden.</dd>
-      <dt>7. „Bildschirme rauben Vitamin A und B1“</dt><dd>Digitale Geräte können zur Ermüdung beitragen oder ablenken, verursachen aber nicht auf die behauptete allgemeine Weise einen Vitaminverlust. Nahrungsergänzung sollte sich an medizinischer Notwendigkeit orientieren.</dd>
-      <dt>8. „Nachmittags kein frisches Obst“ und feste Nahrungsprozente</dt><dd>Solche Pauschalregeln sind ernährungswissenschaftlich nicht tragfähig. Regelmäßigkeit, Gesamtqualität, individuelle Verträglichkeit und passende Versorgung sind wichtiger.</dd>
-      <dt>9. Elektrosmog, Erdstrahlen und schlechte Sitzplätze</dt><dd>Behauptungen über angeblich lernschädliche „Erdstrahlen“ oder pauschale Zwei-Meter-Regeln für Computer lassen sich nicht als evidenzbasierte Lernmethoden übernehmen. Relevanter sind Licht, Akustik, Ergonomie und Ablenkung.</dd>
-      <dt>10. Gut unterstützte Kernmethoden</dt><dd>Aktives Testen, zeitlich verteiltes Üben, fachbezogene Selbstregulation und konkretes Feedback haben eine deutlich robustere empirische Grundlage. Sie bilden deshalb den methodischen Kern dieses Kompendiums.</dd>
-    </dl>
-  </section>
+        <section class="card" id="einordnung" aria-labelledby="science-heading">
+            <span class="eyebrow">Historische Quelle – heutiger Kenntnisstand</span>
+            <h2 id="science-heading">Was sich seit 2002 wissenschaftlich verändert hat</h2>
+            <p>Das verwendete Buch enthält viel pädagogisch Brauchbares – etwa die Bedeutung von Übung, Fehleranalyse,
+                sinnvollen Pausen und Lernorganisation. Zugleich finden sich zeittypische neurobiologische
+                Vereinfachungen, starre Typologien und alternativmedizinische Behauptungen. Eine zeitgemäße Lernseite
+                muss diese Unterschiede offenlegen.</p>
+            <dl class="evidence-list">
+                <dt>1. „Optimales Lernen bei exakt 20 Hertz“</dt>
+                <dd>So lässt sich Lernqualität nicht definieren. EEG-Frequenzbänder beschreiben Aspekte neuronaler
+                    Aktivität, sind aber kein individuell einzustellender Lernknopf. Eine exakte Zielzahl ist kein
+                    seriöser allgemeiner Praxistipp.</dd>
+                <dt>2. Starre auditive, visuelle oder motorische Lerntypen</dt>
+                <dd>Individuelle Vorlieben und Fähigkeiten existieren. Die Behauptung, Lernleistungen stiegen
+                    zuverlässig, wenn Unterricht nach einem diagnostizierten „Lerntyp“ angepasst werde, ist jedoch nicht
+                    überzeugend belegt. Besser: Darstellungsformen nach Stoff und Aufgabe wählen.</dd>
+                <dt>3. Fixe Prozentwerte zur Merkfähigkeit einzelner Sinne</dt>
+                <dd>Beliebte Merkpyramiden mit präzisen Behaltensquoten für Hören, Sehen und Handeln sind keine
+                    allgemein gültigen Gesetze. Aktives Verarbeiten kann hilfreich sein; die exakte Erfolgsquote hängt
+                    aber von vielen Bedingungen ab.</dd>
+                <dt>4. Die einzig richtige Tageszeit zum Lernen</dt>
+                <dd>Leistungsfähigkeit schwankt, aber starre Zeitfenster wie „erst nach 15 Uhr Hausaufgaben“ gelten
+                    nicht universell. Lebensalter, Schlaf, Chronotyp und Tagesbelastung müssen berücksichtigt werden.
+                </dd>
+                <dt>5. Musik als garantierte Gehirnsteuerung</dt>
+                <dd>Musik kann angenehme Stimmung oder Entspannung unterstützen. Bei sprachlich anspruchsvollen Aufgaben
+                    kann sie ebenso stören. Eine verlässliche Steuerung der Gehirnwellen auf einen optimalen Lerntakt
+                    ist nicht belegt.</dd>
+                <dt>6. Blütenessenzen gegen Angst oder Lernprobleme</dt>
+                <dd>Für spezifische Wirkungen über Placeboeffekte hinaus gibt es keine überzeugenden Nachweise. Sie
+                    sollten nicht als Lösung für ausgeprägte Angst, Konzentrationsprobleme oder Lernstörungen
+                    dargestellt werden.</dd>
+                <dt>7. „Bildschirme rauben Vitamin A und B1“</dt>
+                <dd>Digitale Geräte können zur Ermüdung beitragen oder ablenken, verursachen aber nicht auf die
+                    behauptete allgemeine Weise einen Vitaminverlust. Nahrungsergänzung sollte sich an medizinischer
+                    Notwendigkeit orientieren.</dd>
+                <dt>8. „Nachmittags kein frisches Obst“ und feste Nahrungsprozente</dt>
+                <dd>Solche Pauschalregeln sind ernährungswissenschaftlich nicht tragfähig. Regelmäßigkeit,
+                    Gesamtqualität, individuelle Verträglichkeit und passende Versorgung sind wichtiger.</dd>
+                <dt>9. Elektrosmog, Erdstrahlen und schlechte Sitzplätze</dt>
+                <dd>Behauptungen über angeblich lernschädliche „Erdstrahlen“ oder pauschale Zwei-Meter-Regeln für
+                    Computer lassen sich nicht als evidenzbasierte Lernmethoden übernehmen. Relevanter sind Licht,
+                    Akustik, Ergonomie und Ablenkung.</dd>
+                <dt>10. Gut unterstützte Kernmethoden</dt>
+                <dd>Aktives Testen, zeitlich verteiltes Üben, fachbezogene Selbstregulation und konkretes Feedback haben
+                    eine deutlich robustere empirische Grundlage. Sie bilden deshalb den methodischen Kern dieses
+                    Kompendiums.</dd>
+            </dl>
+        </section>
 
-  <section class="card" id="quellen" aria-labelledby="sources-heading">
-    <h2 id="sources-heading">Quellen, Einordnung und Redaktion</h2>
-    <p><strong>Historischer Ausgangspunkt:</strong> Puchbauer-Schnabel, Konrad (2002): <em>Die 111 besten Lern-Tipps.</em> Wien: öbv &amp; hpt, 1. Auflage, Nachdruck 2003. ISBN 3-209-03790-6. Die gedankliche Themenwahl wurde aus einer vom Seitenautor herangezogenen Ausgabe erschlossen. Es wurden weder Buchtexte noch die Originalillustrationen übernommen.</p>
-    <p><strong>Zusätzliche wissenschaftliche Orientierung:</strong> Die folgenden Publikationen und Einrichtungen ermöglichen es, Aussagen nachzulesen und die historischen Empfehlungen kritisch einzuordnen.</p>
-    <ol class="references">
-      <li>Dunlosky, J. et al. (2013): <a href="https://doi.org/10.1177/1529100612453266" target="_blank" rel="noopener noreferrer">Improving Students’ Learning With Effective Learning Techniques</a> – Überblick zu Lernmethoden, darunter Übungstests und verteiltes Üben.</li>
-      <li>Education Endowment Foundation (2025): <a href="https://educationendowmentfoundation.org.uk/education-evidence/guidance-reports/metacognition" target="_blank" rel="noopener noreferrer">Metacognition and Self-Regulated Learning</a> – Planung, Überwachung und Bewertung des eigenen Lernens.</li>
-      <li>Education Endowment Foundation: <a href="https://educationendowmentfoundation.org.uk/education-evidence/guidance-reports/feedback" target="_blank" rel="noopener noreferrer">Teacher Feedback to Improve Pupil Learning</a> – aufgabenbezogene Rückmeldung und Anschlusslernen.</li>
-      <li>Pashler, H. et al. (2008): <a href="https://www.psychologicalscience.org/journals/pspi/j.1539-6053.2009.01038.x/" target="_blank" rel="noopener noreferrer">Learning Styles</a> – kritische Prüfung der Hypothese, Unterricht müsse zu diagnostizierten Lernstilen passen.</li>
-      <li>Ernst, E. (2010): <a href="https://pubmed.ncbi.nlm.nih.gov/20734279/" target="_blank" rel="noopener noreferrer">Bach flower remedies: a systematic review of randomised clinical trials</a> – fehlende überzeugende Wirksamkeitsbelege für spezifische Blütenessenzeffekte.</li>
-    </ol>
-    <p class="hint"><strong>Redaktionelle Kennzeichnung:</strong> Die 111 nummerierten Tipps, Kapiteltexte, Beispiele, Tabellenstruktur und Rotationslogik sind eine neue Ausarbeitung. Sie stellen keine nummerierte Transkription des Buchs dar. Aussagen zur Forschung sind allgemeine Information, keine individualisierte medizinische Beratung.</p>
-    <a class="back" href="#seitenanfang">↑ Zurück zum Seitenanfang</a>
-  </section>
-</main>
-<footer class="site-footer main-footer"><p>Learning knowledge · eigenständiges Lernkompendium · Stand: Oktober 2026</p></footer>
-<script>
-'use strict';
-// Die Datensätze sind eigenständig verfasste Kurztexte, keine Abschriften.
-const CATEGORIES = [["start","Aufmerksamkeit & Einstieg"],["understand","Verstehen & Vernetzen"],["retrieve","Aktiv lernen & abrufen"],["repeat","Wiederholen & behalten"],["plan","Lernplan & Umgebung"],["pause","Pausen, Schlaf & Ernährung"],["feedback","Motivation & Fehlerkultur"],["exam","Prüfungen & Belastung"],["reading","Lesen & Textverständnis"],["writing","Schreiben & Rechtschreibung"],["teaching","Unterricht & Zusammenarbeit"],["family","Selbstständigkeit & Alltag"]];
-const TIPS = [{"id":1,"cat":"start","title":"Mit einer Frage beginnen","action":"Formuliere vor dem Lernen eine konkrete Frage, die du am Ende beantworten können möchtest.","note":"Aus „Kapitel 4 lernen“ wird zum Beispiel „Warum entsteht ein Gewitter?“."},{"id":2,"cat":"start","title":"Das Vorwissen wecken","action":"Notiere drei Dinge, die du über das Thema bereits weißt – und kennzeichne Unsicherheiten.","note":"Vorwissen ist die Startfläche, nicht zwingend eine verlässliche Landkarte."},{"id":3,"cat":"start","title":"Den Nutzen sichtbar machen","action":"Schreibe in einem Satz auf, wofür du den Stoff brauchst oder wo er dir begegnet.","note":"Ein Bezug zur Praxis hilft, abstrakte Inhalte einzuordnen."},{"id":4,"cat":"start","title":"Neugier durch Widersprüche","action":"Suche eine scheinbar paradoxe Aussage und versuche, sie zu erklären.","note":"Warum schwimmt ein Stahlschiff, obwohl Stahl schwerer als Wasser ist?"},{"id":5,"cat":"start","title":"Ein überschaubares Ziel setzen","action":"Definiere ein Ergebnis für die nächsten 20–40 Minuten, das sich überprüfen lässt.","note":"„Fünf Aufgaben selbst lösen“ ist überprüfbar, „gut lernen“ nicht."},{"id":6,"cat":"start","title":"Mit einer Mini-Aufgabe starten","action":"Beginne mit einer zweiminütigen Einstiegsaufgabe, statt auf Motivation zu warten.","note":"Ein leichter Anfang senkt die Hürde, ersetzt aber nicht die eigentliche Arbeit."},{"id":7,"cat":"start","title":"Aufmerksamkeit aktiv zurückholen","action":"Notiere bei abschweifenden Gedanken ein Stichwort und kehre dann zur Aufgabe zurück.","note":"Ablenkung wird registriert, ohne ihr sofort nachzugeben."},{"id":8,"cat":"start","title":"Schwierigkeitsgrad passend wählen","action":"Starte weder mit völliger Routine noch mit einer nahezu unlösbaren Aufgabe.","note":"Eine lösbare Herausforderung erhält Konzentration und Rückmeldung."},{"id":9,"cat":"start","title":"Einen Einstieg ritualisieren","action":"Nutze eine kurze feste Folge: Material bereitlegen, Ziel notieren, erste Frage bearbeiten.","note":"Wiederkehrende Abläufe sparen Organisationsentscheidungen."},{"id":10,"cat":"understand","title":"Erst die Landkarte, dann die Details","action":"Überfliege Überschriften, Abbildungen und Zusammenfassung, bevor du einzelne Absätze lernst.","note":"So erkennst du, welche Fragen das Kapitel überhaupt beantwortet."},{"id":11,"cat":"understand","title":"Das Thema als Strukturbaum zeichnen","action":"Schreibe das zentrale Thema in die Mitte und ordne Ober- und Unterbegriffe an.","note":"Die Zeichnung soll Beziehungen sichtbar machen, nicht besonders hübsch sein."},{"id":12,"cat":"understand","title":"Begriffe mit eigenen Worten erklären","action":"Formuliere eine kurze Definition, die ohne den Wortlaut des Lehrbuchs auskommt.","note":"Wenn nur die Originalformulierung funktioniert, ist das Verständnis womöglich noch fragil."},{"id":13,"cat":"understand","title":"Beispiele und Gegenbeispiele bilden","action":"Suche zu einem Begriff je ein zutreffendes und ein nicht zutreffendes Beispiel.","note":"Was ist eine Metapher – und was gerade keine?"},{"id":14,"cat":"understand","title":"Ursache und Wirkung unterscheiden","action":"Markiere in Erklärungen ausdrücklich, was Ursache, Bedingung und Folge ist.","note":"Das verhindert, dass bloße zeitliche Abfolgen für Erklärungen gehalten werden."},{"id":15,"cat":"understand","title":"Neues mit Bekanntem verknüpfen","action":"Suche bewusst zwei Verbindungen zu früheren Themen oder Alltagserfahrungen.","note":"Das neue Wissen erhält mehr Anknüpfungspunkte."},{"id":16,"cat":"understand","title":"Ähnliche Konzepte vergleichen","action":"Erstelle eine Tabelle mit Gemeinsamkeiten, Unterschieden und einem typischen Fehler.","note":"Besonders hilfreich bei Begriffspaaren wie Osmose und Diffusion."},{"id":17,"cat":"understand","title":"Vom Einfachen zum Komplexen gehen","action":"Beginne mit einer vollständigen, leichten Lösung und steigere dann die Schwierigkeit.","note":"Zwischenschritte vermeiden unnötige Überforderung."},{"id":18,"cat":"understand","title":"Ein Konzept grafisch prüfen","action":"Übersetze eine sprachliche Erklärung in Pfeile, Skizze, Zeitleiste oder Ablaufdiagramm.","note":"Eine Grafik deckt häufig fehlende Beziehungen auf."},{"id":19,"cat":"retrieve","title":"Buch zu – Wissen hervorholen","action":"Schließe die Unterlagen und schreibe alles auf, was du noch erklären kannst.","note":"Erst danach prüfst du, was gefehlt oder nicht gestimmt hat."},{"id":20,"cat":"retrieve","title":"Eigene Prüfungsfragen erfinden","action":"Formuliere zu jedem Abschnitt zwei Fragen – eine Wissensfrage und eine Transferfrage.","note":"Eine gute Transferfrage verlangt Anwendung statt Wiedererkennen."},{"id":21,"cat":"retrieve","title":"Karteikarten mit einer Frage pro Karte","action":"Schreibe vorne eine präzise Frage und hinten eine prüfbare Antwort.","note":"Überladene Karten erzeugen eher Wiedererkennung als belastbares Erinnern."},{"id":22,"cat":"retrieve","title":"Ein Thema laut unterrichten","action":"Erkläre den Inhalt frei einem realen oder vorgestellten Gegenüber.","note":"Stellen, an denen du ins Stocken gerätst, sind wertvolle Diagnosen."},{"id":23,"cat":"retrieve","title":"Ohne Vorlage skizzieren","action":"Zeichne einen Prozess aus dem Gedächtnis, bevor du die Buchgrafik vergleichst.","note":"Besonders geeignet für Kreisläufe, technische Schaltungen und historische Abläufe."},{"id":24,"cat":"retrieve","title":"Das Warum beantworten","action":"Ergänze eine Faktenfrage um „Warum ist das so?“ oder „Wodurch lässt sich das erklären?“.","note":"Die Begründung vertieft den Abruf, wenn sie sachlich korrekt ist."},{"id":25,"cat":"retrieve","title":"Gelerntes direkt anwenden","action":"Löse nach einer Erklärung mindestens eine Aufgabe ohne Musterlösung.","note":"Anwendung prüft, ob du das Prinzip beherrschst."},{"id":26,"cat":"retrieve","title":"Gemischte Aufgaben bearbeiten","action":"Wechsle nach dem Verstehen zwischen verwandten Aufgabentypen.","note":"So musst du zuerst entscheiden, welche Methode überhaupt passt."},{"id":27,"cat":"retrieve","title":"Die Lösung erst danach ansehen","action":"Halte den eigenen Lösungsversuch sichtbar fest und vergleiche erst dann mit der Vorlage.","note":"Ein vorzeitiger Blick macht die Aufgabe oft leichter, ohne etwas zu festigen."},{"id":28,"cat":"retrieve","title":"In beide Richtungen fragen","action":"Lerne Zusammenhänge nicht nur von Begriff zu Definition, sondern auch umgekehrt.","note":"Zum Beispiel Fachwort → Erklärung und Erklärung → Fachwort."},{"id":29,"cat":"retrieve","title":"Eine Ein-Minuten-Zusammenfassung geben","action":"Beschreibe nach einer Einheit drei Hauptgedanken frei in höchstens sechzig Sekunden.","note":"Kurz, aber aussagekräftig – und sofort überprüfbar."},{"id":30,"cat":"repeat","title":"Am selben Tag kurz abrufen","action":"Hole zentrale Inhalte nach der ersten Lerneinheit erneut ohne Unterlagen hervor.","note":"Kurze Nacharbeit ist oft wertvoller als wiederholtes Durchlesen."},{"id":31,"cat":"repeat","title":"Die Abstände verlängern","action":"Plane weitere Abrufe nach etwa einem, drei, sieben und vierzehn Tagen.","note":"Das ist ein flexibler Ausgangspunkt, kein biologisch exakter Rhythmus."},{"id":32,"cat":"repeat","title":"Schwierige Karten früher wiederholen","action":"Wiederhole verfehlte Fragen früher als solche, die sicher beantwortet werden.","note":"Zeit fließt dorthin, wo sie am meisten bringt."},{"id":33,"cat":"repeat","title":"Erinnern vor Nachlesen","action":"Versuche zunächst eine Antwort zu geben und konsultiere danach die Quelle.","note":"Das Nachlesen dient der Korrektur des Abrufs."},{"id":34,"cat":"repeat","title":"Wiederholen in den Kalender aufnehmen","action":"Plane Lerntermine direkt mit den Wiederholungsterminen.","note":"Was im Kalender fehlt, fällt häufig der Gegenwart zum Opfer."},{"id":35,"cat":"repeat","title":"Alte und neue Inhalte verbinden","action":"Mische wenige ältere Fragen in jede neue Lerneinheit.","note":"So bleibt bereits Gelerntes erreichbar."},{"id":36,"cat":"repeat","title":"Den Lernerfolg verzögert prüfen","action":"Teste dich auch Tage nach einer vermeintlich erfolgreichen Einheit.","note":"Leichtigkeit unmittelbar nach dem Lesen ist kein Langzeitbeweis."},{"id":37,"cat":"repeat","title":"Fehler gezielt erneut testen","action":"Führe eine Liste unsicherer Antworten und prüfe sie nach einer Korrektur nochmals.","note":"Der zweite Abruf ist entscheidend."},{"id":38,"cat":"repeat","title":"Wiederholung variieren","action":"Rufe denselben Inhalt einmal schriftlich, einmal mündlich und einmal anhand einer Aufgabe ab.","note":"Die Varianten sollen unterschiedliche Anforderungen trainieren."},{"id":39,"cat":"repeat","title":"Wiederholung beenden, wenn sie produktiv war","action":"Kontrolliere anhand von Antworten statt nach dem Gefühl von Vertrautheit.","note":"Sicherer Abruf ist aussagekräftiger als ein vertrauter Text."},{"id":40,"cat":"plan","title":"Prüfungstermin rückwärts planen","action":"Trage vom Termin rückwärts kleine Lernportionen und Wiederholungen ein.","note":"Der letzte Tag dient der Übersicht, nicht dem erstmaligen Erarbeiten."},{"id":41,"cat":"plan","title":"Aufgaben nach Wirkung priorisieren","action":"Beginne mit Stoff, der wichtig, unsicher und prüfungsrelevant ist.","note":"Ein hübsches Inhaltsverzeichnis ist noch keine Vorbereitung."},{"id":42,"cat":"plan","title":"Eine realistische Tagesmenge wählen","action":"Plane weniger, als du in einem idealen, unterbrechungsfreien Tag schaffen würdest.","note":"Etwas Reserve macht den Plan belastbar."},{"id":43,"cat":"plan","title":"Lernziele konkret formulieren","action":"Schreibe „drei Textaufgaben selbstständig lösen“ statt „Mathematik lernen“.","note":"Nach der Einheit ist damit klar, ob das Ziel erreicht wurde."},{"id":44,"cat":"plan","title":"Ablenkungen vorab beseitigen","action":"Lege nicht benötigte Geräte weg und schalte Benachrichtigungen für die Lernphase aus.","note":"Willenskraft ist ein schlechter Ersatz für eine gute Umgebung."},{"id":45,"cat":"plan","title":"Material am Vorabend bereitstellen","action":"Sammle Bücher, Blätter, Übungsfragen und nötige Werkzeuge an einem Ort.","note":"Die erste Lernminute soll tatsächlich dem Lernen gehören."},{"id":46,"cat":"plan","title":"Schwierige Aufgaben passend einplanen","action":"Nutze Tageszeiten, zu denen du persönlich wach und konzentriert bist.","note":"Eine allgemeingültige Uhrzeit für alle Lernenden gibt es nicht."},{"id":47,"cat":"plan","title":"Große Aufgaben zerlegen","action":"Unterteile ein Kapitel in kleine Ergebnisse: Überblick, Verständnis, Übungsfragen und Abruf.","note":"Ein übergroßer Block wird dadurch handhabbar."},{"id":48,"cat":"plan","title":"Jeden Plan kurz überprüfen","action":"Frage am Tagesende, was funktioniert hat und welche Lernportion verschoben werden muss.","note":"Pläne dürfen angepasst werden; entscheidend ist die nächste gute Handlung."},{"id":49,"cat":"pause","title":"Regelmäßig kurze Pausen machen","action":"Nach einer konzentrierten Arbeitsphase kurz aufstehen, trinken oder den Blick wechseln.","note":"Die passende Dauer hängt von Aufgabe, Alter und Person ab."},{"id":50,"cat":"pause","title":"Die Pause wirklich als Pause nutzen","action":"Vermeide direkt nach einer anspruchsvollen Einheit neue Informationsfluten.","note":"Ein kurzer Spaziergang ist oft erholsamer als endloses Scrollen."},{"id":51,"cat":"pause","title":"Bewegung einbauen","action":"Unterbrich langes Sitzen durch lockere Bewegung oder einen kurzen Gang ins Freie.","note":"Bewegung unterstützt Wohlbefinden und kann Aufmerksamkeit begünstigen."},{"id":52,"cat":"pause","title":"Schlaf vor Prüfungen schützen","action":"Vermeide Lernnächte, wenn dadurch die übliche Schlafdauer massiv sinkt.","note":"Schlaf spielt für Gedächtnis und Leistungsfähigkeit eine wichtige Rolle."},{"id":53,"cat":"pause","title":"Müdigkeit ernst nehmen","action":"Unterscheide zwischen Startwiderstand und echter Erschöpfung.","note":"Bei Erschöpfung hilft häufig Erholung eher als noch mehr Druck."},{"id":54,"cat":"pause","title":"Ausreichend trinken","action":"Stelle Wasser bereit und trinke nach Durst und Situation.","note":"Starre Literzahlen sind für unterschiedliche Menschen nicht sinnvoll."},{"id":55,"cat":"pause","title":"Eine alltagstaugliche Mahlzeit wählen","action":"Plane bei langen Lerntagen Essen, das sättigt und gut vertragen wird.","note":"Kein einzelnes Lebensmittel ersetzt Lernmethoden."},{"id":56,"cat":"pause","title":"Licht und Raumklima prüfen","action":"Sorge für gut lesbares Licht, Luft und eine angenehme Temperatur.","note":"Der Lernplatz soll angenehm sein, nicht durch Perfektionismus aufhalten."},{"id":57,"cat":"pause","title":"Musik bewusst erproben","action":"Teste stilles Arbeiten gegen leise, möglichst textfreie Musik bei verschiedenen Aufgaben.","note":"Was bei Routinearbeiten angenehm ist, kann Sprachlernen stören."},{"id":58,"cat":"feedback","title":"Fehler als Information lesen","action":"Notiere zu einer falschen Antwort den konkreten Denk- oder Rechenschritt, an dem sie scheitert.","note":"„Falsch“ beschreibt das Ergebnis, nicht die Ursache."},{"id":59,"cat":"feedback","title":"Gelungenes sichtbar machen","action":"Halte regelmäßig fest, was du inzwischen selbstständig beherrschst.","note":"Fortschritt ist motivierender, wenn er belegbar bleibt."},{"id":60,"cat":"feedback","title":"Korrekturhinweise konkret formulieren","action":"Ersetze pauschales Lob oder Tadel durch Hinweise auf Aufgabe, Strategie und nächsten Schritt.","note":"„Prüfe den Übergang zwischen Absatz zwei und drei“ ist umsetzbar."},{"id":61,"cat":"feedback","title":"Zuerst selbst prüfen","action":"Vergleiche deine Lösung mit Kriterien, bevor du eine externe Rückmeldung erhältst.","note":"Selbstkontrolle macht dich weniger abhängig."},{"id":62,"cat":"feedback","title":"Die Strategie wechseln, nicht das Selbstbild","action":"Bei Misserfolg überprüfe Methode, Aufgabenmenge und Hilfen.","note":"„Ich kann das noch nicht“ lässt Entwicklung offen."},{"id":63,"cat":"feedback","title":"Kleine Erfolge sinnvoll markieren","action":"Feiere abgeschlossene, überprüfte Lernziele statt bloßer Sitzzeit.","note":"Eine Belohnung sollte den Prozess begleiten, nicht jeden Versuch ersetzen."},{"id":64,"cat":"feedback","title":"Fortschritt einmal pro Woche reflektieren","action":"Notiere eine erfolgreiche Methode, einen hartnäckigen Fehler und eine Änderung für nächste Woche.","note":"So werden Erfahrungen zu besseren Entscheidungen."},{"id":65,"cat":"feedback","title":"Neugier vor Vergleich stellen","action":"Vergleiche neue Leistungen zunächst mit deinem früheren Stand statt ausschließlich mit anderen.","note":"Der eigene Lernweg bleibt damit sichtbar."},{"id":66,"cat":"feedback","title":"Rückmeldung zeitnah nutzen","action":"Korrigiere Fehlvorstellungen, bevor du das Thema wochenlang ungeprüft weiterübst.","note":"Die zeitnahe Verbesserung ist wichtiger als die perfekte Benotung."},{"id":67,"cat":"exam","title":"Den Prüfungsrahmen klären","action":"Ermittle rechtzeitig Stoffumfang, Aufgabenformate, Dauer und erlaubte Hilfsmittel.","note":"Unklarheit erschwert zielgerichtete Vorbereitung."},{"id":68,"cat":"exam","title":"Unter realistischen Bedingungen üben","action":"Bearbeite gelegentlich Aufgaben mit Zeitlimit und ohne Hilfsmittel.","note":"So trainierst du Wissen und Prüfungssituation gemeinsam."},{"id":69,"cat":"exam","title":"Einen sinnvollen Probedurchgang machen","action":"Simuliere den gesamten Ablauf und werte Fehler anschließend in Ruhe aus.","note":"Die Simulation liefert Daten für die letzte Vorbereitung."},{"id":70,"cat":"exam","title":"Schwierige Fragen zunächst markieren","action":"Gehe bei einer Prüfung gegebenenfalls zu lösbaren Aufgaben über und kehre später zurück.","note":"Das verhindert, dass eine einzige Frage die ganze Zeit verschlingt."},{"id":71,"cat":"exam","title":"Vor dem Beginn langsam ausatmen","action":"Nutze einige ruhige Atemzüge als kurze Selbstregulation.","note":"Das kann beruhigen; es ist keine Garantie gegen Prüfungsangst."},{"id":72,"cat":"exam","title":"Unterstützende Selbstgespräche formulieren","action":"Ersetze „Ich werde alles vergessen“ durch einen konkreten Plan: „Ich lese zuerst die Aufgaben genau“.","note":"Handlungsorientierte Sätze sind hilfreicher als unrealistische Versprechen."},{"id":73,"cat":"exam","title":"Prüfungsanforderungen zerlegen","action":"Unterscheide zwischen Wissen, Anwendung, Transfer, Zeitdruck und Darstellung.","note":"Jeder Teil verlangt etwas anderes Training."},{"id":74,"cat":"exam","title":"Vor dem Termin bekannte Fehler prüfen","action":"Sieh am letzten Lerntag vor allem die häufigsten Missverständnisse durch.","note":"Kurz vor der Prüfung ist gezielte Qualität wichtiger als Stoffmassen."},{"id":75,"cat":"exam","title":"Nach einer Prüfung auswerten","action":"Halte zwei Dinge fest, die gut liefen, und eine Verbesserung für nächstes Mal.","note":"Die Bilanz sollte lernorientiert bleiben."},{"id":76,"cat":"exam","title":"Bei starker Angst Hilfe einbeziehen","action":"Wenn Prüfungsangst wiederholt blockiert oder stark belastet, suche professionelle beziehungsweise schulische Unterstützung.","note":"Atemübungen und Selbstorganisation ersetzen keine notwendige Hilfe."},{"id":77,"cat":"reading","title":"Eine Leseabsicht festlegen","action":"Entscheide vor dem Lesen, welche Frage du beantworten können möchtest.","note":"Damit liest du zielgerichteter."},{"id":78,"cat":"reading","title":"Abschnitte in eigenen Worten benennen","action":"Gib jedem Abschnitt eine selbst formulierte kurze Überschrift.","note":"Sie sollte den Kern treffen, nicht nur Wörter kopieren."},{"id":79,"cat":"reading","title":"Unbekannte Wörter klären","action":"Schlage Schlüsselbegriffe nach und setze sie in einen Beispielsatz.","note":"Ungeklärte Begriffe können das Gesamtverständnis blockieren."},{"id":80,"cat":"reading","title":"Argumentationsgang prüfen","action":"Markiere Behauptung, Begründung, Beleg und mögliche Einschränkung.","note":"Gerade Sachtexte sind mehr als eine Ansammlung von Fakten."},{"id":81,"cat":"reading","title":"Das Wesentliche knapp zusammenfassen","action":"Schreibe zu einer Textseite höchstens drei eigene Kernaussagen.","note":"Vollständiges Abschreiben ist keine Verdichtung."},{"id":82,"cat":"reading","title":"Gezielt rückwärts nachlesen","action":"Wenn eine Aussage unverständlich bleibt, suche ihren Bezug in vorhergehenden Sätzen.","note":"Ein Pronomen oder ein übersehener Begriff ist oft der Schlüssel."},{"id":83,"cat":"reading","title":"Eine Frage zum Text beantworten","action":"Schließe das Buch und beantworte deine eingangs formulierte Frage.","note":"So wird aus dem Lesen ein überprüfbarer Vorgang."},{"id":84,"cat":"reading","title":"Lautlesen zweckmäßig einsetzen","action":"Lies schwierige Passagen bei Bedarf laut, wenn dir Rhythmus oder Struktur hilft.","note":"Nicht jede Aufgabe verlangt lautes Lesen."},{"id":85,"cat":"reading","title":"Texte kritisch vergleichen","action":"Vergleiche zwei Darstellungen auf Quellen, Perspektive und Belege.","note":"Verstehen umfasst auch die Grenzen einer Darstellung."},{"id":86,"cat":"writing","title":"Vor dem Schreiben den Zweck klären","action":"Notiere Adressaten, Textsorte und die eine zentrale Aussage.","note":"Ein guter Text weiß, wofür er geschrieben wird."},{"id":87,"cat":"writing","title":"Eine tragfähige Gliederung bauen","action":"Ordne Hauptgedanken in eine nachvollziehbare Folge, bevor du Details formulierst.","note":"Ein roter Faden spart spätere Umbauten."},{"id":88,"cat":"writing","title":"Die erste Fassung fertigschreiben","action":"Schreibe einen Rohentwurf, ohne jeden Satz sofort zu polieren.","note":"Inhalt und Feinschliff sind verschiedene Denkaufgaben."},{"id":89,"cat":"writing","title":"Sätze auf Verständlichkeit prüfen","action":"Suche unnötige Einschübe, Mehrdeutigkeiten und abrupte Sprünge.","note":"Klarheit ist keine stilistische Verarmung."},{"id":90,"cat":"writing","title":"Mit Beispielen konkretisieren","action":"Füge zu abstrakten Behauptungen ein treffendes Beispiel oder einen Beleg hinzu.","note":"Ein Beispiel sollte etwas erklären, nicht bloß illustrieren."},{"id":91,"cat":"writing","title":"Den roten Faden kontrollieren","action":"Lies nur die ersten Sätze aller Absätze hintereinander.","note":"Wird dabei der Gedankengang sichtbar?"},{"id":92,"cat":"writing","title":"Rechtschreibfehler systematisch sammeln","action":"Führe ein persönliches Fehlerheft mit Regel, Beispiel und Gegenprobe.","note":"Wiederkehrende Muster sind trainierbarer als ein unsortierter Fehlerberg."},{"id":93,"cat":"writing","title":"Korrektur in getrennten Runden","action":"Prüfe zunächst Inhalt und Aufbau, danach Sprache, zuletzt Orthografie und Zeichensetzung.","note":"Ein einziger Korrekturdurchgang übersieht leicht vieles."},{"id":94,"cat":"writing","title":"Mit Abstand gegenlesen","action":"Lies wichtige Texte nach einer Pause noch einmal oder lass eine geeignete Person gegenlesen.","note":"Distanz macht Auslassungen und Unschärfen sichtbar."},{"id":95,"cat":"teaching","title":"Lernziele transparent machen","action":"Sage zu Beginn, woran die Lernenden am Ende erkennen, dass sie das Ziel erreicht haben.","note":"Ziele helfen, Aufgaben und Erfolg miteinander zu verbinden."},{"id":96,"cat":"teaching","title":"Gedankengänge vormachen","action":"Erkläre eine Beispielaufgabe laut und benenne die Entscheidungen, nicht nur die Rechenschritte.","note":"So werden unsichtbare Strategien sichtbar."},{"id":97,"cat":"teaching","title":"Vorwissen diagnostizieren","action":"Stelle vor dem Unterricht eine kurze Frage oder kleine Aufgabe.","note":"So lassen sich Irrtümer und Voraussetzungen früh erkennen."},{"id":98,"cat":"teaching","title":"Übungsformen variieren","action":"Nutze Erklären, Anwenden, Vergleichen und Abrufen passend zum Lernziel.","note":"Die Methode richtet sich nach dem Stoff, nicht nach einem angeblichen Lerntyp."},{"id":99,"cat":"teaching","title":"Fehler besprechbar machen","action":"Arbeite mit anonymisierten, typischen Fehlbeispielen und verbessere sie gemeinsam.","note":"Fehler werden zum Gegenstand fachlicher Analyse."},{"id":100,"cat":"teaching","title":"Rückmeldungen zur nächsten Handlung geben","action":"Formuliere Feedback so, dass klar ist, was im nächsten Versuch anders werden soll.","note":"Eine Rückmeldung ohne Anschlussmöglichkeit bleibt folgenlos."},{"id":101,"cat":"teaching","title":"Selbstständigkeit schrittweise aufbauen","action":"Reduziere Hilfestellungen, sobald die Lernenden Teile selbst übernehmen können.","note":"Unterstützung ist eine Brücke, keine Dauerkrücke."},{"id":102,"cat":"teaching","title":"Aktives Wiedergeben einplanen","action":"Lass Lernende zentrale Inhalte ohne Unterlagen erklären oder skizzieren.","note":"Ein Unterrichtsende mit Abruf prüft mehr als „Alles verstanden?“."},{"id":103,"cat":"teaching","title":"Beispiele und Darstellungen wechseln","action":"Zeige ein Prinzip mit sprachlichem Beispiel, Skizze und Anwendung, wenn es fachlich passt.","note":"Mehrere Darstellungen können Verständnis unterstützen."},{"id":104,"cat":"family","title":"Eigenständige Hausaufgaben ermöglichen","action":"Kläre den Arbeitsauftrag, gib bei Bedarf einen kleinen Impuls und lass das Kind selbst handeln.","note":"Elternhilfe darf nicht die gesamte Denkarbeit übernehmen."},{"id":105,"cat":"family","title":"Gemeinsam realistische Routinen finden","action":"Vereinbare Lernzeiten und Pausen mit Blick auf Alter, Belastung und Freizeit.","note":"Ein gemeinsam entwickelter Plan wird eher getragen."},{"id":106,"cat":"family","title":"Schulprobleme ohne Beschämung besprechen","action":"Frage nach Situationen und möglichen Lösungen statt vorschnell nach Schuldigen.","note":"Eine tragfähige Beziehung erleichtert Hilfe."},{"id":107,"cat":"family","title":"Schule und Eltern konstruktiv abstimmen","action":"Kontaktiere Lehrpersonen bei wiederkehrenden Schwierigkeiten mit konkreten Beobachtungen.","note":"Der Austausch sollte Hilfe organisieren, nicht Fronten bilden."},{"id":108,"cat":"family","title":"Erholung und soziale Kontakte schützen","action":"Plane Zeit für Spiel, Sport, Freunde und Familie ausdrücklich mit ein.","note":"Lernen ist ein Teil des Tages, nicht sein alleiniger Sinn."},{"id":109,"cat":"family","title":"Die eigene Lernstrategie erklären lassen","action":"Frage das Kind, wie es vorgegangen ist und warum.","note":"Das fördert Selbstbeobachtung ohne Dauerüberwachung."},{"id":110,"cat":"family","title":"Herausforderungen gemeinsam portionieren","action":"Reduziert die Familie große Lernberge auf kleine, überschaubare Schritte.","note":"Das Kind bleibt für die Bearbeitung selbst verantwortlich."},{"id":111,"cat":"family","title":"Unterstützung früh holen","action":"Bei anhaltenden Lese-, Schreib-, Lern- oder Angstproblemen mit Schule und Fachpersonen abklären, welche Förderung sinnvoll ist.","note":"Abwarten allein behebt nicht jedes Problem."}];
+        <section class="card" id="quellen" aria-labelledby="sources-heading">
+            <h2 id="sources-heading">Quellen, Einordnung und Redaktion</h2>
+            <p><strong>Historischer Ausgangspunkt:</strong> Puchbauer-Schnabel, Konrad (2002): <em>Die 111 besten
+                    Lern-Tipps.</em> Wien: öbv &amp; hpt, 1. Auflage, Nachdruck 2003. ISBN 3-209-03790-6. Die
+                gedankliche Themenwahl wurde aus einer vom Seitenautor herangezogenen Ausgabe erschlossen. Es wurden
+                weder Buchtexte noch die Originalillustrationen übernommen.</p>
+            <p><strong>Zusätzliche wissenschaftliche Orientierung:</strong> Die folgenden Publikationen und
+                Einrichtungen ermöglichen es, Aussagen nachzulesen und die historischen Empfehlungen kritisch
+                einzuordnen.</p>
+            <ol class="references">
+                <li>Dunlosky, J. et al. (2013): <a href="https://doi.org/10.1177/1529100612453266" target="_blank"
+                        rel="noopener noreferrer">Improving Students’ Learning With Effective Learning Techniques</a> –
+                    Überblick zu Lernmethoden, darunter Übungstests und verteiltes Üben.</li>
+                <li>Education Endowment Foundation (2025): <a
+                        href="https://educationendowmentfoundation.org.uk/education-evidence/guidance-reports/metacognition"
+                        target="_blank" rel="noopener noreferrer">Metacognition and Self-Regulated Learning</a> –
+                    Planung, Überwachung und Bewertung des eigenen Lernens.</li>
+                <li>Education Endowment Foundation: <a
+                        href="https://educationendowmentfoundation.org.uk/education-evidence/guidance-reports/feedback"
+                        target="_blank" rel="noopener noreferrer">Teacher Feedback to Improve Pupil Learning</a> –
+                    aufgabenbezogene Rückmeldung und Anschlusslernen.</li>
+                <li>Pashler, H. et al. (2008): <a
+                        href="https://www.psychologicalscience.org/journals/pspi/j.1539-6053.2009.01038.x/"
+                        target="_blank" rel="noopener noreferrer">Learning Styles</a> – kritische Prüfung der Hypothese,
+                    Unterricht müsse zu diagnostizierten Lernstilen passen.</li>
+                <li>Ernst, E. (2010): <a href="https://pubmed.ncbi.nlm.nih.gov/20734279/" target="_blank"
+                        rel="noopener noreferrer">Bach flower remedies: a systematic review of randomised clinical
+                        trials</a> – fehlende überzeugende Wirksamkeitsbelege für spezifische Blütenessenzeffekte.</li>
+            </ol>
+            <p class="hint"><strong>Redaktionelle Kennzeichnung:</strong> Die 111 nummerierten Tipps, Kapiteltexte,
+                Beispiele, Tabellenstruktur und Rotationslogik sind eine neue Ausarbeitung. Sie stellen keine
+                nummerierte Transkription des Buchs dar. Aussagen zur Forschung sind allgemeine Information, keine
+                individualisierte medizinische Beratung.</p>
+            <a class="back" href="#seitenanfang">↑ Zurück zum Seitenanfang</a>
+        </section>
+    </main>
+    <footer class="site-footer main-footer">
+        <p>Learning knowledge · eigenständiges Lernkompendium · Stand: Oktober 2026</p>
+    </footer>
+    <script>
+        'use strict';
+        // Die Datensätze sind eigenständig verfasste Kurztexte, keine Abschriften.
+        const CATEGORIES = [["start", "Aufmerksamkeit & Einstieg"], ["understand", "Verstehen & Vernetzen"], ["retrieve", "Aktiv lernen & abrufen"], ["repeat", "Wiederholen & behalten"], ["plan", "Lernplan & Umgebung"], ["pause", "Pausen, Schlaf & Ernährung"], ["feedback", "Motivation & Fehlerkultur"], ["exam", "Prüfungen & Belastung"], ["reading", "Lesen & Textverständnis"], ["writing", "Schreiben & Rechtschreibung"], ["teaching", "Unterricht & Zusammenarbeit"], ["family", "Selbstständigkeit & Alltag"]];
+        const TIPS = [{ "id": 1, "cat": "start", "title": "Mit einer Frage beginnen", "action": "Formuliere vor dem Lernen eine konkrete Frage, die du am Ende beantworten können möchtest.", "note": "Aus „Kapitel 4 lernen“ wird zum Beispiel „Warum entsteht ein Gewitter?“." }, { "id": 2, "cat": "start", "title": "Das Vorwissen wecken", "action": "Notiere drei Dinge, die du über das Thema bereits weißt – und kennzeichne Unsicherheiten.", "note": "Vorwissen ist die Startfläche, nicht zwingend eine verlässliche Landkarte." }, { "id": 3, "cat": "start", "title": "Den Nutzen sichtbar machen", "action": "Schreibe in einem Satz auf, wofür du den Stoff brauchst oder wo er dir begegnet.", "note": "Ein Bezug zur Praxis hilft, abstrakte Inhalte einzuordnen." }, { "id": 4, "cat": "start", "title": "Neugier durch Widersprüche", "action": "Suche eine scheinbar paradoxe Aussage und versuche, sie zu erklären.", "note": "Warum schwimmt ein Stahlschiff, obwohl Stahl schwerer als Wasser ist?" }, { "id": 5, "cat": "start", "title": "Ein überschaubares Ziel setzen", "action": "Definiere ein Ergebnis für die nächsten 20–40 Minuten, das sich überprüfen lässt.", "note": "„Fünf Aufgaben selbst lösen“ ist überprüfbar, „gut lernen“ nicht." }, { "id": 6, "cat": "start", "title": "Mit einer Mini-Aufgabe starten", "action": "Beginne mit einer zweiminütigen Einstiegsaufgabe, statt auf Motivation zu warten.", "note": "Ein leichter Anfang senkt die Hürde, ersetzt aber nicht die eigentliche Arbeit." }, { "id": 7, "cat": "start", "title": "Aufmerksamkeit aktiv zurückholen", "action": "Notiere bei abschweifenden Gedanken ein Stichwort und kehre dann zur Aufgabe zurück.", "note": "Ablenkung wird registriert, ohne ihr sofort nachzugeben." }, { "id": 8, "cat": "start", "title": "Schwierigkeitsgrad passend wählen", "action": "Starte weder mit völliger Routine noch mit einer nahezu unlösbaren Aufgabe.", "note": "Eine lösbare Herausforderung erhält Konzentration und Rückmeldung." }, { "id": 9, "cat": "start", "title": "Einen Einstieg ritualisieren", "action": "Nutze eine kurze feste Folge: Material bereitlegen, Ziel notieren, erste Frage bearbeiten.", "note": "Wiederkehrende Abläufe sparen Organisationsentscheidungen." }, { "id": 10, "cat": "understand", "title": "Erst die Landkarte, dann die Details", "action": "Überfliege Überschriften, Abbildungen und Zusammenfassung, bevor du einzelne Absätze lernst.", "note": "So erkennst du, welche Fragen das Kapitel überhaupt beantwortet." }, { "id": 11, "cat": "understand", "title": "Das Thema als Strukturbaum zeichnen", "action": "Schreibe das zentrale Thema in die Mitte und ordne Ober- und Unterbegriffe an.", "note": "Die Zeichnung soll Beziehungen sichtbar machen, nicht besonders hübsch sein." }, { "id": 12, "cat": "understand", "title": "Begriffe mit eigenen Worten erklären", "action": "Formuliere eine kurze Definition, die ohne den Wortlaut des Lehrbuchs auskommt.", "note": "Wenn nur die Originalformulierung funktioniert, ist das Verständnis womöglich noch fragil." }, { "id": 13, "cat": "understand", "title": "Beispiele und Gegenbeispiele bilden", "action": "Suche zu einem Begriff je ein zutreffendes und ein nicht zutreffendes Beispiel.", "note": "Was ist eine Metapher – und was gerade keine?" }, { "id": 14, "cat": "understand", "title": "Ursache und Wirkung unterscheiden", "action": "Markiere in Erklärungen ausdrücklich, was Ursache, Bedingung und Folge ist.", "note": "Das verhindert, dass bloße zeitliche Abfolgen für Erklärungen gehalten werden." }, { "id": 15, "cat": "understand", "title": "Neues mit Bekanntem verknüpfen", "action": "Suche bewusst zwei Verbindungen zu früheren Themen oder Alltagserfahrungen.", "note": "Das neue Wissen erhält mehr Anknüpfungspunkte." }, { "id": 16, "cat": "understand", "title": "Ähnliche Konzepte vergleichen", "action": "Erstelle eine Tabelle mit Gemeinsamkeiten, Unterschieden und einem typischen Fehler.", "note": "Besonders hilfreich bei Begriffspaaren wie Osmose und Diffusion." }, { "id": 17, "cat": "understand", "title": "Vom Einfachen zum Komplexen gehen", "action": "Beginne mit einer vollständigen, leichten Lösung und steigere dann die Schwierigkeit.", "note": "Zwischenschritte vermeiden unnötige Überforderung." }, { "id": 18, "cat": "understand", "title": "Ein Konzept grafisch prüfen", "action": "Übersetze eine sprachliche Erklärung in Pfeile, Skizze, Zeitleiste oder Ablaufdiagramm.", "note": "Eine Grafik deckt häufig fehlende Beziehungen auf." }, { "id": 19, "cat": "retrieve", "title": "Buch zu – Wissen hervorholen", "action": "Schließe die Unterlagen und schreibe alles auf, was du noch erklären kannst.", "note": "Erst danach prüfst du, was gefehlt oder nicht gestimmt hat." }, { "id": 20, "cat": "retrieve", "title": "Eigene Prüfungsfragen erfinden", "action": "Formuliere zu jedem Abschnitt zwei Fragen – eine Wissensfrage und eine Transferfrage.", "note": "Eine gute Transferfrage verlangt Anwendung statt Wiedererkennen." }, { "id": 21, "cat": "retrieve", "title": "Karteikarten mit einer Frage pro Karte", "action": "Schreibe vorne eine präzise Frage und hinten eine prüfbare Antwort.", "note": "Überladene Karten erzeugen eher Wiedererkennung als belastbares Erinnern." }, { "id": 22, "cat": "retrieve", "title": "Ein Thema laut unterrichten", "action": "Erkläre den Inhalt frei einem realen oder vorgestellten Gegenüber.", "note": "Stellen, an denen du ins Stocken gerätst, sind wertvolle Diagnosen." }, { "id": 23, "cat": "retrieve", "title": "Ohne Vorlage skizzieren", "action": "Zeichne einen Prozess aus dem Gedächtnis, bevor du die Buchgrafik vergleichst.", "note": "Besonders geeignet für Kreisläufe, technische Schaltungen und historische Abläufe." }, { "id": 24, "cat": "retrieve", "title": "Das Warum beantworten", "action": "Ergänze eine Faktenfrage um „Warum ist das so?“ oder „Wodurch lässt sich das erklären?“.", "note": "Die Begründung vertieft den Abruf, wenn sie sachlich korrekt ist." }, { "id": 25, "cat": "retrieve", "title": "Gelerntes direkt anwenden", "action": "Löse nach einer Erklärung mindestens eine Aufgabe ohne Musterlösung.", "note": "Anwendung prüft, ob du das Prinzip beherrschst." }, { "id": 26, "cat": "retrieve", "title": "Gemischte Aufgaben bearbeiten", "action": "Wechsle nach dem Verstehen zwischen verwandten Aufgabentypen.", "note": "So musst du zuerst entscheiden, welche Methode überhaupt passt." }, { "id": 27, "cat": "retrieve", "title": "Die Lösung erst danach ansehen", "action": "Halte den eigenen Lösungsversuch sichtbar fest und vergleiche erst dann mit der Vorlage.", "note": "Ein vorzeitiger Blick macht die Aufgabe oft leichter, ohne etwas zu festigen." }, { "id": 28, "cat": "retrieve", "title": "In beide Richtungen fragen", "action": "Lerne Zusammenhänge nicht nur von Begriff zu Definition, sondern auch umgekehrt.", "note": "Zum Beispiel Fachwort → Erklärung und Erklärung → Fachwort." }, { "id": 29, "cat": "retrieve", "title": "Eine Ein-Minuten-Zusammenfassung geben", "action": "Beschreibe nach einer Einheit drei Hauptgedanken frei in höchstens sechzig Sekunden.", "note": "Kurz, aber aussagekräftig – und sofort überprüfbar." }, { "id": 30, "cat": "repeat", "title": "Am selben Tag kurz abrufen", "action": "Hole zentrale Inhalte nach der ersten Lerneinheit erneut ohne Unterlagen hervor.", "note": "Kurze Nacharbeit ist oft wertvoller als wiederholtes Durchlesen." }, { "id": 31, "cat": "repeat", "title": "Die Abstände verlängern", "action": "Plane weitere Abrufe nach etwa einem, drei, sieben und vierzehn Tagen.", "note": "Das ist ein flexibler Ausgangspunkt, kein biologisch exakter Rhythmus." }, { "id": 32, "cat": "repeat", "title": "Schwierige Karten früher wiederholen", "action": "Wiederhole verfehlte Fragen früher als solche, die sicher beantwortet werden.", "note": "Zeit fließt dorthin, wo sie am meisten bringt." }, { "id": 33, "cat": "repeat", "title": "Erinnern vor Nachlesen", "action": "Versuche zunächst eine Antwort zu geben und konsultiere danach die Quelle.", "note": "Das Nachlesen dient der Korrektur des Abrufs." }, { "id": 34, "cat": "repeat", "title": "Wiederholen in den Kalender aufnehmen", "action": "Plane Lerntermine direkt mit den Wiederholungsterminen.", "note": "Was im Kalender fehlt, fällt häufig der Gegenwart zum Opfer." }, { "id": 35, "cat": "repeat", "title": "Alte und neue Inhalte verbinden", "action": "Mische wenige ältere Fragen in jede neue Lerneinheit.", "note": "So bleibt bereits Gelerntes erreichbar." }, { "id": 36, "cat": "repeat", "title": "Den Lernerfolg verzögert prüfen", "action": "Teste dich auch Tage nach einer vermeintlich erfolgreichen Einheit.", "note": "Leichtigkeit unmittelbar nach dem Lesen ist kein Langzeitbeweis." }, { "id": 37, "cat": "repeat", "title": "Fehler gezielt erneut testen", "action": "Führe eine Liste unsicherer Antworten und prüfe sie nach einer Korrektur nochmals.", "note": "Der zweite Abruf ist entscheidend." }, { "id": 38, "cat": "repeat", "title": "Wiederholung variieren", "action": "Rufe denselben Inhalt einmal schriftlich, einmal mündlich und einmal anhand einer Aufgabe ab.", "note": "Die Varianten sollen unterschiedliche Anforderungen trainieren." }, { "id": 39, "cat": "repeat", "title": "Wiederholung beenden, wenn sie produktiv war", "action": "Kontrolliere anhand von Antworten statt nach dem Gefühl von Vertrautheit.", "note": "Sicherer Abruf ist aussagekräftiger als ein vertrauter Text." }, { "id": 40, "cat": "plan", "title": "Prüfungstermin rückwärts planen", "action": "Trage vom Termin rückwärts kleine Lernportionen und Wiederholungen ein.", "note": "Der letzte Tag dient der Übersicht, nicht dem erstmaligen Erarbeiten." }, { "id": 41, "cat": "plan", "title": "Aufgaben nach Wirkung priorisieren", "action": "Beginne mit Stoff, der wichtig, unsicher und prüfungsrelevant ist.", "note": "Ein hübsches Inhaltsverzeichnis ist noch keine Vorbereitung." }, { "id": 42, "cat": "plan", "title": "Eine realistische Tagesmenge wählen", "action": "Plane weniger, als du in einem idealen, unterbrechungsfreien Tag schaffen würdest.", "note": "Etwas Reserve macht den Plan belastbar." }, { "id": 43, "cat": "plan", "title": "Lernziele konkret formulieren", "action": "Schreibe „drei Textaufgaben selbstständig lösen“ statt „Mathematik lernen“.", "note": "Nach der Einheit ist damit klar, ob das Ziel erreicht wurde." }, { "id": 44, "cat": "plan", "title": "Ablenkungen vorab beseitigen", "action": "Lege nicht benötigte Geräte weg und schalte Benachrichtigungen für die Lernphase aus.", "note": "Willenskraft ist ein schlechter Ersatz für eine gute Umgebung." }, { "id": 45, "cat": "plan", "title": "Material am Vorabend bereitstellen", "action": "Sammle Bücher, Blätter, Übungsfragen und nötige Werkzeuge an einem Ort.", "note": "Die erste Lernminute soll tatsächlich dem Lernen gehören." }, { "id": 46, "cat": "plan", "title": "Schwierige Aufgaben passend einplanen", "action": "Nutze Tageszeiten, zu denen du persönlich wach und konzentriert bist.", "note": "Eine allgemeingültige Uhrzeit für alle Lernenden gibt es nicht." }, { "id": 47, "cat": "plan", "title": "Große Aufgaben zerlegen", "action": "Unterteile ein Kapitel in kleine Ergebnisse: Überblick, Verständnis, Übungsfragen und Abruf.", "note": "Ein übergroßer Block wird dadurch handhabbar." }, { "id": 48, "cat": "plan", "title": "Jeden Plan kurz überprüfen", "action": "Frage am Tagesende, was funktioniert hat und welche Lernportion verschoben werden muss.", "note": "Pläne dürfen angepasst werden; entscheidend ist die nächste gute Handlung." }, { "id": 49, "cat": "pause", "title": "Regelmäßig kurze Pausen machen", "action": "Nach einer konzentrierten Arbeitsphase kurz aufstehen, trinken oder den Blick wechseln.", "note": "Die passende Dauer hängt von Aufgabe, Alter und Person ab." }, { "id": 50, "cat": "pause", "title": "Die Pause wirklich als Pause nutzen", "action": "Vermeide direkt nach einer anspruchsvollen Einheit neue Informationsfluten.", "note": "Ein kurzer Spaziergang ist oft erholsamer als endloses Scrollen." }, { "id": 51, "cat": "pause", "title": "Bewegung einbauen", "action": "Unterbrich langes Sitzen durch lockere Bewegung oder einen kurzen Gang ins Freie.", "note": "Bewegung unterstützt Wohlbefinden und kann Aufmerksamkeit begünstigen." }, { "id": 52, "cat": "pause", "title": "Schlaf vor Prüfungen schützen", "action": "Vermeide Lernnächte, wenn dadurch die übliche Schlafdauer massiv sinkt.", "note": "Schlaf spielt für Gedächtnis und Leistungsfähigkeit eine wichtige Rolle." }, { "id": 53, "cat": "pause", "title": "Müdigkeit ernst nehmen", "action": "Unterscheide zwischen Startwiderstand und echter Erschöpfung.", "note": "Bei Erschöpfung hilft häufig Erholung eher als noch mehr Druck." }, { "id": 54, "cat": "pause", "title": "Ausreichend trinken", "action": "Stelle Wasser bereit und trinke nach Durst und Situation.", "note": "Starre Literzahlen sind für unterschiedliche Menschen nicht sinnvoll." }, { "id": 55, "cat": "pause", "title": "Eine alltagstaugliche Mahlzeit wählen", "action": "Plane bei langen Lerntagen Essen, das sättigt und gut vertragen wird.", "note": "Kein einzelnes Lebensmittel ersetzt Lernmethoden." }, { "id": 56, "cat": "pause", "title": "Licht und Raumklima prüfen", "action": "Sorge für gut lesbares Licht, Luft und eine angenehme Temperatur.", "note": "Der Lernplatz soll angenehm sein, nicht durch Perfektionismus aufhalten." }, { "id": 57, "cat": "pause", "title": "Musik bewusst erproben", "action": "Teste stilles Arbeiten gegen leise, möglichst textfreie Musik bei verschiedenen Aufgaben.", "note": "Was bei Routinearbeiten angenehm ist, kann Sprachlernen stören." }, { "id": 58, "cat": "feedback", "title": "Fehler als Information lesen", "action": "Notiere zu einer falschen Antwort den konkreten Denk- oder Rechenschritt, an dem sie scheitert.", "note": "„Falsch“ beschreibt das Ergebnis, nicht die Ursache." }, { "id": 59, "cat": "feedback", "title": "Gelungenes sichtbar machen", "action": "Halte regelmäßig fest, was du inzwischen selbstständig beherrschst.", "note": "Fortschritt ist motivierender, wenn er belegbar bleibt." }, { "id": 60, "cat": "feedback", "title": "Korrekturhinweise konkret formulieren", "action": "Ersetze pauschales Lob oder Tadel durch Hinweise auf Aufgabe, Strategie und nächsten Schritt.", "note": "„Prüfe den Übergang zwischen Absatz zwei und drei“ ist umsetzbar." }, { "id": 61, "cat": "feedback", "title": "Zuerst selbst prüfen", "action": "Vergleiche deine Lösung mit Kriterien, bevor du eine externe Rückmeldung erhältst.", "note": "Selbstkontrolle macht dich weniger abhängig." }, { "id": 62, "cat": "feedback", "title": "Die Strategie wechseln, nicht das Selbstbild", "action": "Bei Misserfolg überprüfe Methode, Aufgabenmenge und Hilfen.", "note": "„Ich kann das noch nicht“ lässt Entwicklung offen." }, { "id": 63, "cat": "feedback", "title": "Kleine Erfolge sinnvoll markieren", "action": "Feiere abgeschlossene, überprüfte Lernziele statt bloßer Sitzzeit.", "note": "Eine Belohnung sollte den Prozess begleiten, nicht jeden Versuch ersetzen." }, { "id": 64, "cat": "feedback", "title": "Fortschritt einmal pro Woche reflektieren", "action": "Notiere eine erfolgreiche Methode, einen hartnäckigen Fehler und eine Änderung für nächste Woche.", "note": "So werden Erfahrungen zu besseren Entscheidungen." }, { "id": 65, "cat": "feedback", "title": "Neugier vor Vergleich stellen", "action": "Vergleiche neue Leistungen zunächst mit deinem früheren Stand statt ausschließlich mit anderen.", "note": "Der eigene Lernweg bleibt damit sichtbar." }, { "id": 66, "cat": "feedback", "title": "Rückmeldung zeitnah nutzen", "action": "Korrigiere Fehlvorstellungen, bevor du das Thema wochenlang ungeprüft weiterübst.", "note": "Die zeitnahe Verbesserung ist wichtiger als die perfekte Benotung." }, { "id": 67, "cat": "exam", "title": "Den Prüfungsrahmen klären", "action": "Ermittle rechtzeitig Stoffumfang, Aufgabenformate, Dauer und erlaubte Hilfsmittel.", "note": "Unklarheit erschwert zielgerichtete Vorbereitung." }, { "id": 68, "cat": "exam", "title": "Unter realistischen Bedingungen üben", "action": "Bearbeite gelegentlich Aufgaben mit Zeitlimit und ohne Hilfsmittel.", "note": "So trainierst du Wissen und Prüfungssituation gemeinsam." }, { "id": 69, "cat": "exam", "title": "Einen sinnvollen Probedurchgang machen", "action": "Simuliere den gesamten Ablauf und werte Fehler anschließend in Ruhe aus.", "note": "Die Simulation liefert Daten für die letzte Vorbereitung." }, { "id": 70, "cat": "exam", "title": "Schwierige Fragen zunächst markieren", "action": "Gehe bei einer Prüfung gegebenenfalls zu lösbaren Aufgaben über und kehre später zurück.", "note": "Das verhindert, dass eine einzige Frage die ganze Zeit verschlingt." }, { "id": 71, "cat": "exam", "title": "Vor dem Beginn langsam ausatmen", "action": "Nutze einige ruhige Atemzüge als kurze Selbstregulation.", "note": "Das kann beruhigen; es ist keine Garantie gegen Prüfungsangst." }, { "id": 72, "cat": "exam", "title": "Unterstützende Selbstgespräche formulieren", "action": "Ersetze „Ich werde alles vergessen“ durch einen konkreten Plan: „Ich lese zuerst die Aufgaben genau“.", "note": "Handlungsorientierte Sätze sind hilfreicher als unrealistische Versprechen." }, { "id": 73, "cat": "exam", "title": "Prüfungsanforderungen zerlegen", "action": "Unterscheide zwischen Wissen, Anwendung, Transfer, Zeitdruck und Darstellung.", "note": "Jeder Teil verlangt etwas anderes Training." }, { "id": 74, "cat": "exam", "title": "Vor dem Termin bekannte Fehler prüfen", "action": "Sieh am letzten Lerntag vor allem die häufigsten Missverständnisse durch.", "note": "Kurz vor der Prüfung ist gezielte Qualität wichtiger als Stoffmassen." }, { "id": 75, "cat": "exam", "title": "Nach einer Prüfung auswerten", "action": "Halte zwei Dinge fest, die gut liefen, und eine Verbesserung für nächstes Mal.", "note": "Die Bilanz sollte lernorientiert bleiben." }, { "id": 76, "cat": "exam", "title": "Bei starker Angst Hilfe einbeziehen", "action": "Wenn Prüfungsangst wiederholt blockiert oder stark belastet, suche professionelle beziehungsweise schulische Unterstützung.", "note": "Atemübungen und Selbstorganisation ersetzen keine notwendige Hilfe." }, { "id": 77, "cat": "reading", "title": "Eine Leseabsicht festlegen", "action": "Entscheide vor dem Lesen, welche Frage du beantworten können möchtest.", "note": "Damit liest du zielgerichteter." }, { "id": 78, "cat": "reading", "title": "Abschnitte in eigenen Worten benennen", "action": "Gib jedem Abschnitt eine selbst formulierte kurze Überschrift.", "note": "Sie sollte den Kern treffen, nicht nur Wörter kopieren." }, { "id": 79, "cat": "reading", "title": "Unbekannte Wörter klären", "action": "Schlage Schlüsselbegriffe nach und setze sie in einen Beispielsatz.", "note": "Ungeklärte Begriffe können das Gesamtverständnis blockieren." }, { "id": 80, "cat": "reading", "title": "Argumentationsgang prüfen", "action": "Markiere Behauptung, Begründung, Beleg und mögliche Einschränkung.", "note": "Gerade Sachtexte sind mehr als eine Ansammlung von Fakten." }, { "id": 81, "cat": "reading", "title": "Das Wesentliche knapp zusammenfassen", "action": "Schreibe zu einer Textseite höchstens drei eigene Kernaussagen.", "note": "Vollständiges Abschreiben ist keine Verdichtung." }, { "id": 82, "cat": "reading", "title": "Gezielt rückwärts nachlesen", "action": "Wenn eine Aussage unverständlich bleibt, suche ihren Bezug in vorhergehenden Sätzen.", "note": "Ein Pronomen oder ein übersehener Begriff ist oft der Schlüssel." }, { "id": 83, "cat": "reading", "title": "Eine Frage zum Text beantworten", "action": "Schließe das Buch und beantworte deine eingangs formulierte Frage.", "note": "So wird aus dem Lesen ein überprüfbarer Vorgang." }, { "id": 84, "cat": "reading", "title": "Lautlesen zweckmäßig einsetzen", "action": "Lies schwierige Passagen bei Bedarf laut, wenn dir Rhythmus oder Struktur hilft.", "note": "Nicht jede Aufgabe verlangt lautes Lesen." }, { "id": 85, "cat": "reading", "title": "Texte kritisch vergleichen", "action": "Vergleiche zwei Darstellungen auf Quellen, Perspektive und Belege.", "note": "Verstehen umfasst auch die Grenzen einer Darstellung." }, { "id": 86, "cat": "writing", "title": "Vor dem Schreiben den Zweck klären", "action": "Notiere Adressaten, Textsorte und die eine zentrale Aussage.", "note": "Ein guter Text weiß, wofür er geschrieben wird." }, { "id": 87, "cat": "writing", "title": "Eine tragfähige Gliederung bauen", "action": "Ordne Hauptgedanken in eine nachvollziehbare Folge, bevor du Details formulierst.", "note": "Ein roter Faden spart spätere Umbauten." }, { "id": 88, "cat": "writing", "title": "Die erste Fassung fertigschreiben", "action": "Schreibe einen Rohentwurf, ohne jeden Satz sofort zu polieren.", "note": "Inhalt und Feinschliff sind verschiedene Denkaufgaben." }, { "id": 89, "cat": "writing", "title": "Sätze auf Verständlichkeit prüfen", "action": "Suche unnötige Einschübe, Mehrdeutigkeiten und abrupte Sprünge.", "note": "Klarheit ist keine stilistische Verarmung." }, { "id": 90, "cat": "writing", "title": "Mit Beispielen konkretisieren", "action": "Füge zu abstrakten Behauptungen ein treffendes Beispiel oder einen Beleg hinzu.", "note": "Ein Beispiel sollte etwas erklären, nicht bloß illustrieren." }, { "id": 91, "cat": "writing", "title": "Den roten Faden kontrollieren", "action": "Lies nur die ersten Sätze aller Absätze hintereinander.", "note": "Wird dabei der Gedankengang sichtbar?" }, { "id": 92, "cat": "writing", "title": "Rechtschreibfehler systematisch sammeln", "action": "Führe ein persönliches Fehlerheft mit Regel, Beispiel und Gegenprobe.", "note": "Wiederkehrende Muster sind trainierbarer als ein unsortierter Fehlerberg." }, { "id": 93, "cat": "writing", "title": "Korrektur in getrennten Runden", "action": "Prüfe zunächst Inhalt und Aufbau, danach Sprache, zuletzt Orthografie und Zeichensetzung.", "note": "Ein einziger Korrekturdurchgang übersieht leicht vieles." }, { "id": 94, "cat": "writing", "title": "Mit Abstand gegenlesen", "action": "Lies wichtige Texte nach einer Pause noch einmal oder lass eine geeignete Person gegenlesen.", "note": "Distanz macht Auslassungen und Unschärfen sichtbar." }, { "id": 95, "cat": "teaching", "title": "Lernziele transparent machen", "action": "Sage zu Beginn, woran die Lernenden am Ende erkennen, dass sie das Ziel erreicht haben.", "note": "Ziele helfen, Aufgaben und Erfolg miteinander zu verbinden." }, { "id": 96, "cat": "teaching", "title": "Gedankengänge vormachen", "action": "Erkläre eine Beispielaufgabe laut und benenne die Entscheidungen, nicht nur die Rechenschritte.", "note": "So werden unsichtbare Strategien sichtbar." }, { "id": 97, "cat": "teaching", "title": "Vorwissen diagnostizieren", "action": "Stelle vor dem Unterricht eine kurze Frage oder kleine Aufgabe.", "note": "So lassen sich Irrtümer und Voraussetzungen früh erkennen." }, { "id": 98, "cat": "teaching", "title": "Übungsformen variieren", "action": "Nutze Erklären, Anwenden, Vergleichen und Abrufen passend zum Lernziel.", "note": "Die Methode richtet sich nach dem Stoff, nicht nach einem angeblichen Lerntyp." }, { "id": 99, "cat": "teaching", "title": "Fehler besprechbar machen", "action": "Arbeite mit anonymisierten, typischen Fehlbeispielen und verbessere sie gemeinsam.", "note": "Fehler werden zum Gegenstand fachlicher Analyse." }, { "id": 100, "cat": "teaching", "title": "Rückmeldungen zur nächsten Handlung geben", "action": "Formuliere Feedback so, dass klar ist, was im nächsten Versuch anders werden soll.", "note": "Eine Rückmeldung ohne Anschlussmöglichkeit bleibt folgenlos." }, { "id": 101, "cat": "teaching", "title": "Selbstständigkeit schrittweise aufbauen", "action": "Reduziere Hilfestellungen, sobald die Lernenden Teile selbst übernehmen können.", "note": "Unterstützung ist eine Brücke, keine Dauerkrücke." }, { "id": 102, "cat": "teaching", "title": "Aktives Wiedergeben einplanen", "action": "Lass Lernende zentrale Inhalte ohne Unterlagen erklären oder skizzieren.", "note": "Ein Unterrichtsende mit Abruf prüft mehr als „Alles verstanden?“." }, { "id": 103, "cat": "teaching", "title": "Beispiele und Darstellungen wechseln", "action": "Zeige ein Prinzip mit sprachlichem Beispiel, Skizze und Anwendung, wenn es fachlich passt.", "note": "Mehrere Darstellungen können Verständnis unterstützen." }, { "id": 104, "cat": "family", "title": "Eigenständige Hausaufgaben ermöglichen", "action": "Kläre den Arbeitsauftrag, gib bei Bedarf einen kleinen Impuls und lass das Kind selbst handeln.", "note": "Elternhilfe darf nicht die gesamte Denkarbeit übernehmen." }, { "id": 105, "cat": "family", "title": "Gemeinsam realistische Routinen finden", "action": "Vereinbare Lernzeiten und Pausen mit Blick auf Alter, Belastung und Freizeit.", "note": "Ein gemeinsam entwickelter Plan wird eher getragen." }, { "id": 106, "cat": "family", "title": "Schulprobleme ohne Beschämung besprechen", "action": "Frage nach Situationen und möglichen Lösungen statt vorschnell nach Schuldigen.", "note": "Eine tragfähige Beziehung erleichtert Hilfe." }, { "id": 107, "cat": "family", "title": "Schule und Eltern konstruktiv abstimmen", "action": "Kontaktiere Lehrpersonen bei wiederkehrenden Schwierigkeiten mit konkreten Beobachtungen.", "note": "Der Austausch sollte Hilfe organisieren, nicht Fronten bilden." }, { "id": 108, "cat": "family", "title": "Erholung und soziale Kontakte schützen", "action": "Plane Zeit für Spiel, Sport, Freunde und Familie ausdrücklich mit ein.", "note": "Lernen ist ein Teil des Tages, nicht sein alleiniger Sinn." }, { "id": 109, "cat": "family", "title": "Die eigene Lernstrategie erklären lassen", "action": "Frage das Kind, wie es vorgegangen ist und warum.", "note": "Das fördert Selbstbeobachtung ohne Dauerüberwachung." }, { "id": 110, "cat": "family", "title": "Herausforderungen gemeinsam portionieren", "action": "Reduziert die Familie große Lernberge auf kleine, überschaubare Schritte.", "note": "Das Kind bleibt für die Bearbeitung selbst verantwortlich." }, { "id": 111, "cat": "family", "title": "Unterstützung früh holen", "action": "Bei anhaltenden Lese-, Schreib-, Lern- oder Angstproblemen mit Schule und Fachpersonen abklären, welche Förderung sinnvoll ist.", "note": "Abwarten allein behebt nicht jedes Problem." }];
 
-const byId = id => document.getElementById(id);
-const catMap = new Map(CATEGORIES.map(([key, title]) => [key,title]));
-const favStorage = 'learning111-favourites-v1';
-let favorites = new Set();
-try {
-  const saved = JSON.parse(localStorage.getItem(favStorage) || '[]');
-  if (Array.isArray(saved)) favorites = new Set(saved.filter(id => Number.isInteger(id)));
-} catch (_) { /* Private browsing or disabled storage: the page remains usable. */ }
-const saveFavorites = () => {
-  try { localStorage.setItem(favStorage, JSON.stringify([...favorites])); } catch (_) {}
-};
-function toggleFavorite(id) {
-  if (favorites.has(id)) favorites.delete(id); else favorites.add(id);
-  saveFavorites();
-  renderDaily(); renderTable();
-}
+        const byId = id => document.getElementById(id);
+        const catMap = new Map(CATEGORIES.map(([key, title]) => [key, title]));
+        const favStorage = 'learning111-favourites-v1';
+        let favorites = new Set();
+        try {
+            const saved = JSON.parse(localStorage.getItem(favStorage) || '[]');
+            if (Array.isArray(saved)) favorites = new Set(saved.filter(id => Number.isInteger(id)));
+        } catch (_) { /* Private browsing or disabled storage: the page remains usable. */ }
+        const saveFavorites = () => {
+            try { localStorage.setItem(favStorage, JSON.stringify([...favorites])); } catch (_) { }
+        };
+        function toggleFavorite(id) {
+            if (favorites.has(id)) favorites.delete(id); else favorites.add(id);
+            saveFavorites();
+            renderDaily(); renderTable();
+        }
 
-// UTC day means everyone sees the same featured tip on the same UTC calendar day.
-// 47 is coprime to 111, so all 111 tips appear exactly once before the cycle repeats.
-const todayIndex = ((Math.floor(Date.now()/86400000) * 47 + 11) % TIPS.length + TIPS.length) % TIPS.length;
-const todayId = TIPS[todayIndex].id;
-let displayedId = todayId;
-function renderDaily() {
-  const tip = TIPS.find(t => t.id === displayedId) || TIPS[0];
-  const dateText = new Intl.DateTimeFormat('de-AT', {timeZone:'UTC',day:'2-digit',month:'long',year:'numeric'}).format(new Date());
-  byId('daily-meta').textContent = (displayedId === todayId ? 'Tagestipp · ' + dateText : 'Entdeckertipp') + ' · Nr. ' + tip.id + ' / 111 · ' + catMap.get(tip.cat);
-  byId('daily-heading').textContent = tip.title;
-  byId('daily-action').textContent = tip.action;
-  byId('daily-note').textContent = tip.note;
-  const fav = byId('favorite-daily');
-  fav.setAttribute('aria-pressed', String(favorites.has(tip.id)));
-  fav.textContent = favorites.has(tip.id) ? '★ Gemerkt' : '☆ Merken';
-}
+        // UTC day means everyone sees the same featured tip on the same UTC calendar day.
+        // 47 is coprime to 111, so all 111 tips appear exactly once before the cycle repeats.
+        const todayIndex = ((Math.floor(Date.now() / 86400000) * 47 + 11) % TIPS.length + TIPS.length) % TIPS.length;
+        const todayId = TIPS[todayIndex].id;
+        let displayedId = todayId;
+        function renderDaily() {
+            const tip = TIPS.find(t => t.id === displayedId) || TIPS[0];
+            const dateText = new Intl.DateTimeFormat('de-AT', { timeZone: 'UTC', day: '2-digit', month: 'long', year: 'numeric' }).format(new Date());
+            byId('daily-meta').textContent = (displayedId === todayId ? 'Tagestipp · ' + dateText : 'Entdeckertipp') + ' · Nr. ' + tip.id + ' / 111 · ' + catMap.get(tip.cat);
+            byId('daily-heading').textContent = tip.title;
+            byId('daily-action').textContent = tip.action;
+            byId('daily-note').textContent = tip.note;
+            const fav = byId('favorite-daily');
+            fav.setAttribute('aria-pressed', String(favorites.has(tip.id)));
+            fav.textContent = favorites.has(tip.id) ? '★ Gemerkt' : '☆ Merken';
+        }
 
-const searchField=byId('tip-search');
-const categoryField=byId('tip-category');
-const sortField=byId('tip-sort');
-const favoritesOnly=byId('only-favorites');
-CATEGORIES.forEach(([key,title]) => {
-  const o=document.createElement('option');o.value=key;o.textContent=title;categoryField.append(o);
-});
-let visibleRows = [];
-function getVisibleTips() {
-  const q=searchField.value.trim().toLocaleLowerCase('de');
-  const selected=categoryField.value;
-  const result=TIPS.filter(t=>
-    (selected==='all'||selected===t.cat) &&
-    (!favoritesOnly.checked||favorites.has(t.id)) &&
-    (!q||[t.title,t.action,t.note,catMap.get(t.cat),String(t.id)].join(' ').toLocaleLowerCase('de').includes(q))
-  );
-  if(sortField.value==='title') result.sort((a,b)=>a.title.localeCompare(b.title,'de'));
-  if(sortField.value==='category') result.sort((a,b)=>catMap.get(a.cat).localeCompare(catMap.get(b.cat),'de')||a.id-b.id);
-  return result;
-}
-function cell(row,text,className='') {
-  const el=document.createElement('td');el.textContent=text;if(className)el.className=className;row.append(el);return el;
-}
-function renderTable() {
-  const body=byId('tips-body');body.replaceChildren();
-  visibleRows=getVisibleTips();
-  byId('result-count').textContent=`${visibleRows.length} von ${TIPS.length} Tipps angezeigt`;
-  if(!visibleRows.length){const tr=document.createElement('tr');const td=cell(tr,'Keine passenden Tipps. Suchbegriff oder Filter ändern.');td.colSpan=5;body.append(tr);return;}
-  const fragment=document.createDocumentFragment();
-  visibleRows.forEach(t=>{
-    const tr=document.createElement('tr');tr.id=`tip-${t.id}`;
-    cell(tr,String(t.id).padStart(3,'0'));
-    const catCell=cell(tr,catMap.get(t.cat));catCell.className='muted';
-    const detailCell=document.createElement('td');
-    const name=document.createElement('span');name.className='tip-name';name.textContent=t.title;
-    const details=document.createElement('details');details.className='tip-detail';
-    const summary=document.createElement('summary');summary.textContent='Warum und wozu?';
-    const p=document.createElement('p');p.textContent=t.note;
-    details.append(summary,p);detailCell.append(name,details);tr.append(detailCell);
-    cell(tr,t.action);
-    const starCell=document.createElement('td');
-    const star=document.createElement('button');star.type='button';star.className='fav';
-    star.textContent=favorites.has(t.id)?'★':'☆';star.setAttribute('aria-pressed',String(favorites.has(t.id)));
-    star.setAttribute('aria-label',`Tipp ${t.id} ${favorites.has(t.id)?'aus der Merkliste entfernen':'merken'}`);
-    star.addEventListener('click',()=>toggleFavorite(t.id));
-    starCell.append(star);tr.append(starCell);fragment.append(tr);
-  });
-  body.append(fragment);
-}
+        const searchField = byId('tip-search');
+        const categoryField = byId('tip-category');
+        const sortField = byId('tip-sort');
+        const favoritesOnly = byId('only-favorites');
+        CATEGORIES.forEach(([key, title]) => {
+            const o = document.createElement('option'); o.value = key; o.textContent = title; categoryField.append(o);
+        });
+        let visibleRows = [];
+        function getVisibleTips() {
+            const q = searchField.value.trim().toLocaleLowerCase('de');
+            const selected = categoryField.value;
+            const result = TIPS.filter(t =>
+                (selected === 'all' || selected === t.cat) &&
+                (!favoritesOnly.checked || favorites.has(t.id)) &&
+                (!q || [t.title, t.action, t.note, catMap.get(t.cat), String(t.id)].join(' ').toLocaleLowerCase('de').includes(q))
+            );
+            if (sortField.value === 'title') result.sort((a, b) => a.title.localeCompare(b.title, 'de'));
+            if (sortField.value === 'category') result.sort((a, b) => catMap.get(a.cat).localeCompare(catMap.get(b.cat), 'de') || a.id - b.id);
+            return result;
+        }
+        function cell(row, text, className = '') {
+            const el = document.createElement('td'); el.textContent = text; if (className) el.className = className; row.append(el); return el;
+        }
+        function renderTable() {
+            const body = byId('tips-body'); body.replaceChildren();
+            visibleRows = getVisibleTips();
+            byId('result-count').textContent = `${visibleRows.length} von ${TIPS.length} Tipps angezeigt`;
+            if (!visibleRows.length) { const tr = document.createElement('tr'); const td = cell(tr, 'Keine passenden Tipps. Suchbegriff oder Filter ändern.'); td.colSpan = 5; body.append(tr); return; }
+            const fragment = document.createDocumentFragment();
+            visibleRows.forEach(t => {
+                const tr = document.createElement('tr'); tr.id = `tip-${t.id}`;
+                cell(tr, String(t.id).padStart(3, '0'));
+                const catCell = cell(tr, catMap.get(t.cat)); catCell.className = 'muted';
+                const detailCell = document.createElement('td');
+                const name = document.createElement('span'); name.className = 'tip-name'; name.textContent = t.title;
+                const details = document.createElement('details'); details.className = 'tip-detail';
+                const summary = document.createElement('summary'); summary.textContent = 'Warum und wozu?';
+                const p = document.createElement('p'); p.textContent = t.note;
+                details.append(summary, p); detailCell.append(name, details); tr.append(detailCell);
+                cell(tr, t.action);
+                const starCell = document.createElement('td');
+                const star = document.createElement('button'); star.type = 'button'; star.className = 'fav';
+                star.textContent = favorites.has(t.id) ? '★' : '☆'; star.setAttribute('aria-pressed', String(favorites.has(t.id)));
+                star.setAttribute('aria-label', `Tipp ${t.id} ${favorites.has(t.id) ? 'aus der Merkliste entfernen' : 'merken'}`);
+                star.addEventListener('click', () => toggleFavorite(t.id));
+                starCell.append(star); tr.append(starCell); fragment.append(tr);
+            });
+            body.append(fragment);
+        }
 
-function resetFilters(){searchField.value='';categoryField.value='all';sortField.value='number';favoritesOnly.checked=false;renderTable();}
-byId('another-tip').addEventListener('click',()=>{
-  // Discover another tip, but never repeat the currently displayed one.
-  const offset = 1 + Math.floor(Math.random()*(TIPS.length-1));
-  displayedId=TIPS[((displayedId-1+offset)%TIPS.length)].id;
-  renderDaily();
-});
-byId('today-tip').addEventListener('click',()=>{displayedId=todayId;renderDaily();});
-byId('favorite-daily').addEventListener('click',()=>toggleFavorite(displayedId));
-byId('find-daily').addEventListener('click',()=>{
-  resetFilters();
-  const item=byId(`tip-${displayedId}`);
-  if(item){item.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'center'});item.focus?.();}
-});
-[searchField,categoryField,sortField,favoritesOnly].forEach(el=>el.addEventListener(el===searchField?'input':'change',renderTable));
-byId('reset-filters').addEventListener('click',resetFilters);
-byId('export-csv').addEventListener('click',()=>{
-  const clean=v=>'"'+String(v).replace(/"/g,'""')+'"';
-  const csv=['Nr;Kategorie;Tipp;Anwendung;Erläuterung',...visibleRows.map(t=>[t.id,catMap.get(t.cat),t.title,t.action,t.note].map(clean).join(';'))].join('\r\n');
-  const blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'});
-  const url=URL.createObjectURL(blob);
-  const a=document.createElement('a');a.href=url;a.download='lerntipps-auswahl.csv';document.body.append(a);a.click();a.remove();
-  window.setTimeout(()=>URL.revokeObjectURL(url),1500);
-});
+        function resetFilters() { searchField.value = ''; categoryField.value = 'all'; sortField.value = 'number'; favoritesOnly.checked = false; renderTable(); }
+        byId('another-tip').addEventListener('click', () => {
+            // Discover another tip, but never repeat the currently displayed one.
+            const offset = 1 + Math.floor(Math.random() * (TIPS.length - 1));
+            displayedId = TIPS[((displayedId - 1 + offset) % TIPS.length)].id;
+            renderDaily();
+        });
+        byId('today-tip').addEventListener('click', () => { displayedId = todayId; renderDaily(); });
+        byId('favorite-daily').addEventListener('click', () => toggleFavorite(displayedId));
+        byId('find-daily').addEventListener('click', () => {
+            resetFilters();
+            const item = byId(`tip-${displayedId}`);
+            if (item) { item.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth', block: 'center' }); item.focus?.(); }
+        });
+        [searchField, categoryField, sortField, favoritesOnly].forEach(el => el.addEventListener(el === searchField ? 'input' : 'change', renderTable));
+        byId('reset-filters').addEventListener('click', resetFilters);
+        byId('export-csv').addEventListener('click', () => {
+            const clean = v => '"' + String(v).replace(/"/g, '""') + '"';
+            const csv = ['Nr;Kategorie;Tipp;Anwendung;Erläuterung', ...visibleRows.map(t => [t.id, catMap.get(t.cat), t.title, t.action, t.note].map(clean).join(';'))].join('\r\n');
+            const blob = new Blob(['\ufeff' + csv], { type: 'text/csv;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a'); a.href = url; a.download = 'lerntipps-auswahl.csv'; document.body.append(a); a.click(); a.remove();
+            window.setTimeout(() => URL.revokeObjectURL(url), 1500);
+        });
 
-byId('planner-form').addEventListener('submit',e=>{
-  e.preventDefault();
-  const subject=byId('plan-topic').value.trim() || 'Mein Lernkapitel';
-  const minutes=Number(byId('plan-minutes').value);
-  const review=Math.max(3,Math.round(minutes*.20));
-  const recall=Math.max(5,Math.round(minutes*.25));
-  const start=Math.max(2,Math.round(minutes*.12));
-  const work=minutes-start-recall-review;
-  const target=byId('planner-result');target.replaceChildren();
-  const headline=document.createElement('strong');headline.textContent=`Lernsitzung: ${subject} · ${minutes} Minuten`;
-  const ul=document.createElement('ol');
-  [
-    `${start} Min. – Orientierung: Ziel und Leitfrage formulieren, Vorwissen aktivieren.`,
-    `${work} Min. – Verstehen und Anwenden: Material durcharbeiten, Beispiel oder Aufgabe lösen.`,
-    `${recall} Min. – Abrufen: Unterlagen schließen und den Stoff selbst erklären.`,
-    `${review} Min. – Kontrolle: Fehler korrigieren und einen Wiederholungstermin notieren.`
-  ].forEach(s=>{const li=document.createElement('li');li.textContent=s;ul.append(li);});
-  const follow=document.createElement('p');follow.textContent='Wiederholungsvorschlag: am nächsten Tag, danach nach einigen Tagen und später erneut – je nach Schwierigkeit anpassen.';
-  target.append(headline,ul,follow);
-});
+        byId('planner-form').addEventListener('submit', e => {
+            e.preventDefault();
+            const subject = byId('plan-topic').value.trim() || 'Mein Lernkapitel';
+            const minutes = Number(byId('plan-minutes').value);
+            const review = Math.max(3, Math.round(minutes * .20));
+            const recall = Math.max(5, Math.round(minutes * .25));
+            const start = Math.max(2, Math.round(minutes * .12));
+            const work = minutes - start - recall - review;
+            const target = byId('planner-result'); target.replaceChildren();
+            const headline = document.createElement('strong'); headline.textContent = `Lernsitzung: ${subject} · ${minutes} Minuten`;
+            const ul = document.createElement('ol');
+            [
+                `${start} Min. – Orientierung: Ziel und Leitfrage formulieren, Vorwissen aktivieren.`,
+                `${work} Min. – Verstehen und Anwenden: Material durcharbeiten, Beispiel oder Aufgabe lösen.`,
+                `${recall} Min. – Abrufen: Unterlagen schließen und den Stoff selbst erklären.`,
+                `${review} Min. – Kontrolle: Fehler korrigieren und einen Wiederholungstermin notieren.`
+            ].forEach(s => { const li = document.createElement('li'); li.textContent = s; ul.append(li); });
+            const follow = document.createElement('p'); follow.textContent = 'Wiederholungsvorschlag: am nächsten Tag, danach nach einigen Tagen und später erneut – je nach Schwierigkeit anpassen.';
+            target.append(headline, ul, follow);
+        });
 
-renderDaily(); renderTable();
-</script>
+        renderDaily(); renderTable();
+    </script>
 </body>
+
 </html>
