@@ -150,8 +150,8 @@
       pc_build: "electronics/pc_build.html",
       arduino: "electronics/arduino.html",
       nas: "electronics/nas.html",
-      bme_meteorology: "electonics/bme_meteorology.html",
-      pcb_basics: "electonics/pcb.html",
+      bme_meteorology: "electronics/bme_meteorology.html",
+      pcb_basics: "electronics/pcb.html",
     },
     nerdism: {
       gothic_mod: "nerdism/gothic_mod.html",
