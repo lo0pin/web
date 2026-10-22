@@ -3271,6 +3271,24 @@
         "src": "/web/assets/img/news/2026-10_sailing_split.jpg"
       }
     ]
+  },
+  {
+    "id": "2026-03-25_project_etching_process",
+    "topic": "electronics",
+    "subtopic": "pcb_basics",
+    "date": "2026-10-22",
+    "title": "Etching Day — Where Design Meets Chemistry",
+    "format": "markdown",
+    "teaser": "The moment of truth: transferring design onto copper, and watching mistakes become permanent.",
+    "content_en": "Up to this point, everything was reversible.\n\nThen came the etching.\n\n**Process:**\n\n- print layout\n- transfer to copper\n- etch away unused material\n- clean, drill, inspect\n\nAnd suddenly:\n\n- traces are final\n- errors are physical\n- imperfections are visible\n\n**Reality check:**\n\n- under-etching → shorts\n- over-etching → broken traces\n- alignment matters more than expected\n\nThe board that comes out is never perfect.\n\nBut it is real.\n\nAnd that changes everything.",
+    "content_de": "Bis zu diesem Punkt war alles reversibel.\n\nDann kam das Ätzen.\n\n**Prozess:**\n\n- Layout drucken\n- auf Kupfer übertragen\n- überschüssiges Material wegätzen\n- reinigen, bohren, prüfen\n\nUnd plötzlich:\n\n- Leiterbahnen sind endgültig\n- Fehler sind physisch\n- Unsauberkeiten werden sichtbar\n\n**Realitätscheck:**\n\n- Unterätzung → Kurzschlüsse\n- Überätzung → unterbrochene Leiterbahnen\n- Ausrichtung ist kritischer als gedacht\n\nDie Platine, die am Ende entsteht, ist nie perfekt.\n\nAber sie ist real.\n\nUnd genau das verändert alles.",
+    "images": [
+      {
+        "src": "/web/assets/news/img/pcb_basics_50.jpeg",
+        "alt": "Hand-etched PCB with visible imperfections and copper traces",
+        "caption": "Not perfect. Not clean. But undeniably real."
+      }
+    ]
   }
 
   ]
