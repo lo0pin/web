@@ -3284,7 +3284,7 @@
     "content_de": "Bis zu diesem Punkt war alles reversibel.\n\nDann kam das Ätzen.\n\n**Prozess:**\n\n- Layout drucken\n- auf Kupfer übertragen\n- überschüssiges Material wegätzen\n- reinigen, bohren, prüfen\n\nUnd plötzlich:\n\n- Leiterbahnen sind endgültig\n- Fehler sind physisch\n- Unsauberkeiten werden sichtbar\n\n**Realitätscheck:**\n\n- Unterätzung → Kurzschlüsse\n- Überätzung → unterbrochene Leiterbahnen\n- Ausrichtung ist kritischer als gedacht\n\nDie Platine, die am Ende entsteht, ist nie perfekt.\n\nAber sie ist real.\n\nUnd genau das verändert alles.",
     "images": [
       {
-        "src": "/web/assets/news/img/pcb_basics_50.jpeg",
+        "src": "/web/assets/img/news/pcb_basics_50.jpeg",
         "alt": "Hand-etched PCB with visible imperfections and copper traces",
         "caption": "Not perfect. Not clean. But undeniably real."
       }
