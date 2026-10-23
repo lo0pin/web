@@ -3289,6 +3289,24 @@
         "caption": "Not perfect. Not clean. But undeniably real."
       }
     ]
+  },
+  {
+    "id": "2026-03-26_project_final_result",
+    "topic": "electronics",
+    "subtopic": "pcb_project",
+    "date": "2026-10-23",
+    "title": "PCB VI: Final Board — From Idea to Object",
+    "format": "markdown",
+    "teaser": "A finished PCB is quiet. It doesn’t explain itself. It simply works — or it doesn’t.",
+    "content_en": "The finished board carries all previous decisions within it.\n\n- schematic logic\n- layout compromises\n- manufacturing imperfections\n\nLooking at it, you don’t see the process anymore.\n\nOnly the result.\n\n**What remains:**\n\n- a working circuit\n- a deeper understanding\n- and the quiet knowledge:\n\n~Next time, it will be better.~",
+    "content_de": "Die fertige Platine trägt alle vorherigen Entscheidungen in sich.\n\n- Logik des Schaltplans\n- Kompromisse im Layout\n- Unvollkommenheiten der Fertigung\n\nBetrachtet man sie, sieht man den Prozess nicht mehr.\n\nNur noch das Ergebnis.\n\n**Was bleibt:**\n\n- eine funktionierende Schaltung\n- ein tieferes Verständnis\n- und das leise Wissen:\n\n~Beim nächsten Mal wird es besser.~",
+    "images": [
+      {
+        "src": "/web/assets/img/news/pcb_basics_60.jpeg",
+        "alt": "Finished PCB of hot wire game with components mounted",
+        "caption": "From abstract signals to copper and solder."
+      }
+    ]
   }
 
   ]
