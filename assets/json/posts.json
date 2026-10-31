@@ -3308,7 +3308,31 @@
       }
     ]
   },
-  
+  {
+    "id": "2026-03-28_electronics_meshtastic_01",
+    "topic": "electronics",
+    "subtopic": "meshtastic",
+    "date": "2026-10-31",
+    "title": "The Messages That Never Arrived — And Why",
+    "format": "markdown",
+    "teaser": "Some messages weren’t lost in the air. They were dropped on purpose — quietly, locally, and for a reason that only becomes visible once you read the logs.",
+    "content_en": "~Not every missing message is a transmission problem. Some never make it past the last meter.~\n\nFor a while, I had this nagging inconsistency in my mesh setup:\n\nSome messages simply never showed up.\n\nNo obvious pattern.\nNo clear signal issue.\n\nJust… gaps.\n\nSo instead of guessing, I did the obvious thing:\n\nI started reading the **raw logs from the node**.\n\n## The clue in plain sight\n\nBuried between routing updates and packet traces, one line kept repeating:\n\n- `ToPhone queue is full, discard oldest`\n\nThat’s not subtle.\nThat’s the system telling you exactly what it’s doing.\n\nAnd what it’s doing is this:\n\n## The actual behavior\n\nThe node maintains an internal queue for messages that are supposed to be forwarded to a connected phone (via Bluetooth).\n\nThat queue is:\n\n- limited in size\n- optimized for *live interaction*\n- not designed as long-term storage\n\nIf no phone is connected:\n\n- messages still arrive via LoRa\n- routing still works\n- packets are processed\n\nBut when it comes to **delivering messages to the app**, they enter the `ToPhone` queue.\n\nAnd if that queue fills up:\n\n- older messages get dropped\n- silently, except for that one warning in the logs\n\n## What this means in practice\n\nThe node is not a mailbox.\n\nIt is a **live relay with a short memory**.\n\nIf you are not connected when messages arrive:\n\n- they are not guaranteed to wait for you\n- they are not reliably persisted\n- they may simply be overwritten\n\nSo the missing messages were never really “lost”.\n\nThey were:\n\n**received → queued → replaced → gone**\n\nAll perfectly according to design.\n\n## Why this design makes sense\n\nAt first glance, this feels like a limitation.\n\nBut it’s actually a deliberate trade-off:\n\n- limited RAM on embedded devices\n- priority on real-time communication\n- avoidance of unbounded queues\n\nIn other words:\n\nThe system prefers being responsive over being archival.\n\n## The real takeaway\n\nThe issue was not:\n\n- bad signal\n- failed routing\n- broken nodes\n\nIt was expectation.\n\nI treated the node like a message store.\n\nIt behaves like a **stream processor**.\n\n~If you’re not there when it flows, it flows past you.~\n\n## What changes now\n\nWith that understanding, a few options become obvious:\n\n- keep a phone connected more consistently\n- build a persistent logger (e.g. Raspberry Pi over serial)\n- or accept that the mesh is ephemeral by nature\n\nPersonally, I’ll go with logging.\n\nBecause once you’ve seen the messages underneath the system,\n\nit’s hard to go back to guessing.\n",
+    "content_de": "~Nicht jede fehlende Nachricht ist ein Funkproblem. Manche sterben auf den letzten Zentimetern.~\n\nIch hatte in meinem Mesh-Setup immer wieder dieses seltsame Phänomen:\n\nNachrichten sind einfach nicht angekommen.\n\nKein klares Muster.\nKein offensichtliches Reichweitenproblem.\n\nEinfach Lücken.\n\nAlso habe ich aufgehört zu spekulieren und angefangen zu messen:\n\nIch habe die **Roh-Logs des Nodes ausgelesen**.\n\n## Die entscheidende Spur\n\nZwischen Routing-Infos und Paketmeldungen tauchte immer wieder dieselbe Zeile auf:\n\n- `ToPhone queue is full, discard oldest`\n\nDas ist keine versteckte Fehlermeldung.\n\nDas ist eine ziemlich direkte Erklärung.\n\n## Was tatsächlich passiert\n\nDer Node verwaltet intern eine Warteschlange für Nachrichten, die an ein verbundenes Handy (Bluetooth) weitergegeben werden sollen.\n\nDiese Queue ist:\n\n- begrenzt\n- auf Live-Betrieb ausgelegt\n- kein dauerhafter Speicher\n\nWenn **kein Handy verbunden ist**:\n\n- Nachrichten werden trotzdem empfangen\n- Routing funktioniert weiterhin\n- Pakete werden verarbeitet\n\nAber:\n\nSobald sie zur App sollen, landen sie in der `ToPhone`-Queue.\n\nUnd wenn diese voll ist:\n\n- werden ältere Nachrichten verworfen\n- kommentarlos — bis auf die Logzeile\n\n## Die eigentliche Erkenntnis\n\nDer Node ist kein Postfach.\n\nEr ist ein **Echtzeit-System mit kurzer Erinnerung**.\n\nWenn du nicht verbunden bist, während Nachrichten eintreffen:\n\n- warten sie nicht zuverlässig auf dich\n- werden sie nicht langfristig gespeichert\n- können sie einfach überschrieben werden\n\nDie „fehlenden“ Nachrichten wurden also nicht verloren.\n\nSie wurden:\n\n**empfangen → zwischengespeichert → verdrängt → gelöscht**\n\nVöllig regelkonform.\n\n## Warum das so gebaut ist\n\nDas wirkt im ersten Moment wie eine Einschränkung.\n\nIst aber eigentlich logisch:\n\n- wenig RAM auf Embedded-Systemen\n- Fokus auf Live-Kommunikation\n- keine endlosen Warteschlangen\n\nDas System ist darauf ausgelegt, **jetzt** zu funktionieren — nicht später.\n\n## Was ich falsch angenommen habe\n\nIch habe den Node wie einen Speicher behandelt.\n\nTatsächlich ist er eher ein **Durchfluss-System**.\n\n~Wenn du nicht da bist, wenn es passiert, ist es vorbei.~\n\n## Konsequenzen\n\nMit dieser Erkenntnis wird die Lösung klar:\n\n- entweder öfter verbunden sein\n- oder Logs persistent mitschreiben (z. B. über Raspberry Pi)\n- oder akzeptieren, dass Mesh-Kommunikation flüchtig ist\n\nIch entscheide mich für Logging.\n\nDenn sobald man einmal gesehen hat, was wirklich passiert,\n\nist „ich glaub, es kam nicht an“ keine zufriedenstellende Erklärung mehr.\n",
+    "images": [
+      {
+        "src": "/web/assets/img/news/meshtastic_log01.jpeg",
+        "alt": "Meshtastic debug log showing 'ToPhone queue is full, discard oldest' indicating dropped messages.",
+        "caption": "Meshtastic debug log showing 'ToPhone queue is full, discard oldest' indicating dropped messages."
+      },
+      {
+        "src": "/web/assets/img/news/meshtastic_log02.jpeg",
+        "alt": "Serial output of mesh node with routing and packet forwarding logs highlighting queue overflow behavior.",
+        "caption": "Serial output of mesh node with routing and packet forwarding logs highlighting queue overflow behavior."
+      }
+    ]
+  }
+
+
 
   ]
 }
