@@ -3330,6 +3330,39 @@
         "caption": "Serial output of mesh node with routing and packet forwarding logs highlighting queue overflow behavior."
       }
     ]
+  },
+  {
+    "id": "2026-06-01_making_3dprint_wooden_katana",
+    "topic": "making",
+    "subtopic": "3dprint",
+    "date": "2026-11-01",
+    "title": "Wood, Plastic, Fabric — A Practice Katana for Kendo Kata",
+    "format": "markdown",
+    "teaser": "For practicing Kendo kata, I built a wooden katana: a soft, easy-to-shape wooden blade, a custom tsuba designed in Fusion 360 and 3D-printed, and a handle wrapped in green leaf-patterned cotton fabric. It already works well in practice — even if the black finish turned out a little heavier than planned.",
+    "content_en": "~A practice sword does not need to be sharp. It needs to feel convincing.~\n\nFor practicing **Kendo kata**, I built myself a wooden katana.\n\nNot a display piece.\nNot a perfect replica.\n\nA functional training object: light enough to handle, solid enough to move with intent, and personal enough that it does not feel like anonymous sports equipment.\n\n## The wooden blade\n\nThe blade started as a piece of soft, easily workable wood — probably beech. It was pleasant to shape, almost suspiciously cooperative. Sawing, sanding and refining the form worked without much resistance, which made the project far more approachable than expected.\n\nThe result is a simple wooden blade with a dark finish. In retrospect, the black paint is perhaps a little too massive. It gives the sword a strong visual presence, but also reduces some of the natural lightness of the wood.\n\nThat is not a failure.\n\nIt is just one of those design decisions that becomes clearer only after the object exists.\n\n## The tsuba\n\nThe guard — the **tsuba** — was designed in **Fusion 360**.\n\nThe form follows a rounded rectangular outline with an inner opening for the wooden blade and recessed decorative arcs on the surface. It is not historically exact, and it does not pretend to be. It is a crafted interpretation: clean, graphic, and made to fit this specific build.\n\nAfter slicing, the tsuba was printed on the Bambu Lab printer. The print shows the usual layered honesty of FDM printing, but structurally it does exactly what it needs to do.\n\n~Fusion 360 for geometry, wood for body, fabric for character. A small alliance of materials.~\n\n## Handle and finish\n\nThe handle is wrapped in cotton fabric with a green leaf pattern.\n\nThat detail changes the whole object. Without it, the sword would be mostly black and gold — strong, but perhaps a little too severe. The green fabric introduces softness, texture and something organic. It makes the handle more pleasant visually and gives the practice katana its own character.\n\nBlack and gold still dominate the overall look, but the leaf pattern keeps it from becoming too solemn.\n\n## First use\n\nI have already practiced Kendo kata with it, and it works well.\n\nThe weight is manageable, the handling feels natural enough, and the construction seems stable. For practice movements and form work, that is exactly what I wanted.\n\nIt is not flawless.\nIt is not meant to be.\n\nBut it is useful, personal, and satisfying in the best workshop sense: an idea became an object, and the object immediately entered use.\n\nA bought wooden practice sword would have been simpler.\n\nThis one has sawdust, slicer lines, fabric, paint — and a little bit of soul.",
+    "content_de": "~Ein Übungsschwert muss nicht scharf sein. Es muss sich überzeugend anfühlen.~\n\nZum Üben von **Kendo-Katas** habe ich mir ein Holzkatana gebaut.\n\nKein reines Dekostück.\nKeine perfekte Replik.\n\nSondern ein funktionales Trainingsobjekt: leicht genug für saubere Bewegungen, stabil genug für ernsthaftes Üben und persönlich genug, um nicht wie beliebiges Sportgerät zu wirken.\n\n## Die Holzklinge\n\nDie Klinge entstand aus einem recht weichen, gut bearbeitbaren Holz — vermutlich Buche. Das Material ließ sich angenehm sägen, schleifen und formen. Fast schon verdächtig kooperativ, was bei Holz ja nicht immer selbstverständlich ist.\n\nSo entstand eine schlichte Holzklinge mit dunklem Finish. Rückblickend ist die schwarze Farbe vielleicht etwas zu massiv geraten. Sie gibt dem Schwert zwar eine starke Präsenz, nimmt dem Holz aber ein wenig von seiner natürlichen Leichtigkeit.\n\nDas ist kein Fehlschlag.\n\nEs ist eher eine jener Gestaltungsentscheidungen, die man erst wirklich beurteilen kann, wenn das Objekt vor einem liegt.\n\n## Die Tsuba\n\nDas Stichblatt — die **Tsuba** — habe ich in **Fusion 360** gezeichnet.\n\nDie Form folgt einer abgerundeten rechteckigen Grundfläche mit zentraler Öffnung für die Holzklinge und eingelassenen, bogenförmigen Dekorelementen auf der Oberfläche. Historisch exakt will das nicht sein. Es ist eher eine eigene, grafische Interpretation: sauber, funktional und genau für dieses Projekt entworfen.\n\nNach dem Slicing wurde die Tsuba auf dem Bambu-Lab-Drucker gedruckt. Man sieht dem Teil die typische Schichtstruktur des FDM-Drucks an, aber strukturell tut es genau das, was es soll.\n\n~Fusion 360 für die Geometrie, Holz für den Körper, Stoff für den Charakter. Eine kleine Materialallianz.~\n\n## Griff und Gestaltung\n\nDer Griff ist mit Baumwollstoff in einem grünen Blattmuster überzogen.\n\nDieses Detail verändert das ganze Objekt. Ohne den Stoff wäre das Schwert hauptsächlich schwarz und gold — stark, aber vielleicht etwas zu streng. Das grüne Muster bringt Weichheit, Textur und etwas Organisches hinein. Es macht den Griff optisch angenehmer und gibt dem Übungskatana eine eigene Handschrift.\n\nSchwarz und Gold bleiben die dominierenden Farben, aber das Blattmuster verhindert, dass es zu gravitätisch wird. Ein bisschen Ernst darf sein. Ein Begräbnis muss es nicht gleich werden.\n\n## Erster Einsatz\n\nIch habe damit bereits Kendo-Katas geübt, und es funktioniert gut.\n\nDas Gewicht ist gut handhabbar, die Bewegung fühlt sich brauchbar natürlich an, und die Konstruktion wirkt stabil. Für Formübungen und Bewegungsabläufe ist das genau das, was ich wollte.\n\nEs ist nicht perfekt.\nEs soll es auch nicht sein.\n\nAber es ist nützlich, persönlich und auf diese sehr befriedigende Werkstatt-Art gelungen: Eine Idee wurde ein Objekt, und das Objekt wurde sofort verwendet.\n\nEin gekauftes Holzschwert wäre einfacher gewesen.\n\nDieses hier hat Sägestaub, Layerlinien, Stoff, Farbe — und ein kleines bisschen Seele.",
+    "images": [
+      {
+        "src": "/web/assets/img/news/2026_holz_katana_02.jpeg",
+        "alt": "Fusion 360 model of a custom tsuba for a wooden practice katana",
+        "caption": "The tsuba in Fusion 360 — a clean, custom guard designed around the wooden blade."
+      },
+      {
+        "src": "/web/assets/img/news/2026_holz_katana_03.jpeg",
+        "alt": "3D printer producing several custom tsuba parts on a Bambu Lab build plate",
+        "caption": "Printing the tsuba parts — geometry leaving the screen and becoming mildly opinionated plastic."
+      },
+      {
+        "src": "/web/assets/img/news/2026_holz_katana_04.jpeg",
+        "alt": "Finished wooden practice katana with black blade, gold guard and green patterned handle wrap",
+        "caption": "The finished practice katana — black and gold, with a green leaf-patterned fabric wrap on the handle."
+      },
+      {
+        "src": "/web/assets/img/news/2026_holz_katana_01.jpeg",
+        "alt": "Wooden practice sword being shaped on a workbench with clamps and tools",
+        "caption": "Shaping the soft wooden blank — easy to work, forgiving, and exactly right for a first practice build."
+      }
+    ]
   }
 
 
