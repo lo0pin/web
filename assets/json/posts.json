@@ -3363,6 +3363,39 @@
         "caption": "Shaping the soft wooden blank — easy to work, forgiving, and exactly right for a first practice build."
       }
     ]
+  },
+  {
+    "id": "2026-03-28_making_3d_printing_02",
+    "topic": "making",
+    "subtopic": "3dprint",
+    "date": "2026-03-28",
+    "title": "When the Printer Fights Back — A Small Lesson in Bodies and Consequences",
+    "format": "markdown",
+    "teaser": "What began as a clean little print for a stationary mesh node ended in grinding noises, existential doubt, and a humbling reminder: in CAD, bodies matter.",
+    "content_en": "~Every print is a hypothesis. This one failed loudly.~\n\nThe plan was simple:\n\nDesign and print a small **holder for my stationary mesh node**.\n\nFunctional, minimal — but with a bit of personality:\n\n- embossed text\n- clean geometry\n- something that feels intentional, not just printed\n\nSo I added a few lines of text.\nA small phrase.\nA quiet gesture.\n\nAnd then I made a classic mistake.\n\n## The part where I didn’t think\n\nIn Fusion, the model looked perfectly fine.\n\nMultiple bodies:\n\n- base plate\n- raised text\n\nVisually aligned.\nConvincing.\n\nBut not actually connected.\n\nAnd instead of doing the obvious — **combine the bodies into a single solid before export** — I exported it as-is.\n\n## The warning I chose to ignore\n\nBambu Studio tried to intervene.\n\nA bright, polite, unmistakable warning:\n\n> Conflicts between G-code paths were found… objects overlap.\n\nWhich is software-speak for:\n\n*This will not go well.*\n\nI clicked it away.\n\nBecause of course I did.\n\n## The moment of truth\n\nThe print started normally.\n\nFirst layer: clean.\nSecond layer: acceptable.\n\nThen suddenly:\n\n**scratching noises.**\n\nSharp. Wrong. Mechanical.\n\nThe kind of sound that makes you look up immediately and think:\n\n*I broke it.*\n\nWhat actually happened:\n\nThe printer was trying to print **two overlapping bodies into the same physical space**.\n\nToolpaths intersected.\nMaterial collided with already printed material.\n\nAnd the nozzle did what physics demands:\n\nIt protested.\n\nLoudly.\n\n## The result\n\nThe final object exists.\n\nTechnically.\n\nBut it is…\n\n- uneven\n- scarred\n- slightly melted in places\n- and overall carrying the aesthetic of “I ignored a warning and paid for it”\n\nIn short:\n\nNot pretty.\n\n## What I should have done\n\nThe fix is embarrassingly simple:\n\n- **Combine bodies in Fusion (Modify → Combine → Join)**\n- ensure a single watertight solid\n- *then* export\n\nBecause slicers are not mind readers.\n\nThey assume geometry is intentional.\n\nEven when it very clearly isn’t.\n\n## Lesson learned\n\nThis was not a failure of the printer.\n\nIt was a failure of attention.\n\nAnd a useful one.\n\nBecause it reinforces something fundamental:\n\n~Digital geometry is not just what you see. It’s what the machine understands.~\n\nNext print will be cleaner.\n\nAnd maybe — just maybe — I’ll read the warning first.\n",
+    "content_de": "~Jeder Druck ist eine Hypothese. Dieser ist hörbar gescheitert.~\n\nDer Plan war eigentlich harmlos:\n\nEine kleine **Halterung für meinen stationären Mesh-Node** drucken.\n\nSchlicht.\nFunktional.\nAber mit ein bisschen Charakter:\n\n- eingeprägter Schriftzug\n- saubere Geometrie\n- nicht nur „irgendwas aus Plastik“\n\nAlso: Text drauf.\nEin kleiner Satz.\nEin bisschen Haltung.\n\nUnd dann habe ich genau den Fehler gemacht, den man eigentlich nur einmal macht.\n\n## Der eigentliche Fehler\n\nIn Fusion sah alles perfekt aus.\n\nMehrere Körper:\n\n- Grundplatte\n- Schrift\n\nSauber positioniert.\nOptisch korrekt.\n\nNur leider:\n\n**nicht miteinander verbunden.**\n\nUnd statt sie zu einem sauberen Volumenkörper zu vereinen, habe ich das Modell einfach exportiert.\n\n## Die Warnung (die ich ignoriert habe)\n\nBambu Studio war nicht begeistert.\n\nEine sehr klare, sehr deutliche Warnung:\n\n> Konflikte zwischen G-Code-Pfaden… überlappende Körper.\n\nÜbersetzt:\n\n*Das wird hässlich.*\n\nIch habe sie weggeklickt.\n\nSouverän.\n\n## Der Moment, in dem es schiefging\n\nDer Druck startet.\n\nErste Schicht: gut.\nZweite Schicht: auch noch okay.\n\nDann plötzlich:\n\n**kratzende Geräusche.**\n\nDieses unangenehme, mechanische Kratzen, bei dem man sofort denkt:\n\n*Bitte nicht. Bitte jetzt nicht kaputt.*\n\nWas tatsächlich passiert ist:\n\nDer Drucker hat versucht, **zwei sich überlappende Körper gleichzeitig zu drucken**.\n\nToolpaths kollidieren.\nMaterial ist im Weg.\n\nUnd die Düse fährt einfach durch.\n\nPhysik gewinnt.\n\n## Das Ergebnis\n\nDas Teil existiert.\n\nFormal.\n\nAber:\n\n- unsauber\n- zerkratzt\n- stellenweise verschmolzen\n- insgesamt… sagen wir: charakterstark\n\nSchön ist anders.\n\n## Die eigentlich triviale Lösung\n\nDie Lösung ist fast peinlich simpel:\n\n- in Fusion: **Modify → Combine → Join**\n- daraus einen einzigen, geschlossenen Körper machen\n- *dann* exportieren\n\nDenn der Slicer nimmt an, dass du weißt, was du tust.\n\nSelbst wenn du es offensichtlich nicht tust.\n\n## Was bleibt\n\nDer Drucker war nicht das Problem.\n\nIch war es.\n\nUnd genau deshalb war es ein guter Fehler.\n\nDenn er erinnert an etwas sehr Grundsätzliches:\n\n~Geometrie ist nicht das, was gut aussieht. Sondern das, was korrekt definiert ist.~\n\nDie nächste Version wird besser.\n\nUnd vielleicht lese ich beim nächsten Mal sogar die Warnung.\n",
+    "images": [
+      {
+        "src": "/web/assets/img/news/mesh_holder01.jpeg",
+        "alt": "3D printed mesh node holder with visible surface defects caused by overlapping bodies during printing.",
+        "caption": "3D printed mesh node holder."
+      },
+      {
+        "src": "/web/assets/img/news/mesh_holder02.jpeg",
+        "alt": "Bambu Studio warning about overlapping bodies and conflicting G-code paths before printing.",
+        "caption": "Bambu Studio warning about overlapping bodies and conflicting G-code paths before printing."
+      },
+      {
+        "src": "/web/assets/img/news/mesh_holder03.jpeg",
+        "alt": "Fusion 360 model showing separate bodies for base plate and text that were not combined before export.",
+        "caption": "Fusion 360 model showing separate bodies for base plate and text that were not combined before export."
+      },
+      {
+        "src": "/web/assets/img/news/mesh_holder04.jpeg",
+        "alt": "Finished mesh node holder print with embossed text and structural design, despite visible print artifacts.",
+        "caption": "Mesh node holder print with embossed text and structural design, despite visible print artifacts."
+      }
+    ]
   }
 
 
