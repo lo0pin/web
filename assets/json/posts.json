@@ -3368,7 +3368,7 @@
     "id": "2026-06-01_electronics_mesh_messages_logged",
     "topic": "electronics",
     "subtopic": "mesh",
-    "date": "2026-06-01",
+    "date": "2026-11-04",
     "title": "Mesh Messages Arrive — But They Do Not All Stay",
     "format": "markdown",
     "teaser": "During another hiking test, I sent messages to myself through the Meshtastic network again. The result confirmed an earlier suspicion: many messages do arrive, but the receiving node only buffers a limited amount and later forwards only the most recent entries to the phone.",
