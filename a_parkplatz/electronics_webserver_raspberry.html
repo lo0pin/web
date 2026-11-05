@@ -408,3 +408,52 @@
                 CPU-Temperatur genügt, um die Verbindung nachzuweisen. Die CPU-Temperatur ist aber ausdrücklich
                 <strong>keine Außen- oder Umgebungstemperatur</strong>.</p>
         </section>
+<section class="card guide-section" id="os"><h2>5. Raspberry Pi OS installieren – von Null an</h2>
+<ol class="guide-steps"><li><strong>Raspberry Pi Imager</strong> von <a href="https://www.raspberrypi.com/software/" target="_blank" rel="noopener noreferrer">raspberrypi.com/software</a> auf deinem PC installieren und öffnen.</li><li>Unter „Raspberry Pi Device“ dein konkretes Pi-Modell auswählen.</li><li>Als Betriebssystem <strong>Raspberry Pi OS Lite</strong> wählen: für einen reinen Webserver ist kein grafischer Desktop nötig. Achte darauf, eine zum Pi passende Architektur zu wählen.</li><li>microSD-Karte als Speichermedium auswählen. <strong>Achtung: Sie wird formatiert.</strong></li><li>In der Imager-Konfiguration einen eigenen <strong>Benutzernamen</strong>, ein starkes <strong>Passwort</strong> und einen einfachen <strong>Hostnamen</strong> wie <code>sailsense-pi</code> anlegen.</li><li>WLAN-SSID und Passwort deines Heimnetzes hinterlegen; WLAN-Land korrekt auf <strong>AT</strong> einstellen.</li><li>Bei „Remote Access“ <strong>SSH aktivieren</strong> (für den Einstieg Passwortanmeldung; später besser SSH-Schlüssel).</li><li>Image auf die Karte schreiben lassen, Karte in den Pi stecken und den Pi mit geeignetem Netzteil starten. Der erste Start benötigt etwas Zeit.</li></ol>
+<p>Du hast nun einen „<strong>headless</strong>“ Raspberry Pi: kein Monitor, keine Tastatur, keine Maus. Nur Linux im Hintergrund – genau das wollen wir später im abgeschlossenen SailSense-Gehäuse.</p>
+<p class="hint guide-note">Die Imager-Oberfläche und die genauen Registerbezeichnungen können je nach Version variieren. Entscheidend sind: Benutzerkonto, Netzwerk, Hostname, Land und SSH <em>vor</em> dem ersten Start.</p>
+</section>
+<section class="card guide-section" id="ssh"><h2>6. Die erste Verbindung: SSH vom PC auf den Raspberry Pi</h2>
+<p>Öffne unter Windows <strong>PowerShell</strong> oder Windows Terminal. macOS und Linux haben ebenfalls ein Terminal. Mit <code>ssh</code> bekommst du eine Textkonsole auf dem Pi; die eingegebenen Befehle werden <strong>auf dem Raspberry Pi</strong> ausgeführt.</p>
+<pre class="cheat-code" data-language="bash"><code>ssh DEIN_BENUTZER@sailsense-pi.local</code></pre>
+<p>Ersetze <code>DEIN_BENUTZER</code> durch den Namen aus Imager, beispielsweise <code>julian</code>. Bei der ersten Verbindung bestätigst du den bekannten SSH-Fingerabdruck <em>nachdem du dich vergewissert hast, dass du den richtigen Pi erreichst</em>, und gibst das Passwort ein. Während der Passworteingabe erscheinen gewöhnlich keine Sternchen: Das ist normal.</p>
+<p>Falls <code>.local</code> nicht funktioniert, suche die IP im Router unter „verbundene Geräte“ und nutze beispielsweise:</p>
+<pre class="cheat-code" data-language="bash"><code>ssh DEIN_BENUTZER@192.168.1.42</code></pre>
+<p>Die IP ist hier ein <strong>Beispiel</strong> – deine Adresse kann anders aussehen. Mit <code>exit</code> schließt du die SSH-Sitzung.</p>
+<pre class="cheat-code" data-language="bash"><code>whoami
+hostname
+hostname -I
+pwd</code></pre>
+<p>Diese vier Befehle verraten dir <em>Benutzername</em>, <em>Rechnername</em>, <em>IP-Adressen</em> und <em>aktuelles Verzeichnis</em>. Notiere deine tatsächlichen Werte.</p>
+<p class="guide-check"><strong>✓ Lernkontrolle:</strong> Du kannst vom PC aus eine SSH-Sitzung starten und <code>hostname -I</code> auf dem Pi ausführen.</p>
+</section>
+<section class="card guide-section" id="linux"><h2>7. Mini-Crashkurs: Die Linux-Befehle, die du hier brauchst</h2>
+<div class="guide-table-wrap"><table class="guide-table"><thead><tr><th>Befehl</th><th>Bedeutung</th></tr></thead><tbody>
+<tr><td><code>pwd</code></td><td>Zeigt das aktuelle Verzeichnis.</td></tr>
+<tr><td><code>ls -la</code></td><td>Zeigt auch versteckte Dateien wie <code>.env</code>.</td></tr>
+<tr><td><code>cd ~/pi-web</code></td><td>Wechselt in einen Ordner; <code>~</code> steht für dein Home-Verzeichnis.</td></tr>
+<tr><td><code>mkdir -p name</code></td><td>Erstellt einen Ordner.</td></tr>
+<tr><td><code>nano datei.py</code></td><td>Öffnet eine Datei im einfachen Terminaleditor.</td></tr>
+<tr><td><code>cp QUELLE ZIEL</code></td><td>Kopiert eine Datei.</td></tr>
+<tr><td><code>cat datei</code></td><td>Zeigt Dateiinhalt.</td></tr>
+<tr><td><code>sudo</code></td><td>Führt einen Befehl mit Administratorrechten aus – nur wenn nötig.</td></tr>
+<tr><td><code>Strg+C</code></td><td>Beendet das gerade im Terminal laufende Programm.</td></tr>
+<tr><td><code>Ctrl+O, Enter, Ctrl+X</code></td><td>Speichern und Beenden in <code>nano</code>.</td></tr>
+</tbody></table></div>
+<p>Besonders wichtig: Ein Befehl nach einem <code>$</code> im Tutorial wird ohne Dollarzeichen eingegeben. Alles in <code>GROSSBUCHSTABEN</code> wie <code>DEIN_BENUTZER</code> ist ein Platzhalter. Eine mehrzeilige Codebox kannst du in der Regel als Block einfügen – sofern sie keine Platzhalter enthält.</p>
+</section>
+<section class="card guide-section" id="update"><h2>8. Raspberry Pi aktualisieren und Python vorbereiten</h2>
+<p>In der SSH-Konsole auf dem Pi:</p>
+<pre class="cheat-code" data-language="bash"><code>sudo apt update
+sudo apt full-upgrade -y
+sudo apt install -y python3 python3-venv python3-pip curl unzip</code></pre>
+<p><code>apt update</code> holt Paketlisten, <code>full-upgrade</code> installiert verfügbare Systemaktualisierungen und <code>apt install</code> sorgt für Python sowie das Werkzeug für virtuelle Python-Umgebungen. Falls ein Neustart empfohlen wird:</p>
+<pre class="cheat-code" data-language="bash"><code>sudo reboot</code></pre>
+<p>Danach SSH neu verbinden. Du musst diese Installationsschritte nicht bei jedem Start wiederholen.</p>
+</section>
+<section class="card guide-section" id="erste-seite"><h2>9. Der erste Webserver in fünf Minuten – noch ganz ohne Sensoren</h2>
+<p>Wir starten <strong>bewusst winzig</strong>. Erst wenn du die erste HTML-Seite am Handy siehst, kommt zusätzliche Logik dazu. Sonst suchst du bei Fehlern gleichzeitig in WLAN, Linux, Python, Sensorverdrahtung und HTML – eine unnötige Disziplin im Fehlersport.</p>
+<ol class="guide-steps"><li><strong>Ordner erstellen:</strong></li></ol>
+<pre class="cheat-code" data-language="bash"><code>mkdir -p ~/web-test
+cd ~/web-test</code></pre>
+<p><strong>2. Datei erstellen:</strong></p>
