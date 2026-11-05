@@ -1218,7 +1218,8 @@ if __name__ == &#x27;__main__&#x27;:
             <h2>20. RaspbiMesh: Wettertelemetrie und Nachrichten auf einer Oberfläche</h2>
             <p>Bei deinem RaspbiMesh-Projekt wäre eine gemeinsame Oberfläche ausgesprochen sinnvoll. Allerdings muss man
                 zwischen <strong>Messwerten, die direkt am Raspberry Pi entstehen</strong>, und
-                <strong>Wettertelemetrie, die von einem fernen Mesh-Node per LoRa eintrifft</strong>, unterscheiden.</p>
+                <strong>Wettertelemetrie, die von einem fernen Mesh-Node per LoRa eintrifft</strong>, unterscheiden.
+            </p>
             <pre class="cheat-code" data-language="text"><code>Lokaler BME280 -----------------------┐
                                      |
 LoRa-Wettertelemetrie -&gt; USB-Node -&gt; | --&gt; Datenmodell
@@ -1232,7 +1233,8 @@ LoRa-Textnachrichten -&gt; USB-Node ---&gt;|       v
                 <strong>Mesh-Wettertelemetrie</strong> braucht hingegen einen Decoder für das tatsächlich empfangene
                 Paket: Bei Meshtastic sind das je nach Gerät, Firmware, Portnummer und Sensorsetup andere Felder. Ein
                 selbst entwickeltes RaspbiMesh-Payload-Format wäre wiederum separat zu interpretieren. Die genaue
-                Integration ist daher bewusst <strong>noch keine fertige Funktion</strong> des Beispielprojekts.</p>
+                Integration ist daher bewusst <strong>noch keine fertige Funktion</strong> des Beispielprojekts.
+            </p>
             <h3>Die richtige Vorgehensweise</h3>
             <ol>
                 <li>Lass die Meshtastic-Bridge zunächst Textnachrichten zuverlässig empfangen.</li>
@@ -1240,9 +1242,11 @@ LoRa-Textnachrichten -&gt; USB-Node ---&gt;|       v
                     Achte darauf, keine privaten Nachrichten oder Schlüssel zu veröffentlichen.</li>
                 <li>Schreibe einen kleinen Decoder, der die echten Daten in ein einheitliches Format umwandelt,
                     beispielsweise <code>source_node</code>, <code>timestamp_utc</code>, <code>temperature_c</code> und
-                    <code>battery_percent</code>.</li>
+                    <code>battery_percent</code>.
+                </li>
                 <li>Speichere die Messwerte in einer eigenen SQLite-Tabelle und ergänze einen API-Endpunkt wie
-                    <code>/api/weather-history</code>.</li>
+                    <code>/api/weather-history</code>.
+                </li>
                 <li>Zeige am Handy sowohl den <strong>Messzeitpunkt</strong> als auch das Alter des letzten empfangenen
                     Datenpunkts an. „Letzte Meldung vor drei Stunden“ darf nicht wie Live-Wetter aussehen.</li>
             </ol>
@@ -1311,7 +1315,8 @@ SailSense-Steuerung +--&gt; Web-POST /api/action
                 Dienst, der die gesamte echte Hardware besitzt. Der Webserver darf nur wohldefinierte Aktionen an diesen
                 Controller weiterreichen und Statuswerte abrufen. Wenn der bestehende SailSense-Dienst schon unter
                 <code>systemd</code> läuft, ist besonders wichtig: <strong>nicht gleichzeitig zwei Prozesse mit
-                    exklusivem Zugriff auf denselben GPS-/Serial-/GPIO-/I²C-Baustein starten</strong>.</p>
+                    exklusivem Zugriff auf denselben GPS-/Serial-/GPIO-/I²C-Baustein starten</strong>.
+            </p>
             <p>Mögliche Integrationswege: <strong>A)</strong> Webserver direkt im bestehenden Python-Prozess auf einem
                 separaten Thread (mit sauberem Datenaustausch), <strong>B)</strong> ein getrenntes Webserver-Programm
                 mit lokaler Kommunikation über Socket/Queue/SQLite oder <strong>C)</strong> der bestehende Prozess
@@ -1355,13 +1360,15 @@ SailSense-Steuerung +--&gt; Web-POST /api/action
                 data-language="bash"><code>sudo nmcli device wifi hotspot ifname wlan0 ssid SailSense-Local password &#x27;EIN_LANGES_EIGENES_WLAN_PASSWORT&#x27;</code></pre>
             <p>Das Passwort ist ein <strong>Platzhalter</strong> und muss ersetzt werden. Der Pi aktiviert das
                 Hotspot-Profil normalerweise sofort. Dein Handy findet anschließend das WLAN
-                <code>SailSense-Local</code>. Verbinde dich mit dem gewählten Passwort.</p>
+                <code>SailSense-Local</code>. Verbinde dich mit dem gewählten Passwort.
+            </p>
             <p><strong>Die IP des Hotspots feststellen:</strong></p>
             <pre class="cheat-code" data-language="bash"><code>ip -4 address show wlan0
 nmcli -g IP4.ADDRESS device show wlan0</code></pre>
             <p>Oft vergeben NetworkManager-Hotspots eine Adresse im Bereich <code>10.42.0.x</code>, beispielsweise
                 <code>10.42.0.1</code>. <strong>Verlass dich nicht darauf:</strong> Nimm die tatsächlich angezeigte
-                Adresse. Im Handy-Browser rufst du <code>http://DIESE-IP:8000</code> auf.</p>
+                Adresse. Im Handy-Browser rufst du <code>http://DIESE-IP:8000</code> auf.
+            </p>
             <h3>Hotspot nach jedem Einschalten automatisch starten</h3>
             <pre class="cheat-code" data-language="bash"><code>nmcli connection show
 sudo nmcli connection modify Hotspot connection.autoconnect yes connection.autoconnect-priority 100</code></pre>
@@ -1382,18 +1389,28 @@ sudo nmcli connection up &#x27;MEIN-HEIMWLAN&#x27; </code></pre>
                 soll. Achte auf mobile Daten und automatische Netzwechsel, falls der Browser den Pi nicht erreicht.</p>
             <p class="guide-check"><strong>✓ Lernkontrolle:</strong> Du verbindest das Handy direkt mit
                 <code>SailSense-Local</code> und öffnest das Dashboard über die tatsächliche Hotspot-IP, ganz ohne
-                Router.</p>
+                Router.
+            </p>
         </section>
-<section class="card guide-section" id="systemd"><h2>23. Automatisch beim Einschalten starten: systemd</h2>
-<p>Ein Webserver, den du nach jedem Boot erst über SSH starten musst, ist noch kein eigenständiges Messgerät. <strong>systemd</strong> startet Programme im Hintergrund, protokolliert ihren Zustand und kann sie nach einem Absturz neu starten. Du hast ein ähnliches Prinzip bei anderen Raspberry-Projekten bereits im Einsatz.</p>
-<h3>Schritt 1: Den bisherigen Testprozess beenden</h3>
-<p>Falls <code>server.py</code> noch in einem Terminal läuft: <code>Ctrl+C</code> drücken. Sonst kann der Dienst später Port 8000 nicht belegen.</p>
-<h3>Schritt 2: Service-Datei kopieren und anpassen</h3>
-<pre class="cheat-code" data-language="bash"><code>sudo cp ~/pi-web/pi-web.service.example /etc/systemd/system/pi-web.service
+        <section class="card guide-section" id="systemd">
+            <h2>23. Automatisch beim Einschalten starten: systemd</h2>
+            <p>Ein Webserver, den du nach jedem Boot erst über SSH starten musst, ist noch kein eigenständiges
+                Messgerät. <strong>systemd</strong> startet Programme im Hintergrund, protokolliert ihren Zustand und
+                kann sie nach einem Absturz neu starten. Du hast ein ähnliches Prinzip bei anderen Raspberry-Projekten
+                bereits im Einsatz.</p>
+            <h3>Schritt 1: Den bisherigen Testprozess beenden</h3>
+            <p>Falls <code>server.py</code> noch in einem Terminal läuft: <code>Ctrl+C</code> drücken. Sonst kann der
+                Dienst später Port 8000 nicht belegen.</p>
+            <h3>Schritt 2: Service-Datei kopieren und anpassen</h3>
+            <pre class="cheat-code" data-language="bash"><code>sudo cp ~/pi-web/pi-web.service.example /etc/systemd/system/pi-web.service
 sudo nano /etc/systemd/system/pi-web.service</code></pre>
-<p>In dieser Datei musst du <strong>jede</strong> Stelle <code>DEIN_BENUTZER</code> durch deinen tatsächlichen Linux-Namen ersetzen. Für einen Benutzer <code>julian</code> würde <code>WorkingDirectory=/home/julian/pi-web</code> das richtige Verzeichnis bezeichnen. Die Zeile <code>EnvironmentFile=...</code> liest deine lokale <code>.env</code> mit der Steuer-PIN ein.</p>
-<details class="news-details guide-code-details"><summary>Vollständige Datei anzeigen: <code>pi-web.service.example</code></summary>
-<pre class="cheat-code" data-language="example"><code>[Unit]
+            <p>In dieser Datei musst du <strong>jede</strong> Stelle <code>DEIN_BENUTZER</code> durch deinen
+                tatsächlichen Linux-Namen ersetzen. Für einen Benutzer <code>julian</code> würde
+                <code>WorkingDirectory=/home/julian/pi-web</code> das richtige Verzeichnis bezeichnen. Die Zeile
+                <code>EnvironmentFile=...</code> liest deine lokale <code>.env</code> mit der Steuer-PIN ein.</p>
+            <details class="news-details guide-code-details">
+                <summary>Vollständige Datei anzeigen: <code>pi-web.service.example</code></summary>
+                <pre class="cheat-code" data-language="example"><code>[Unit]
 Description=Lokaler Pi-Webserver fuer Sensor- und Mesh-Dashboard
 After=network.target
 
@@ -1408,28 +1425,38 @@ RestartSec=5
 
 [Install]
 WantedBy=multi-user.target</code></pre>
-</details>
-<h3>Schritt 3: Dienst bekannt machen und aktivieren</h3>
-<pre class="cheat-code" data-language="bash"><code>sudo systemctl daemon-reload
+            </details>
+            <h3>Schritt 3: Dienst bekannt machen und aktivieren</h3>
+            <pre class="cheat-code" data-language="bash"><code>sudo systemctl daemon-reload
 sudo systemctl enable --now pi-web
 sudo systemctl status pi-web</code></pre>
-<p>Wenn du <code>active (running)</code> siehst, läuft dein Webserver. Teste das Dashboard am Handy. Um die Logausgabe live zu verfolgen:</p>
-<pre class="cheat-code" data-language="bash"><code>sudo journalctl -u pi-web -f</code></pre>
-<p>Mit <code>Ctrl+C</code> verlässt du die Logansicht, <strong>nicht</strong> den Webserver. Nützliche Befehle danach:</p>
-<pre class="cheat-code" data-language="bash"><code>sudo systemctl restart pi-web   # nach Codeaenderungen
+            <p>Wenn du <code>active (running)</code> siehst, läuft dein Webserver. Teste das Dashboard am Handy. Um die
+                Logausgabe live zu verfolgen:</p>
+            <pre class="cheat-code" data-language="bash"><code>sudo journalctl -u pi-web -f</code></pre>
+            <p>Mit <code>Ctrl+C</code> verlässt du die Logansicht, <strong>nicht</strong> den Webserver. Nützliche
+                Befehle danach:</p>
+            <pre class="cheat-code" data-language="bash"><code>sudo systemctl restart pi-web   # nach Codeaenderungen
 sudo systemctl stop pi-web      # voruebergehend stoppen
 sudo systemctl start pi-web     # wieder starten
 sudo systemctl disable --now pi-web  # Autostart deaktivieren</code></pre>
-<p>Der Dienst startet auch ohne angemeldeten SSH-Benutzer. Die Umgebung wird aus <code>.env</code> gelesen, daher ist ein vorheriges manuelles <code>source</code> beim Boot nicht nötig.</p>
-</section>
-<section class="card guide-section" id="mesh-systemd"><h2>24. Optional: Auch die Meshtastic-Bridge automatisch starten</h2>
-<p>Wenn die manuelle USB-Bridge nachweislich funktioniert, kannst du dafür einen <strong>zweiten</strong> Dienst aktivieren. Der Webserver liest dann nur noch die SQLite-Datei, während die Bridge den Serial-Port besitzt. Beides darf parallel laufen, weil die Komponenten verschiedene Aufgaben haben.</p>
-<pre class="cheat-code" data-language="bash"><code>sudo cp ~/pi-web/pi-mesh.service.example /etc/systemd/system/pi-mesh.service
+            <p>Der Dienst startet auch ohne angemeldeten SSH-Benutzer. Die Umgebung wird aus <code>.env</code> gelesen,
+                daher ist ein vorheriges manuelles <code>source</code> beim Boot nicht nötig.</p>
+        </section>
+        <section class="card guide-section" id="mesh-systemd">
+            <h2>24. Optional: Auch die Meshtastic-Bridge automatisch starten</h2>
+            <p>Wenn die manuelle USB-Bridge nachweislich funktioniert, kannst du dafür einen <strong>zweiten</strong>
+                Dienst aktivieren. Der Webserver liest dann nur noch die SQLite-Datei, während die Bridge den
+                Serial-Port besitzt. Beides darf parallel laufen, weil die Komponenten verschiedene Aufgaben haben.</p>
+            <pre class="cheat-code" data-language="bash"><code>sudo cp ~/pi-web/pi-mesh.service.example /etc/systemd/system/pi-mesh.service
 sudo nano /etc/systemd/system/pi-mesh.service</code></pre>
-<p>Ersetze den Benutzernamen und überprüfe die Gerätedatei im <code>ExecStart</code>. Wenn dein Node etwa <code>/dev/ttyUSB0</code> statt <code>/dev/ttyACM0</code> verwendet, muss die Zeile geändert werden. Häufig ist ein stabiler Gerätename über <code>/dev/serial/by-id/</code> besser als eine wechselnde Nummer.</p>
-<pre class="cheat-code" data-language="bash"><code>ls -l /dev/serial/by-id/ 2&gt;/dev/null</code></pre>
-<details class="news-details guide-code-details"><summary>Vollständige Datei anzeigen: <code>pi-mesh.service.example</code></summary>
-<pre class="cheat-code" data-language="example"><code>[Unit]
+            <p>Ersetze den Benutzernamen und überprüfe die Gerätedatei im <code>ExecStart</code>. Wenn dein Node etwa
+                <code>/dev/ttyUSB0</code> statt <code>/dev/ttyACM0</code> verwendet, muss die Zeile geändert werden.
+                Häufig ist ein stabiler Gerätename über <code>/dev/serial/by-id/</code> besser als eine wechselnde
+                Nummer.</p>
+            <pre class="cheat-code" data-language="bash"><code>ls -l /dev/serial/by-id/ 2&gt;/dev/null</code></pre>
+            <details class="news-details guide-code-details">
+                <summary>Vollständige Datei anzeigen: <code>pi-mesh.service.example</code></summary>
+                <pre class="cheat-code" data-language="example"><code>[Unit]
 Description=Meshtastic USB-Empfang zu lokalem SQLite-Archiv
 After=network.target
 
@@ -1444,61 +1471,247 @@ RestartSec=10
 
 [Install]
 WantedBy=multi-user.target</code></pre>
-</details>
-<pre class="cheat-code" data-language="bash"><code>sudo systemctl daemon-reload
+            </details>
+            <pre class="cheat-code" data-language="bash"><code>sudo systemctl daemon-reload
 sudo systemctl enable --now pi-mesh
 sudo systemctl status pi-mesh
 sudo journalctl -u pi-mesh -f</code></pre>
-<p>Wenn der Node später nicht mehr angeschlossen ist oder eine andere Portkennung erhält, wird die Bridge fehlschlagen und systemd neu starten. Das Nachrichtenarchiv bleibt bestehen; ohne Funkempfang kommen schlicht keine neuen Einträge hinzu.</p>
-</section>
-<section class="card guide-section" id="sicherheit"><h2>25. Sicherheit: Für ein Bastelprojekt unkompliziert, aber nicht fahrlässig</h2>
-<p>Ein Webserver mit Steuerbefehlen ist mehr als eine hübsche Anzeige. Er kann – nach echter SailSense-Anbindung – Hardwarezustände verändern. Deshalb gelten schon beim ersten Aufbau einige simple Regeln.</p>
-<ul><li><strong>Keine Portfreigabe am Router:</strong> Leite Port 8000 nicht ins öffentliche Internet weiter. Das Beispiel ist ausschließlich für ein vertrauenswürdiges lokales Netzwerk gedacht.</li><li><strong>WLAN schützen:</strong> Eigenen Hotspot nur mit sicherem WPA2-/WPA3-Passwort betreiben.</li><li><strong>Steuer-PIN:</strong> Das Beispiel erlaubt keine POST-Aktion ohne gesetztes <code>WEB_CONTROL_PIN</code>. Erstelle eine ausreichend lange, eigene PIN bzw. Passphrase.</li><li><strong>HTTP ist nicht verschlüsselt:</strong> Die PIN wird bei diesem Einsteigeraufbau <em>nicht</em> über TLS geschützt. Für fremde Netze, größere Reichweite und produktive Steuerung brauchst du ein höheres Sicherheitsniveau – etwa HTTPS und richtige Benutzer-/Geräteauthentifizierung.</li><li><strong>Nur erlaubte Befehle:</strong> Der Webserver darf bekannte Aktionen wie Start/Stop annehmen, aber keine beliebigen Shell-Befehle aus einem Browser ausführen.</li><li><strong>Keine Root-Rechte:</strong> Webserver und Meshtastic-Prozess laufen als normaler Linux-Benutzer, nicht als <code>root</code>.</li><li><strong>Geheimnisse nicht veröffentlichen:</strong> <code>.env</code>, WLAN-Passwörter, private Meshtastic-Schlüssel oder Chatarchive gehören nicht ins öffentliche GitHub-Repository.</li><li><strong>Nachrichten sind fremde Eingaben:</strong> Mit <code>textContent</code> im JavaScript wird eingehender Text nicht als HTML ausgeführt; <code>innerHTML</code> mit ungeprüften Funkinhalten wäre unnötig riskant.</li><li><strong>Offline-Fallback:</strong> Ein Gerät soll bei verlorener WLAN-Verbindung einen definierten sicheren Zustand behalten.</li></ul>
-<p class="hint guide-note">Der mitgelieferte Server ist eine <strong>Lern- und lokale Prototypenlösung</strong>, kein gehärtetes Produkt für öffentliche Netze, medizinische Anwendungen oder sicherheitskritische Steuerungen. WLAN-Zugang und PIN sind nützlich, ersetzen jedoch kein professionelles Sicherheitskonzept.</p>
-</section>
-<section class="card guide-section" id="fehler"><h2>26. Typische Fehler – und wie du sie systematisch findest</h2>
-<div class="guide-table-wrap"><table class="guide-table"><thead><tr><th>Symptom</th><th>Wahrscheinliche Ursache</th><th>Prüfen / Lösung</th></tr></thead><tbody>
-<tr><td>Handy lädt die Seite nicht</td><td>Falsche IP, falscher Port oder anderes WLAN</td><td><code>hostname -I</code>, WLAN vergleichen, <code>http://IP:8000</code> verwenden</td></tr>
-<tr><td><code>Connection refused</code></td><td>Server nicht gestartet</td><td><code>systemctl status pi-web</code>, <code>journalctl</code></td></tr>
-<tr><td><code>.local</code> funktioniert nicht</td><td>mDNS nicht verfügbar</td><td>Direkt mit numerischer IP-Adresse öffnen</td></tr>
-<tr><td><code>Address already in use</code></td><td>Port 8000 bereits belegt</td><td>Alten Testserver stoppen oder <code>sudo ss -ltnp | grep 8000</code></td></tr>
-<tr><td>Dashboard lädt, aber keine Messwerte</td><td>API-Fehler oder kein Sensor</td><td><code>curl localhost:8000/api/status</code> testen; I²C prüfen</td></tr>
-<tr><td>Wetterfelder „—“</td><td>BME280 fehlt, falsche Adresse oder Treiber</td><td><code>i2cdetect -y 1</code>, Logs, Bibliothek im venv</td></tr>
-<tr><td><code>ModuleNotFoundError</code></td><td>Paket nicht in dieser Python-Umgebung</td><td><code>.venv/bin/pip install ...</code> statt globalem <code>pip</code></td></tr>
-<tr><td><code>externally-managed-environment</code></td><td>System-Python schützt globale Installation</td><td>Im Projekt ein <code>venv</code> verwenden</td></tr>
-<tr><td>Buttons reagieren nicht</td><td>PIN fehlt oder falsch; Server blockiert Steuerung</td><td><code>.env</code> prüfen, Dienst neu starten</td></tr>
-<tr><td>Meshtastic hat keine Nachrichten</td><td>Node/Port/Channel falsch oder niemand sendet</td><td><code>ls /dev/tty*</code>, Bridge-Logs, tatsächlichen Empfang testen</td></tr>
-<tr><td><code>Permission denied</code> auf Serial</td><td>Benutzer nicht in <code>dialout</code></td><td>Gruppe ergänzen und neu anmelden</td></tr>
-<tr><td>Hotspot nicht sichtbar</td><td>WLAN-Land, Adapter oder AP-Modus</td><td><code>nmcli device</code>, WLAN-Land, Adaptertauglichkeit prüfen</td></tr>
-<tr><td>Nach Hotspot-Befehl ist SSH weg</td><td>wlan0 wurde vom Heimnetz auf Hotspot umgeschaltet</td><td>Mit Hotspot verbinden oder lokale Konsole / Ethernet verwenden</td></tr>
-<tr><td>Seite lädt nach Codeänderung alt</td><td>Prozess nicht neu gestartet / Browsercache</td><td><code>sudo systemctl restart pi-web</code>, Seite neu laden</td></tr>
-<tr><td>Nachrichten tauchen doppelt auf</td><td>Mesh-Wiederholungen oder fehlende Paket-ID</td><td>Packet-IDs / Sender auswerten und Duplikate gezielt prüfen</td></tr>
-</tbody></table></div>
-<p>Arbeite beim Debugging möglichst <strong>von unten nach oben</strong>: 1. Stromversorgung, 2. Netzwerk, 3. Serverprozess, 4. API-Antwort, 5. JavaScript, 6. Sensor/Serial, 7. Datenformat. Wer gleichzeitig an allen Ebenen schraubt, erzeugt seine Fehler schneller, als er sie finden kann.</p>
-</section>
-<section class="card guide-section" id="gehaeuse"><h2>27. Funk, Gehäuse und Energie: Gerade bei SailSense entscheidend</h2>
-<p>Ein fensterloses, besser abgedichtetes Gehäuse ist attraktiv. Aber „abgeschirmt“ hat zwei Bedeutungen: <strong>gegen Wasser, Staub und mechanische Belastung geschützt</strong> ist wünschenswert; <strong>gegen Funkwellen abgeschirmt</strong> ist bei einem WLAN-gesteuerten Gerät fatal. Ein Metallgehäuse kann den Raspberry Pi praktisch vom Smartphone isolieren.</p>
-<ul><li><strong>WLAN-Antenne:</strong> Eine geeignete Antennenposition oder – je nach Pi-Hardware – externes WLAN mit fachgerechter, wasserdichter Durchführung einplanen. Nicht jeden Pi kann man ohne Modifikation mit externer Antenne ausstatten.</li><li><strong>LoRa-Antenne:</strong> Meshtastic braucht eine eigene, richtig abgestimmte Antenne. WLAN (2,4/5 GHz) und LoRa (in der EU typischerweise 868 MHz) sind getrennte Funkstrecken.</li><li><strong>Wärme:</strong> CPU, Spannungsregler und Akku erwärmen ein geschlossenes Gehäuse. Den BME280 nicht in der heißen Elektronikkammer als „Außentemperaturfühler“ missbrauchen.</li><li><strong>Kondenswasser und Salznebel:</strong> Spritzwasserschutz, Dichtungen, Druckausgleich und geeignete Materialien sind im Bordalltag wichtiger als ein rein optisch dichter 3D-Druck.</li><li><strong>Versorgung:</strong> Pi-Spitzenlasten, USB-Geräte und Hotspot-Betrieb beim Dimensionieren des Akkus berücksichtigen. Ein Pi Zero 2 W ist kein schlafoptimierter ESP32; für Solar-/Batteriestationen ist eine Strombilanz unabdingbar.</li><li><strong>Startverhalten:</strong> Nach Spannungsunterbrechung muss der Pi sauber booten, Sensoren wieder verbinden und seine Weboberfläche auch ohne Handy weiterführen.</li><li><strong>Speicher:</strong> SD-Karten sind kein unendlicher Datenschreiber. Logs begrenzen, Schreibintervalle sinnvoll wählen, Daten exportieren und Backups vorsehen.</li></ul>
-<p>Für ein Gerät, das wirklich dauerhaft im Freien oder auf See betrieben werden soll, lohnt es sich, <em>Stromversorgung, Funkkonzept, Gehäuse und Software</em> gemeinsam zu entwerfen statt als voneinander unabhängige Nachrüstungen.</p>
-</section>
-<section class="card guide-section" id="ausbau"><h2>28. Sinnvolle nächste Ausbaustufen – in der richtigen Reihenfolge</h2>
-<div class="guide-table-wrap"><table class="guide-table"><thead><tr><th>Stufe</th><th>Funktion</th><th>Nutzen</th></tr></thead><tbody>
-<tr><td>1 · Basis</td><td>Lokale Statusanzeige + Demo-Buttons</td><td>HTTP, WLAN und Frontend verstehen</td></tr>
-<tr><td>2 · Sensorik</td><td>BME280 und echte Messwerte</td><td>End-to-End-Datenpfad lernen</td></tr>
-<tr><td>3 · Persistenz</td><td>SQLite-Zeitreihen und CSV-Export</td><td>Messdaten verlieren ihren Wegwerfcharakter</td></tr>
-<tr><td>4 · Funk</td><td>Meshtastic-Nachrichten archivieren</td><td>Aus LoRa-Empfang wird eine belastbare Chronik</td></tr>
-<tr><td>5 · Autark</td><td>Eigenes WLAN + <code>systemd</code></td><td>Betrieb ohne Router und SSH-Handarbeit</td></tr>
-<tr><td>6 · SailSense</td><td>Bestehende Eingaben und Displayseiten als Web-UI</td><td>Weniger Gehäusedurchbrüche, bessere Bedienbarkeit</td></tr>
-<tr><td>7 · Qualität</td><td>Fehlerzustände, Offline-Banner, Zeitstempel, Watchdog</td><td>Ein Messgerät statt einer hübschen Demo</td></tr>
-<tr><td>8 · Analyse</td><td>Verlaufsgrafiken, Filter, GPX-/CSV-Export</td><td>Besserer Nutzen der gesammelten Daten</td></tr>
-</tbody></table></div>
-<h3>Kleine Übungsaufgaben, die dir wirklich etwas beibringen</h3>
-<ol><li>Ergänze auf der HTML-Seite eine neue Karte <em>„Pi-System“</em>, die eine weitere API-Eigenschaft zeigt.</li><li>Ändere das Aktualisierungsintervall im JavaScript von 2000 auf 5000 Millisekunden und beobachte den Unterschied.</li><li>Füge einen neuen, zunächst nur simulierten Schaltzustand hinzu, den Python ausdrücklich erlaubt.</li><li>Zeige neben einem Messwert das Zeitalter der letzten gültigen Messung an.</li><li>Speichere BME280-Messreihen einmal pro Minute in einer zweiten SQLite-Tabelle.</li><li>Erweitere das Frontend um ein einfaches <code>&lt;canvas&gt;</code>-Diagramm ohne externe Bibliothek.</li><li>Sorge dafür, dass ein fehlender Sensor das Webinterface nicht zum Absturz bringt.</li></ol>
-</section>
-<section class="card guide-section" id="quellcode"><h2>29. Zum Nachbauen: Die vollständigen Frontend-Dateien</h2>
-<p>Die folgenden Dateien zeigen, wie das Beispielprojekt aufgebaut ist. Du kannst sie direkt in die angegebenen Ordner kopieren. Die Struktur bleibt vollständig statisch – alle dynamischen Informationen stammen aus <code>/api/status</code>.</p>
-<details class="news-details guide-code-details"><summary>Vollständige Datei anzeigen: <code>web/index.html</code></summary>
-<pre class="cheat-code" data-language="html"><code>&lt;!doctype html&gt;
+            <p>Wenn der Node später nicht mehr angeschlossen ist oder eine andere Portkennung erhält, wird die Bridge
+                fehlschlagen und systemd neu starten. Das Nachrichtenarchiv bleibt bestehen; ohne Funkempfang kommen
+                schlicht keine neuen Einträge hinzu.</p>
+        </section>
+        <section class="card guide-section" id="sicherheit">
+            <h2>25. Sicherheit: Für ein Bastelprojekt unkompliziert, aber nicht fahrlässig</h2>
+            <p>Ein Webserver mit Steuerbefehlen ist mehr als eine hübsche Anzeige. Er kann – nach echter
+                SailSense-Anbindung – Hardwarezustände verändern. Deshalb gelten schon beim ersten Aufbau einige simple
+                Regeln.</p>
+            <ul>
+                <li><strong>Keine Portfreigabe am Router:</strong> Leite Port 8000 nicht ins öffentliche Internet
+                    weiter. Das Beispiel ist ausschließlich für ein vertrauenswürdiges lokales Netzwerk gedacht.</li>
+                <li><strong>WLAN schützen:</strong> Eigenen Hotspot nur mit sicherem WPA2-/WPA3-Passwort betreiben.</li>
+                <li><strong>Steuer-PIN:</strong> Das Beispiel erlaubt keine POST-Aktion ohne gesetztes
+                    <code>WEB_CONTROL_PIN</code>. Erstelle eine ausreichend lange, eigene PIN bzw. Passphrase.</li>
+                <li><strong>HTTP ist nicht verschlüsselt:</strong> Die PIN wird bei diesem Einsteigeraufbau
+                    <em>nicht</em> über TLS geschützt. Für fremde Netze, größere Reichweite und produktive Steuerung
+                    brauchst du ein höheres Sicherheitsniveau – etwa HTTPS und richtige
+                    Benutzer-/Geräteauthentifizierung.</li>
+                <li><strong>Nur erlaubte Befehle:</strong> Der Webserver darf bekannte Aktionen wie Start/Stop annehmen,
+                    aber keine beliebigen Shell-Befehle aus einem Browser ausführen.</li>
+                <li><strong>Keine Root-Rechte:</strong> Webserver und Meshtastic-Prozess laufen als normaler
+                    Linux-Benutzer, nicht als <code>root</code>.</li>
+                <li><strong>Geheimnisse nicht veröffentlichen:</strong> <code>.env</code>, WLAN-Passwörter, private
+                    Meshtastic-Schlüssel oder Chatarchive gehören nicht ins öffentliche GitHub-Repository.</li>
+                <li><strong>Nachrichten sind fremde Eingaben:</strong> Mit <code>textContent</code> im JavaScript wird
+                    eingehender Text nicht als HTML ausgeführt; <code>innerHTML</code> mit ungeprüften Funkinhalten wäre
+                    unnötig riskant.</li>
+                <li><strong>Offline-Fallback:</strong> Ein Gerät soll bei verlorener WLAN-Verbindung einen definierten
+                    sicheren Zustand behalten.</li>
+            </ul>
+            <p class="hint guide-note">Der mitgelieferte Server ist eine <strong>Lern- und lokale
+                    Prototypenlösung</strong>, kein gehärtetes Produkt für öffentliche Netze, medizinische Anwendungen
+                oder sicherheitskritische Steuerungen. WLAN-Zugang und PIN sind nützlich, ersetzen jedoch kein
+                professionelles Sicherheitskonzept.</p>
+        </section>
+        <section class="card guide-section" id="fehler">
+            <h2>26. Typische Fehler – und wie du sie systematisch findest</h2>
+            <div class="guide-table-wrap">
+                <table class="guide-table">
+                    <thead>
+                        <tr>
+                            <th>Symptom</th>
+                            <th>Wahrscheinliche Ursache</th>
+                            <th>Prüfen / Lösung</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Handy lädt die Seite nicht</td>
+                            <td>Falsche IP, falscher Port oder anderes WLAN</td>
+                            <td><code>hostname -I</code>, WLAN vergleichen, <code>http://IP:8000</code> verwenden</td>
+                        </tr>
+                        <tr>
+                            <td><code>Connection refused</code></td>
+                            <td>Server nicht gestartet</td>
+                            <td><code>systemctl status pi-web</code>, <code>journalctl</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>.local</code> funktioniert nicht</td>
+                            <td>mDNS nicht verfügbar</td>
+                            <td>Direkt mit numerischer IP-Adresse öffnen</td>
+                        </tr>
+                        <tr>
+                            <td><code>Address already in use</code></td>
+                            <td>Port 8000 bereits belegt</td>
+                            <td>Alten Testserver stoppen oder <code>sudo ss -ltnp | grep 8000</code></td>
+                        </tr>
+                        <tr>
+                            <td>Dashboard lädt, aber keine Messwerte</td>
+                            <td>API-Fehler oder kein Sensor</td>
+                            <td><code>curl localhost:8000/api/status</code> testen; I²C prüfen</td>
+                        </tr>
+                        <tr>
+                            <td>Wetterfelder „—“</td>
+                            <td>BME280 fehlt, falsche Adresse oder Treiber</td>
+                            <td><code>i2cdetect -y 1</code>, Logs, Bibliothek im venv</td>
+                        </tr>
+                        <tr>
+                            <td><code>ModuleNotFoundError</code></td>
+                            <td>Paket nicht in dieser Python-Umgebung</td>
+                            <td><code>.venv/bin/pip install ...</code> statt globalem <code>pip</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>externally-managed-environment</code></td>
+                            <td>System-Python schützt globale Installation</td>
+                            <td>Im Projekt ein <code>venv</code> verwenden</td>
+                        </tr>
+                        <tr>
+                            <td>Buttons reagieren nicht</td>
+                            <td>PIN fehlt oder falsch; Server blockiert Steuerung</td>
+                            <td><code>.env</code> prüfen, Dienst neu starten</td>
+                        </tr>
+                        <tr>
+                            <td>Meshtastic hat keine Nachrichten</td>
+                            <td>Node/Port/Channel falsch oder niemand sendet</td>
+                            <td><code>ls /dev/tty*</code>, Bridge-Logs, tatsächlichen Empfang testen</td>
+                        </tr>
+                        <tr>
+                            <td><code>Permission denied</code> auf Serial</td>
+                            <td>Benutzer nicht in <code>dialout</code></td>
+                            <td>Gruppe ergänzen und neu anmelden</td>
+                        </tr>
+                        <tr>
+                            <td>Hotspot nicht sichtbar</td>
+                            <td>WLAN-Land, Adapter oder AP-Modus</td>
+                            <td><code>nmcli device</code>, WLAN-Land, Adaptertauglichkeit prüfen</td>
+                        </tr>
+                        <tr>
+                            <td>Nach Hotspot-Befehl ist SSH weg</td>
+                            <td>wlan0 wurde vom Heimnetz auf Hotspot umgeschaltet</td>
+                            <td>Mit Hotspot verbinden oder lokale Konsole / Ethernet verwenden</td>
+                        </tr>
+                        <tr>
+                            <td>Seite lädt nach Codeänderung alt</td>
+                            <td>Prozess nicht neu gestartet / Browsercache</td>
+                            <td><code>sudo systemctl restart pi-web</code>, Seite neu laden</td>
+                        </tr>
+                        <tr>
+                            <td>Nachrichten tauchen doppelt auf</td>
+                            <td>Mesh-Wiederholungen oder fehlende Paket-ID</td>
+                            <td>Packet-IDs / Sender auswerten und Duplikate gezielt prüfen</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p>Arbeite beim Debugging möglichst <strong>von unten nach oben</strong>: 1. Stromversorgung, 2. Netzwerk,
+                3. Serverprozess, 4. API-Antwort, 5. JavaScript, 6. Sensor/Serial, 7. Datenformat. Wer gleichzeitig an
+                allen Ebenen schraubt, erzeugt seine Fehler schneller, als er sie finden kann.</p>
+        </section>
+        <section class="card guide-section" id="gehaeuse">
+            <h2>27. Funk, Gehäuse und Energie: Gerade bei SailSense entscheidend</h2>
+            <p>Ein fensterloses, besser abgedichtetes Gehäuse ist attraktiv. Aber „abgeschirmt“ hat zwei Bedeutungen:
+                <strong>gegen Wasser, Staub und mechanische Belastung geschützt</strong> ist wünschenswert;
+                <strong>gegen Funkwellen abgeschirmt</strong> ist bei einem WLAN-gesteuerten Gerät fatal. Ein
+                Metallgehäuse kann den Raspberry Pi praktisch vom Smartphone isolieren.</p>
+            <ul>
+                <li><strong>WLAN-Antenne:</strong> Eine geeignete Antennenposition oder – je nach Pi-Hardware – externes
+                    WLAN mit fachgerechter, wasserdichter Durchführung einplanen. Nicht jeden Pi kann man ohne
+                    Modifikation mit externer Antenne ausstatten.</li>
+                <li><strong>LoRa-Antenne:</strong> Meshtastic braucht eine eigene, richtig abgestimmte Antenne. WLAN
+                    (2,4/5 GHz) und LoRa (in der EU typischerweise 868 MHz) sind getrennte Funkstrecken.</li>
+                <li><strong>Wärme:</strong> CPU, Spannungsregler und Akku erwärmen ein geschlossenes Gehäuse. Den BME280
+                    nicht in der heißen Elektronikkammer als „Außentemperaturfühler“ missbrauchen.</li>
+                <li><strong>Kondenswasser und Salznebel:</strong> Spritzwasserschutz, Dichtungen, Druckausgleich und
+                    geeignete Materialien sind im Bordalltag wichtiger als ein rein optisch dichter 3D-Druck.</li>
+                <li><strong>Versorgung:</strong> Pi-Spitzenlasten, USB-Geräte und Hotspot-Betrieb beim Dimensionieren
+                    des Akkus berücksichtigen. Ein Pi Zero 2 W ist kein schlafoptimierter ESP32; für
+                    Solar-/Batteriestationen ist eine Strombilanz unabdingbar.</li>
+                <li><strong>Startverhalten:</strong> Nach Spannungsunterbrechung muss der Pi sauber booten, Sensoren
+                    wieder verbinden und seine Weboberfläche auch ohne Handy weiterführen.</li>
+                <li><strong>Speicher:</strong> SD-Karten sind kein unendlicher Datenschreiber. Logs begrenzen,
+                    Schreibintervalle sinnvoll wählen, Daten exportieren und Backups vorsehen.</li>
+            </ul>
+            <p>Für ein Gerät, das wirklich dauerhaft im Freien oder auf See betrieben werden soll, lohnt es sich,
+                <em>Stromversorgung, Funkkonzept, Gehäuse und Software</em> gemeinsam zu entwerfen statt als voneinander
+                unabhängige Nachrüstungen.</p>
+        </section>
+        <section class="card guide-section" id="ausbau">
+            <h2>28. Sinnvolle nächste Ausbaustufen – in der richtigen Reihenfolge</h2>
+            <div class="guide-table-wrap">
+                <table class="guide-table">
+                    <thead>
+                        <tr>
+                            <th>Stufe</th>
+                            <th>Funktion</th>
+                            <th>Nutzen</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1 · Basis</td>
+                            <td>Lokale Statusanzeige + Demo-Buttons</td>
+                            <td>HTTP, WLAN und Frontend verstehen</td>
+                        </tr>
+                        <tr>
+                            <td>2 · Sensorik</td>
+                            <td>BME280 und echte Messwerte</td>
+                            <td>End-to-End-Datenpfad lernen</td>
+                        </tr>
+                        <tr>
+                            <td>3 · Persistenz</td>
+                            <td>SQLite-Zeitreihen und CSV-Export</td>
+                            <td>Messdaten verlieren ihren Wegwerfcharakter</td>
+                        </tr>
+                        <tr>
+                            <td>4 · Funk</td>
+                            <td>Meshtastic-Nachrichten archivieren</td>
+                            <td>Aus LoRa-Empfang wird eine belastbare Chronik</td>
+                        </tr>
+                        <tr>
+                            <td>5 · Autark</td>
+                            <td>Eigenes WLAN + <code>systemd</code></td>
+                            <td>Betrieb ohne Router und SSH-Handarbeit</td>
+                        </tr>
+                        <tr>
+                            <td>6 · SailSense</td>
+                            <td>Bestehende Eingaben und Displayseiten als Web-UI</td>
+                            <td>Weniger Gehäusedurchbrüche, bessere Bedienbarkeit</td>
+                        </tr>
+                        <tr>
+                            <td>7 · Qualität</td>
+                            <td>Fehlerzustände, Offline-Banner, Zeitstempel, Watchdog</td>
+                            <td>Ein Messgerät statt einer hübschen Demo</td>
+                        </tr>
+                        <tr>
+                            <td>8 · Analyse</td>
+                            <td>Verlaufsgrafiken, Filter, GPX-/CSV-Export</td>
+                            <td>Besserer Nutzen der gesammelten Daten</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <h3>Kleine Übungsaufgaben, die dir wirklich etwas beibringen</h3>
+            <ol>
+                <li>Ergänze auf der HTML-Seite eine neue Karte <em>„Pi-System“</em>, die eine weitere API-Eigenschaft
+                    zeigt.</li>
+                <li>Ändere das Aktualisierungsintervall im JavaScript von 2000 auf 5000 Millisekunden und beobachte den
+                    Unterschied.</li>
+                <li>Füge einen neuen, zunächst nur simulierten Schaltzustand hinzu, den Python ausdrücklich erlaubt.
+                </li>
+                <li>Zeige neben einem Messwert das Zeitalter der letzten gültigen Messung an.</li>
+                <li>Speichere BME280-Messreihen einmal pro Minute in einer zweiten SQLite-Tabelle.</li>
+                <li>Erweitere das Frontend um ein einfaches <code>&lt;canvas&gt;</code>-Diagramm ohne externe
+                    Bibliothek.</li>
+                <li>Sorge dafür, dass ein fehlender Sensor das Webinterface nicht zum Absturz bringt.</li>
+            </ol>
+        </section>
+        <section class="card guide-section" id="quellcode">
+            <h2>29. Zum Nachbauen: Die vollständigen Frontend-Dateien</h2>
+            <p>Die folgenden Dateien zeigen, wie das Beispielprojekt aufgebaut ist. Du kannst sie direkt in die
+                angegebenen Ordner kopieren. Die Struktur bleibt vollständig statisch – alle dynamischen Informationen
+                stammen aus <code>/api/status</code>.</p>
+            <details class="news-details guide-code-details">
+                <summary>Vollständige Datei anzeigen: <code>web/index.html</code></summary>
+                <pre class="cheat-code" data-language="html"><code>&lt;!doctype html&gt;
 &lt;html lang=&quot;de&quot;&gt;
 &lt;head&gt;
   &lt;meta charset=&quot;utf-8&quot;&gt;
@@ -1549,9 +1762,10 @@ sudo journalctl -u pi-mesh -f</code></pre>
   &lt;/main&gt;
 &lt;/body&gt;
 &lt;/html&gt;</code></pre>
-</details>
-<details class="news-details guide-code-details"><summary>Vollständige Datei anzeigen: <code>web/app.js</code></summary>
-<pre class="cheat-code" data-language="js"><code>&#x27;use strict&#x27;;
+            </details>
+            <details class="news-details guide-code-details">
+                <summary>Vollständige Datei anzeigen: <code>web/app.js</code></summary>
+                <pre class="cheat-code" data-language="js"><code>&#x27;use strict&#x27;;
 const $ = (id) =&gt; document.getElementById(id);
 const display = (value, suffix = &#x27;&#x27;) =&gt; value === null || value === undefined ? &#x27;—&#x27; : `${value}${suffix}`;
 
@@ -1617,9 +1831,10 @@ $(&#x27;start&#x27;).addEventListener(&#x27;click&#x27;, () =&gt; action(&#x27;s
 $(&#x27;stop&#x27;).addEventListener(&#x27;click&#x27;, () =&gt; action(&#x27;stop&#x27;));
 refresh();
 setInterval(refresh, 2000);</code></pre>
-</details>
-<details class="news-details guide-code-details"><summary>Vollständige Datei anzeigen: <code>web/style.css</code></summary>
-<pre class="cheat-code" data-language="css"><code>:root { --bg:#f7f7f7; --surface:#fff; --text:#1f2328; --muted:#6b7280; --border:#e5e7eb; --radius:16px; }
+            </details>
+            <details class="news-details guide-code-details">
+                <summary>Vollständige Datei anzeigen: <code>web/style.css</code></summary>
+                <pre class="cheat-code" data-language="css"><code>:root { --bg:#f7f7f7; --surface:#fff; --text:#1f2328; --muted:#6b7280; --border:#e5e7eb; --radius:16px; }
 * {box-sizing:border-box}
 body {margin:0; font:16px/1.6 system-ui,-apple-system,&quot;Segoe UI&quot;,sans-serif; background:var(--bg);color:var(--text)}
 .site-header {background:var(--surface);border-bottom:1px solid var(--border)}
@@ -1642,47 +1857,128 @@ button.secondary {background:#6b7280} button:disabled {opacity:.4;cursor:not-all
 .message-list li {padding:.75rem 0;border-bottom:1px solid var(--border);overflow-wrap:anywhere}
 .message-list p {margin:.25rem 0 0;white-space:pre-wrap}
 #connection {color:var(--muted);font-size:.95rem}</code></pre>
-</details>
-</section>
-<section class="card guide-section" id="begriffsliste"><h2>30. Kleines Glossar für die Werkbank</h2>
-<div class="guide-table-wrap"><table class="guide-table"><thead><tr><th>Begriff</th><th>Bedeutung</th></tr></thead><tbody>
-<tr><td><strong>Access Point (AP)</strong></td><td>Ein Gerät, das ein WLAN-Netz aussendet.</td></tr>
-<tr><td><strong>Backend</strong></td><td>Der Programmteil auf dem Pi: Sensoren, Logik, Dateien, APIs.</td></tr>
-<tr><td><strong>Frontend</strong></td><td>Die sichtbare Webseite im Handy-Browser.</td></tr>
-<tr><td><strong>Endpoint</strong></td><td>Eine eindeutige API-Adresse wie <code>/api/status</code>.</td></tr>
-<tr><td><strong>GPIO</strong></td><td>Elektrische Ein- und Ausgänge des Raspberry Pi.</td></tr>
-<tr><td><strong>I²C</strong></td><td>Zweidraht-Kommunikationsbus für Sensoren und andere Chips.</td></tr>
-<tr><td><strong>LoRa</strong></td><td>Funktechnik für kleine Datenmengen über größere Distanzen.</td></tr>
-<tr><td><strong>mDNS</strong></td><td>Namensauflösung wie <code>sailsense-pi.local</code> im lokalen Netz.</td></tr>
-<tr><td><strong>Polling</strong></td><td>Wiederholtes Abfragen eines Status, z. B. alle zwei Sekunden.</td></tr>
-<tr><td><strong>SSH</strong></td><td>Verschlüsselter Zugriff auf die Textkonsole eines entfernten Computers.</td></tr>
-<tr><td><strong>SQLite</strong></td><td>Dateibasierte relationale Datenbank, ohne eigenständigen Server.</td></tr>
-<tr><td><strong>systemd</strong></td><td>Verwaltet Programme und deren Autostart unter Linux.</td></tr>
-<tr><td><strong>venv</strong></td><td>Isolierte Python-Umgebung für die Bibliotheken eines Projekts.</td></tr>
-</tbody></table></div>
-</section>
-<section class="card guide-section" id="checkliste"><h2>31. Abschlusscheckliste: Wann ist dein System einsatzfähig?</h2>
-<ul class="guide-checklist">
-<li>Pi startet ohne Monitor und Tastatur.</li>
-<li>SSH-Zugang funktioniert, und du kennst die aktuelle IP-Adresse.</li>
-<li>Die lokale Webseite lädt am Handy.</li>
-<li><code>/api/status</code> liefert gültiges JSON.</li>
-<li>Die Anzeige unterscheidet echte Messwerte von fehlenden Daten.</li>
-<li>Buttons lösen nur erlaubte, geprüfte Befehle aus.</li>
-<li>Bei echtem BME280 ist Verdrahtung und I²C-Adresse bestätigt.</li>
-<li>Optional: Meshtastic-USB-Node liefert neue Nachrichten an SQLite.</li>
-<li>Optional: Der Pi-Hotspot funktioniert ohne Internet.</li>
-<li><code>systemd</code> startet die benötigten Dienste selbständig.</li>
-<li>Die Funktion nach Netz- und Stromausfall ist getestet.</li>
-<li>Steuerung ist <strong>nicht</strong> aus dem öffentlichen Internet erreichbar.</li>
-</ul>
-<p><strong>Ergebnis:</strong> Eine normale Webseite wird zur Bedienoberfläche eines realen Elektronikprojekts. Das Handy ist lediglich der Bildschirm und die Fernbedienung; der Raspberry Pi misst, speichert und steuert selbständig. Genau darin liegt der Vorteil eines headless Geräts.</p>
-</section>
-<section class="card guide-section" id="quellen"><h2>32. Offizielle Dokumentation und weiterführende Quellen</h2>
-<ul><li><a href="https://www.raspberrypi.com/documentation/computers/getting-started.html" target="_blank" rel="noopener noreferrer">Raspberry Pi – Getting started / Raspberry Pi Imager</a></li><li><a href="https://www.raspberrypi.com/documentation/computers/remote-access.html" target="_blank" rel="noopener noreferrer">Raspberry Pi – Remote access und SSH</a></li><li><a href="https://www.raspberrypi.com/tutorials/host-a-hotel-wifi-hotspot/" target="_blank" rel="noopener noreferrer">Raspberry Pi – Hotspot mit NetworkManager erstellen</a></li><li><a href="https://www.raspberrypi.com/documentation/configuration/wifi-hotspot.md" target="_blank" rel="noopener noreferrer">Raspberry Pi – WLAN-Konfiguration und Länderkennung</a></li><li><a href="https://docs.python.org/3/library/http.server.html" target="_blank" rel="noopener noreferrer">Python – HTTP-Server aus der Standardbibliothek</a></li><li><a href="https://docs.python.org/3/library/sqlite3.html" target="_blank" rel="noopener noreferrer">Python – SQLite3</a></li><li><a href="https://docs.circuitpython.org/projects/bme280/en/latest/examples.html" target="_blank" rel="noopener noreferrer">Adafruit – BME280 Python-Beispiele</a></li><li><a href="https://python.meshtastic.org/" target="_blank" rel="noopener noreferrer">Meshtastic – Python-Client API und Events</a></li><li><a href="https://meshtastic.org/docs/software/python/cli/" target="_blank" rel="noopener noreferrer">Meshtastic – Python CLI</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch" target="_blank" rel="noopener noreferrer">MDN – Fetch API in JavaScript</a></li></ul>
-<p>Stand der technischen Prüfung: <time datetime="2026-11-05">5. November 2026</time>. Softwareoberflächen, Bibliotheken und Meshtastic-Paketformate können sich verändern; für Geräte, die dauerhaft laufen sollen, aktuelle Dokumentation und eigene Tests einbeziehen.</p>
-</section>
-<p class="hint"><a href="#guide-inhalt">↑ Zum Inhaltsverzeichnis</a></p>
-</main>
-<footer class="site-footer"><p>Raspberry Pi · Webserver &amp; Remote UI | Dokumentation · November 2026</p></footer>
-</body></html>
+            </details>
+        </section>
+        <section class="card guide-section" id="begriffsliste">
+            <h2>30. Kleines Glossar für die Werkbank</h2>
+            <div class="guide-table-wrap">
+                <table class="guide-table">
+                    <thead>
+                        <tr>
+                            <th>Begriff</th>
+                            <th>Bedeutung</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Access Point (AP)</strong></td>
+                            <td>Ein Gerät, das ein WLAN-Netz aussendet.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Backend</strong></td>
+                            <td>Der Programmteil auf dem Pi: Sensoren, Logik, Dateien, APIs.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Frontend</strong></td>
+                            <td>Die sichtbare Webseite im Handy-Browser.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Endpoint</strong></td>
+                            <td>Eine eindeutige API-Adresse wie <code>/api/status</code>.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>GPIO</strong></td>
+                            <td>Elektrische Ein- und Ausgänge des Raspberry Pi.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>I²C</strong></td>
+                            <td>Zweidraht-Kommunikationsbus für Sensoren und andere Chips.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>LoRa</strong></td>
+                            <td>Funktechnik für kleine Datenmengen über größere Distanzen.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>mDNS</strong></td>
+                            <td>Namensauflösung wie <code>sailsense-pi.local</code> im lokalen Netz.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Polling</strong></td>
+                            <td>Wiederholtes Abfragen eines Status, z. B. alle zwei Sekunden.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>SSH</strong></td>
+                            <td>Verschlüsselter Zugriff auf die Textkonsole eines entfernten Computers.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>SQLite</strong></td>
+                            <td>Dateibasierte relationale Datenbank, ohne eigenständigen Server.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>systemd</strong></td>
+                            <td>Verwaltet Programme und deren Autostart unter Linux.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>venv</strong></td>
+                            <td>Isolierte Python-Umgebung für die Bibliotheken eines Projekts.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        <section class="card guide-section" id="checkliste">
+            <h2>31. Abschlusscheckliste: Wann ist dein System einsatzfähig?</h2>
+            <ul class="guide-checklist">
+                <li>Pi startet ohne Monitor und Tastatur.</li>
+                <li>SSH-Zugang funktioniert, und du kennst die aktuelle IP-Adresse.</li>
+                <li>Die lokale Webseite lädt am Handy.</li>
+                <li><code>/api/status</code> liefert gültiges JSON.</li>
+                <li>Die Anzeige unterscheidet echte Messwerte von fehlenden Daten.</li>
+                <li>Buttons lösen nur erlaubte, geprüfte Befehle aus.</li>
+                <li>Bei echtem BME280 ist Verdrahtung und I²C-Adresse bestätigt.</li>
+                <li>Optional: Meshtastic-USB-Node liefert neue Nachrichten an SQLite.</li>
+                <li>Optional: Der Pi-Hotspot funktioniert ohne Internet.</li>
+                <li><code>systemd</code> startet die benötigten Dienste selbständig.</li>
+                <li>Die Funktion nach Netz- und Stromausfall ist getestet.</li>
+                <li>Steuerung ist <strong>nicht</strong> aus dem öffentlichen Internet erreichbar.</li>
+            </ul>
+            <p><strong>Ergebnis:</strong> Eine normale Webseite wird zur Bedienoberfläche eines realen
+                Elektronikprojekts. Das Handy ist lediglich der Bildschirm und die Fernbedienung; der Raspberry Pi
+                misst, speichert und steuert selbständig. Genau darin liegt der Vorteil eines headless Geräts.</p>
+        </section>
+        <section class="card guide-section" id="quellen">
+            <h2>32. Offizielle Dokumentation und weiterführende Quellen</h2>
+            <ul>
+                <li><a href="https://www.raspberrypi.com/documentation/computers/getting-started.html" target="_blank"
+                        rel="noopener noreferrer">Raspberry Pi – Getting started / Raspberry Pi Imager</a></li>
+                <li><a href="https://www.raspberrypi.com/documentation/computers/remote-access.html" target="_blank"
+                        rel="noopener noreferrer">Raspberry Pi – Remote access und SSH</a></li>
+                <li><a href="https://www.raspberrypi.com/tutorials/host-a-hotel-wifi-hotspot/" target="_blank"
+                        rel="noopener noreferrer">Raspberry Pi – Hotspot mit NetworkManager erstellen</a></li>
+                <li><a href="https://www.raspberrypi.com/documentation/configuration/wifi-hotspot.md" target="_blank"
+                        rel="noopener noreferrer">Raspberry Pi – WLAN-Konfiguration und Länderkennung</a></li>
+                <li><a href="https://docs.python.org/3/library/http.server.html" target="_blank"
+                        rel="noopener noreferrer">Python – HTTP-Server aus der Standardbibliothek</a></li>
+                <li><a href="https://docs.python.org/3/library/sqlite3.html" target="_blank"
+                        rel="noopener noreferrer">Python – SQLite3</a></li>
+                <li><a href="https://docs.circuitpython.org/projects/bme280/en/latest/examples.html" target="_blank"
+                        rel="noopener noreferrer">Adafruit – BME280 Python-Beispiele</a></li>
+                <li><a href="https://python.meshtastic.org/" target="_blank" rel="noopener noreferrer">Meshtastic –
+                        Python-Client API und Events</a></li>
+                <li><a href="https://meshtastic.org/docs/software/python/cli/" target="_blank"
+                        rel="noopener noreferrer">Meshtastic – Python CLI</a></li>
+                <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch" target="_blank"
+                        rel="noopener noreferrer">MDN – Fetch API in JavaScript</a></li>
+            </ul>
+            <p>Stand der technischen Prüfung: <time datetime="2026-11-05">5. November 2026</time>. Softwareoberflächen,
+                Bibliotheken und Meshtastic-Paketformate können sich verändern; für Geräte, die dauerhaft laufen sollen,
+                aktuelle Dokumentation und eigene Tests einbeziehen.</p>
+        </section>
+        <p class="hint"><a href="#guide-inhalt">↑ Zum Inhaltsverzeichnis</a></p>
+    </main>
+    <footer class="site-footer">
+        <p>Raspberry Pi · Webserver &amp; Remote UI | Dokumentation · November 2026</p>
+    </footer>
+</body>
+
+</html>
