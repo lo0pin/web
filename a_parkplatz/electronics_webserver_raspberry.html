@@ -541,3 +541,57 @@ sudo apt install -y python3 python3-venv python3-pip curl unzip</code></pre>
             <pre class="cheat-code" data-language="bash"><code>mkdir -p ~/web-test
 cd ~/web-test</code></pre>
             <p><strong>2. Datei erstellen:</strong></p>
+
+            <pre class="cheat-code" data-language="bash"><code>nano index.html</code></pre>
+<p><strong>3. Diesen HTML-Inhalt einfügen:</strong></p>
+<pre class="cheat-code" data-language="html"><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;de&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Mein erster Pi-Webserver&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Hallo vom Raspberry Pi!&lt;/h1&gt;
+  &lt;p&gt;Diese Seite liegt auf meinem Raspberry Pi.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p><strong>4. Speichern:</strong> in <code>nano</code> mit <code>Ctrl+O</code>, <code>Enter</code>, <code>Ctrl+X</code>. <strong>5. Webserver starten:</strong></p>
+<pre class="cheat-code" data-language="bash"><code>python3 -m http.server 8000 --bind 0.0.0.0</code></pre>
+<p><strong>6. Smartphone mit demselben WLAN verbinden</strong> und im Browser die tatsächliche IP des Pi zusammen mit dem Port öffnen, etwa <code>http://192.168.1.42:8000</code>. Schreibe ausdrücklich <code>http://</code>, nicht <code>https://</code>.</p>
+<p>Die IP kannst du in einer <em>zweiten</em> SSH-Verbindung mit <code>hostname -I</code> abrufen. Der Webserver blockiert die erste Konsole, solange er läuft. Das ist vorerst normal.</p>
+<p>Mit <code>Ctrl+C</code> beendest du den Testserver. Der Befehl <code>python3 -m http.server</code> kann <strong>nur vorhandene Dateien anzeigen</strong>; eigene Sensor-APIs und Steuerbefehle fehlen ihm noch.</p>
+<p class="guide-check"><strong>✓ Lernkontrolle:</strong> Auf deinem Handy erscheint „Hallo vom Raspberry Pi!“. Damit sind Netzwerk, IP-Adresse, Port und HTML bereits erfolgreich getestet.</p>
+</section>
+<section class="card guide-section" id="api"><h2>10. Statisch und dynamisch: Wie kommen echte Daten auf die Seite?</h2>
+<p>Die erste Webseite war statisch. Ihr Text änderte sich nicht, obwohl der Pi im Hintergrund andere Messwerte haben könnte. Für Live-Daten kommt eine <strong>HTTP-API</strong> hinzu, die in regelmäßigen Abständen einen aktuellen Zustand als JSON zurückliefert.</p>
+<pre class="cheat-code" data-language="json"><code>GET http://192.168.1.42:8000/api/status
+
+Antwort (nur zur Erklärung):
+{
+  &quot;weather&quot;: {
+    &quot;temperature_c&quot;: 21.4,
+    &quot;humidity_percent&quot;: 48.2,
+    &quot;pressure_hpa&quot;: 991.8
+  },
+  &quot;demo_mode&quot;: &quot;standby&quot;
+}</code></pre>
+<p>Das obige JSON ist ausdrücklich ein <strong>Formatbeispiel</strong>, keine reale Messung. Der Pi erstellt so eine Antwort, JavaScript wertet sie aus und setzt einzelne Zahlen in HTML-Elemente. Bei fehlendem Sensor werden in unserem echten Beispielprojekt <code>null</code>-Werte zurückgegeben – die Anzeige zeigt „—“ statt Fantasiewetter.</p>
+<h3>Lesen und Steuern unterscheiden</h3>
+<ul><li><strong>GET</strong> fragt einen Zustand ab, ohne ihn verändern zu sollen: Temperatur, Luftdruck, Meldungen, Betriebszustand.</li><li><strong>POST</strong> übermittelt einen Befehl oder neue Daten: „Messung starten“, „Messung stoppen“ oder später „Einstellung speichern“.</li><li><strong>JSON</strong> ist das Transportformat; es sieht nach JavaScript aus, ist aber ein eigenes standardisiertes Datenformat.</li></ul>
+</section>
+<section class="card guide-section" id="paket"><h2>11. Das vollständige Beispielprojekt auf den Raspberry Pi bringen</h2>
+<p>Damit du nicht zu Beginn 300 Zeilen Quellcode mühsam in einen Terminaleditor übertragen musst, gibt es ein passendes Beispielpaket <strong><code>pi-web-beispiel.zip</code></strong>. Es enthält einen Webserver ohne Python-Webframework, eine mobile Oberfläche, eine SQLite-Datenbank, eine optionale Meshtastic-Bridge und Beispielkonfigurationen für <code>systemd</code>.</p>
+<pre class="cheat-code" data-language="text"><code>pi-web/
+├── server.py              # HTTP-Server + API + optional BME280
+├── database.py            # SQLite-Archiv für Meshtastic
+├── mesh_bridge.py         # USB-Meshtastic -&gt; Datenbank
+├── .env.example           # Vorlage für Steuer-PIN
+├── pi-web.service.example # Webserver-Autostart
+├── pi-mesh.service.example# Meshtastic-Autostart
+└── web/
+    ├── index.html         # Benutzeroberfläche
+    ├── style.css          # responsives Design
+    └── app.js             # regelmäßige Abfragen und Buttons</code></pre>
+<p><strong>Einfachster Übertragungsweg:</strong> Lade <code>pi-web-beispiel.zip</code> auf deinen Windows-PC. Öffne PowerShell <em>im Ordner mit dieser ZIP-Datei</em> und kopiere die ZIP-Datei auf den Pi:</p>
+<pre class="cheat-code" data-language="bash"><code>scp pi-web-beispiel.zip DEIN_BENUTZER@sailsense-pi.local:~/</code></pre>
