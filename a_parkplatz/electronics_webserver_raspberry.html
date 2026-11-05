@@ -1,34 +1,410 @@
 <!doctype html>
 <html lang="de">
+
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Umfassender deutschsprachiger Einsteigerleitfaden: Raspberry Pi als lokaler Webserver und WLAN-Hotspot, Sensordaten am Smartphone, Meshtastic, SailSense, Python, HTML, JavaScript und systemd.">
-<title>Raspberry Pi: Webserver, Sensoren &amp; WLAN-Dashboard – Beginner Guide</title>
-<!-- Diese Datei ist für /web/code/raspberry_webserver.html vorgesehen. -->
-<link rel="stylesheet" href="../assets/css/main.css">
-<style>
-/* Nur zusätzliche Feinheiten für diesen Leitfaden; das Layout stammt aus main.css. */
-.guide-section{scroll-margin-top:1rem}
-.guide-section>h2{font-size:1.35rem;line-height:1.3;margin:0 0 .6rem}
-.guide-section h3{margin-top:1.5rem;font-size:1.06rem}
-.guide-section h4{margin-bottom:.3rem}
-.guide-section pre.cheat-code{white-space:pre;max-width:100%;overflow-x:auto}
-.guide-section pre.cheat-code code{font-size:.86rem;white-space:pre}
-.guide-code-details pre{margin-top:.75rem}
-.guide-table-wrap{overflow-x:auto;margin:1rem 0}
-.guide-table{width:100%;border-collapse:collapse;min-width:490px;line-height:1.5}
-.guide-table th,.guide-table td{border-bottom:1px solid var(--border);padding:.67rem .8rem;text-align:left;vertical-align:top}
-.guide-table th{background:rgba(15,19,32,.04)}
-.guide-table td code{overflow-wrap:anywhere}
-.guide-check{border-left:3px solid var(--link);padding:.6rem .85rem;background:rgba(11,95,255,.035)}
-.guide-note{border-left:3px solid var(--border);padding:.55rem .8rem;background:rgba(15,19,32,.025)}
-.guide-steps li,.guide-checklist li{margin-bottom:.5rem}
-.guide-section a{overflow-wrap:anywhere}
-.guide-kicker{font-size:.95rem}
-.guide-toc{margin-bottom:1.5rem}
-.guide-toc .toc_column{column-count:3;column-gap:1.4rem}
-.guide-toc .toc_column li{break-inside:avoid;margin-bottom:.4rem}
-@media (max-width:760px){.guide-toc .toc_column{column-count:2}}
-@media (max-width:530px){.guide-toc .toc_column{column-count:1}.guide-section>h2{font-size:1.22rem}}
-</style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description"
+        content="Umfassender deutschsprachiger Einsteigerleitfaden: Raspberry Pi als lokaler Webserver und WLAN-Hotspot, Sensordaten am Smartphone, Meshtastic, SailSense, Python, HTML, JavaScript und systemd.">
+    <title>Raspberry Pi: Webserver, Sensoren &amp; WLAN-Dashboard – Beginner Guide</title>
+    <!-- Diese Datei ist für /web/code/raspberry_webserver.html vorgesehen. -->
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <style>
+        /* Nur zusätzliche Feinheiten für diesen Leitfaden; das Layout stammt aus main.css. */
+        .guide-section {
+            scroll-margin-top: 1rem
+        }
+
+        .guide-section>h2 {
+            font-size: 1.35rem;
+            line-height: 1.3;
+            margin: 0 0 .6rem
+        }
+
+        .guide-section h3 {
+            margin-top: 1.5rem;
+            font-size: 1.06rem
+        }
+
+        .guide-section h4 {
+            margin-bottom: .3rem
+        }
+
+        .guide-section pre.cheat-code {
+            white-space: pre;
+            max-width: 100%;
+            overflow-x: auto
+        }
+
+        .guide-section pre.cheat-code code {
+            font-size: .86rem;
+            white-space: pre
+        }
+
+        .guide-code-details pre {
+            margin-top: .75rem
+        }
+
+        .guide-table-wrap {
+            overflow-x: auto;
+            margin: 1rem 0
+        }
+
+        .guide-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 490px;
+            line-height: 1.5
+        }
+
+        .guide-table th,
+        .guide-table td {
+            border-bottom: 1px solid var(--border);
+            padding: .67rem .8rem;
+            text-align: left;
+            vertical-align: top
+        }
+
+        .guide-table th {
+            background: rgba(15, 19, 32, .04)
+        }
+
+        .guide-table td code {
+            overflow-wrap: anywhere
+        }
+
+        .guide-check {
+            border-left: 3px solid var(--link);
+            padding: .6rem .85rem;
+            background: rgba(11, 95, 255, .035)
+        }
+
+        .guide-note {
+            border-left: 3px solid var(--border);
+            padding: .55rem .8rem;
+            background: rgba(15, 19, 32, .025)
+        }
+
+        .guide-steps li,
+        .guide-checklist li {
+            margin-bottom: .5rem
+        }
+
+        .guide-section a {
+            overflow-wrap: anywhere
+        }
+
+        .guide-kicker {
+            font-size: .95rem
+        }
+
+        .guide-toc {
+            margin-bottom: 1.5rem
+        }
+
+        .guide-toc .toc_column {
+            column-count: 3;
+            column-gap: 1.4rem
+        }
+
+        .guide-toc .toc_column li {
+            break-inside: avoid;
+            margin-bottom: .4rem
+        }
+
+        @media (max-width:760px) {
+            .guide-toc .toc_column {
+                column-count: 2
+            }
+        }
+
+        @media (max-width:530px) {
+            .guide-toc .toc_column {
+                column-count: 1
+            }
+
+            .guide-section>h2 {
+                font-size: 1.22rem
+            }
+        }
+    </style>
+</head>
+
+<body class="has-bg bg-code">
+    <header class="site-header">
+        <div class="header-inner">
+            <h1 class="site-title">Raspberry Pi · Webserver Guide</h1>
+            <nav class="top-nav" aria-label="Navigation"><a href="../index.html">Home</a><a href="home.html">Code</a><a
+                    href="../electronics/home.html">Electronics</a><a href="../cheatsheets.html">Cheatsheets</a></nav>
+        </div>
+    </header>
+    <main class="content">
+        <section class="hero" aria-label="Einführung">
+            <p class="hero-quote">Vom Sensor zur Webseite.<br>Vom Taster zum Touchscreen.<br>Vom Raspberry Pi zum
+                eigenen kleinen Netzwerk.</p>
+        </section>
+        <section class="card guide-toc" aria-labelledby="guide-inhalt">
+            <h2 id="guide-inhalt" class="card-title">Inhaltsverzeichnis · Vom ersten Start zum autarken Gerät</h2>
+            <ol class="toc toc_column">
+                <li><a href="#start">1. Das Ziel: Ein Raspberry Pi ohne Bildschirm – aber mit eigener Webseite</a></li>
+                <li><a href="#architektur">2. Was passiert technisch? Das Prinzip in fünf Bausteinen</a></li>
+                <li><a href="#varianten">3. Zwei WLAN-Betriebsarten: Heimnetz oder eigener Hotspot</a></li>
+                <li><a href="#hardware">4. Welche Hardware benötigst du?</a></li>
+                <li><a href="#os">5. Raspberry Pi OS installieren – von Null an</a></li>
+                <li><a href="#ssh">6. Die erste Verbindung: SSH vom PC auf den Raspberry Pi</a></li>
+                <li><a href="#linux">7. Mini-Crashkurs: Die Linux-Befehle, die du hier brauchst</a></li>
+                <li><a href="#update">8. Raspberry Pi aktualisieren und Python vorbereiten</a></li>
+                <li><a href="#erste-seite">9. Der erste Webserver in fünf Minuten – noch ganz ohne Sensoren</a></li>
+                <li><a href="#api">10. Statisch und dynamisch: Wie kommen echte Daten auf die Seite?</a></li>
+                <li><a href="#paket">11. Das vollständige Beispielprojekt auf den Raspberry Pi bringen</a></li>
+                <li><a href="#venv">12. Projekt starten: Python-Umgebung und sichere PIN</a></li>
+                <li><a href="#frontend">13. Die Webseite verstehen: HTML, CSS und JavaScript</a></li>
+                <li><a href="#backend">14. Der Python-Webserver: Die wichtigsten Funktionen</a></li>
+                <li><a href="#pinsteuerung">15. Was beim Klick auf einen Button wirklich passiert</a></li>
+                <li><a href="#bme">16. Echte Wetterdaten: BME280 per I²C anschließen</a></li>
+                <li><a href="#mesh-prinzip">17. Meshtastic ist nicht WLAN: Wie die beiden Netze zusammenspielen</a></li>
+                <li><a href="#meshtastic-usb">18. Meshtastic-Node anschließen – wirklich Schritt für Schritt</a></li>
+                <li><a href="#sqlite">19. Warum SQLite? Nachrichten und später Messreihen richtig speichern</a></li>
+                <li><a href="#raspbimesh">20. RaspbiMesh: Wettertelemetrie und Nachrichten auf einer Oberfläche</a></li>
+                <li><a href="#sailsense">21. SailSense: Buttons und OLED durch das Handy ersetzen</a></li>
+                <li><a href="#hotspot">22. Ein eigenes WLAN erzeugen: Raspberry Pi als Access Point</a></li>
+                <li><a href="#systemd">23. Automatisch beim Einschalten starten: systemd</a></li>
+                <li><a href="#mesh-systemd">24. Optional: Auch die Meshtastic-Bridge automatisch starten</a></li>
+                <li><a href="#sicherheit">25. Sicherheit: Für ein Bastelprojekt unkompliziert, aber nicht fahrlässig</a>
+                </li>
+                <li><a href="#fehler">26. Typische Fehler – und wie du sie systematisch findest</a></li>
+                <li><a href="#gehaeuse">27. Funk, Gehäuse und Energie: Gerade bei SailSense entscheidend</a></li>
+                <li><a href="#ausbau">28. Sinnvolle nächste Ausbaustufen – in der richtigen Reihenfolge</a></li>
+                <li><a href="#quellcode">29. Zum Nachbauen: Die vollständigen Frontend-Dateien</a></li>
+                <li><a href="#begriffsliste">30. Kleines Glossar für die Werkbank</a></li>
+                <li><a href="#checkliste">31. Abschlusscheckliste: Wann ist dein System einsatzfähig?</a></li>
+                <li><a href="#quellen">32. Offizielle Dokumentation und weiterführende Quellen</a></li>
+            </ol>
+        </section>
+        <section class="card guide-section" id="start">
+            <h2>1. Das Ziel: Ein Raspberry Pi ohne Bildschirm – aber mit eigener Webseite</h2>
+            <p class="hint">Anfängerleitfaden · Linux, Python, WLAN, HTML, CSS, JavaScript, BME280, Meshtastic und
+                systemd</p>
+            <p>Du möchtest einen kleinen Raspberry Pi in ein Mess- oder Steuergerät einbauen, <strong>dessen Display
+                    dein Smartphone ist</strong>. Das funktioniert. Der Pi sammelt Daten und stellt sie über einen
+                Webserver bereit. Dein Handy zeigt eine normale Webseite an; Schaltflächen auf dieser Webseite können
+                Befehle zurück an den Pi senden.</p>
+            <p>Das gilt beispielsweise für <strong>SailSense</strong> (Messwerte anzeigen und Gerätefunktionen bedienen)
+                und für ein stationäres <strong>RaspbiMesh-/Meshtastic-Setup</strong> (Wetterwerte und Funknachrichten
+                ansehen, neue Nachrichten archivieren). Du brauchst dafür grundsätzlich <strong>keine
+                    Internetverbindung</strong> und keinen Cloud-Dienst.</p>
+            <div class="cheat-grid">
+                <div class="cheat-item">
+                    <h4>Am Ende kannst du …</h4>
+                    <ul>
+                        <li>den Pi erstmals ohne Monitor einrichten,</li>
+                        <li>vom PC aus per SSH auf ihn zugreifen,</li>
+                        <li>eine Webseite im lokalen Netzwerk aufrufen,</li>
+                        <li>Messwerte als JSON an den Browser liefern,</li>
+                        <li>Buttons vom Handy an den Pi schicken,</li>
+                        <li>optional mit eigenem WLAN-Hotspot arbeiten,</li>
+                        <li>Meshtastic-Nachrichten lokal speichern und anzeigen,</li>
+                        <li>alles beim Einschalten automatisch starten lassen.</li>
+                    </ul>
+                </div>
+                <div class="cheat-item">
+                    <h4>Das wird bewusst NICHT vorausgesetzt</h4>
+                    <ul>
+                        <li>Linux-Vorkenntnisse</li>
+                        <li>Backend-Programmierung</li>
+                        <li>Datenbank-Erfahrung</li>
+                        <li>Cloud-Hosting</li>
+                        <li>React, Node.js, Flask oder andere Web-Frameworks</li>
+                        <li>ein angeschlossener Bildschirm oder eine Tastatur am Raspberry Pi</li>
+                    </ul>
+                </div>
+            </div>
+            <p class="hint guide-note">Der vollständige Praxiscode ist zusätzlich als eigenständiges Beispielprojekt
+                erhältlich. Du kannst die Kapitel Schritt für Schritt durcharbeiten oder die Dateien als fertiges
+                Grundgerüst verwenden. In dieser Anleitung sind die wichtigsten Dateien vollständig einsehbar.</p>
+        </section>
+        <section class="card guide-section" id="architektur">
+            <h2>2. Was passiert technisch? Das Prinzip in fünf Bausteinen</h2>
+            <pre class="cheat-code" data-language="text"><code>BME280 / GPS / SailSense-Logik / Meshtastic-Node
+                |       (GPIO, I²C, USB, UART)
+                v
+         RASPBERRY PI (Linux)
+           Python-Programm
+                |
+          lokale HTTP-API
+         GET /api/status
+         POST /api/action
+                |
+       WLAN / Heimrouter / Hotspot
+                |
+                v
+             SMARTPHONE
+       Browser: HTML + CSS + JS
+        Anzeige und Bedienung</code></pre>
+            <p>Die Arbeit ist klar getrennt: <strong>Python</strong> auf dem Pi spricht mit Sensoren, Dateien und
+                Hardware. <strong>HTML</strong> gibt der Bedienoberfläche ihre Struktur. <strong>CSS</strong> sorgt für
+                eine brauchbare Darstellung am Handy. <strong>JavaScript</strong> ruft aktuelle Daten ab und sendet
+                Befehle. Eine <strong>API</strong> ist die vereinbarte Schnittstelle zwischen Browser und Python.</p>
+            <div class="guide-table-wrap">
+                <table class="guide-table">
+                    <thead>
+                        <tr>
+                            <th>Begriff</th>
+                            <th>Einfach erklärt</th>
+                            <th>Im Beispiel</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Server</td>
+                            <td>Ein Rechner/Programm, das auf Anfragen antwortet.</td>
+                            <td>Python auf dem Raspberry Pi</td>
+                        </tr>
+                        <tr>
+                            <td>Client</td>
+                            <td>Ein Programm, das Daten anfragt oder Befehle sendet.</td>
+                            <td>Browser auf dem Smartphone</td>
+                        </tr>
+                        <tr>
+                            <td>HTTP</td>
+                            <td>Die Sprache der Browser-Anfragen und -Antworten.</td>
+                            <td><code>GET</code> und <code>POST</code></td>
+                        </tr>
+                        <tr>
+                            <td>IP-Adresse</td>
+                            <td>Die Adresse eines Geräts in einem Netzwerk.</td>
+                            <td>z. B. <code>192.168.1.42</code></td>
+                        </tr>
+                        <tr>
+                            <td>Port</td>
+                            <td>Eine nummerierte „Tür“ zu einem bestimmten Dienst.</td>
+                            <td><code>8000</code></td>
+                        </tr>
+                        <tr>
+                            <td>JSON</td>
+                            <td>Ein kompaktes, maschinenlesbares Datenformat.</td>
+                            <td><code>{"temperature_c": 21.4}</code></td>
+                        </tr>
+                        <tr>
+                            <td>Polling</td>
+                            <td>Der Browser fragt in regelmäßigen Abständen neu nach.</td>
+                            <td>hier alle zwei Sekunden</td>
+                        </tr>
+                        <tr>
+                            <td>systemd</td>
+                            <td>Linux-Verwaltung für Programme im Hintergrund.</td>
+                            <td>Start nach jedem Boot</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <h3>WLAN ist nicht das Internet</h3>
+            <p>Diese Unterscheidung ist zentral: WLAN ist zunächst nur eine <strong>lokale Funkverbindung</strong>. Ein
+                Pi kann mit deinem Handy über WLAN kommunizieren, obwohl weit und breit kein Internet existiert. Die
+                Webseite liegt nämlich <em>auf dem Pi</em>, nicht bei einem externen Anbieter. Ein WLAN-Hotspot des Pi
+                ist somit auf einem Segelboot ebenso denkbar wie in der Werkstatt.</p>
+        </section>
+        <section class="card guide-section" id="varianten">
+            <h2>3. Zwei WLAN-Betriebsarten: Heimnetz oder eigener Hotspot</h2>
+            <div class="guide-table-wrap">
+                <table class="guide-table">
+                    <thead>
+                        <tr>
+                            <th>Variante A: vorhandenes WLAN</th>
+                            <th>Variante B: Raspberry Pi als Hotspot</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Pi und Handy verbinden sich mit demselben Router.</td>
+                            <td>Der Pi erzeugt selbst das WLAN; das Handy verbindet sich direkt.</td>
+                        </tr>
+                        <tr>
+                            <td>Ideal für Entwicklung, Werkstatt, Wohnung.</td>
+                            <td>Ideal für SailSense, unterwegs, Boot oder autarke Station.</td>
+                        </tr>
+                        <tr>
+                            <td>Meist Zugang über <code>http://pi-name.local:8000</code> oder Router-IP.</td>
+                            <td>Zugang über die Hotspot-IP des Pi, die du mit <code>ip</code>/<code>nmcli</code>
+                                ermittelst.</td>
+                        </tr>
+                        <tr>
+                            <td>Internet kann vorhanden sein, ist aber für die lokale Webseite unnötig.</td>
+                            <td>Internet ist nicht erforderlich; Android/iOS können „Kein Internet“ anzeigen.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p><strong>Empfohlene Reihenfolge:</strong> Entwickle zuerst im vorhandenen Heim-WLAN. Sobald alles
+                funktioniert, richtest du den Pi als Hotspot ein. Ein einziges WLAN-Interface kann in der üblichen
+                Konfiguration nicht zugleich völlig unabhängig als Hotspot und als Heim-WLAN-Client betrieben werden.
+                Für parallele Verbindungen sind LAN oder ein zweiter WLAN-Adapter die einfache Lösung.</p>
+            <p class="guide-check"><strong>✓ Lernkontrolle:</strong> Du kannst erklären, warum ein Browser den Pi
+                erreichen kann, auch wenn der Pi keinen Internetzugang besitzt.</p>
+        </section>
+        <section class="card guide-section" id="hardware">
+            <h2>4. Welche Hardware benötigst du?</h2>
+            <div class="guide-table-wrap">
+                <table class="guide-table">
+                    <thead>
+                        <tr>
+                            <th>Teil</th>
+                            <th>Benötigt?</th>
+                            <th>Worauf achten?</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Raspberry Pi Zero 2 W / Pi 3 / Pi 4 / Pi 5</td>
+                            <td>Ja</td>
+                            <td>Mit WLAN; Zero 2 W ist klein und interessant für kompakte Messgeräte.</td>
+                        </tr>
+                        <tr>
+                            <td>microSD-Karte</td>
+                            <td>Ja</td>
+                            <td>Ausreichend Platz, vorzugsweise Qualitätskarte; für dauerhaftes Logging auf Haltbarkeit
+                                achten.</td>
+                        </tr>
+                        <tr>
+                            <td>Passendes Netzteil</td>
+                            <td>Ja</td>
+                            <td>Stabile Spannung und Stromversorgung nach Pi-Modell; Boot-Probleme kommen oft vom
+                                Netzteil.</td>
+                        </tr>
+                        <tr>
+                            <td>Windows-, macOS- oder Linux-PC</td>
+                            <td>Für Einrichtung</td>
+                            <td>Für Imager, SSH und ggf. Dateiübertragung.</td>
+                        </tr>
+                        <tr>
+                            <td>Smartphone</td>
+                            <td>Für Bedienung</td>
+                            <td>Beliebiger moderner Browser genügt.</td>
+                        </tr>
+                        <tr>
+                            <td>BME280</td>
+                            <td>Optional</td>
+                            <td>Für echte Temperatur-, Feuchte- und Luftdruckwerte.</td>
+                        </tr>
+                        <tr>
+                            <td>Meshtastic-Node / Heltec</td>
+                            <td>Optional</td>
+                            <td>Über USB mit dem Pi verbindbar; die LoRa-Funkstrecke bleibt separat.</td>
+                        </tr>
+                        <tr>
+                            <td>Gehäuse & Antennendurchführung</td>
+                            <td>Später</td>
+                            <td>HF-Abschirmung, Feuchte, Wärme und Servicezugang bedenken.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="hint guide-note"><strong>Wichtig:</strong> Ein Raspberry Pi Pico / Pico W ist <em>nicht</em>
+                dasselbe wie ein Raspberry Pi Zero 2 W. Ein Pico W ist ein Mikrocontroller ohne normales Raspberry Pi OS
+                oder <code>systemd</code>. Auch damit lassen sich Webseiten bauen, aber mit einer völlig anderen
+                Softwarebasis (z. B. MicroPython). Diese Anleitung ist für Raspberry-Pi-Modelle gedacht, auf denen Linux
+                läuft.</p>
+            <p>Für den ersten Test benötigst du noch keine zusätzliche Sensorik. Eine Systeminformation wie die
+                CPU-Temperatur genügt, um die Verbindung nachzuweisen. Die CPU-Temperatur ist aber ausdrücklich
+                <strong>keine Außen- oder Umgebungstemperatur</strong>.</p>
+        </section>
