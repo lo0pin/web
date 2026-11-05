@@ -560,11 +560,13 @@ cd ~/web-test</code></pre>
 &lt;/body&gt;
 &lt;/html&gt;</code></pre>
             <p><strong>4. Speichern:</strong> in <code>nano</code> mit <code>Ctrl+O</code>, <code>Enter</code>,
-                <code>Ctrl+X</code>. <strong>5. Webserver starten:</strong></p>
+                <code>Ctrl+X</code>. <strong>5. Webserver starten:</strong>
+            </p>
             <pre class="cheat-code" data-language="bash"><code>python3 -m http.server 8000 --bind 0.0.0.0</code></pre>
             <p><strong>6. Smartphone mit demselben WLAN verbinden</strong> und im Browser die tatsächliche IP des Pi
                 zusammen mit dem Port öffnen, etwa <code>http://192.168.1.42:8000</code>. Schreibe ausdrücklich
-                <code>http://</code>, nicht <code>https://</code>.</p>
+                <code>http://</code>, nicht <code>https://</code>.
+            </p>
             <p>Die IP kannst du in einer <em>zweiten</em> SSH-Verbindung mit <code>hostname -I</code> abrufen. Der
                 Webserver blockiert die erste Konsole, solange er läuft. Das ist vorerst normal.</p>
             <p>Mit <code>Ctrl+C</code> beendest du den Testserver. Der Befehl <code>python3 -m http.server</code> kann
@@ -626,46 +628,75 @@ Antwort (nur zur Erklärung):
             <pre class="cheat-code"
                 data-language="bash"><code>scp pi-web-beispiel.zip DEIN_BENUTZER@sailsense-pi.local:~/</code></pre>
 
-<p>Danach <strong>im SSH-Terminal des Raspberry Pi</strong> das Paket entpacken. <code>unzip</code> wurde in Kapitel 8 mitinstalliert:</p>
-<pre class="cheat-code" data-language="bash"><code>mkdir -p ~/pi-web
+            <p>Danach <strong>im SSH-Terminal des Raspberry Pi</strong> das Paket entpacken. <code>unzip</code> wurde in
+                Kapitel 8 mitinstalliert:</p>
+            <pre class="cheat-code" data-language="bash"><code>mkdir -p ~/pi-web
 unzip ~/pi-web-beispiel.zip -d ~/pi-web
 ls -la ~/pi-web</code></pre>
-<p>Achte bei <code>ls -la</code> darauf, dass direkt unter <code>~/pi-web</code> die Dateien <code>server.py</code> und <code>.env.example</code> sowie der Ordner <code>web/</code> liegen. Falls du lieber mit einzelnen Dateien arbeitest, kannst du auch WinSCP (SFTP) oder <code>scp -r</code> verwenden. Versteckte Dateien wie <code>.env.example</code> dabei unbedingt mitkopieren.</p>
-<p>Alternativ kannst du die Dateien mit <code>nano</code> aus den Quelltext-Anhängen dieser Anleitung erstellen. Entscheidend ist, dass die Dateinamen und Ordnerstruktur stimmen.</p>
-<p class="hint guide-note">Die ZIP-Datei enthält bewusst <em>keine</em> echten Zugangsdaten, keine Meshtastic-Nachrichten und keine vorgefüllte Datenbank. Die Datenbank wird beim ersten Start automatisch angelegt.</p>
-</section>
-<section class="card guide-section" id="venv"><h2>12. Projekt starten: Python-Umgebung und sichere PIN</h2>
-<p>Anders als viele Raspberry-Pi-Tutorials installieren wir keine Python-Pakete ungefragt systemweit. Eine <strong>virtuelle Umgebung</strong> (<code>.venv</code>) isoliert spätere Bibliotheken. Für den Grundserver benötigst du noch gar keine externe Python-Bibliothek.</p>
-<pre class="cheat-code" data-language="bash"><code>cd ~/pi-web
+            <p>Achte bei <code>ls -la</code> darauf, dass direkt unter <code>~/pi-web</code> die Dateien
+                <code>server.py</code> und <code>.env.example</code> sowie der Ordner <code>web/</code> liegen. Falls du
+                lieber mit einzelnen Dateien arbeitest, kannst du auch WinSCP (SFTP) oder <code>scp -r</code> verwenden.
+                Versteckte Dateien wie <code>.env.example</code> dabei unbedingt mitkopieren.</p>
+            <p>Alternativ kannst du die Dateien mit <code>nano</code> aus den Quelltext-Anhängen dieser Anleitung
+                erstellen. Entscheidend ist, dass die Dateinamen und Ordnerstruktur stimmen.</p>
+            <p class="hint guide-note">Die ZIP-Datei enthält bewusst <em>keine</em> echten Zugangsdaten, keine
+                Meshtastic-Nachrichten und keine vorgefüllte Datenbank. Die Datenbank wird beim ersten Start automatisch
+                angelegt.</p>
+        </section>
+        <section class="card guide-section" id="venv">
+            <h2>12. Projekt starten: Python-Umgebung und sichere PIN</h2>
+            <p>Anders als viele Raspberry-Pi-Tutorials installieren wir keine Python-Pakete ungefragt systemweit. Eine
+                <strong>virtuelle Umgebung</strong> (<code>.venv</code>) isoliert spätere Bibliotheken. Für den
+                Grundserver benötigst du noch gar keine externe Python-Bibliothek.</p>
+            <pre class="cheat-code" data-language="bash"><code>cd ~/pi-web
 python3 -m venv .venv
 cp .env.example .env
 nano .env</code></pre>
-<p>In der Datei <code>.env</code> ersetzt du <code>BITTE_DURCH_EIGENEN_PIN_ERSETZEN</code> durch eine lange, selbst gewählte Zeichenfolge. Schreib diese nicht in ein öffentliches GitHub-Repository. Die Datei enthält beispielsweise:</p>
-<pre class="cheat-code" data-language="ini"><code>WEB_CONTROL_PIN=HIER_DEIN_EIGENES_LANGES_GEHEIMNIS</code></pre>
-<p>Speichern, Leserechte begrenzen und die Variable für den manuellen Test in die aktuelle Konsole laden:</p>
-<pre class="cheat-code" data-language="bash"><code>chmod 600 .env
+            <p>In der Datei <code>.env</code> ersetzt du <code>BITTE_DURCH_EIGENEN_PIN_ERSETZEN</code> durch eine lange,
+                selbst gewählte Zeichenfolge. Schreib diese nicht in ein öffentliches GitHub-Repository. Die Datei
+                enthält beispielsweise:</p>
+            <pre class="cheat-code"
+                data-language="ini"><code>WEB_CONTROL_PIN=HIER_DEIN_EIGENES_LANGES_GEHEIMNIS</code></pre>
+            <p>Speichern, Leserechte begrenzen und die Variable für den manuellen Test in die aktuelle Konsole laden:
+            </p>
+            <pre class="cheat-code" data-language="bash"><code>chmod 600 .env
 set -a
 . ./.env
 set +a
 .venv/bin/python server.py</code></pre>
-<p><strong>Was passiert nun?</strong> Der Webserver startet auf Port 8000. Er stellt die Dateien aus <code>web/</code> bereit. <code>/api/status</code> liefert Systemwerte. Ohne BME280 sind die Wetterfelder leer; ohne Meshtastic-Bridge ist das Nachrichtenarchiv leer. Die Buttons funktionieren als <strong>Demonstration</strong>, schalten aber noch keine echte SailSense-Messung um.</p>
-<p>Smartphone: <code>http://DEINE-PI-IP:8000</code> öffnen. Steuer-PIN eingeben, „Demo starten“ drücken, beobachten, wie der angezeigte Zustand wechselt.</p>
-<p>Du kannst den Status auch direkt auf dem Pi mit einem zweiten Terminal abfragen:</p>
-<pre class="cheat-code" data-language="bash"><code>curl http://localhost:8000/api/status</code></pre>
-<p class="guide-check"><strong>✓ Lernkontrolle:</strong> Das Dashboard lädt am Handy. Die CPU-Temperatur kann angezeigt werden; fehlende Sensorwerte bleiben leer. Nach der PIN-Eingabe verändert der Button den Demo-Zustand.</p>
-</section>
-<section class="card guide-section" id="frontend"><h2>13. Die Webseite verstehen: HTML, CSS und JavaScript</h2>
-<p>Im Ordner <code>web/</code> liegen drei Dateien. Sie entsprechen genau der Architektur deiner GitHub-Pages-Seite: <strong>statisches HTML, CSS und Vanilla JavaScript</strong>, keine Frameworks. Der Unterschied ist nur die Datenquelle: Statt <code>posts.json</code> vom GitHub-Server abzurufen, fragt diese Seite die lokale API auf dem Pi ab.</p>
-<h3>HTML: Hier stehen die Platzhalter</h3>
-<pre class="cheat-code" data-language="html"><code>&lt;section class=&quot;card&quot;&gt;
+            <p><strong>Was passiert nun?</strong> Der Webserver startet auf Port 8000. Er stellt die Dateien aus
+                <code>web/</code> bereit. <code>/api/status</code> liefert Systemwerte. Ohne BME280 sind die
+                Wetterfelder leer; ohne Meshtastic-Bridge ist das Nachrichtenarchiv leer. Die Buttons funktionieren als
+                <strong>Demonstration</strong>, schalten aber noch keine echte SailSense-Messung um.</p>
+            <p>Smartphone: <code>http://DEINE-PI-IP:8000</code> öffnen. Steuer-PIN eingeben, „Demo starten“ drücken,
+                beobachten, wie der angezeigte Zustand wechselt.</p>
+            <p>Du kannst den Status auch direkt auf dem Pi mit einem zweiten Terminal abfragen:</p>
+            <pre class="cheat-code" data-language="bash"><code>curl http://localhost:8000/api/status</code></pre>
+            <p class="guide-check"><strong>✓ Lernkontrolle:</strong> Das Dashboard lädt am Handy. Die CPU-Temperatur
+                kann angezeigt werden; fehlende Sensorwerte bleiben leer. Nach der PIN-Eingabe verändert der Button den
+                Demo-Zustand.</p>
+        </section>
+        <section class="card guide-section" id="frontend">
+            <h2>13. Die Webseite verstehen: HTML, CSS und JavaScript</h2>
+            <p>Im Ordner <code>web/</code> liegen drei Dateien. Sie entsprechen genau der Architektur deiner
+                GitHub-Pages-Seite: <strong>statisches HTML, CSS und Vanilla JavaScript</strong>, keine Frameworks. Der
+                Unterschied ist nur die Datenquelle: Statt <code>posts.json</code> vom GitHub-Server abzurufen, fragt
+                diese Seite die lokale API auf dem Pi ab.</p>
+            <h3>HTML: Hier stehen die Platzhalter</h3>
+            <pre class="cheat-code" data-language="html"><code>&lt;section class=&quot;card&quot;&gt;
   &lt;h2&gt;Wetter&lt;/h2&gt;
   &lt;p&gt;Temperatur: &lt;strong id=&quot;temp&quot;&gt;—&lt;/strong&gt;&lt;/p&gt;
 &lt;/section&gt;</code></pre>
-<p>Das Element mit <code>id="temp"</code> ist die Adresse <em>innerhalb des Dokuments</em>, an der JavaScript später einen Temperaturwert einsetzt. Du kannst in HTML beliebige weitere Felder für GPS, Luftdruck, Batteriespannung oder Segelparameter ergänzen.</p>
-<h3>CSS: Deine vorhandenen Bausteine wiederverwenden</h3>
-<p>Das Dashboard verwendet dieselben Gestaltungsprinzipien wie deine Webseite: <code>:root</code>-Farben, <code>.site-header</code>, <code>.card</code>, <code>.hint</code> und eine responsive Rasterdarstellung. Im Beispielprojekt liegt eine kleine, eigenständige <code>style.css</code>; auf deiner GitHub-Pages-Anleitungsseite nutzt dieses Dokument dagegen direkt dein <code>main.css</code>.</p>
-<h3>JavaScript: Daten holen und darstellen</h3>
-<pre class="cheat-code" data-language="javascript"><code>async function refresh() {
+            <p>Das Element mit <code>id="temp"</code> ist die Adresse <em>innerhalb des Dokuments</em>, an der
+                JavaScript später einen Temperaturwert einsetzt. Du kannst in HTML beliebige weitere Felder für GPS,
+                Luftdruck, Batteriespannung oder Segelparameter ergänzen.</p>
+            <h3>CSS: Deine vorhandenen Bausteine wiederverwenden</h3>
+            <p>Das Dashboard verwendet dieselben Gestaltungsprinzipien wie deine Webseite: <code>:root</code>-Farben,
+                <code>.site-header</code>, <code>.card</code>, <code>.hint</code> und eine responsive Rasterdarstellung.
+                Im Beispielprojekt liegt eine kleine, eigenständige <code>style.css</code>; auf deiner
+                GitHub-Pages-Anleitungsseite nutzt dieses Dokument dagegen direkt dein <code>main.css</code>.</p>
+            <h3>JavaScript: Daten holen und darstellen</h3>
+            <pre class="cheat-code" data-language="javascript"><code>async function refresh() {
   const response = await fetch(&#x27;/api/status&#x27;);
   const data = await response.json();
   const value = data.weather.temperature_c;
@@ -675,11 +706,21 @@ set +a
 
 refresh();
 setInterval(refresh, 2000);</code></pre>
-<p><code>fetch()</code> startet eine HTTP-Anfrage. <code>await response.json()</code> wandelt das JSON in ein JavaScript-Objekt um. Mit <code>textContent</code> ersetzt du Text sicher, ohne fremden HTML-Code auszuführen. <code>setInterval(..., 2000)</code> wiederholt die Aktualisierung alle 2000 Millisekunden, also alle zwei Sekunden.</p>
-<h3>Warum nicht ständig die ganze Seite neu laden?</h3>
-<p>Die Seite selbst bleibt offen. Es werden lediglich kleine JSON-Antworten übertragen und einzelne DOM-Elemente aktualisiert. Das ist ressourcenschonend, fühlt sich unmittelbar an und genügt für Wetterdaten oder einen Statusmonitor vollkommen. Für sehr schnelle Datenströme können später Server-Sent Events oder WebSockets sinnvoll sein.</p>
-</section>
-<section class="card guide-section" id="backend"><h2>14. Der Python-Webserver: Die wichtigsten Funktionen</h2>
-<p>Die eigentliche Server-Datei heißt <code>server.py</code>. Sie verwendet <code>ThreadingHTTPServer</code> und <code>SimpleHTTPRequestHandler</code> aus der <strong>Python-Standardbibliothek</strong>. Das ist für einen kleinen, vertrauenswürdigen lokalen Prototypen eine überschaubare Lösung. Ein professioneller, öffentlich erreichbarer Webserver wäre eine andere Liga.</p>
-<pre class="cheat-code" data-language="python"><code>HOST = &#x27;0.0.0.0&#x27;
+            <p><code>fetch()</code> startet eine HTTP-Anfrage. <code>await response.json()</code> wandelt das JSON in
+                ein JavaScript-Objekt um. Mit <code>textContent</code> ersetzt du Text sicher, ohne fremden HTML-Code
+                auszuführen. <code>setInterval(..., 2000)</code> wiederholt die Aktualisierung alle 2000 Millisekunden,
+                also alle zwei Sekunden.</p>
+            <h3>Warum nicht ständig die ganze Seite neu laden?</h3>
+            <p>Die Seite selbst bleibt offen. Es werden lediglich kleine JSON-Antworten übertragen und einzelne
+                DOM-Elemente aktualisiert. Das ist ressourcenschonend, fühlt sich unmittelbar an und genügt für
+                Wetterdaten oder einen Statusmonitor vollkommen. Für sehr schnelle Datenströme können später Server-Sent
+                Events oder WebSockets sinnvoll sein.</p>
+        </section>
+        <section class="card guide-section" id="backend">
+            <h2>14. Der Python-Webserver: Die wichtigsten Funktionen</h2>
+            <p>Die eigentliche Server-Datei heißt <code>server.py</code>. Sie verwendet <code>ThreadingHTTPServer</code>
+                und <code>SimpleHTTPRequestHandler</code> aus der <strong>Python-Standardbibliothek</strong>. Das ist
+                für einen kleinen, vertrauenswürdigen lokalen Prototypen eine überschaubare Lösung. Ein professioneller,
+                öffentlich erreichbarer Webserver wäre eine andere Liga.</p>
+            <pre class="cheat-code" data-language="python"><code>HOST = &#x27;0.0.0.0&#x27;
 PORT = 8000
