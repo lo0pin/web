@@ -636,7 +636,8 @@ ls -la ~/pi-web</code></pre>
             <p>Achte bei <code>ls -la</code> darauf, dass direkt unter <code>~/pi-web</code> die Dateien
                 <code>server.py</code> und <code>.env.example</code> sowie der Ordner <code>web/</code> liegen. Falls du
                 lieber mit einzelnen Dateien arbeitest, kannst du auch WinSCP (SFTP) oder <code>scp -r</code> verwenden.
-                Versteckte Dateien wie <code>.env.example</code> dabei unbedingt mitkopieren.</p>
+                Versteckte Dateien wie <code>.env.example</code> dabei unbedingt mitkopieren.
+            </p>
             <p>Alternativ kannst du die Dateien mit <code>nano</code> aus den Quelltext-Anhängen dieser Anleitung
                 erstellen. Entscheidend ist, dass die Dateinamen und Ordnerstruktur stimmen.</p>
             <p class="hint guide-note">Die ZIP-Datei enthält bewusst <em>keine</em> echten Zugangsdaten, keine
@@ -647,7 +648,8 @@ ls -la ~/pi-web</code></pre>
             <h2>12. Projekt starten: Python-Umgebung und sichere PIN</h2>
             <p>Anders als viele Raspberry-Pi-Tutorials installieren wir keine Python-Pakete ungefragt systemweit. Eine
                 <strong>virtuelle Umgebung</strong> (<code>.venv</code>) isoliert spätere Bibliotheken. Für den
-                Grundserver benötigst du noch gar keine externe Python-Bibliothek.</p>
+                Grundserver benötigst du noch gar keine externe Python-Bibliothek.
+            </p>
             <pre class="cheat-code" data-language="bash"><code>cd ~/pi-web
 python3 -m venv .venv
 cp .env.example .env
@@ -667,7 +669,8 @@ set +a
             <p><strong>Was passiert nun?</strong> Der Webserver startet auf Port 8000. Er stellt die Dateien aus
                 <code>web/</code> bereit. <code>/api/status</code> liefert Systemwerte. Ohne BME280 sind die
                 Wetterfelder leer; ohne Meshtastic-Bridge ist das Nachrichtenarchiv leer. Die Buttons funktionieren als
-                <strong>Demonstration</strong>, schalten aber noch keine echte SailSense-Messung um.</p>
+                <strong>Demonstration</strong>, schalten aber noch keine echte SailSense-Messung um.
+            </p>
             <p>Smartphone: <code>http://DEINE-PI-IP:8000</code> öffnen. Steuer-PIN eingeben, „Demo starten“ drücken,
                 beobachten, wie der angezeigte Zustand wechselt.</p>
             <p>Du kannst den Status auch direkt auf dem Pi mit einem zweiten Terminal abfragen:</p>
@@ -694,7 +697,8 @@ set +a
             <p>Das Dashboard verwendet dieselben Gestaltungsprinzipien wie deine Webseite: <code>:root</code>-Farben,
                 <code>.site-header</code>, <code>.card</code>, <code>.hint</code> und eine responsive Rasterdarstellung.
                 Im Beispielprojekt liegt eine kleine, eigenständige <code>style.css</code>; auf deiner
-                GitHub-Pages-Anleitungsseite nutzt dieses Dokument dagegen direkt dein <code>main.css</code>.</p>
+                GitHub-Pages-Anleitungsseite nutzt dieses Dokument dagegen direkt dein <code>main.css</code>.
+            </p>
             <h3>JavaScript: Daten holen und darstellen</h3>
             <pre class="cheat-code" data-language="javascript"><code>async function refresh() {
   const response = await fetch(&#x27;/api/status&#x27;);
@@ -729,11 +733,19 @@ PORT = 8000
 # GET /api/status   -&gt; aktuelle Werte lesen
 # POST /api/action  -&gt; PIN prüfen, Demo-Aktion ausführen
 # alle anderen Pfade -&gt; Dateien aus web/ ausliefern</code></pre>
-<p><strong><code>0.0.0.0</code> ist keine Browser-Adresse.</strong> Es bedeutet lediglich, dass der Python-Server auf allen Netzwerkinterfaces des Pi Anfragen annimmt. Du öffnest auf dem Handy weiterhin die konkrete IP oder den Hostnamen des Pi.</p>
-<p>In <code>do_GET()</code> werden Zeit, CPU-Temperatur, BME280-Werte, Demo-Zustand und bis zu 20 gespeicherte Mesh-Nachrichten zu JSON. In <code>do_POST()</code> akzeptiert der Server ausschließlich <code>start</code> oder <code>stop</code> und prüft vorher die Steuer-PIN. Unbekannte Befehle werden abgewiesen. <strong>Die reale SailSense-Hardware wird noch nicht angesprochen.</strong></p>
-<p class="hint guide-note">Der Demonstrationszustand wird nur im RAM gehalten; nach einem Neustart springt er wieder auf <code>standby</code>. Eine echte Geräteanwendung braucht bei Bedarf dauerhafte Zustandsverwaltung und eine sichere Start-/Stopplogik.</p>
-<details class="news-details guide-code-details"><summary>Vollständige Datei anzeigen: <code>server.py</code></summary>
-<pre class="cheat-code" data-language="py"><code>&quot;&quot;&quot;Einfacher lokaler Webserver, nur Python-Standardbibliothek.
+            <p><strong><code>0.0.0.0</code> ist keine Browser-Adresse.</strong> Es bedeutet lediglich, dass der
+                Python-Server auf allen Netzwerkinterfaces des Pi Anfragen annimmt. Du öffnest auf dem Handy weiterhin
+                die konkrete IP oder den Hostnamen des Pi.</p>
+            <p>In <code>do_GET()</code> werden Zeit, CPU-Temperatur, BME280-Werte, Demo-Zustand und bis zu 20
+                gespeicherte Mesh-Nachrichten zu JSON. In <code>do_POST()</code> akzeptiert der Server ausschließlich
+                <code>start</code> oder <code>stop</code> und prüft vorher die Steuer-PIN. Unbekannte Befehle werden
+                abgewiesen. <strong>Die reale SailSense-Hardware wird noch nicht angesprochen.</strong></p>
+            <p class="hint guide-note">Der Demonstrationszustand wird nur im RAM gehalten; nach einem Neustart springt
+                er wieder auf <code>standby</code>. Eine echte Geräteanwendung braucht bei Bedarf dauerhafte
+                Zustandsverwaltung und eine sichere Start-/Stopplogik.</p>
+            <details class="news-details guide-code-details">
+                <summary>Vollständige Datei anzeigen: <code>server.py</code></summary>
+                <pre class="cheat-code" data-language="py"><code>&quot;&quot;&quot;Einfacher lokaler Webserver, nur Python-Standardbibliothek.
 
 Start: WEB_CONTROL_PIN=&#x27;ein-langes-geheimes-passwort&#x27; python3 server.py
 Aufruf: http://&lt;raspberry-ip&gt;:8000
@@ -882,10 +894,11 @@ def main():
 
 if __name__ == &#x27;__main__&#x27;:
     main()</code></pre>
-</details>
-</section>
-<section class="card guide-section" id="pinsteuerung"><h2>15. Was beim Klick auf einen Button wirklich passiert</h2>
-<pre class="cheat-code" data-language="text"><code>Handy: Klick auf „Demo starten“
+            </details>
+        </section>
+        <section class="card guide-section" id="pinsteuerung">
+            <h2>15. Was beim Klick auf einen Button wirklich passiert</h2>
+            <pre class="cheat-code" data-language="text"><code>Handy: Klick auf „Demo starten“
        |
 JavaScript: POST /api/action
        |
@@ -898,37 +911,88 @@ Python: Zustand = &quot;recording&quot; (nur Demo)
 Antwort: {&quot;ok&quot;: true, &quot;demo_mode&quot;: &quot;recording&quot;}
        |
 JavaScript: Anzeige aktualisieren</code></pre>
-<p>Das ist der entscheidende Schritt für SailSense: Ein Webbutton kann im Prinzip dieselbe Funktion auslösen wie ein bisheriger physischer Taster – <strong>aber nur, wenn du ihn bewusst mit der vorhandenen Programmlogik verknüpfst</strong>. Das Beispiel setzt zuerst ausschließlich eine harmlose Variable.</p>
-<pre class="cheat-code" data-language="python"><code># Demonstration in server.py:
+            <p>Das ist der entscheidende Schritt für SailSense: Ein Webbutton kann im Prinzip dieselbe Funktion auslösen
+                wie ein bisheriger physischer Taster – <strong>aber nur, wenn du ihn bewusst mit der vorhandenen
+                    Programmlogik verknüpfst</strong>. Das Beispiel setzt zuerst ausschließlich eine harmlose Variable.
+            </p>
+            <pre class="cheat-code" data-language="python"><code># Demonstration in server.py:
 state[&#x27;mode&#x27;] = &#x27;recording&#x27; if action == &#x27;start&#x27; else &#x27;standby&#x27;
 
 # Spätere Integration (Pseudocode, NOCH NICHT funktionsfähig):
 # sailsense_controller.handle_command(action)</code></pre>
-<p>Für reale Funktionen sollte die Webschicht <strong>nicht</strong> selbst GPIO-Leitungen willkürlich schalten oder nebenbei zweite Sensorloops starten. Ideal ist eine zentrale Anwendungslogik, an die bisherige Buttons <em>und</em> neue Webbuttons denselben eindeutigen Befehl senden.</p>
-</section>
-<section class="card guide-section" id="bme"><h2>16. Echte Wetterdaten: BME280 per I²C anschließen</h2>
-<p>Jetzt ersetzen wir die leeren Wetterfelder durch reale Daten. Der BME280 misst <strong>Temperatur, relative Luftfeuchtigkeit und Luftdruck</strong>. Er lässt sich über I²C mit dem Raspberry Pi verbinden – für diese Verbindung sind nur vier Leitungen nötig.</p>
-<div class="guide-table-wrap"><table class="guide-table"><thead><tr><th>BME280-Pin am Modul</th><th>Raspberry-Pi-GPIO (BCM)</th><th>Physische Pin-Nummer</th></tr></thead><tbody>
-<tr><td><code>VIN / VCC</code></td><td><code>3V3</code></td><td><code>1</code></td></tr>
-<tr><td><code>GND</code></td><td>Masse</td><td><code>6</code></td></tr>
-<tr><td><code>SDA</code></td><td><code>GPIO 2 / SDA1</code></td><td><code>3</code></td></tr>
-<tr><td><code>SCL</code></td><td><code>GPIO 3 / SCL1</code></td><td><code>5</code></td></tr>
-</tbody></table></div>
-<p class="hint guide-note"><strong>Elektrische Vorsicht:</strong> Diese Tabelle gilt für ein geeignetes 3,3-V-BME280-Breakout. Prüfe stets die Beschriftung und das Datenblatt <em>deines konkreten Moduls</em>, besonders bei Boards mit Regler oder Pegelwandler. Raspberry-Pi-GPIOs sind nicht 5-V-tolerant. Verkabelung nur im ausgeschalteten Zustand ändern.</p>
-<ol class="guide-steps"><li>Pi ausschalten: <code>sudo shutdown -h now</code>, Stromversorgung danach trennen, vier Leitungen korrekt verbinden.</li><li>Wieder starten, SSH öffnen und <code>sudo raspi-config</code> ausführen.</li><li>Unter <strong>Interface Options → I2C</strong> die I²C-Schnittstelle aktivieren; bei Bedarf neu starten.</li><li><code>i2c-tools</code> installieren und nach der Sensoradresse suchen.</li></ol>
-<pre class="cheat-code" data-language="bash"><code>sudo apt install -y i2c-tools
+            <p>Für reale Funktionen sollte die Webschicht <strong>nicht</strong> selbst GPIO-Leitungen willkürlich
+                schalten oder nebenbei zweite Sensorloops starten. Ideal ist eine zentrale Anwendungslogik, an die
+                bisherige Buttons <em>und</em> neue Webbuttons denselben eindeutigen Befehl senden.</p>
+        </section>
+        <section class="card guide-section" id="bme">
+            <h2>16. Echte Wetterdaten: BME280 per I²C anschließen</h2>
+            <p>Jetzt ersetzen wir die leeren Wetterfelder durch reale Daten. Der BME280 misst <strong>Temperatur,
+                    relative Luftfeuchtigkeit und Luftdruck</strong>. Er lässt sich über I²C mit dem Raspberry Pi
+                verbinden – für diese Verbindung sind nur vier Leitungen nötig.</p>
+            <div class="guide-table-wrap">
+                <table class="guide-table">
+                    <thead>
+                        <tr>
+                            <th>BME280-Pin am Modul</th>
+                            <th>Raspberry-Pi-GPIO (BCM)</th>
+                            <th>Physische Pin-Nummer</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>VIN / VCC</code></td>
+                            <td><code>3V3</code></td>
+                            <td><code>1</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>GND</code></td>
+                            <td>Masse</td>
+                            <td><code>6</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>SDA</code></td>
+                            <td><code>GPIO 2 / SDA1</code></td>
+                            <td><code>3</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>SCL</code></td>
+                            <td><code>GPIO 3 / SCL1</code></td>
+                            <td><code>5</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="hint guide-note"><strong>Elektrische Vorsicht:</strong> Diese Tabelle gilt für ein geeignetes
+                3,3-V-BME280-Breakout. Prüfe stets die Beschriftung und das Datenblatt <em>deines konkreten Moduls</em>,
+                besonders bei Boards mit Regler oder Pegelwandler. Raspberry-Pi-GPIOs sind nicht 5-V-tolerant.
+                Verkabelung nur im ausgeschalteten Zustand ändern.</p>
+            <ol class="guide-steps">
+                <li>Pi ausschalten: <code>sudo shutdown -h now</code>, Stromversorgung danach trennen, vier Leitungen
+                    korrekt verbinden.</li>
+                <li>Wieder starten, SSH öffnen und <code>sudo raspi-config</code> ausführen.</li>
+                <li>Unter <strong>Interface Options → I2C</strong> die I²C-Schnittstelle aktivieren; bei Bedarf neu
+                    starten.</li>
+                <li><code>i2c-tools</code> installieren und nach der Sensoradresse suchen.</li>
+            </ol>
+            <pre class="cheat-code" data-language="bash"><code>sudo apt install -y i2c-tools
 sudo i2cdetect -y 1</code></pre>
-<p>Im Raster sollte typischerweise <code>76</code> oder <code>77</code> auftauchen. Diese Hexadezimalzahlen entsprechen den I²C-Adressen <code>0x76</code> bzw. <code>0x77</code>. Fehlt beides, zunächst Verdrahtung, Versorgung, Schnittstellenaktivierung und Modul überprüfen.</p>
-<p><strong>Python-Treiber installieren</strong> (in der virtuellen Umgebung des Projekts):</p>
-<pre class="cheat-code" data-language="bash"><code>cd ~/pi-web
+            <p>Im Raster sollte typischerweise <code>76</code> oder <code>77</code> auftauchen. Diese Hexadezimalzahlen
+                entsprechen den I²C-Adressen <code>0x76</code> bzw. <code>0x77</code>. Fehlt beides, zunächst
+                Verdrahtung, Versorgung, Schnittstellenaktivierung und Modul überprüfen.</p>
+            <p><strong>Python-Treiber installieren</strong> (in der virtuellen Umgebung des Projekts):</p>
+            <pre class="cheat-code" data-language="bash"><code>cd ~/pi-web
 .venv/bin/pip install adafruit-blinka adafruit-circuitpython-bme280</code></pre>
-<p>Unser <code>server.py</code> versucht beim Start automatisch, den BME280 an <code>0x76</code> zu initialisieren. Wenn der I²C-Scan stattdessen <code>77</code> meldet, ändere die Adresse im Servercode:</p>
-<pre class="cheat-code" data-language="python"><code>bme = adafruit_bme280.Adafruit_BME280_I2C(
+            <p>Unser <code>server.py</code> versucht beim Start automatisch, den BME280 an <code>0x76</code> zu
+                initialisieren. Wenn der I²C-Scan stattdessen <code>77</code> meldet, ändere die Adresse im Servercode:
+            </p>
+            <pre class="cheat-code" data-language="python"><code>bme = adafruit_bme280.Adafruit_BME280_I2C(
     board.I2C(), address=0x77
 )</code></pre>
-<p>Danach Server neu starten. Werden Werte erfolgreich gelesen, zeigt das Dashboard Temperatur, Feuchte und <strong>Stationsluftdruck</strong> an. Stationsdruck ist nicht automatisch der auf Meereshöhe reduzierte Luftdruck aus Wetterberichten.</p>
-<h3>Wenn du zunächst nur den Sensor testen möchtest</h3>
-<pre class="cheat-code" data-language="bash"><code>.venv/bin/python - &lt;&lt;&#x27;PY&#x27;
+            <p>Danach Server neu starten. Werden Werte erfolgreich gelesen, zeigt das Dashboard Temperatur, Feuchte und
+                <strong>Stationsluftdruck</strong> an. Stationsdruck ist nicht automatisch der auf Meereshöhe reduzierte
+                Luftdruck aus Wetterberichten.</p>
+            <h3>Wenn du zunächst nur den Sensor testen möchtest</h3>
+            <pre class="cheat-code" data-language="bash"><code>.venv/bin/python - &lt;&lt;&#x27;PY&#x27;
 import board
 from adafruit_bme280 import basic as bme280
 sensor = bme280.Adafruit_BME280_I2C(board.I2C(), address=0x76)
@@ -936,13 +1000,22 @@ print(&#x27;Temperatur:&#x27;, sensor.temperature)
 print(&#x27;Feuchtigkeit:&#x27;, sensor.relative_humidity)
 print(&#x27;Luftdruck:&#x27;, sensor.pressure)
 PY</code></pre>
-<p>Ersetze gegebenenfalls auch hier <code>0x76</code> durch <code>0x77</code>. Die Beispielwerte stammen erst nach erfolgreichem Test vom tatsächlichen Sensor.</p>
-<p class="hint guide-note">Für eine Wetterstation gehört der BME280 <strong>nicht</strong> direkt neben CPU, Akku, Laderegler oder in ein hermetisch geschlossenes, warmes Elektronikgehäuse. Sonst misst du vor allem die Abwärme deiner Elektronik. Temperatur- und Feuchtesensor benötigen eine geschützte, aber belüftete Messposition; für SailSense müssen Salz, Spritzwasser und Feuchtigkeit getrennt betrachtet werden.</p>
-<p class="guide-check"><strong>✓ Lernkontrolle:</strong> Du siehst beim I²C-Scan eine plausible Sensoradresse und erhältst nach Installation des Treibers echte Werte.</p>
-</section>
-<section class="card guide-section" id="mesh-prinzip"><h2>17. Meshtastic ist nicht WLAN: Wie die beiden Netze zusammenspielen</h2>
-<p>Beim Mesh-Teil sind <strong>zwei verschiedene Funkwelten</strong> beteiligt. Meshtastic überträgt Nachrichten über LoRa auf dem dafür konfigurierten Frequenzband. Dein Handy nutzt für das Dashboard dagegen normales WLAN. Der Raspberry Pi ist die Brücke zwischen beiden.</p>
-<pre class="cheat-code" data-language="text"><code>Ferne Meshtastic-Nodes
+            <p>Ersetze gegebenenfalls auch hier <code>0x76</code> durch <code>0x77</code>. Die Beispielwerte stammen
+                erst nach erfolgreichem Test vom tatsächlichen Sensor.</p>
+            <p class="hint guide-note">Für eine Wetterstation gehört der BME280 <strong>nicht</strong> direkt neben CPU,
+                Akku, Laderegler oder in ein hermetisch geschlossenes, warmes Elektronikgehäuse. Sonst misst du vor
+                allem die Abwärme deiner Elektronik. Temperatur- und Feuchtesensor benötigen eine geschützte, aber
+                belüftete Messposition; für SailSense müssen Salz, Spritzwasser und Feuchtigkeit getrennt betrachtet
+                werden.</p>
+            <p class="guide-check"><strong>✓ Lernkontrolle:</strong> Du siehst beim I²C-Scan eine plausible
+                Sensoradresse und erhältst nach Installation des Treibers echte Werte.</p>
+        </section>
+        <section class="card guide-section" id="mesh-prinzip">
+            <h2>17. Meshtastic ist nicht WLAN: Wie die beiden Netze zusammenspielen</h2>
+            <p>Beim Mesh-Teil sind <strong>zwei verschiedene Funkwelten</strong> beteiligt. Meshtastic überträgt
+                Nachrichten über LoRa auf dem dafür konfigurierten Frequenzband. Dein Handy nutzt für das Dashboard
+                dagegen normales WLAN. Der Raspberry Pi ist die Brücke zwischen beiden.</p>
+            <pre class="cheat-code" data-language="text"><code>Ferne Meshtastic-Nodes
        ))))))  LoRa / Meshtastic
                 |
        [Heltec / Mesh-Node]
@@ -955,3 +1028,103 @@ PY</code></pre>
       HTTP über WLAN (Pi)
                 |
        [Handy im Browser]</code></pre>
+<p>Für die ersten Versuche verbindest du einen vorhandenen Heltec-Meshtastic-Node <strong>mit einem USB-Datenkabel</strong> mit dem Raspberry Pi. Die reguläre Meshtastic-Python-Clientbibliothek kann darüber Textnachrichten empfangen. Du musst dafür <em>nicht</em> den separaten Meshtastic-UART-Serial-Modus aktivieren, solange du über die normale USB-Client-Schnittstelle arbeitest.</p>
+<p>Anders als eine bloße Live-Verbindung hat das SQLite-Archiv einen echten Zusatznutzen: <strong>Neu eintreffende Nachrichten bleiben lokal gespeichert</strong>, selbst wenn du das Handy vom WLAN trennst. Historische Nachrichten vor dem Start des Archivs tauchen dadurch allerdings nicht nachträglich auf.</p>
+</section>
+<section class="card guide-section" id="meshtastic-usb"><h2>18. Meshtastic-Node anschließen – wirklich Schritt für Schritt</h2>
+<ol class="guide-steps"><li>Heltec oder anderen kompatiblen Meshtastic-Node mit einem <strong>Daten</strong>-USB-Kabel an den Raspberry Pi anschließen; reine Ladekabel reichen nicht.</li><li>In der SSH-Konsole die seriellen Ports anzeigen.</li></ol>
+<pre class="cheat-code" data-language="bash"><code>ls /dev/ttyACM* /dev/ttyUSB* 2&gt;/dev/null</code></pre>
+<p>Typische Gerätenamen sind <code>/dev/ttyACM0</code> oder <code>/dev/ttyUSB0</code>. <strong>Die konkrete Nummer kann sich ändern.</strong> Wenn keine Datei angezeigt wird, USB-Kabel, Stromversorgung und <code>dmesg</code> prüfen.</p>
+<pre class="cheat-code" data-language="bash"><code>dmesg | tail -n 25</code></pre>
+<p>Für die Python-Bibliothek:</p>
+<pre class="cheat-code" data-language="bash"><code>cd ~/pi-web
+.venv/bin/pip install meshtastic</code></pre>
+<p>Falls Python keine Zugriffsrechte auf die serielle Schnittstelle hat:</p>
+<pre class="cheat-code" data-language="bash"><code>sudo usermod -aG dialout &quot;$USER&quot;</code></pre>
+<p><strong>Danach abmelden und neu über SSH anmelden</strong>, damit die neue Gruppenzugehörigkeit wirkt. Mit <code>groups</code> kannst du sie kontrollieren. Nun den Empfangsdienst starten – Port anpassen:</p>
+<pre class="cheat-code" data-language="bash"><code>cd ~/pi-web
+.venv/bin/python mesh_bridge.py /dev/ttyACM0</code></pre>
+<p>Schicke mit einem <em>anderen</em> Node eine Testnachricht auf einem passenden Meshtastic-Kanal. Im Terminal sollte die empfangene Nachricht erscheinen. Der Empfangsdienst speichert sie als neuen Datensatz in <code>mesh_messages.sqlite3</code>. Das Dashboard auf dem Handy zeigt anschließend die letzten Nachrichten an.</p>
+<p class="hint guide-note">Wichtig: Nur <strong>ein</strong> Prozess sollte denselben USB-Serial-Port öffnen. Lass nicht gleichzeitig Meshtastic-CLI, einen zweiten Python-Empfänger und dieselbe bestehende Anwendung mit exklusivem Portzugriff laufen. Wenn SailSense/RaspbiMesh bereits den Node ausliest, solltest du den Nachrichteneingang in <em>diesen</em> Prozess integrieren statt eine konkurrierende Verbindung aufzubauen.</p>
+<h3>Und was, wenn ich auch Nachrichten senden möchte?</h3>
+<p>Grundsätzlich ist das möglich: Der Python-Client bietet <code>interface.sendText(...)</code>. Für eine saubere Web-Bedienung sollte aber <strong>derselbe Prozess, der den Serial-Port besitzt</strong>, auch die Sendewünsche abarbeiten, beispielsweise über eine interne Warteschlange. Das mitgelieferte Einsteigerprojekt ist bewusst <strong>nur empfangend</strong>; ein Web-Button zum Funk-Senden ist noch nicht eingebaut. Dadurch kann keine versehentlich im Browser ausgelöste Sendung ins Mesh gelangen.</p>
+<p class="guide-check"><strong>✓ Lernkontrolle:</strong> Ein zweiter Node sendet eine Testnachricht, und sie erscheint nach wenigen Sekunden im Dashboard und bleibt in der SQLite-Datei gespeichert.</p>
+</section>
+<section class="card guide-section" id="sqlite"><h2>19. Warum SQLite? Nachrichten und später Messreihen richtig speichern</h2>
+<p>SQLite ist eine kleine Datenbank, die direkt in einer Datei liegt. Sie benötigt keinen separaten Datenbankserver, ist Teil der Python-Standardbibliothek und eignet sich hervorragend für ein kompaktes Messgerät. Anders als eine bloße Liste im RAM überlebt sie gewöhnliche Neustarts.</p>
+<pre class="cheat-code" data-language="text"><code>messages
+┌────┬─────────────────────────┬──────────┬───────────────┐
+│ id │ received_at             │ sender   │ message       │
+├────┼─────────────────────────┼──────────┼───────────────┤
+│  1 │ 2026-...T...+00:00       │ !abcd... │ Hallo Mesh!   │
+└────┴─────────────────────────┴──────────┴───────────────┘</code></pre>
+<p>Die dargestellte Tabellenzeile ist ein erfundenes <em>Strukturbeispiel</em>. In der echten Datenbank speichert <code>database.py</code> für neue Nachrichten unter anderem Empfangszeit, Absenderkennung, Text und – sofern vorhanden – RSSI/SNR. Die Paket-ID dient der Duplikatvermeidung, soweit sie verfügbar ist.</p>
+<p>So liest du die letzten fünf gespeicherten Datensätze aus, <strong>ohne</strong> ein zusätzliches SQLite-Programm installieren zu müssen:</p>
+<pre class="cheat-code" data-language="bash"><code>.venv/bin/python - &lt;&lt;&#x27;PY&#x27;
+from database import recent_messages
+for message in recent_messages(5):
+    print(message)
+PY</code></pre>
+<p>Für künftige Wetterverläufe kannst du eine zweite Tabelle hinzufügen, etwa <code>weather_samples(timestamp_utc, temperature_c, humidity_percent, pressure_hpa)</code>. Gute Praxis: <strong>Messwerte nicht alle 200 Millisekunden auf die SD-Karte schreiben</strong>. Sensoren regelmäßig auslesen, sinnvolle Mittelwerte bilden und beispielsweise alle 30–60 Sekunden oder minutenweise dauerhaft speichern. Das begrenzt Speichermenge und Schreibbelastung.</p>
+<p>Zeitstempel am besten in <strong>UTC</strong> speichern und erst im Browser lokal darstellen. Das vermeidet Missverständnisse rund um Sommer- und Winterzeit. Das Beispielarchiv nutzt UTC-Zeitstempel.</p>
+<details class="news-details guide-code-details"><summary>Vollständige Datei anzeigen: <code>database.py</code></summary>
+<pre class="cheat-code" data-language="py"><code>&quot;&quot;&quot;Kleine lokale SQLite-Ablage fuer Meshtastic-Nachrichten.&quot;&quot;&quot;
+import sqlite3
+from pathlib import Path
+
+DB_PATH = Path(__file__).resolve().parent / &#x27;mesh_messages.sqlite3&#x27;
+
+
+def connect():
+    connection = sqlite3.connect(DB_PATH, timeout=10)
+    connection.row_factory = sqlite3.Row
+    return connection
+
+
+def prepare():
+    with connect() as connection:
+        connection.execute(&#x27;PRAGMA journal_mode=WAL&#x27;)
+        connection.execute(&#x27;&#x27;&#x27;
+            CREATE TABLE IF NOT EXISTS messages (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                received_at TEXT NOT NULL,
+                sender TEXT NOT NULL,
+                message TEXT NOT NULL,
+                rssi REAL,
+                snr REAL,
+                packet_id TEXT,
+                UNIQUE(sender, packet_id)
+            )
+        &#x27;&#x27;&#x27;)
+
+
+def save_message(received_at, sender, message, rssi=None, snr=None, packet_id=None):
+    with connect() as connection:
+        connection.execute(&#x27;&#x27;&#x27;
+            INSERT OR IGNORE INTO messages
+            (received_at, sender, message, rssi, snr, packet_id)
+            VALUES (?, ?, ?, ?, ?, ?)
+        &#x27;&#x27;&#x27;, (received_at, sender, message, rssi, snr, packet_id))
+
+
+def recent_messages(limit=20):
+    with connect() as connection:
+        rows = connection.execute(&#x27;&#x27;&#x27;
+            SELECT received_at, sender, message, rssi, snr
+            FROM messages ORDER BY id DESC LIMIT ?
+        &#x27;&#x27;&#x27;, (min(max(int(limit), 1), 100),)).fetchall()
+    return [dict(row) for row in rows]</code></pre>
+</details>
+<details class="news-details guide-code-details"><summary>Vollständige Datei anzeigen: <code>mesh_bridge.py</code></summary>
+<pre class="cheat-code" data-language="py"><code>&quot;&quot;&quot;Empfaengt Meshtastic-Textnachrichten von einem USB-Node und archiviert sie.&quot;&quot;&quot;
+import sys
+import time
+from datetime import datetime, timezone
+
+from database import prepare, save_message
+
+try:
+    import meshtastic.serial_interface
+    from pubsub import pub
+except ImportError:
+    raise SystemExit(&#x27;Zuerst im venv installieren: pip install meshtastic&#x27;)
