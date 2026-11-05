@@ -739,7 +739,8 @@ PORT = 8000
             <p>In <code>do_GET()</code> werden Zeit, CPU-Temperatur, BME280-Werte, Demo-Zustand und bis zu 20
                 gespeicherte Mesh-Nachrichten zu JSON. In <code>do_POST()</code> akzeptiert der Server ausschließlich
                 <code>start</code> oder <code>stop</code> und prüft vorher die Steuer-PIN. Unbekannte Befehle werden
-                abgewiesen. <strong>Die reale SailSense-Hardware wird noch nicht angesprochen.</strong></p>
+                abgewiesen. <strong>Die reale SailSense-Hardware wird noch nicht angesprochen.</strong>
+            </p>
             <p class="hint guide-note">Der Demonstrationszustand wird nur im RAM gehalten; nach einem Neustart springt
                 er wieder auf <code>standby</code>. Eine echte Geräteanwendung braucht bei Bedarf dauerhafte
                 Zustandsverwaltung und eine sichere Start-/Stopplogik.</p>
@@ -990,7 +991,8 @@ sudo i2cdetect -y 1</code></pre>
 )</code></pre>
             <p>Danach Server neu starten. Werden Werte erfolgreich gelesen, zeigt das Dashboard Temperatur, Feuchte und
                 <strong>Stationsluftdruck</strong> an. Stationsdruck ist nicht automatisch der auf Meereshöhe reduzierte
-                Luftdruck aus Wetterberichten.</p>
+                Luftdruck aus Wetterberichten.
+            </p>
             <h3>Wenn du zunächst nur den Sensor testen möchtest</h3>
             <pre class="cheat-code" data-language="bash"><code>.venv/bin/python - &lt;&lt;&#x27;PY&#x27;
 import board
@@ -1028,47 +1030,88 @@ PY</code></pre>
       HTTP über WLAN (Pi)
                 |
        [Handy im Browser]</code></pre>
-<p>Für die ersten Versuche verbindest du einen vorhandenen Heltec-Meshtastic-Node <strong>mit einem USB-Datenkabel</strong> mit dem Raspberry Pi. Die reguläre Meshtastic-Python-Clientbibliothek kann darüber Textnachrichten empfangen. Du musst dafür <em>nicht</em> den separaten Meshtastic-UART-Serial-Modus aktivieren, solange du über die normale USB-Client-Schnittstelle arbeitest.</p>
-<p>Anders als eine bloße Live-Verbindung hat das SQLite-Archiv einen echten Zusatznutzen: <strong>Neu eintreffende Nachrichten bleiben lokal gespeichert</strong>, selbst wenn du das Handy vom WLAN trennst. Historische Nachrichten vor dem Start des Archivs tauchen dadurch allerdings nicht nachträglich auf.</p>
-</section>
-<section class="card guide-section" id="meshtastic-usb"><h2>18. Meshtastic-Node anschließen – wirklich Schritt für Schritt</h2>
-<ol class="guide-steps"><li>Heltec oder anderen kompatiblen Meshtastic-Node mit einem <strong>Daten</strong>-USB-Kabel an den Raspberry Pi anschließen; reine Ladekabel reichen nicht.</li><li>In der SSH-Konsole die seriellen Ports anzeigen.</li></ol>
-<pre class="cheat-code" data-language="bash"><code>ls /dev/ttyACM* /dev/ttyUSB* 2&gt;/dev/null</code></pre>
-<p>Typische Gerätenamen sind <code>/dev/ttyACM0</code> oder <code>/dev/ttyUSB0</code>. <strong>Die konkrete Nummer kann sich ändern.</strong> Wenn keine Datei angezeigt wird, USB-Kabel, Stromversorgung und <code>dmesg</code> prüfen.</p>
-<pre class="cheat-code" data-language="bash"><code>dmesg | tail -n 25</code></pre>
-<p>Für die Python-Bibliothek:</p>
-<pre class="cheat-code" data-language="bash"><code>cd ~/pi-web
+            <p>Für die ersten Versuche verbindest du einen vorhandenen Heltec-Meshtastic-Node <strong>mit einem
+                    USB-Datenkabel</strong> mit dem Raspberry Pi. Die reguläre Meshtastic-Python-Clientbibliothek kann
+                darüber Textnachrichten empfangen. Du musst dafür <em>nicht</em> den separaten
+                Meshtastic-UART-Serial-Modus aktivieren, solange du über die normale USB-Client-Schnittstelle arbeitest.
+            </p>
+            <p>Anders als eine bloße Live-Verbindung hat das SQLite-Archiv einen echten Zusatznutzen: <strong>Neu
+                    eintreffende Nachrichten bleiben lokal gespeichert</strong>, selbst wenn du das Handy vom WLAN
+                trennst. Historische Nachrichten vor dem Start des Archivs tauchen dadurch allerdings nicht nachträglich
+                auf.</p>
+        </section>
+        <section class="card guide-section" id="meshtastic-usb">
+            <h2>18. Meshtastic-Node anschließen – wirklich Schritt für Schritt</h2>
+            <ol class="guide-steps">
+                <li>Heltec oder anderen kompatiblen Meshtastic-Node mit einem <strong>Daten</strong>-USB-Kabel an den
+                    Raspberry Pi anschließen; reine Ladekabel reichen nicht.</li>
+                <li>In der SSH-Konsole die seriellen Ports anzeigen.</li>
+            </ol>
+            <pre class="cheat-code" data-language="bash"><code>ls /dev/ttyACM* /dev/ttyUSB* 2&gt;/dev/null</code></pre>
+            <p>Typische Gerätenamen sind <code>/dev/ttyACM0</code> oder <code>/dev/ttyUSB0</code>. <strong>Die konkrete
+                    Nummer kann sich ändern.</strong> Wenn keine Datei angezeigt wird, USB-Kabel, Stromversorgung und
+                <code>dmesg</code> prüfen.</p>
+            <pre class="cheat-code" data-language="bash"><code>dmesg | tail -n 25</code></pre>
+            <p>Für die Python-Bibliothek:</p>
+            <pre class="cheat-code" data-language="bash"><code>cd ~/pi-web
 .venv/bin/pip install meshtastic</code></pre>
-<p>Falls Python keine Zugriffsrechte auf die serielle Schnittstelle hat:</p>
-<pre class="cheat-code" data-language="bash"><code>sudo usermod -aG dialout &quot;$USER&quot;</code></pre>
-<p><strong>Danach abmelden und neu über SSH anmelden</strong>, damit die neue Gruppenzugehörigkeit wirkt. Mit <code>groups</code> kannst du sie kontrollieren. Nun den Empfangsdienst starten – Port anpassen:</p>
-<pre class="cheat-code" data-language="bash"><code>cd ~/pi-web
+            <p>Falls Python keine Zugriffsrechte auf die serielle Schnittstelle hat:</p>
+            <pre class="cheat-code" data-language="bash"><code>sudo usermod -aG dialout &quot;$USER&quot;</code></pre>
+            <p><strong>Danach abmelden und neu über SSH anmelden</strong>, damit die neue Gruppenzugehörigkeit wirkt.
+                Mit <code>groups</code> kannst du sie kontrollieren. Nun den Empfangsdienst starten – Port anpassen:</p>
+            <pre class="cheat-code" data-language="bash"><code>cd ~/pi-web
 .venv/bin/python mesh_bridge.py /dev/ttyACM0</code></pre>
-<p>Schicke mit einem <em>anderen</em> Node eine Testnachricht auf einem passenden Meshtastic-Kanal. Im Terminal sollte die empfangene Nachricht erscheinen. Der Empfangsdienst speichert sie als neuen Datensatz in <code>mesh_messages.sqlite3</code>. Das Dashboard auf dem Handy zeigt anschließend die letzten Nachrichten an.</p>
-<p class="hint guide-note">Wichtig: Nur <strong>ein</strong> Prozess sollte denselben USB-Serial-Port öffnen. Lass nicht gleichzeitig Meshtastic-CLI, einen zweiten Python-Empfänger und dieselbe bestehende Anwendung mit exklusivem Portzugriff laufen. Wenn SailSense/RaspbiMesh bereits den Node ausliest, solltest du den Nachrichteneingang in <em>diesen</em> Prozess integrieren statt eine konkurrierende Verbindung aufzubauen.</p>
-<h3>Und was, wenn ich auch Nachrichten senden möchte?</h3>
-<p>Grundsätzlich ist das möglich: Der Python-Client bietet <code>interface.sendText(...)</code>. Für eine saubere Web-Bedienung sollte aber <strong>derselbe Prozess, der den Serial-Port besitzt</strong>, auch die Sendewünsche abarbeiten, beispielsweise über eine interne Warteschlange. Das mitgelieferte Einsteigerprojekt ist bewusst <strong>nur empfangend</strong>; ein Web-Button zum Funk-Senden ist noch nicht eingebaut. Dadurch kann keine versehentlich im Browser ausgelöste Sendung ins Mesh gelangen.</p>
-<p class="guide-check"><strong>✓ Lernkontrolle:</strong> Ein zweiter Node sendet eine Testnachricht, und sie erscheint nach wenigen Sekunden im Dashboard und bleibt in der SQLite-Datei gespeichert.</p>
-</section>
-<section class="card guide-section" id="sqlite"><h2>19. Warum SQLite? Nachrichten und später Messreihen richtig speichern</h2>
-<p>SQLite ist eine kleine Datenbank, die direkt in einer Datei liegt. Sie benötigt keinen separaten Datenbankserver, ist Teil der Python-Standardbibliothek und eignet sich hervorragend für ein kompaktes Messgerät. Anders als eine bloße Liste im RAM überlebt sie gewöhnliche Neustarts.</p>
-<pre class="cheat-code" data-language="text"><code>messages
+            <p>Schicke mit einem <em>anderen</em> Node eine Testnachricht auf einem passenden Meshtastic-Kanal. Im
+                Terminal sollte die empfangene Nachricht erscheinen. Der Empfangsdienst speichert sie als neuen
+                Datensatz in <code>mesh_messages.sqlite3</code>. Das Dashboard auf dem Handy zeigt anschließend die
+                letzten Nachrichten an.</p>
+            <p class="hint guide-note">Wichtig: Nur <strong>ein</strong> Prozess sollte denselben USB-Serial-Port
+                öffnen. Lass nicht gleichzeitig Meshtastic-CLI, einen zweiten Python-Empfänger und dieselbe bestehende
+                Anwendung mit exklusivem Portzugriff laufen. Wenn SailSense/RaspbiMesh bereits den Node ausliest,
+                solltest du den Nachrichteneingang in <em>diesen</em> Prozess integrieren statt eine konkurrierende
+                Verbindung aufzubauen.</p>
+            <h3>Und was, wenn ich auch Nachrichten senden möchte?</h3>
+            <p>Grundsätzlich ist das möglich: Der Python-Client bietet <code>interface.sendText(...)</code>. Für eine
+                saubere Web-Bedienung sollte aber <strong>derselbe Prozess, der den Serial-Port besitzt</strong>, auch
+                die Sendewünsche abarbeiten, beispielsweise über eine interne Warteschlange. Das mitgelieferte
+                Einsteigerprojekt ist bewusst <strong>nur empfangend</strong>; ein Web-Button zum Funk-Senden ist noch
+                nicht eingebaut. Dadurch kann keine versehentlich im Browser ausgelöste Sendung ins Mesh gelangen.</p>
+            <p class="guide-check"><strong>✓ Lernkontrolle:</strong> Ein zweiter Node sendet eine Testnachricht, und sie
+                erscheint nach wenigen Sekunden im Dashboard und bleibt in der SQLite-Datei gespeichert.</p>
+        </section>
+        <section class="card guide-section" id="sqlite">
+            <h2>19. Warum SQLite? Nachrichten und später Messreihen richtig speichern</h2>
+            <p>SQLite ist eine kleine Datenbank, die direkt in einer Datei liegt. Sie benötigt keinen separaten
+                Datenbankserver, ist Teil der Python-Standardbibliothek und eignet sich hervorragend für ein kompaktes
+                Messgerät. Anders als eine bloße Liste im RAM überlebt sie gewöhnliche Neustarts.</p>
+            <pre class="cheat-code" data-language="text"><code>messages
 ┌────┬─────────────────────────┬──────────┬───────────────┐
 │ id │ received_at             │ sender   │ message       │
 ├────┼─────────────────────────┼──────────┼───────────────┤
 │  1 │ 2026-...T...+00:00       │ !abcd... │ Hallo Mesh!   │
 └────┴─────────────────────────┴──────────┴───────────────┘</code></pre>
-<p>Die dargestellte Tabellenzeile ist ein erfundenes <em>Strukturbeispiel</em>. In der echten Datenbank speichert <code>database.py</code> für neue Nachrichten unter anderem Empfangszeit, Absenderkennung, Text und – sofern vorhanden – RSSI/SNR. Die Paket-ID dient der Duplikatvermeidung, soweit sie verfügbar ist.</p>
-<p>So liest du die letzten fünf gespeicherten Datensätze aus, <strong>ohne</strong> ein zusätzliches SQLite-Programm installieren zu müssen:</p>
-<pre class="cheat-code" data-language="bash"><code>.venv/bin/python - &lt;&lt;&#x27;PY&#x27;
+            <p>Die dargestellte Tabellenzeile ist ein erfundenes <em>Strukturbeispiel</em>. In der echten Datenbank
+                speichert <code>database.py</code> für neue Nachrichten unter anderem Empfangszeit, Absenderkennung,
+                Text und – sofern vorhanden – RSSI/SNR. Die Paket-ID dient der Duplikatvermeidung, soweit sie verfügbar
+                ist.</p>
+            <p>So liest du die letzten fünf gespeicherten Datensätze aus, <strong>ohne</strong> ein zusätzliches
+                SQLite-Programm installieren zu müssen:</p>
+            <pre class="cheat-code" data-language="bash"><code>.venv/bin/python - &lt;&lt;&#x27;PY&#x27;
 from database import recent_messages
 for message in recent_messages(5):
     print(message)
 PY</code></pre>
-<p>Für künftige Wetterverläufe kannst du eine zweite Tabelle hinzufügen, etwa <code>weather_samples(timestamp_utc, temperature_c, humidity_percent, pressure_hpa)</code>. Gute Praxis: <strong>Messwerte nicht alle 200 Millisekunden auf die SD-Karte schreiben</strong>. Sensoren regelmäßig auslesen, sinnvolle Mittelwerte bilden und beispielsweise alle 30–60 Sekunden oder minutenweise dauerhaft speichern. Das begrenzt Speichermenge und Schreibbelastung.</p>
-<p>Zeitstempel am besten in <strong>UTC</strong> speichern und erst im Browser lokal darstellen. Das vermeidet Missverständnisse rund um Sommer- und Winterzeit. Das Beispielarchiv nutzt UTC-Zeitstempel.</p>
-<details class="news-details guide-code-details"><summary>Vollständige Datei anzeigen: <code>database.py</code></summary>
-<pre class="cheat-code" data-language="py"><code>&quot;&quot;&quot;Kleine lokale SQLite-Ablage fuer Meshtastic-Nachrichten.&quot;&quot;&quot;
+            <p>Für künftige Wetterverläufe kannst du eine zweite Tabelle hinzufügen, etwa
+                <code>weather_samples(timestamp_utc, temperature_c, humidity_percent, pressure_hpa)</code>. Gute Praxis:
+                <strong>Messwerte nicht alle 200 Millisekunden auf die SD-Karte schreiben</strong>. Sensoren regelmäßig
+                auslesen, sinnvolle Mittelwerte bilden und beispielsweise alle 30–60 Sekunden oder minutenweise
+                dauerhaft speichern. Das begrenzt Speichermenge und Schreibbelastung.</p>
+            <p>Zeitstempel am besten in <strong>UTC</strong> speichern und erst im Browser lokal darstellen. Das
+                vermeidet Missverständnisse rund um Sommer- und Winterzeit. Das Beispielarchiv nutzt UTC-Zeitstempel.
+            </p>
+            <details class="news-details guide-code-details">
+                <summary>Vollständige Datei anzeigen: <code>database.py</code></summary>
+                <pre class="cheat-code" data-language="py"><code>&quot;&quot;&quot;Kleine lokale SQLite-Ablage fuer Meshtastic-Nachrichten.&quot;&quot;&quot;
 import sqlite3
 from pathlib import Path
 
@@ -1114,9 +1157,10 @@ def recent_messages(limit=20):
             FROM messages ORDER BY id DESC LIMIT ?
         &#x27;&#x27;&#x27;, (min(max(int(limit), 1), 100),)).fetchall()
     return [dict(row) for row in rows]</code></pre>
-</details>
-<details class="news-details guide-code-details"><summary>Vollständige Datei anzeigen: <code>mesh_bridge.py</code></summary>
-<pre class="cheat-code" data-language="py"><code>&quot;&quot;&quot;Empfaengt Meshtastic-Textnachrichten von einem USB-Node und archiviert sie.&quot;&quot;&quot;
+            </details>
+            <details class="news-details guide-code-details">
+                <summary>Vollständige Datei anzeigen: <code>mesh_bridge.py</code></summary>
+                <pre class="cheat-code" data-language="py"><code>&quot;&quot;&quot;Empfaengt Meshtastic-Textnachrichten von einem USB-Node und archiviert sie.&quot;&quot;&quot;
 import sys
 import time
 from datetime import datetime, timezone
