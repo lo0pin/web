@@ -724,3 +724,234 @@ setInterval(refresh, 2000);</code></pre>
                 öffentlich erreichbarer Webserver wäre eine andere Liga.</p>
             <pre class="cheat-code" data-language="python"><code>HOST = &#x27;0.0.0.0&#x27;
 PORT = 8000
+
+
+# GET /api/status   -&gt; aktuelle Werte lesen
+# POST /api/action  -&gt; PIN prüfen, Demo-Aktion ausführen
+# alle anderen Pfade -&gt; Dateien aus web/ ausliefern</code></pre>
+<p><strong><code>0.0.0.0</code> ist keine Browser-Adresse.</strong> Es bedeutet lediglich, dass der Python-Server auf allen Netzwerkinterfaces des Pi Anfragen annimmt. Du öffnest auf dem Handy weiterhin die konkrete IP oder den Hostnamen des Pi.</p>
+<p>In <code>do_GET()</code> werden Zeit, CPU-Temperatur, BME280-Werte, Demo-Zustand und bis zu 20 gespeicherte Mesh-Nachrichten zu JSON. In <code>do_POST()</code> akzeptiert der Server ausschließlich <code>start</code> oder <code>stop</code> und prüft vorher die Steuer-PIN. Unbekannte Befehle werden abgewiesen. <strong>Die reale SailSense-Hardware wird noch nicht angesprochen.</strong></p>
+<p class="hint guide-note">Der Demonstrationszustand wird nur im RAM gehalten; nach einem Neustart springt er wieder auf <code>standby</code>. Eine echte Geräteanwendung braucht bei Bedarf dauerhafte Zustandsverwaltung und eine sichere Start-/Stopplogik.</p>
+<details class="news-details guide-code-details"><summary>Vollständige Datei anzeigen: <code>server.py</code></summary>
+<pre class="cheat-code" data-language="py"><code>&quot;&quot;&quot;Einfacher lokaler Webserver, nur Python-Standardbibliothek.
+
+Start: WEB_CONTROL_PIN=&#x27;ein-langes-geheimes-passwort&#x27; python3 server.py
+Aufruf: http://&lt;raspberry-ip&gt;:8000
+&quot;&quot;&quot;
+import json
+import os
+import secrets
+import threading
+from datetime import datetime, timezone
+from functools import partial
+from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
+from pathlib import Path
+from urllib.parse import urlsplit
+
+from database import prepare, recent_messages
+
+ROOT = Path(__file__).resolve().parent
+PUBLIC = ROOT / &#x27;web&#x27;
+HOST = &#x27;0.0.0.0&#x27;  # Von anderen Geraeten im lokalen Netz erreichbar.
+PORT = 8000
+CONTROL_PIN = os.environ.get(&#x27;WEB_CONTROL_PIN&#x27;, &#x27;&#x27;)
+state = {&#x27;mode&#x27;: &#x27;standby&#x27;}
+state_lock = threading.Lock()
+bme_lock = threading.Lock()
+bme = None
+
+# Optional: Wenn Bibliothek + BME280 vorhanden sind, echte Werte auslesen.
+try:
+    import board
+    from adafruit_bme280 import basic as adafruit_bme280
+    bme = adafruit_bme280.Adafruit_BME280_I2C(board.I2C(), address=0x76)
+    print(&#x27;BME280 erkannt (I2C-Adresse 0x76).&#x27;)
+except (ImportError, RuntimeError, OSError, ValueError) as exc:
+    print(f&#x27;Kein BME280 aktiv: {exc}&#x27;)
+
+
+def cpu_temperature():
+    &quot;&quot;&quot;CPU-Temperatur des Pi; nicht die Aussentemperatur!&quot;&quot;&quot;
+    try:
+        raw = Path(&#x27;/sys/class/thermal/thermal_zone0/temp&#x27;).read_text().strip()
+        return round(int(raw) / 1000, 1)
+    except (OSError, ValueError):
+        return None
+
+
+def read_weather():
+    if bme is None:
+        return {&#x27;temperature_c&#x27;: None, &#x27;humidity_percent&#x27;: None, &#x27;pressure_hpa&#x27;: None}
+    try:
+        with bme_lock:
+            return {
+                &#x27;temperature_c&#x27;: round(bme.temperature, 1),
+                &#x27;humidity_percent&#x27;: round(bme.relative_humidity, 1),
+                &#x27;pressure_hpa&#x27;: round(bme.pressure, 1),
+            }
+    except (OSError, RuntimeError, ValueError) as exc:
+        print(f&#x27;BME280-Lesefehler: {exc}&#x27;)
+        return {&#x27;temperature_c&#x27;: None, &#x27;humidity_percent&#x27;: None, &#x27;pressure_hpa&#x27;: None}
+
+
+def uptime_seconds():
+    try:
+        return int(float(Path(&#x27;/proc/uptime&#x27;).read_text().split()[0]))
+    except (OSError, ValueError, IndexError):
+        return None
+
+
+class Handler(SimpleHTTPRequestHandler):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, directory=str(PUBLIC), **kwargs)
+
+    def send_json(self, status_code, obj):
+        raw = json.dumps(obj, ensure_ascii=False, allow_nan=False).encode(&#x27;utf-8&#x27;)
+        self.send_response(status_code)
+        self.send_header(&#x27;Content-Type&#x27;, &#x27;application/json; charset=utf-8&#x27;)
+        self.send_header(&#x27;Content-Length&#x27;, str(len(raw)))
+        self.send_header(&#x27;Cache-Control&#x27;, &#x27;no-store&#x27;)
+        self.send_header(&#x27;X-Content-Type-Options&#x27;, &#x27;nosniff&#x27;)
+        self.end_headers()
+        self.wfile.write(raw)
+
+    def do_GET(self):
+        if urlsplit(self.path).path == &#x27;/api/status&#x27;:
+            with state_lock:
+                mode = state[&#x27;mode&#x27;]
+            self.send_json(200, {
+                &#x27;timestamp_utc&#x27;: datetime.now(timezone.utc).isoformat(),
+                &#x27;pi_cpu_temperature_c&#x27;: cpu_temperature(),
+                &#x27;pi_uptime_seconds&#x27;: uptime_seconds(),
+                &#x27;weather&#x27;: read_weather(),
+                &#x27;demo_mode&#x27;: mode,
+                &#x27;mesh_messages&#x27;: recent_messages(20),
+                &#x27;control_available&#x27;: bool(CONTROL_PIN),
+            })
+            return
+        if urlsplit(self.path).path.startswith(&#x27;/api/&#x27;):
+            self.send_json(404, {&#x27;error&#x27;: &#x27;Unbekannter API-Pfad&#x27;})
+            return
+        return super().do_GET()
+
+    def do_POST(self):
+        if urlsplit(self.path).path != &#x27;/api/action&#x27;:
+            self.send_json(404, {&#x27;error&#x27;: &#x27;Unbekannter API-Pfad&#x27;})
+            return
+        if not CONTROL_PIN:
+            self.send_json(503, {&#x27;error&#x27;: &#x27;Steuerung gesperrt: WEB_CONTROL_PIN fehlt&#x27;})
+            return
+        if self.headers.get(&#x27;Content-Type&#x27;, &#x27;&#x27;).split(&#x27;;&#x27;)[0].strip().lower() != &#x27;application/json&#x27;:
+            self.send_json(415, {&#x27;error&#x27;: &#x27;Bitte JSON senden&#x27;})
+            return
+        try:
+            length = int(self.headers.get(&#x27;Content-Length&#x27;, &#x27;0&#x27;))
+            if not 0 &lt; length &lt;= 2048:
+                self.send_json(413, {&#x27;error&#x27;: &#x27;Anfrage zu gross oder leer&#x27;})
+                return
+            command = json.loads(self.rfile.read(length).decode(&#x27;utf-8&#x27;))
+        except (ValueError, UnicodeError, json.JSONDecodeError):
+            self.send_json(400, {&#x27;error&#x27;: &#x27;Ungueltige JSON-Daten&#x27;})
+            return
+        if not isinstance(command, dict):
+            self.send_json(400, {&#x27;error&#x27;: &#x27;JSON-Objekt erwartet&#x27;})
+            return
+        pin = command.get(&#x27;pin&#x27;)
+        if not isinstance(pin, str) or not secrets.compare_digest(pin, CONTROL_PIN):
+            self.send_json(403, {&#x27;error&#x27;: &#x27;Falsche PIN&#x27;})
+            return
+        action = command.get(&#x27;action&#x27;)
+        if action not in (&#x27;start&#x27;, &#x27;stop&#x27;):
+            self.send_json(400, {&#x27;error&#x27;: &#x27;Aktion nicht erlaubt&#x27;})
+            return
+        with state_lock:
+            state[&#x27;mode&#x27;] = &#x27;recording&#x27; if action == &#x27;start&#x27; else &#x27;standby&#x27;
+            new_mode = state[&#x27;mode&#x27;]
+        # WICHTIG: Nur DEMO-Zustand. Hier spaeter die SailSense-Funktion aufrufen.
+        self.send_json(200, {&#x27;ok&#x27;: True, &#x27;demo_mode&#x27;: new_mode})
+
+
+def main():
+    prepare()
+    if not CONTROL_PIN:
+        print(&#x27;HINWEIS: Demo-Steuerung deaktiviert, da WEB_CONTROL_PIN nicht gesetzt ist.&#x27;)
+    with ThreadingHTTPServer((HOST, PORT), Handler) as httpd:
+        print(f&#x27;Webserver bereit auf Port {PORT}. Mit Strg+C beenden.&#x27;)
+        httpd.serve_forever()
+
+
+if __name__ == &#x27;__main__&#x27;:
+    main()</code></pre>
+</details>
+</section>
+<section class="card guide-section" id="pinsteuerung"><h2>15. Was beim Klick auf einen Button wirklich passiert</h2>
+<pre class="cheat-code" data-language="text"><code>Handy: Klick auf „Demo starten“
+       |
+JavaScript: POST /api/action
+       |
+JSON: {&quot;action&quot;: &quot;start&quot;, &quot;pin&quot;: &quot;...&quot;}
+       |
+Python: Prüfen, ob Aktion erlaubt ist und PIN stimmt
+       |
+Python: Zustand = &quot;recording&quot; (nur Demo)
+       |
+Antwort: {&quot;ok&quot;: true, &quot;demo_mode&quot;: &quot;recording&quot;}
+       |
+JavaScript: Anzeige aktualisieren</code></pre>
+<p>Das ist der entscheidende Schritt für SailSense: Ein Webbutton kann im Prinzip dieselbe Funktion auslösen wie ein bisheriger physischer Taster – <strong>aber nur, wenn du ihn bewusst mit der vorhandenen Programmlogik verknüpfst</strong>. Das Beispiel setzt zuerst ausschließlich eine harmlose Variable.</p>
+<pre class="cheat-code" data-language="python"><code># Demonstration in server.py:
+state[&#x27;mode&#x27;] = &#x27;recording&#x27; if action == &#x27;start&#x27; else &#x27;standby&#x27;
+
+# Spätere Integration (Pseudocode, NOCH NICHT funktionsfähig):
+# sailsense_controller.handle_command(action)</code></pre>
+<p>Für reale Funktionen sollte die Webschicht <strong>nicht</strong> selbst GPIO-Leitungen willkürlich schalten oder nebenbei zweite Sensorloops starten. Ideal ist eine zentrale Anwendungslogik, an die bisherige Buttons <em>und</em> neue Webbuttons denselben eindeutigen Befehl senden.</p>
+</section>
+<section class="card guide-section" id="bme"><h2>16. Echte Wetterdaten: BME280 per I²C anschließen</h2>
+<p>Jetzt ersetzen wir die leeren Wetterfelder durch reale Daten. Der BME280 misst <strong>Temperatur, relative Luftfeuchtigkeit und Luftdruck</strong>. Er lässt sich über I²C mit dem Raspberry Pi verbinden – für diese Verbindung sind nur vier Leitungen nötig.</p>
+<div class="guide-table-wrap"><table class="guide-table"><thead><tr><th>BME280-Pin am Modul</th><th>Raspberry-Pi-GPIO (BCM)</th><th>Physische Pin-Nummer</th></tr></thead><tbody>
+<tr><td><code>VIN / VCC</code></td><td><code>3V3</code></td><td><code>1</code></td></tr>
+<tr><td><code>GND</code></td><td>Masse</td><td><code>6</code></td></tr>
+<tr><td><code>SDA</code></td><td><code>GPIO 2 / SDA1</code></td><td><code>3</code></td></tr>
+<tr><td><code>SCL</code></td><td><code>GPIO 3 / SCL1</code></td><td><code>5</code></td></tr>
+</tbody></table></div>
+<p class="hint guide-note"><strong>Elektrische Vorsicht:</strong> Diese Tabelle gilt für ein geeignetes 3,3-V-BME280-Breakout. Prüfe stets die Beschriftung und das Datenblatt <em>deines konkreten Moduls</em>, besonders bei Boards mit Regler oder Pegelwandler. Raspberry-Pi-GPIOs sind nicht 5-V-tolerant. Verkabelung nur im ausgeschalteten Zustand ändern.</p>
+<ol class="guide-steps"><li>Pi ausschalten: <code>sudo shutdown -h now</code>, Stromversorgung danach trennen, vier Leitungen korrekt verbinden.</li><li>Wieder starten, SSH öffnen und <code>sudo raspi-config</code> ausführen.</li><li>Unter <strong>Interface Options → I2C</strong> die I²C-Schnittstelle aktivieren; bei Bedarf neu starten.</li><li><code>i2c-tools</code> installieren und nach der Sensoradresse suchen.</li></ol>
+<pre class="cheat-code" data-language="bash"><code>sudo apt install -y i2c-tools
+sudo i2cdetect -y 1</code></pre>
+<p>Im Raster sollte typischerweise <code>76</code> oder <code>77</code> auftauchen. Diese Hexadezimalzahlen entsprechen den I²C-Adressen <code>0x76</code> bzw. <code>0x77</code>. Fehlt beides, zunächst Verdrahtung, Versorgung, Schnittstellenaktivierung und Modul überprüfen.</p>
+<p><strong>Python-Treiber installieren</strong> (in der virtuellen Umgebung des Projekts):</p>
+<pre class="cheat-code" data-language="bash"><code>cd ~/pi-web
+.venv/bin/pip install adafruit-blinka adafruit-circuitpython-bme280</code></pre>
+<p>Unser <code>server.py</code> versucht beim Start automatisch, den BME280 an <code>0x76</code> zu initialisieren. Wenn der I²C-Scan stattdessen <code>77</code> meldet, ändere die Adresse im Servercode:</p>
+<pre class="cheat-code" data-language="python"><code>bme = adafruit_bme280.Adafruit_BME280_I2C(
+    board.I2C(), address=0x77
+)</code></pre>
+<p>Danach Server neu starten. Werden Werte erfolgreich gelesen, zeigt das Dashboard Temperatur, Feuchte und <strong>Stationsluftdruck</strong> an. Stationsdruck ist nicht automatisch der auf Meereshöhe reduzierte Luftdruck aus Wetterberichten.</p>
+<h3>Wenn du zunächst nur den Sensor testen möchtest</h3>
+<pre class="cheat-code" data-language="bash"><code>.venv/bin/python - &lt;&lt;&#x27;PY&#x27;
+import board
+from adafruit_bme280 import basic as bme280
+sensor = bme280.Adafruit_BME280_I2C(board.I2C(), address=0x76)
+print(&#x27;Temperatur:&#x27;, sensor.temperature)
+print(&#x27;Feuchtigkeit:&#x27;, sensor.relative_humidity)
+print(&#x27;Luftdruck:&#x27;, sensor.pressure)
+PY</code></pre>
+<p>Ersetze gegebenenfalls auch hier <code>0x76</code> durch <code>0x77</code>. Die Beispielwerte stammen erst nach erfolgreichem Test vom tatsächlichen Sensor.</p>
+<p class="hint guide-note">Für eine Wetterstation gehört der BME280 <strong>nicht</strong> direkt neben CPU, Akku, Laderegler oder in ein hermetisch geschlossenes, warmes Elektronikgehäuse. Sonst misst du vor allem die Abwärme deiner Elektronik. Temperatur- und Feuchtesensor benötigen eine geschützte, aber belüftete Messposition; für SailSense müssen Salz, Spritzwasser und Feuchtigkeit getrennt betrachtet werden.</p>
+<p class="guide-check"><strong>✓ Lernkontrolle:</strong> Du siehst beim I²C-Scan eine plausible Sensoradresse und erhältst nach Installation des Treibers echte Werte.</p>
+</section>
+<section class="card guide-section" id="mesh-prinzip"><h2>17. Meshtastic ist nicht WLAN: Wie die beiden Netze zusammenspielen</h2>
+<p>Beim Mesh-Teil sind <strong>zwei verschiedene Funkwelten</strong> beteiligt. Meshtastic überträgt Nachrichten über LoRa auf dem dafür konfigurierten Frequenzband. Dein Handy nutzt für das Dashboard dagegen normales WLAN. Der Raspberry Pi ist die Brücke zwischen beiden.</p>
+<pre class="cheat-code" data-language="text"><code>Ferne Meshtastic-Nodes
+       ))))))  LoRa / Meshtastic
+                |
+       [Heltec / Mesh-Node]
+                | USB-Kabel
+        [Raspberry Pi]
+       Meshtastic Python API
+                |
+           SQLite-Archiv
+                |
+      HTTP über WLAN (Pi)
+                |
+       [Handy im Browser]</code></pre>
