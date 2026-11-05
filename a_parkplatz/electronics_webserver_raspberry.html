@@ -1172,3 +1172,108 @@ try:
     from pubsub import pub
 except ImportError:
     raise SystemExit(&#x27;Zuerst im venv installieren: pip install meshtastic&#x27;)
+
+
+
+def on_receive(packet, interface):
+    decoded = packet.get(&#x27;decoded&#x27;) or {}
+    message = decoded.get(&#x27;text&#x27;, &#x27;&#x27;)
+    if not isinstance(message, str) or not message:
+        return
+    sender = str(packet.get(&#x27;fromId&#x27;) or packet.get(&#x27;from&#x27;) or &#x27;unbekannt&#x27;)
+    packet_id = packet.get(&#x27;id&#x27;)
+    when = datetime.now(timezone.utc).isoformat()
+    save_message(
+        when, sender, message, packet.get(&#x27;rxRssi&#x27;), packet.get(&#x27;rxSnr&#x27;),
+        str(packet_id) if packet_id is not None else None,
+    )
+    print(f&#x27;[{when}] {sender}: {message}&#x27;, flush=True)
+
+
+def main():
+    if len(sys.argv) != 2:
+        raise SystemExit(&#x27;Aufruf: python mesh_bridge.py /dev/ttyACM0&#x27;)
+    prepare()
+    pub.subscribe(on_receive, &#x27;meshtastic.receive.text&#x27;)
+    # Der serielle Anschluss wird von genau EINEM Prozess verwaltet.
+    port = sys.argv[1]
+    iface = meshtastic.serial_interface.SerialInterface(devPath=port)
+    print(f&#x27;Meshtastic verbunden: {port}; warte auf neue Nachrichten ...&#x27;, flush=True)
+    try:
+        while True:
+            time.sleep(1)
+    except KeyboardInterrupt:
+        print(&#x27;Bridge beendet.&#x27;, flush=True)
+    finally:
+        iface.close()
+
+
+if __name__ == &#x27;__main__&#x27;:
+    main()</code></pre>
+</details>
+</section>
+<section class="card guide-section" id="raspbimesh"><h2>20. RaspbiMesh: Wettertelemetrie und Nachrichten auf einer Oberfläche</h2>
+<p>Bei deinem RaspbiMesh-Projekt wäre eine gemeinsame Oberfläche ausgesprochen sinnvoll. Allerdings muss man zwischen <strong>Messwerten, die direkt am Raspberry Pi entstehen</strong>, und <strong>Wettertelemetrie, die von einem fernen Mesh-Node per LoRa eintrifft</strong>, unterscheiden.</p>
+<pre class="cheat-code" data-language="text"><code>Lokaler BME280 -----------------------┐
+                                     |
+LoRa-Wettertelemetrie -&gt; USB-Node -&gt; | --&gt; Datenmodell
+                                     |       |
+LoRa-Textnachrichten -&gt; USB-Node ---&gt;|       v
+                                     |   SQLite / API
+                                     |       |
+                                     └-------v
+                                         Handy-Dashboard</code></pre>
+<p>Die <strong>lokalen</strong> BME280-Werte kann der mitgelieferte Server direkt anzeigen. <strong>Mesh-Wettertelemetrie</strong> braucht hingegen einen Decoder für das tatsächlich empfangene Paket: Bei Meshtastic sind das je nach Gerät, Firmware, Portnummer und Sensorsetup andere Felder. Ein selbst entwickeltes RaspbiMesh-Payload-Format wäre wiederum separat zu interpretieren. Die genaue Integration ist daher bewusst <strong>noch keine fertige Funktion</strong> des Beispielprojekts.</p>
+<h3>Die richtige Vorgehensweise</h3>
+<ol><li>Lass die Meshtastic-Bridge zunächst Textnachrichten zuverlässig empfangen.</li><li>Untersuche im eigenen Testnetz <em>ein reales</em> empfangenes Telemetriepaket und seine Struktur. Achte darauf, keine privaten Nachrichten oder Schlüssel zu veröffentlichen.</li><li>Schreibe einen kleinen Decoder, der die echten Daten in ein einheitliches Format umwandelt, beispielsweise <code>source_node</code>, <code>timestamp_utc</code>, <code>temperature_c</code> und <code>battery_percent</code>.</li><li>Speichere die Messwerte in einer eigenen SQLite-Tabelle und ergänze einen API-Endpunkt wie <code>/api/weather-history</code>.</li><li>Zeige am Handy sowohl den <strong>Messzeitpunkt</strong> als auch das Alter des letzten empfangenen Datenpunkts an. „Letzte Meldung vor drei Stunden“ darf nicht wie Live-Wetter aussehen.</li></ol>
+<p class="hint guide-note">Weder die Meshtastic-Funkstrecke noch eine USB-Verbindung garantiert, dass jedes Paket ankommt. Gerade bei einer Wetterstation sind Status „veraltet/offline“, Zeitstempel, Packet-Loss und eine lokale Speicherung nützlicher als eine täuschend glatte „Live“-Anzeige.</p>
+</section>
+<section class="card guide-section" id="sailsense"><h2>21. SailSense: Buttons und OLED durch das Handy ersetzen</h2>
+<p>Für SailSense ist die Weboberfläche sogar ein potenzieller <strong>Gehäuse- und Wartungsgewinn</strong>: weniger Ausnehmungen für Taster, keine notwendige Displayöffnung, weniger Dichtungskanten und ein zentraler, am Handy bedienbarer Bildschirm. Die Software muss allerdings so strukturiert sein, dass nicht ein zweiter Webprozess unkontrolliert in die bestehende Sensor- und Logginglogik eingreift.</p>
+<div class="guide-table-wrap"><table class="guide-table"><thead><tr><th>Bisher am Gerät</th><th>Mögliches Web-Pendant</th><th>Technische Umsetzung</th></tr></thead><tbody>
+<tr><td>OLED: aktuelle Werte</td><td>Dashboard-Kacheln / digitale Instrumente</td><td><code>GET /api/status</code></td></tr>
+<tr><td>OLED: Messverlauf</td><td>Verlaufsgrafik / Historie</td><td><code>GET /api/history</code> + Speicherung</td></tr>
+<tr><td>Taste: Start/Stop</td><td>Zwei große Touch-Schaltflächen</td><td><code>POST /api/action</code></td></tr>
+<tr><td>Taste: Menü wechseln</td><td>Registerkarten / Seitenmenü</td><td>Lokales HTML/JavaScript</td></tr>
+<tr><td>Hardware-Konfiguration</td><td>Einstellungsformular</td><td>Validierter <code>POST</code>-Endpunkt</td></tr>
+<tr><td>Status-LED</td><td>Kleine Statusanzeige auf dem Dashboard</td><td>API-Status plus Anzeige „Letzte Aktualisierung“</td></tr>
+</tbody></table></div>
+<h3>Eine zentrale Steuerungslogik statt doppelter Programme</h3>
+<pre class="cheat-code" data-language="text"><code>                   +--&gt; physischer Button (optional)
+                   |
+SailSense-Steuerung +--&gt; Web-POST /api/action
+                   |
+                   +--&gt; GPS / Sensorik / Logging
+                   |
+                   +--&gt; Statusdaten -&gt; GET /api/status</code></pre>
+<p>Ein robuster Ansatz ist eine zentrale <code>SailSenseController</code>-Klasse oder ein vorhandener Dienst, der die gesamte echte Hardware besitzt. Der Webserver darf nur wohldefinierte Aktionen an diesen Controller weiterreichen und Statuswerte abrufen. Wenn der bestehende SailSense-Dienst schon unter <code>systemd</code> läuft, ist besonders wichtig: <strong>nicht gleichzeitig zwei Prozesse mit exklusivem Zugriff auf denselben GPS-/Serial-/GPIO-/I²C-Baustein starten</strong>.</p>
+<p>Mögliche Integrationswege: <strong>A)</strong> Webserver direkt im bestehenden Python-Prozess auf einem separaten Thread (mit sauberem Datenaustausch), <strong>B)</strong> ein getrenntes Webserver-Programm mit lokaler Kommunikation über Socket/Queue/SQLite oder <strong>C)</strong> der bestehende Prozess schreibt Snapshots, die der Webserver nur liest. Für ein kleines Gerät ist A oft überschaubar; bei mehrjährigem Betrieb kann B eine sauberere Trennung bieten.</p>
+<h3>Was du beim Entfall von Bildschirm und Tastern nicht übersehen solltest</h3>
+<ul><li><strong>Fallback:</strong> Wie stoppst oder startest du wichtige Funktionen, wenn das WLAN ausfällt oder das Handy leer ist? Mindestens eine einfache lokale Notbedienung bzw. definierte Default-Logik ist sinnvoll.</li><li><strong>Boot-Verhalten:</strong> Beginnt die Messung automatisch? Muss sie nach Stromausfall bewusst gestartet werden? Das ist eine Produktentscheidung, keine CSS-Frage.</li><li><strong>Rückmeldung:</strong> Nach einem Buttonklick nur „Erfolg“ melden, wenn die Anwendungslogik die Aktion tatsächlich bestätigt hat.</li><li><strong>Funk:</strong> Ein vollständig leitendes/abgeschirmtes Gehäuse verhindert auch die WLAN-Verbindung. Antenne und wasserdichte HF-Durchführung müssen mitgeplant werden.</li><li><strong>Energie:</strong> WLAN-AP und ständig laufender Pi erhöhen die Leistungsaufnahme. Auf einem Segelboot mit Akku ist das messbar relevant.</li></ul>
+</section>
+<section class="card guide-section" id="hotspot"><h2>22. Ein eigenes WLAN erzeugen: Raspberry Pi als Access Point</h2>
+<p>Jetzt machen wir das System unabhängig vom Heimrouter. Auf modernen Raspberry Pi OS-Versionen wird das üblicherweise über <strong>NetworkManager</strong> und das Kommando <code>nmcli</code> konfiguriert. Die folgenden Schritte beruhen auf der offiziellen Raspberry-Pi-Anleitung für Hotspots.</p>
+<p class="hint guide-note"><strong>Ganz wichtig vor dem Start:</strong> Wenn du aktuell per SSH <em>über wlan0</em> verbunden bist und dieses Interface zum Hotspot umkonfigurierst, <strong>bricht die Verbindung erwartungsgemäß ab</strong>. Führe diesen Schritt erst aus, wenn du das Heimnetz-Setup verstanden hast und eine Rückfallmöglichkeit besitzt: Bildschirm/Tastatur, Ethernet/USB-Ethernet oder zweiter WLAN-Adapter. Nicht blind die eigene einzige Fernverbindung kappen.</p>
+<ol class="guide-steps"><li>Prüfe, wie dein WLAN-Adapter heißt und welche Verbindung aktiv ist:</li></ol>
+<pre class="cheat-code" data-language="bash"><code>nmcli device</code></pre>
+<p>Beim Pi-internen WLAN ist der Name meist <code>wlan0</code>. Andere Geräte können <code>wlan1</code> heißen. Prüfe außerdem die korrekte WLAN-Ländereinstellung:</p>
+<pre class="cheat-code" data-language="bash"><code>sudo raspi-config</code></pre>
+<p>Im Menü WLAN-Land auf <strong>AT</strong> setzen, falls noch nicht geschehen. Jetzt einen Hotspot mit eigener SSID und einem langen Passwort erstellen:</p>
+<pre class="cheat-code" data-language="bash"><code>sudo nmcli device wifi hotspot ifname wlan0 ssid SailSense-Local password &#x27;EIN_LANGES_EIGENES_WLAN_PASSWORT&#x27;</code></pre>
+<p>Das Passwort ist ein <strong>Platzhalter</strong> und muss ersetzt werden. Der Pi aktiviert das Hotspot-Profil normalerweise sofort. Dein Handy findet anschließend das WLAN <code>SailSense-Local</code>. Verbinde dich mit dem gewählten Passwort.</p>
+<p><strong>Die IP des Hotspots feststellen:</strong></p>
+<pre class="cheat-code" data-language="bash"><code>ip -4 address show wlan0
+nmcli -g IP4.ADDRESS device show wlan0</code></pre>
+<p>Oft vergeben NetworkManager-Hotspots eine Adresse im Bereich <code>10.42.0.x</code>, beispielsweise <code>10.42.0.1</code>. <strong>Verlass dich nicht darauf:</strong> Nimm die tatsächlich angezeigte Adresse. Im Handy-Browser rufst du <code>http://DIESE-IP:8000</code> auf.</p>
+<h3>Hotspot nach jedem Einschalten automatisch starten</h3>
+<pre class="cheat-code" data-language="bash"><code>nmcli connection show
+sudo nmcli connection modify Hotspot connection.autoconnect yes connection.autoconnect-priority 100</code></pre>
+<p>Der Profilname heißt im Standardfall <code>Hotspot</code>; falls er bei dir anders lautet, verwende den angezeigten Namen. Beachte: eine hohe Autoconnect-Priorität macht den Hotspot bewusst zur bevorzugten WLAN-Verbindung. Erwarte dann nicht gleichzeitig eine normale Heim-WLAN-Verbindung über dasselbe Interface.</p>
+<h3>So kommst du zurück ins Heimnetz</h3>
+<pre class="cheat-code" data-language="bash"><code>nmcli connection show
+# Profilname deines Heimnetzes statt MEIN-HEIMWLAN einsetzen:
+sudo nmcli connection up &#x27;MEIN-HEIMWLAN&#x27; </code></pre>
+<p>Das schaltet die WLAN-Verbindung um und kann eine laufende SSH-Verbindung erneut unterbrechen. Wenn du in Zukunft flexibel zwischen Heimnetz und eigenem Netz wechseln willst, ist ein zweiter WLAN-Adapter oder ein bewusst konzipierter Fallback-Mechanismus besser als spontane Netzwerkschalterei im laufenden Betrieb.</p>
+<p class="hint guide-note">Auf iPhones und Android-Handys kann „WLAN ohne Internet“ erscheinen. Die lokale Webseite funktioniert trotzdem. Bestätige gegebenenfalls, dass das Handy mit dem WLAN verbunden bleiben soll. Achte auf mobile Daten und automatische Netzwechsel, falls der Browser den Pi nicht erreicht.</p>
+<p class="guide-check"><strong>✓ Lernkontrolle:</strong> Du verbindest das Handy direkt mit <code>SailSense-Local</code> und öffnest das Dashboard über die tatsächliche Hotspot-IP, ganz ohne Router.</p>
+</section>
