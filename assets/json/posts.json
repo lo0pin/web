@@ -3391,7 +3391,7 @@
     "id": "2026-03-28_electronics_mesh_quiet_mountain_valley",
     "topic": "electronics",
     "subtopic": "mesh",
-    "date": "2026-11-",
+    "date": "2026-11-09",
     "title": "A Very Quiet Mesh Valley",
     "format": "markdown",
     "teaser": "During a visit to the western periphery of Austria, I tested my Meshtastic node in a narrow mountain valley. The result was almost complete radio silence: no visible mesh activity, no meaningful channel load, and only tiny bursts of airtime when I sent pings myself.",
