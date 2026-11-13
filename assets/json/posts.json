@@ -3483,7 +3483,7 @@
       "id": "2026-03-18_electronics_corridor_light_03_19_34",
       "topic": "electronics",
       "subtopic": "beleuchtungsleiste",
-      "date": "2026-03-18",
+      "date": "2026-11-13",
       "title": "Part III: You Don’t Measure Light — You Design the Voltage Curve",
       "format": "markdown",
       "teaser": "An LDR does not hand you a neat brightness value. It only changes its resistance. Everything the Arduino sees depends on the voltage divider around it — and on whether that divider uses the ADC range intelligently in the conditions that actually matter.",
