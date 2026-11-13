@@ -3492,7 +3492,7 @@
       "images": [
         {
           "src": "/web/assets/img/news/corridor_light30.jpg",
-          "alt": "Close-up of the LDR5516 photoresistor used in the corridor light project",
+          "alt": "LDR5516 photoresistor used in the corridor light project",
           "caption": "The LDR5516 does not output brightness — it only changes its resistance"
         }
       ]
